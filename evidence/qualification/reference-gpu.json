@@ -1,0 +1,103 @@
+{
+  "artifact_identity": "PosteriorForge",
+  "atol": 1e-09,
+  "binding": {
+    "observation_sha256": "57fb7625b2521ff040f6d858961ca5876276708fbe2637242b48c69fdce7bdac",
+    "parameter_order": [
+      "mu_a",
+      "mu_b",
+      "mu_d0",
+      "a_m1",
+      "b_m1",
+      "d0_m1",
+      "sigma_m1",
+      "a_m2",
+      "b_m2",
+      "d0_m2",
+      "sigma_m2",
+      "a_m3",
+      "b_m3",
+      "d0_m3",
+      "sigma_m3",
+      "a_a1",
+      "sigma_a1",
+      "a_a2",
+      "sigma_a2",
+      "a_a3",
+      "sigma_a3"
+    ],
+    "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966"
+  },
+  "case_index": 0,
+  "checks": [
+    {
+      "float64": true,
+      "formula": "numpy_precision_space",
+      "mean_covariance_log_evidence_max_errors": [
+        1.0658141036401503e-14,
+        7.632783294297951e-16,
+        6.963318810448982e-13
+      ],
+      "passed": true
+    },
+    {
+      "float64": true,
+      "formula": "numpy_observation_covariance_space",
+      "mean_covariance_log_evidence_max_errors": [
+        2.886579864025407e-14,
+        2.5604518505417673e-15,
+        9.521272659185342e-13
+      ],
+      "passed": true
+    }
+  ],
+  "elapsed_seconds": 5.87864569760859,
+  "gpu_device": "cuda:0",
+  "passed": true,
+  "rtol": 1e-09,
+  "schema": "posteriorforge.reference.v1.qualification",
+  "sigma": [
+    [
+      0.08,
+      0.08,
+      0.08,
+      0.08,
+      0.08,
+      0.08
+    ],
+    [
+      0.15,
+      0.15,
+      0.15,
+      0.15,
+      0.15,
+      0.15
+    ],
+    [
+      0.255,
+      0.255,
+      0.255,
+      0.255,
+      0.255,
+      0.255
+    ],
+    [
+      0.49,
+      0.49,
+      0.49,
+      0.49,
+      0.49,
+      0.49
+    ],
+    [
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.35,
+      0.45
+    ]
+  ],
+  "slurm_job_id": "5392320",
+  "state": "qualified"
+}

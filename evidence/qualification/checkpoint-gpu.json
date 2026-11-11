@@ -1,0 +1,141 @@
+{
+  "artifact_identity": "PosteriorForge",
+  "case": 0,
+  "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+  "context_filter": "no_filtering",
+  "context_obs": {
+    "dtype": "<f8",
+    "sha256": "aee2030d63158a3baf3b731e1231e17972ed80a19def10152b4e67d6d1e6ffb8",
+    "shape": [
+      4096,
+      33
+    ]
+  },
+  "context_seed": 20261111,
+  "context_size": 4096,
+  "context_theta": {
+    "dtype": "<f8",
+    "sha256": "73c4c282c136a1fd86459e7b1b736629b459075def9176956a90d232d4c30f4d",
+    "shape": [
+      4096,
+      21
+    ]
+  },
+  "created_unix": 1794403394.2421606,
+  "git_dirty": false,
+  "git_revision": "0b1b0b1e84d12e2fa2d304b038532c7c7022fa1d",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "hostname": "acn45.karolina.it4i.cz",
+  "log_density": "not_used",
+  "max_iter_rejection": null,
+  "memory": {
+    "peak_allocated_bytes": 2495186944,
+    "peak_reserved_bytes": 29234298880
+  },
+  "microbatch": 1024,
+  "model": {
+    "autocast": false,
+    "device": "cpu",
+    "dtype": "torch.float32",
+    "forced_inference_dtype": "torch.float32",
+    "parameter_count": 11081864
+  },
+  "observation_preprocessing": "raw; TabPFN frozen preprocessing",
+  "parameter_order": [
+    "mu_a",
+    "mu_b",
+    "mu_d0",
+    "a_m1",
+    "b_m1",
+    "d0_m1",
+    "sigma_m1",
+    "a_m2",
+    "b_m2",
+    "d0_m2",
+    "sigma_m2",
+    "a_m3",
+    "b_m3",
+    "d0_m3",
+    "sigma_m3",
+    "a_a1",
+    "sigma_a1",
+    "a_a2",
+    "sigma_a2",
+    "a_a3",
+    "sigma_a3"
+  ],
+  "query": {
+    "dtype": "<f8",
+    "sha256": "57fb7625b2521ff040f6d858961ca5876276708fbe2637242b48c69fdce7bdac",
+    "shape": [
+      1,
+      33
+    ]
+  },
+  "rank": 0,
+  "regressor_settings": {
+    "average_before_softmax": false,
+    "categorical_features_indices": null,
+    "device": "cuda",
+    "fit_mode": "fit_preprocessors",
+    "ignore_pretraining_limits": false,
+    "inference_config": null,
+    "inference_precision": "torch.float32",
+    "memory_saving_mode": "auto",
+    "model_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/cache/model/tabpfn-v2-regressor.ckpt",
+    "n_estimators": 8,
+    "n_jobs": 1,
+    "random_state": 0,
+    "softmax_temperature": 0.9
+  },
+  "rejection": {
+    "accepted_before_final_trim": 224,
+    "proposed": 228,
+    "returned": 128,
+    "support_calls": 2
+  },
+  "repetition": 0,
+  "requested_count": 128,
+  "samples": {
+    "dtype": "<f8",
+    "sha256": "9c6742e3d19110d17ea60a4704b132bcf844b05afff04319ae9bf84c16c4f8b0",
+    "shape": [
+      128,
+      21
+    ]
+  },
+  "samples_file": "samples.npz",
+  "samples_sha256": "789fac54ce2521f17b40519b2542c3f17ea3f5ba1e20979e384035fe9961d0e4",
+  "schema": "posteriorforge.inference.v1",
+  "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+  "scientific_run": false,
+  "seed": 4265748221,
+  "slurm_job_id": "5392321",
+  "stage_timings": "unmeasured; profiling gated on scientific feasibility",
+  "status": "complete",
+  "timings": {
+    "accepted_samples_per_second": 0.4351801550824639,
+    "append_context_seconds": 0.03554012347012758,
+    "cold_checkpoint_load_included_in_request": true,
+    "constructor_and_import_seconds": 8.329836262390018,
+    "includes_repeated_stage_context_preparation": true,
+    "posterior_request_seconds": 294.1310592982918,
+    "total_seconds": 302.49643568415195
+  },
+  "torch_cuda": "12.4",
+  "transfer_and_sync": "unmeasured; profiling gated on scientific feasibility",
+  "variant": "upstream_unmodified",
+  "versions": {
+    "jax": null,
+    "jaxlib": null,
+    "numpy": "1.26.4",
+    "platform": "Linux-4.18.0-553.148.1.el8_10.x86_64-x86_64-with-glibc2.28",
+    "posteriorforge": null,
+    "python": "3.11.13",
+    "sbi": "0.23.0",
+    "scipy": "1.12.0",
+    "tabpfn": "2.0.9",
+    "torch": "2.6.0"
+  },
+  "world_size": 1
+}

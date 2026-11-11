@@ -100,6 +100,7 @@ def test_submit_saves_before_sbatch_and_forbids_resource_override(tmp_path, monk
         assert state["reservations"][0]["reserved_gpu_seconds"] == 2 * 3600
         assert "--gpus-per-node=2" in argv
         assert "--nodes=1" in argv
+        assert "--no-requeue" in argv
         return subprocess.CompletedProcess(argv, 0, "123;karolina\n", "")
     monkeypatch.setattr(subprocess, "run", accepted)
     entry = ledger.submit(script, gpus=2, walltime_seconds=3600, purpose="qualification",

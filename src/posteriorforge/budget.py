@@ -228,6 +228,7 @@ class BudgetLedger:
 
         Scripts must not contain #SBATCH options. Resources are fixed here, so a
         script cannot silently override the reserved GPU count or walltime.
+        Automatic requeue is disabled: every retry requires its own reservation.
         A nonzero exit or timeout holds capacity because acceptance is unknown.
         """
         script = Path(script).resolve(strict=True)
@@ -242,7 +243,7 @@ class BudgetLedger:
         walltime_seconds = _positive_int(walltime_seconds, "walltime_seconds")
         hours, remainder = divmod(walltime_seconds, 3600)
         minutes, seconds = divmod(remainder, 60)
-        argv = ["sbatch", "--parsable", "--account=eu-26-17", "--partition=qgpu", "--nodes=1",
+        argv = ["sbatch", "--parsable", "--no-requeue", "--account=eu-26-17", "--partition=qgpu", "--nodes=1",
                 "--ntasks=1", f"--gpus-per-node={gpus}", f"--cpus-per-task={16 * gpus}",
                 f"--time={hours:02d}:{minutes:02d}:{seconds:02d}", f"--job-name={job_name}",
                 f"--output={directory}/%x-%j.out", f"--error={directory}/%x-%j.err",

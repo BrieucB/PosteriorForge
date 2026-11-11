@@ -9,7 +9,8 @@ confirmation all consume this same cap. Queue waiting consumes no allocation.
 `GPU count × requested walltime` under a filesystem lock, saves and synchronizes
 the ledger, then calls `sbatch` once. Same-node GPU counts are restricted to
 1, 2 or 4 on Karolina qgpu using account eu-26-17. Script resource directives
-are rejected so allocation resources agree with the reservation. Launch scripts
+are rejected so allocation resources agree with the reservation. Automatic Slurm
+requeue is disabled with `--no-requeue`; each retry needs a new reservation. Launch scripts
 run offline after dependency and checkpoint preparation.
 
 `reconcile_all()` reads Slurm allocation records using `sacct -X`, excludes job

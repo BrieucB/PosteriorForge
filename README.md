@@ -11,9 +11,16 @@ not study text generation or distributed training.
 
 ## Current evidence
 
-Implementation and environment qualification are in progress. **No scientific
-feasibility, optimization, or scaling result has passed yet.** Machine-readable
-status and public evidence will be published under `evidence/` as runs finish.
+Both pinned environments pass 55 CPU tests. A fresh public-only installation and
+GitHub CPU CI pass. The original 11,081,864-parameter checkpoint executed on an
+A100 in FP32 without autocast; a small 128-vector integrity probe passed. Native
+GPU float64 reference algebra agrees with two CPU formulas below 1e-12. See
+[evidence/qualification](evidence/qualification). The container recipe is provided
+but has not been built.
+
+**Scientific feasibility is in progress; optimization and scaling are unrun.**
+The checkpoint probe is not a posterior-accuracy result. Portable scientific
+evidence will be published as the full diagnostic screen finishes.
 
 ## Reproduce
 

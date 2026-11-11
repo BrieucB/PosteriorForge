@@ -48,6 +48,11 @@ def _parser():
     submit.add_argument("--job-name", required=True)
     submit.add_argument("--log-directory", required=True)
     submit.add_argument("script_args", nargs=argparse.REMAINDER)
+    plan = commands.add_parser("plan", help="expand a declarative campaign without submitting jobs")
+    plan.add_argument("--config", required=True)
+    plan.add_argument("--banks", required=True)
+    plan.add_argument("--references", required=True)
+    plan.add_argument("--runs", required=True)
     gate = commands.add_parser("gate", help="assess all 24 complete baseline runs and retained references")
     gate.add_argument("--banks", required=True)
     gate.add_argument("--references", required=True)
@@ -99,6 +104,9 @@ def main(argv=None):
         ledger = BudgetLedger(args.pop("ledger"))
         if script_args[:1] == ["--"]: script_args = script_args[1:]
         result = ledger.submit(**args, script_args=script_args)
+    elif operation == "plan":
+        from .campaign import campaign_plan
+        result = campaign_plan(args.pop("config"), **args)
     elif operation == "gate":
         from .gate import evaluate_gate
         result = evaluate_gate(**args)

@@ -20,7 +20,9 @@ BUDGET_FIELDS = ("reservation_id", "purpose", "gpus", "walltime_seconds", "reser
 RUN_FIELDS = ("context_seed", "case", "status", "passed", "manifest_file", "manifest_sha256",
               "max_marginal_cdf_lower", "max_marginal_cdf_upper", "max_joint_projection_cdf_lower",
               "max_joint_projection_cdf_upper", "max_absolute_bias_reference_sd", "min_sd_ratio", "max_sd_ratio",
-              "cold_start_seconds", "append_context_seconds", "posterior_request_seconds", "total_seconds",
+              "max_absolute_bias_reference_sd_lower", "max_absolute_bias_reference_sd_upper",
+              "min_sd_ratio_lower", "max_sd_ratio_upper", "constructor_and_import_seconds",
+              "cold_checkpoint_load_included_in_request", "append_context_seconds", "posterior_request_seconds", "total_seconds",
               "accepted_samples_per_second", "peak_allocated_bytes", "peak_reserved_bytes")
 
 
@@ -52,7 +54,19 @@ def _run_rows(gate):
         ratios = moments.get("sd_ratio", [])
         if ratios and all(_number(value) for value in ratios):
             row.update(min_sd_ratio=min(ratios), max_sd_ratio=max(ratios))
-        row.update({key: value for key, value in entry.get("timings", {}).items() if key in RUN_FIELDS and _number(value)})
+        intervals = moments.get("uncertainty_intervals")
+        if isinstance(intervals, dict):
+            for label, bound, target, reduction in (
+                    ("absolute_bias_reference_sd", "lower", "max_absolute_bias_reference_sd_lower", max),
+                    ("absolute_bias_reference_sd", "upper", "max_absolute_bias_reference_sd_upper", max),
+                    ("sd_ratio", "lower", "min_sd_ratio_lower", min),
+                    ("sd_ratio", "upper", "max_sd_ratio_upper", max)):
+                values = intervals.get(label, {}).get(bound, [])
+                if values and all(_number(value) for value in values):
+                    row[target] = reduction(values)
+        row.update({key: value for key, value in entry.get("timings", {}).items()
+                    if key in RUN_FIELDS and (_number(value) or
+                    (key == "cold_checkpoint_load_included_in_request" and type(value) is bool))})
         row.update({key: value for key, value in entry.get("memory", {}).items() if key in RUN_FIELDS and _number(value)})
         result.append(row)
     return result
@@ -146,11 +160,18 @@ def _agreement_figure(plt, rows, output):
                 axes[0].scatter(index + shift, upper, color=color, s=22, marker="o")
         bias = row.get("max_absolute_bias_reference_sd")
         if _number(bias):
-            axes[1].scatter(index, bias, color=COLORS["blue"], s=30)
-        low, high = row.get("min_sd_ratio"), row.get("max_sd_ratio")
+            axes[1].scatter(index, bias, color=COLORS["grey"], marker="x", s=28, zorder=4)
+        bias_low, bias_high = row.get("max_absolute_bias_reference_sd_lower"), row.get("max_absolute_bias_reference_sd_upper")
+        if _number(bias_low) and _number(bias_high):
+            axes[1].plot([index] * 2, [bias_low, bias_high], color=COLORS["blue"], linewidth=2)
+            axes[1].scatter(index, bias_high, color=COLORS["blue"], s=20)
+        low, high = row.get("min_sd_ratio_lower"), row.get("max_sd_ratio_upper")
         if _number(low) and _number(high):
             axes[2].plot([index] * 2, [low, high], color=COLORS["teal"], linewidth=2)
-            axes[2].scatter([index, index], [low, high], color=COLORS["teal"], s=25)
+            axes[2].scatter([index, index], [low, high], color=COLORS["teal"], s=23)
+        raw_low, raw_high = row.get("min_sd_ratio"), row.get("max_sd_ratio")
+        if _number(raw_low) and _number(raw_high):
+            axes[2].scatter([index, index], [raw_low, raw_high], color=COLORS["grey"], marker="x", s=26, zorder=4)
     axes[0].axhline(.10, color=COLORS["red"], linestyle="--", label="Gate: ≤ 0.10")
     axes[0].plot([], [], color=COLORS["blue"], marker="o", label="Marginal CDF bound")
     axes[0].plot([], [], color=COLORS["teal"], marker="o", label="32 projection CDF bound")
@@ -158,10 +179,16 @@ def _agreement_figure(plt, rows, output):
     axes[0].legend(fontsize=8, ncol=3)
     axes[1].axhline(.20, color=COLORS["red"], linestyle="--")
     axes[1].set(ylabel="Max |mean bias| / ref. SD")
+    axes[1].plot([], [], color=COLORS["blue"], marker="o", label="Conservative numerical interval")
+    axes[1].plot([], [], linestyle="none", color=COLORS["grey"], marker="x", label="Raw point estimate")
+    axes[1].legend(fontsize=8, loc="best", ncol=2)
     axes[2].axhspan(.8, 1.2, color=COLORS["green"], alpha=.10)
     axes[2].axhline(.8, color=COLORS["green"], linestyle="--", linewidth=1)
     axes[2].axhline(1.2, color=COLORS["green"], linestyle="--", linewidth=1)
     axes[2].set(ylabel="Predicted / ref. SD\n(min–max across parameters)", xlabel="Context seed / held-out case", xlim=(-.6, len(selected) - .4))
+    axes[2].plot([], [], color=COLORS["teal"], marker="o", label="Conservative min–max extent")
+    axes[2].plot([], [], linestyle="none", color=COLORS["grey"], marker="x", label="Raw min–max point estimates")
+    axes[2].legend(fontsize=8, loc="best", ncol=2)
     axes[2].set_xticks(range(len(selected)), labels, rotation=90, fontsize=8)
     for axis in axes:
         axis.grid(axis="y", alpha=.18)
@@ -258,7 +285,9 @@ def render_report(*, gate, ledger, output):
         lines += ["CDF segments show the witnessed lower and conservative whole-line upper bounds, including "
                   "tail mass and the source reference precision where available. Reference qualification "
                   "is assessed separately; an inconclusive reference cannot pass. A finite-grid lower bound cannot "
-                  "establish a pass. Mean and SD panels use the same case reference.", "",
+                  "establish a pass. Mean and SD panels overlay raw point estimates (crosses) on "
+                  "conservative numerical intervals (circles and lines) from the same case reference. "
+                  "Crosses without intervals are diagnostic and cannot establish a moment pass.", "",
                   f"![Posterior agreement and absolute acceptance thresholds]({agreement})", ""]
     else:
         lines += ["No retained numeric posterior assessments are available in this gate artifact. "
@@ -267,7 +296,9 @@ def render_report(*, gate, ledger, output):
     if "latency" in figures:
         lines += ["Request latency includes upstream repeated stage/context work and support rejection for "
                   "the complete accepted vectors. These are individual scientific runs, not three-repeat "
-                  "timing summaries; no p95 or scaling speedup is inferred.", "",
+                  "timing summaries; no p95 or scaling speedup is inferred. Constructor/import timing is "
+                  "recorded separately in runs.csv; cold checkpoint loading remains included in the request "
+                  "when its retained flag is true.", "",
                   f"![Measured complete upstream posterior request latency]({figures['latency']})", ""]
     else:
         lines += ["No complete numeric request timings are retained in this gate artifact.", ""]

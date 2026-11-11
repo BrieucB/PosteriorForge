@@ -1,0 +1,82 @@
+{
+  "all_initial_allocations_terminal_without_restart": true,
+  "future_submissions": "explicit --no-requeue; each retry receives a fresh reservation",
+  "initial_default_requeue_enabled": true,
+  "jobs": [
+    {
+      "command": [
+        "scontrol",
+        "show",
+        "job",
+        "5392320",
+        "-o"
+      ],
+      "fields": {
+        "Account": "eu-26-17",
+        "AllocTRES": "cpu=16,mem=124160M,node=1,billing=1,gres/gpu=1",
+        "JobId": "5392320",
+        "JobState": "COMPLETED",
+        "NumCPUs": "16",
+        "NumNodes": "1",
+        "Partition": "qgpu",
+        "Requeue": "1",
+        "Restarts": "0",
+        "RunTime": "00:00:10",
+        "TimeLimit": "00:15:00"
+      },
+      "stdout_sha256": "caaee3dc4e595e6217ad8f18a586e1c87951f0b2e4cd3acbce7283b4ae145c8e"
+    },
+    {
+      "command": [
+        "scontrol",
+        "show",
+        "job",
+        "5392321",
+        "-o"
+      ],
+      "fields": {
+        "Account": "eu-26-17",
+        "AllocTRES": "cpu=16,mem=124160M,node=1,billing=1,gres/gpu=1",
+        "JobId": "5392321",
+        "JobState": "COMPLETED",
+        "NumCPUs": "16",
+        "NumNodes": "1",
+        "Partition": "qgpu",
+        "Requeue": "1",
+        "Restarts": "0",
+        "RunTime": "00:05:08",
+        "TimeLimit": "00:45:00"
+      },
+      "stdout_sha256": "9ae3c39028c469278f65bba9d81038bcbb9b8bcc28d667d9da02c2512a8a5d5e"
+    },
+    {
+      "command": [
+        "scontrol",
+        "show",
+        "job",
+        "5392353",
+        "-o"
+      ],
+      "fields": {
+        "Account": "eu-26-17",
+        "AllocTRES": "cpu=16,mem=124160M,node=1,billing=1,gres/gpu=1",
+        "JobId": "5392353",
+        "JobState": "COMPLETED",
+        "NumCPUs": "16",
+        "NumNodes": "1",
+        "Partition": "qgpu",
+        "Requeue": "1",
+        "Restarts": "0",
+        "RunTime": "00:00:26",
+        "TimeLimit": "02:05:00"
+      },
+      "stdout_sha256": "0d0fe4addd62b04b8ae8ced38fe3e2d6716895f079891751310f4a4166171f79"
+    }
+  ],
+  "observed_utc": "2026-11-11T13:33:27.561472+00:00",
+  "raw_snapshot": {
+    "file": "audit-initial-slurm-state.txt",
+    "sha256": "7b976afe50adbc94f0903cbcbe58517fee047e354090fa6512a44dd4ef016b6c"
+  },
+  "schema": "posteriorforge.initial_requeue_audit.v1"
+}

@@ -1,4 +1,5 @@
 import json
+import csv
 from pathlib import Path
 
 import pytest
@@ -48,8 +49,12 @@ def test_numeric_assessments_generate_measured_figures_and_portable_tables(tmp_p
                      "manifest_file": "seed20261111/case-0/manifest.json", "manifest_sha256": "fixturehash",
                      "assessment": {"marginal_cdf": {"max_lower": .04, "max_upper": .06},
                                     "joint_projection_cdf": {"max_lower": .05, "max_upper": .07},
-                                    "moments": {"max_absolute_bias_reference_sd": .1, "sd_ratio": [.9, 1.1]}},
-                     "timings": {"posterior_request_seconds": 100., "total_seconds": 120.,
+                                    "moments": {"max_absolute_bias_reference_sd": .1, "sd_ratio": [.9, 1.1],
+                                                "uncertainty_intervals": {
+                                                    "absolute_bias_reference_sd": {"lower": [.08, .09], "upper": [.1, .105]},
+                                                    "sd_ratio": {"lower": [.895, 1.095], "upper": [.905, 1.105]}}}},
+                     "timings": {"constructor_and_import_seconds": 19., "cold_checkpoint_load_included_in_request": True,
+                                 "posterior_request_seconds": 100., "total_seconds": 120.,
                                  "accepted_samples_per_second": 500.},
                      "memory": {"peak_allocated_bytes": 2**30, "peak_reserved_bytes": 2**31}}]
     gate["references"][0].update(state="verified", cdf_precision=.002, manifest_sha256="fixture-reference")
@@ -57,14 +62,25 @@ def test_numeric_assessments_generate_measured_figures_and_portable_tables(tmp_p
     output = tmp_path / "report"
     result = render_report(gate=gate_path, ledger=ledger, output=output)
     assert set(result["figures"]) == {"reference", "budget", "agreement", "latency", "memory"}
-    csv = (output / "runs.csv").read_text()
-    assert "max_marginal_cdf_upper" in csv
-    assert "fixturehash" in csv
-    assert "seed20261111/case-0/manifest.json" in csv
+    csv_text = (output / "runs.csv").read_text()
+    assert "max_marginal_cdf_upper" in csv_text
+    assert "fixturehash" in csv_text
+    assert "seed20261111/case-0/manifest.json" in csv_text
+    with (output / "runs.csv").open() as stream:
+        row = next(csv.DictReader(stream))
+    assert float(row["constructor_and_import_seconds"]) == 19.
+    assert row["cold_checkpoint_load_included_in_request"] == "True"
+    assert "cold_start_seconds" not in row
+    assert float(row["max_absolute_bias_reference_sd"]) == .1
+    assert float(row["max_absolute_bias_reference_sd_upper"]) == .105
+    assert float(row["min_sd_ratio_lower"]) == .895
+    assert float(row["max_sd_ratio_upper"]) == 1.105
     report = (output / "report.md").read_text()
     for figure in result["figures"].values():
         assert f"]({figure})" in report
     assert "not three-repeat" in report
+    assert "raw point estimates (crosses)" in report
+    assert "cold checkpoint loading remains included" in report
     checksums = json.loads((output / "checksums.json").read_text())
     for file, digest in checksums["files"].items():
         assert sha256_file(output / file) == digest
