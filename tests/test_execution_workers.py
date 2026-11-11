@@ -59,7 +59,7 @@ def actual_driver_execution_engine_header(mode,worker_count):
     return eval(compile(expression,"<actual-driver-metadata>","eval"),namespace)
 
 
-def _payloads(tmp_path):
+def _payloads(tmp_path,mode="component_mass"):
     contracts=[];paths=[]
     problem=build_problem();noise=[problem.parameter_order.index(name) for name in problem.prior.noise_names]
     for rank in range(2):
@@ -79,11 +79,13 @@ def _payloads(tmp_path):
             "original_translator_code_sha256":"same","active_translator_code_sha256":"same",
             "sdk_source_sha256":dict(PINNED_SDK_SHA256),"sdk_source_sha256_after":dict(PINNED_SDK_SHA256)}
         manifest={"schema":"test.worker.v1","status":"complete","run_purpose":"performance_worker",
+            "mode":mode,"variant":workers.WORKER_VARIANTS[mode],
             "rank":rank,"world_size":2,"benchmark_total_count":50000,"requested_count":25000,
             "worker_contract_sha256":sha256_file(path),"end_to_end":False,
             "completed_stage_indices":list(range(21)),"qualification_manifest_sha256":"qualification",
             "runner_source_sha256":"runner","sources_unchanged":True,"qualification_full21":True,
-            "execution_engine":actual_driver_execution_engine_header("component_mass",25000),
+            "execution_engine":actual_driver_execution_engine_header(mode,25000),
+            **({"hybrid_execution":workers.expected_hybrid_metadata()} if mode=="component_hybrid" else {}),
             "compatibility_adapter":descriptor,"sampling_policy":{"streams":{key:{"seed":value}
                 for key,value in contract["seed_streams"].items()}},
             "samples":array_descriptor(samples),"samples_sha256":sha256_file(root/"samples.npz")}
@@ -156,7 +158,7 @@ def test_existing_aggregate_output_is_never_overwritten(tmp_path,monkeypatch):
 
 def test_actual_driver_header_uses_base_cache_identity_for_all_sampling_modes():
     from posteriorforge.execution_cache import execution_metadata
-    for mode in ("resident_full","component_mass"):
+    for mode in ("resident_full","component_mass","component_hybrid"):
         header=actual_driver_execution_engine_header(mode,12500)
         assert header["engine_id"]==execution_metadata()["engine_id"]
         assert header["module_sha256"]==execution_metadata()["module_sha256"]
@@ -169,3 +171,17 @@ def test_default_worker_threads_partition_allocation_without_touching_blas_setti
     assert workers.worker_thread_plan(1,None)== (16,16)
     assert workers.worker_thread_plan(4,"64",8)== (8,64)
     with pytest.raises(ValueError):workers.worker_thread_plan(4,"64",32)
+
+
+def test_hybrid_workers_bind_fixed_fallback_map_and_source(tmp_path):
+    contracts,paths=_payloads(tmp_path,mode="component_hybrid")
+    bindings={"mode":"component_hybrid","variant":"execution_hybrid_v1"}
+    values,_=workers.validate_worker_payloads(contracts,paths,expected_bindings=bindings,
+                  driver_schema="test.worker.v1",qualification_sha256="qualification")
+    assert values.shape==(50000,21)
+    target=Path(contracts[1]["expected_output"])/"manifest.json"
+    manifest=json.loads(target.read_text());manifest["hybrid_execution"]["fallback_map"]["10"]=[4]
+    write_json(target,manifest)
+    with pytest.raises(ValueError,match="hybrid source/policy"):
+        workers.validate_worker_payloads(contracts,paths,expected_bindings=bindings,
+                  driver_schema="test.worker.v1",qualification_sha256="qualification")

@@ -162,3 +162,45 @@ def test_component_uniforms_keep_physical_row_identity_across_chunks_and_head_re
     np.testing.assert_array_equal(left,right)
     assert lmeta["head_rejections"]>0 and rmeta["head_rejections"]==lmeta["head_rejections"]
     assert lmeta["uniform_draws"]==rmeta["uniform_draws"]==17 and torch.equal(lstate,rstate)
+
+
+def hybrid_qualification():
+    from posteriorforge.execution_hybrid import policy_metadata
+    probability={"passed":True,"minimum_probability":0.,"max_normalization_error":0.,"max_cdf_absolute_error":0.,"max_row_total_variation":0.}
+    prediction={"passed":True,"eight_members":True,"exact_final_borders":True,"final_float32":True,"final":deepcopy(probability),
+        "members":[{**probability,"index":index,"configuration_identity_equal":True,"exact_borders":True,"float32":True} for index in range(8)],
+        "inverse_cdf":{"passed":True,"icdf_contract_version":2,"same_logits_and_borders_exact_failures":0,"independent_fp32_replay_failures":0,"probability_space_failures":[]}}
+    value={"schema":"posteriorforge.execution_hybrid_qualification.v1","status":"hybrid_screen_pass","qualified":True,
+        "full21_qualified":False,"cache_only_full21_qualified":False,"full21_hybrid_qualified":True,"full21_component_qualified":True,"full21_sampler_qualified":True,
+        "sources_unchanged":True,"input_statuses_preserved":True,"control_variant":"cdf_arithmetic_v1","icdf_contract_version":2,
+        "cache_module_sha256":"cache","mixture_module_sha256":"mixture","hybrid_module_sha256":"hybrid",
+        "cache_qualifier_sha256":runner.QUALIFIER_SHA256,"hybrid_qualifier_sha256":runner.HYBRID_QUALIFIER_SHA256,
+        "assembler_source_sha256":runner.HYBRID_ASSEMBLER_SHA256,"fallback_map":deepcopy(runner.HYBRID_FALLBACK_MAP),
+        "fallback_policy_sha256":policy_metadata(runner.HYBRID_FALLBACK_MAP)["fallback_policy_sha256"],
+        "thresholds":deepcopy(runner.QUALIFICATION_THRESHOLDS),"row_counts":[1,16,128,1024],"stage_coverage":list(range(21)),"stage_results":[],"stage_routes":{}}
+    for stage in range(21):
+        fallback=runner.HYBRID_FALLBACK_MAP.get(str(stage),[]);routes={str(member):"uncached" if member in fallback else "cached" for member in range(8)}
+        component={"passed":True,"module_sha256":"hybrid" if fallback else "mixture","fast_icdf_same_logits_failures":0,
+            "executor_metadata":{"full8_member_lists_restored":True},"roundoff":{"mass_corrected_reconstruction_passed":True,"component_mass_guard_passed":True},
+            "members":[{**probability,"ensemble_index":index,"configuration_identity_equal":True,"exact_borders":True,"float32":True,
+                "component_raw_mass_matches_fp64_sum":True,"fast_icdf_same_logits_exact":True,"executed_corrected_helper_fingerprint_matches":True,
+                "corrected_cdf_call_delta":1,"normalized_component":deepcopy(probability),"execution_route":routes[str(index)],"route_counter_delta":1,"other_route_counter_delta":0} for index in range(8)]}
+        for name in ("normalized_mean_captured_raw_vs_full_fp32","normalized_mean_observed_raw_vs_full_fp32","mass_corrected_observed_outputs_vs_full_fp32"):component[name]=deepcopy(probability)
+        if stage==0:component.update(stage0_dedup_scope="full_mixture_only",stage0_shared_distribution={**probability,"shared_icdf_same_logits_exact":True})
+        value["stage_routes"][str(stage)]={"fallback_members":list(fallback),"member_routes":routes}
+        value["stage_results"].append({"stage_index":stage,"passed":True,"assembled_route":"hybrid" if fallback else "cached",
+            "comparisons":[{"query_rows":count,"cache_vs_same_chunk_control":deepcopy(prediction),"control_chunk_vs_1024":deepcopy(prediction)} for count in (1,16,128,1024)],
+            "stress_comparison":deepcopy(prediction),"component_qualification":component})
+    return value
+
+
+def test_hybrid_proof_is_accepted_without_promoting_cache_flags_or_mutating_inputs():
+    value=hybrid_qualification();before=deepcopy(value)
+    assert runner.validate_qualification(value,bindings={},cache_sha256="cache",mixture_sha256="mixture",hybrid_sha256="hybrid",mode="component_hybrid",query_batch_size=1024)
+    assert value==before and value["full21_qualified"] is False
+    for mutation in (lambda x:x.update(full21_qualified=True),lambda x:x["fallback_map"]["13"].append(5),
+                     lambda x:x["stage_routes"]["10"]["member_routes"].update({"5":"cached"}),
+                     lambda x:x["stage_results"][13]["component_qualification"]["members"][6].update(route_counter_delta=0),
+                     lambda x:x["stage_results"][2]["comparisons"][0]["cache_vs_same_chunk_control"]["final"].update(max_cdf_absolute_error=3e-5)):
+        broken=deepcopy(value);mutation(broken)
+        with pytest.raises(ValueError):runner.validate_qualification(broken,bindings={},cache_sha256="cache",mixture_sha256="mixture",hybrid_sha256="hybrid",mode="component_hybrid",query_batch_size=1024)

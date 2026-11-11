@@ -23,6 +23,7 @@ from posteriorforge.banks import derive_seed
 TOTAL_COUNT=50000
 CONTRACT_SCHEMA="posteriorforge.execution_worker_contract.v1"
 AGGREGATE_SCHEMA="posteriorforge.inference.execution.aggregate.v1"
+WORKER_VARIANTS={"resident_full":"execution_cache_v1","component_mass":"execution_mixture_v1","component_hybrid":"execution_hybrid_v1"}
 STREAM_ROLES={"head_proposal":"execution-head-proposal","head_acceptance":"execution-head-acceptance",
               "component_uniform":"execution-component-uniform"}
 
@@ -76,6 +77,11 @@ def _stream_seed_map(manifest):
     return {name:(value["seed"] if isinstance(value,dict) else value) for name,value in streams.items()}
 
 
+def expected_hybrid_metadata():
+    from posteriorforge.execution_hybrid import execution_metadata
+    return execution_metadata({10:[5],13:[6]})
+
+
 def scientific_bindings(banks,context_seed,case):
     from posteriorforge.banks import load_context,load_heldout
     from posteriorforge.science.analytical_benchmark_v2 import build_problem,array_descriptor
@@ -116,6 +122,10 @@ def validate_worker_payloads(contracts,contract_paths,*,expected_bindings,driver
             "posterior_count":contract["worker_count"]}
         if any(engine.get(key)!=value for key,value in expected_engine.items()):
             raise ValueError("worker base cache engine identity mismatch")
+        if manifest.get("mode")=="component_hybrid":
+            hybrid=manifest.get("hybrid_execution",{})
+            if any(hybrid.get(key)!=value for key,value in expected_hybrid_metadata().items()):
+                raise ValueError("worker hybrid source/policy identity mismatch")
         if manifest.get("qualification_manifest_sha256")!=qualification_sha256:
             raise ValueError("worker qualification artifact mismatch")
         adapter=manifest["compatibility_adapter"]
@@ -211,6 +221,7 @@ def run(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,
     from posteriorforge.science.analytical_benchmark_v2 import array_descriptor
     import numpy as np
     counts=partition_counts(workers)
+    if mode not in WORKER_VARIANTS:raise ValueError("explicit supported worker sampling mode required")
     budget=_require_budgeted_gpu(ledger)
     if budget["gpus"]!=workers:raise RuntimeError("registered allocation GPU count must equal worker count")
     tokens=visible_device_tokens(os.getenv("CUDA_VISIBLE_DEVICES"),workers)
@@ -238,11 +249,12 @@ def run(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,
         worker_engine={**execution_cache.execution_metadata(),
             "sampling_rng_policy":"independent_cpu_sampling_streams_model_rng_isolated",
             "query_batch_size":query_batch_size,"posterior_count":TOTAL_COUNT}
-        bindings.update(mode=mode,variant="execution_cache_v1" if mode=="resident_full" else "execution_mixture_v1",
+        bindings.update(mode=mode,variant=WORKER_VARIANTS[mode],
             reference_binding=reference_binding(banks=banks,reference=reference,reference_grid=reference_grid,case=case))
         result.update({key:value for key,value in bindings.items() if key!="variant"})
         result["worker_execution_variant"]=bindings["variant"]
         result["execution_engine"]=worker_engine
+        if mode=="component_hybrid":result["hybrid_execution"]=expected_hybrid_metadata()
         contracts=[];contract_paths=[];commands=[];environments=[];logs=[]
         for rank in range(workers):
             worker_output=root/f"worker-{rank}"
@@ -305,6 +317,6 @@ if __name__=="__main__":
     parser.add_argument("--workers",type=int,choices=[1,2,4],default=1)
     parser.add_argument("--context-seed",type=int,default=20261111);parser.add_argument("--case",type=int,default=0)
     parser.add_argument("--repetition",type=int,default=0);parser.add_argument("--query-batch-size",type=int,default=1024)
-    parser.add_argument("--mode",choices=["resident_full","component_mass"],default="component_mass")
+    parser.add_argument("--mode",choices=list(WORKER_VARIANTS),default="component_mass")
     parser.add_argument("--timeout-seconds",type=int,default=3000);parser.add_argument("--threads-per-worker",type=int)
     print(json.dumps(run(**vars(parser.parse_args())),indent=2))
