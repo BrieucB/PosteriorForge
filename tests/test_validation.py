@@ -19,7 +19,11 @@ def _reference(points=2049):
             "mean": np.zeros(21), "sd": np.ones(21),
             "qualification": {"state": "qualified", "precision": .001,
                               "witness_gate_passed": True, "independent_nested_passed": True,
-                              "cpu_check_passed": True, "joint_reference_passed": True}}
+                              "cpu_check_passed": True, "joint_reference_passed": True,
+                              "moment_gate_passed": True,
+                              "moment_precision": {"passed": True,
+                                  "mean_error_reference_sd": [.001] * 21,
+                                  "sd_error_reference_sd": [.001] * 21}}}
 
 
 @pytest.fixture(scope="module")
@@ -133,3 +137,50 @@ def test_adapter_outer_inconclusive_cannot_be_overridden(samples):
     assert not result["passed"]
     assert result["status"] == "reference_inconclusive"
     assert reference["qualification"]["state"] == "qualified"
+
+
+@pytest.mark.parametrize("mutation", ["missing_gate", "missing_precision", "failed_precision", "bad_shape", "nonfinite", "excessive", "text"])
+def test_missing_or_malformed_moment_qualification_never_passes(samples, mutation):
+    reference = _reference()
+    q = reference["qualification"]
+    if mutation == "missing_gate":
+        q.pop("moment_gate_passed")
+    elif mutation == "missing_precision":
+        q.pop("moment_precision")
+    elif mutation == "failed_precision":
+        q["moment_precision"]["passed"] = False
+    elif mutation == "bad_shape":
+        q["moment_precision"]["mean_error_reference_sd"] = [0.] * 20
+    elif mutation == "nonfinite":
+        q["moment_precision"]["mean_error_reference_sd"][0] = np.nan
+    elif mutation == "excessive":
+        q["moment_precision"]["sd_error_reference_sd"][0] = .005001
+    else:
+        q["moment_precision"]["sd_error_reference_sd"] = ["0.001"] * 21
+    result = assess_samples(samples, reference, expected_count=len(samples),
+                            support_mask=np.ones(len(samples), dtype=bool))
+    assert not result["passed"]
+    assert result["status"] == "reference_inconclusive"
+
+
+@pytest.mark.parametrize("coordinate_mean,coordinate_sd", [(.2, 1.), (0., .8), (0., 1.2)])
+def test_moment_boundary_uncertainty_is_inconclusive(samples, coordinate_mean, coordinate_sd):
+    standardized = (samples - samples.mean(0)) / samples.std(0, ddof=1)
+    standardized[:, 0] = standardized[:, 0] * coordinate_sd + coordinate_mean
+    reference = _reference()
+    result = assess_samples(standardized, reference, expected_count=len(samples),
+                            support_mask=np.ones(len(samples), dtype=bool))
+    assert result["status"] == "moment_inconclusive"
+    assert not result["passed"]
+    assert not result["moments"]["conclusively_failed"]
+    assert result["moments"]["uncertainty_intervals"] is not None
+
+
+def test_moment_failure_requires_entire_interval_outside_gate(samples):
+    standardized = (samples - samples.mean(0)) / samples.std(0, ddof=1)
+    standardized[:, 0] += .202
+    result = assess_samples(standardized, _reference(), expected_count=len(samples),
+                            support_mask=np.ones(len(samples), dtype=bool))
+    assert result["status"] == "model_failure"
+    assert result["moments"]["conclusively_failed"]
+    assert result["moments"]["uncertainty_intervals"]["absolute_bias_reference_sd"]["lower"][0] > .2

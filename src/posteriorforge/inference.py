@@ -9,6 +9,14 @@ from .artifacts import runtime_identity, sha256_file, write_json
 from .banks import derive_seed, load_context, load_heldout
 from .science.analytical_benchmark_v2 import array_descriptor, build_problem
 
+UPSTREAM_REVISION = "29c1e900a89781ee00677df6d2415a6664e59c37"
+CHECKPOINT_SHA256 = "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736"
+
+def upstream_source_hashes():
+    root = Path(__file__).parent / "upstream" / "npe_pfn"
+    return {path.name: sha256_file(path) for path in sorted(root.glob("*.py"))}
+
+
 
 def validate_query(observation):
     """Only the observed 33-vector is accepted; held-out labels are not inputs."""
@@ -79,7 +87,8 @@ def run_baseline(*, banks, output, context_seed, case, context_size=4096,
     started = time.perf_counter()
     status = {**runtime_identity(), "schema": "posteriorforge.inference.v1",
               "artifact_identity": "PosteriorForge", "status": "running",
-              "variant": "upstream_unmodified", "context_seed": context_seed,
+              "variant": "upstream_unmodified", "upstream_revision": UPSTREAM_REVISION,
+              "upstream_files": upstream_source_hashes(), "context_seed": context_seed,
               "case": case, "context_size": context_size, "requested_count": count,
               "scientific_run": count == 50000, "microbatch": microbatch,
               "repetition": repetition, "checkpoint_sha256": checkpoint_sha256,
@@ -88,7 +97,7 @@ def run_baseline(*, banks, output, context_seed, case, context_size=4096,
               "max_iter_rejection": None, "rank": 0, "world_size": 1}
     write_json(output / "manifest.json", status)
     try:
-        if sha256_file(checkpoint) != checkpoint_sha256:
+        if checkpoint_sha256 != CHECKPOINT_SHA256 or sha256_file(checkpoint) != checkpoint_sha256:
             raise ValueError("checkpoint SHA256 mismatch")
         context = load_context(banks, context_seed, context_size)
         heldout = load_heldout(banks, case)

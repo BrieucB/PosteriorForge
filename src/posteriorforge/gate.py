@@ -3,10 +3,11 @@ from pathlib import Path
 import json
 import numpy as np
 from .artifacts import sha256_file, write_json
-from .banks import CONTEXT_SEEDS, load_heldout
-from .inference import support_mask
-from .science.analytical_benchmark_v2 import array_descriptor, build_problem
+from .banks import CONTEXT_SEEDS, load_heldout, load_context, derive_seed
+from .inference import support_mask, frozen_regressor_settings, upstream_source_hashes, UPSTREAM_REVISION, CHECKPOINT_SHA256
+from .science.analytical_benchmark_v2 import array_descriptor, build_problem, unflatten_observations
 from .reference import load_reference_distribution
+from .science.analytical_benchmark_reference_v2 import FullHierarchyReference, refinement_witnesses
 from .validation import assess_samples, make_reference_input
 
 
@@ -36,6 +37,11 @@ def evaluate_gate(*, banks, references, runs, output):
                 or binding["observation_sha256"] != array_descriptor(query)["sha256"]
                 or binding["parameter_order"] != list(build_problem().parameter_order)):
             raise ValueError("reference case/science binding mismatch")
+        definition = FullHierarchyReference(build_problem(), unflatten_observations(query))
+        expected_directions, _ = refinement_witnesses(definition)
+        if (not np.array_equal(arrays["directions"], expected_directions)
+                or not np.array_equal(arrays["queries"], np.linspace(-8., 8., 513))):
+            raise ValueError("fixed joint-projection or dense query definition mismatch")
         refs[case] = make_reference_input(arrays, manifest)
     discovered = {}
     for path in sorted(Path(runs).rglob("manifest.json")):
@@ -59,6 +65,27 @@ def evaluate_gate(*, banks, references, runs, output):
                     entry["status"] = "reference_inconclusive"
                 else:
                     query = load_heldout(banks, case).obs
+                    context = load_context(banks, seed, 4096)
+                    expected = {"scientific_fingerprint": build_problem().scientific_fingerprint,
+                                "parameter_order": list(build_problem().parameter_order),
+                                "context_theta": array_descriptor(context.theta),
+                                "context_obs": array_descriptor(context.obs),
+                                "checkpoint_sha256": CHECKPOINT_SHA256,
+                                "upstream_revision": UPSTREAM_REVISION,
+                                "upstream_files": upstream_source_hashes(),
+                                "context_filter": "no_filtering", "max_iter_rejection": None,
+                                "scientific_run": True, "microbatch": 10000,
+                                "seed": derive_seed(seed, "posterior", case=case),
+                                "repetition": 0, "rank": 0, "world_size": 1}
+                    for field, expected_value in expected.items():
+                        if manifest.get(field) != expected_value:
+                            raise ValueError(f"inference contract mismatch: {field}")
+                    actual_settings = dict(manifest["regressor_settings"])
+                    actual_settings.pop("model_path")
+                    expected_settings = frozen_regressor_settings("unused.ckpt")
+                    expected_settings.pop("model_path")
+                    if actual_settings != expected_settings:
+                        raise ValueError("frozen regressor settings mismatch")
                     if manifest["query"] != array_descriptor(query):
                         raise ValueError("inference query differs from held-out observation")
                     payload = path.parent / "samples.npz"

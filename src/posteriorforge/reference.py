@@ -23,6 +23,7 @@ from .science.analytical_benchmark_reference_v2 import (
 
 SCHEMA = "posteriorforge.reference.v1"
 CDF_TOLERANCE = .005
+MOMENT_RELATIVE_TOLERANCE = .005
 DEFAULT_NESTED_CORNERS = ((20, 128), (40, 64), (40, 128))
 
 
@@ -71,11 +72,24 @@ def _dense_witnesses(reference, root, history, *, points, batch_size, deadline):
         raise ValueError("at least129 dense witness points required")
     directions, _ = refinement_witnesses(reference)
     queries = np.linspace(-8., 8., points)
-    centers, spreads = [], []
+    centers, spreads, retained_moments = [], [], []
     if len(history) < 2:
         raise ValueError("two retained refinement levels required")
     for entry in history[-2:]:
         banks = [_load_node(root / f"nodes-p{entry['power']}-s{j}", reference) for j in range(4)]
+        moments = [reference_moments(reference, bank) for bank in banks]
+        evidence = np.asarray([bank.metadata["log_evidence"] for bank in banks])
+        evidence_weight = np.exp(evidence - evidence.max())
+        evidence_weight /= evidence_weight.sum()
+        means = np.asarray([moment[0] for moment in moments])
+        sds = np.asarray([moment[1] for moment in moments])
+        combined_mean = evidence_weight @ means
+        combined_variance = evidence_weight @ (sds * sds + means * means) - combined_mean * combined_mean
+        if np.any(combined_variance <= 0):
+            raise ValueError("nonpositive retained mixture variance")
+        retained_moments.append({"power": entry["power"], "scramble_means": means,
+            "scramble_sds": sds, "combined_mean": combined_mean,
+            "combined_sd": np.sqrt(combined_variance)})
         values = np.asarray([bank.projected_cdfs(reference, directions, queries,
                             batch_size=batch_size, deadline=deadline) for bank in banks])
         center, spread = scramble_witness_summary(banks, values)
@@ -89,7 +103,67 @@ def _dense_witnesses(reference, root, history, *, points, batch_size, deadline):
               "joint_projection_cdf_precision": float(error[21:].max()),
               "passed": bool(np.max(error) <= CDF_TOLERANCE),
               "contract": "maximum final scramble spread and consecutive-power CDF difference at retained witness grid"}
-    return directions, queries, centers[-1], result
+    return directions, queries, centers[-1], result, retained_moments
+
+
+
+def _moment_precision(reference, nodes, retained_moments, nested_checks):
+    """Retained all-coordinate moment convergence, including independent corners.
+
+    Errors are normalized by the final mixture SD. They are empirical numerical
+    uncertainty diagnostics under the declared retained-refinement contract.
+    No moment check changes the frozen quadrature powers or observed cases.
+    """
+    if len(retained_moments) != 2 or len(nested_checks) < 3:
+        raise ValueError("two retained levels and three independent nested corners required")
+    mean, sd = reference_moments(reference, nodes)
+    previous, final = retained_moments
+    mean_errors = [np.abs(np.asarray(final["scramble_means"]) - mean).max(axis=0),
+                   np.abs(np.asarray(previous["combined_mean"]) - mean)]
+    sd_errors = [np.abs(np.asarray(final["scramble_sds"]) - sd).max(axis=0),
+                 np.abs(np.asarray(previous["combined_sd"]) - sd)]
+    mean_error = np.max(mean_errors, axis=0)
+    sd_error = np.max(sd_errors, axis=0)
+    ppos = [reference.problem.parameter_order.index(name) for name in reference.names[:3]]
+    npos = [reference.problem.parameter_order.index(name) for name in reference.problem.prior.noise_names]
+    # Source compare_nested already verifies separate-axis corners and binding.
+    nested_final = nested_checks[-1]
+    nested_global_mean = np.asarray(nested_final["global_mean"], dtype=np.float64)
+    nested_variance = np.diag(np.asarray(nested_final["global_covariance"], dtype=np.float64))
+    if np.any(nested_variance <= 0):
+        raise ValueError("nonpositive independent global posterior variance")
+    nested_global_sd = np.sqrt(nested_variance)
+    independent_global_mean = np.abs(nested_global_mean - mean[ppos])
+    independent_global_sd = np.abs(nested_global_sd - sd[ppos])
+    independent_noise_mean = np.abs(np.asarray(nested_final["noise_mean"]) - mean[npos])
+    for corner in nested_checks[:-1]:
+        variance = np.diag(np.asarray(corner["global_covariance"], dtype=np.float64))
+        if np.any(variance <= 0):
+            raise ValueError("nonpositive independent-corner global posterior variance")
+        independent_global_mean = np.maximum(independent_global_mean,
+            np.abs(np.asarray(corner["global_mean"]) - nested_global_mean))
+        independent_global_sd = np.maximum(independent_global_sd,
+            np.abs(np.sqrt(variance) - nested_global_sd))
+        independent_noise_mean = np.maximum(independent_noise_mean,
+            np.abs(np.asarray(corner["noise_mean"]) - nested_final["noise_mean"]))
+    mean_error[ppos] = np.maximum(mean_error[ppos], independent_global_mean)
+    sd_error[ppos] = np.maximum(sd_error[ppos], independent_global_sd)
+    mean_error[npos] = np.maximum(mean_error[npos], independent_noise_mean)
+    mean_relative, sd_relative = mean_error / sd, sd_error / sd
+    passed = (np.isfinite(mean_relative).all() and np.isfinite(sd_relative).all()
+              and mean_relative.max() <= MOMENT_RELATIVE_TOLERANCE
+              and sd_relative.max() <= MOMENT_RELATIVE_TOLERANCE)
+    return {"passed": bool(passed), "threshold_reference_sd": MOMENT_RELATIVE_TOLERANCE,
+            "mean_error_reference_sd": mean_relative.tolist(),
+            "sd_error_reference_sd": sd_relative.tolist(),
+            "mean_error_physical": mean_error.tolist(), "sd_error_physical": sd_error.tolist(),
+            "max_mean_error_reference_sd": float(mean_relative.max()),
+            "max_sd_error_reference_sd": float(sd_relative.max()),
+            "compared_powers": [entry["power"] for entry in retained_moments],
+            "checks": ["final_four_scramble_moments", "previous_power_combined_moments",
+                       "independent_global_mean_and_sd", "independent_noise_mean",
+                       "separate_axis_independent_corner_changes"],
+            "contract": "retained empirical numerical convergence diagnostics; validation propagates these uncertainties"}
 
 
 def _prepare_reference(banks_root, case_index: int, output_root, *, backend="jax", device="gpu",
@@ -125,7 +199,7 @@ def _prepare_reference(banks_root, case_index: int, output_root, *, backend="jax
               "cdf_tolerance": CDF_TOLERANCE,
               "slurm_job_id": os.environ["SLURM_JOB_ID"],
               "qualification": {"witness_passed": False, "dense_witness_passed": False,
-                                "independent_nested_passed": False},
+                                "independent_nested_passed": False, "moment_gate_passed": False},
               "reference_precision_contract": "finite-grid retained scramble/refinement diagnostic plus independent nested-order check; not global calibration certification"}
     def bank_path(power, j):
         return root / f"nodes-p{power}-s{j}"
@@ -148,7 +222,7 @@ def _prepare_reference(banks_root, case_index: int, output_root, *, backend="jax
             result["reason"] = "retained four-scramble reference exhausted approved powers without adequate CDF precision"
         else:
             # Dense retained checks protect table-based candidate decisions.
-            directions, queries, cdfs, dense = _dense_witnesses(reference, root,
+            directions, queries, cdfs, dense, retained_moments = _dense_witnesses(reference, root,
                         refinement["history"], points=dense_points,
                         batch_size=witness_batch_size, deadline=deadline)
             result["dense_witness"] = dense
@@ -179,6 +253,9 @@ def _prepare_reference(banks_root, case_index: int, output_root, *, backend="jax
                          noise_mean_tolerance=.001)
             result["independent_nested"] = independent
             result["qualification"]["independent_nested_passed"] = independent["passed"]
+            moment_precision = _moment_precision(reference, nodes, retained_moments, checks)
+            result["moment_precision"] = moment_precision
+            result["qualification"]["moment_gate_passed"] = moment_precision["passed"]
             result["cdf_precision"] = max(dense["marginal_cdf_precision"],
                      dense["joint_projection_cdf_precision"], independent["noise_cdf_max_error"])
             if all(result["qualification"].values()):
@@ -199,6 +276,7 @@ def _prepare_reference(banks_root, case_index: int, output_root, *, backend="jax
         independent_nested_passed=result["qualification"]["independent_nested_passed"],
         cpu_check_passed=result.get("refinement", {}).get("cpu_check", {}).get("passed", False),
         joint_reference_passed=result["qualification"]["dense_witness_passed"],
+        moment_precision=result.get("moment_precision"),
     )
     result["elapsed_seconds"] = time.monotonic() - started
     _json(root / "manifest.json", result)
@@ -241,7 +319,8 @@ def prepare_reference(banks_root, case_index: int, output_root, **kwargs) -> dic
                 "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
                 "qualification": {"state": "failed", "precision": None,
                     "witness_gate_passed": False, "independent_nested_passed": False,
-                    "cpu_check_passed": False, "joint_reference_passed": False}})
+                    "cpu_check_passed": False, "joint_reference_passed": False,
+                    "moment_gate_passed": False}})
         raise
 
 

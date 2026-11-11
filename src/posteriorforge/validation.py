@@ -98,6 +98,24 @@ def cdf_distance_bounds(projected_samples, queries, reference_cdfs, *, precision
             "bound_method": "whole_line_monotonicity_including_tails_plus_reference_precision"}
 
 
+def _moment_uncertainties(qualification):
+    """Return declared numerical moment uncertainty only after strict checks."""
+    moment = qualification.get("moment_precision")
+    if qualification.get("moment_gate_passed") is not True or not isinstance(moment, dict) or moment.get("passed") is not True:
+        return None
+    values = []
+    for name in ("mean_error_reference_sd", "sd_error_reference_sd"):
+        try:
+            array = np.asarray(moment[name])
+        except (KeyError, TypeError, ValueError):
+            return None
+        if (array.shape != (21,) or array.dtype.kind not in "fiu"
+                or not np.isfinite(array).all() or np.any(array < 0) or np.any(array > .005)):
+            return None
+        values.append(array.astype(np.float64))
+    return tuple(values)
+
+
 def _reference_arrays(reference):
     required = ("directions", "queries", "cdfs", "mean", "sd", "qualification")
     missing = [key for key in required if key not in reference]
@@ -118,7 +136,8 @@ def _reference_arrays(reference):
     if not isinstance(qualification, dict):
         raise ValueError("reference qualification mapping required")
     precision = qualification.get("precision")
-    qualified = (qualification.get("state") == "qualified" and type(precision) in (int, float)
+    qualified = (_moment_uncertainties(qualification) is not None
+                 and qualification.get("state") == "qualified" and type(precision) in (int, float)
                  and np.isfinite(precision) and 0 <= precision <= REFERENCE_PRECISION_LIMIT
                  and all(qualification.get(key) is True for key in
                          ("witness_gate_passed", "independent_nested_passed", "cpu_check_passed", "joint_reference_passed")))
@@ -152,13 +171,35 @@ def assess_samples(samples, reference, *, lower_bounds=None, upper_bounds=None,
     sample_mean, sample_sd = values.mean(axis=0), values.std(axis=0, ddof=1)
     bias = np.abs(sample_mean - reference_mean) / reference_sd
     ratio = sample_sd / reference_sd
-    moment_passed = bool(np.max(bias) <= BIAS_SD_LIMIT and np.min(ratio) >= SD_RATIO_LIMITS[0]
-                         and np.max(ratio) <= SD_RATIO_LIMITS[1])
+    raw_moment_passed = bool(np.max(bias) <= BIAS_SD_LIMIT and np.min(ratio) >= SD_RATIO_LIMITS[0]
+                             and np.max(ratio) <= SD_RATIO_LIMITS[1])
+    uncertainty = _moment_uncertainties(qualification)
+    moment_passed, moment_failed = False, False
+    intervals = None
+    if uncertainty is not None:
+        mean_error, sd_error = uncertainty
+        bias_lower = np.maximum(0., bias - mean_error) / (1 + sd_error)
+        bias_upper = (bias + mean_error) / (1 - sd_error)
+        ratio_lower = ratio / (1 + sd_error)
+        ratio_upper = ratio / (1 - sd_error)
+        moment_passed = bool(np.max(bias_upper) <= BIAS_SD_LIMIT
+                             and np.min(ratio_lower) >= SD_RATIO_LIMITS[0]
+                             and np.max(ratio_upper) <= SD_RATIO_LIMITS[1])
+        moment_failed = bool(np.any(bias_lower > BIAS_SD_LIMIT)
+                             or np.any(ratio_upper < SD_RATIO_LIMITS[0])
+                             or np.any(ratio_lower > SD_RATIO_LIMITS[1]))
+        intervals = {"absolute_bias_reference_sd": {"lower": bias_lower.tolist(), "upper": bias_upper.tolist()},
+                     "sd_ratio": {"lower": ratio_lower.tolist(), "upper": ratio_upper.tolist()},
+                     "mean_error_reference_sd": mean_error.tolist(),
+                     "sd_error_reference_sd": sd_error.tolist(),
+                     "contract": "reference mean and SD numerical uncertainty propagated conservatively"}
     result["moments"] = {"sample_mean": sample_mean.tolist(), "sample_sd": sample_sd.tolist(),
                          "sd_ddof": 1, "reference_mean": reference_mean.tolist(),
                          "reference_sd": reference_sd.tolist(), "absolute_bias_reference_sd": bias.tolist(),
                          "max_absolute_bias_reference_sd": float(np.max(bias)), "sd_ratio": ratio.tolist(),
-                         "passed": moment_passed}
+                         "raw_point_estimate_passed": raw_moment_passed,
+                         "uncertainty_intervals": intervals,
+                         "conclusively_failed": moment_failed, "passed": moment_passed}
     precision = qualification.get("precision")
     if type(precision) not in (float, int) or not np.isfinite(precision) or not 0 <= precision <= 1:
         # Retain useful raw witnesses, but do not invent missing precision.
@@ -176,8 +217,10 @@ def assess_samples(samples, reference, *, lower_bounds=None, upper_bounds=None,
     result["cdf_grid_point_count"] = bounds["grid_point_count"]
     if not qualified:
         return result
-    if not moment_passed or result["marginal_cdf"]["max_lower"] > CDF_LIMIT or result["joint_projection_cdf"]["max_lower"] > CDF_LIMIT:
+    if moment_failed or result["marginal_cdf"]["max_lower"] > CDF_LIMIT or result["joint_projection_cdf"]["max_lower"] > CDF_LIMIT:
         result["status"] = "model_failure"
+    elif not moment_passed:
+        result["status"] = "moment_inconclusive"
     elif result["marginal_cdf"]["passed"] and result["joint_projection_cdf"]["passed"]:
         result.update(status="pass", passed=True)
     else:

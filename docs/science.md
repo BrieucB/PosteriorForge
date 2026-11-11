@@ -59,3 +59,17 @@ noise mean errors<=0.001 in physical units. These conservative declared checks
 can return inconclusive; no failed/exhausted reference yields scientific pass.
 The public manifest records each condition separately. Production refinements
 and dense tables must run within the same200 allocated GPU-hour cap.
+
+
+# Moment precision
+
+The reference also requires all21 posterior means and standard deviations to
+converge under retained refinement. The final four scramble estimates and the
+previous-power combined estimates must agree with the final combined mixture:
+absolute mean differences<=0.005 referenceSD and absolute SD differences<=0.005
+referenceSD. Independent nested quadrature additionally checks global mean/SD
+and noise means with the same normalized thresholds, including both separate-axis
+corner changes. A missing or inadequate moment check leaves qualification
+inconclusive. The saved per-coordinate mean/SD uncertainties must be propagated
+into the candidate bias and SD-ratio decision. This uses existing retained banks
+and independent corners; it adds no observed cases or quadrature powers.
