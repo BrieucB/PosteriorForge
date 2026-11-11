@@ -1,0 +1,15 @@
+{
+  "schema": "posteriorforge.public_budget_snapshot.v1",
+  "captured_at_utc": "2026-11-11T20:04:04.336345+00:00",
+  "summary": {
+    "cap_gpu_hours": 200,
+    "actual_gpu_hours": 19.839166666666667,
+    "reserved_gpu_hours": 0.25,
+    "remaining_gpu_hours": 179.91083333333333,
+    "actual_gpu_seconds": 71421,
+    "reserved_gpu_seconds": 900,
+    "remaining_gpu_seconds": 647679,
+    "cap_exceeded": false,
+    "reservation_count": 53
+  }
+}

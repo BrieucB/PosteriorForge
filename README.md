@@ -116,3 +116,5 @@ providers have an interface contract; physical/C-CUDA adapters are out of scope.
 See `NOTICE`, the root MIT license, per-file provenance, and the separate Prior
 Labs license for upstream code and model terms. Uncorrected upstream log densities
 are not used as calibrated densities of support-truncated accepted samples.
+
+Current runtime contract and measured control figures: [performance-first execution](docs/performance-first-v1.md) and [control report](evidence/performance-first-v1/controls/report.md).

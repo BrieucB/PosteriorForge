@@ -31,7 +31,7 @@ def load_run(path):
     return values,manifest,{'manifest_sha256':sha256_file(path/'manifest.json'),'samples_sha256':sha256_file(payload),'path':str(path)}
 
 
-def render(*,control,reference,output,runs=(),qualification=None):
+def render(*,control,reference,output,runs=(),qualification=None,tail_diagnostic=None,budget_summary=None):
     output=Path(output);output.mkdir(parents=True,exist_ok=False)
     control_values,control_manifest,control_binding=load_run(control)
     binding_script=Path(__file__).with_name('evaluate_cdf_pilot.py')
@@ -130,7 +130,7 @@ def render(*,control,reference,output,runs=(),qualification=None):
         axes[1].plot(x,[r['peak_allocated_bytes']/2**30 for r in stages],marker='o',label='Probe peak allocated')
         axes[1].set(xlabel='Autoregressive stage',ylabel='GiB');axes[1].legend()
         for ax in axes:ax.grid(alpha=.15)
-        fig.suptitle('Fixed-conditional engineering probe; not an end-to-end posterior benchmark');fig.tight_layout();save(fig,'qualification-stage-time-memory.png')
+        fig.suptitle(f"Fixed-conditional probe: {q.get('status')}, {len(stages)}/21 stages recorded; not a posterior benchmark");fig.tight_layout();save(fig,'qualification-stage-time-memory.png')
         profiles=q.get('profiles',{})
         if profiles:
             fig,axes=plt.subplots(1,len(profiles),figsize=(7*len(profiles),5),squeeze=False)
@@ -140,10 +140,13 @@ def render(*,control,reference,output,runs=(),qualification=None):
             fig.suptitle('Actual bounded CPU/CUDA trace windows; query counts and capture scope retained in provenance');fig.tight_layout();save(fig,'bounded-trace-kernels.png')
     with (output/'timings.csv').open('w',newline='') as f:
         writer=csv.DictWriter(f,fieldnames=list(timing_rows[0]));writer.writeheader();writer.writerows(timing_rows)
+    tail=json.loads(Path(tail_diagnostic).read_text()) if tail_diagnostic else None
+    budget=json.loads(Path(budget_summary).read_text()) if budget_summary else None
     meta={'schema':'posteriorforge.execution_figures.v1','attribution':'Built with PriorLabs-TabPFN','script_sha256':sha256_file(__file__),
         'reference_manifest_sha256':sha256_file(Path(reference)/'manifest.json'),'reference_recomputed':False,'samples_clipped_or_repaired':False,
         'control':control_binding,'reference_custody':custody,'original_gate_sha256':sha256_file(gate_path),'binding_script_sha256':sha256_file(binding_script),'plotted_posterior_cohorts':[label for label,_,_,_ in data[:5]],'worst_four_parameter_indices':ranked.tolist(),'density_windows':windows,'assessments':assessments,'timings':timing_rows,'figures':figures,
         'qualification_manifest_sha256':sha256_file(qualification) if qualification else None,
+        'tail_diagnostic_sha256':sha256_file(tail_diagnostic) if tail_diagnostic else None,'tail_diagnostic':tail,'budget_summary_sha256':sha256_file(budget_summary) if budget_summary else None,'budget_summary':budget,
         'scope':'Saved finite-cohort visual evidence; not population equivalence, global calibration, or an execution acceptance decision.'}
     write_json(output/'figure-data.json',meta)
     lines=['# PosteriorForge performance evidence','','Built with PriorLabs-TabPFN. Every posterior curve contains 50,000 complete accepted physical vectors. Runtime qualification and absolute physical accuracy are separate decisions. These plots alone do not establish an optimized execution pass.','','| Run | Request seconds | Vectors/s | Physical result |','|---|---:|---:|---|']
@@ -153,6 +156,11 @@ def render(*,control,reference,output,runs=(),qualification=None):
         relative=item['relative']
         lines.append(f"| {item['label']} | {max(relative['cdf_difference']):.6g} | {max(relative['mean_difference_reference_sd']):.6g} | {max(relative['sd_fraction_difference']):.6g} | {relative['investigation_required']} |")
     lines.extend(['','Investigation thresholds remain 0.01 CDF, 0.05 reference SD in mean, and 5% in SD. Repeated controls can also raise flags; every flagged comparison remains an investigation, not an automatic equivalence claim. No reported vector or outlier is removed.'])
+    if tail:
+        lines.extend(['',tail['classification']['confirmed'],'',tail['classification']['important_correction'],'',tail['classification']['not_proven']])
+    if budget:
+        snapshot=budget.get('summary',budget)
+        lines.extend(['',f"Cumulative allocated cost at the saved snapshot: {snapshot['actual_gpu_hours']:.6f} GPU-hours spent and {snapshot['reserved_gpu_hours']:.6f} reserved, under the immutable {snapshot['cap_gpu_hours']}-hour cap. Request wall-products in the plots are separate from scheduler allocation accounting."])
     for name in figures:lines.extend(['',f'![{name.removesuffix(".png").replace("-"," ")}]({name})'])
     lines.extend(['','All densities divide by the complete draw count, including mass outside the displayed retained grid. Reference curves use saved values; no new reference integration, clipping, tail repair or physical gate changes were performed. Detailed input/output SHA256 values and absolute assessments are in figure-data.json.'])
     (output/'report.md').write_text('\n'.join(lines)+'\n')
@@ -162,5 +170,5 @@ def render(*,control,reference,output,runs=(),qualification=None):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     for key in ('control','reference','output'):p.add_argument('--'+key,required=True)
-    p.add_argument('--run',action='append',dest='runs',default=[]);p.add_argument('--qualification')
+    p.add_argument('--run',action='append',dest='runs',default=[]);p.add_argument('--qualification');p.add_argument('--tail-diagnostic');p.add_argument('--budget-summary')
     print(json.dumps(render(**vars(p.parse_args())),indent=2))

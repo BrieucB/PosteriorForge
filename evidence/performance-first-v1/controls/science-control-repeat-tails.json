@@ -1,0 +1,198 @@
+{
+  "attribution": "Built with PriorLabs-TabPFN",
+  "classification": {
+    "confirmed": "One finite, prior-supported accepted a_a3 sample accounts for88.8% of this coordinate's rep2 squared deviation; central quantiles remain similar and the unchanged engine produces a201.7% relative-SD investigation flag.",
+    "important_correction": "The outlier is inside the nominal very wide finite terminal bar. It is not evidence by itself of extrapolation beyond the last finite border.",
+    "not_proven": "Original per-draw probabilities and uniform were not retained, so numerical CDF/bin-selection roundoff versus genuine learned terminal-bin probability cannot be identified.",
+    "performance_implication": "Do not remove the row, suppress the flag, or loosen thresholds. Treat this unchanged-control tail event as evidence that finite-cohort SD flags need investigation alongside pointwise conditional/source proofs.",
+    "physical_implication": "Natural variability of the implemented PFN sampler is not natural variability of the qualified scientific posterior; this draw is scientifically extreme."
+  },
+  "control_custody": [
+    {
+      "manifest_sha256": "1d13af13123be5b57d5ce07cc4cf684932d5a5338a486770cfe60663efc031c0",
+      "repetition": 0,
+      "samples_sha256": "27e51ad1b1ee615fc921ee4f5c237155139304da3e7c193f7781a389cee6d53e",
+      "seed": 4265748221
+    },
+    {
+      "manifest_sha256": "54dd3171385218c8cb8bd9b9fd5c9ee66b3e0e587822d9e18293a2e96e3c248e",
+      "repetition": 1,
+      "samples_sha256": "7db3e9dfcf876262b39696fa1cceb0ffadb823dd716ad8a0e12d329969157c60",
+      "seed": 3516945444
+    },
+    {
+      "manifest_sha256": "090475d62ed2ef86a4e6607a87e7b8e16b98b2601971a0ad3525fe75035f7eeb",
+      "repetition": 2,
+      "samples_sha256": "5bc538fe70b05fbda39e68f806b660f7e454e6257d93d0a2d6ec509fb1024ae4",
+      "seed": 2469119474
+    }
+  ],
+  "nominal_finite_bar_reconstruction": {
+    "border_count": 5001,
+    "checkpoint_normalized_endpoints": [
+      -93.08673095703125,
+      86.94256591796875
+    ],
+    "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+    "float32_training_target_mean": 0.32394862174987793,
+    "float32_training_target_sd": 1.1066925525665283,
+    "outlier_bin_endpoints": [
+      30.376461029052734,
+      96.54264068603516
+    ],
+    "outlier_bin_index": 4999,
+    "outlier_fraction_within_bin": 0.9142861244475952,
+    "outlier_inside_nominal_finite_borders": true,
+    "physical_endpoints": [
+      -102.69444274902344,
+      96.54264068603516
+    ],
+    "regressor_source_sha256": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+    "source_formula": "regressor.py: mean=np.mean(y),std=np.std(y)+1e-20; criterion=(checkpoint_borders*std+mean).float(); y supplied from float32 context."
+  },
+  "parameter": "a_a3",
+  "parameter_index": 19,
+  "schema": "posteriorforge.control_repeat_tail_diagnostic.v1",
+  "scientific_context": {
+    "acoustic3_observation": 2.8316636882565205,
+    "outlier_acoustic3_forward_prediction": 157.78118362426758,
+    "outlier_prior_z": 82.59390207307928,
+    "prior_gaussian_upper_tail_log_probability": -3416.209350751142,
+    "prior_marginal_mean": 0.3,
+    "prior_marginal_sd": 1.0965856099730655,
+    "residual_in_maximum_allowed_noise_sd": 309.8990398720221
+  },
+  "scope": "Diagnostic only: unchanged corrected unoptimized controls; no filtering, sample repair, inference or reference integration.",
+  "sd_ratio_rep2_over_rep0": 3.0170824308623483,
+  "summaries": [
+    {
+      "diagnostic_leave_one_out_sd_NOT_a_gate_or_repaired_sample": 0.1432770871082477,
+      "largest_squared_deviation_row": 44586,
+      "largest_squared_deviation_value": 0.9755442142486572,
+      "mean": -0.28261563237999043,
+      "one_row_fraction_of_sum_squared_deviations": 0.0015399131151909021,
+      "quantile_probabilities": [
+        0,
+        2e-05,
+        0.0001,
+        0.001,
+        0.01,
+        0.05,
+        0.25,
+        0.5,
+        0.75,
+        0.95,
+        0.99,
+        0.999,
+        0.9999,
+        0.99998,
+        1
+      ],
+      "quantiles": [
+        -1.1626965999603271,
+        -1.0427664663004874,
+        -0.9210109221696854,
+        -0.7802735038399696,
+        -0.6312760025262832,
+        -0.5184961348772049,
+        -0.37515129894018173,
+        -0.28139862418174744,
+        -0.1898651272058487,
+        -0.04960119016468529,
+        0.059089298285543934,
+        0.20075260621308505,
+        0.3287025938600288,
+        0.3863387828162316,
+        0.9755442142486572
+      ],
+      "repetition": 0,
+      "sd": 0.14338610011414435
+    },
+    {
+      "diagnostic_leave_one_out_sd_NOT_a_gate_or_repaired_sample": 0.14396682270088698,
+      "largest_squared_deviation_row": 35328,
+      "largest_squared_deviation_value": 1.086992859840393,
+      "mean": -0.28422361357770337,
+      "one_row_fraction_of_sum_squared_deviations": 0.001811120237956477,
+      "quantile_probabilities": [
+        0,
+        2e-05,
+        0.0001,
+        0.001,
+        0.01,
+        0.05,
+        0.25,
+        0.5,
+        0.75,
+        0.95,
+        0.99,
+        0.999,
+        0.9999,
+        0.99998,
+        1
+      ],
+      "quantiles": [
+        -1.276254415512085,
+        -0.972741952176094,
+        -0.9243729252457619,
+        -0.7703111011385918,
+        -0.6347166818380355,
+        -0.5209080636501312,
+        -0.37796325981616974,
+        -0.28287409245967865,
+        -0.1898864507675171,
+        -0.04960021488368549,
+        0.054982997067272714,
+        0.18205420139431888,
+        0.35790710530275677,
+        0.6303745042536336,
+        1.086992859840393
+      ],
+      "repetition": 1,
+      "sd": 0.14409593227412562
+    },
+    {
+      "diagnostic_leave_one_out_sd_NOT_a_gate_or_repaired_sample": 0.14477708515211893,
+      "largest_squared_deviation_row": 43246,
+      "largest_squared_deviation_value": 90.87128448486328,
+      "mean": -0.2831929505627515,
+      "one_row_fraction_of_sum_squared_deviations": 0.8879862394304204,
+      "quantile_probabilities": [
+        0,
+        2e-05,
+        0.0001,
+        0.001,
+        0.01,
+        0.05,
+        0.25,
+        0.5,
+        0.75,
+        0.95,
+        0.99,
+        0.999,
+        0.9999,
+        0.99998,
+        1
+      ],
+      "quantiles": [
+        -1.0929572582244873,
+        -0.958768250182867,
+        -0.914416240119934,
+        -0.7847692429423332,
+        -0.6361151999235153,
+        -0.5227565675973892,
+        -0.3788585960865021,
+        -0.28400076925754547,
+        -0.19085021689534187,
+        -0.047886979021132585,
+        0.05891768403351311,
+        0.19417618100345088,
+        0.31807055218208935,
+        0.4088947324385151,
+        90.87128448486328
+      ],
+      "repetition": 2,
+      "sd": 0.43260768348425527
+    }
+  ]
+}
