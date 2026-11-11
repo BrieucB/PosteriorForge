@@ -1,0 +1,1426 @@
+{
+  "schema": "posteriorforge.failure_runtime_diagnostic.v1.streaming_trace",
+  "attribution": "Built with PriorLabs-TabPFN",
+  "diagnostic_only": true,
+  "method": "Two passes with stdlib JSONDecoder; bounded buffer, only compact GPU/sync intervals retained.",
+  "trace_file": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/diagnostics-20261111/runtime-profile/runtime.trace.json",
+  "trace_bytes": 7402806760,
+  "trace_event_count": 27518694,
+  "profiled_request_trace_span_seconds": 614.1093348017578,
+  "counts_and_summed_times_scope": "entire profiler session; interval unions clipped to annotated request",
+  "cuda_activity_status": "recorded",
+  "cuda_kernel_event_count": 198078,
+  "cuda_kernel_summed_seconds": 490.6979296278541,
+  "cuda_kernel_interval_union_seconds": 490.69785059375,
+  "cuda_kernel_and_copy_interval_union_seconds": 491.6546156508789,
+  "cuda_copy_interval_union_seconds": 0.94951915625,
+  "cuda_runtime_sync_interval_union_seconds": 415.09096284179685,
+  "cuda_copy_event_count": 12642,
+  "cuda_copy_summed_seconds": 0.9495190909999759,
+  "cuda_runtime_sync_event_count": 11972,
+  "cuda_runtime_sync_host_seconds": 415.09096732099977,
+  "kernel_busy_fraction_of_profile_span": 0.7990398822909172,
+  "top_kernels": [
+    {
+      "name": "fmha_cutlassF_f32_aligned_64x64_rf_sm80(PyTorchMemEffAttention::AttentionKernel<float, cutlass::arch::Sm80, true, 64, 64, 64, true, true>::Params)",
+      "count": 12096,
+      "summed_duration_seconds": 361.84158658500155,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "ampere_sgemm_64x64_tn",
+      "count": 12192,
+      "summed_duration_seconds": 40.5551821759999,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "ampere_sgemm_128x64_tn",
+      "count": 8568,
+      "summed_duration_seconds": 29.766249871000053,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "ampere_sgemm_64x64_nn",
+      "count": 13056,
+      "summed_duration_seconds": 12.819240371999989,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<float, float>(int, float, float const*, float const*, float const*, float*, float*, float*)",
+      "count": 12096,
+      "summed_duration_seconds": 12.556058628999883,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "ampere_sgemm_32x128_tn",
+      "count": 2856,
+      "summed_duration_seconds": 7.754822963999973,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
+      "count": 45696,
+      "summed_duration_seconds": 6.992461454999736,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::GeluCUDAKernelImpl(at::TensorIteratorBase&, at::native::GeluType)::{lambda()#2}::operator()() const::{lambda()#2}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::GeluCUDAKernelImpl(at::TensorIteratorBase&, at::native::GeluType)::{lambda()#2}::operator()() const::{lambda()#2}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>)",
+      "count": 5088,
+      "summed_duration_seconds": 6.379994036999976,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul> >(int, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul>)",
+      "count": 10752,
+      "summed_duration_seconds": 5.1252279239999465,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})",
+      "count": 9744,
+      "summed_duration_seconds": 2.691714589000039,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy_aligned16_contig<at::native::(anonymous namespace)::OpaqueType<4u>, unsigned int, 4, 128, 1>(at::native::(anonymous namespace)::OpaqueType<4u>*, at::native::(anonymous namespace)::CatArrInputTensorMetadata<at::native::(anonymous namespace)::OpaqueType<4u>, unsigned int, 128, 1>, at::native::(anonymous namespace)::TensorSizeStride<unsigned int, 4u>, int, unsigned int)",
+      "count": 4368,
+      "summed_duration_seconds": 1.8334617949999994,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::_scatter_gather_elementwise_kernel<128, 4, at::native::_cuda_scatter_gather_internal_kernel<false, at::native::OpaqueType<4> >::operator()<at::native::TensorAssign>(at::TensorIterator&, long, long, long, at::native::TensorAssign const&)::{lambda(int)#1}>(int, at::native::_cuda_scatter_gather_internal_kernel<false, at::native::OpaqueType<4> >::operator()<at::native::TensorAssign>(at::TensorIterator&, long, long, long, at::native::TensorAssign const&)::{lambda(int)#1})",
+      "count": 672,
+      "summed_duration_seconds": 0.21144479600000032,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::masked_fill_kernel(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#4}::operator()() const::{lambda(long, bool)#1}, std::array<char*, 3ul> >(int, at::native::(anonymous namespace)::masked_fill_kernel(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#4}::operator()() const::{lambda(long, bool)#1}, std::array<char*, 3ul>)",
+      "count": 672,
+      "summed_duration_seconds": 0.21136383299999964,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "ampere_sgemm_32x128_nn",
+      "count": 2064,
+      "summed_duration_seconds": 0.198383316,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::(anonymous namespace)::searchsorted_cuda_kernel<float, long>(long*, float const*, float const*, long const*, long, long, long, bool, bool)",
+      "count": 336,
+      "summed_duration_seconds": 0.19012302600000033,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<4> >(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_kernel_impl<at::native::OpaqueType<4> >(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<4> >(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_kernel_impl<at::native::OpaqueType<4> >(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&)::{lambda(int)#1})",
+      "count": 1008,
+      "summed_duration_seconds": 0.16269254899999927,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>)",
+      "count": 2688,
+      "summed_duration_seconds": 0.1518480040000014,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::masked_fill_kernel(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#7}::operator()() const::{lambda(float, bool)#1}, std::array<char*, 3ul> >(int, at::native::(anonymous namespace)::masked_fill_kernel(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#7}::operator()() const::{lambda(float, bool)#1}, std::array<char*, 3ul>)",
+      "count": 672,
+      "summed_duration_seconds": 0.10848535300000021,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}, std::array<char*, 2ul> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}, std::array<char*, 2ul>)",
+      "count": 1008,
+      "summed_duration_seconds": 0.10247921700000011,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<long>, std::array<char*, 2ul> >(int, at::native::CUDAFunctorOnSelf_add<long>, std::array<char*, 2ul>)",
+      "count": 336,
+      "summed_duration_seconds": 0.10079647599999995,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, bool, at::native::(anonymous namespace)::CompareEqFunctor<float> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, bool, at::native::(anonymous namespace)::CompareEqFunctor<float> >, std::array<char*, 3ul>)",
+      "count": 4032,
+      "summed_duration_seconds": 0.0988189079999978,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float, float, bool, at::native::(anonymous namespace)::CompareEqFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, bool, at::native::(anonymous namespace)::CompareEqFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float, float, bool, at::native::(anonymous namespace)::CompareEqFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, bool, at::native::(anonymous namespace)::CompareEqFunctor<float> > const&)::{lambda(int)#1})",
+      "count": 1344,
+      "summed_duration_seconds": 0.08314767799999984,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::(anonymous namespace)::CompareFunctor<float> >(at::TensorIteratorBase&, at::native::(anonymous namespace)::CompareFunctor<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::(anonymous namespace)::CompareFunctor<float> >(at::TensorIteratorBase&, at::native::(anonymous namespace)::CompareFunctor<float> const&)::{lambda(int)#1})",
+      "count": 672,
+      "summed_duration_seconds": 0.07897354799999991,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::DivFunctor<float> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::DivFunctor<float> >, std::array<char*, 3ul>)",
+      "count": 2016,
+      "summed_duration_seconds": 0.07758010100000018,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "void at::native::tensor_kernel_scan_innermost_dim<float, std::plus<float> >(float*, float const*, unsigned int, unsigned int, unsigned int, float, std::plus<float>)",
+      "count": 336,
+      "summed_duration_seconds": 0.07746548899999993,
+      "bytes": null,
+      "events_with_byte_count": 0
+    }
+  ],
+  "copies": [
+    {
+      "name": "Memcpy DtoH (Device -> Pageable)",
+      "count": 4200,
+      "summed_duration_seconds": 0.7712515370000008,
+      "bytes": 6104386744,
+      "events_with_byte_count": 4200
+    },
+    {
+      "name": "Memcpy HtoD (Pageable -> Device)",
+      "count": 5754,
+      "summed_duration_seconds": 0.17111985099999893,
+      "bytes": 2816528720,
+      "events_with_byte_count": 5754
+    },
+    {
+      "name": "Memcpy DtoH (Device -> Pinned)",
+      "count": 2016,
+      "summed_duration_seconds": 0.004529899999999993,
+      "bytes": 6048,
+      "events_with_byte_count": 2016
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "count": 672,
+      "summed_duration_seconds": 0.002617802999999991,
+      "bytes": 954162880,
+      "events_with_byte_count": 672
+    }
+  ],
+  "memset": [
+    {
+      "name": "Memset (Device)",
+      "count": 5136,
+      "summed_duration_seconds": 0.0072458660000000175,
+      "bytes": 1531392,
+      "events_with_byte_count": 5136
+    }
+  ],
+  "sync_calls": [
+    {
+      "name": "cudaStreamSynchronize",
+      "count": 11970,
+      "summed_duration_seconds": 415.09093786599976,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "cudaDeviceSynchronize",
+      "count": 2,
+      "summed_duration_seconds": 2.9455000000000002e-05,
+      "bytes": null,
+      "events_with_byte_count": 0
+    }
+  ],
+  "runtime_calls": [
+    {
+      "name": "cudaStreamSynchronize",
+      "count": 11970,
+      "summed_duration_seconds": 415.09093786599976,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "cudaMemcpyAsync",
+      "count": 12642,
+      "summed_duration_seconds": 66.89641242700006,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "cudaLaunchKernel",
+      "count": 198078,
+      "summed_duration_seconds": 1.4920933279999609,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "cudaFree",
+      "count": 1692,
+      "summed_duration_seconds": 0.46035486000000053,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "cudaMalloc",
+      "count": 1692,
+      "summed_duration_seconds": 0.4564240449999996,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "cudaMemsetAsync",
+      "count": 5136,
+      "summed_duration_seconds": 0.029165370999999968,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "cudaOccupancyMaxActiveBlocksPerMultiprocessor",
+      "count": 16500,
+      "summed_duration_seconds": 0.023570827999999787,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "cudaStreamIsCapturing",
+      "count": 15804,
+      "summed_duration_seconds": 0.02156240000000046,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags",
+      "count": 2688,
+      "summed_duration_seconds": 0.0029263570000000014,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "cudaDeviceGetAttribute",
+      "count": 4032,
+      "summed_duration_seconds": 0.00183609099999999,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "cudaPeekAtLastError",
+      "count": 10752,
+      "summed_duration_seconds": 0.0008002559999999841,
+      "bytes": null,
+      "events_with_byte_count": 0
+    },
+    {
+      "name": "cudaDeviceSynchronize",
+      "count": 2,
+      "summed_duration_seconds": 2.9455000000000002e-05,
+      "bytes": null,
+      "events_with_byte_count": 0
+    }
+  ],
+  "annotated_host_spans": [
+    {
+      "name": "pfdiagnostic/profile/request",
+      "start_us": 3554587014930.801,
+      "duration_seconds": 614.109334802
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s-1/proposal",
+      "start_us": 3554587016057.315,
+      "duration_seconds": 463.72714588
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s0/fit",
+      "start_us": 3554587028114.079,
+      "duration_seconds": 1.2808265509999999
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s0/predict",
+      "start_us": 3554588308992.147,
+      "duration_seconds": 14.509490842
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s0/empty_cache",
+      "start_us": 3554604617113.048,
+      "duration_seconds": 0.012894158
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s0/ipc_collect",
+      "start_us": 3554604630042.863,
+      "duration_seconds": 2.9585000000000002e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s1/fit",
+      "start_us": 3554604630120.758,
+      "duration_seconds": 1.173356912
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s1/predict",
+      "start_us": 3554605803533.594,
+      "duration_seconds": 15.062400909
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s1/empty_cache",
+      "start_us": 3554622665130.389,
+      "duration_seconds": 0.012992061
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s1/ipc_collect",
+      "start_us": 3554622678159.159,
+      "duration_seconds": 3.0155999999999997e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s2/fit",
+      "start_us": 3554622678237.796,
+      "duration_seconds": 1.2021908559999999
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s2/predict",
+      "start_us": 3554623880480.619,
+      "duration_seconds": 15.31885935
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s2/empty_cache",
+      "start_us": 3554641005145.818,
+      "duration_seconds": 0.014678341000000001
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s2/ipc_collect",
+      "start_us": 3554641019859.044,
+      "duration_seconds": 3.0036000000000002e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s3/fit",
+      "start_us": 3554641019943.502,
+      "duration_seconds": 1.2472588459999998
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s3/predict",
+      "start_us": 3554642267258.202,
+      "duration_seconds": 16.001446526000002
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s3/empty_cache",
+      "start_us": 3554660066844.552,
+      "duration_seconds": 0.013283526
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s3/ipc_collect",
+      "start_us": 3554660080157.673,
+      "duration_seconds": 2.7622e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s4/fit",
+      "start_us": 3554660080233.885,
+      "duration_seconds": 1.334281634
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s4/predict",
+      "start_us": 3554661414569.81,
+      "duration_seconds": 16.23207891
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s4/empty_cache",
+      "start_us": 3554679545011.841,
+      "duration_seconds": 0.013331556000000001
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s4/ipc_collect",
+      "start_us": 3554679558380.375,
+      "duration_seconds": 3.0126999999999998e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s5/fit",
+      "start_us": 3554679558459.293,
+      "duration_seconds": 1.297199736
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s5/predict",
+      "start_us": 3554680855711.697,
+      "duration_seconds": 16.713599234
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s5/empty_cache",
+      "start_us": 3554699383939.956,
+      "duration_seconds": 0.013886952999999999
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s5/ipc_collect",
+      "start_us": 3554699397914.102,
+      "duration_seconds": 3.9774e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s6/fit",
+      "start_us": 3554699398003.028,
+      "duration_seconds": 1.5133738300000001
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s6/predict",
+      "start_us": 3554700911429.066,
+      "duration_seconds": 16.989005738000003
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s6/empty_cache",
+      "start_us": 3554719712622.381,
+      "duration_seconds": 0.016351274
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s6/ipc_collect",
+      "start_us": 3554719729000.505,
+      "duration_seconds": 2.5568e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s7/fit",
+      "start_us": 3554719729076.006,
+      "duration_seconds": 1.593428415
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s7/predict",
+      "start_us": 3554721322560.225,
+      "duration_seconds": 17.655030155000002
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s7/empty_cache",
+      "start_us": 3554740770849.93,
+      "duration_seconds": 0.016137275
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s7/ipc_collect",
+      "start_us": 3554740787013.354,
+      "duration_seconds": 2.4596e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s8/fit",
+      "start_us": 3554740787086.25,
+      "duration_seconds": 1.548519712
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s8/predict",
+      "start_us": 3554742335658.821,
+      "duration_seconds": 17.851584521000003
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s8/empty_cache",
+      "start_us": 3554761980916.335,
+      "duration_seconds": 0.016102289000000002
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s8/ipc_collect",
+      "start_us": 3554761997054.501,
+      "duration_seconds": 3.0177e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s9/fit",
+      "start_us": 3554761997134.09,
+      "duration_seconds": 1.602151654
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s9/predict",
+      "start_us": 3554763599339.274,
+      "duration_seconds": 18.304668723000002
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s9/empty_cache",
+      "start_us": 3554783688055.515,
+      "duration_seconds": 0.016463233
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s9/ipc_collect",
+      "start_us": 3554783704555.767,
+      "duration_seconds": 3.0818e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s10/fit",
+      "start_us": 3554783704635.987,
+      "duration_seconds": 1.6521971599999998
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s10/predict",
+      "start_us": 3554785356887.418,
+      "duration_seconds": 18.575328464000002
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s10/empty_cache",
+      "start_us": 3554805732096.126,
+      "duration_seconds": 0.016569372
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s10/ipc_collect",
+      "start_us": 3554805748744.385,
+      "duration_seconds": 3.1618999999999997e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s11/fit",
+      "start_us": 3554805748825.707,
+      "duration_seconds": 1.59750125
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s11/predict",
+      "start_us": 3554807346379.115,
+      "duration_seconds": 19.201780994
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s11/empty_cache",
+      "start_us": 3554828346503.683,
+      "duration_seconds": 0.01681479
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s11/ipc_collect",
+      "start_us": 3554828363344.602,
+      "duration_seconds": 2.5146999999999998e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s12/fit",
+      "start_us": 3554828363419.271,
+      "duration_seconds": 1.518214911
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s12/predict",
+      "start_us": 3554829881690.056,
+      "duration_seconds": 19.36651012
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s12/empty_cache",
+      "start_us": 3554851048407.481,
+      "duration_seconds": 0.016822804
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s12/ipc_collect",
+      "start_us": 3554851065267.986,
+      "duration_seconds": 3.1058e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s13/fit",
+      "start_us": 3554851065348.376,
+      "duration_seconds": 1.545194993
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s13/predict",
+      "start_us": 3554852610595.457,
+      "duration_seconds": 19.857778997
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s13/empty_cache",
+      "start_us": 3554874256236.445,
+      "duration_seconds": 0.019403574
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s13/ipc_collect",
+      "start_us": 3554874275667.18,
+      "duration_seconds": 2.4956e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s14/fit",
+      "start_us": 3554874275742.42,
+      "duration_seconds": 1.55507822
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s14/predict",
+      "start_us": 3554875830875.342,
+      "duration_seconds": 20.155104634
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s14/empty_cache",
+      "start_us": 3554897778420.767,
+      "duration_seconds": 0.017413008
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s14/ipc_collect",
+      "start_us": 3554897795871.495,
+      "duration_seconds": 3.0227e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s15/fit",
+      "start_us": 3554897795958.698,
+      "duration_seconds": 1.6404727250000002
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s15/predict",
+      "start_us": 3554899436486.055,
+      "duration_seconds": 20.808587752
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s15/empty_cache",
+      "start_us": 3554922045567.496,
+      "duration_seconds": 0.01740922
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s15/ipc_collect",
+      "start_us": 3554922063053.5,
+      "duration_seconds": 3.1448e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s16/fit",
+      "start_us": 3554922063135.513,
+      "duration_seconds": 1.807793661
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s16/predict",
+      "start_us": 3554923870992.702,
+      "duration_seconds": 20.961789522
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s16/empty_cache",
+      "start_us": 3554946622420.992,
+      "duration_seconds": 0.018195769
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s16/ipc_collect",
+      "start_us": 3554946640652.929,
+      "duration_seconds": 3.0026e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s17/fit",
+      "start_us": 3554946640732.187,
+      "duration_seconds": 1.7696959369999998
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s17/predict",
+      "start_us": 3554948410484.149,
+      "duration_seconds": 21.523697118999998
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s17/empty_cache",
+      "start_us": 3554971735393.95,
+      "duration_seconds": 0.017722375
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s17/ipc_collect",
+      "start_us": 3554971753152.272,
+      "duration_seconds": 3.1419e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s18/fit",
+      "start_us": 3554971753232.712,
+      "duration_seconds": 1.760037993
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s18/predict",
+      "start_us": 3554973513326.399,
+      "duration_seconds": 22.141880267
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s18/empty_cache",
+      "start_us": 3554997455557.048,
+      "duration_seconds": 0.01805177
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s18/ipc_collect",
+      "start_us": 3554997473645.526,
+      "duration_seconds": 2.9876e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s19/fit",
+      "start_us": 3554997473724.684,
+      "duration_seconds": 1.9160717
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s19/predict",
+      "start_us": 3554999389850.776,
+      "duration_seconds": 22.939285204
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s19/empty_cache",
+      "start_us": 3555024114835.773,
+      "duration_seconds": 0.018451937999999998
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s19/ipc_collect",
+      "start_us": 3555024133325.601,
+      "duration_seconds": 3.1469e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s20/fit",
+      "start_us": 3555024133406.562,
+      "duration_seconds": 1.825322405
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s20/predict",
+      "start_us": 3555025958781.706,
+      "duration_seconds": 22.978567530000003
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s20/empty_cache",
+      "start_us": 3555050724504.437,
+      "duration_seconds": 0.018269175999999998
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s20/ipc_collect",
+      "start_us": 3555050742800.232,
+      "duration_seconds": 2.4577000000000002e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s20/support",
+      "start_us": 3555050743223.293,
+      "duration_seconds": 0.000929766
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s-1/proposal",
+      "start_us": 3555050744353.724,
+      "duration_seconds": 150.37937323300002
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s0/fit",
+      "start_us": 3555050744551.002,
+      "duration_seconds": 1.332106301
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s0/predict",
+      "start_us": 3555052076712.937,
+      "duration_seconds": 4.370098759999999
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s0/empty_cache",
+      "start_us": 3555056463839.945,
+      "duration_seconds": 0.00483549
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s0/ipc_collect",
+      "start_us": 3555056468698.048,
+      "duration_seconds": 2.2271e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s1/fit",
+      "start_us": 3555056468764.421,
+      "duration_seconds": 1.398265367
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s1/predict",
+      "start_us": 3555057867085.592,
+      "duration_seconds": 4.5156837560000005
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s1/empty_cache",
+      "start_us": 3555062399680.598,
+      "duration_seconds": 0.004836091000000001
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s1/ipc_collect",
+      "start_us": 3555062404540.524,
+      "duration_seconds": 2.2843e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s2/fit",
+      "start_us": 3555062404608.631,
+      "duration_seconds": 1.320573254
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s2/predict",
+      "start_us": 3555063725234.463,
+      "duration_seconds": 4.595446506
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s2/empty_cache",
+      "start_us": 3555068337475.771,
+      "duration_seconds": 0.0048514
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s2/ipc_collect",
+      "start_us": 3555068342350.124,
+      "duration_seconds": 2.3864e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s3/fit",
+      "start_us": 3555068342418.812,
+      "duration_seconds": 1.2401024520000001
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s3/predict",
+      "start_us": 3555069582576.207,
+      "duration_seconds": 4.810525244
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s3/empty_cache",
+      "start_us": 3555074409852.482,
+      "duration_seconds": 0.007866049
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s3/ipc_collect",
+      "start_us": 3555074417741.504,
+      "duration_seconds": 2.3244e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s4/fit",
+      "start_us": 3555074417809.701,
+      "duration_seconds": 1.2700545660000002
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s4/predict",
+      "start_us": 3555075687926.273,
+      "duration_seconds": 4.877871616999999
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s4/empty_cache",
+      "start_us": 3555080582574.398,
+      "duration_seconds": 0.004920458999999999
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s4/ipc_collect",
+      "start_us": 3555080587518.15,
+      "duration_seconds": 2.2933e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s5/fit",
+      "start_us": 3555080587586.338,
+      "duration_seconds": 1.291512565
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s5/predict",
+      "start_us": 3555081879153.926,
+      "duration_seconds": 5.004006162
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s5/empty_cache",
+      "start_us": 3555086900095.263,
+      "duration_seconds": 0.004928823999999999
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s5/ipc_collect",
+      "start_us": 3555086905047.13,
+      "duration_seconds": 2.3113e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s6/fit",
+      "start_us": 3555086905115.167,
+      "duration_seconds": 1.3628419760000001
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s6/predict",
+      "start_us": 3555088268015.753,
+      "duration_seconds": 5.070267077
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s6/empty_cache",
+      "start_us": 3555093355097.4,
+      "duration_seconds": 0.004980701
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s6/ipc_collect",
+      "start_us": 3555093360101.164,
+      "duration_seconds": 2.3183e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s7/fit",
+      "start_us": 3555093360169.291,
+      "duration_seconds": 1.352056857
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s7/predict",
+      "start_us": 3555094712292.732,
+      "duration_seconds": 5.266817226
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s7/empty_cache",
+      "start_us": 3555099995898.118,
+      "duration_seconds": 0.005025595
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s7/ipc_collect",
+      "start_us": 3555100000946.946,
+      "duration_seconds": 2.2882999999999998e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s8/fit",
+      "start_us": 3555100001014.202,
+      "duration_seconds": 1.532707053
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s8/predict",
+      "start_us": 3555101533775.617,
+      "duration_seconds": 5.339165588999999
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s8/empty_cache",
+      "start_us": 3555106889848.008,
+      "duration_seconds": 0.005030825
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s8/ipc_collect",
+      "start_us": 3555106894901.435,
+      "duration_seconds": 3.0336e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s9/fit",
+      "start_us": 3555106894976.916,
+      "duration_seconds": 1.430131764
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s9/predict",
+      "start_us": 3555108325163.071,
+      "duration_seconds": 5.4618849460000005
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s9/empty_cache",
+      "start_us": 3555113803932.688,
+      "duration_seconds": 0.0051790709999999995
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s9/ipc_collect",
+      "start_us": 3555113809135.043,
+      "duration_seconds": 2.3624e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s10/fit",
+      "start_us": 3555113809204.052,
+      "duration_seconds": 1.541805985
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s10/predict",
+      "start_us": 3555115351066.462,
+      "duration_seconds": 5.5444667800000005
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s10/empty_cache",
+      "start_us": 3555120912299.481,
+      "duration_seconds": 0.00523207
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s10/ipc_collect",
+      "start_us": 3555120917554.424,
+      "duration_seconds": 2.2592e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s11/fit",
+      "start_us": 3555120917622.221,
+      "duration_seconds": 1.650545125
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s11/predict",
+      "start_us": 3555122568223.48,
+      "duration_seconds": 5.748185556
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s11/empty_cache",
+      "start_us": 3555128333259.182,
+      "duration_seconds": 0.005915536
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s11/ipc_collect",
+      "start_us": 3555128339197.23,
+      "duration_seconds": 2.3153e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s12/fit",
+      "start_us": 3555128339265.287,
+      "duration_seconds": 1.581700013
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s12/predict",
+      "start_us": 3555129921020.243,
+      "duration_seconds": 5.8201727640000005
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s12/empty_cache",
+      "start_us": 3555135757962.693,
+      "duration_seconds": 0.005917961
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s12/ipc_collect",
+      "start_us": 3555135763909.338,
+      "duration_seconds": 2.4245000000000002e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s13/fit",
+      "start_us": 3555135763978.798,
+      "duration_seconds": 1.60671718
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s13/predict",
+      "start_us": 3555137370748.836,
+      "duration_seconds": 5.963310962
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s13/empty_cache",
+      "start_us": 3555143350868.126,
+      "duration_seconds": 0.00586915
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s13/ipc_collect",
+      "start_us": 3555143356760.409,
+      "duration_seconds": 2.2582e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s14/fit",
+      "start_us": 3555143356828.216,
+      "duration_seconds": 1.594786971
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s14/predict",
+      "start_us": 3555144951671.432,
+      "duration_seconds": 6.030534595
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s14/empty_cache",
+      "start_us": 3555150999161.5,
+      "duration_seconds": 0.005886843
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s14/ipc_collect",
+      "start_us": 3555151005071.576,
+      "duration_seconds": 2.3264e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s15/fit",
+      "start_us": 3555151005139.804,
+      "duration_seconds": 1.6854680800000001
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s15/predict",
+      "start_us": 3555152690682.353,
+      "duration_seconds": 6.213573242
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s15/empty_cache",
+      "start_us": 3555158921276.8,
+      "duration_seconds": 0.008311371
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s15/ipc_collect",
+      "start_us": 3555158929611.204,
+      "duration_seconds": 2.2431999999999998e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s16/fit",
+      "start_us": 3555158929677.948,
+      "duration_seconds": 1.649320138
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s16/predict",
+      "start_us": 3555160579053.409,
+      "duration_seconds": 6.263647551
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s16/empty_cache",
+      "start_us": 3555166859533.593,
+      "duration_seconds": 0.0059923599999999995
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s16/ipc_collect",
+      "start_us": 3555166865548.866,
+      "duration_seconds": 2.2382e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s17/fit",
+      "start_us": 3555166865616.733,
+      "duration_seconds": 1.797076067
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s17/predict",
+      "start_us": 3555168662746.661,
+      "duration_seconds": 6.425774898
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s17/empty_cache",
+      "start_us": 3555175105381.774,
+      "duration_seconds": 0.010251564
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s17/ipc_collect",
+      "start_us": 3555175115656.731,
+      "duration_seconds": 2.2803000000000002e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s18/fit",
+      "start_us": 3555175115724.658,
+      "duration_seconds": 1.797675877
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s18/predict",
+      "start_us": 3555176913454.155,
+      "duration_seconds": 6.588500162
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s18/empty_cache",
+      "start_us": 3555183518748.138,
+      "duration_seconds": 0.006031664
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s18/ipc_collect",
+      "start_us": 3555183524802.544,
+      "duration_seconds": 2.3264e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s19/fit",
+      "start_us": 3555183524870.642,
+      "duration_seconds": 1.850197105
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s19/predict",
+      "start_us": 3555185375121.978,
+      "duration_seconds": 6.812710604
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s19/empty_cache",
+      "start_us": 3555192204633.596,
+      "duration_seconds": 0.0061146180000000005
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s19/ipc_collect",
+      "start_us": 3555192210772.319,
+      "duration_seconds": 2.2922999999999997e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s20/fit",
+      "start_us": 3555192210839.946,
+      "duration_seconds": 1.924692148
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s20/predict",
+      "start_us": 3555194135588.499,
+      "duration_seconds": 6.964711761
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s20/empty_cache",
+      "start_us": 3555201117316.587,
+      "duration_seconds": 0.006310874
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s20/ipc_collect",
+      "start_us": 3555201123650.775,
+      "duration_seconds": 2.3264e-05
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s20/support",
+      "start_us": 3555201123748.558,
+      "duration_seconds": 0.000252922
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s20/predict",
+      "start_us": 3555194142714.207,
+      "duration_seconds": 6.955762629
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s19/predict",
+      "start_us": 3555185382039.105,
+      "duration_seconds": 6.804013974999999
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s17/predict",
+      "start_us": 3555168669371.424,
+      "duration_seconds": 6.417351837
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s16/predict",
+      "start_us": 3555160585796.245,
+      "duration_seconds": 6.255142309999999
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s18/predict",
+      "start_us": 3555176920204.662,
+      "duration_seconds": 6.579924566
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s14/predict",
+      "start_us": 3555144958177.365,
+      "duration_seconds": 6.022179238
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s15/predict",
+      "start_us": 3555152697086.131,
+      "duration_seconds": 6.205381014
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s11/predict",
+      "start_us": 3555122574472.206,
+      "duration_seconds": 5.740110298
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s8/predict",
+      "start_us": 3555101539536.145,
+      "duration_seconds": 5.3316195109999995
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s12/predict",
+      "start_us": 3554829891306.606,
+      "duration_seconds": 19.205361053
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s10/predict",
+      "start_us": 3554785367002.94,
+      "duration_seconds": 18.413572733
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s9/predict",
+      "start_us": 3554763608495.261,
+      "duration_seconds": 18.145223033
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s11/predict",
+      "start_us": 3554807355956.227,
+      "duration_seconds": 19.041891405999998
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s6/predict",
+      "start_us": 3555088273703.52,
+      "duration_seconds": 5.062750513
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s8/predict",
+      "start_us": 3554742345173.283,
+      "duration_seconds": 17.692943808
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s6/predict",
+      "start_us": 3554700921036.547,
+      "duration_seconds": 16.827510953
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s3/predict",
+      "start_us": 3554642276978.586,
+      "duration_seconds": 15.840365456
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s14/predict",
+      "start_us": 3554875841540.347,
+      "duration_seconds": 19.993254153000002
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s0/predict",
+      "start_us": 3555052081725.923,
+      "duration_seconds": 4.363254223
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s10/predict",
+      "start_us": 3555115357115.468,
+      "duration_seconds": 5.536562609
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s5/predict",
+      "start_us": 3554680864666.231,
+      "duration_seconds": 16.55317698
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s4/predict",
+      "start_us": 3554661422651.918,
+      "duration_seconds": 16.074026657
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s2/predict",
+      "start_us": 3554623889894.76,
+      "duration_seconds": 15.157780585000001
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s3/predict",
+      "start_us": 3555069587858.72,
+      "duration_seconds": 4.803366454
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s9/predict",
+      "start_us": 3555108331049.383,
+      "duration_seconds": 5.454187207
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s1/predict",
+      "start_us": 3554605811694.566,
+      "duration_seconds": 14.906315619
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s0/predict",
+      "start_us": 3554588316857.574,
+      "duration_seconds": 14.35027131
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s1/predict",
+      "start_us": 3555057872287.745,
+      "duration_seconds": 4.508573799
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s12/predict",
+      "start_us": 3555129927221.691,
+      "duration_seconds": 5.812111942
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s13/predict",
+      "start_us": 3554852620834.432,
+      "duration_seconds": 19.696872914
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s4/predict",
+      "start_us": 3555075693339.571,
+      "duration_seconds": 4.870622665
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s15/predict",
+      "start_us": 3554899447744.775,
+      "duration_seconds": 20.646735322
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s16/predict",
+      "start_us": 3554923882410.677,
+      "duration_seconds": 20.799332169
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s13/predict",
+      "start_us": 3555137377060.455,
+      "duration_seconds": 5.955226076000001
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s17/predict",
+      "start_us": 3554948422224.436,
+      "duration_seconds": 21.360963936999998
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s5/predict",
+      "start_us": 3555081884791.853,
+      "duration_seconds": 4.996556239
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s19/predict",
+      "start_us": 3554999400847.014,
+      "duration_seconds": 22.779707993000002
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s18/predict",
+      "start_us": 3554973525039.902,
+      "duration_seconds": 21.979004468
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s7/predict",
+      "start_us": 3555094718051.94,
+      "duration_seconds": 5.25912673
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s20/predict",
+      "start_us": 3555025969882.249,
+      "duration_seconds": 22.819652844
+    },
+    {
+      "name": "pfdiagnostic/profile/p1/s7/predict",
+      "start_us": 3554721331628.182,
+      "duration_seconds": 17.494985227
+    },
+    {
+      "name": "pfdiagnostic/profile/p2/s2/predict",
+      "start_us": 3555063730468.461,
+      "duration_seconds": 4.588371031
+    }
+  ],
+  "cautions": [
+    "Kernel sums can overlap; interval union avoids that double count.",
+    "Prediction host wall includes CPU work, GPU waits and transfers; it is not CPU compute time.",
+    "Host sync can overlap active kernels; never add it to GPU time as independent cost.",
+    "This profiled diagnostic differs in query count and overhead from the original 50000-vector requests; no exact original decomposition is established."
+  ],
+  "elapsed_summary_seconds": 216.0631451383233,
+  "maxrss_kib": 63500
+}

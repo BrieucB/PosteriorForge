@@ -1,0 +1,1794 @@
+{
+  "attribution": "Built with PriorLabs-TabPFN",
+  "candidate_fix_implemented": false,
+  "cdf_translation_caution": "This compares only final returned-criterion families. The separate tabpfn.utils._cdf ensemble interpolation defect can affect interior probabilities before these final logits, and is not bounded by final endpoint mass.",
+  "diagnostic_only": true,
+  "distribution_comparison": "At one fixed prefix: the returned criterion half-normal density family versus the actual inherited finite-uniform sampler family, before support rejection.",
+  "finite_precision_formula": "TV=p_left*t_left+p_right*t_right; KS=max(p_left*t_left,p_right*t_right), where t_side=erfc(width/(scale*sqrt(2))). Valid when half-normal density at its anchor is below the overlapping uniform density; checked below.",
+  "ideal_exact_formula": "For ideal median-calibrated tails: TV=(p_left+p_right)/2; KS=max(p_left,p_right)/2.",
+  "original_gate_changed": false,
+  "population_limitation": "128 saved accepted PFN prefixes, not the unconditioned free-proposal prefix population; no rigorous chain/joint TV claim is made.",
+  "proof": "Each half-normal puts half its endpoint mass beyond the finite endpoint bar and its density is everywhere lower than the uniform density on that bar. Endpoint discrepancies have disjoint supports. Their TV contributions add; their maximum CDF discrepancies do not add.",
+  "schema": "posteriorforge.diagnostic.bar_summary.v1",
+  "source_capture_sha256": "f2acf694db0446e5f7034a4cd48d742d08c854608628ee9884fbea3011d13ce0",
+  "source_manifest_sha256": "a62991b0046e8fce1cad05bcfd04e4552038af0633c3fe797cb45b7a79fa0a01",
+  "stages": [
+    {
+      "all128_endpoint_mass": {
+        "max": 3.725289943190546e-08,
+        "mean": 3.725289943190546e-08,
+        "min": 3.725289943190546e-08,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          3.725289943190546e-08,
+          3.725289943190546e-08,
+          3.725289943190546e-08,
+          3.725289943190546e-08,
+          3.725289943190546e-08,
+          3.725289943190546e-08,
+          3.725289943190546e-08
+        ]
+      },
+      "all128_max_one_conditional_ks": 1.862645023239907e-08,
+      "all128_mean_one_conditional_ks_bounds": [
+        1.862645023239907e-08,
+        1.862645023239907e-08
+      ],
+      "all128_mean_one_conditional_tv": 1.862645023239907e-08,
+      "captured_selected_rows": 4,
+      "captured_subset_ks": [
+        1.8626460351432254e-08,
+        1.8626460351432254e-08,
+        1.8626460351432254e-08,
+        1.8626460351432254e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        1.8626460351432254e-08,
+        1.8626460351432254e-08,
+        1.8626460351432254e-08,
+        1.8626460351432254e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649390770468,
+        0.5381649406970657
+      ],
+      "ideal_all128_max_one_conditional_tv": 1.862644971595273e-08,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        1.862644971595273e-08,
+        1.862644971595273e-08,
+        1.862644971595273e-08,
+        1.862644971595273e-08,
+        1.862644971595273e-08,
+        1.862644971595273e-08,
+        1.862644971595273e-08
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 1.515367431537129e-08,
+      "parameter": "mu_a",
+      "source_float_endpoint_tail_fractions": [
+        0.5000000151536743,
+        0.5000000138632521
+      ],
+      "stage_index": 0,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.014222548343241215,
+        "fit_synchronized_wall": 3.3925288589671254,
+        "original_criterion_sample_cpu_wall": 0.0606725737452507,
+        "predict_synchronized_wall": 32.50569018255919
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 1.4901149825163884e-07,
+        "mean": 7.09551017455401e-08,
+        "min": 7.450582373280668e-09,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          7.450582373280668e-09,
+          1.4901135818590205e-08,
+          2.980232007843142e-08,
+          7.078044106378911e-08,
+          1.0654332314175006e-07,
+          1.4699981377930275e-07,
+          1.4901149825163884e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 7.450575108323636e-08,
+      "all128_mean_one_conditional_ks_bounds": [
+        3.547755180483717e-08,
+        3.547755180483717e-08
+      ],
+      "all128_mean_one_conditional_tv": 3.547755180483717e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        4.097815404854051e-08,
+        7.450576718722559e-08,
+        2.9802320289173614e-08,
+        4.842877994962514e-08,
+        3.725291807205093e-09,
+        2.9802320402137945e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        4.097815404854051e-08,
+        7.450576718722559e-08,
+        2.9802320289173614e-08,
+        4.842877994962514e-08,
+        3.725291807205093e-09,
+        2.9802320402137945e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649586800122,
+        0.5381649416100545
+      ],
+      "ideal_all128_max_one_conditional_tv": 7.450574912581942e-08,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        3.725291186640334e-09,
+        7.4505679092951026e-09,
+        1.490116003921571e-08,
+        3.5390220531894556e-08,
+        5.327166157087503e-08,
+        7.349990688965138e-08,
+        7.450574912581942e-08
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 1.3136012722014812e-08,
+      "parameter": "mu_b",
+      "source_float_endpoint_tail_fractions": [
+        0.49999999953897645,
+        0.5000000131360127
+      ],
+      "stage_index": 1,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.004773334600031376,
+        "fit_synchronized_wall": 1.181322768330574,
+        "original_criterion_sample_cpu_wall": 0.014170191250741482,
+        "predict_synchronized_wall": 4.432980990968645
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 1.1920931797249068e-07,
+        "mean": 5.22122488091914e-08,
+        "min": 1.4901135436673485e-08,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          1.4901135436673485e-08,
+          1.6912794862378178e-08,
+          2.235174250131422e-08,
+          4.470350845053872e-08,
+          8.419146482196991e-08,
+          1.1518599599469332e-07,
+          1.1920931797249068e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 5.960465895233488e-08,
+      "all128_mean_one_conditional_ks_bounds": [
+        2.6106124389743327e-08,
+        2.6106124389743327e-08
+      ],
+      "all128_mean_one_conditional_tv": 2.6106124389743327e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        4.4703439371827444e-08,
+        7.450573024992723e-09,
+        1.4901153129290184e-08,
+        5.960467022609205e-08,
+        2.9802320296399755e-08,
+        2.9802320200377066e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        4.4703439371827444e-08,
+        7.450573024992723e-09,
+        1.4901153129290184e-08,
+        5.960467022609205e-08,
+        2.9802320296399755e-08,
+        2.9802320200377066e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649349118482,
+        0.538164958458353
+      ],
+      "ideal_all128_max_one_conditional_tv": 5.960465898624534e-08,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        7.4505677183367425e-09,
+        8.456397431189089e-09,
+        1.117587125065711e-08,
+        2.235175422526936e-08,
+        4.2095732410984955e-08,
+        5.759299799734666e-08,
+        5.960465898624534e-08
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 1.8471453921975467e-08,
+      "parameter": "mu_d0",
+      "source_float_endpoint_tail_fractions": [
+        0.5000000184714539,
+        0.49999999971553855
+      ],
+      "stage_index": 2,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.0047035738825798035,
+        "fit_synchronized_wall": 1.2083716597408056,
+        "original_criterion_sample_cpu_wall": 0.014174269512295723,
+        "predict_synchronized_wall": 4.471808142028749
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 2.533197687171196e-07,
+        "mean": 1.0547222145662616e-07,
+        "min": 7.450582373280668e-09,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          7.450582373280668e-09,
+          9.462235084356507e-09,
+          3.7252926787800786e-08,
+          1.0058282384761696e-07,
+          1.7136337646661559e-07,
+          2.2351728432568052e-07,
+          2.533197687171196e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 1.2665988600183333e-07,
+      "all128_mean_one_conditional_ks_bounds": [
+        5.2736111412506464e-08,
+        5.2736111412506464e-08
+      ],
+      "all128_mean_one_conditional_tv": 5.2736111412506464e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        1.4901153597375268e-08,
+        1.2665991663905005e-07,
+        8.940691983249642e-08,
+        5.215407610728911e-08,
+        3.725291951184846e-09,
+        9.685750995613432e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        1.4901153597375268e-08,
+        1.2665991663905005e-07,
+        8.940691983249642e-08,
+        5.215407610728911e-08,
+        3.725291951184846e-09,
+        9.685750995613432e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649464781015,
+        0.5381649499574
+      ],
+      "ideal_all128_max_one_conditional_tv": 1.266598843585598e-07,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        3.725291186640334e-09,
+        4.7311175421782535e-09,
+        1.8626463393900393e-08,
+        5.029141192380848e-08,
+        8.568168823330779e-08,
+        1.1175864216284026e-07,
+        1.266598843585598e-07
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 9.258380950782907e-09,
+      "parameter": "a_m1",
+      "source_float_endpoint_tail_fractions": [
+        0.500000009258381,
+        0.5000000064869534
+      ],
+      "stage_index": 3,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.0047705089673399925,
+        "fit_synchronized_wall": 1.2071821009740233,
+        "original_criterion_sample_cpu_wall": 0.014093687757849693,
+        "predict_synchronized_wall": 4.67235819902271
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 2.2351720474489412e-07,
+        "mean": 7.561171344941386e-08,
+        "min": 7.4505792646561986e-09,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          7.4505792646561986e-09,
+          2.2351741595372233e-08,
+          3.7252925721986686e-08,
+          7.450571004596895e-08,
+          1.1175869190083176e-07,
+          1.5243893315641806e-07,
+          2.2351720474489412e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 1.1175860472066955e-07,
+      "all128_mean_one_conditional_ks_bounds": [
+        3.780585751906693e-08,
+        3.780585751906693e-08
+      ],
+      "all128_mean_one_conditional_tv": 3.780585751906693e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        6.705522730739812e-08,
+        1.1175865948442767e-07,
+        3.7252865802177486e-08,
+        3.72529177061348e-09,
+        4.097815476475143e-08,
+        7.823112027890486e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        6.705522730739812e-08,
+        1.1175865948442767e-07,
+        3.7252865802177486e-08,
+        3.72529177061348e-09,
+        4.097815476475143e-08,
+        7.823112027890486e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649347299113,
+        0.5381649449120953
+      ],
+      "ideal_all128_max_one_conditional_tv": 1.1175860237244706e-07,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        3.7252896323280993e-09,
+        1.1175870797686117e-08,
+        1.8626462860993343e-08,
+        3.725285502298448e-08,
+        5.587934595041588e-08,
+        7.621946657820903e-08,
+        1.1175860237244706e-07
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 1.8616375330182677e-08,
+      "parameter": "b_m1",
+      "source_float_endpoint_tail_fractions": [
+        0.5000000186163753,
+        0.5000000105057796
+      ],
+      "stage_index": 4,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.004794643260538578,
+        "fit_synchronized_wall": 1.2581086456775665,
+        "original_criterion_sample_cpu_wall": 0.01415056362748146,
+        "predict_synchronized_wall": 4.736652028746903
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 1.564622920113834e-07,
+        "mean": 5.1746589402323906e-08,
+        "min": 7.450578820566989e-09,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          7.450578820566989e-09,
+          1.4901137763700944e-08,
+          2.2351738238057806e-08,
+          5.2154042862184724e-08,
+          8.195625085249958e-08,
+          1.097470352817709e-07,
+          1.564622920113834e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 7.823114579302784e-08,
+      "all128_mean_one_conditional_ks_bounds": [
+        2.5873294630827887e-08,
+        2.5873294630827887e-08
+      ],
+      "all128_mean_one_conditional_tv": 2.5873294630827887e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        2.9802321087369322e-08,
+        7.823111748032361e-08,
+        3.725291913567079e-09,
+        2.9802320653646e-08,
+        2.2351751168083273e-08,
+        1.8626460066908074e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        2.9802321087369322e-08,
+        7.823111748032361e-08,
+        3.725291913567079e-09,
+        2.9802320653646e-08,
+        2.2351751168083273e-08,
+        1.8626460066908074e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649200755663,
+        0.5381649598076012
+      ],
+      "ideal_all128_max_one_conditional_tv": 7.82311460056917e-08,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        3.7252894102834944e-09,
+        7.450568881850472e-09,
+        1.1175869119028903e-08,
+        2.6077021431092362e-08,
+        4.097812542624979e-08,
+        5.487351764088545e-08,
+        7.82311460056917e-08
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 3.028926109926999e-08,
+      "parameter": "d0_m1",
+      "source_float_endpoint_tail_fractions": [
+        0.5000000302892611,
+        0.499999998640798
+      ],
+      "stage_index": 5,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.0049315206706523895,
+        "fit_synchronized_wall": 1.538010062649846,
+        "original_criterion_sample_cpu_wall": 0.014123653993010521,
+        "predict_synchronized_wall": 4.866106721572578
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 1.639133131448034e-07,
+        "mean": 8.137482708503452e-08,
+        "min": 2.2352161010985583e-08,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          2.2352161010985583e-08,
+          2.235232289038436e-08,
+          4.4703956447733616e-08,
+          8.195674894295735e-08,
+          1.2666026520946617e-07,
+          1.5988999649607654e-07,
+          1.639133131448034e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 8.195637282422896e-08,
+      "all128_mean_one_conditional_ks_bounds": [
+        4.068713483871672e-08,
+        4.0687413884214e-08
+      ],
+      "all128_mean_one_conditional_tv": 4.0687413884214e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        2.6077026200799094e-08,
+        3.725286598311657e-08,
+        4.470343937677607e-08,
+        1.1175870172825976e-08,
+        8.195634531076357e-08,
+        2.235175167016379e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        2.6077302636248447e-08,
+        3.7253080781113655e-08,
+        4.470370382180089e-08,
+        1.1176071867212319e-08,
+        8.195666593989445e-08,
+        2.235200844881667e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649473488533,
+        0.5381649545097368
+      ],
+      "ideal_all128_max_one_conditional_tv": 8.19566565724017e-08,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        1.1176080505492791e-08,
+        1.117616144519218e-08,
+        2.2351978223866808e-08,
+        4.0978374471478674e-08,
+        6.333013260473309e-08,
+        7.994499824803827e-08,
+        8.19566565724017e-08
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 8.564785547449105e-09,
+      "parameter": "sigma_m1",
+      "source_float_endpoint_tail_fractions": [
+        0.5000000085647855,
+        0.5000000028607999
+      ],
+      "stage_index": 6,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.004853373393416405,
+        "fit_synchronized_wall": 1.309839403256774,
+        "original_criterion_sample_cpu_wall": 0.014143670909106731,
+        "predict_synchronized_wall": 4.9294507894665
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 2.235172757991677e-07,
+        "mean": 7.700869512211606e-08,
+        "min": 1.4901135436673485e-08,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          1.4901135436673485e-08,
+          1.4901142275647316e-08,
+          2.9802309953197437e-08,
+          7.450567451883217e-08,
+          1.3411042232291948e-07,
+          2.12043453871047e-07,
+          2.235172757991677e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 1.1175864041211329e-07,
+      "all128_mean_one_conditional_ks_bounds": [
+        3.8504348426703035e-08,
+        3.8504348426703035e-08
+      ],
+      "all128_mean_one_conditional_tv": 3.8504348426703035e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        2.9802320205970716e-08,
+        1.1175865747788462e-07,
+        7.450573183432519e-09,
+        4.842877986027043e-08,
+        2.6077026882153316e-08,
+        3.3527596709728514e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        2.9802320205970716e-08,
+        1.1175865747788462e-07,
+        7.450573183432519e-09,
+        4.842877986027043e-08,
+        2.6077026882153316e-08,
+        3.3527596709728514e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649396883527,
+        0.5381649439892454
+      ],
+      "ideal_all128_max_one_conditional_tv": 1.1175863789958385e-07,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        7.4505677183367425e-09,
+        7.450571137823658e-09,
+        1.4901154976598718e-08,
+        3.725283725941608e-08,
+        6.705521116145974e-08,
+        1.060217269355235e-07,
+        1.1175863789958385e-07
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 1.4666740044688709e-08,
+      "parameter": "a_m2",
+      "source_float_endpoint_tail_fractions": [
+        0.50000001466674,
+        0.5000000112408736
+      ],
+      "stage_index": 7,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.005084111355245113,
+        "fit_synchronized_wall": 1.3711264878511429,
+        "original_criterion_sample_cpu_wall": 0.014103783294558525,
+        "predict_synchronized_wall": 5.126296543516219
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 1.9371502446574596e-07,
+        "mean": 9.313220225570795e-08,
+        "min": 2.9802279755131167e-08,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          2.9802279755131167e-08,
+          2.980229410809443e-08,
+          5.96046273670936e-08,
+          8.940689255609868e-08,
+          1.3411035553190232e-07,
+          1.8022936217221295e-07,
+          1.9371502446574596e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 9.685751272410647e-08,
+      "all128_mean_one_conditional_ks_bounds": [
+        4.656610136402387e-08,
+        4.656610136402387e-08
+      ],
+      "all128_mean_one_conditional_tv": 4.656610136402387e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        9.313221649710052e-08,
+        7.823111535037857e-08,
+        9.685751288944132e-08,
+        3.7252866314946106e-08,
+        1.4901152106106755e-08,
+        5.2154074391475105e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        9.313221649710052e-08,
+        7.823111535037857e-08,
+        9.685751288944132e-08,
+        3.7252866314946106e-08,
+        1.4901152106106755e-08,
+        5.2154074391475105e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649338786587,
+        0.5381649549176765
+      ],
+      "ideal_all128_max_one_conditional_tv": 9.685751223287298e-08,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        1.4901139877565583e-08,
+        1.4901147054047215e-08,
+        2.98023136835468e-08,
+        4.470344627804934e-08,
+        6.705517776595116e-08,
+        9.011468108610648e-08,
+        9.685751223287298e-08
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 1.9294438713401973e-08,
+      "parameter": "b_m2",
+      "source_float_endpoint_tail_fractions": [
+        0.5000000192944387,
+        0.5000000025358564
+      ],
+      "stage_index": 8,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.0049862489104270935,
+        "fit_synchronized_wall": 1.4591651456430554,
+        "original_criterion_sample_cpu_wall": 0.014056313782930374,
+        "predict_synchronized_wall": 5.188932270742953
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 1.117586450050112e-07,
+        "mean": 3.8242425129397795e-08,
+        "min": 0.0,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          0.0,
+          2.0116567611694337e-09,
+          1.4901142009193791e-08,
+          3.72529100900465e-08,
+          6.183981255958313e-08,
+          1.0229649291204626e-07,
+          1.117586450050112e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 5.587932313546024e-08,
+      "all128_mean_one_conditional_ks_bounds": [
+        1.912121278128814e-08,
+        1.912121278128814e-08
+      ],
+      "all128_mean_one_conditional_tv": 1.912121278128814e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        2.9802322925120016e-08,
+        0.0,
+        2.2351751907016172e-08,
+        1.4901153428399976e-08,
+        5.587935282482496e-08,
+        1.490115357415769e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        2.9802322925120016e-08,
+        0.0,
+        2.2351751907016172e-08,
+        1.4901153428399976e-08,
+        5.587935282482496e-08,
+        1.490115357415769e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649587304143,
+        0.5381649509910706
+      ],
+      "ideal_all128_max_one_conditional_tv": 5.58793225025056e-08,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        0.0,
+        1.0058283805847169e-09,
+        7.4505710045968955e-09,
+        1.862645504502325e-08,
+        3.0919906279791564e-08,
+        5.114824645602313e-08,
+        5.58793225025056e-08
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 5.663585489479317e-09,
+      "parameter": "d0_m2",
+      "source_float_endpoint_tail_fractions": [
+        0.4999999994988288,
+        0.5000000056635855
+      ],
+      "stage_index": 9,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.005051981657743454,
+        "fit_synchronized_wall": 1.4305010447278619,
+        "original_criterion_sample_cpu_wall": 0.01407691277563572,
+        "predict_synchronized_wall": 5.3243505554273725
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 2.0116578980378108e-07,
+        "mean": 8.62055137412776e-08,
+        "min": 1.4901143430279262e-08,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          1.4901143430279262e-08,
+          2.2351737420933658e-08,
+          4.991886477512254e-08,
+          8.195626932661071e-08,
+          1.3411036547950062e-07,
+          1.6190107487545905e-07,
+          2.0116578980378108e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 1.0058289895352796e-07,
+      "all128_mean_one_conditional_ks_bounds": [
+        4.3102758606885734e-08,
+        4.3102758606885734e-08
+      ],
+      "all128_mean_one_conditional_tv": 4.3102758606885734e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        4.8428779293281984e-08,
+        1.0058284102247145e-07,
+        4.097815588354149e-08,
+        2.607702648391491e-08,
+        7.450573081314169e-09,
+        3.3527596123784e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        4.8428779293281984e-08,
+        1.0058284102247145e-07,
+        4.097815588354149e-08,
+        2.607702648391491e-08,
+        7.450573081314169e-09,
+        3.3527596123784e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649647221782,
+        0.5381649328161378
+      ],
+      "ideal_all128_max_one_conditional_tv": 1.0058289490189054e-07,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        7.450571715139631e-09,
+        1.1175868710466829e-08,
+        2.495943238756127e-08,
+        4.0978134663305354e-08,
+        6.705518273975031e-08,
+        8.095053743772952e-08,
+        1.0058289490189054e-07
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 2.01407874822479e-08,
+      "parameter": "sigma_m2",
+      "source_float_endpoint_tail_fractions": [
+        0.4999999947261028,
+        0.5000000201407875
+      ],
+      "stage_index": 10,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.02427006233483553,
+        "fit_synchronized_wall": 1.4310671258717775,
+        "original_criterion_sample_cpu_wall": 0.014086640439927578,
+        "predict_synchronized_wall": 5.399077960290015
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 1.6391264523463178e-07,
+        "mean": 8.597266499404954e-08,
+        "min": 1.4901144318457682e-08,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          1.4901144318457682e-08,
+          2.235173674591806e-08,
+          4.470349672658358e-08,
+          8.195629774832014e-08,
+          1.3411043511268872e-07,
+          1.5646214876596787e-07,
+          1.6391264523463178e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 8.195632480378054e-08,
+      "all128_mean_one_conditional_ks_bounds": [
+        4.2986333643831916e-08,
+        4.2986333643831916e-08
+      ],
+      "all128_mean_one_conditional_tv": 4.2986333643831916e-08,
+      "captured_selected_rows": 5,
+      "captured_subset_ks": [
+        3.352759482388229e-08,
+        7.450573391316519e-09,
+        8.195634684076637e-08,
+        2.607702718379442e-08,
+        4.0978155135518626e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        3.352759482388229e-08,
+        7.450573391316519e-09,
+        8.195634684076637e-08,
+        2.607702718379442e-08,
+        4.0978155135518626e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649574176707,
+        0.5381649413549615
+      ],
+      "ideal_all128_max_one_conditional_tv": 8.195632261731589e-08,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        7.450572159228841e-09,
+        1.117586837295903e-08,
+        2.235174836329179e-08,
+        4.097814887416007e-08,
+        6.705521755634436e-08,
+        7.823107438298393e-08,
+        8.195632261731589e-08
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 1.3339206628160127e-08,
+      "parameter": "a_m3",
+      "source_float_endpoint_tail_fractions": [
+        0.5000000005444918,
+        0.5000000133392066
+      ],
+      "stage_index": 11,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.005709073506295681,
+        "fit_synchronized_wall": 1.5605597253888845,
+        "original_criterion_sample_cpu_wall": 0.014161715283989906,
+        "predict_synchronized_wall": 5.595964559353888
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 1.564622920113834e-07,
+        "mean": 7.858030744156697e-08,
+        "min": 7.450582373280668e-09,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          7.450582373280668e-09,
+          1.6912807723201695e-08,
+          4.470350987162419e-08,
+          7.45057526785331e-08,
+          1.1920934497311464e-07,
+          1.5445051658957713e-07,
+          1.564622920113834e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 7.823114806083607e-08,
+      "all128_mean_one_conditional_ks_bounds": [
+        3.9290154752941926e-08,
+        3.9290154752941926e-08
+      ],
+      "all128_mean_one_conditional_tv": 3.9290154752941926e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        3.352759516960776e-08,
+        2.9802321474774008e-08,
+        7.823111813975662e-08,
+        3.725291706251763e-09,
+        5.960467178810776e-08,
+        1.8626459518456643e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        3.352759516960776e-08,
+        2.9802321474774008e-08,
+        7.823111813975662e-08,
+        3.725291706251763e-09,
+        5.960467178810776e-08,
+        1.8626459518456643e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649606140585,
+        0.5381649416112284
+      ],
+      "ideal_all128_max_one_conditional_tv": 7.82311460056917e-08,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        3.725291186640334e-09,
+        8.456403861600848e-09,
+        2.2351754935812097e-08,
+        3.725287633926655e-08,
+        5.960467248655732e-08,
+        7.722525829478856e-08,
+        7.82311460056917e-08
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 1.3135077692183472e-08,
+      "parameter": "b_m3",
+      "source_float_endpoint_tail_fractions": [
+        0.4999999979984163,
+        0.5000000131350777
+      ],
+      "stage_index": 12,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.00585838221013546,
+        "fit_synchronized_wall": 1.5710507491603494,
+        "original_criterion_sample_cpu_wall": 0.014192012138664722,
+        "predict_synchronized_wall": 5.6533427182585
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 8.942890872276621e-08,
+        "mean": 4.071299252533068e-08,
+        "min": 8.2396320669198e-12,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          8.2396320669198e-12,
+          2.0383463185044693e-09,
+          1.4947473125914713e-08,
+          3.7394231711118664e-08,
+          6.706085642349535e-08,
+          8.74040554066369e-08,
+          8.942890872276621e-08
+        ]
+      },
+      "all128_max_one_conditional_ks": 4.470345926858446e-08,
+      "all128_mean_one_conditional_ks_bounds": [
+        2.034357010604455e-08,
+        2.0356496569268027e-08
+      ],
+      "all128_mean_one_conditional_tv": 2.0356496569268027e-08,
+      "captured_selected_rows": 5,
+      "captured_subset_ks": [
+        4.47034390140027e-08,
+        1.490115358798908e-08,
+        4.1198212658489304e-12,
+        1.8626459697345713e-08,
+        2.235175195793886e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        4.4714460547566944e-08,
+        1.4905481603007554e-08,
+        4.1198212658489304e-12,
+        1.86289958614124e-08,
+        2.235443550859502e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649307835629,
+        0.5381649502935741
+      ],
+      "ideal_all128_max_one_conditional_tv": 4.4714454361383105e-08,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        4.1198160334599e-12,
+        1.0191731592522346e-09,
+        7.473736562957357e-09,
+        1.8697115855559332e-08,
+        3.3530428211747676e-08,
+        4.370202770331845e-08,
+        4.4714454361383105e-08
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 2.1759830493017773e-08,
+      "parameter": "d0_m3",
+      "source_float_endpoint_tail_fractions": [
+        0.5000000217598305,
+        0.5000000062191747
+      ],
+      "stage_index": 13,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.005812196061015129,
+        "fit_synchronized_wall": 1.5957165975123644,
+        "original_criterion_sample_cpu_wall": 0.014081424102187157,
+        "predict_synchronized_wall": 5.794470498338342
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 1.6392363022532663e-07,
+        "mean": 8.28961171789322e-08,
+        "min": 2.2358724649507167e-08,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          2.2358724649507167e-08,
+          2.980740532620985e-08,
+          4.4710464308650445e-08,
+          8.196345646638292e-08,
+          1.192189429843893e-07,
+          1.4700850002213885e-07,
+          1.6392363022532663e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 8.195627087737094e-08,
+      "all128_mean_one_conditional_ks_bounds": [
+        4.144383301891048e-08,
+        4.144805761347515e-08
+      ],
+      "all128_mean_one_conditional_tv": 4.144805761347515e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        2.980232082183757e-08,
+        1.1175869928496592e-08,
+        4.470343823446024e-08,
+        8.195634526041679e-08,
+        4.842877594492034e-08,
+        2.9802320200192945e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        2.980777190463175e-08,
+        1.1179363675293588e-08,
+        4.470704753548194e-08,
+        8.196188555502003e-08,
+        4.843185059163803e-08,
+        2.980766137521241e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649446377053,
+        0.5381649734343353
+      ],
+      "ideal_all128_max_one_conditional_tv": 8.196181511266332e-08,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        1.1179362324753583e-08,
+        1.4903702663104924e-08,
+        2.2355232154325223e-08,
+        4.098172823319146e-08,
+        5.960947149219465e-08,
+        7.350425001106942e-08,
+        8.196181511266332e-08
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 1.2213546174422163e-08,
+      "parameter": "sigma_m3",
+      "source_float_endpoint_tail_fractions": [
+        0.5000000107243443,
+        0.4999999877864538
+      ],
+      "stage_index": 14,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.005883718840777874,
+        "fit_synchronized_wall": 1.6329575795680285,
+        "original_criterion_sample_cpu_wall": 0.01418335735797882,
+        "predict_synchronized_wall": 5.853213503025472
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 2.458689323248109e-07,
+        "mean": 1.4953532154193816e-07,
+        "min": 5.21539966769069e-08,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          5.21539966769069e-08,
+          6.705514010718616e-08,
+          8.717160611126929e-08,
+          1.4901147693535677e-07,
+          2.0861615439571325e-07,
+          2.458688808815168e-07,
+          2.458689323248109e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 1.229344702726608e-07,
+      "all128_mean_one_conditional_ks_bounds": [
+        7.476766327079023e-08,
+        7.476766327079023e-08
+      ],
+      "all128_mean_one_conditional_tv": 7.476766327079023e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        5.2154068121526345e-08,
+        5.2154076563281915e-08,
+        1.2293450169598836e-07,
+        1.0058280353865281e-07,
+        2.607701146226315e-08,
+        8.568170680012513e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        5.2154068121526345e-08,
+        5.2154076563281915e-08,
+        1.2293450169598836e-07,
+        1.0058280353865281e-07,
+        2.607701146226315e-08,
+        8.568170680012513e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649627695227,
+        0.5381649371140916
+      ],
+      "ideal_all128_max_one_conditional_tv": 1.2293446616240544e-07,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        2.607699833845345e-08,
+        3.352757005359308e-08,
+        4.3585803055634643e-08,
+        7.450573846767838e-08,
+        1.0430807719785662e-07,
+        1.229344404407584e-07,
+        1.2293446616240544e-07
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 1.6717262019128043e-08,
+      "parameter": "a_a1",
+      "source_float_endpoint_tail_fractions": [
+        0.49999999628148606,
+        0.500000016717262
+      ],
+      "stage_index": 15,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.006140151061117649,
+        "fit_synchronized_wall": 1.667654287070036,
+        "original_criterion_sample_cpu_wall": 0.014191484078764915,
+        "predict_synchronized_wall": 6.127188227139413
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 1.3411042232291948e-07,
+        "mean": 6.72880213284377e-08,
+        "min": 0.0,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          0.0,
+          9.462231291834655e-09,
+          3.725290902423239e-08,
+          6.705518629246399e-08,
+          9.685754918109523e-08,
+          1.3209877053554922e-07,
+          1.3411042232291948e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 6.705521424229666e-08,
+      "all128_mean_one_conditional_ks_bounds": [
+        3.364401220998551e-08,
+        3.364401220998551e-08
+      ],
+      "all128_mean_one_conditional_tv": 3.364401220998551e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        4.0978153730121487e-08,
+        6.70552240414e-08,
+        4.8428778724389206e-08,
+        4.4703438210479965e-08,
+        0.0,
+        4.4703440056658194e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        4.0978153730121487e-08,
+        6.70552240414e-08,
+        4.8428778724389206e-08,
+        4.4703438210479965e-08,
+        0.0,
+        4.4703440056658194e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649547569731,
+        0.5381649292612943
+      ],
+      "ideal_all128_max_one_conditional_tv": 6.705521116145974e-08,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        0.0,
+        4.731115645917328e-09,
+        1.8626454512116196e-08,
+        3.352759314623199e-08,
+        4.8428774590547616e-08,
+        6.604938526777461e-08,
+        6.705521116145974e-08
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 2.297238999027229e-08,
+      "parameter": "sigma_a1",
+      "source_float_endpoint_tail_fractions": [
+        0.5000000026638645,
+        0.50000002297239
+      ],
+      "stage_index": 16,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.005894370377063751,
+        "fit_synchronized_wall": 1.8586384085938334,
+        "original_criterion_sample_cpu_wall": 0.014141278341412544,
+        "predict_synchronized_wall": 6.143452706746757
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 2.086161856595936e-07,
+        "mean": 1.2101370566730552e-07,
+        "min": 3.725290653733282e-08,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          3.725290653733282e-08,
+          5.6177326719364375e-08,
+          8.19562870901791e-08,
+          1.1920936060505483e-07,
+          1.6391267791959764e-07,
+          1.917034184373279e-07,
+          2.086161856595936e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 1.0430809581689776e-07,
+      "all128_mean_one_conditional_ks_bounds": [
+        6.050685456640496e-08,
+        6.050685456640496e-08
+      ],
+      "all128_mean_one_conditional_tv": 6.050685456640496e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        8.195634692476963e-08,
+        1.0430810904887014e-07,
+        7.45057686494137e-08,
+        7.823111566203749e-08,
+        1.862645883993368e-08,
+        4.842877874099664e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        8.195634692476963e-08,
+        1.0430810904887014e-07,
+        7.45057686494137e-08,
+        7.823111566203749e-08,
+        1.862645883993368e-08,
+        4.842877874099664e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649343227906,
+        0.5381649401253583
+      ],
+      "ideal_all128_max_one_conditional_tv": 1.043080928297968e-07,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        1.862645326866641e-08,
+        2.8088663359682187e-08,
+        4.097814354508955e-08,
+        5.960468030252741e-08,
+        8.195633895979882e-08,
+        9.585170921866394e-08,
+        1.043080928297968e-07
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 1.8940666590694377e-08,
+      "parameter": "a_a2",
+      "source_float_endpoint_tail_fractions": [
+        0.5000000189406666,
+        0.5000000143186443
+      ],
+      "stage_index": 17,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.00594000518321991,
+        "fit_synchronized_wall": 1.7464980892837048,
+        "original_criterion_sample_cpu_wall": 0.01419647317379713,
+        "predict_synchronized_wall": 6.2887746803462505
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 1.5647896134396433e-07,
+        "mean": 7.516014526032233e-08,
+        "min": 2.2361945184457e-08,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          2.2361945184457e-08,
+          2.236285945755867e-08,
+          3.726920851931936e-08,
+          7.451776085076744e-08,
+          1.192193465726632e-07,
+          1.5647477255242848e-07,
+          1.5647896134396433e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 7.82311137619776e-08,
+      "all128_mean_one_conditional_ks_bounds": [
+        3.757303327679279e-08,
+        3.7580074228136665e-08
+      ],
+      "all128_mean_one_conditional_tv": 3.7580074228136665e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        3.35275966569445e-08,
+        2.9802321371245866e-08,
+        1.1175870425216052e-08,
+        5.587935367933764e-08,
+        7.82311179177401e-08,
+        4.842878086019099e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        3.3533371811076745e-08,
+        2.9810349325425356e-08,
+        1.1180968157108405e-08,
+        5.58851573005352e-08,
+        7.823949118341885e-08,
+        4.843392899187517e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649283142216,
+        0.5381649317557933
+      ],
+      "ideal_all128_max_one_conditional_tv": 7.823948067198216e-08,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        1.11809725922285e-08,
+        1.1181429728779335e-08,
+        1.863460425965968e-08,
+        3.725888042538372e-08,
+        5.96096732863316e-08,
+        7.823738627621424e-08,
+        7.823948067198216e-08
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 2.3726778763943912e-08,
+      "parameter": "sigma_a2",
+      "source_float_endpoint_tail_fractions": [
+        0.5000000237267788,
+        0.5000000209854025
+      ],
+      "stage_index": 18,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.006073426455259323,
+        "fit_synchronized_wall": 1.8156896876171231,
+        "original_criterion_sample_cpu_wall": 0.014165925793349743,
+        "predict_synchronized_wall": 6.445592584088445
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 1.937149676223271e-07,
+        "mean": 1.1711376926570871e-07,
+        "min": 4.470348358154297e-08,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          4.470348358154297e-08,
+          5.4165701435238137e-08,
+          8.195624232598674e-08,
+          1.1920925047093078e-07,
+          1.5646214421849435e-07,
+          1.8626436514068702e-07,
+          1.937149676223271e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 9.685748285232696e-08,
+      "all128_mean_one_conditional_ks_bounds": [
+        5.855688405317294e-08,
+        5.855688405317294e-08
+      ],
+      "all128_mean_one_conditional_tv": 5.855688405317294e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        3.3527591896049195e-08,
+        9.685750205792898e-08,
+        7.450576295974938e-08,
+        2.235175069033107e-08,
+        6.70552196497136e-08,
+        6.332992139748455e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        3.3527591896049195e-08,
+        9.685750205792898e-08,
+        7.450576295974938e-08,
+        2.235175069033107e-08,
+        6.70552196497136e-08,
+        6.332992139748455e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649526281019,
+        0.5381649643152117
+      ],
+      "ideal_all128_max_one_conditional_tv": 9.685748381116355e-08,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        2.2351741790771484e-08,
+        2.7082850717619068e-08,
+        4.097812116299337e-08,
+        5.960462523546539e-08,
+        7.823107210924718e-08,
+        9.313218257034351e-08,
+        9.685748381116355e-08
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 4.949728960035316e-09,
+      "parameter": "a_a3",
+      "source_float_endpoint_tail_fractions": [
+        0.500000004359612,
+        0.49999999505027104
+      ],
+      "stage_index": 19,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.006030192598700523,
+        "fit_synchronized_wall": 1.7790872119367123,
+        "original_criterion_sample_cpu_wall": 0.014079751446843147,
+        "predict_synchronized_wall": 6.663775784894824
+      }
+    },
+    {
+      "all128_endpoint_mass": {
+        "max": 1.4901152667334827e-07,
+        "mean": 7.275954463231704e-08,
+        "min": 0.0,
+        "quantile_levels": [
+          0,
+          0.01,
+          0.1,
+          0.5,
+          0.9,
+          0.99,
+          1
+        ],
+        "quantiles": [
+          0.0,
+          1.6912809863711687e-08,
+          4.246830904719446e-08,
+          6.705518984517767e-08,
+          1.1175867555834885e-07,
+          1.4699989904443104e-07,
+          1.4901152667334827e-07
+        ]
+      },
+      "all128_max_one_conditional_ks": 7.450576611516685e-08,
+      "all128_mean_one_conditional_ks_bounds": [
+        3.63797736728446e-08,
+        3.63797736728446e-08
+      ],
+      "all128_mean_one_conditional_tv": 3.63797736728446e-08,
+      "captured_selected_rows": 6,
+      "captured_subset_ks": [
+        6.332993373619689e-08,
+        0.0,
+        3.7252866689919195e-08,
+        1.8626459906348383e-08,
+        7.450576722809828e-08,
+        6.332993243559887e-08
+      ],
+      "captured_subset_selection_caution": "Selected extremal and evenly spaced capture rows; not a representative independent second128-row population.",
+      "captured_subset_tv": [
+        6.332993373619689e-08,
+        0.0,
+        3.7252866689919195e-08,
+        1.8626459906348383e-08,
+        7.450576722809828e-08,
+        6.332993243559887e-08
+      ],
+      "half_normal_peak_density_divided_by_finite_uniform_density": [
+        0.5381649405190766,
+        0.5381649346925197
+      ],
+      "ideal_all128_max_one_conditional_tv": 7.450576333667414e-08,
+      "ideal_all128_tv_quantile_levels": [
+        0,
+        0.01,
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        1
+      ],
+      "ideal_all128_tv_quantiles": [
+        0.0,
+        8.456404931855844e-09,
+        2.123415452359723e-08,
+        3.352759492258883e-08,
+        5.587933777917442e-08,
+        7.349994952221552e-08,
+        7.450576333667414e-08
+      ],
+      "ideal_formula_max_abs_precision_error_bound": 1.8646159616331204e-08,
+      "parameter": "sigma_a3",
+      "source_float_endpoint_tail_fractions": [
+        0.5000000140050287,
+        0.5000000186461596
+      ],
+      "stage_index": 20,
+      "timings_seconds": {
+        "cache_clear_cpu_wall": 0.007039676420390606,
+        "fit_synchronized_wall": 1.8514812774956226,
+        "original_criterion_sample_cpu_wall": 0.014125338755548,
+        "predict_synchronized_wall": 6.849690346047282
+      }
+    }
+  ]
+}

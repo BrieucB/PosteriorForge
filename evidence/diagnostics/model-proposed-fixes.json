@@ -1,0 +1,48 @@
+{
+  "caution": "AR factorization itself is exact, and later6marginals being closer argues against generic inevitable autoregressive drift. More posterior draws reduce Monte Carlo noise, not systematic discrepancy. Low ESS and observed bank variation are not causal proof. Scientific prior and frozen-model pretraining task prior are distinct.",
+  "fallback": "Different pretrained task prior/checkpoint or adaptation requires separate scope/model qualification. Exact-conditional hybrid is fixture-specific.",
+  "final_report": "report.md",
+  "first_minimal_experiment_proposal": "After user chooses, isolate ensemble arithmetic correction only; same checkpoint/order/FP32/4096bank/seed20261111case0/50000completevectors; require original physical integrity and accuracy criteria. One-case success only justifies all24confirmation.",
+  "original_gate_unchanged": true,
+  "primary_literature_context": "https://arxiv.org/html/2504.17660v2 sections2.3/B.2/D.4/D.8; literature does not establish improvement on this project.",
+  "ranking": [
+    {
+      "basis": "Executed pinned helper has a missing-parentheses defect. Captured fixed-member mixtures differ by maximum TV0.079105 and CDF0.014634; not an end-to-end improvement.",
+      "cost": "One predeclared case/seed full50000pilot, then all24 only if it passes.",
+      "feasibility": "Small correction, existing worlds/checkpoint. Keep tail-family coherence as a separate ablation.",
+      "proposal": "Isolated ensemble-CDF arithmetic correction",
+      "rank": 1,
+      "uncertainty": "Large gate errors remain unexplained; no repaired posterior was sampled."
+    },
+    {
+      "basis": "Fixed-design Gaussian likelihood preserved with33->15features, retaining mechanical residual energy; reconstruction max4.66e-10.",
+      "feasibility": "Deterministic adapter, no new worlds, same frozen checkpoint.",
+      "proposal": "Exact sufficient observation statistics",
+      "rank": 2,
+      "uncertainty": "No inference improvement evaluated."
+    },
+    {
+      "basis": "Posterior factorization conditional on all global parameters; local stages retain own observations and earlier own targets.",
+      "feasibility": "Reuse worlds/checkpoint; validate posterior-graph masks, not just prior direct-parent masks.",
+      "proposal": "Exact graph-local conditional covariates",
+      "rank": 3,
+      "uncertainty": "Cannot repair global factor bias or SDK defects; no local variant evaluated."
+    },
+    {
+      "basis": "QR/likelihood-aligned mechanical basis targets distorted geometry; bounded-noise transforms separate.",
+      "feasibility": "Reuse worlds; inverse pushforward and density Jacobians if used; unchanged physical gate.",
+      "proposal": "Separate invertible target-coordinate ablations",
+      "rank": 4,
+      "uncertainty": "Noncentering regime-dependent; no target variant evaluated."
+    },
+    {
+      "basis": "Full-prior likelihood ESS1.000-2.216 and bank effects indicate scarce nearby worlds, not proof of PFN failure.",
+      "feasibility": "Use existing contexts first; arbitrary parameter proposals need correction.",
+      "proposal": "Observation-only context localization, then more worlds only if justified",
+      "rank": 5,
+      "uncertainty": "Can discard useful context; future1hour/world cost makes larger banks expensive."
+    }
+  ],
+  "schema": "posteriorforge.diagnostic.fix_proposals.v1",
+  "status": "final proposal ranking after completed captures; no implemented fix or improvement established"
+}

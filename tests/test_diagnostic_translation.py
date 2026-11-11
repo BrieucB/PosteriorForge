@@ -49,3 +49,40 @@ def test_buggy_cdf_can_still_be_monotone_and_probability_normalized():
 @pytest.mark.parametrize('borders',[[0,0,1],[0,2,1],[0,np.nan,1]])
 def test_bad_borders_fail_closed(borders):
     with pytest.raises(ValueError):module.finite_bar_cdf([[.5,.5]],borders,[0,1])
+
+summary_spec=importlib.util.spec_from_file_location('model_summary',Path(__file__).parents[1]/'scripts/summarize_model_diagnostics.py')
+summary=importlib.util.module_from_spec(summary_spec);summary_spec.loader.exec_module(summary)
+
+
+def test_tail_tv_ks_formula_matches_independent_density_integrals():
+    from scipy.integrate import quad
+    from scipy.special import erf
+    from scipy.stats import norm
+    borders=np.array([-3.,-1.,4.,5.])
+    masses=np.array([.3,.4,.3])
+    scales=np.array([2.,1.])/norm.ppf(.75)
+    def finite_density(y):
+        if y<borders[0] or y>borders[-1]:return 0.
+        i=min(np.searchsorted(borders,y,side='right')-1,2)
+        return masses[i]/np.diff(borders)[i]
+    def full_density(y):
+        if y<=borders[1]:return masses[0]*np.sqrt(2/np.pi)/scales[0]*np.exp(-.5*((borders[1]-y)/scales[0])**2)
+        if y>=borders[-2]:return masses[-1]*np.sqrt(2/np.pi)/scales[1]*np.exp(-.5*((y-borders[-2])/scales[1])**2)
+        return masses[1]/(borders[2]-borders[1])
+    numerical_tv=.5*sum(quad(lambda y:abs(full_density(y)-finite_density(y)),a,b,epsabs=1e-12)[0] for a,b in zip([-np.inf,*borders],[*borders,np.inf]))
+    tv,ks=summary.tail_distances(masses[0],masses[-1])
+    assert abs(numerical_tv-tv)<1e-12
+    def full_cdf(y):
+        if y<=borders[1]:return masses[0]*(1-erf((borders[1]-y)/(scales[0]*np.sqrt(2))))
+        if y<borders[-2]:return masses[0]+masses[1]*(y-borders[1])/(borders[-2]-borders[1])
+        return 1-masses[-1]+masses[-1]*erf((y-borders[-2])/(scales[1]*np.sqrt(2)))
+    points=np.unique(np.r_[np.linspace(-20,20,10001),borders])
+    finite_cdf=module.finite_bar_cdf(masses[None,:],borders,points)[0]
+    numerical_ks=np.max(np.abs(np.array([full_cdf(y) for y in points])-finite_cdf))
+    assert abs(numerical_ks-ks)<1e-12
+
+
+def test_tail_tv_ks_are_different_with_asymmetric_endpoint_masses():
+    tv,ks=summary.tail_distances(np.array([.8,.1]),np.array([.1,.1]))
+    np.testing.assert_allclose(tv,[.45,.1])
+    np.testing.assert_allclose(ks,[.4,.05])

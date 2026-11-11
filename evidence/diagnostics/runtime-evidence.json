@@ -1,0 +1,443 @@
+{
+  "actual_diagnostic_requests": [
+    {
+      "accepted_before_trim": 1,
+      "call_counts": {
+        "empty_cache": 21,
+        "fit": 21,
+        "ipc_collect": 21,
+        "predict": 21,
+        "proposal": 1,
+        "support": 1
+      },
+      "candidate_acceptance_rate": 1.0,
+      "complete_finite_in_support": true,
+      "external_cache_host_seconds": 0.12589126906823367,
+      "host_seconds_by_operation_inclusive": {
+        "empty_cache": 0.12522281904239208,
+        "fit": 30.45275407191366,
+        "ipc_collect": 0.0006684500258415937,
+        "predict": 118.57392946421169,
+        "proposal": 149.21170543693006,
+        "support": 0.014408063027076423
+      },
+      "invalid_candidates_rejected": 0,
+      "name": "cold_single",
+      "peak_allocated_bytes": 2414673920,
+      "peak_reserved_bytes": 5010096128,
+      "profiler_enabled": false,
+      "proposal_other_host_seconds": 0.0591306317364797,
+      "proposal_sizes": [
+        1
+      ],
+      "proposed": 1,
+      "request_other_host_seconds": 0.01711902511306107,
+      "request_seconds": 149.2432325250702,
+      "requested_complete_count": 1,
+      "returned": 1,
+      "samples": {
+        "dtype": "<f8",
+        "sha256": "46bcba9adb606c1fbf8b9fc16f62020ec03755b592ff4f379d898b19b0cade03",
+        "shape": [
+          1,
+          21
+        ]
+      },
+      "session_seconds_including_profiler_setup_flush": 149.28908001095988,
+      "support_calls": 1,
+      "valid_candidates_trimmed": 0
+    },
+    {
+      "accepted_before_trim": 10034,
+      "call_counts": {
+        "empty_cache": 42,
+        "fit": 42,
+        "ipc_collect": 42,
+        "predict": 42,
+        "proposal": 2,
+        "support": 2
+      },
+      "candidate_acceptance_rate": 0.9933669933669934,
+      "complete_finite_in_support": true,
+      "external_cache_host_seconds": 0.4686255193082616,
+      "host_seconds_by_operation_inclusive": {
+        "empty_cache": 0.46696426905691624,
+        "fit": 64.59148724307306,
+        "ipc_collect": 0.0016612502513453364,
+        "predict": 510.83721887122374,
+        "proposal": 614.1065507150488,
+        "support": 0.0012036380358040333
+      },
+      "invalid_candidates_rejected": 67,
+      "name": "profile",
+      "peak_allocated_bytes": 8976019968,
+      "peak_reserved_bytes": 23966253056,
+      "profiler_enabled": true,
+      "proposal_other_host_seconds": 38.209219081443734,
+      "proposal_sizes": [
+        10000,
+        101
+      ],
+      "proposed": 10101,
+      "request_other_host_seconds": 0.0015461868606507778,
+      "request_seconds": 614.1093005399453,
+      "requested_complete_count": 10000,
+      "returned": 10000,
+      "samples": {
+        "dtype": "<f8",
+        "sha256": "1c700cdf4f9bc54051ad0e68b18e1900efc6b7b8e1329c65f733e6a41ba3d403",
+        "shape": [
+          10000,
+          21
+        ]
+      },
+      "session_seconds_including_profiler_setup_flush": 707.7551258909516,
+      "support_calls": 2,
+      "valid_candidates_trimmed": 34
+    }
+  ],
+  "all_original_24_requests": {
+    "accepted_before_final_trim": {
+      "maximum": 50649,
+      "median_across_distinct_cases_and_banks": 50150.5,
+      "minimum": 50126
+    },
+    "accepted_samples_per_second": {
+      "maximum": 21.440653396526674,
+      "median_across_distinct_cases_and_banks": 21.234103226888408,
+      "minimum": 20.728947259172084
+    },
+    "amortized_seconds_per_returned_vector": {
+      "maximum": 0.04824171664373949,
+      "median_across_distinct_cases_and_banks": 0.04709407420101168,
+      "minimum": 0.04664036965226056
+    },
+    "append_context_seconds": {
+      "maximum": 0.23031459096819162,
+      "median_across_distinct_cases_and_banks": 0.02733128677937202,
+      "minimum": 0.0030691209831275046
+    },
+    "autoregressive_fit_predict_stages": {
+      "maximum": 126,
+      "median_across_distinct_cases_and_banks": 126.0,
+      "minimum": 126
+    },
+    "candidate_acceptance_rate": {
+      "maximum": 0.9948200924841725,
+      "median_across_distinct_cases_and_banks": 0.9938667863105479,
+      "minimum": 0.9741316305727584
+    },
+    "constructor_and_import_seconds": {
+      "maximum": 26.243576237000525,
+      "median_across_distinct_cases_and_banks": 8.498272190248827,
+      "minimum": 3.6876758270082064
+    },
+    "invalid_candidates_rejected": {
+      "maximum": 1345,
+      "median_across_distinct_cases_and_banks": 309.5,
+      "minimum": 261
+    },
+    "peak_allocated_bytes": {
+      "maximum": 8975456256,
+      "median_across_distinct_cases_and_banks": 8975456256.0,
+      "minimum": 8975456256
+    },
+    "peak_reserved_bytes": {
+      "maximum": 23966253056,
+      "median_across_distinct_cases_and_banks": 23966253056.0,
+      "minimum": 23966253056
+    },
+    "posterior_request_seconds": {
+      "maximum": 2412.0858321869746,
+      "median_across_distinct_cases_and_banks": 2354.703710050584,
+      "minimum": 2332.018482613028
+    },
+    "proposed": {
+      "maximum": 51994,
+      "median_across_distinct_cases_and_banks": 50460.5,
+      "minimum": 50387
+    },
+    "slurm_elapsed_seconds": {
+      "maximum": 2424,
+      "median_across_distinct_cases_and_banks": 2377.0,
+      "minimum": 2346
+    },
+    "support_calls": {
+      "maximum": 6,
+      "median_across_distinct_cases_and_banks": 6.0,
+      "minimum": 6
+    },
+    "total_seconds": {
+      "maximum": 2420.3209282699972,
+      "median_across_distinct_cases_and_banks": 2371.0057989545166,
+      "minimum": 2335.7092275610194
+    },
+    "valid_candidates_trimmed": {
+      "maximum": 649,
+      "median_across_distinct_cases_and_banks": 150.5,
+      "minimum": 126
+    }
+  },
+  "attention_fraction_of_kernel_sum": 0.7374019019387806,
+  "attention_summed_fraction_of_profile_span": 0.5892136238277644,
+  "attribution": "Built with PriorLabs-TabPFN",
+  "baseline_commit": "89404ac9e43bf9fb72d3e51a7113dbd207871221",
+  "case": 0,
+  "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+  "context_seed": 20261111,
+  "context_size": 4096,
+  "copies": [
+    {
+      "bytes": 6104386744,
+      "count": 4200,
+      "events_with_byte_count": 4200,
+      "name": "Memcpy DtoH (Device -> Pageable)",
+      "summed_duration_seconds": 0.7712515370000008
+    },
+    {
+      "bytes": 2816528720,
+      "count": 5754,
+      "events_with_byte_count": 5754,
+      "name": "Memcpy HtoD (Pageable -> Device)",
+      "summed_duration_seconds": 0.17111985099999893
+    },
+    {
+      "bytes": 6048,
+      "count": 2016,
+      "events_with_byte_count": 2016,
+      "name": "Memcpy DtoH (Device -> Pinned)",
+      "summed_duration_seconds": 0.004529899999999993
+    },
+    {
+      "bytes": 954162880,
+      "count": 672,
+      "events_with_byte_count": 672,
+      "name": "Memcpy DtoD (Device -> Device)",
+      "summed_duration_seconds": 0.002617802999999991
+    }
+  ],
+  "cpu_sampler_median_seconds_range": [
+    1.2930567367002368,
+    2.2539377445355058
+  ],
+  "device": "NVIDIA A100-SXM4-40GB",
+  "diagnostic_only": true,
+  "dominant_attention_summed_seconds": 361.84158658500155,
+  "float32_matmul_precision": "highest",
+  "host_partition": [
+    {
+      "host_partition_fractions": {
+        "external_cache": 0.0008435308384725999,
+        "fit": 0.204047805429289,
+        "other": 0.0006074494524325471,
+        "predict": 0.7945012142798058
+      },
+      "host_partition_seconds": {
+        "external_cache": 0.12589126906823367,
+        "fit": 30.45275407191366,
+        "other": 0.0906577198766172,
+        "predict": 118.57392946421169
+      },
+      "profiler_enabled": false,
+      "proposal_sizes": [
+        1
+      ],
+      "request": "cold_single",
+      "request_seconds": 149.2432325250702,
+      "requested_vectors": 1
+    },
+    {
+      "host_partition_fractions": {
+        "external_cache": 0.0007630979027613334,
+        "fit": 0.10517913860982415,
+        "other": 0.06222340041543575,
+        "predict": 0.8318343630719788
+      },
+      "host_partition_seconds": {
+        "external_cache": 0.4686255193082616,
+        "fit": 64.59148724307306,
+        "other": 38.21196890634019,
+        "predict": 510.83721887122374
+      },
+      "profiler_enabled": true,
+      "proposal_sizes": [
+        10000,
+        101
+      ],
+      "request": "profile",
+      "request_seconds": 614.1093005399453,
+      "requested_vectors": 10000
+    }
+  ],
+  "inputs": {
+    "runtime-baseline-summary.json": {
+      "sha256": "2c6d7af9d88566b1a73d4ddcf9b4f581dcbf3ed093d6dee375929f55fe06a7cf",
+      "source": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/diagnostics-20261111/runtime-baseline/runtime-baseline-summary.json"
+    },
+    "runtime-controlled-stop.json": {
+      "sha256": "1427de413230c15cdd00cb8c362b2e823a7a25db434b969e48844525221b643d",
+      "source": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/diagnostics-20261111/runtime-controlled-stop.json"
+    },
+    "runtime-original-partial-manifest.json": {
+      "sha256": "0aa31c8c783fce8d480fbf81a88104c4c72dbc67064148ec27d8f3012caab505",
+      "source": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/diagnostics-20261111/runtime-profile/manifest.json"
+    },
+    "runtime-sampler-cpu.json": {
+      "sha256": "6034447a407fd30bded5057ea09ce96b0395bdd53f5569b5892a267a78c61f5e",
+      "source": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/diagnostics-20261111/runtime-sampler-cpu.json"
+    },
+    "runtime-trace-summary.json": {
+      "sha256": "4a1f6079062c9433256bb76275e22eb32cbdcd121a0305e71b237ebf5d80b69c",
+      "source": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/diagnostics-20261111/runtime-stream-trace-summary.json"
+    }
+  },
+  "limitations": [
+    "Cold-single, profiled 10000 and original 50000 requests use different counts; no exact original 50000 cost decomposition or overhead factor is extrapolated.",
+    "One unprofiled single-vector timing is not a latency distribution; warm-single was not measured.",
+    "Controlled stop occurred after complete request and raw trace export during CPU-only profiler key averaging; the original partial manifest is preserved.",
+    "Trace-derived GPU interval unions and host partitions are overlapping views, not additive categories.",
+    "Rejection and final valid overshoot are distinct; measured proposal sizes are retained for every completed diagnostic request.",
+    "No scientific gate was rerun or passed by this evidence."
+  ],
+  "measured_conclusions": [
+    "For this 10000-accepted-vector diagnostic, prediction host spans and actual GPU kernels dominate; FP32 attention is the largest recorded kernel group.",
+    "Host synchronization and host memcpy API waits overlap GPU execution and must not be added to GPU time as independent overhead.",
+    "Device copy durations are below 1 second in this trace; host memcpy API duration includes waits and is not device transfer time.",
+    "Single accepted vector took 149.243 seconds after constructor/bank attachment; original \u224847 ms/vector is amortized throughput, not isolated latency.",
+    "The CPU scalar sampler costs about 1.3\u20132.3 seconds per 10000-row stage in this fixed-logit microbenchmark; its per-row operators generate a large trace, but it is secondary to GPU prediction in the measured request."
+  ],
+  "optimization_performed": false,
+  "original_gate_unchanged": true,
+  "original_profile_manifest_status_preserved": "running",
+  "profile_execution_git_revision": "c122261a89b6965f3c791e2d97305227ad4976f6",
+  "schema": "posteriorforge.failure_runtime_diagnostic.v1.recovered_evidence",
+  "scientific_gate_reclassified": false,
+  "settings": {
+    "average_before_softmax": false,
+    "categorical_features_indices": null,
+    "device": "cuda",
+    "fit_mode": "fit_preprocessors",
+    "ignore_pretraining_limits": false,
+    "inference_config": null,
+    "inference_precision": "torch.float32",
+    "memory_saving_mode": "auto",
+    "model_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/cache/model/tabpfn-v2-regressor.ckpt",
+    "n_estimators": 8,
+    "n_jobs": 1,
+    "random_state": 0,
+    "softmax_temperature": 0.9
+  },
+  "source_call_graph": {
+    "each_fit": "Pinned SDK reloads/reconstructs checkpoint and fits stage preprocessors; measured fit wall does not isolate physical disk I/O.",
+    "each_proposal": "21 autoregressive fit/predict stages; predict iterates 8 ensembles and moves model to CUDA then CPU; final CPU logits are sampled by per-row icdf.",
+    "original_24_calls": "6 proposals/support calls per original request =>126 fit/predict pairs; first 5 full 10000, final adaptive 387\u20131994, not 60000 total."
+  },
+  "status": "completed_sampling_and_raw_trace_recovered_after_controlled_postprocessing_stop",
+  "sync_calls": [
+    {
+      "bytes": null,
+      "count": 11970,
+      "events_with_byte_count": 0,
+      "name": "cudaStreamSynchronize",
+      "summed_duration_seconds": 415.09093786599976
+    },
+    {
+      "bytes": null,
+      "count": 2,
+      "events_with_byte_count": 0,
+      "name": "cudaDeviceSynchronize",
+      "summed_duration_seconds": 2.9455000000000002e-05
+    }
+  ],
+  "top_kernels": [
+    {
+      "bytes": null,
+      "count": 12096,
+      "events_with_byte_count": 0,
+      "name": "fmha_cutlassF_f32_aligned_64x64_rf_sm80(PyTorchMemEffAttention::AttentionKernel<float, cutlass::arch::Sm80, true, 64, 64, 64, true, true>::Params)",
+      "summed_duration_seconds": 361.84158658500155
+    },
+    {
+      "bytes": null,
+      "count": 12192,
+      "events_with_byte_count": 0,
+      "name": "ampere_sgemm_64x64_tn",
+      "summed_duration_seconds": 40.5551821759999
+    },
+    {
+      "bytes": null,
+      "count": 8568,
+      "events_with_byte_count": 0,
+      "name": "ampere_sgemm_128x64_tn",
+      "summed_duration_seconds": 29.766249871000053
+    },
+    {
+      "bytes": null,
+      "count": 13056,
+      "events_with_byte_count": 0,
+      "name": "ampere_sgemm_64x64_nn",
+      "summed_duration_seconds": 12.819240371999989
+    },
+    {
+      "bytes": null,
+      "count": 12096,
+      "events_with_byte_count": 0,
+      "name": "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<float, float>(int, float, float const*, float const*, float const*, float*, float*, float*)",
+      "summed_duration_seconds": 12.556058628999883
+    },
+    {
+      "bytes": null,
+      "count": 2856,
+      "events_with_byte_count": 0,
+      "name": "ampere_sgemm_32x128_tn",
+      "summed_duration_seconds": 7.754822963999973
+    },
+    {
+      "bytes": null,
+      "count": 45696,
+      "events_with_byte_count": 0,
+      "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
+      "summed_duration_seconds": 6.992461454999736
+    },
+    {
+      "bytes": null,
+      "count": 5088,
+      "events_with_byte_count": 0,
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::GeluCUDAKernelImpl(at::TensorIteratorBase&, at::native::GeluType)::{lambda()#2}::operator()() const::{lambda()#2}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::GeluCUDAKernelImpl(at::TensorIteratorBase&, at::native::GeluType)::{lambda()#2}::operator()() const::{lambda()#2}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>)",
+      "summed_duration_seconds": 6.379994036999976
+    }
+  ],
+  "trace_metrics": {
+    "cuda_copy_event_count": 12642,
+    "cuda_copy_interval_union_seconds": 0.94951915625,
+    "cuda_copy_summed_seconds": 0.9495190909999759,
+    "cuda_kernel_and_copy_interval_union_seconds": 491.6546156508789,
+    "cuda_kernel_event_count": 198078,
+    "cuda_kernel_interval_union_seconds": 490.69785059375,
+    "cuda_kernel_summed_seconds": 490.6979296278541,
+    "cuda_runtime_sync_event_count": 11972,
+    "cuda_runtime_sync_host_seconds": 415.09096732099977,
+    "cuda_runtime_sync_interval_union_seconds": 415.09096284179685,
+    "kernel_busy_fraction_of_profile_span": 0.7990398822909172,
+    "profiled_request_trace_span_seconds": 614.1093348017578,
+    "trace_event_count": 27518694
+  },
+  "upstream_hashes_after": {
+    "__init__.py": "a32a437d7910cec8c251ceb6849fece6b61ece32c16e8a346e4afae82bf7bc08",
+    "accept_reject_sampler.py": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+    "npe_pfn.py": "29517328b3ff23e2e8040d19f33e79adef5fc7f91db2cffccf60234344399a85",
+    "restricted_prior.py": "13026cf8a4618aa4ca6406e0596a7ec97c0664de5b7c2b4dd7f31e4c32ece160",
+    "support_posterior.py": "022e5b22b9397e9faea08b73df76b5a0c5cf0c012b665decfe28c5b725c362ee",
+    "tsnpe_pfn.py": "f959662adf6ac6ed5aecefcebad907ef951c22bf05bbcf2c8e0e6312cb054034"
+  },
+  "upstream_hashes_before": {
+    "__init__.py": "a32a437d7910cec8c251ceb6849fece6b61ece32c16e8a346e4afae82bf7bc08",
+    "accept_reject_sampler.py": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+    "npe_pfn.py": "29517328b3ff23e2e8040d19f33e79adef5fc7f91db2cffccf60234344399a85",
+    "restricted_prior.py": "13026cf8a4618aa4ca6406e0596a7ec97c0664de5b7c2b4dd7f31e4c32ece160",
+    "support_posterior.py": "022e5b22b9397e9faea08b73df76b5a0c5cf0c012b665decfe28c5b725c362ee",
+    "tsnpe_pfn.py": "f959662adf6ac6ed5aecefcebad907ef951c22bf05bbcf2c8e0e6312cb054034"
+  },
+  "upstream_source_unchanged": true,
+  "warm_single": "not_measured"
+}

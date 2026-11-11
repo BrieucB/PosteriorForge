@@ -1,0 +1,137 @@
+{
+  "attribution": "Built with PriorLabs-TabPFN",
+  "confirmed_semantics": {
+    "cdf_inherited_finite_uniform_interpolation": true,
+    "forward_and_mean_use_unbounded_half_normal_end_bins": true,
+    "icdf_inherited_finite_uniform_interpolation": true,
+    "pdf_exp_positive_nll_instead_of_negative_nll": true,
+    "pdf_is_unused_by_original_baseline": true,
+    "sample_uses_inherited_icdf": true,
+    "sampling_and_density_mean_define_different_distributions": true
+  },
+  "constructed_distribution": {
+    "borders": [
+      -1.0,
+      0.0,
+      1.0,
+      2.0
+    ],
+    "endpoint_mass": 0.9500000000000001,
+    "half_normal_scale": 1.4826022484857804,
+    "probabilities": [
+      0.9,
+      0.05,
+      0.05
+    ],
+    "sample_count": 20000,
+    "seed": 20261111
+  },
+  "custody": {
+    "class_first_line": 448,
+    "forward_first_line": 486,
+    "inherited_icdf_first_line": 256,
+    "mean_first_line": 587,
+    "pdf_first_line": 573,
+    "sample_first_line": 577,
+    "script": "/home/it4i-bbenvegnen/workspace/PosteriorForge/scripts/diagnose_fullsupport_sampling.py",
+    "script_sha256": "68d8719c200c9643ee260c17a13e593bd4dcd0d7149d4926493ed86fff46f527",
+    "sdk_source": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib/python3.11/site-packages/tabpfn/model/bar_distribution.py",
+    "sdk_source_sha256": "3e753389dcb8f3970452e82ff832d40857cf3def29b60f6d4f95c0e1b52937bf"
+  },
+  "environment": {
+    "device": "cpu",
+    "python": "3.11.13",
+    "tabpfn": "2.0.9",
+    "torch": "2.6.0+cu124"
+  },
+  "fixed_logits_distance_formula": {
+    "approximate_kolmogorov_distance": 0.45,
+    "approximate_total_variation_distance": 0.47500000000000003,
+    "assumptions": "The installed half-normal scale puts approximately half each endpoint mass outside its finite endpoint bar; finite floating-point median calibration causes only numerical differences. These are fixed-logit row distances before autoregressive propagation or prior support rejection."
+  },
+  "interpretation": {
+    "baseline_causality": "This constructed proof does not measure actual endpoint probabilities for the released PosteriorForge checkpoint and queries. Baseline impact remains unknown until those probabilities and target-coordinate transformations are measured.",
+    "confirmed_defect": "In TabPFN 2.0.9 FullSupportBarDistribution, forward/mean describe half-normal endpoint tails, but inherited icdf/cdf and sample describe finite uniform endpoint bars.",
+    "direction": "It is not yet established whether restoring half-normal sampling would improve or worsen any original posterior gate metric.",
+    "timing": "The CPU time is for this constructed sample only and is not a full-pipeline performance attribution.",
+    "unused_pdf": "The pdf sign error is confirmed by direct API evaluation. The released PosteriorForge sample path does not call pdf; exclude it as a demonstrated baseline failure cause."
+  },
+  "label": "Constructed CPU-only API diagnostic; not the original scientific acceptance gate",
+  "mean_comparison": {
+    "analytic_finite_sampler_mean": -0.35,
+    "analytic_full_support_mean": -0.9305036272966549,
+    "analytic_full_support_sd": 1.1863086303726418,
+    "api_full_support_mean": -0.9305036272966548,
+    "empirical_max": 1.9990928173065194,
+    "empirical_min": -0.9999068180720011,
+    "empirical_sampler_mean": -0.3515135383347669,
+    "full_support_mass_above_right_finite_border": 0.02500000043341788,
+    "full_support_mass_below_left_finite_border": 0.45000000780152144,
+    "mean_error_vs_density_in_sampler_se": 146.8663611209784,
+    "sample_seconds_cpu": 2.5736661395058036,
+    "sampler_mean_monte_carlo_se": 0.0039422920575049565
+  },
+  "point_witnesses": [
+    {
+      "api_finite_cdf": 0.0,
+      "api_pdf": 5.128552715101441,
+      "density_from_negative_nll": 0.19498678390404733,
+      "density_implied_cdf": 0.1596092034728982,
+      "sampler_empirical_cdf": 0.0,
+      "x": -2.0
+    },
+    {
+      "api_finite_cdf": 0.0,
+      "api_pdf": 2.5919717784449627,
+      "density_from_negative_nll": 0.3858066697778414,
+      "density_implied_cdf": 0.45000000780152144,
+      "sampler_empirical_cdf": 0.0,
+      "x": -1.0
+    },
+    {
+      "api_finite_cdf": 0.10000000000000003,
+      "api_pdf": 2.471137696548358,
+      "density_from_negative_nll": 0.40467190533201874,
+      "density_implied_cdf": 0.49392770069536734,
+      "sampler_empirical_cdf": 0.1006,
+      "x": -0.8888888888888888
+    },
+    {
+      "api_finite_cdf": 0.9249999999999999,
+      "api_pdf": 19.999999999999996,
+      "density_from_negative_nll": 0.05000000000000001,
+      "density_implied_cdf": 0.925,
+      "sampler_empirical_cdf": 0.9276,
+      "x": 0.5
+    },
+    {
+      "api_finite_cdf": 1.0,
+      "api_pdf": 46.65549201200932,
+      "density_from_negative_nll": 0.02143370387654675,
+      "density_implied_cdf": 0.9749999995665821,
+      "sampler_empirical_cdf": 1.0,
+      "x": 2.0
+    },
+    {
+      "api_finite_cdf": 1.0,
+      "api_pdf": 92.31394887182593,
+      "density_from_negative_nll": 0.010832599105780409,
+      "density_implied_cdf": 0.9911328220292834,
+      "sampler_empirical_cdf": 1.0,
+      "x": 3.0
+    }
+  ],
+  "quantile_witness": {
+    "api_icdf": -0.8888888888888888,
+    "density_implied_cdf_at_api_icdf": 0.49392769801533115,
+    "requested_probability": 0.1
+  },
+  "schema": "posteriorforge.sdk_sampling_semantics.v1",
+  "scope": {
+    "baseline_cause_demonstrated": false,
+    "checkpoint_loaded": false,
+    "gpu_hours": 0,
+    "model_calls": 0,
+    "scientific_pipeline_changes": false
+  }
+}

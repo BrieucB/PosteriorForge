@@ -1,0 +1,75 @@
+{
+  "additional_actual_gpu_hours": 0.6308333333333334,
+  "additional_actual_gpu_seconds": 2271,
+  "additional_reserved_gpu_seconds": 0,
+  "arithmetic": "actual allocated GPU count from AllocTRES times ElapsedRaw; failures and controlled stops count; original total is never reset",
+  "attribution": "Built with PriorLabs-TabPFN",
+  "baseline_actual_gpu_seconds": 58226,
+  "global": {
+    "actual_gpu_hours": 16.80472222222222,
+    "actual_gpu_seconds": 60497,
+    "cap_exceeded": false,
+    "cap_gpu_hours": 200,
+    "remaining_gpu_hours": 183.1952777777778,
+    "remaining_gpu_seconds": 659503,
+    "reservation_count": 45,
+    "reserved_gpu_hours": 0.0,
+    "reserved_gpu_seconds": 0
+  },
+  "investigation_cap_gpu_seconds": 7200,
+  "jobs": [
+    {
+      "accounting_record": {
+        "Account": "eu-26-17",
+        "AllocTRES": "billing=1,cpu=16,gres/gpu=1,mem=124160M,node=1",
+        "ElapsedRaw": "1734",
+        "JobIDRaw": "5395988",
+        "JobName": "pf-failure-diagnostic",
+        "Partition": "qgpu",
+        "State": "FAILED"
+      },
+      "actual_gpu_seconds": 1734,
+      "gpus": 1,
+      "job_id": "5395988",
+      "reservation_id": "68d9e57f3e3147f39de4a11e0c37bbee",
+      "slurm_state": "FAILED",
+      "walltime_seconds": 3600
+    },
+    {
+      "accounting_record": {
+        "Account": "eu-26-17",
+        "AllocTRES": "billing=1,cpu=16,gres/gpu=1,mem=124160M,node=1",
+        "ElapsedRaw": "343",
+        "JobIDRaw": "5396047",
+        "JobName": "pf-bar-sampler-diagnostic",
+        "Partition": "qgpu",
+        "State": "COMPLETED"
+      },
+      "actual_gpu_seconds": 343,
+      "gpus": 1,
+      "job_id": "5396047",
+      "reservation_id": "3cea50dbac8c4d3a83f50a775da6a3e0",
+      "slurm_state": "COMPLETED",
+      "walltime_seconds": 900
+    },
+    {
+      "accounting_record": {
+        "Account": "eu-26-17",
+        "AllocTRES": "billing=1,cpu=16,gres/gpu=1,mem=124160M,node=1",
+        "ElapsedRaw": "194",
+        "JobIDRaw": "5396548",
+        "JobName": "pf-ensemble-diagnostic",
+        "Partition": "qgpu",
+        "State": "COMPLETED"
+      },
+      "actual_gpu_seconds": 194,
+      "gpus": 1,
+      "job_id": "5396548",
+      "reservation_id": "86b342f90b2d4a0f8d7a4a399ae562d8",
+      "slurm_state": "COMPLETED",
+      "walltime_seconds": 600
+    }
+  ],
+  "private_ledger_sha256": "18a963bf68f2f5ce590f28af03d58429772b04b2f7b1e48036075308208ee385",
+  "schema": "posteriorforge.diagnostic_budget.v1"
+}

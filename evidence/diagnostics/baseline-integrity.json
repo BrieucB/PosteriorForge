@@ -1,0 +1,16 @@
+{
+  "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+  "diagnostic_gate_reclassification": false,
+  "original_commit": "89404ac9e43bf9fb72d3e51a7113dbd207871221",
+  "original_gate_sha256": "42163c5d77f0f1f8f7e1bb3a78c81fba43ca36a0682446a0dc533544995e490d",
+  "original_samples_not_mutated": true,
+  "protected_paths": [
+    "src",
+    "environments",
+    "configs",
+    "evidence/feasibility"
+  ],
+  "schema": "posteriorforge.diagnostic_baseline_integrity.v1",
+  "tracked_diff_exit_code": 0,
+  "untracked_files_in_protected_paths": []
+}

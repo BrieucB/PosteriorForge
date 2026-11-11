@@ -1,0 +1,98 @@
+{
+  "schema": "posteriorforge.scientific_failure_findings.v1",
+  "attribution": "Built with PriorLabs-TabPFN",
+  "status": "diagnostic_only_original_gate_and_samples_unchanged",
+  "confirmed_defects": [
+    {
+      "scope": "Installed TabPFN 2.0.9 distribution API, not yet an established cause of baseline scientific failure",
+      "evidence": "science-fullsupport-semantics.json",
+      "defect": "FullSupportBarDistribution.forward/mean use half-normal endpoint tails, while inherited cdf/icdf and sample use finite uniform endpoint bars.",
+      "constructed_witness": "With borders [-1,0,1,2] and probabilities [0.9,0.05,0.05], API mean is -0.9305036273; finite-sampler expected mean is -0.35 and 20,000 CPU draws average -0.3515135383. Requested quantile p=0.1 has density-implied CDF 0.4939276980.",
+      "causality_limit": "Actual endpoint mass and target transforms for baseline queries must be measured before attributing any original gate error to this mismatch. Restoring half-normal sampling might improve or worsen accuracy.",
+      "unused_related_defect": "pdf returns exp(positive NLL), the inverse of the density; original baseline does not call pdf, so this is excluded as a baseline failure cause."
+    }
+  ],
+  "not_found": "No scientific prior, forward/noise, support, order, full-joint context, held-out conditioning, or label-leakage defect was found by the independent checks. A separate installed SDK sampling/density mismatch is confirmed below; its baseline impact is not yet measured.",
+  "confirmed_checks": [
+    "Independent Gaussian prior, quadratic mechanical/affine acoustic forward and absolute-noise likelihood match the source numerically.",
+    "Acoustic maps are 1.4*a_a1 + 3.1, 1.55*a_a2 + 3.2, and 1.7*a_a3 + 3.3; six sigma coordinates are standard deviations, not variances.",
+    "Training banks use the full correlated joint prior. Held-out central selection does not alter the inference prior.",
+    "Unbounded Gaussian physics coordinates need no extra support truncation. Whole-vector finite plus six bounded-noise checks match the declared support.",
+    "All 24 query/context/order/checkpoint/settings/seed/source/sample-payload bindings and all 8 parent/refined-grid chains match.",
+    "Training features are raw observations followed by earlier bank parameters; query features are observations followed by earlier generated parameters, with no true held-out parameter input.",
+    "Rejection uses complete vectors, max_iter_rejection=None; no clipping, timeout filler, or uncorrected log-density calibration is used."
+  ],
+  "demonstrated_patterns": [
+    "All 155 definite marginal CDF failures occur in global/mechanical coordinates: 18 globals, 92 mechanical coefficients, 45 mechanical noise. The final 144 acoustic cells meet this marginalCDF criterion.",
+    "Acoustic-noise posterior is almost unchanged from the prior (median reference/priorSD 0.99735; prior-referenceCDF witness difference 0.00796), while mechanical-noise posteriors are informative (median SD/priorSD 0.52813; prior-referenceCDF witness difference 0.29753). Acoustic-noise agreement is therefore a weak-information control.",
+    "Acoustic locations are strongly informed (median referenceSD/priorSD 0.15163) and still meet the marginalCDF criterion at all 72 cells. A simple monotonic later-stage-error story cannot explain the group pattern.",
+    "Bias patterns are largely case-dependent across the three banks: for mechanical targets, between-case fractions are 0.710\u20130.990 in the balanced descriptive bias decomposition. Bank changes are nevertheless much larger than conditional empirical sampling SE.",
+    "Mechanical posterior dependence can be wrong beyond marginal scale changes: worst variance inflation in reference-whitened 3-coefficient space 11.98, curve-signalSD inflation 3.44, and expected residual-energy ratio 3.75. These are descriptive covariance diagnostics, not new gate criteria.",
+    "Only 91 of 154 point-bias-failure cells have mean errors directed toward the prior mean. Uniform shrinkage toward the prior is therefore insufficient as a sole explanation."
+  ],
+  "plausible_hypotheses_not_proven": [
+    "The raw10-point mechanical representation leaves the frozen tabular regressor to infer residual energy and coupled polynomial coefficients from redundant noisy features.",
+    "Finite 4096-world prior coverage interacts with a conditional task-prior mismatch in the frozen regression checkpoint.",
+    "Within-mechanical-block autoregressive propagation may amplify conditional approximation errors; late-stage acoustic success does not exclude this local mechanism.",
+    "The current physical coefficient basis is correlated/anisotropic, and bounded-noise targets may be awkward for the frozen predictive distribution head."
+  ],
+  "ranked_scientific_proposals_not_implemented": [
+    {
+      "rank": 1,
+      "proposal": "Likelihood-preserving mechanical sufficient-statistic input representation, with stable scaling/whitening",
+      "reason": "Retains X^T y and y^T y (or equivalent coefficient/residual-energy statistics), making the Gaussian mechanical noise information explicit while preserving the original physical posterior. Scalar acoustic inputs remain identifiable affine observations.",
+      "confidence": "Plausible best first controlled experiment, not demonstrated PFN improvement.",
+      "cost": "CPU representation preparation plus one case/seed PFN request initially; all 24 combinations required for later scientific confirmation.",
+      "goal_fit": "Keeps the same frozen transformer and all 21 posterior stages."
+    },
+    {
+      "rank": 2,
+      "proposal": "Invertible mechanical coefficient basis and bounded-noise target transforms",
+      "reason": "Targets reference-whitened dependence inflation and physical-support geometry; inverse-transform complete draws before applying unchanged physical-coordinate metrics.",
+      "confidence": "Plausible; target order/basis changes may also alter conditional learning in unpredictable ways.",
+      "cost": "Moderate implementation and one controlled request per isolated representation choice.",
+      "goal_fit": "Preserves frozen-model inference engineering, but is a statistical variant rather than execution optimization."
+    },
+    {
+      "rank": 3,
+      "proposal": "Larger or deliberately sequential/local simulation contexts with exact selection/proposal accounting",
+      "reason": "Bank-sensitive predictions exceed empirical sampling SE, but persistent case effects and shared failures mean a larger bank alone is not assured to cure the bias.",
+      "confidence": "Unresolved until context coverage and task-mismatch diagnostics are combined.",
+      "cost": "Potentially high quadratic context attention cost; cannot silently enlarge the approved experiment.",
+      "goal_fit": "Keeps the transformer, but proposal/correction semantics require care."
+    },
+    {
+      "rank": 4,
+      "proposal": "Checkpoint or task-prior adaptation suited to posterior regression",
+      "reason": "If exact information-preserving representations still fail, the frozen regressor may not represent these conditional distributions adequately.",
+      "confidence": "Possible improvement; requires a new model/statistical decision, not inferred from this screen alone.",
+      "cost": "Higher model preparation/training/qualification cost; not authorized as an implemented fix in this investigation.",
+      "goal_fit": "Foundation-model engineering remains possible; fine-tuning changes the original frozen-baseline scope."
+    },
+    {
+      "rank": 5,
+      "proposal": "Analytical-conditional hybrid using the known Gaussian physics structure",
+      "reason": "Can remove difficult physical conditional approximation for this analytical problem, but borrows structure unavailable to general future physical-surrogate providers.",
+      "confidence": "Scientifically credible for this fixture, not a repair of the original NPE-PFN baseline.",
+      "cost": "Algorithm redesign and fresh confirmation.",
+      "goal_fit": "Lower fit to demonstrating full 21-stage general frozen-transformer inference."
+    }
+  ],
+  "minimal_next_experiment_proposal": {
+    "requires_user_choice": true,
+    "workload": "Same checkpoint, one fixed 4096-world bank seed 20261111, held-out case 0, 50,000 complete accepted draws; alter only the proposed likelihood-preserving observation representation.",
+    "success": "All unchanged original criteria pass conservatively on this predeclared case: marginal/projectionCDFupper<= 0.10, mean-bias upper<= 0.20 reference SD, SD-ratio interval within [0.8, 1.2], complete finite supported rows.",
+    "failure": "Any conclusive violation or unresolved numerical interval means the minimal experiment does not establish a fix. No original baseline outcome is reclassified.",
+    "confirmation": "Passing one case is only a screening result; all 24 original4096-context seed/case combinations must pass before engineering optimization."
+  },
+  "limitations": [
+    "No new model call or alternative representation evaluated.",
+    "Reference inverse-CDF quantiles and covariance whitening are diagnostic, not additional gate criteria.",
+    "Case/bank decomposition includes Monte Carlo sampling and numerical effects; empirical MC SE is conditional on the fitted PFN and assumes independent complete draws.",
+    "Simple monotonic stage-error accumulation is testable as a descriptive pattern; this cannot exclude within-block autoregressive propagation.",
+    "No root cause follows from correlation or group concentration alone."
+  ],
+  "source_metrics": "science-audit.json",
+  "compute": "CPU-only diagnostic using saved data/moments/tables; 0 additional GPU-hours from this worker.",
+  "sdk_semantics_followup": "Before any statistical candidate change, inspect actual per-stage endpoint probabilities and transformations, then decide whether a narrowly isolated reconstruction-consistency experiment is warranted. The constructed proof is not that experiment."
+}

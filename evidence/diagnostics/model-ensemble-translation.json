@@ -9,6 +9,7 @@
     ]
   ],
   "actual_model_or_checkpoint_used": false,
+  "actual_regressor_helper_alias_identity": true,
   "attribution": "Built with PriorLabs-TabPFN",
   "baseline_impact": "The frozen regressor predict path calls this helper on every member, including target_transform=None. This constructed example proves incorrect interpolation and nonidentity translation; actual per-member baseline probability impact has not been measured. Final merged endpoint mass cannot bound this interior-probability defect.",
   "borders": [
@@ -32,6 +33,7 @@
   "diagnostic_only": true,
   "helper_first_line": 558,
   "identity_translation_max_abs_error": 0.5,
+  "integrity_caution": "The incorrect interpolation can remain monotone and probability-normalized; those checks do not establish correct reconstruction.",
   "interpretation_limit": "This does not establish that repairing the helper would make the posterior pass its gate. No sampler, SDK source, preprocessing, checkpoint, data, original samples or gate has been changed.",
   "original_gate_changed": false,
   "probabilities": [
@@ -47,6 +49,8 @@
     -1.0,
     0.0
   ],
+  "regressor_source": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/regressor.py",
+  "regressor_source_sha256": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
   "same_borders_translation_actual": [
     [
       0.0,
@@ -63,5 +67,10 @@
   "source": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/utils.py",
   "source_sha256": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1",
   "tabpfn_version": "2.0.9",
-  "translate_first_line": 579
+  "toy_original_cdf_monotone": true,
+  "toy_translated_probability_sum": [
+    1.0
+  ],
+  "translate_first_line": 579,
+  "translate_helper_global_cdf_identity": true
 }

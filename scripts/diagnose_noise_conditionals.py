@@ -84,17 +84,37 @@ def conditional_cdf_gpu(sigma, rss, count, *, nodes=128, batch_size=4096):
 
 
 def conditional_cdf_quad(sigma, rss, count):
-    """Independent adaptive CPU formula, called on real rows only inside GPU job."""
+    """Independent adaptive integration with explicit narrow-boundary intervals.
+
+    Each side is rescaled separately. Breakpoints around its density maximum
+    prevent an adaptive integrator from missing a thin endpoint layer.
+    Real-row use is restricted by the enclosing reserved-GPU diagnostic run.
+    """
     _validate(np.array([sigma]),np.array([rss]),count)
     def logf(s):return -count*math.log(s)-rss/(2*s*s)-.5*((s-PRIOR_MEAN)/PRIOR_SD)**2
-    mode=minimize_scalar(lambda s:-logf(s),bounds=(LOW,HIGH),method='bounded')
-    shift=max(logf(LOW),logf(HIGH),logf(mode.x))
-    f=lambda s:math.exp(logf(s)-shift)
-    denom,error_d=quad(f,LOW,HIGH,epsabs=1e-12,epsrel=1e-12,limit=200)
-    numer,error_n=quad(f,LOW,float(sigma),epsabs=1e-12,epsrel=1e-12,limit=200)
-    if denom<=0 or not math.isfinite(denom):raise RuntimeError('independent normalizer failed')
-    return numer/denom, (error_n+error_d)/denom
-
+    def log_mass(low,high):
+        if low==high:return -math.inf,0.
+        mode=minimize_scalar(lambda s:-logf(s),bounds=(low,high),method='bounded',
+                             options={'xatol':1e-13})
+        anchors=[low,high,float(mode.x)]
+        peak=max(anchors,key=logf);shift=logf(peak)
+        slope=-count/peak+rss/(peak**3)-(peak-PRIOR_MEAN)/(PRIOR_SD**2)
+        curvature=count/(peak**2)-3*rss/(peak**4)-1/(PRIOR_SD**2)
+        scale=min((high-low)/8,1/max(1.,abs(slope)),1/math.sqrt(max(1.,abs(curvature))))
+        points={float(mode.x)}
+        for factor in 2.**np.arange(-2,22):
+            for point in (peak-scale*factor,peak+scale*factor):
+                if low<point<high:points.add(float(point))
+        value,error=quad(lambda s:math.exp(logf(s)-shift),low,high,
+                         points=sorted(points),epsabs=1e-12,epsrel=1e-12,limit=250)
+        if value<=0 or not math.isfinite(value):raise RuntimeError('independent interval normalizer failed')
+        return shift+math.log(value),error/value
+    left,error_left=log_mass(LOW,float(sigma))
+    right,error_right=log_mass(float(sigma),HIGH)
+    cdf=math.exp(left-float(np.logaddexp(left,right)))
+    relative=cdf*error_left+(1-cdf)*error_right
+    error_bound=2*relative/max(1-relative,np.finfo(float).tiny)
+    return cdf,error_bound
 
 def _ks_uniform(values):
     ordered=np.sort(values)
@@ -126,7 +146,7 @@ def run(*,banks,runs,output,cases='0',seeds='20261111,20261112,20261113',ledger=
         'source_sha256':sha256_file(__file__),'device':torch.cuda.get_device_name(),'torch_float64':True}
     write_json(root/'manifest.json',result)
     problem=build_problem();case_ids=[int(x) for x in cases.split(',')];seed_ids=[int(x) for x in seeds.split(',')]
-    observations_counts=[];pit_arrays={};max_refinement=0.;max_quad=0.;max_quad_error=0.;identity_error=0.
+    observations_counts=[];pit_arrays={};max_refinement=0.;max_quad=0.;max_quad_error=0.;identity_error=0.;max_initial_refinement=0.;highest_nodes=256
     try:
         for case in case_ids:
             observed=load_heldout(banks,case).obs
@@ -146,38 +166,92 @@ def run(*,banks,runs,output,cases='0',seeds='20261111,20261112,20261113',ledger=
                     residual=predicted[block.dataset_id]-observed_blocks.values[block.dataset_id]
                     rss=np.square(residual).sum(axis=1);sigma=samples[:,problem.parameter_order.index(noise)];n=block.observation_size
                     assembled += -.5*rss/(sigma*sigma)-n*(np.log(sigma)+.5*math.log(2*math.pi))
+                    current={'case':case,'context_seed':seed,'noise':noise,'dataset':block.dataset_id,
+                        'n':n,'count':len(samples),'phase':'all_row128_256',
+                        'sigma_quantiles':np.quantile(sigma,[0,.01,.5,.99,1]).tolist(),
+                        'rss_quantiles':np.quantile(rss,[0,.01,.5,.99,1]).tolist(),
+                        'refinement':[],'independent_quad':[]}
+                    result['current_qualification']=current
+                    write_json(root/'manifest.json',result)
                     q128=conditional_cdf_gpu(sigma,rss,n,nodes=128)
                     q256=conditional_cdf_gpu(sigma,rss,n,nodes=256)
-                    positions=_stratified(sigma,rss)
+                    qfinal=q256.copy();differences=np.abs(q256-q128)
+                    node_counts=np.full(len(sigma),256,dtype=int)
+                    initial_delta=float(differences.max())
+                    worst=np.argsort(differences)[-8:]
+                    current['initial128_256_max_abs']=initial_delta
+                    current['initial_worst_points']=[{'row':int(i),'sigma':float(sigma[i]),
+                        'rss':float(rss[i]),'q128':float(q128[i]),'q256':float(q256[i]),
+                        'absolute_difference':float(differences[i])} for i in worst[::-1]]
+                    write_json(root/'manifest.json',result)
+                    for nodes in (512,1024):
+                        bad=np.flatnonzero(differences>TOLERANCE)
+                        if not len(bad):break
+                        upgraded=conditional_cdf_gpu(sigma[bad],rss[bad],n,nodes=nodes)
+                        differences[bad]=np.abs(upgraded-qfinal[bad]);qfinal[bad]=upgraded;node_counts[bad]=nodes
+                        current['refinement'].append({'nodes':nodes,'rows':len(bad),
+                            'max_difference':float(differences[bad].max()),
+                            'remaining_above_tolerance':int(np.sum(differences>TOLERANCE))})
+                        write_json(root/'manifest.json',result)
+                    positions=np.unique(np.r_[_stratified(sigma,rss),worst])
                     q64=conditional_cdf_gpu(sigma[positions],rss[positions],n,nodes=64)
-                    delta=float(np.max(np.abs(q256-q128)))
                     delta64=float(np.max(np.abs(q64-q128[positions])))
-                    quad_records=[]
+                    current['phase']='independent_quad'
+                    quad_records=current['independent_quad']
                     for index in positions:
                         check,quad_error=conditional_cdf_quad(float(sigma[index]),float(rss[index]),n)
-                        error=abs(check-float(q256[index]));max_quad=max(max_quad,error);max_quad_error=max(max_quad_error,quad_error)
-                        quad_records.append({'row':int(index),'rss':float(rss[index]),'sigma':float(sigma[index]),'quad_cdf':float(check),'gpu_cdf':float(q256[index]),'absolute_error':error,'quad_error_estimate':quad_error})
-                    max_refinement=max(max_refinement,delta)
-                    if not np.isfinite(q256).all() or np.any(q256<0) or np.any(q256>1):raise RuntimeError('invalid conditional CDF values; no clipping allowed')
-                    if delta>TOLERANCE or max_quad>TOLERANCE or max_quad_error>TOLERANCE:
-                        raise RuntimeError('conditional CDF precision inconclusive; no diagnostic conclusion')
-                    key=f'seed{seed}_case{case}_{noise}';pit_arrays[key]=q256;run_pits.append(q256)
+                        initial_quad_difference=abs(check-float(qfinal[index]))
+                        upgrades=[]
+                        while (abs(check-float(qfinal[index]))>TOLERANCE or differences[index]>TOLERANCE) and node_counts[index]<1024:
+                            nodes=512 if node_counts[index]<512 else 1024
+                            improved=float(conditional_cdf_gpu(sigma[index:index+1],rss[index:index+1],n,nodes=nodes)[0])
+                            differences[index]=abs(improved-float(qfinal[index]));qfinal[index]=improved;node_counts[index]=nodes
+                            upgrades.append({'nodes':nodes,'cdf':improved,'previous_difference':float(differences[index])})
+                        error=abs(check-float(qfinal[index]))
+                        quad_records.append({'row':int(index),'rss':float(rss[index]),'sigma':float(sigma[index]),
+                            'quad_cdf':float(check),'gpu_cdf':float(qfinal[index]),'gpu_nodes':int(node_counts[index]),
+                            'initial_absolute_error':initial_quad_difference,'absolute_error':error,
+                            'quad_error_estimate':quad_error,'targeted_refinements':upgrades})
+                        write_json(root/'manifest.json',result)
+                    delta=float(differences.max())
+                    block_quad=max(row['absolute_error'] for row in quad_records)
+                    block_quad_error=max(row['quad_error_estimate'] for row in quad_records)
+                    current.update(phase='qualification_complete',final_refinement_max_abs=delta,
+                        highest_node_count=int(node_counts.max()),independent_quad_max_abs=block_quad,
+                        quad_error_estimate_max=block_quad_error,
+                        final_worst_points=[{'row':int(i),'sigma':float(sigma[i]),'rss':float(rss[i]),
+                            'cdf':float(qfinal[i]),'nodes':int(node_counts[i]),'last_refinement_difference':float(differences[i])}
+                            for i in np.argsort(differences)[-8:][::-1]])
+                    current['passed']=bool(np.isfinite(qfinal).all() and np.all(qfinal>=0)
+                        and np.all(qfinal<=1) and delta<=TOLERANCE
+                        and block_quad<=TOLERANCE and block_quad_error<=TOLERANCE)
+                    write_json(root/'manifest.json',result)
+                    if not current['passed']:
+                        raise RuntimeError('conditional CDF precision inconclusive; current qualification metadata recorded')
+                    max_refinement=max(max_refinement,delta);max_quad=max(max_quad,block_quad)
+                    max_quad_error=max(max_quad_error,block_quad_error)
+                    max_initial_refinement=max(max_initial_refinement,initial_delta)
+                    highest_nodes=max(highest_nodes,int(node_counts.max()))
+                    key=f'seed{seed}_case{case}_{noise}';pit_arrays[key]=qfinal;run_pits.append(qfinal)
                     result['rows'].append({'case':case,'context_seed':seed,'noise':noise,'dataset':block.dataset_id,
-                        'n':n,'count':len(samples),'conditional_pit_ks_uniform':_ks_uniform(q256),
-                        'conditional_pit_mean':float(q256.mean()),'conditional_pit_variance':float(q256.var(ddof=1)),
-                        'fraction_below_05':float(np.mean(q256<.05)),'fraction_above_95':float(np.mean(q256>.95)),
-                        'pit_quantiles':np.quantile(q256,[.01,.05,.25,.5,.75,.95,.99]).tolist(),
-                        'refinement128_256_max_abs':delta,'stratified64_128_max_abs':delta64,
-                        'independent_quad':quad_records,'manifest_sha256':sha256_file(path),
-                        'samples_sha256':manifest['samples_sha256'],'rss_quantiles':np.quantile(rss,[0,.01,.5,.99,1]).tolist()})
+                        'n':n,'count':len(samples),'conditional_pit_ks_uniform':_ks_uniform(qfinal),
+                        'conditional_pit_mean':float(qfinal.mean()),'conditional_pit_variance':float(qfinal.var(ddof=1)),
+                        'fraction_below_05':float(np.mean(qfinal<.05)),'fraction_above_95':float(np.mean(qfinal>.95)),
+                        'pit_quantiles':np.quantile(qfinal,[.01,.05,.25,.5,.75,.95,.99]).tolist(),
+                        'initial128_256_max_abs':initial_delta,'final_refinement_max_abs':delta,
+                        'highest_node_count':int(node_counts.max()),'stratified64_128_max_abs':delta64,
+                        'refinement':current['refinement'],'independent_quad':quad_records,
+                        'manifest_sha256':sha256_file(path),'samples_sha256':manifest['samples_sha256'],
+                        'rss_quantiles':np.quantile(rss,[0,.01,.5,.99,1]).tolist()})
+                    write_json(root/'manifest.json',result)
                 identity_error=max(identity_error,float(np.max(np.abs(assembled-problem.log_likelihood(samples,observed_blocks)))))
                 if not np.allclose(assembled,problem.log_likelihood(samples,observed_blocks),rtol=1e-12,atol=1e-9):raise RuntimeError('conditional formula does not reconstruct source likelihood')
                 write_json(root/'manifest.json',result)
         with (root/'conditional-pits.npz').open('xb') as stream:np.savez(stream,**pit_arrays)
-        result['qualification']={'passed':True,'all_row128_256_max_abs':max_refinement,
+        result['qualification']={'passed':True,'initial_all_row128_256_max_abs':max_initial_refinement,'final_refinement_max_abs':max_refinement,'highest_node_count':highest_nodes,
             'independent_quad_max_abs':max_quad,'quad_error_estimate_max':max_quad_error,
             'source_likelihood_identity_max_abs':identity_error,
-            'contract':'All evaluated PIT points agree128vs256; independent adaptive quad on sigma/RSS strata. This is not a universal conditional-CDF bound.'}
+            'contract':'All evaluated PIT points agree128vs256 or targeted256vs512/512vs1024 at1e-5; independent adaptive quad on sigma/RSS strata plus worst refinement rows. This is not a universal conditional-CDF bound.'}
         result.update(state='qualified_diagnostic',pit_payload_sha256=sha256_file(root/'conditional-pits.npz'),
                       elapsed_seconds=time.perf_counter()-start)
         _plot(result,pit_arrays,root)

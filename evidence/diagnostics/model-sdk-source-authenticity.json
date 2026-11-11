@@ -1,0 +1,49 @@
+{
+  "attribution": "Built with PriorLabs-TabPFN",
+  "cached_extracted_wheel_root": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/cache/uv/archive-v0/5lxJ1-H-sEbiOw7D",
+  "cached_record_sha256": "89113fc627cd6c2b2169b2da03b6657a06b211c6cefd0bcf77a8baeb2de140cf",
+  "diagnostic_only": true,
+  "files": [
+    {
+      "byte_equal_cached_wheel_file": true,
+      "cached_record_sha256": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1",
+      "cached_sha256": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1",
+      "file": "tabpfn/utils.py",
+      "installed_record_equal_cached_record": false,
+      "installed_sha256": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1",
+      "matches_cached_wheel_record": true
+    },
+    {
+      "byte_equal_cached_wheel_file": true,
+      "cached_record_sha256": "3e753389dcb8f3970452e82ff832d40857cf3def29b60f6d4f95c0e1b52937bf",
+      "cached_sha256": "3e753389dcb8f3970452e82ff832d40857cf3def29b60f6d4f95c0e1b52937bf",
+      "file": "tabpfn/model/bar_distribution.py",
+      "installed_record_equal_cached_record": false,
+      "installed_sha256": "3e753389dcb8f3970452e82ff832d40857cf3def29b60f6d4f95c0e1b52937bf",
+      "matches_cached_wheel_record": true
+    },
+    {
+      "byte_equal_cached_wheel_file": true,
+      "cached_record_sha256": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "cached_sha256": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "file": "tabpfn/regressor.py",
+      "installed_record_equal_cached_record": false,
+      "installed_sha256": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "matches_cached_wheel_record": true
+    }
+  ],
+  "installed_root": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib/python3.11/site-packages",
+  "limitation": "Installed files are byte-identical to the existing extracted cached2.0.9wheel and match its wheel RECORD hashes. The original wheel zip has not been found, so this does not independently rehash that distribution archive. Environment preparation uses uv pip sync --require-hashes with the recorded inference lock.",
+  "locked_distribution_sha256": [
+    "04e3bb989e9328d510ea4fccb6c6a36c8269630685d460af4df5eb268206bf21",
+    "7e6e006a61e8b08011c1a6761eef3c514c4ff16f5698ed655443c0704a3f93a6"
+  ],
+  "qualification_passed": true,
+  "schema": "posteriorforge.diagnostic.sdk_source_authenticity.v1",
+  "uv_cache_strings": [
+    "zVmBZ8uvx_6alxYYhttps://files.pythonhosted.org/packages/35/f8/b0e7ff83484acfbe670b2f56c28c6bcf09ae84284e624cd45755a8b7073c/tabpfn-2.0.9-py3-none-any.whl.metadata\"46049f471ad3f10af3a47fa7461b2fab\"accept-encoding"
+  ],
+  "uv_wheel_cache_metadata_sha256": "e3f7a5dd1c7fd8c8e8d229cf1e1805d73982bba143153b31a624884ec335571e",
+  "uv_wheel_cache_metadata_size": 1084,
+  "version": "2.0.9"
+}

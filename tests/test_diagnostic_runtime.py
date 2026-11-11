@@ -96,3 +96,28 @@ def test_profile_refuses_unbudgeted_execution(tmp_path, monkeypatch):
     with pytest.raises(RuntimeError, match="reserved Slurm"):
         runtime.profile_baseline(banks="none",checkpoint="none",output=tmp_path/"out",ledger=tmp_path/"ledger.json",profile_count=10000)
     assert not (tmp_path/"out").exists()
+
+
+@pytest.mark.parametrize("chunk_bytes", [16, 23, 73, 1024])
+def test_stream_reader_handles_event_boundaries_unicode_and_footer(tmp_path, chunk_bytes):
+    events = [
+        {"name": "unicode_λ", "ph": "M", "args": {"text": "a,b]c{d}"}},
+        {"ph": "X", "cat": "kernel", "name": "k", "ts": 3, "dur": 8},
+    ]
+    path = tmp_path / "trace.json"
+    path.write_text(json.dumps({"traceEvents": events, "tail": "metadata"}, ensure_ascii=False))
+    assert list(runtime.iter_trace_events(path, chunk_bytes)) == events
+
+
+def test_stream_reader_rejects_truncated_trace_array(tmp_path):
+    path = tmp_path / "trace.json"
+    path.write_text(json.dumps({"traceEvents": [{"ph": "X", "dur": 100}]})[:-5])
+    with pytest.raises(ValueError, match="truncated or invalid"):
+        list(runtime.iter_trace_events(path, 23))
+
+
+def test_cpu_sampler_requires_completed_capture_before_library_imports(tmp_path):
+    (tmp_path / "manifest.json").write_text(json.dumps({"state": "running"}))
+    with pytest.raises(ValueError, match="completed authenticated"):
+        runtime.benchmark_captured_sampler(capture_dir=tmp_path, output=tmp_path / "out.json")
+    assert not (tmp_path / "out.json").exists()

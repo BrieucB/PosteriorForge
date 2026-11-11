@@ -1,0 +1,121 @@
+{
+  "schema": "posteriorforge.diagnostic.runtime_sampler_cpu.v1",
+  "attribution": "Built with PriorLabs-TabPFN",
+  "diagnostic_only": true,
+  "model_calls": 0,
+  "gpu_calls": 0,
+  "genuine_inference_request": false,
+  "original_gate_changed": false,
+  "input_capture_sha256": "f2acf694db0446e5f7034a4cd48d742d08c854608628ee9884fbea3011d13ce0",
+  "criterion_source_sha256": "3e753389dcb8f3970452e82ff832d40857cf3def29b60f6d4f95c0e1b52937bf",
+  "torch": "2.6.0+cu124",
+  "python": "3.11.13",
+  "cpu_threads": 16,
+  "procedure": "Actual unchanged FullSupportBarDistribution.sample; cyclic repetitions of captured actual FP32 CPU logits to 10000 rows; constructor, tile setup and 128-row warmup excluded; 3 timed calls per stage.",
+  "limitation": "Fixed captured-logit CPU microbenchmark, not a complete model request or an exact original 50000-vector decomposition. Selected captured rows are not representative of all proposal prefixes.",
+  "stages": [
+    {
+      "stage_index": 0,
+      "parameter": "mu_a",
+      "captured_rows": 4,
+      "timed_rows": 10000,
+      "logits_shape": [
+        10000,
+        5000
+      ],
+      "wall_seconds": [
+        1.8526823539286852,
+        1.3006363343447447,
+        1.6165670482441783
+      ],
+      "median_wall_seconds": 1.6165670482441783,
+      "finite_outputs": true
+    },
+    {
+      "stage_index": 6,
+      "parameter": "sigma_m1",
+      "captured_rows": 6,
+      "timed_rows": 10000,
+      "logits_shape": [
+        10000,
+        5000
+      ],
+      "wall_seconds": [
+        1.3081333478912711,
+        1.662058980204165,
+        1.296528142876923
+      ],
+      "median_wall_seconds": 1.3081333478912711,
+      "finite_outputs": true
+    },
+    {
+      "stage_index": 9,
+      "parameter": "d0_m2",
+      "captured_rows": 6,
+      "timed_rows": 10000,
+      "logits_shape": [
+        10000,
+        5000
+      ],
+      "wall_seconds": [
+        2.2539377445355058,
+        2.723917156457901,
+        1.6720875715836883
+      ],
+      "median_wall_seconds": 2.2539377445355058,
+      "finite_outputs": true
+    },
+    {
+      "stage_index": 14,
+      "parameter": "sigma_m3",
+      "captured_rows": 6,
+      "timed_rows": 10000,
+      "logits_shape": [
+        10000,
+        5000
+      ],
+      "wall_seconds": [
+        1.5625204369425774,
+        1.8470513606444001,
+        1.2904485957697034
+      ],
+      "median_wall_seconds": 1.5625204369425774,
+      "finite_outputs": true
+    },
+    {
+      "stage_index": 16,
+      "parameter": "sigma_a1",
+      "captured_rows": 6,
+      "timed_rows": 10000,
+      "logits_shape": [
+        10000,
+        5000
+      ],
+      "wall_seconds": [
+        1.2930567367002368,
+        1.7281455053016543,
+        1.2911866987124085
+      ],
+      "median_wall_seconds": 1.2930567367002368,
+      "finite_outputs": true
+    },
+    {
+      "stage_index": 20,
+      "parameter": "sigma_a3",
+      "captured_rows": 6,
+      "timed_rows": 10000,
+      "logits_shape": [
+        10000,
+        5000
+      ],
+      "wall_seconds": [
+        1.5805364241823554,
+        1.9466226743534207,
+        1.431721542030573
+      ],
+      "median_wall_seconds": 1.5805364241823554,
+      "finite_outputs": true
+    }
+  ],
+  "source_hash_unchanged": true
+}

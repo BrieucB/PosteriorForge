@@ -1,0 +1,23 @@
+{
+  "assets": [
+    {
+      "bytes": 139307403,
+      "name": "posteriorforge-diagnostics-20261111.tar.gz",
+      "sha256": "5eeab1674867fd8c77e461e9164f6cc8acd8c5403813c99b1de6328901324f36",
+      "url": "https://github.com/BrieucB/PosteriorForge/releases/download/diagnostics-20261111/posteriorforge-diagnostics-20261111.tar.gz"
+    },
+    {
+      "bytes": 475953825,
+      "name": "runtime.trace.json.gz",
+      "sha256": "2a5506a954a20b44b4410f2d515dc30c1587f8b6ba1a4462a8319645b336055a",
+      "url": "https://github.com/BrieucB/PosteriorForge/releases/download/diagnostics-20261111/runtime.trace.json.gz"
+    }
+  ],
+  "attribution": "Built with PriorLabs-TabPFN",
+  "checksums_url": "https://github.com/BrieucB/PosteriorForge/releases/download/diagnostics-20261111/SHA256SUMS.diagnostics",
+  "diagnostic_only": true,
+  "model_weights_included": false,
+  "original_scientific_assets": "../artifacts.json",
+  "release_url": "https://github.com/BrieucB/PosteriorForge/releases/tag/diagnostics-20261111",
+  "schema": "posteriorforge.diagnostic_artifacts.v1"
+}

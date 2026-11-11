@@ -1,0 +1,14 @@
+{
+  "job_id": "5395988",
+  "original_gate_unchanged": true,
+  "pid": 3395156,
+  "raw_trace_complete_bytes": 7402806760,
+  "raw_trace_fd_closed": true,
+  "reason": "CPU-only key-average postprocessing retained ~95GiB after complete raw trace export; stop only profiler child and preserve combined shell/PIT. Stream trace analysis on Karolina CPU outside the GPU allocation.",
+  "request_completed": true,
+  "request_seconds": 614.1093005399453,
+  "schema": "posteriorforge.diagnostic.controlled_stop.v1",
+  "signal": "SIGTERM",
+  "timestamp": "2026-11-11T16:06:11.379404+00:00",
+  "warm_single_measured": false
+}

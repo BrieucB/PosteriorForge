@@ -1,0 +1,18 @@
+{
+  "actual_model_or_checkpoint_used": false,
+  "affine_sampling_equivariance_max_abs_float32": 5.960464477539063e-08,
+  "count": 10000,
+  "device": "CPU",
+  "diagnostic_only": true,
+  "meaning": "Synthetic bar-distribution check supports the physical-unit affine renormalization path; it does not validate the learned conditional densities or every target-transform edge case.",
+  "passed": true,
+  "scale": 0.1225,
+  "schema": "posteriorforge.diagnostic.output_reconstruction.v1",
+  "shift": 0.255,
+  "underlying_source_sha256": "3e753389dcb8f3970452e82ff832d40857cf3def29b60f6d4f95c0e1b52937bf",
+  "scope_caution": "Affine equivariance passing does not rule out the two independently confirmed pinned SDK defects: FullSupportBarDistribution half-normal density/mean versus finite-uniform sampling, and tabpfn.utils._cdf missing parentheses during ensemble probability translation. Neither was exercised by this affine check.",
+  "sdk_defects_evidence": [
+    "science-fullsupport-semantics.json",
+    "model-ensemble-translation.json"
+  ]
+}

@@ -20,12 +20,12 @@ discrepancy is bounded by [0.444206, 0.449960], against a 0.10 limit; worst mean
 bias is 1.20006 reference SD, against 0.20. This is model failure under this
 protocol, not unresolved reference uncertainty.
 
-The accepted stopping rule leaves lower-context expansion, optimization,
+The original accepted stopping rule left lower-context expansion, optimization,
 CPU/CUDA profiling and multi-GPU scaling **deferred and unrun**. No checkpoint,
 prior, preprocessing or scenario was changed to rescue the result. Eight cases
 are a diagnostic screen, not global calibration or SBC certification.
 
-Fresh public-only installation passes **109 CPU tests**. Replaying the downloaded
+The original release's fresh public-only installation passed **109 CPU tests**. Replaying the downloaded
 public artifacts reproduces the complete gate JSON byte-for-byte, including all
 24 verdicts and 11,483 numeric values. See the
 [public reproduction proof](evidence/qualification/public-artifact-replay.json).
@@ -33,10 +33,25 @@ public artifacts reproduces the complete gate JSON byte-for-byte, including all
 The [case study](docs/case-study.md), [complete evidence](evidence/feasibility/report.md),
 [machine-readable gate](evidence/feasibility/gate.json) and
 [public artifact index](evidence/artifacts.json) contain the result and its
-reproduction chain. Total allocated cost: **16.1739 GPU-hours**, zero reserved,
+reproduction chain. Original feasibility cost: **16.1739 GPU-hours**, zero reserved,
 under the hard 200-hour cap. The container recipe is provided but remains unbuilt.
 
 ![Posterior CDF discrepancies across all seed/case combinations](evidence/feasibility/marginal-cdf-discrepancy-heatmap.png)
+
+## Follow-up failure investigation
+
+A separately authorized diagnostic investigation found an active SDK ensemble-CDF
+interpolation defect with measurable conditional-probability distortion. It has not
+been repaired or shown to explain the full gate failure. The original 50k request
+takes 38.9–40.2 minutes; a one-vector request took 149 seconds. A CPU/CUDA trace
+identifies repeated GPU attention as the dominant runtime cost. Statistical fixes
+and GPU/multi-GPU optimization remain proposals.
+
+See the [diagnostic report](evidence/diagnostics/report.md), ranked next experiments,
+[reproduction guide](evidence/diagnostics/reproduce.md), and
+[reconciled accounting](evidence/diagnostics/budget.json). The additional investigation
+used 0.630833 GPU-hours; cumulative actual cost is 16.804722 GPU-hours, zero reserved.
+Original evidence and all 24 failure verdicts are unchanged.
 
 ## Reproduce
 

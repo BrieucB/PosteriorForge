@@ -1,0 +1,214 @@
+{
+  "attribution": "Built with PriorLabs-TabPFN",
+  "baseline_commit": "89404ac9e43bf9fb72d3e51a7113dbd207871221",
+  "budget_binding": {
+    "gpus": 1,
+    "job_id": "5395988",
+    "purpose": "failure-diagnostics-20261111-runtime-and-conditional-pit",
+    "reservation_id": "68d9e57f3e3147f39de4a11e0c37bbee",
+    "walltime_seconds": 3600
+  },
+  "case": 0,
+  "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+  "constructor_and_bank_attachment_seconds": 8.275930467061698,
+  "context_obs": {
+    "dtype": "<f8",
+    "sha256": "aee2030d63158a3baf3b731e1231e17972ed80a19def10152b4e67d6d1e6ffb8",
+    "shape": [
+      4096,
+      33
+    ]
+  },
+  "context_seed": 20261111,
+  "context_size": 4096,
+  "context_theta": {
+    "dtype": "<f8",
+    "sha256": "73c4c282c136a1fd86459e7b1b736629b459075def9176956a90d232d4c30f4d",
+    "shape": [
+      4096,
+      21
+    ]
+  },
+  "created_unix": 1794411445.9881015,
+  "cuda_matmul_allow_tf32": false,
+  "cudnn_allow_tf32": true,
+  "device": "NVIDIA A100-SXM4-40GB",
+  "diagnostic_only": true,
+  "git_dirty": true,
+  "git_revision": "c122261a89b6965f3c791e2d97305227ad4976f6",
+  "hostname": "acn16.karolina.it4i.cz",
+  "optimization_performed": false,
+  "parameter_order": [
+    "mu_a",
+    "mu_b",
+    "mu_d0",
+    "a_m1",
+    "b_m1",
+    "d0_m1",
+    "sigma_m1",
+    "a_m2",
+    "b_m2",
+    "d0_m2",
+    "sigma_m2",
+    "a_m3",
+    "b_m3",
+    "d0_m3",
+    "sigma_m3",
+    "a_a1",
+    "sigma_a1",
+    "a_a2",
+    "sigma_a2",
+    "a_a3",
+    "sigma_a3"
+  ],
+  "profile_count": 10000,
+  "query": {
+    "dtype": "<f8",
+    "sha256": "57fb7625b2521ff040f6d858961ca5876276708fbe2637242b48c69fdce7bdac",
+    "shape": [
+      1,
+      33
+    ]
+  },
+  "regressor_settings": {
+    "average_before_softmax": false,
+    "categorical_features_indices": null,
+    "device": "cuda",
+    "fit_mode": "fit_preprocessors",
+    "ignore_pretraining_limits": false,
+    "inference_config": null,
+    "inference_precision": "torch.float32",
+    "memory_saving_mode": "auto",
+    "model_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/cache/model/tabpfn-v2-regressor.ckpt",
+    "n_estimators": 8,
+    "n_jobs": 1,
+    "random_state": 0,
+    "softmax_temperature": 0.9
+  },
+  "requests": [
+    {
+      "accepted_before_trim": 1,
+      "call_counts": {
+        "empty_cache": 21,
+        "fit": 21,
+        "ipc_collect": 21,
+        "predict": 21,
+        "proposal": 1,
+        "support": 1
+      },
+      "candidate_acceptance_rate": 1.0,
+      "complete_finite_in_support": true,
+      "external_cache_host_seconds": 0.12589126906823367,
+      "host_seconds_by_operation_inclusive": {
+        "empty_cache": 0.12522281904239208,
+        "fit": 30.45275407191366,
+        "ipc_collect": 0.0006684500258415937,
+        "predict": 118.57392946421169,
+        "proposal": 149.21170543693006,
+        "support": 0.014408063027076423
+      },
+      "invalid_candidates_rejected": 0,
+      "name": "cold_single",
+      "peak_allocated_bytes": 2414673920,
+      "peak_reserved_bytes": 5010096128,
+      "profiler_enabled": false,
+      "proposal_other_host_seconds": 0.0591306317364797,
+      "proposal_sizes": [
+        1
+      ],
+      "proposed": 1,
+      "request_other_host_seconds": 0.01711902511306107,
+      "request_seconds": 149.2432325250702,
+      "requested_complete_count": 1,
+      "returned": 1,
+      "samples": {
+        "dtype": "<f8",
+        "sha256": "46bcba9adb606c1fbf8b9fc16f62020ec03755b592ff4f379d898b19b0cade03",
+        "shape": [
+          1,
+          21
+        ]
+      },
+      "session_seconds_including_profiler_setup_flush": 149.28908001095988,
+      "support_calls": 1,
+      "valid_candidates_trimmed": 0
+    },
+    {
+      "accepted_before_trim": 10034,
+      "call_counts": {
+        "empty_cache": 42,
+        "fit": 42,
+        "ipc_collect": 42,
+        "predict": 42,
+        "proposal": 2,
+        "support": 2
+      },
+      "candidate_acceptance_rate": 0.9933669933669934,
+      "complete_finite_in_support": true,
+      "external_cache_host_seconds": 0.4686255193082616,
+      "host_seconds_by_operation_inclusive": {
+        "empty_cache": 0.46696426905691624,
+        "fit": 64.59148724307306,
+        "ipc_collect": 0.0016612502513453364,
+        "predict": 510.83721887122374,
+        "proposal": 614.1065507150488,
+        "support": 0.0012036380358040333
+      },
+      "invalid_candidates_rejected": 67,
+      "name": "profile",
+      "peak_allocated_bytes": 8976019968,
+      "peak_reserved_bytes": 23966253056,
+      "profiler_enabled": true,
+      "proposal_other_host_seconds": 38.209219081443734,
+      "proposal_sizes": [
+        10000,
+        101
+      ],
+      "proposed": 10101,
+      "request_other_host_seconds": 0.0015461868606507778,
+      "request_seconds": 614.1093005399453,
+      "requested_complete_count": 10000,
+      "returned": 10000,
+      "samples": {
+        "dtype": "<f8",
+        "sha256": "1c700cdf4f9bc54051ad0e68b18e1900efc6b7b8e1329c65f733e6a41ba3d403",
+        "shape": [
+          10000,
+          21
+        ]
+      },
+      "session_seconds_including_profiler_setup_flush": 707.7551258909516,
+      "support_calls": 2,
+      "valid_candidates_trimmed": 34
+    }
+  ],
+  "schema": "posteriorforge.failure_runtime_diagnostic.v1",
+  "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+  "scientific_gate_reclassified": false,
+  "seed": 3091371039,
+  "slurm_job_id": "5395988",
+  "status": "running",
+  "torch_cuda": "12.4",
+  "torch_float32_matmul_precision": "highest",
+  "upstream_files": {
+    "__init__.py": "a32a437d7910cec8c251ceb6849fece6b61ece32c16e8a346e4afae82bf7bc08",
+    "accept_reject_sampler.py": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+    "npe_pfn.py": "29517328b3ff23e2e8040d19f33e79adef5fc7f91db2cffccf60234344399a85",
+    "restricted_prior.py": "13026cf8a4618aa4ca6406e0596a7ec97c0664de5b7c2b4dd7f31e4c32ece160",
+    "support_posterior.py": "022e5b22b9397e9faea08b73df76b5a0c5cf0c012b665decfe28c5b725c362ee",
+    "tsnpe_pfn.py": "f959662adf6ac6ed5aecefcebad907ef951c22bf05bbcf2c8e0e6312cb054034"
+  },
+  "upstream_revision": "29c1e900a89781ee00677df6d2415a6664e59c37",
+  "versions": {
+    "jax": null,
+    "jaxlib": null,
+    "numpy": "1.26.4",
+    "platform": "Linux-4.18.0-553.148.1.el8_10.x86_64-x86_64-with-glibc2.28",
+    "posteriorforge": null,
+    "python": "3.11.13",
+    "sbi": "0.23.0",
+    "scipy": "1.12.0",
+    "tabpfn": "2.0.9",
+    "torch": "2.6.0"
+  }
+}

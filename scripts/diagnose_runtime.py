@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter, defaultdict
+from array import array
 from contextlib import contextmanager, nullcontext
 import csv
 import gzip
@@ -15,6 +16,7 @@ import hashlib
 import json
 from pathlib import Path
 import os
+import resource
 import shutil
 import statistics
 import time
@@ -193,56 +195,137 @@ class CallRecorder:
                     delattr(owner, name)
 
 
+def iter_trace_events(path, chunk_bytes=1024*1024):
+    decoder=json.JSONDecoder()
+    with Path(path).open(encoding="utf-8") as stream:
+        buffer=""
+        while True:
+            chunk=stream.read(chunk_bytes)
+            if not chunk: raise ValueError("traceEvents array not found")
+            buffer+=chunk
+            key=buffer.find(chr(34)+"traceEvents"+chr(34))
+            start=buffer.find("[",key+13) if key>=0 else -1
+            if start>=0:
+                buffer=buffer[start+1:]; position=0; break
+            if len(buffer)>2*chunk_bytes: raise ValueError("oversized trace header")
+        while True:
+            while position<len(buffer) and (buffer[position].isspace() or buffer[position]==","):
+                position+=1
+            if position<len(buffer) and buffer[position]=="]":return
+            try:
+                event, end=decoder.raw_decode(buffer,position)
+            except json.JSONDecodeError:
+                chunk=stream.read(chunk_bytes)
+                if not chunk:raise ValueError("truncated or invalid trace event array")
+                buffer=buffer[position:]+chunk;position=0;continue
+            position=end
+            if not isinstance(event,dict):raise ValueError("non-object trace event")
+            yield event
+            if position>=chunk_bytes:
+                buffer=buffer[position:];position=0
+
+def union_seconds(flat):
+    pairs=sorted(zip(flat[::2],flat[1::2]))
+    if not pairs:return 0.
+    left,right=pairs[0];total=0.
+    for start,stop in pairs[1:]:
+        if start>right:total+=right-left;left,right=start,stop
+        else:right=max(right,stop)
+    return (total+right-left)/1e6
+
 def summarize_trace(path):
-    """Summarize CPU/CUDA trace intervals without adding overlapping durations."""
-    with Path(path).open() as stream:
-        trace = json.load(stream)
-    events = [event for event in trace.get("traceEvents", [])
-              if event.get("ph") == "X" and isinstance(event.get("dur"), (float, int))]
-    kernels = [event for event in events if "kernel" in event.get("cat", "").lower()]
-    copies = [event for event in events if "memcpy" in event.get("cat", "").lower()]
-    memset = [event for event in events if "memset" in event.get("cat", "").lower()]
-    runtime = [event for event in events if any(tag in event.get("cat", "").lower() for tag in ("cuda_runtime", "cuda_driver"))]
-    sync = [event for event in runtime if "synchroniz" in event.get("name", "").lower()]
-    request = [event for event in events if event.get("name") == "pfdiagnostic/profile/request"]
-    if len(request) != 1:
-        raise ValueError("exactly one annotated profiled request required")
-    start, stop = request[0]["ts"], request[0]["ts"] + request[0]["dur"]
-    def duration(items): return sum(event["dur"] for event in items)/1e6
-    def union(items):
-        return interval_union([(max(start,event["ts"]), min(stop,event["ts"]+event["dur"]))
-                               for event in items if event["ts"] < stop and event["ts"]+event["dur"] > start])/1e6
-    def grouped(items):
-        values = defaultdict(lambda: {"count": 0, "summed_duration_seconds": 0., "bytes": None, "events_with_byte_count": 0})
-        for event in items:
-            row = values[event.get("name", "unknown")]
-            row["count"] += 1; row["summed_duration_seconds"] += event["dur"]/1e6
-            args = event.get("args", {})
-            for key in ("Bytes", "bytes", "size"):
-                if isinstance(args.get(key), (int,float)):
-                    row["bytes"] = (row["bytes"] or 0) + args[key]
-                    row["events_with_byte_count"] += 1; break
-        return sorted([{"name": key, **value} for key,value in values.items()],
-                      key=lambda row: row["summed_duration_seconds"], reverse=True)
-    result = {"schema": SCHEMA + ".trace", "trace_event_count": len(trace.get("traceEvents", [])),
-        "profiled_request_trace_span_seconds": (stop-start)/1e6,
-        "counts_and_summed_times_scope": "entire profiler session; GPU interval unions clipped to annotated request",
-        "cuda_kernel_event_count": len(kernels), "cuda_kernel_summed_seconds": duration(kernels),
-        "cuda_kernel_interval_union_seconds": union(kernels),
-        "cuda_kernel_and_copy_interval_union_seconds": union(kernels+copies+memset),
-        "cuda_copy_event_count": len(copies), "cuda_copy_summed_seconds": duration(copies),
-        "cuda_runtime_sync_event_count": len(sync), "cuda_runtime_sync_host_seconds": duration(sync),
-        "top_kernels": grouped(kernels)[:25], "copies": grouped(copies), "sync_calls": grouped(sync),
-        "runtime_calls": grouped(runtime)[:20],
-        "cautions": ["Kernel sums can overlap across streams; interval union avoids that double count.",
-            "Host prediction durations include device waits and copies; they are not CPU compute durations.",
-            "Host synchronization can overlap active kernels; never add it to GPU time as independent cost.",
-            "A diagnostic query count and profiler overhead do not supply an exact original 50k breakdown."]}
-    if not kernels:
-        result["cuda_activity_status"] = "missing_or_unavailable"
-    else:
-        result["cuda_activity_status"] = "recorded"
-    result["kernel_busy_fraction_of_profile_span"] = result["cuda_kernel_interval_union_seconds"] / max((stop-start)/1e6, 1e-30)
+    start_clock=time.perf_counter();path=Path(path)
+    groups={key:defaultdict(lambda:{"count":0,"summed_duration_seconds":0.,"bytes":None,"events_with_byte_count":0}) for key in ("kernel","copy","memset","runtime","sync")}
+    counts=defaultdict(int); sums=defaultdict(float);request=[];labels=[];all_events=0
+    for event in iter_trace_events(path):
+        all_events+=1
+        if event.get("ph")!="X" or not isinstance(event.get("dur"),(float,int)):continue
+        name=event.get("name","");cat=event.get("cat","").lower()
+        if name=="pfdiagnostic/profile/request":request.append((event["ts"],event["ts"]+event["dur"]))
+        if name.startswith("pfdiagnostic/profile/"):
+            labels.append({"name":name,"start_us":event["ts"],"duration_seconds":event["dur"]/1e6})
+        tags=[]
+        if "kernel" in cat:tags.append("kernel")
+        if "memcpy" in cat:tags.append("copy")
+        if "memset" in cat:tags.append("memset")
+        if "cuda_runtime" in cat or "cuda_driver" in cat:
+            tags.append("runtime")
+            if "synchroniz" in name.lower():tags.append("sync")
+        for tag in tags:
+            counts[tag]+=1;sums[tag]+=event["dur"]/1e6
+            row=groups[tag][name];row["count"]+=1;row["summed_duration_seconds"]+=event["dur"]/1e6
+            for key in ("Bytes","bytes","size"):
+                value=event.get("args",{}).get(key)
+                if isinstance(value,(int,float)):
+                    row["bytes"]=(row["bytes"] or 0)+value;row["events_with_byte_count"]+=1;break
+    if len(request)!=1:raise ValueError("exactly one annotated profile request required")
+    start,stop=request[0];kernels=array("d");active=array("d");copies=array("d");sync=array("d")
+    for event in iter_trace_events(path):
+        if event.get("ph")!="X" or not isinstance(event.get("dur"),(float,int)):continue
+        cat=event.get("cat","").lower();name=event.get("name","")
+        is_kernel="kernel" in cat;is_copy="memcpy" in cat;is_memset="memset" in cat
+        is_sync=("cuda_runtime" in cat or "cuda_driver" in cat) and "synchroniz" in name.lower()
+        if not (is_kernel or is_copy or is_memset or is_sync):continue
+        left=max(start,event["ts"]);right=min(stop,event["ts"]+event["dur"])
+        if left>=right:continue
+        if is_kernel:kernels.extend((left,right))
+        if is_kernel or is_copy or is_memset:active.extend((left,right))
+        if is_copy:copies.extend((left,right))
+        if is_sync:sync.extend((left,right))
+    def grouped(tag,limit=None):
+        rows=sorted(({"name":key,**value} for key,value in groups[tag].items()),key=lambda r:r["summed_duration_seconds"],reverse=True)
+        return rows if limit is None else rows[:limit]
+    span=(stop-start)/1e6;kernel_union=union_seconds(kernels)
+    result={"schema":"posteriorforge.failure_runtime_diagnostic.v1.streaming_trace","attribution":"Built with PriorLabs-TabPFN","diagnostic_only":True,"method":"Two passes with stdlib JSONDecoder; bounded buffer, only compact GPU/sync intervals retained.","trace_file":str(path),"trace_bytes":path.stat().st_size,"trace_event_count":all_events,"profiled_request_trace_span_seconds":span,"counts_and_summed_times_scope":"entire profiler session; interval unions clipped to annotated request","cuda_activity_status":"recorded" if counts["kernel"] else "missing_or_unavailable","cuda_kernel_event_count":counts["kernel"],"cuda_kernel_summed_seconds":sums["kernel"],"cuda_kernel_interval_union_seconds":kernel_union,"cuda_kernel_and_copy_interval_union_seconds":union_seconds(active),"cuda_copy_interval_union_seconds":union_seconds(copies),"cuda_runtime_sync_interval_union_seconds":union_seconds(sync),"cuda_copy_event_count":counts["copy"],"cuda_copy_summed_seconds":sums["copy"],"cuda_runtime_sync_event_count":counts["sync"],"cuda_runtime_sync_host_seconds":sums["sync"],"kernel_busy_fraction_of_profile_span":kernel_union/max(span,1e-30),"top_kernels":grouped("kernel",25),"copies":grouped("copy"),"memset":grouped("memset"),"sync_calls":grouped("sync"),"runtime_calls":grouped("runtime",20),"annotated_host_spans":labels,"cautions":["Kernel sums can overlap; interval union avoids that double count.","Prediction host wall includes CPU work, GPU waits and transfers; it is not CPU compute time.","Host sync can overlap active kernels; never add it to GPU time as independent cost.","This profiled diagnostic differs in query count and overhead from the original 50000-vector requests; no exact original decomposition is established."],"elapsed_summary_seconds":time.perf_counter()-start_clock,"maxrss_kib":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss}
+    return result
+
+
+def benchmark_captured_sampler(*,capture_dir,output):
+    """CPU only: unchanged sample() at fixed captured logits, without model calls."""
+    capture_dir=Path(capture_dir)
+    manifest=json.loads((capture_dir/"manifest.json").read_text())
+    if manifest.get("state")!="completed_diagnostic":
+        raise ValueError("completed authenticated bar capture required")
+    capture=capture_dir/"bar-logits-capture.npz"
+    if sha256_file(capture)!=manifest["capture_sha256"]:
+        raise ValueError("bar capture hash mismatch")
+    if Path(output).exists():raise FileExistsError(output)
+    import inspect
+    import platform
+    import numpy as np
+    import torch
+    from tabpfn.model.bar_distribution import FullSupportBarDistribution
+    torch.set_num_threads(16);torch.manual_seed(20261111)
+    criterion_source=Path(inspect.getfile(FullSupportBarDistribution))
+    original_hash=sha256_file(criterion_source)
+    if original_hash!=manifest["criterion_source_sha256"]:raise ValueError("captured criterion source changed")
+    result={**runtime_identity(),"schema":SCHEMA+".sampler_cpu","attribution":ATTRIBUTION,
+      "diagnostic_only":True,"model_calls":0,"gpu_calls":0,"genuine_inference_request":False,
+      "original_gate_changed":False,"input_capture_sha256":manifest["capture_sha256"],
+      "criterion_source_sha256":original_hash,"torch":torch.__version__,"python":platform.python_version(),
+      "cpu_threads":torch.get_num_threads(),
+      "procedure":"Actual unchanged FullSupportBarDistribution.sample; cyclic repetitions of captured actual FP32 CPU logits to 10000 rows; constructor, tile setup and 128-row warmup excluded; 3 timed calls per stage.",
+      "limitation":"Fixed captured-logit CPU microbenchmark, not a complete model request or an exact original 50000-vector decomposition. Selected captured rows are not representative of all proposal prefixes.","stages":[]}
+    with np.load(capture,allow_pickle=False) as values:
+        for stage in (0,6,9,14,16,20):
+            logits=torch.from_numpy(values[f"stage{stage}_logits"].copy())
+            borders=torch.from_numpy(values[f"stage{stage}_borders"].copy())
+            criterion=FullSupportBarDistribution(borders)
+            tiled=logits.repeat((10000+len(logits)-1)//len(logits),1)[:10000].contiguous()
+            if tiled.dtype!=torch.float32 or tiled.device.type!="cpu":
+                raise ValueError("captured FP32 CPU logits required")
+            with torch.no_grad():
+                criterion.sample(tiled[:128]);durations=[]
+                for repeat in range(3):
+                    started=time.perf_counter();draw=criterion.sample(tiled);durations.append(time.perf_counter()-started)
+                    if draw.shape!=(10000,) or not draw.isfinite().all():
+                        raise RuntimeError("CPU sampler microbenchmark integrity failure")
+            result["stages"].append({"stage_index":stage,"parameter":manifest["parameter_order"][stage],
+                "captured_rows":len(logits),"timed_rows":10000,"logits_shape":list(tiled.shape),
+                "wall_seconds":durations,"median_wall_seconds":statistics.median(durations),"finite_outputs":True})
+    if sha256_file(criterion_source)!=original_hash:raise RuntimeError("criterion source changed")
+    result["source_hash_unchanged"]=True
+    with Path(output).open("x") as stream:json.dump(result,stream,indent=2)
     return result
 
 
@@ -424,6 +507,98 @@ def _plot_profile(result,output):
     fig.savefig(output/"runtime-profile-breakdown.png",dpi=160,bbox_inches="tight");plt.close(fig)
 
 
+def publish_runtime_report(*,profile_dir,baseline_summary,trace_summary,controlled_stop,sampler,output):
+    """Publish recovered partial-profile evidence without marking it complete."""
+    import re
+    from posteriorforge.inference import upstream_source_hashes
+    profile_dir=Path(profile_dir);output=Path(output)
+    output.mkdir(parents=True,exist_ok=False)
+    manifest=json.loads((profile_dir/"manifest.json").read_text())
+    baseline=json.loads(Path(baseline_summary).read_text())
+    trace=json.loads(Path(trace_summary).read_text())
+    stop=json.loads(Path(controlled_stop).read_text())
+    sample=json.loads(Path(sampler).read_text())
+    if manifest["status"]!="running" or stop.get("warm_single_measured") is not False:
+        raise ValueError("this recovery report expects the preserved partial controlled-stop run")
+    names=[r["name"] for r in manifest["requests"]]
+    if names!=["cold_single","profile"] or not stop["request_completed"]:
+        raise ValueError("the two actual completed requests are required")
+    after=upstream_source_hashes()
+    if after!=manifest["upstream_files"]:raise RuntimeError("upstream source differs from pre-wrapper record")
+    cold,profile=manifest["requests"]
+    copies={"runtime-original-partial-manifest.json":profile_dir/"manifest.json",
+            "runtime-controlled-stop.json":Path(controlled_stop),"runtime-trace-summary.json":Path(trace_summary),
+            "runtime-sampler-cpu.json":Path(sampler)}
+    inputs={}
+    for name,path in copies.items():
+        shutil.copyfile(path,output/name)
+        inputs[name]={"source":str(path),"sha256":sha256_file(path)}
+    inputs["runtime-baseline-summary.json"]={"source":str(baseline_summary),"sha256":sha256_file(baseline_summary)}
+    partitions=[]
+    for request in (cold,profile):
+        totals=request["host_seconds_by_operation_inclusive"]
+        other=request["proposal_other_host_seconds"]+totals["support"]+request["request_other_host_seconds"]
+        values={"fit":totals["fit"],"predict":totals["predict"],"external_cache":request["external_cache_host_seconds"],"other":other}
+        if abs(sum(values.values())-request["request_seconds"])>1e-6:raise ValueError("host partition mismatch")
+        partitions.append({"request":request["name"],"requested_vectors":request["requested_complete_count"],"proposal_sizes":request["proposal_sizes"],"request_seconds":request["request_seconds"],"profiler_enabled":request["profiler_enabled"],"host_partition_seconds":values,"host_partition_fractions":{key:value/request["request_seconds"] for key,value in values.items()}})
+    attention=sum(row["summed_duration_seconds"] for row in trace["top_kernels"] if "AttentionKernel" in row["name"])
+    result={"schema":SCHEMA+".recovered_evidence","attribution":ATTRIBUTION,"diagnostic_only":True,
+      "original_gate_unchanged":True,"scientific_gate_reclassified":False,"optimization_performed":False,
+      "status":"completed_sampling_and_raw_trace_recovered_after_controlled_postprocessing_stop",
+      "original_profile_manifest_status_preserved":manifest["status"],"warm_single":"not_measured",
+      "baseline_commit":BASELINE_COMMIT,"profile_execution_git_revision":manifest["git_revision"],
+      "case":manifest["case"],"context_seed":manifest["context_seed"],"context_size":manifest["context_size"],
+      "checkpoint_sha256":manifest["checkpoint_sha256"],"settings":manifest["regressor_settings"],
+      "device":manifest["device"],"float32_matmul_precision":manifest["torch_float32_matmul_precision"],
+      "upstream_hashes_before":manifest["upstream_files"],"upstream_hashes_after":after,"upstream_source_unchanged":True,
+      "all_original_24_requests":baseline["summary"],"actual_diagnostic_requests":manifest["requests"],
+      "host_partition":partitions,"trace_metrics":{key:trace[key] for key in ("trace_event_count","profiled_request_trace_span_seconds","cuda_kernel_event_count","cuda_kernel_summed_seconds","cuda_kernel_interval_union_seconds","cuda_kernel_and_copy_interval_union_seconds","cuda_copy_interval_union_seconds","cuda_copy_event_count","cuda_copy_summed_seconds","cuda_runtime_sync_event_count","cuda_runtime_sync_host_seconds","cuda_runtime_sync_interval_union_seconds","kernel_busy_fraction_of_profile_span")},
+      "dominant_attention_summed_seconds":attention,"attention_fraction_of_kernel_sum":attention/trace["cuda_kernel_summed_seconds"],
+      "attention_summed_fraction_of_profile_span":attention/trace["profiled_request_trace_span_seconds"],
+      "copies":trace["copies"],"sync_calls":trace["sync_calls"],"top_kernels":trace["top_kernels"][:8],
+      "cpu_sampler_median_seconds_range":[min(r["median_wall_seconds"] for r in sample["stages"]),max(r["median_wall_seconds"] for r in sample["stages"])],
+      "source_call_graph":{"each_proposal":"21 autoregressive fit/predict stages; predict iterates 8 ensembles and moves model to CUDA then CPU; final CPU logits are sampled by per-row icdf.","each_fit":"Pinned SDK reloads/reconstructs checkpoint and fits stage preprocessors; measured fit wall does not isolate physical disk I/O.","original_24_calls":"6 proposals/support calls per original request =>126 fit/predict pairs; first 5 full 10000, final adaptive 387–1994, not 60000 total."},
+      "measured_conclusions":["For this 10000-accepted-vector diagnostic, prediction host spans and actual GPU kernels dominate; FP32 attention is the largest recorded kernel group.","Host synchronization and host memcpy API waits overlap GPU execution and must not be added to GPU time as independent overhead.","Device copy durations are below 1 second in this trace; host memcpy API duration includes waits and is not device transfer time.","Single accepted vector took 149.243 seconds after constructor/bank attachment; original ≈47 ms/vector is amortized throughput, not isolated latency.","The CPU scalar sampler costs about 1.3–2.3 seconds per 10000-row stage in this fixed-logit microbenchmark; its per-row operators generate a large trace, but it is secondary to GPU prediction in the measured request."],
+      "limitations":["Cold-single, profiled 10000 and original 50000 requests use different counts; no exact original 50000 cost decomposition or overhead factor is extrapolated.","One unprofiled single-vector timing is not a latency distribution; warm-single was not measured.","Controlled stop occurred after complete request and raw trace export during CPU-only profiler key averaging; the original partial manifest is preserved.","Trace-derived GPU interval unions and host partitions are overlapping views, not additive categories.","Rejection and final valid overshoot are distinct; measured proposal sizes are retained for every completed diagnostic request.","No scientific gate was rerun or passed by this evidence."],"inputs":inputs}
+    write_json(output/"runtime-evidence.json",result)
+    with (output/"runtime-stage-spans.csv").open("w",newline="") as stream:
+        fields=["proposal","stage_index","parameter","query_rows","operation","host_seconds"]
+        writer=csv.DictWriter(stream,fieldnames=fields);writer.writeheader()
+        for row in trace["annotated_host_spans"]:
+            match=re.match(r"pfdiagnostic/profile/p(\d+)/s(-?\d+)/(.*)$",row["name"])
+            if not match:continue
+            proposal,stage,operation=int(match[1]),int(match[2]),match[3]
+            writer.writerow({"proposal":proposal,"stage_index":stage,"parameter":manifest["parameter_order"][stage] if stage>=0 else "all stages","query_rows":profile["proposal_sizes"][proposal-1],"operation":operation,"host_seconds":row["duration_seconds"]})
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    import numpy as np
+    fig,axes=plt.subplots(1,2,figsize=(13.5,5.0),layout="constrained")
+    colors={"fit":"#4b6382","predict":"#cb7b31","external_cache":"#267d75","other":"#a8b2c0"}
+    y=np.arange(2);left=np.zeros(2)
+    for key in ("fit","predict","external_cache","other"):
+        values=[r["host_partition_seconds"][key] for r in partitions]
+        axes[0].barh(y,values,left=left,color=colors[key],label=key.replace("_"," "));left+=values
+    axes[0].set_yticks(y,["Cold: 1 vector\nproposals [1]","Profile: 10000 vectors\nproposals [10000,101]"])
+    axes[0].set(xlabel="Measured request wall seconds",title="Actual host spans, separate workloads",xlim=(0,680))
+    axes[0].invert_yaxis();axes[0].legend(loc="lower right",fontsize=9)
+    for index,row in enumerate(partitions):axes[0].text(row["request_seconds"]+7,index,format(row["request_seconds"],".2f")+"s",va="center",fontsize=10)
+    span=trace["profiled_request_trace_span_seconds"]
+    labels=["GPU kernel union","GPU kernel + copy union","Host sync wait union"]
+    values=[trace["cuda_kernel_interval_union_seconds"],trace["cuda_kernel_and_copy_interval_union_seconds"],trace["cuda_runtime_sync_interval_union_seconds"]]
+    axes[1].barh(range(3),[span]*3,color="#e9edf2",label="Profile request span")
+    axes[1].barh(range(3),values,color=["#cb7b31","#267d75","#4b6382"])
+    axes[1].set_yticks(range(3),labels);axes[1].invert_yaxis()
+    axes[1].set(xlabel="Interval union seconds inside profiled request",title="GPU activity and host waits overlap",xlim=(0,680))
+    for index,value in enumerate(values):axes[1].text(value+7,index,f"{value:.2f}s",va="center",fontsize=10)
+    axes[1].legend(loc="lower right",fontsize=9)
+    for ax in axes:ax.grid(axis="x",alpha=.15);ax.set_axisbelow(True)
+    fig.suptitle(ATTRIBUTION+"\nFrozen FP32 baseline diagnostic; no optimization or gate change",fontsize=13)
+    fig.supxlabel("Prediction host time includes GPU compute/waits. Profiler overhead included; warm-single unmeasured. No exact 50k extrapolation.",fontsize=9)
+    fig.savefig(output/"runtime-profile-breakdown.png",dpi=170,bbox_inches="tight");plt.close(fig)
+    return result
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     commands=parser.add_subparsers(dest="operation",required=True)
@@ -432,8 +607,22 @@ def main():
     profile=commands.add_parser("profile")
     for name in ("banks","checkpoint","output","ledger"):profile.add_argument("--"+name,required=True)
     profile.add_argument("--profile-count",type=int,default=10000)
+    trace=commands.add_parser("trace-summary")
+    trace.add_argument("--trace",required=True);trace.add_argument("--output",required=True)
+    sampler=commands.add_parser("sampler-cpu")
+    sampler.add_argument("--capture-dir",required=True);sampler.add_argument("--output",required=True)
+    report=commands.add_parser("report")
+    for name in ("profile-dir","baseline-summary","trace-summary","controlled-stop","sampler","output"):report.add_argument("--"+name,required=True)
     args=vars(parser.parse_args());operation=args.pop("operation")
-    result=summarize_saved(**args) if operation=="summary" else profile_baseline(**args)
+    if operation=="summary":result=summarize_saved(**args)
+    elif operation=="profile":result=profile_baseline(**args)
+    elif operation=="sampler-cpu":result=benchmark_captured_sampler(**args)
+    elif operation=="report":result=publish_runtime_report(**args)
+    else:
+        output=Path(args["output"])
+        if output.exists():raise FileExistsError(output)
+        result=summarize_trace(args["trace"])
+        with output.open("x") as stream:json.dump(result,stream,indent=2)
     print(json.dumps(result,indent=2,sort_keys=True,allow_nan=False))
 
 

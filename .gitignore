@@ -16,3 +16,6 @@ dist/
 *.tar.gz
 results/
 .cache/
+
+# Intermediate diagnostics and drafts
+work/

@@ -1,0 +1,1298 @@
+{
+  "attribution": "Built with PriorLabs-TabPFN",
+  "candidate_fix_implemented": false,
+  "counterfactual_limitation": "Fixed original member predictions only; correct finite-bar interpolation, not a repaired half-normal family, no propagation or corrected posterior sample.",
+  "diagnostic_only": true,
+  "interpretation": "Distances compare original final member mixture against correct finite-bar interpolation on the same captured original members. This is an API reconstruction counterfactual, not a corrected posterior, half-normal repair, or demonstrated gate improvement.",
+  "maximum_cpu_source_replay_error": 2.0754432961123115e-07,
+  "maximum_final_probability_reconstruction_error": 2.2750395553550185e-08,
+  "original_gate_changed": false,
+  "population_limitation": "Saved accepted PFN prefixes, not free proposal prefixes; no chain or accepted-joint error bound.",
+  "schema": "posteriorforge.diagnostic.translation_summary.v1",
+  "source_capture_sha256": "94a3628310116f564e661ab8ff189a276a887694de268cd8f1b1a8293668eacf",
+  "source_manifest_sha256": "ef59e37f711ec066fcd101f40665840e80e4e6624d6a3a7975f3eca0cfef4d87",
+  "stages": [
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.0027884201276989263,
+          "mean": 0.0027884201276989263,
+          "min": 0.0027884201276989263,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.0027884201276989263,
+            0.0027884201276989263,
+            0.0027884201276989263,
+            0.0027884201276989263,
+            0.0027884201276989263,
+            0.0027884201276989263,
+            0.0027884201276989263
+          ]
+        },
+        "total_variation": {
+          "max": 0.03626374318461023,
+          "mean": 0.03626374318461023,
+          "min": 0.03626374318461023,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.03626374318461023,
+            0.03626374318461023,
+            0.03626374318461023,
+            0.03626374318461023,
+            0.03626374318461023,
+            0.03626374318461023,
+            0.03626374318461023
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.0000000596046448,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "mu_a",
+      "same_borders_member_count": 4,
+      "stage_index": 0,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.7199164601042867,
+        "predict_with_diagnostic_cpu_capture_wall": 7.425415022298694
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.0017599889046543693,
+          "mean": 0.0017188087966900456,
+          "min": 0.0016714997660295125,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.0016714997660295125,
+            0.0016721075431455732,
+            0.001677280470537499,
+            0.0017222594254358015,
+            0.001742430264838279,
+            0.0017579746302227343,
+            0.0017599889046543693
+          ]
+        },
+        "total_variation": {
+          "max": 0.03464549185221315,
+          "mean": 0.03259541735039238,
+          "min": 0.030632688937360934,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.030632688937360934,
+            0.030711162583311056,
+            0.03123158376320382,
+            0.03282825770769928,
+            0.033702530473003596,
+            0.034529654223701786,
+            0.03464549185221315
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.000000238418579,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "mu_b",
+      "same_borders_member_count": 4,
+      "stage_index": 1,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.5272614173591137,
+        "predict_with_diagnostic_cpu_capture_wall": 4.385212929919362
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.005834045627323699,
+          "mean": 0.005558915594643185,
+          "min": 0.005254709813661993,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.005254709813661993,
+            0.005259911249674888,
+            0.005332808526797186,
+            0.005584233794951889,
+            0.005755079380645043,
+            0.005823522165292911,
+            0.005834045627323699
+          ]
+        },
+        "total_variation": {
+          "max": 0.045842269552001595,
+          "mean": 0.04561349888040751,
+          "min": 0.04548135516818019,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.04548135516818019,
+            0.045481641302584974,
+            0.04548704573511066,
+            0.04559520168522373,
+            0.0457806285259187,
+            0.0458365262113044,
+            0.045842269552001595
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.0000001788139343,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "mu_d0",
+      "same_borders_member_count": 4,
+      "stage_index": 2,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.178115132264793,
+        "predict_with_diagnostic_cpu_capture_wall": 4.4187360582873225
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.0023539777977610726,
+          "mean": 0.002184609990732367,
+          "min": 0.00210812013422517,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.00210812013422517,
+            0.002110334948180804,
+            0.00212315670808651,
+            0.0021560125586850424,
+            0.002278341261704087,
+            0.002347841027719926,
+            0.0023539777977610726
+          ]
+        },
+        "total_variation": {
+          "max": 0.03613589835615196,
+          "mean": 0.030086580833976032,
+          "min": 0.027844257000751136,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.027844257000751136,
+            0.02784821283556675,
+            0.027900320366769316,
+            0.028416484334239284,
+            0.034481283983884295,
+            0.03608370189808412,
+            0.03613589835615196
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.000000238418579,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "a_m1",
+      "same_borders_member_count": 4,
+      "stage_index": 3,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.213565668091178,
+        "predict_with_diagnostic_cpu_capture_wall": 4.611408642493188
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.004493424144892369,
+          "mean": 0.003928720321296838,
+          "min": 0.0035861885692325085,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.0035861885692325085,
+            0.003594152346069925,
+            0.003650701829997341,
+            0.0038751343041006415,
+            0.004349518970008605,
+            0.0044744099505986045,
+            0.004493424144892369
+          ]
+        },
+        "total_variation": {
+          "max": 0.04345541229621407,
+          "mean": 0.03755793379360908,
+          "min": 0.024894936456911786,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.024894936456911786,
+            0.02491583588503315,
+            0.027063520445868735,
+            0.04112785551801933,
+            0.04263900482245103,
+            0.043375130669652553,
+            0.04345541229621407
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.000000238418579,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "b_m1",
+      "same_borders_member_count": 4,
+      "stage_index": 4,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.2600669115781784,
+        "predict_with_diagnostic_cpu_capture_wall": 4.6851316802203655
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.014580743979769396,
+          "mean": 0.012071743218790015,
+          "min": 0.009968677757031585,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.009968677757031585,
+            0.010082882104025444,
+            0.010765268038144406,
+            0.011421354429380609,
+            0.013989837759192568,
+            0.014504666926074163,
+            0.014580743979769396
+          ]
+        },
+        "total_variation": {
+          "max": 0.045287788329581496,
+          "mean": 0.041556334072616344,
+          "min": 0.032044968793869685,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.032044968793869685,
+            0.03230291004947433,
+            0.034024215974952816,
+            0.043455900690613385,
+            0.045032355231790167,
+            0.045251922064394975,
+            0.045287788329581496
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.0000001192092896,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "d0_m1",
+      "same_borders_member_count": 4,
+      "stage_index": 5,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.3369154650717974,
+        "predict_with_diagnostic_cpu_capture_wall": 4.825087605975568
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.001942544100140445,
+          "mean": 0.0014550242615095667,
+          "min": 0.0012827041768499535,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.0012827041768499535,
+            0.001284416314401865,
+            0.0013063313681774234,
+            0.0014086909372078187,
+            0.0016828016418288774,
+            0.0019214222063945602,
+            0.001942544100140445
+          ]
+        },
+        "total_variation": {
+          "max": 0.038626626836532514,
+          "mean": 0.03075477383630406,
+          "min": 0.028393184472129386,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.028393184472129386,
+            0.028401471688024153,
+            0.028618086336104055,
+            0.029888114954188298,
+            0.03420367113810793,
+            0.03830108142770127,
+            0.038626626836532514
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.0000001788139343,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "sigma_m1",
+      "same_borders_member_count": 4,
+      "stage_index": 6,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.505049154162407,
+        "predict_with_diagnostic_cpu_capture_wall": 4.906729632988572
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.0023058554645732678,
+          "mean": 0.0022003158258854212,
+          "min": 0.0019685795123366772,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.0019685795123366772,
+            0.0019777908664871777,
+            0.002069574385555299,
+            0.0022377605096646014,
+            0.002291331421563958,
+            0.00230410077896,
+            0.0023058554645732678
+          ]
+        },
+        "total_variation": {
+          "max": 0.02988312013253728,
+          "mean": 0.028893038066190608,
+          "min": 0.028347682240071996,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.028347682240071996,
+            0.028352157391105363,
+            0.02837942714727444,
+            0.02898163155849158,
+            0.02928877526063079,
+            0.029808176738319196,
+            0.02988312013253728
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.000000238418579,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "a_m2",
+      "same_borders_member_count": 4,
+      "stage_index": 7,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.3900728151202202,
+        "predict_with_diagnostic_cpu_capture_wall": 5.168706815689802
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.004414173334355303,
+          "mean": 0.0034137148597324866,
+          "min": 0.002370897347991274,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.002370897347991274,
+            0.002373266785742797,
+            0.0024375939391393475,
+            0.0033479923468016514,
+            0.004361164984893761,
+            0.004406752891032901,
+            0.004414173334355303
+          ]
+        },
+        "total_variation": {
+          "max": 0.07910515960755383,
+          "mean": 0.029241491741946925,
+          "min": 0.012183941459314061,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.012183941459314061,
+            0.012322259726756499,
+            0.013314736997782017,
+            0.022029655566215375,
+            0.07074688479602873,
+            0.07819634763642601,
+            0.07910515960755383
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.0000002980232239,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "b_m2",
+      "same_borders_member_count": 4,
+      "stage_index": 8,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.3400957118719816,
+        "predict_with_diagnostic_cpu_capture_wall": 5.146241729147732
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.01394452323876615,
+          "mean": 0.011723019258575287,
+          "min": 0.010409167888847957,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.010409167888847957,
+            0.010425350418312437,
+            0.010551651039544016,
+            0.011427918684958304,
+            0.013200490212326901,
+            0.013847439106177516,
+            0.01394452323876615
+          ]
+        },
+        "total_variation": {
+          "max": 0.0636112493274665,
+          "mean": 0.05286191796499016,
+          "min": 0.04327471527367039,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.04327471527367039,
+            0.04332356767072004,
+            0.04369555915192419,
+            0.053352821120035226,
+            0.060673871721348485,
+            0.06320487248209054,
+            0.0636112493274665
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.0000001192092896,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "d0_m2",
+      "same_borders_member_count": 4,
+      "stage_index": 9,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.6643426408991218,
+        "predict_with_diagnostic_cpu_capture_wall": 5.253393470309675
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.0017682701301384024,
+          "mean": 0.0016537600393045839,
+          "min": 0.001508080157005176,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.001508080157005176,
+            0.0015119922738104346,
+            0.0015418746821934603,
+            0.0016525668298952875,
+            0.0017618170240617788,
+            0.0017681127625084202,
+            0.0017682701301384024
+          ]
+        },
+        "total_variation": {
+          "max": 0.022341234995476897,
+          "mean": 0.015662891486220586,
+          "min": 0.012345317486343018,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.012345317486343018,
+            0.012515221025885051,
+            0.013624973949575628,
+            0.015126899119637766,
+            0.01899668736302311,
+            0.02191673247937617,
+            0.022341234995476897
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.0000001788139343,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "sigma_m2",
+      "same_borders_member_count": 4,
+      "stage_index": 10,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.4834069376811385,
+        "predict_with_diagnostic_cpu_capture_wall": 5.345643131993711
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.0023933436241358533,
+          "mean": 0.0021793416610471506,
+          "min": 0.002056107359104653,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.002056107359104653,
+            0.0020636118223968454,
+            0.0021091602366490178,
+            0.002160284071218782,
+            0.0022877192107438327,
+            0.0023855157940074765,
+            0.0023933436241358533
+          ]
+        },
+        "total_variation": {
+          "max": 0.03413197396953983,
+          "mean": 0.03309484384749334,
+          "min": 0.03218437744031939,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.03218437744031939,
+            0.03219311460244687,
+            0.032289628472642475,
+            0.03300516596288404,
+            0.034012752192804765,
+            0.03411699576183318,
+            0.03413197396953983
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.000000238418579,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "a_m3",
+      "same_borders_member_count": 4,
+      "stage_index": 11,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.4719272768124938,
+        "predict_with_diagnostic_cpu_capture_wall": 5.531794340349734
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.006266468930044517,
+          "mean": 0.0040314518318118496,
+          "min": 0.0033082585537162488,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.0033082585537162488,
+            0.003334468181274795,
+            0.0034842824414374907,
+            0.004015939064940129,
+            0.004209367918033988,
+            0.005961208621033613,
+            0.006266468930044517
+          ]
+        },
+        "total_variation": {
+          "max": 0.04028373790873124,
+          "mean": 0.034410798382831426,
+          "min": 0.015206139398238517,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.015206139398238517,
+            0.016367843792432987,
+            0.026427072426120763,
+            0.037161426287826045,
+            0.039923684266290074,
+            0.04025339114547865,
+            0.04028373790873124
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.0000001788139343,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "b_m3",
+      "same_borders_member_count": 4,
+      "stage_index": 12,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.5822352459654212,
+        "predict_with_diagnostic_cpu_capture_wall": 5.593825686722994
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.014633883609021745,
+          "mean": 0.011972113782200805,
+          "min": 0.0081074657902725,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.0081074657902725,
+            0.008140197829548688,
+            0.008892774540225207,
+            0.012517422218235822,
+            0.01429413541372404,
+            0.014603187386648087,
+            0.014633883609021745
+          ]
+        },
+        "total_variation": {
+          "max": 0.06922339719917824,
+          "mean": 0.033349444960440205,
+          "min": 0.022455128607926946,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.022455128607926946,
+            0.022654896638898206,
+            0.02380611974934523,
+            0.02513656858907271,
+            0.0649377262848739,
+            0.0689851784160328,
+            0.06922339719917824
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.0000001788139343,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "d0_m3",
+      "same_borders_member_count": 4,
+      "stage_index": 13,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.5780362412333488,
+        "predict_with_diagnostic_cpu_capture_wall": 5.717743253335357
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.0015530489555785618,
+          "mean": 0.0013455582923829908,
+          "min": 0.0010455252116392658,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.0010455252116392658,
+            0.0010584726076419276,
+            0.001150108847284982,
+            0.0014011577473834508,
+            0.0015206857623604807,
+            0.0015522488846052638,
+            0.0015530489555785618
+          ]
+        },
+        "total_variation": {
+          "max": 0.037721169486209113,
+          "mean": 0.0353575458346879,
+          "min": 0.034121333273755744,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.034121333273755744,
+            0.034139251331907254,
+            0.03426526786965242,
+            0.035252502405992994,
+            0.03687635769825515,
+            0.037697801587288346,
+            0.037721169486209113
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.0000001788139343,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "sigma_m3",
+      "same_borders_member_count": 4,
+      "stage_index": 14,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.6980686001479626,
+        "predict_with_diagnostic_cpu_capture_wall": 5.790607700124383
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.004646477297176196,
+          "mean": 0.004090559555410147,
+          "min": 0.003696850026691206,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.003696850026691206,
+            0.003703699584784383,
+            0.0037513139851393464,
+            0.004127399299370859,
+            0.0044601815131700764,
+            0.004622814926811769,
+            0.004646477297176196
+          ]
+        },
+        "total_variation": {
+          "max": 0.032382217962848965,
+          "mean": 0.02920492645033983,
+          "min": 0.027380173507975857,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.027380173507975857,
+            0.027409481322005914,
+            0.02759187463234968,
+            0.029167461109193084,
+            0.030868164530755575,
+            0.03217078409556856,
+            0.032382217962848965
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.0000012516975403,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "a_a1",
+      "same_borders_member_count": 4,
+      "stage_index": 15,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.7056213673204184,
+        "predict_with_diagnostic_cpu_capture_wall": 6.090673821978271
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.0012342294298899222,
+          "mean": 0.001227479813509433,
+          "min": 0.0012244882355177283,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.0012244882355177283,
+            0.001224584490676629,
+            0.0012253187026478242,
+            0.0012272850032494346,
+            0.0012291012597366304,
+            0.0012335436965868751,
+            0.0012342294298899222
+          ]
+        },
+        "total_variation": {
+          "max": 0.028858928935358685,
+          "mean": 0.028828899980874102,
+          "min": 0.028783480206772988,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.028783480206772988,
+            0.028784564721237287,
+            0.028791096124765114,
+            0.02883612171820569,
+            0.028856408439880934,
+            0.02885886070943605,
+            0.028858928935358685
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.000000238418579,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "sigma_a1",
+      "same_borders_member_count": 4,
+      "stage_index": 16,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.6508785663172603,
+        "predict_with_diagnostic_cpu_capture_wall": 6.03666171617806
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.004785723462945837,
+          "mean": 0.004140623113427275,
+          "min": 0.0038698811628140755,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.0038698811628140755,
+            0.0038748843848014688,
+            0.003906793325670668,
+            0.004079957437997876,
+            0.004416332180199718,
+            0.004735535829534703,
+            0.004785723462945837
+          ]
+        },
+        "total_variation": {
+          "max": 0.04486281465113179,
+          "mean": 0.044258450824388784,
+          "min": 0.04391452421351983,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.04391452421351983,
+            0.043922767805327195,
+            0.04397450467462782,
+            0.044199613810517846,
+            0.04463897859404136,
+            0.0448412050489186,
+            0.04486281465113179
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.0000001788139343,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "a_a2",
+      "same_borders_member_count": 4,
+      "stage_index": 17,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.7307672649621964,
+        "predict_with_diagnostic_cpu_capture_wall": 6.167008214630187
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.0015250126732321797,
+          "mean": 0.001250100046763319,
+          "min": 0.0010931278582325162,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.0010931278582325162,
+            0.001093335482828119,
+            0.0010981018005691565,
+            0.0012075412496405768,
+            0.0014498575986578073,
+            0.001517900560797661,
+            0.0015250126732321797
+          ]
+        },
+        "total_variation": {
+          "max": 0.039334863242830295,
+          "mean": 0.03793725186310909,
+          "min": 0.03707276587061341,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.03707276587061341,
+            0.03707341309718001,
+            0.03710765382599707,
+            0.03781868839625169,
+            0.038833559109705186,
+            0.039264982342586824,
+            0.039334863242830295
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.000000238418579,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "sigma_a2",
+      "same_borders_member_count": 4,
+      "stage_index": 18,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.778320986777544,
+        "predict_with_diagnostic_cpu_capture_wall": 6.362146386876702
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.003571623105234124,
+          "mean": 0.0027387120336309625,
+          "min": 0.0025020502670682473,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.0025020502670682473,
+            0.002503332569640461,
+            0.002555785127149871,
+            0.0026563233713551636,
+            0.002952124291596361,
+            0.00348737264564683,
+            0.003571623105234124
+          ]
+        },
+        "total_variation": {
+          "max": 0.03602635436161361,
+          "mean": 0.029926462154232808,
+          "min": 0.02646964400858601,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.02646964400858601,
+            0.026629433836997996,
+            0.027793443896388777,
+            0.029010018207490364,
+            0.032653191980478016,
+            0.03556434877006323,
+            0.03602635436161361
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.0000002980232239,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "a_a3",
+      "same_borders_member_count": 4,
+      "stage_index": 19,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.7430038880556822,
+        "predict_with_diagnostic_cpu_capture_wall": 6.562327957712114
+      }
+    },
+    {
+      "fixed_member_mixture_probability_distances": {
+        "boundary_cdf_distance": {
+          "max": 0.0014446212916831992,
+          "mean": 0.001434921350847984,
+          "min": 0.0014234129717920554,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.0014234129717920554,
+            0.0014236708310955306,
+            0.0014251467361040722,
+            0.0014347786922576016,
+            0.0014445092681716358,
+            0.0014446193808656783,
+            0.0014446212916831992
+          ]
+        },
+        "total_variation": {
+          "max": 0.048078094948712916,
+          "mean": 0.047150278462110784,
+          "min": 0.04694842386979857,
+          "quantile_levels": [
+            0,
+            0.01,
+            0.1,
+            0.5,
+            0.9,
+            0.99,
+            1
+          ],
+          "quantiles": [
+            0.04694842386979857,
+            0.046949547994626945,
+            0.046970787394098525,
+            0.047080679142508394,
+            0.04729792107063566,
+            0.04797470259736953,
+            0.048078094948712916
+          ]
+        }
+      },
+      "member_calls": 8,
+      "original_cdf_decreasing_boundary_steps": 0,
+      "original_member_probability_sum_max": 1.000000238418579,
+      "original_member_probability_sum_min": 1.0,
+      "parameter": "sigma_a3",
+      "same_borders_member_count": 4,
+      "stage_index": 20,
+      "timings_seconds": {
+        "fit_synchronized_wall": 1.782736150547862,
+        "predict_with_diagnostic_cpu_capture_wall": 6.683293703012168
+      }
+    }
+  ],
+  "stages_completed": 21
+}

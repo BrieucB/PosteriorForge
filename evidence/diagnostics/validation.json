@@ -1,0 +1,17 @@
+{
+  "all_report_figures_exist": true,
+  "conditional_PIT_retry_executed": false,
+  "environment": "original inference environment, Python3.11",
+  "executed_on": "Karolina",
+  "full_cpu_tests_passed": 137,
+  "gpu_jobs_pending": false,
+  "json_files_parse": true,
+  "new_diagnostic_tests": 28,
+  "original_cpu_tests_preserved": 109,
+  "original_test_files_changed": false,
+  "protected_baseline_diff_exit_code": 0,
+  "public_ci": "Run on final pushed diagnostic commit; see GitHub Actions link in issue6.",
+  "reconstruction_fix_tested_as_posterior": false,
+  "schema": "posteriorforge.diagnostic_validation.v1",
+  "scientific_gate_rerun": false
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "posteriorforge.diagnostic.runtime_trace_archive.v1",
+  "attribution": "Built with PriorLabs-TabPFN",
+  "file": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/diagnostics-20261111/runtime-profile/runtime.trace.json.gz",
+  "uncompressed_file": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/diagnostics-20261111/runtime-profile/runtime.trace.json",
+  "uncompressed_bytes": 7402806760,
+  "uncompressed_sha256": "b5d4b21db187f67349c29c02028e8354dec62eed963b6263a77c3caf466b8429",
+  "compressed_bytes": 475953825,
+  "compressed_sha256": "2a5506a954a20b44b4410f2d515dc30c1587f8b6ba1a4462a8319645b336055a",
+  "compression_level": 5,
+  "gzip_mtime": 0,
+  "uncompressed_preserved": true,
+  "cpu_archive_seconds": 66.57063009310514
+}
