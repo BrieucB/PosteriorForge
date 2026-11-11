@@ -1,0 +1,286 @@
+{
+  "context_size": 4096,
+  "expected_count": 50000,
+  "expected_runs": 24,
+  "optimization_authorized_by_gate": false,
+  "passed": false,
+  "references": [
+    {
+      "case": 0,
+      "cdf_precision": 0.0006185336730101243,
+      "grid_manifest_sha256": "0cdfb135e5b95c1c2353979005fb16f234a9ec4ed6a12a25d512920ffcc1ec59",
+      "grid_point_count": 2695,
+      "grid_state": "verified",
+      "manifest_sha256": "364289ef904e5a2841416851d03944646d7e958c7c55d519c1914fc3f8b23f39",
+      "maximum_cdf_step": 0.004996924714221529,
+      "state": "verified"
+    },
+    {
+      "case": 1,
+      "cdf_precision": 0.0006068255845131931,
+      "grid_manifest_sha256": "9207faf163f8a058c2a16091dea55ab6aa69f04795e38f548ae88c9e6dae47dd",
+      "grid_point_count": 2949,
+      "grid_state": "verified",
+      "manifest_sha256": "6137794b17d51989b1a4341c2a5670f5e9ad48862ebc79e952c500aee5da93fa",
+      "maximum_cdf_step": 0.004996580924117366,
+      "state": "verified"
+    },
+    {
+      "case": 2,
+      "cdf_precision": 0.0007370232201646676,
+      "grid_manifest_sha256": "76c820575b6c14a7e6d29b250e5e736d4fda6bab4dab4547cae0a5334c36375a",
+      "grid_point_count": 2802,
+      "grid_state": "verified",
+      "manifest_sha256": "9eb99c31add3cd68d4219f980b0f46bdaecad62d2ead651aff30d07a04d93bc8",
+      "maximum_cdf_step": 0.004999477410982722,
+      "state": "verified"
+    },
+    {
+      "case": 3,
+      "cdf_precision": 0.0007337785793286589,
+      "grid_manifest_sha256": "ab823f7a3597dd677e70a494ed6f3e00dc81a830e26bc8888537f89989fb4ed8",
+      "grid_point_count": 2616,
+      "grid_state": "verified",
+      "manifest_sha256": "37b682f7e2c666f1759bceeb52f7f99e77efa596c304af5f9d221e714a207505",
+      "maximum_cdf_step": 0.004997215151178236,
+      "state": "verified"
+    },
+    {
+      "case": 4,
+      "cdf_precision": 0.000877946999594037,
+      "grid_manifest_sha256": "3ab9222848ee21d3e2f4559723b87dbc3eb40ae5d2d780f32b4279f6e85a266e",
+      "grid_point_count": 2825,
+      "grid_state": "verified",
+      "manifest_sha256": "b9e1e27354ff45a87ed172100dc23c3ba2e3dda4fa804131121406dc76f8c86f",
+      "maximum_cdf_step": 0.004998502021514417,
+      "state": "verified"
+    },
+    {
+      "case": 5,
+      "cdf_precision": 0.0008545148508871669,
+      "grid_manifest_sha256": "b80d3021432a5efd3e2459ecdb3c88fa485b7ee6b23fc27f474cb3d2ab44c547",
+      "grid_point_count": 2923,
+      "grid_state": "verified",
+      "manifest_sha256": "9167b1561e4ee8d22d044e6ccd6834eceb2935dad6c3c1bdbf0ace0445ff5fd5",
+      "maximum_cdf_step": 0.004999569656857494,
+      "state": "verified"
+    },
+    {
+      "case": 6,
+      "cdf_precision": 0.0007509684949215667,
+      "grid_manifest_sha256": "4ae76fbb00f1ed44897cad3d8878bb134ad72bf57c965164d4dbc252e90fa680",
+      "grid_point_count": 2382,
+      "grid_state": "verified",
+      "manifest_sha256": "9426516c372528bc20ea01a101bc04a03ce87f86214bf44de93e3a66431754ea",
+      "maximum_cdf_step": 0.004997157801150065,
+      "state": "verified"
+    },
+    {
+      "case": 7,
+      "cdf_precision": 0.0010510956779208325,
+      "grid_manifest_sha256": "521dfdcdb792935f718483f5bb386ab4211f5698ce065f640b0229e7185ba896",
+      "grid_point_count": 2415,
+      "grid_state": "verified",
+      "manifest_sha256": "83abcddf87b96f5a2619ef18f035e9913a3c2d01649137e6b1f064414bece4c3",
+      "maximum_cdf_step": 0.0049991368563025995,
+      "state": "verified"
+    }
+  ],
+  "runs": [
+    {
+      "case": 0,
+      "context_seed": 20261111,
+      "manifest_file": "context-4096/seed-20261111-case-0/manifest.json",
+      "manifest_sha256": "97fdacbae665ba348599d4e21ce56fabfc6a8cca175c3a5ef812126f68f8057d",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 1,
+      "context_seed": 20261111,
+      "manifest_file": "context-4096/seed-20261111-case-1/manifest.json",
+      "manifest_sha256": "a140e34680a684c044a80698237ff7557c7f3ff508f836918fb88b681a4dd794",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 2,
+      "context_seed": 20261111,
+      "manifest_file": "context-4096/seed-20261111-case-2/manifest.json",
+      "manifest_sha256": "e8cbd73fab7643a9b38200158d705412ff7d5bea7300963a7bfe5564b171a9f0",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 3,
+      "context_seed": 20261111,
+      "manifest_file": "context-4096/seed-20261111-case-3/manifest.json",
+      "manifest_sha256": "d112a55ef19abb56795e9a71086489839a64e38b5f1fd34b9e1fefbe6cf60031",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 4,
+      "context_seed": 20261111,
+      "manifest_file": "context-4096/seed-20261111-case-4/manifest.json",
+      "manifest_sha256": "4bb3c8314f2782dcaef7e3a836d057e94c7639a3ae69dd33bb4ebfee3a3e5d71",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 5,
+      "context_seed": 20261111,
+      "manifest_file": "context-4096/seed-20261111-case-5/manifest.json",
+      "manifest_sha256": "afd4dfaa1a081ccdaadae40a0d266559993232a04c55e59e9c4c711f4af674eb",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 6,
+      "context_seed": 20261111,
+      "manifest_file": "context-4096/seed-20261111-case-6/manifest.json",
+      "manifest_sha256": "54d08cdf54d30a21b9631e06573d57230e8c6477911d347f314f49f3761a32a9",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 7,
+      "context_seed": 20261111,
+      "manifest_file": "context-4096/seed-20261111-case-7/manifest.json",
+      "manifest_sha256": "7daedeea302e080e91b42691400619e70f84208b5c43c9073b3a83efbec01632",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 0,
+      "context_seed": 20261112,
+      "manifest_file": "context-4096/seed-20261112-case-0/manifest.json",
+      "manifest_sha256": "c6562d53c79c8612834785c1be3a9524ffd28fa23a07b694f9eee74d9cae2fe1",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 1,
+      "context_seed": 20261112,
+      "manifest_file": "context-4096/seed-20261112-case-1/manifest.json",
+      "manifest_sha256": "07655a7225a545e8fca581ea9ab3bfe23c1fbb824a315766a62e9b5234b64f06",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 2,
+      "context_seed": 20261112,
+      "manifest_file": "context-4096/seed-20261112-case-2/manifest.json",
+      "manifest_sha256": "5db277d7cdc8676e6f8c7d926742c7f0ecfde60633852f0faa8cb9b87da11cbc",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 3,
+      "context_seed": 20261112,
+      "manifest_file": "context-4096/seed-20261112-case-3/manifest.json",
+      "manifest_sha256": "0d5ef3bca3cd063d8407b107c17e9dc92ef6ee2dc54502fb6753bf62e32d0bde",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 4,
+      "context_seed": 20261112,
+      "manifest_file": "context-4096/seed-20261112-case-4/manifest.json",
+      "manifest_sha256": "b594ad2e8a6dccbe76fcb752a32c943818ba99e7c2e20b374b94a5a16ce47233",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 5,
+      "context_seed": 20261112,
+      "manifest_file": "context-4096/seed-20261112-case-5/manifest.json",
+      "manifest_sha256": "7dd8277178958fd5c3cbbaa4845730a0b308b99cf9f3563c71bfb8d981c85da2",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 6,
+      "context_seed": 20261112,
+      "manifest_file": "context-4096/seed-20261112-case-6/manifest.json",
+      "manifest_sha256": "5332821a24a74b02d69bce4035ef6ebbd733c10606b57e2fa27fc1001e3ea7b1",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 7,
+      "context_seed": 20261112,
+      "manifest_file": "context-4096/seed-20261112-case-7/manifest.json",
+      "manifest_sha256": "d824644766448eb27f83a969f66e5bb24c814a6d57e704f23c5f27b788afc880",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 0,
+      "context_seed": 20261113,
+      "manifest_file": "context-4096/seed-20261113-case-0/manifest.json",
+      "manifest_sha256": "f9f6cd9bd5d16ce9f68f57a8438f5e5cd5ec134662250e5e85b63a65b3bf218b",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 1,
+      "context_seed": 20261113,
+      "manifest_file": "context-4096/seed-20261113-case-1/manifest.json",
+      "manifest_sha256": "e70891f915330be74c8709bc31d439f331d8f6099c12ac8f942d1d7b29442953",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 2,
+      "context_seed": 20261113,
+      "manifest_file": "context-4096/seed-20261113-case-2/manifest.json",
+      "manifest_sha256": "e78ae31692b9defd26ab1d9b4ab5f1a68b82a919cbc916fd8a5b5a8bec6c040d",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 3,
+      "context_seed": 20261113,
+      "manifest_file": "context-4096/seed-20261113-case-3/manifest.json",
+      "manifest_sha256": "6fad8627bf6aeea21ffdeaf9721fe0842674695cc8554020a7f9177a1b30f1e1",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 4,
+      "context_seed": 20261113,
+      "manifest_file": "context-4096/seed-20261113-case-4/manifest.json",
+      "manifest_sha256": "50648f9bdfe5746e4d76fcea5a9b7f51b46530e46bfc8e16142545524ecd0a2f",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 5,
+      "context_seed": 20261113,
+      "manifest_file": "context-4096/seed-20261113-case-5/manifest.json",
+      "manifest_sha256": "b36eedda986d9963cc868539c95efea3b32fe29886bec8aa1d8e8ec04263050c",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 6,
+      "context_seed": 20261113,
+      "manifest_file": "context-4096/seed-20261113-case-6/manifest.json",
+      "manifest_sha256": "b85106300654c4652fa7e9bf695d4b32c088aee7d2fb9bc70afd6a79aceb15c3",
+      "passed": false,
+      "status": "running"
+    },
+    {
+      "case": 7,
+      "context_seed": 20261113,
+      "manifest_file": "context-4096/seed-20261113-case-7/manifest.json",
+      "manifest_sha256": "dee3ece9a237bbbde5b0d39f5fd750e54242e1cab0dac1475a67a27f95998c19",
+      "passed": false,
+      "status": "running"
+    }
+  ],
+  "schema": "posteriorforge.scientific_gate.v1",
+  "scope": "eight_case_diagnostic_screen_not_global_calibration_or_SBC",
+  "status": "incomplete"
+}

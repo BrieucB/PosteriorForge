@@ -42,6 +42,13 @@ def verify_refined_grid(arrays, manifest, parent_arrays, parent_manifest, parent
         raise ValueError("refined reference parent binding mismatch")
     if any(not np.array_equal(arrays[name], parent_arrays[name]) for name in ("directions", "mean", "sd")):
         raise ValueError("grid refinement changed directions or physical moments")
+    base_positions = np.searchsorted(arrays["queries"], parent_arrays["queries"])
+    if not np.array_equal(arrays["cdfs"][:, base_positions], parent_arrays["cdfs"]):
+        raise ValueError("grid refinement changed retained base CDF values")
+    if manifest["qualification"].get("moment_precision") != parent_manifest["qualification"]["moment_precision"]:
+        raise ValueError("grid refinement changed nested moment qualification")
+    if manifest["cdf_precision"] < parent_manifest["cdf_precision"]:
+        raise ValueError("grid refinement understated retained reference precision")
     if manifest.get("moment_precision") != parent_manifest["moment_precision"]:
         raise ValueError("grid refinement changed moment qualification")
     contract = manifest["grid_contract"]
@@ -73,7 +80,8 @@ def verify_refined_grid(arrays, manifest, parent_arrays, parent_manifest, parent
     if manifest.get("state") == "verified":
         if (manifest["qualification"].get("grid_gate_passed") is not True
                 or np.diff(arrays["cdfs"], axis=1).max() > .005
-                or manifest["cdf_precision"] > .005):
+                or manifest["cdf_precision"] > .005
+                or max(arrays["cdfs"][:, 0].max(), (1-arrays["cdfs"][:, -1]).max()) > .005):
             raise ValueError("refined grid incorrectly claims qualification")
 
 
@@ -114,6 +122,10 @@ def evaluate_gate(*, banks, references, runs, output, reference_grids=None):
             if not grid_path.exists():
                 result["references"][-1]["grid_state"] = "missing"
                 continue
+            raw_grid_manifest = json.loads(grid_path.read_text())
+            if raw_grid_manifest.get("state") != "verified":
+                result["references"][-1]["grid_state"] = raw_grid_manifest.get("state", "inconclusive")
+                continue
             grid_arrays, grid_manifest = load_reference_distribution(grid_root)
             verify_refined_grid(grid_arrays, grid_manifest, arrays, manifest, sha256_file(path))
             result["references"][-1].update(grid_state=grid_manifest["state"],
@@ -139,7 +151,9 @@ def evaluate_gate(*, banks, references, runs, output, reference_grids=None):
             if pair:
                 path, manifest = pair
                 entry.update(manifest_sha256=sha256_file(path), manifest_file=str(path.relative_to(runs)))
-                if manifest["status"] != "complete":
+                if manifest["status"] in ("running", "pending"):
+                    entry["status"] = manifest["status"]
+                elif manifest["status"] != "complete":
                     entry["status"] = "execution_failure"
                 elif case not in refs:
                     entry["status"] = "reference_inconclusive"
@@ -164,7 +178,7 @@ def evaluate_gate(*, banks, references, runs, output, reference_grids=None):
     statuses = [entry["status"] for entry in result["runs"]]
     if all(entry["passed"] for entry in result["runs"]):
         result.update(status="pass", passed=True, optimization_authorized_by_gate=True)
-    elif "missing" in statuses:
+    elif any(status in ("missing", "running", "pending") for status in statuses):
         result["status"] = "incomplete"
     elif any(status in ("model_failure", "invalid_samples") for status in statuses):
         result["status"] = "model_failure"

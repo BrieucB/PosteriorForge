@@ -152,3 +152,22 @@ def test_missing_reference_and_run_matrix_is_incomplete_and_never_authorizes_eng
 def test_gate_import_does_not_import_torch_or_initialize_model():
     subprocess.run([sys.executable, "-c", "import sys; import posteriorforge.gate; assert 'torch' not in sys.modules"],
                    check=True, capture_output=True, text=True)
+
+
+def test_running_manifests_are_incomplete_not_execution_failures(tmp_path):
+    import json
+    from posteriorforge.gate import evaluate_gate
+    runs=tmp_path/'runs'
+    for seed in (20261111,20261112,20261113):
+        for case in range(8):
+            folder=runs/f'{seed}-{case}'
+            folder.mkdir(parents=True)
+            (folder/'manifest.json').write_text(json.dumps({
+                'schema':'posteriorforge.inference.v1','context_size':4096,
+                'requested_count':50000,'variant':'upstream_unmodified',
+                'context_seed':seed,'case':case,'status':'running'}))
+    result=evaluate_gate(banks=tmp_path/'banks', references=tmp_path/'refs',
+                         runs=runs,output=tmp_path/'gate.json')
+    assert result['status']=='incomplete'
+    assert not result['passed']
+    assert {entry['status'] for entry in result['runs']}=={'running'}

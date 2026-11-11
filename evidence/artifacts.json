@@ -1,0 +1,11 @@
+{
+  "schema": "posteriorforge.external_artifacts.v1",
+  "artifacts": [
+    {
+      "name": "posteriorforge-reference-v1.tar.gz",
+      "url": "https://github.com/BrieucB/PosteriorForge/releases/download/reference-v1/posteriorforge-reference-v1.tar.gz",
+      "sha256": "15004d6376c835b86391b6a73151107156272938d940b22315f0449102b8310c",
+      "contents": "analytical banks and immutable retained references; no weights"
+    }
+  ]
+}
