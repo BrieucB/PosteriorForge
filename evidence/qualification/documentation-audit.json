@@ -1,63 +1,122 @@
 {
   "project": "PosteriorForge",
-  "source_commit": "4eb787dfb170dd6d47eaebe620fbab09413cd834",
-  "scope": "Public current-head claims/provenance and distribution/container exclusion; no model accuracy verdict, GPU execution or container build.",
-  "tracked_file_count": 106,
+  "source_commit": "f032ec723be8af47f97d53d49c0d4b0874385b39",
+  "status": "passed",
+  "unresolved_blocking_findings": [],
+  "tracked_file_count": 142,
   "credential_pattern_matches": [],
-  "model_or_environment_bundles": [],
-  "report_checksum_verification": [
+  "model_bundles": [],
+  "verified_image_links": [
     {
-      "directory": "evidence/references",
+      "document": "README.md",
+      "target": "evidence/feasibility/marginal-cdf-discrepancy-heatmap.png",
+      "sha256": "b6ce5c7d8f3f2a2b60d954b5828a72beaec20a5ed6fa970c731445aff77545ff"
+    },
+    {
+      "document": "docs/case-study.md",
+      "target": "../evidence/feasibility/posterior-agreement.png",
+      "sha256": "189937258410485f2b56f668cafb90f368c7f9791c765bc5d18c26f66d75928f"
+    },
+    {
+      "document": "docs/case-study.md",
+      "target": "../evidence/feasibility/case0-worst4-marginal-densities.png",
+      "sha256": "2d8f99b8d0cd4ceb751a73decb5fff6f1c3f1b48ca8b8d08367bf006cd3a50b5"
+    },
+    {
+      "document": "docs/case-study.md",
+      "target": "../evidence/feasibility/marginal-cdf-discrepancy-heatmap.png",
+      "sha256": "b6ce5c7d8f3f2a2b60d954b5828a72beaec20a5ed6fa970c731445aff77545ff"
+    },
+    {
+      "document": "docs/case-study.md",
+      "target": "../evidence/feasibility/case0-three-seed-cdf-overlays.png",
+      "sha256": "11c06407bfe4cf3f63cbc18516ce0f1c208113a88fe022c64df4f9e3f39b1a4a"
+    },
+    {
+      "document": "docs/case-study.md",
+      "target": "../evidence/feasibility/upstream-latency.png",
+      "sha256": "02f338ccc0d5c175aea382f6307f0ad491926ee0e6af46598c310598bc2ff8f4"
+    },
+    {
+      "document": "docs/case-study.md",
+      "target": "../evidence/feasibility/upstream-memory.png",
+      "sha256": "e6b150c202b7cbb8af8683dbe8ece72e735314039c6583041109604132872829"
+    },
+    {
+      "document": "docs/case-study.md",
+      "target": "../evidence/feasibility/compute-budget.png",
+      "sha256": "1950a305168a4eb16b9a9f0d07b278ff9347124c8f2342424eb306ece8cf028d"
+    },
+    {
+      "document": "evidence/feasibility/report.md",
+      "target": "reference-qualification.png",
+      "sha256": "919f56bce8e958e7e22b1dec5295427b937d47e27e34ac446513cf4c50ecbe91"
+    },
+    {
+      "document": "evidence/feasibility/report.md",
+      "target": "posterior-agreement.png",
+      "sha256": "189937258410485f2b56f668cafb90f368c7f9791c765bc5d18c26f66d75928f"
+    },
+    {
+      "document": "evidence/feasibility/report.md",
+      "target": "upstream-latency.png",
+      "sha256": "02f338ccc0d5c175aea382f6307f0ad491926ee0e6af46598c310598bc2ff8f4"
+    },
+    {
+      "document": "evidence/feasibility/report.md",
+      "target": "upstream-memory.png",
+      "sha256": "e6b150c202b7cbb8af8683dbe8ece72e735314039c6583041109604132872829"
+    },
+    {
+      "document": "evidence/feasibility/report.md",
+      "target": "compute-budget.png",
+      "sha256": "1950a305168a4eb16b9a9f0d07b278ff9347124c8f2342424eb306ece8cf028d"
+    },
+    {
+      "document": "evidence/reference-grids/report.md",
+      "target": "reference-qualification.png",
+      "sha256": "919f56bce8e958e7e22b1dec5295427b937d47e27e34ac446513cf4c50ecbe91"
+    },
+    {
+      "document": "evidence/reference-grids/report.md",
+      "target": "compute-budget.png",
+      "sha256": "83141fa619a4631ded7c6a3b57efb66242aaa11ae1cd56421e05c8caef57b5ec"
+    },
+    {
+      "document": "evidence/references/report.md",
+      "target": "reference-qualification.png",
+      "sha256": "f243455759f14b0992d1e17f408fe5b4f0cc6a1b47a2fdfa9e3281aae528e76e"
+    },
+    {
+      "document": "evidence/references/report.md",
+      "target": "compute-budget.png",
+      "sha256": "713403d98d22a4b58ac145fe49f17204426ebe1c0e875925fedbae2a1dfae5b8"
+    }
+  ],
+  "checksum_manifests": [
+    {
+      "manifest": "evidence/feasibility/checksums.json",
+      "verified_files": 12
+    },
+    {
+      "manifest": "evidence/reference-grids/checksums.json",
       "verified_files": 9
     },
     {
-      "directory": "evidence/reference-grids",
+      "manifest": "evidence/references/checksums.json",
       "verified_files": 9
     }
   ],
-  "reference_claims": {
-    "original_qualified_cases": 8,
-    "original_max_precision": 0.0010483981870132997,
-    "refined_qualified_cases": 8,
-    "refined_max_precision": 0.0010510956779208325,
-    "refined_max_step": 0.004999569656857494
+  "full_feasibility_inventory_verified_files": 28,
+  "cross_run_sidecar_gate_script_parent_and_grid_hashes": "passed",
+  "claims": {
+    "model_failure_all24": "supported_by_final_gate",
+    "complete_prior_supported_rows1200000": "supported_by_all24_integrity_assessments",
+    "reference_uncertainty_does_not_explain_CDF_failure": "supported_by_saved_lower_bounds",
+    "optimization_profiling_scaling": "explicitly_deferred_and_unrun",
+    "container": "explicitly_unbuilt",
+    "eight_case_scope": "diagnostic_not_global_SBC"
   },
-  "public_index_matches_release_server_digests": true,
-  "current_commit_ci": [
-    {
-      "conclusion": "success",
-      "databaseId": 43034682305,
-      "headSha": "4eb787dfb170dd6d47eaebe620fbab09413cd834",
-      "name": "CPU validation",
-      "status": "completed",
-      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43034682305"
-    }
-  ],
-  "resolved_prior_findings": [
-    "Prominent README and generated report PriorLabs attribution now present",
-    "Docker ignore rules now exclude Git metadata, outputs, caches, environments and checkpoints"
-  ],
-  "unresolved_blocking_current_claims_or_provenance": [],
-  "terminal_publication_followups": [
-    {
-      "path": "README.md",
-      "finding": "Current test count56 is historical; this exact public wheel passes108; update alongside new qualification evidence."
-    },
-    {
-      "path": "evidence/qualification/public-install-current.json",
-      "finding": "Current artifact remains commit4d29937/56tests; replace with public-install-v3/qualification.json for final current-code claim."
-    },
-    {
-      "path": "evidence/artifacts.json and docs/artifacts.md",
-      "finding": "Original referencebundle URL and digest match live public release. Refined gridbundle and SHA256SUMS exist on same release but need explicit index URL/digest and download instructions before terminal reproduction claims.",
-      "refined_asset": {
-        "name": "posteriorforge-reference-grids-v1.tar.gz",
-        "url": "https://github.com/BrieucB/PosteriorForge/releases/download/reference-v1/posteriorforge-reference-grids-v1.tar.gz",
-        "digest": "sha256:cba1f5db0b1c94936587f83940ec3cb704af270f4ac46b4437662bb6fe3ee920"
-      }
-    }
-  ],
-  "container_built": false,
-  "scientific_gate_inprogress": true,
-  "accuracy_verdict": null
+  "gpu_used": false,
+  "private_scientific_inputs_used": false
 }

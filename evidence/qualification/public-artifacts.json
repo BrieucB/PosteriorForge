@@ -1,0 +1,165 @@
+{
+  "project": "PosteriorForge",
+  "source_commit": "f032ec723be8af47f97d53d49c0d4b0874385b39",
+  "public_metadata_url": "https://api.github.com/repos/BrieucB/PosteriorForge/releases",
+  "metadata_sha256": "58fd8d67a1d577a413726ae30e2d45327e9f8d7f69d781350924484016cf0f3d",
+  "authentication": "none",
+  "archive_records": [
+    {
+      "artifact": {
+        "name": "posteriorforge-reference-v1.tar.gz",
+        "url": "https://github.com/BrieucB/PosteriorForge/releases/download/reference-v1/posteriorforge-reference-v1.tar.gz",
+        "sha256": "15004d6376c835b86391b6a73151107156272938d940b22315f0449102b8310c",
+        "contents": "analytical banks and immutable retained references; no weights"
+      },
+      "release_tag": "reference-v1",
+      "server_asset_id": 735697958,
+      "server_digest": "sha256:15004d6376c835b86391b6a73151107156272938d940b22315f0449102b8310c",
+      "server_size_bytes": 1002004629,
+      "download": {
+        "name": "posteriorforge-reference-v1.tar.gz",
+        "url": "https://github.com/BrieucB/PosteriorForge/releases/download/reference-v1/posteriorforge-reference-v1.tar.gz",
+        "downloaded_sha256": "15004d6376c835b86391b6a73151107156272938d940b22315f0449102b8310c",
+        "size_bytes": 1002004629,
+        "elapsed_seconds": 176.2225126242265,
+        "https_final_host": "release-assets.githubusercontent.com",
+        "authentication": "none; no Authorization header or credential helper"
+      }
+    },
+    {
+      "artifact": {
+        "name": "posteriorforge-reference-grids-v1.tar.gz",
+        "url": "https://github.com/BrieucB/PosteriorForge/releases/download/reference-v1/posteriorforge-reference-grids-v1.tar.gz",
+        "sha256": "cba1f5db0b1c94936587f83940ec3cb704af270f4ac46b4437662bb6fe3ee920",
+        "contents": "deterministic refined CDF query tables with immutable parent bindings; no new nodes or weights"
+      },
+      "release_tag": "reference-v1",
+      "server_asset_id": 735730700,
+      "server_digest": "sha256:cba1f5db0b1c94936587f83940ec3cb704af270f4ac46b4437662bb6fe3ee920",
+      "server_size_bytes": 6665430,
+      "download": {
+        "name": "posteriorforge-reference-grids-v1.tar.gz",
+        "url": "https://github.com/BrieucB/PosteriorForge/releases/download/reference-v1/posteriorforge-reference-grids-v1.tar.gz",
+        "downloaded_sha256": "cba1f5db0b1c94936587f83940ec3cb704af270f4ac46b4437662bb6fe3ee920",
+        "size_bytes": 6665430,
+        "elapsed_seconds": 0.6597678707912564,
+        "https_final_host": "release-assets.githubusercontent.com",
+        "authentication": "none; no Authorization header or credential helper"
+      }
+    },
+    {
+      "artifact": {
+        "name": "posteriorforge-feasibility-v1.tar.gz",
+        "url": "https://github.com/BrieucB/PosteriorForge/releases/download/v0.1.0-feasibility/posteriorforge-feasibility-v1.tar.gz",
+        "sha256": "cab119612bdcaf65f4964f99ea8bba80830da043f1b3912a15dd330bfcec3675",
+        "size_bytes": 110763286,
+        "server_digest_verified": true,
+        "contents": "all24 completed50000-vector runs, final gate, allocation records, independent audit, scientific figures; no weights"
+      },
+      "release_tag": "v0.1.0-feasibility",
+      "server_asset_id": 735852859,
+      "server_digest": "sha256:cab119612bdcaf65f4964f99ea8bba80830da043f1b3912a15dd330bfcec3675",
+      "server_size_bytes": 110763286,
+      "download": {
+        "name": "posteriorforge-feasibility-v1.tar.gz",
+        "url": "https://github.com/BrieucB/PosteriorForge/releases/download/v0.1.0-feasibility/posteriorforge-feasibility-v1.tar.gz",
+        "downloaded_sha256": "cab119612bdcaf65f4964f99ea8bba80830da043f1b3912a15dd330bfcec3675",
+        "size_bytes": 110763286,
+        "elapsed_seconds": 20.6053521996364,
+        "https_final_host": "release-assets.githubusercontent.com",
+        "authentication": "none; no Authorization header or credential helper"
+      }
+    }
+  ],
+  "checksum_records": [
+    {
+      "name": "SHA256SUMS.feasibility",
+      "url": "https://github.com/BrieucB/PosteriorForge/releases/download/v0.1.0-feasibility/SHA256SUMS.feasibility",
+      "downloaded_sha256": "70c109c142099835d0d0cb455df11040369b6e59106e522366c6f1a798726782",
+      "size_bytes": 103,
+      "elapsed_seconds": 0.44132670760154724,
+      "https_final_host": "release-assets.githubusercontent.com",
+      "authentication": "none; no Authorization header or credential helper",
+      "verified_archive_lines": [
+        {
+          "file": "posteriorforge-feasibility-v1.tar.gz",
+          "verified_sha256": "cab119612bdcaf65f4964f99ea8bba80830da043f1b3912a15dd330bfcec3675"
+        }
+      ]
+    },
+    {
+      "name": "SHA256SUMS.reference-grids",
+      "url": "https://github.com/BrieucB/PosteriorForge/releases/download/reference-v1/SHA256SUMS.reference-grids",
+      "downloaded_sha256": "2ada10af7dd28688bcf624d2adfbf441cf27793351ba9f4cafdaab1ab3745d28",
+      "size_bytes": 107,
+      "elapsed_seconds": 0.38813867792487144,
+      "https_final_host": "release-assets.githubusercontent.com",
+      "authentication": "none; no Authorization header or credential helper",
+      "verified_archive_lines": [
+        {
+          "file": "posteriorforge-reference-grids-v1.tar.gz",
+          "verified_sha256": "cba1f5db0b1c94936587f83940ec3cb704af270f4ac46b4437662bb6fe3ee920"
+        }
+      ]
+    },
+    {
+      "name": "SHA256SUMS.references",
+      "url": "https://github.com/BrieucB/PosteriorForge/releases/download/reference-v1/SHA256SUMS.references",
+      "downloaded_sha256": "4aff002fb17dcdd67fba6ca5e35e6c8bed21380e8618eaeb3452c7fca625d548",
+      "size_bytes": 101,
+      "elapsed_seconds": 0.40570520143955946,
+      "https_final_host": "release-assets.githubusercontent.com",
+      "authentication": "none; no Authorization header or credential helper",
+      "verified_archive_lines": [
+        {
+          "file": "posteriorforge-reference-v1.tar.gz",
+          "verified_sha256": "15004d6376c835b86391b6a73151107156272938d940b22315f0449102b8310c"
+        }
+      ]
+    }
+  ],
+  "extraction": [
+    {
+      "archive": "posteriorforge-reference-v1.tar.gz",
+      "member_count": 283,
+      "regular_file_count": 201,
+      "uncompressed_bytes": 1065883314,
+      "relative_top_level_members": [
+        "banks-v1",
+        "references-v1"
+      ],
+      "path_traversal_links_devices_check": "passed"
+    },
+    {
+      "archive": "posteriorforge-reference-grids-v1.tar.gz",
+      "member_count": 25,
+      "regular_file_count": 16,
+      "uncompressed_bytes": 10164281,
+      "relative_top_level_members": [
+        "reference-grids-v1"
+      ],
+      "path_traversal_links_devices_check": "passed"
+    },
+    {
+      "archive": "posteriorforge-feasibility-v1.tar.gz",
+      "member_count": 109,
+      "regular_file_count": 77,
+      "uncompressed_bytes": 205577449,
+      "relative_top_level_members": [
+        "case0-final-diagnostics",
+        "case0-joint-diagnostic",
+        "cross-run-diagnostics-final",
+        "execution-final",
+        "feasibility-final-report",
+        "feasibility-posterior-figures-v2",
+        "gate-final.json",
+        "upstream-v1"
+      ],
+      "path_traversal_links_devices_check": "passed"
+    }
+  ],
+  "status": "downloaded_verified_and_safely_extracted",
+  "model_downloaded": false,
+  "private_inputs_used": false,
+  "gpu_used": false
+}

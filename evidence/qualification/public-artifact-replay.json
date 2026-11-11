@@ -1,0 +1,215 @@
+{
+  "project": "PosteriorForge",
+  "kind": "installed_wheel_public_saved_artifact_gate_replay",
+  "exit_code": 0,
+  "elapsed_seconds": 21.91546491254121,
+  "versions": {
+    "posteriorforge": "0.1.0",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "private_scientific_inputs_used": false,
+  "new_model_or_reference_evaluation": false,
+  "gpu_used": false,
+  "command": [
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/work/public-reproduction/venv/bin/posteriorforge",
+    "gate",
+    "--banks",
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/work/public-repro-v4/extracted/banks-v1",
+    "--references",
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/work/public-repro-v4/extracted/references-v1",
+    "--reference-grids",
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/work/public-repro-v4/extracted/reference-grids-v1",
+    "--runs",
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/work/public-repro-v4/extracted/upstream-v1",
+    "--output",
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/public-install-v4/replayed-gate.json"
+  ],
+  "log": "gate-replay.log",
+  "status": "passed",
+  "original_downloaded_gate_sha256": "42163c5d77f0f1f8f7e1bb3a78c81fba43ca36a0682446a0dc533544995e490d",
+  "replayed_gate_sha256": "42163c5d77f0f1f8f7e1bb3a78c81fba43ca36a0682446a0dc533544995e490d",
+  "entire_gate_objects_identical": true,
+  "gate_files_byte_identical": true,
+  "numeric_values_compared": 11483,
+  "numeric_values_exactly_equal": 11483,
+  "numeric_differences": [],
+  "structural_differences": [],
+  "run_verdicts": [
+    {
+      "context_seed": 20261111,
+      "case": 0,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261111,
+      "case": 1,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261111,
+      "case": 2,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261111,
+      "case": 3,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261111,
+      "case": 4,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261111,
+      "case": 5,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261111,
+      "case": 6,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261111,
+      "case": 7,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261112,
+      "case": 0,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261112,
+      "case": 1,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261112,
+      "case": 2,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261112,
+      "case": 3,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261112,
+      "case": 4,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261112,
+      "case": 5,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261112,
+      "case": 6,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261112,
+      "case": 7,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261113,
+      "case": 0,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261113,
+      "case": 1,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261113,
+      "case": 2,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261113,
+      "case": 3,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261113,
+      "case": 4,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261113,
+      "case": 5,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261113,
+      "case": 6,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    },
+    {
+      "context_seed": 20261113,
+      "case": 7,
+      "original": "model_failure",
+      "replayed": "model_failure",
+      "all_assessment_values_identical": true
+    }
+  ],
+  "gate_status": "model_failure",
+  "accepted_vectors": 1200000,
+  "references_qualified": 8,
+  "reference_parent_and_refined_grid_manifest_hashes_authenticated_by_gate": true,
+  "authentication": "public HTTPS assets only; no Authorization headers; committed index + GitHub server digests + downloaded checksum files verified",
+  "public_archive_evidence": "public-artifacts.json",
+  "no_dependency_pins_or_root_source_changed": true
+}

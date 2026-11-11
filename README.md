@@ -25,6 +25,11 @@ CPU/CUDA profiling and multi-GPU scaling **deferred and unrun**. No checkpoint,
 prior, preprocessing or scenario was changed to rescue the result. Eight cases
 are a diagnostic screen, not global calibration or SBC certification.
 
+Fresh public-only installation passes **109 CPU tests**. Replaying the downloaded
+public artifacts reproduces the complete gate JSON byte-for-byte, including all
+24 verdicts and 11,483 numeric values. See the
+[public reproduction proof](evidence/qualification/public-artifact-replay.json).
+
 The [case study](docs/case-study.md), [complete evidence](evidence/feasibility/report.md),
 [machine-readable gate](evidence/feasibility/gate.json) and
 [public artifact index](evidence/artifacts.json) contain the result and its

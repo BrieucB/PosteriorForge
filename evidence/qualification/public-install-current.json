@@ -1,13 +1,12 @@
 {
-  "accelerator_or_model_downloaded": false,
   "artifacts": {
     "posteriorforge-0.1.0-py3-none-any.whl": {
-      "sha256": "4f728bf966e928ecb5267419325234fde764cc9e15fd77c72937bf1c02bbfb28",
-      "size_bytes": 116820
+      "sha256": "b38af339ad04d071866fe3d2ac736d539d34d7ee54ab3cd6668692f153a929c4",
+      "size_bytes": 116937
     },
     "posteriorforge-0.1.0.tar.gz": {
-      "sha256": "b917aed2d90552e5ed4ddcadbe1deb0deacc7bea24ee2eeaed593d878cb08ba5",
-      "size_bytes": 113560
+      "sha256": "d0aed2fe400ce84fb50ccd20419ddcc4a80ce6e9a035b40ac9300202f35d86bc",
+      "size_bytes": 114016
     }
   },
   "cli_help_checks": [
@@ -61,94 +60,55 @@
     }
   ],
   "container_built": false,
-  "doctor_exit_code": 0,
-  "github_actions": [
+  "current_commit_ci": [
     {
       "conclusion": "success",
-      "databaseId": 43034682305,
-      "headSha": "4eb787dfb170dd6d47eaebe620fbab09413cd834",
+      "databaseId": 43041609044,
+      "headSha": "f032ec723be8af47f97d53d49c0d4b0874385b39",
       "name": "CPU validation",
       "status": "completed",
-      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43034682305"
-    },
-    {
-      "conclusion": "success",
-      "databaseId": 43033629236,
-      "headSha": "f102e008d6d25c89a9006f0ded872d67b36ac3e0",
-      "name": "CPU validation",
-      "status": "completed",
-      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43033629236"
-    },
-    {
-      "conclusion": "success",
-      "databaseId": 43033058280,
-      "headSha": "c5210b9c26f44f8f02139424b7e6439cd3128cc4",
-      "name": "CPU validation",
-      "status": "completed",
-      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43033058280"
-    },
-    {
-      "conclusion": "success",
-      "databaseId": 43032632043,
-      "headSha": "65bb80a246ec8d4aae2d8c04a2ab0c136416bf57",
-      "name": "CPU validation",
-      "status": "completed",
-      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43032632043"
-    },
-    {
-      "conclusion": "success",
-      "databaseId": 43031790481,
-      "headSha": "c5210b9c26f44f8f02139424b7e6439cd3128cc4",
-      "name": "CPU validation",
-      "status": "completed",
-      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43031790481"
-    },
-    {
-      "conclusion": "success",
-      "databaseId": 43030378413,
-      "headSha": "4d29937308ef942d1af1f725121d9402f6214d91",
-      "name": "CPU validation",
-      "status": "completed",
-      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43030378413"
-    },
-    {
-      "conclusion": "success",
-      "databaseId": 43029480692,
-      "headSha": "338e2abeb0b936bb4926f1884a1fc8720c1755ca",
-      "name": "CPU validation",
-      "status": "completed",
-      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43029480692"
-    },
-    {
-      "conclusion": "success",
-      "databaseId": 43028629683,
-      "headSha": "0b1b0b1e84d12e2fa2d304b038532c7c7022fa1d",
-      "name": "CPU validation",
-      "status": "completed",
-      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43028629683"
+      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43041609044"
     }
   ],
-  "gpu_qualified": false,
-  "kind": "public_only_wheel_requalification",
+  "dependency_pins_changed": false,
+  "doctor_exit_code": 0,
+  "documentation_audit": {
+    "evidence": "documentation-audit.json",
+    "status": "passed"
+  },
+  "github_actions_snapshot": "github-actions.json",
+  "gpu_used": false,
+  "kind": "final_public_only_package_and_saved_artifact_reproduction",
+  "model_downloaded": false,
+  "new_inference_or_reference_computation": false,
   "notices_in_wheel": [
     "posteriorforge/science/LICENSE",
     "posteriorforge/upstream/LICENSE.TabPFN-model.txt",
     "posteriorforge/upstream/LICENSE.npe-pfn"
   ],
   "package_loaded_from": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/work/public-reproduction/venv/lib/python3.11/site-packages/posteriorforge/__init__.py",
-  "private_dependencies": false,
+  "private_scientific_inputs_used": false,
   "project": "PosteriorForge",
+  "public_artifact_replay": {
+    "all24_verdicts_identical": true,
+    "entire_gate_objects_identical": true,
+    "evidence": "public-artifact-replay.json",
+    "gate_files_byte_identical": true,
+    "numeric_values_exactly_equal": 11483,
+    "status": "passed"
+  },
+  "public_release_archives_verified": 3,
   "python": "3.11.13",
-  "reuse": "Public-only reproduction environment; exact source fetched from public origin, wheel rebuilt and reinstalled.",
-  "source_commit": "4eb787dfb170dd6d47eaebe620fbab09413cd834",
+  "root_source_changed": false,
+  "source_commit": "f032ec723be8af47f97d53d49c0d4b0874385b39",
   "source_url": "https://github.com/BrieucB/PosteriorForge.git",
   "status": "passed",
   "test_summary": {
     "errors": "0",
     "failures": "0",
     "skipped": "0",
-    "tests": "108",
-    "time": "10.235"
+    "tests": "109",
+    "time": "10.519"
   },
   "versions": {
     "Pygments": "2.21.0",
@@ -175,5 +135,5 @@
     "wheel": "0.45.1"
   },
   "wheel_and_sdist_built": true,
-  "wheel_import_outside_checkout": true
+  "wheel_installed_and_tested_outside_checkout": true
 }

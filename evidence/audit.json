@@ -85,5 +85,8 @@
   "scientific_screen": "terminal_model_failure_24_of_24",
   "optimization_and_scaling": "deferred_unrun_by_accepted_gate",
   "container_execution": "unrun_recipe_only",
-  "final_scientific_audit": "feasibility/final-scientific-audit.json"
+  "final_scientific_audit": "feasibility/final-scientific-audit.json",
+  "final_public_install": "qualification/public-install-current.json",
+  "public_artifact_replay": "qualification/public-artifact-replay.json",
+  "publication_audit_state": "passed"
 }
