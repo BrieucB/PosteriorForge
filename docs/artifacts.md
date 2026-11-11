@@ -89,6 +89,17 @@ They are an optional access route for the project owner. Scientific source,
 locks, configurations and public release assets support reproduction without
 private repositories or private scratch access.
 
+The [feasibility release](https://github.com/BrieucB/PosteriorForge/releases/tag/v0.1.0-feasibility)
+contains all completed posterior runs and the final gate, allocation evidence
+and diagnostics. Retrieve it alongside the reference archives:
+
+```bash
+gh release download v0.1.0-feasibility --repo BrieucB/PosteriorForge \
+  --pattern posteriorforge-feasibility-v1.tar.gz --pattern SHA256SUMS.feasibility
+sha256sum -c SHA256SUMS.feasibility
+tar -xzf posteriorforge-feasibility-v1.tar.gz
+```
+
 ## Plot posterior agreement
 
 After the complete gate, use its authenticated run paths and the selected
