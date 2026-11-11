@@ -71,9 +71,12 @@ exact asset URL and digest. No private project access is needed to download it.
 
 ```bash
 gh release download reference-v1 --repo BrieucB/PosteriorForge \
-  --pattern posteriorforge-reference-v1.tar.gz --pattern SHA256SUMS.references
+  --pattern posteriorforge-reference-v1.tar.gz --pattern SHA256SUMS.references \
+  --pattern posteriorforge-reference-grids-v1.tar.gz --pattern SHA256SUMS.reference-grids
 sha256sum -c SHA256SUMS.references
+sha256sum -c SHA256SUMS.reference-grids
 tar -xzf posteriorforge-reference-v1.tar.gz
+tar -xzf posteriorforge-reference-grids-v1.tar.gz
 ```
 
 The reference release preserves the original 513-point tables. Deterministic

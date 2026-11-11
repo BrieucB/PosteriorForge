@@ -6,6 +6,12 @@
       "url": "https://github.com/BrieucB/PosteriorForge/releases/download/reference-v1/posteriorforge-reference-v1.tar.gz",
       "sha256": "15004d6376c835b86391b6a73151107156272938d940b22315f0449102b8310c",
       "contents": "analytical banks and immutable retained references; no weights"
+    },
+    {
+      "name": "posteriorforge-reference-grids-v1.tar.gz",
+      "url": "https://github.com/BrieucB/PosteriorForge/releases/download/reference-v1/posteriorforge-reference-grids-v1.tar.gz",
+      "sha256": "cba1f5db0b1c94936587f83940ec3cb704af270f4ac46b4437662bb6fe3ee920",
+      "contents": "deterministic refined CDF query tables with immutable parent bindings; no new nodes or weights"
     }
   ]
 }

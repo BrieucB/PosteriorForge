@@ -1,0 +1,63 @@
+{
+  "project": "PosteriorForge",
+  "source_commit": "4eb787dfb170dd6d47eaebe620fbab09413cd834",
+  "scope": "Public current-head claims/provenance and distribution/container exclusion; no model accuracy verdict, GPU execution or container build.",
+  "tracked_file_count": 106,
+  "credential_pattern_matches": [],
+  "model_or_environment_bundles": [],
+  "report_checksum_verification": [
+    {
+      "directory": "evidence/references",
+      "verified_files": 9
+    },
+    {
+      "directory": "evidence/reference-grids",
+      "verified_files": 9
+    }
+  ],
+  "reference_claims": {
+    "original_qualified_cases": 8,
+    "original_max_precision": 0.0010483981870132997,
+    "refined_qualified_cases": 8,
+    "refined_max_precision": 0.0010510956779208325,
+    "refined_max_step": 0.004999569656857494
+  },
+  "public_index_matches_release_server_digests": true,
+  "current_commit_ci": [
+    {
+      "conclusion": "success",
+      "databaseId": 43034682305,
+      "headSha": "4eb787dfb170dd6d47eaebe620fbab09413cd834",
+      "name": "CPU validation",
+      "status": "completed",
+      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43034682305"
+    }
+  ],
+  "resolved_prior_findings": [
+    "Prominent README and generated report PriorLabs attribution now present",
+    "Docker ignore rules now exclude Git metadata, outputs, caches, environments and checkpoints"
+  ],
+  "unresolved_blocking_current_claims_or_provenance": [],
+  "terminal_publication_followups": [
+    {
+      "path": "README.md",
+      "finding": "Current test count56 is historical; this exact public wheel passes108; update alongside new qualification evidence."
+    },
+    {
+      "path": "evidence/qualification/public-install-current.json",
+      "finding": "Current artifact remains commit4d29937/56tests; replace with public-install-v3/qualification.json for final current-code claim."
+    },
+    {
+      "path": "evidence/artifacts.json and docs/artifacts.md",
+      "finding": "Original referencebundle URL and digest match live public release. Refined gridbundle and SHA256SUMS exist on same release but need explicit index URL/digest and download instructions before terminal reproduction claims.",
+      "refined_asset": {
+        "name": "posteriorforge-reference-grids-v1.tar.gz",
+        "url": "https://github.com/BrieucB/PosteriorForge/releases/download/reference-v1/posteriorforge-reference-grids-v1.tar.gz",
+        "digest": "sha256:cba1f5db0b1c94936587f83940ec3cb704af270f4ac46b4437662bb6fe3ee920"
+      }
+    }
+  ],
+  "container_built": false,
+  "scientific_gate_inprogress": true,
+  "accuracy_verdict": null
+}

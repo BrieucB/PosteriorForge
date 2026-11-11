@@ -13,7 +13,7 @@ not study text generation or distributed training.
 
 ## Current evidence
 
-Both pinned environments pass 56 CPU tests. A fresh public-only installation and
+Both pinned environments pass 108 CPU tests. A fresh public-only installation and
 GitHub CPU CI pass. The original 11,081,864-parameter checkpoint executed on an
 A100 in FP32 without autocast; a small 128-vector integrity probe passed. Native
 GPU float64 reference algebra agrees with two CPU formulas below 1e-12. See

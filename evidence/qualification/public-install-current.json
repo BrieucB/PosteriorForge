@@ -2,17 +2,107 @@
   "accelerator_or_model_downloaded": false,
   "artifacts": {
     "posteriorforge-0.1.0-py3-none-any.whl": {
-      "sha256": "a22524dbaecd37748c5b34144faeddb5bd2b9d09c1f6d75c8c98cbe187e4bd61",
-      "size_bytes": 105071
+      "sha256": "4f728bf966e928ecb5267419325234fde764cc9e15fd77c72937bf1c02bbfb28",
+      "size_bytes": 116820
     },
     "posteriorforge-0.1.0.tar.gz": {
-      "sha256": "6706ecbd251cdd94c703bb0e04a5158f599ff3601b03dc36d6baff7609c25d06",
-      "size_bytes": 98662
+      "sha256": "b917aed2d90552e5ed4ddcadbe1deb0deacc7bea24ee2eeaed593d878cb08ba5",
+      "size_bytes": 113560
     }
   },
+  "cli_help_checks": [
+    {
+      "help_exit_code": 0,
+      "operation": "doctor"
+    },
+    {
+      "help_exit_code": 0,
+      "operation": "prepare-banks"
+    },
+    {
+      "help_exit_code": 0,
+      "operation": "reference"
+    },
+    {
+      "help_exit_code": 0,
+      "operation": "reference-grid"
+    },
+    {
+      "help_exit_code": 0,
+      "operation": "qualify-reference"
+    },
+    {
+      "help_exit_code": 0,
+      "operation": "inference"
+    },
+    {
+      "help_exit_code": 0,
+      "operation": "budget"
+    },
+    {
+      "help_exit_code": 0,
+      "operation": "submit"
+    },
+    {
+      "help_exit_code": 0,
+      "operation": "plan"
+    },
+    {
+      "help_exit_code": 0,
+      "operation": "gate"
+    },
+    {
+      "help_exit_code": 0,
+      "operation": "plot-posteriors"
+    },
+    {
+      "help_exit_code": 0,
+      "operation": "report"
+    }
+  ],
   "container_built": false,
   "doctor_exit_code": 0,
   "github_actions": [
+    {
+      "conclusion": "success",
+      "databaseId": 43034682305,
+      "headSha": "4eb787dfb170dd6d47eaebe620fbab09413cd834",
+      "name": "CPU validation",
+      "status": "completed",
+      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43034682305"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 43033629236,
+      "headSha": "f102e008d6d25c89a9006f0ded872d67b36ac3e0",
+      "name": "CPU validation",
+      "status": "completed",
+      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43033629236"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 43033058280,
+      "headSha": "c5210b9c26f44f8f02139424b7e6439cd3128cc4",
+      "name": "CPU validation",
+      "status": "completed",
+      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43033058280"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 43032632043,
+      "headSha": "65bb80a246ec8d4aae2d8c04a2ab0c136416bf57",
+      "name": "CPU validation",
+      "status": "completed",
+      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43032632043"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 43031790481,
+      "headSha": "c5210b9c26f44f8f02139424b7e6439cd3128cc4",
+      "name": "CPU validation",
+      "status": "completed",
+      "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43031790481"
+    },
     {
       "conclusion": "success",
       "databaseId": 43030378413,
@@ -39,7 +129,6 @@
     }
   ],
   "gpu_qualified": false,
-  "help_exit_code": 0,
   "kind": "public_only_wheel_requalification",
   "notices_in_wheel": [
     "posteriorforge/science/LICENSE",
@@ -50,16 +139,16 @@
   "private_dependencies": false,
   "project": "PosteriorForge",
   "python": "3.11.13",
-  "reuse": "Public-only reproduction environment from v1; source fetched from public origin, wheel rebuilt and reinstalled.",
-  "source_commit": "4d29937308ef942d1af1f725121d9402f6214d91",
+  "reuse": "Public-only reproduction environment; exact source fetched from public origin, wheel rebuilt and reinstalled.",
+  "source_commit": "4eb787dfb170dd6d47eaebe620fbab09413cd834",
   "source_url": "https://github.com/BrieucB/PosteriorForge.git",
   "status": "passed",
   "test_summary": {
     "errors": "0",
     "failures": "0",
     "skipped": "0",
-    "tests": "56",
-    "time": "7.775"
+    "tests": "108",
+    "time": "10.235"
   },
   "versions": {
     "Pygments": "2.21.0",
