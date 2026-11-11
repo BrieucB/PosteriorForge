@@ -1,6 +1,8 @@
 """Explicit CDF-only adapter contracts; pure CPU fake needs no Torch package."""
 from __future__ import annotations
 import random
+import hashlib
+import marshal
 from types import ModuleType, SimpleNamespace
 import numpy as np
 import pytest
@@ -100,10 +102,18 @@ def test_explicit_activation_changes_only_context_alias_and_restores(sdk):
         assert regressor.translate_probs_across_borders.__code__ is original.__code__
         assert utils.translate_probs_across_borders is original
         assert utils._cdf is helper
+        assert "executed_corrected_cdf_code_sha256" not in descriptor
+        assert descriptor["patched_call_count"]==0
         actual=regressor.translate_probs_across_borders(logits,frm=borders,to=borders)
         np.testing.assert_allclose(actual,[[.5,.5]],atol=0)
         assert descriptor["patched_call_count"]==1
         assert descriptor["original_alias_restored"] is False
+        assert descriptor["original_alias_identity_verified"] is True
+        assert descriptor["original_cdf_code_sha256"]==hashlib.sha256(marshal.dumps(helper.__code__)).hexdigest()
+        assert descriptor["corrected_cdf_code_sha256"]!=descriptor["original_cdf_code_sha256"]
+        assert descriptor["executed_corrected_cdf_code_sha256"]==descriptor["corrected_cdf_code_sha256"]
+        assert descriptor["active_translator_code_sha256"]==descriptor["original_translator_code_sha256"]
+        assert descriptor["original_translator_code_sha256"]==hashlib.sha256(marshal.dumps(original.__code__)).hexdigest()
     assert regressor.translate_probs_across_borders is original
     assert descriptor["original_alias_restored"] is True
     assert descriptor["sdk_sources_unchanged"] is True

@@ -36,6 +36,13 @@ def descriptor():
         "tail_family_changed": False,
         "execution_optimized": False,
         "patched_call_count": 1008,
+        "exact_patch_target": "tabpfn.regressor.translate_probs_across_borders.__globals__['_cdf']",
+        "original_alias_identity_verified": True,
+        "original_cdf_code_sha256": "a" * 64,
+        "corrected_cdf_code_sha256": "b" * 64,
+        "original_translator_code_sha256": "c" * 64,
+        "active_translator_code_sha256": "c" * 64,
+        "executed_corrected_cdf_code_sha256": "b" * 64,
     }
 
 
@@ -66,6 +73,8 @@ def test_exact_approved_descriptor_can_be_assessed_without_sdk_import(descriptor
     ("sdk_sources_unchanged", False),
     ("sdk_aliases_unchanged", False),
     ("translator_code_unchanged", False),
+    ("exact_patch_target", "tabpfn.utils._cdf"),
+    ("original_alias_identity_verified", False),
     ("source_guard_passed", False),
     ("original_alias_restored", False),
     ("activation", "implicit"),
@@ -162,3 +171,34 @@ def test_run_cannot_silently_use_another_reference(reference, field):
     manifest["reference_binding"][reference][field] = "wrong"
     with pytest.raises(ValueError, match="reference binding"):
         evaluation.validate_run_reference_binding(manifest, {"runner_reference_binding": expected})
+
+
+@pytest.mark.parametrize("field", [
+    "original_cdf_code_sha256", "corrected_cdf_code_sha256",
+    "original_translator_code_sha256", "active_translator_code_sha256",
+    "executed_corrected_cdf_code_sha256",
+])
+@pytest.mark.parametrize("value", [None, "", "a" * 63, "g" * 64, "a" * 65])
+def test_code_fingerprints_must_be_well_formed(descriptor, field, value):
+    descriptor[field] = value
+    with pytest.raises(ValueError, match="SHA256 code fingerprint"):
+        evaluation.validate_adapter_descriptor(descriptor)
+
+
+def test_label_alone_cannot_claim_unchanged_helper_is_repaired(descriptor):
+    descriptor["corrected_cdf_code_sha256"] = descriptor["original_cdf_code_sha256"]
+    descriptor["executed_corrected_cdf_code_sha256"] = descriptor["original_cdf_code_sha256"]
+    with pytest.raises(ValueError, match="helper code is unchanged"):
+        evaluation.validate_adapter_descriptor(descriptor)
+
+
+def test_translator_code_change_is_outside_cdf_only_scope(descriptor):
+    descriptor["active_translator_code_sha256"] = "d" * 64
+    with pytest.raises(ValueError, match="changed the translator"):
+        evaluation.validate_adapter_descriptor(descriptor)
+
+
+def test_corrected_helper_must_be_the_code_that_executed(descriptor):
+    descriptor["executed_corrected_cdf_code_sha256"] = descriptor["original_cdf_code_sha256"]
+    with pytest.raises(ValueError, match="executed CDF helper"):
+        evaluation.validate_adapter_descriptor(descriptor)

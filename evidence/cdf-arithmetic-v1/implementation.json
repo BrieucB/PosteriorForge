@@ -1,6 +1,6 @@
 {
   "adapter_id": "tabpfn-2.0.9-finite-cdf-parentheses-v1",
-  "adapter_sha256": "3859bcdc974a38830f22c12adf24cae28e0b1834cbbf43731e12c33f9c98391d",
+  "adapter_sha256": "7a86fbbefdb0fa7e850a394bea8af710c2e5f0139c10cdce1fd272fb9709eec0",
   "adapter_version": 1,
   "attribution": "Built with PriorLabs-TabPFN",
   "baseline_execution_source": {
@@ -81,19 +81,20 @@
       "manifest_sha256": "0cdfb135e5b95c1c2353979005fb16f234a9ec4ed6a12a25d512920ffcc1ec59"
     }
   },
-  "cpu_tests_passed": 203,
+  "cpu_tests_passed": 233,
   "default_baseline_activation_changed": false,
+  "executed_helper_fingerprint_required": true,
   "execution_optimized": false,
   "files": {
-    "scripts/evaluate_cdf_pilot.py": "cc28fbab953b663c3d6bc06467dbdc4535117c2f4f2ba67b6014248da7b96526",
-    "src/posteriorforge/compat_cdf.py": "3859bcdc974a38830f22c12adf24cae28e0b1834cbbf43731e12c33f9c98391d",
+    "scripts/evaluate_cdf_pilot.py": "ad9c9f54777f0a05ed4e0a0490301b647e46c6587b4b46838680eb2c7145b050",
+    "src/posteriorforge/compat_cdf.py": "7a86fbbefdb0fa7e850a394bea8af710c2e5f0139c10cdce1fd272fb9709eec0",
     "src/posteriorforge/inference_cdf.py": "efc60d03ee6acf8b0ce68a470c55e42dad7f96006dc2613f9370cfc714c34fb9",
-    "tests/test_cdf_pilot_evaluation.py": "e2f00e11754033753e2ac1bb2cdea2854db92e5a54a81db6ed46ed679f5bd34b",
+    "tests/test_cdf_pilot_evaluation.py": "04dbe8d82f5ac1083243ca4ee9b17963e9a14805fd9207ea2d182ccaf49992b2",
     "tests/test_cdf_variant_runner.py": "1f14650208f61b097a99d62346bded24a7e25767221d783ea34f2c8adf252f6d",
-    "tests/test_compat_cdf.py": "c73bda26def4562b5adc8a74af8dacae094ec0dc77cbed356d1abd88fdbd33bd",
+    "tests/test_compat_cdf.py": "facfbfb9ff6eef486bc89f6d8333668b654e1b3678d5dbbd35be7a9b961c8533",
     "variants/cdf-arithmetic-v1.json": "6f511f944ed1c54cc7a2bc8bd778a5554ad1661aeea4534c88bf28fc6956c036"
   },
-  "new_tests": 66,
+  "new_tests": 96,
   "pinned_sdk_cpu_activation_passed": true,
   "previous_137_tests_preserved": true,
   "schema": "posteriorforge.cdf_arithmetic_implementation.v1",

@@ -12,6 +12,7 @@ from contextlib import contextmanager
 import hashlib
 from importlib import import_module, metadata
 import inspect
+import marshal
 from pathlib import Path
 from threading import Lock
 from types import FunctionType, MappingProxyType
@@ -33,6 +34,10 @@ class CompatibilityError(RuntimeError):
 
 def _sha256(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def _code_sha256(function):
+    return hashlib.sha256(marshal.dumps(function.__code__)).hexdigest()
 
 
 def adapter_source_sha256():
@@ -113,6 +118,7 @@ def finite_cdf_compatibility():
         version, utils, regressor = _load_sdk()
         hashes, original, helper, mapper = _guard_sdk(version, utils, regressor)
         fixed_helper = _corrected_helper(helper)
+        corrected_code_sha256 = _code_sha256(fixed_helper)
         descriptor = {
             "schema": "posteriorforge.compat.finite_cdf.v1",
             "variant": VARIANT, "adapter_id": ADAPTER_ID,
@@ -125,10 +131,16 @@ def finite_cdf_compatibility():
             "tail_family_changed": False, "execution_optimized": False,
             "original_alias_restored": False, "patched_call_count": 0,
             "translator_code_unchanged": True,
+            "original_cdf_code_sha256": _code_sha256(helper),
+            "corrected_cdf_code_sha256": corrected_code_sha256,
+            "original_translator_code_sha256": _code_sha256(original),
+            "exact_patch_target": "tabpfn.regressor.translate_probs_across_borders.__globals__['_cdf']",
+            "original_alias_identity_verified": True,
         }
 
         def counted_helper(*args, **kwargs):
             value = fixed_helper(*args, **kwargs)
+            descriptor["executed_corrected_cdf_code_sha256"] = corrected_code_sha256
             descriptor["patched_call_count"] += 1
             return value
 
@@ -140,6 +152,7 @@ def finite_cdf_compatibility():
         replacement.__annotations__ = original.__annotations__.copy()
         replacement.__module__ = original.__module__
         replacement.__qualname__ = original.__qualname__
+        descriptor["active_translator_code_sha256"] = _code_sha256(replacement)
         if replacement.__code__ is not original.__code__:
             raise CompatibilityError("CDF adapter translator code changed")
         regressor.translate_probs_across_borders = replacement

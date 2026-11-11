@@ -63,12 +63,28 @@ def validate_adapter_descriptor(descriptor):
         "scope": "finite_ensemble_cdf_parentheses_only",
         "tail_family_changed": False,
         "execution_optimized": False,
+        "exact_patch_target": "tabpfn.regressor.translate_probs_across_borders.__globals__['_cdf']",
+        "original_alias_identity_verified": True,
     }
     require(isinstance(descriptor, dict), "compatibility_adapter mapping required")
     for key, value in expected.items():
         actual = descriptor.get(key)
         equal = actual is value if isinstance(value, bool) else actual == value
         require(equal, "CDF adapter contract mismatch: " + key)
+    fingerprints = ("original_cdf_code_sha256", "corrected_cdf_code_sha256",
+                    "original_translator_code_sha256", "active_translator_code_sha256",
+                    "executed_corrected_cdf_code_sha256")
+    for name in fingerprints:
+        value = descriptor.get(name)
+        require(isinstance(value, str) and len(value) == 64
+                and all(character in "0123456789abcdef" for character in value),
+                "canonical SHA256 code fingerprint required: " + name)
+    require(descriptor["original_cdf_code_sha256"] != descriptor["corrected_cdf_code_sha256"],
+            "CDF repair helper code is unchanged")
+    require(descriptor["original_translator_code_sha256"] == descriptor["active_translator_code_sha256"],
+            "CDF repair changed the translator code")
+    require(descriptor["executed_corrected_cdf_code_sha256"] == descriptor["corrected_cdf_code_sha256"],
+            "executed CDF helper fingerprint differs from the corrected helper")
     count = descriptor.get("patched_call_count")
     require(type(count) is int and count > 0, "positive patched_call_count required")
     return dict(descriptor)
