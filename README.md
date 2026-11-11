@@ -50,8 +50,21 @@ and GPU/multi-GPU optimization remain proposals.
 See the [diagnostic report](evidence/diagnostics/report.md), ranked next experiments,
 [reproduction guide](evidence/diagnostics/reproduce.md), and
 [reconciled accounting](evidence/diagnostics/budget.json). The additional investigation
-used 0.630833 GPU-hours; cumulative actual cost is 16.804722 GPU-hours, zero reserved.
+used 0.630833 GPU-hours; cumulative cost at that point was 16.804722 GPU-hours, zero reserved.
 Original evidence and all 24 failure verdicts are unchanged.
+
+## CDF-only repair pilot
+
+The explicit source-guarded CDF arithmetic adapter is implemented, but its fixed
+case-0 / seed 20261111 / 4096-world / 50k-vector pilot still **fails the unchanged gate**.
+Worst marginal CDF upper is 0.2183, bias upper 0.4299 reference SD, and SD-ratio upper 1.3977.
+All 50k rows are valid; all 1008 corrected-helper calls are verified. No further
+scientific or optimization GPU jobs were submitted. Original results/defaults remain
+unchanged. [Pilot report and posteriors](evidence/cdf-arithmetic-v1/report.md).
+
+The pilot used 0.677778 GPU-hours; cumulative actual cost is 17.4825/200 GPU-hours,
+zero reserved. Exact sufficient observations are the next separate proposal;
+GPU context reuse, precision/compilation and multi-GPU scaling remain gated.
 
 ## Reproduce
 

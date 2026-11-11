@@ -1,0 +1,32 @@
+{
+  "attribution": "Built with PriorLabs-TabPFN",
+  "code_execution_commit": "9ed1bb2724dd6f88f27e7c3874d3339e8878c8b3",
+  "complete_finite_supported_count": 50000,
+  "executed_code_fingerprint_qualified": true,
+  "expected_patched_call_count": 1008,
+  "full_cpu_tests_passed_before_pilot": 233,
+  "gpu_jobs_after_failure": 0,
+  "layout_rerender_assessments_exactly_equal": true,
+  "layout_rerender_reference_custody_exactly_equal": true,
+  "model_fp32_autocast_false": true,
+  "optimization_attempted": false,
+  "patched_call_count": 1008,
+  "pinned_sdk_cpu_tests_passed": 13,
+  "previous_137_tests_preserved": true,
+  "previous_diagnostic_evidence_diff_exit_code": 0,
+  "protected_paths": [
+    "src/posteriorforge/inference.py",
+    "src/posteriorforge/science",
+    "src/posteriorforge/upstream",
+    "src/posteriorforge/gate.py",
+    "src/posteriorforge/validation.py",
+    "environments",
+    "configs",
+    "evidence/feasibility"
+  ],
+  "public_ci": "https://github.com/BrieucB/PosteriorForge/actions/runs/43067584944",
+  "real_gpu_job": "5398923",
+  "schema": "posteriorforge.cdf_pilot_validation.v1",
+  "scientific_gate_passed": false,
+  "source_integrity_diff_exit_code": 0
+}

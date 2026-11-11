@@ -239,6 +239,17 @@ def plot_comparisons(output, baseline, pilot, arrays, assessments, order, *, see
     footer = ATTRIBUTION + " | display ranges selected from saved reference; acceptance uses all samples and whole-line bounds"
     figs = {}
     density, dax = plt.subplots(7, 3, figsize=(14, 19), layout="constrained")
+    focus, focus_axes = plt.subplots(2, 2, figsize=(11.5, 8), layout="constrained")
+    original_errors = assessments["baseline"]["marginal_cdf"]["upper"]
+    focus_indices = sorted(range(21), key=lambda j: (-original_errors[j], j))[:4]
+    focus_panels = dict(zip(focus_indices, focus_axes.flat))
+    focus_selection = {
+        "rule": "four highest original baseline marginal-CDF upper bounds; original physical-order index breaks ties",
+        "pilot_used_for_selection": False, "parameter_indices": focus_indices,
+        "parameters": [order[j] for j in focus_indices],
+        "original_cdf_upper_bounds": [original_errors[j] for j in focus_indices],
+        "bins_and_display_range": "identical to each parameter's full 21-panel density display",
+    }
     marginal, maxes = plt.subplots(7, 3, figsize=(14, 19), layout="constrained")
     for j, name in enumerate(order):
         x = arrays["queries"] / arrays["directions"][j, j]
@@ -252,10 +263,14 @@ def plot_comparisons(output, baseline, pilot, arrays, assessments, order, *, see
         reference_density = np.diff(np.interp(bins, x, cdf)) / widths
         d, m = dax.flat[j], maxes.flat[j]
         d.stairs(reference_density, bins, color=colors["reference"], lw=1.4)
+        if j in focus_panels:
+            focus_panels[j].stairs(reference_density, bins, color=colors["reference"], lw=1.6)
         detail = {"parameter": name, "display_lower": lo, "display_upper": hi, "histogram_bins": 40}
         for key, values in (("baseline", baseline[:, j]), ("pilot", pilot[:, j])):
             counts, _ = np.histogram(values, bins)
             d.stairs(counts / (len(values) * widths), bins, color=colors[key], lw=1.1)
+            if j in focus_panels:
+                focus_panels[j].stairs(counts / (len(values) * widths), bins, color=colors[key], lw=1.3)
             detail[key + "_mass_below_display"] = float(np.mean(values < lo))
             detail[key + "_mass_above_display"] = float(np.mean(values > hi))
             ordered = np.sort(values)
@@ -267,14 +282,25 @@ def plot_comparisons(output, baseline, pilot, arrays, assessments, order, *, see
         after = assessments["pilot"]["marginal_cdf"]["upper"][j]
         title = f"{name}: CDF upper {before:.3f} → {after:.3f}"
         d.set(title=name, xlim=(lo, hi), xlabel="physical coordinate", ylabel="binned density")
+        if j in focus_panels:
+            focus_panels[j].set(title=title, xlim=(lo, hi), xlabel="physical coordinate", ylabel="binned density")
         m.set(title=title, xlim=(lo, hi), ylim=(-.02, 1.02), xlabel="physical coordinate", ylabel="CDF")
         display_details.append(detail)
-    density.suptitle("Before/after physical marginal densities\n" + common, fontsize=13)
-    density.supxlabel("Reference density is saved-CDF bin mass / bin width; illustrative only.\n" + footer, fontsize=9)
-    marginal.suptitle("Before/after all 21 physical marginal CDFs\n" + common, fontsize=13)
-    marginal.supxlabel(footer, fontsize=9)
+    density.suptitle("Before/after physical marginal densities\n" + common, fontsize=13, y=.998)
+    density.supxlabel("Reference density is saved-CDF bin mass / bin width; illustrative only.\n" + footer, fontsize=9, y=.004)
+    marginal.suptitle("Before/after all 21 physical marginal CDFs\n" + common, fontsize=13, y=.998)
+    marginal.supxlabel(footer, fontsize=9, y=.004)
     for fig in (density, marginal):
-        fig.legend(handles=legend, loc="outside upper center", ncol=3, bbox_to_anchor=(.5, .97))
+        fig.set_layout_engine("constrained", rect=(0, .025, 1, .91))
+        fig.legend(handles=legend, loc="upper center", ncol=3, bbox_to_anchor=(.5, .966))
+    focus.suptitle("CDF-only repair: four original worst marginal CDFs\n" + common, fontsize=12, y=.998)
+    focus.supxlabel("Original-only selection; full figures and unchanged gate retain all coordinates.\n" + footer,
+                    fontsize=8, y=.004)
+    focus.set_layout_engine("constrained", rect=(0, .045, 1, .84))
+    focus.legend(handles=legend, loc="upper center", ncol=3, bbox_to_anchor=(.5, .936))
+    figs["focus_density"] = output / "cdf-pilot-density-focus.png"
+    focus.savefig(figs["focus_density"], dpi=170)
+    plt.close(focus)
     figs["density"] = output / "cdf-pilot-density.png"
     figs["marginal_cdf"] = output / "cdf-pilot-marginal-cdf.png"
     density.savefig(figs["density"], dpi=145)
@@ -299,13 +325,14 @@ def plot_comparisons(output, baseline, pilot, arrays, assessments, order, *, see
         after = assessments["pilot"]["joint_projection_cdf"]["upper"][index]
         ax.set(title=f"fixed joint {index+1}: {before:.3f} → {after:.3f}", xlim=(lo, hi),
                ylim=(-.02, 1.02), xlabel="unchanged physical-vector projection", ylabel="CDF")
-    joint.suptitle("Before/after all 32 original full-vector projection CDFs\n" + common, fontsize=13)
-    joint.supxlabel(footer, fontsize=9)
-    joint.legend(handles=legend, loc="outside upper center", ncol=3, bbox_to_anchor=(.5, .975))
+    joint.suptitle("Before/after all 32 original full-vector projection CDFs\n" + common, fontsize=13, y=.998)
+    joint.supxlabel(footer, fontsize=9, y=.004)
+    joint.set_layout_engine("constrained", rect=(0, .025, 1, .91))
+    joint.legend(handles=legend, loc="upper center", ncol=3, bbox_to_anchor=(.5, .966))
     figs["joint_cdf"] = output / "cdf-pilot-joint-cdf.png"
     joint.savefig(figs["joint_cdf"], dpi=145)
     plt.close(joint)
-    return {key: {"file": path.name, "sha256": sha256_file(path)} for key, path in figs.items()}, display_details
+    return {key: {"file": path.name, "sha256": sha256_file(path)} for key, path in figs.items()}, display_details, focus_selection
 
 
 def run(args):
@@ -402,7 +429,7 @@ def run(args):
                 row[key + "_cdf_" + bound] = assessments[key]["joint_projection_cdf"][bound][j]
         projections.append(row)
     write_csv(output / "cdf-pilot-projections.csv", projections)
-    result["figures"], result["display_details"] = plot_comparisons(
+    result["figures"], result["display_details"], result["focus_selection"] = plot_comparisons(
         output, baseline, pilot, arrays, assessments, result["parameter_order"], seed=args.seed, case=args.case)
     write_json(output / "cdf-pilot-assessment.json", result)
     write_json(output / "cdf-pilot-checksums.json", {path.name: sha256_file(path) for path in sorted(output.iterdir()) if path.is_file()})

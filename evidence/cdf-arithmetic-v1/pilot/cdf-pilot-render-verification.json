@@ -1,0 +1,60 @@
+{
+  "assessment_sha256": "af86236a14e7a7fe4e6aa62d37cc018826eb46ef3928b7569617e2a8c09ca771",
+  "attribution": "Built with PriorLabs-TabPFN",
+  "baseline_assessment_exactly_unchanged": true,
+  "figures": {
+    "density": {
+      "file": "cdf-pilot-density.png",
+      "sha256": "e6a4be4aad10aa2673d9c775f20967f6cce2f7f9e8b83f7edc15f260b8bc0ee4"
+    },
+    "focus_density": {
+      "file": "cdf-pilot-density-focus.png",
+      "sha256": "047fb2903215131a0cc87b1c6e0556080754b0bcd77f51fbdde5054a0a0e9322"
+    },
+    "joint_cdf": {
+      "file": "cdf-pilot-joint-cdf.png",
+      "sha256": "4f3fa8bebffd778507f8d805dd8065110cebce09dec8a4dc331b3e364944a2a1"
+    },
+    "marginal_cdf": {
+      "file": "cdf-pilot-marginal-cdf.png",
+      "sha256": "dd54305be63a55acb17884ee4a343ac5ab3f55793b6684a545fe950e235577a8"
+    }
+  },
+  "first_assessment_sha256": "ac3dcaf45ee94ca1c6a69f615a2dc06b96e29bb36c2cc685e7bb208939d2e459",
+  "focus_selection": {
+    "bins_and_display_range": "identical to each parameter's full 21-panel density display",
+    "original_cdf_upper_bounds": [
+      0.2171117226746061,
+      0.1891336116087451,
+      0.15307213893342553,
+      0.13668199920356083
+    ],
+    "parameter_indices": [
+      14,
+      13,
+      4,
+      11
+    ],
+    "parameters": [
+      "sigma_m3",
+      "d0_m3",
+      "b_m1",
+      "a_m3"
+    ],
+    "pilot_used_for_selection": false,
+    "rule": "four highest original baseline marginal-CDF upper bounds; original physical-order index breaks ties"
+  },
+  "original_gate_sha256": "42163c5d77f0f1f8f7e1bb3a78c81fba43ca36a0682446a0dc533544995e490d",
+  "pilot_assessment_exactly_unchanged": true,
+  "reference_custody_exactly_unchanged": true,
+  "schema": "posteriorforge.cdf_pilot_render_verification.v1",
+  "scope": "Layout-only correction and original-only focus selection; no scientific criteria, arrays or calculations changed.",
+  "visual_qa": {
+    "focus_panels": 4,
+    "four_pngs_inspected": true,
+    "full_joint_projections_rendered": 32,
+    "full_marginals_rendered": 21,
+    "labels_and_attribution_visible": true,
+    "legends_clear_of_panels": true
+  }
+}

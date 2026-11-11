@@ -1,0 +1,16 @@
+{
+  "assets": [
+    {
+      "bytes": 6114305,
+      "name": "posteriorforge-cdf-arithmetic-v1-pilot.tar.gz",
+      "sha256": "1a04969dd65a1e944d411eb533f8a97bb38a2ffb2d1fbabeec97567f4dedfaf1",
+      "url": "https://github.com/BrieucB/PosteriorForge/releases/download/cdf-arithmetic-v1-pilot/posteriorforge-cdf-arithmetic-v1-pilot.tar.gz"
+    }
+  ],
+  "checksums_url": "https://github.com/BrieucB/PosteriorForge/releases/download/cdf-arithmetic-v1-pilot/SHA256SUMS.cdf-pilot",
+  "model_weights_included": false,
+  "original_inputs": "https://github.com/BrieucB/PosteriorForge/blob/main/docs/artifacts.md",
+  "release_url": "https://github.com/BrieucB/PosteriorForge/releases/tag/cdf-arithmetic-v1-pilot",
+  "schema": "posteriorforge.cdf_pilot_artifacts.v1",
+  "scientific_status": "model_failure"
+}

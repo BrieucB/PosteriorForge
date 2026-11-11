@@ -1,0 +1,23 @@
+{
+  "attribution": "Built with PriorLabs-TabPFN",
+  "files": {
+    "artifacts.json": "9872009de5fbbf7ca21b224764237b01e8aebb3c1f4b407f97497ae4267d672d",
+    "attention-plan.json": "0710d54cee296f9170b67de0b1f3b4c6eac7ff47094eee66e4aeb1235c8b4faf",
+    "budget.json": "e72bb9fb91f5bd08d8e3fdeafb85dccaf9dc595ea3fddb2ba6069d116b188c19",
+    "decision.json": "da459992d48a21be6e09a78364ffb2c040424e00c34915b7c274a8475c75320b",
+    "implementation.json": "eddadea260e6e7991127f032db5a5bc2b8eff0b52b1fc2c6898d79f137cef8c5",
+    "pilot-run-manifest.json": "a0114fd74721cf9bed31e9131045e841f262db123c8f849e5cb3f15814a14f4b",
+    "pilot/cdf-pilot-assessment.json": "af86236a14e7a7fe4e6aa62d37cc018826eb46ef3928b7569617e2a8c09ca771",
+    "pilot/cdf-pilot-checksums.json": "f6f330cb1e94ce7d3b16a7354ca89ab038b52eb28913534cf9f513ad9ff8740a",
+    "pilot/cdf-pilot-density-focus.png": "047fb2903215131a0cc87b1c6e0556080754b0bcd77f51fbdde5054a0a0e9322",
+    "pilot/cdf-pilot-density.png": "e6a4be4aad10aa2673d9c775f20967f6cce2f7f9e8b83f7edc15f260b8bc0ee4",
+    "pilot/cdf-pilot-joint-cdf.png": "4f3fa8bebffd778507f8d805dd8065110cebce09dec8a4dc331b3e364944a2a1",
+    "pilot/cdf-pilot-marginal-cdf.png": "dd54305be63a55acb17884ee4a343ac5ab3f55793b6684a545fe950e235577a8",
+    "pilot/cdf-pilot-parameters.csv": "6065c82bec5258c7f00b904465cd1284c4c37790794c332b8b56515018e80414",
+    "pilot/cdf-pilot-projections.csv": "51d2252c4ec0851f811b15b2072cbe7134124b18a0f7656d58f53e1d85af4af8",
+    "pilot/cdf-pilot-render-verification.json": "90e587bafd9a062a056278a3cb9d2b18038647504836197ba7c7ef1003136cd4",
+    "report.md": "d1c3a7c7d562945c71d90ef0ae0ed28ce7d1e1d9a16061886c90a1ccb8c4bd6d",
+    "validation.json": "0afdb8dc6da9d73abee0f44662dccbf23ad42d0092c428f203a4415b0d47352e"
+  },
+  "schema": "posteriorforge.cdf_pilot_compact_checksums.v1"
+}

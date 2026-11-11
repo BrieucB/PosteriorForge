@@ -1,0 +1,288 @@
+{
+  "adapter_activation_seconds": 5.107599167153239,
+  "adapter_setup_outside_original_timing": true,
+  "artifact_identity": "PosteriorForge",
+  "attribution": "Built with PriorLabs-TabPFN",
+  "baseline_execution_source": {
+    "baseline_inference_sha256": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e",
+    "upstream_files": {
+      "__init__.py": "a32a437d7910cec8c251ceb6849fece6b61ece32c16e8a346e4afae82bf7bc08",
+      "accept_reject_sampler.py": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+      "npe_pfn.py": "29517328b3ff23e2e8040d19f33e79adef5fc7f91db2cffccf60234344399a85",
+      "restricted_prior.py": "13026cf8a4618aa4ca6406e0596a7ec97c0664de5b7c2b4dd7f31e4c32ece160",
+      "support_posterior.py": "022e5b22b9397e9faea08b73df76b5a0c5cf0c012b665decfe28c5b725c362ee",
+      "tsnpe_pfn.py": "f959662adf6ac6ed5aecefcebad907ef951c22bf05bbcf2c8e0e6312cb054034"
+    },
+    "upstream_provenance_sha256": "4caf84b49b04c79f28bcbe9f88f9da6b64ac0b99a2c60f53e01b2fc1c6833c8b"
+  },
+  "baseline_release": "89404ac9e43bf9fb72d3e51a7113dbd207871221",
+  "budget_binding": {
+    "account": "eu-26-17",
+    "gpus": 1,
+    "job_id": "5398923",
+    "ledger": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/budget/ledger.json",
+    "partition": "qgpu",
+    "reservation_id": "13a68044c5714dc0a16e1040255a9334",
+    "reserved_gpu_seconds": 3600
+  },
+  "case": 0,
+  "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+  "compatibility_adapter": {
+    "activation": "explicit",
+    "active_translator_code_sha256": "8a13551c263346388cee3326e17daabcae89274dd7fa9dcf0f07aded35498367",
+    "adapter_id": "tabpfn-2.0.9-finite-cdf-parentheses-v1",
+    "adapter_sha256": "7a86fbbefdb0fa7e850a394bea8af710c2e5f0139c10cdce1fd272fb9709eec0",
+    "adapter_version": 1,
+    "corrected_cdf_code_sha256": "ae3c7d841ba63f2fd27f7a317848834bdf4bcf5330c780e5dad6dd678b4ba140",
+    "correction": "finite_cdf_parentheses_only",
+    "exact_patch_target": "tabpfn.regressor.translate_probs_across_borders.__globals__['_cdf']",
+    "executed_corrected_cdf_code_sha256": "ae3c7d841ba63f2fd27f7a317848834bdf4bcf5330c780e5dad6dd678b4ba140",
+    "execution_optimized": false,
+    "original_alias_identity_verified": true,
+    "original_alias_restored": true,
+    "original_cdf_code_sha256": "5e7eebe9521dba64daa2148b35d0ff4f8d88f618a1193cb2b6ea3404249c4945",
+    "original_translator_code_sha256": "8a13551c263346388cee3326e17daabcae89274dd7fa9dcf0f07aded35498367",
+    "patched_call_count": 1008,
+    "schema": "posteriorforge.compat.finite_cdf.v1",
+    "scope": "finite_ensemble_cdf_parentheses_only",
+    "sdk_aliases_unchanged": true,
+    "sdk_files_modified": false,
+    "sdk_source_sha256": {
+      "tabpfn/regressor.py": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "tabpfn/utils.py": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1"
+    },
+    "sdk_source_sha256_after": {
+      "tabpfn/regressor.py": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "tabpfn/utils.py": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1"
+    },
+    "sdk_sources_unchanged": true,
+    "source_guard_passed": true,
+    "tabpfn_version": "2.0.9",
+    "tail_family_changed": false,
+    "translator_code_unchanged": true,
+    "variant": "cdf_arithmetic_v1"
+  },
+  "context_filter": "no_filtering",
+  "context_obs": {
+    "dtype": "<f8",
+    "sha256": "aee2030d63158a3baf3b731e1231e17972ed80a19def10152b4e67d6d1e6ffb8",
+    "shape": [
+      4096,
+      33
+    ]
+  },
+  "context_seed": 20261111,
+  "context_size": 4096,
+  "context_theta": {
+    "dtype": "<f8",
+    "sha256": "73c4c282c136a1fd86459e7b1b736629b459075def9176956a90d232d4c30f4d",
+    "shape": [
+      4096,
+      21
+    ]
+  },
+  "created_unix": 1794417892.9345305,
+  "cuda_matmul_allow_tf32": false,
+  "cudnn_allow_tf32": true,
+  "execution_optimized": false,
+  "expected_patched_call_count": 1008,
+  "explicit_variant_activation": true,
+  "git_dirty": false,
+  "git_revision": "9ed1bb2724dd6f88f27e7c3874d3339e8878c8b3",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "hostname": "acn16.karolina.it4i.cz",
+  "log_density": "not_used",
+  "max_iter_rejection": null,
+  "memory": {
+    "peak_allocated_bytes": 8975456256,
+    "peak_reserved_bytes": 23966253056
+  },
+  "metadata_writer_restored": true,
+  "microbatch": 10000,
+  "model": {
+    "autocast": false,
+    "dtype": "torch.float32",
+    "forced_inference_dtype": "torch.float32",
+    "parameter_count": 11081864,
+    "parameter_device_after_request": "cpu",
+    "post_request_residency_note": "TabPFN may return model to CPU between prediction calls"
+  },
+  "observation_preprocessing": "raw; TabPFN frozen preprocessing",
+  "original_rng_role": "posterior",
+  "parameter_order": [
+    "mu_a",
+    "mu_b",
+    "mu_d0",
+    "a_m1",
+    "b_m1",
+    "d0_m1",
+    "sigma_m1",
+    "a_m2",
+    "b_m2",
+    "d0_m2",
+    "sigma_m2",
+    "a_m3",
+    "b_m3",
+    "d0_m3",
+    "sigma_m3",
+    "a_a1",
+    "sigma_a1",
+    "a_a2",
+    "sigma_a2",
+    "a_a3",
+    "sigma_a3"
+  ],
+  "query": {
+    "dtype": "<f8",
+    "sha256": "57fb7625b2521ff040f6d858961ca5876276708fbe2637242b48c69fdce7bdac",
+    "shape": [
+      1,
+      33
+    ]
+  },
+  "rank": 0,
+  "reference_binding": {
+    "parent": {
+      "binding": {
+        "observation_sha256": "57fb7625b2521ff040f6d858961ca5876276708fbe2637242b48c69fdce7bdac",
+        "parameter_order": [
+          "mu_a",
+          "mu_b",
+          "mu_d0",
+          "a_m1",
+          "b_m1",
+          "d0_m1",
+          "sigma_m1",
+          "a_m2",
+          "b_m2",
+          "d0_m2",
+          "sigma_m2",
+          "a_m3",
+          "b_m3",
+          "d0_m3",
+          "sigma_m3",
+          "a_a1",
+          "sigma_a1",
+          "a_a2",
+          "sigma_a2",
+          "a_a3",
+          "sigma_a3"
+        ],
+        "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966"
+      },
+      "cdf_precision": 0.0006115610036022678,
+      "distribution_sha256": "cab498f169e416bbc59297e1263d09ba4768bcad6028a52343362924f5a194c4",
+      "manifest_sha256": "364289ef904e5a2841416851d03944646d7e958c7c55d519c1914fc3f8b23f39"
+    },
+    "refined_grid": {
+      "binding": {
+        "observation_sha256": "57fb7625b2521ff040f6d858961ca5876276708fbe2637242b48c69fdce7bdac",
+        "parameter_order": [
+          "mu_a",
+          "mu_b",
+          "mu_d0",
+          "a_m1",
+          "b_m1",
+          "d0_m1",
+          "sigma_m1",
+          "a_m2",
+          "b_m2",
+          "d0_m2",
+          "sigma_m2",
+          "a_m3",
+          "b_m3",
+          "d0_m3",
+          "sigma_m3",
+          "a_a1",
+          "sigma_a1",
+          "a_a2",
+          "sigma_a2",
+          "a_a3",
+          "sigma_a3"
+        ],
+        "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966"
+      },
+      "cdf_precision": 0.0006185336730101243,
+      "distribution_sha256": "3b6b26234d925c0b5cf2ccb8e1a2f6476fe8b2df107e2791e4233a2fc307a99f",
+      "manifest_sha256": "0cdfb135e5b95c1c2353979005fb16f234a9ec4ed6a12a25d512920ffcc1ec59"
+    }
+  },
+  "regressor_settings": {
+    "average_before_softmax": false,
+    "categorical_features_indices": null,
+    "device": "cuda",
+    "fit_mode": "fit_preprocessors",
+    "ignore_pretraining_limits": false,
+    "inference_config": null,
+    "inference_precision": "torch.float32",
+    "memory_saving_mode": "auto",
+    "model_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/cache/model/tabpfn-v2-regressor.ckpt",
+    "n_estimators": 8,
+    "n_jobs": 1,
+    "random_state": 0,
+    "softmax_temperature": 0.9
+  },
+  "rejection": {
+    "accepted_before_final_trim": 50155,
+    "proposed": 50461,
+    "returned": 50000,
+    "support_calls": 6
+  },
+  "repetition": 0,
+  "requested_count": 50000,
+  "samples": {
+    "dtype": "<f8",
+    "sha256": "8ffcad8681f1f6fe53541574611ec396f43ab677cec52a3e8def9239ba10f681",
+    "shape": [
+      50000,
+      21
+    ]
+  },
+  "samples_file": "samples.npz",
+  "samples_sha256": "27e51ad1b1ee615fc921ee4f5c237155139304da3e7c193f7781a389cee6d53e",
+  "schema": "posteriorforge.inference.cdf_arithmetic.v1",
+  "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+  "scientific_run": true,
+  "seed": 4265748221,
+  "slurm_job_id": "5398923",
+  "stage_timings": "unmeasured; profiling gated on scientific feasibility",
+  "status": "complete",
+  "tail_family_changed": false,
+  "timings": {
+    "accepted_samples_per_second": 20.669262477245518,
+    "append_context_seconds": 0.026916006114333868,
+    "cold_checkpoint_load_included_in_request": true,
+    "constructor_and_import_seconds": 1.7590804588980973,
+    "includes_repeated_stage_context_preparation": true,
+    "posterior_request_seconds": 2419.0509968628176,
+    "total_seconds": 2420.83699332783
+  },
+  "torch_cuda": "12.4",
+  "torch_float32_matmul_precision": "highest",
+  "transfer_and_sync": "unmeasured; profiling gated on scientific feasibility",
+  "upstream_files": {
+    "__init__.py": "a32a437d7910cec8c251ceb6849fece6b61ece32c16e8a346e4afae82bf7bc08",
+    "accept_reject_sampler.py": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+    "npe_pfn.py": "29517328b3ff23e2e8040d19f33e79adef5fc7f91db2cffccf60234344399a85",
+    "restricted_prior.py": "13026cf8a4618aa4ca6406e0596a7ec97c0664de5b7c2b4dd7f31e4c32ece160",
+    "support_posterior.py": "022e5b22b9397e9faea08b73df76b5a0c5cf0c012b665decfe28c5b725c362ee",
+    "tsnpe_pfn.py": "f959662adf6ac6ed5aecefcebad907ef951c22bf05bbcf2c8e0e6312cb054034"
+  },
+  "upstream_revision": "29c1e900a89781ee00677df6d2415a6664e59c37",
+  "variant": "cdf_arithmetic_v1",
+  "versions": {
+    "jax": null,
+    "jaxlib": null,
+    "numpy": "1.26.4",
+    "platform": "Linux-4.18.0-553.148.1.el8_10.x86_64-x86_64-with-glibc2.28",
+    "posteriorforge": null,
+    "python": "3.11.13",
+    "sbi": "0.23.0",
+    "scipy": "1.12.0",
+    "tabpfn": "2.0.9",
+    "torch": "2.6.0"
+  },
+  "world_size": 1,
+  "wrapper_preexecution_setup_seconds": 13.580874643987045,
+  "wrapper_total_seconds": 2434.466050017858
+}

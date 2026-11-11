@@ -1,0 +1,38 @@
+{
+  "attribution": "Built with PriorLabs-TabPFN",
+  "follow_on_gpu_jobs_submitted": 0,
+  "global": {
+    "actual_gpu_hours": 17.4825,
+    "actual_gpu_seconds": 62937,
+    "cap_exceeded": false,
+    "cap_gpu_hours": 200,
+    "remaining_gpu_hours": 182.5175,
+    "remaining_gpu_seconds": 657063,
+    "reservation_count": 46,
+    "reserved_gpu_hours": 0.0,
+    "reserved_gpu_seconds": 0
+  },
+  "job": {
+    "accounting_record": {
+      "Account": "eu-26-17",
+      "AllocTRES": "billing=1,cpu=16,gres/gpu=1,mem=124160M,node=1",
+      "ElapsedRaw": "2440",
+      "JobIDRaw": "5398923",
+      "JobName": "pf-cdf-pilot-0",
+      "Partition": "qgpu",
+      "State": "COMPLETED"
+    },
+    "actual_gpu_seconds": 2440,
+    "gpus": 1,
+    "job_id": "5398923",
+    "reservation_id": "13a68044c5714dc0a16e1040255a9334",
+    "slurm_state": "COMPLETED",
+    "walltime_seconds": 3600
+  },
+  "original_actual_before_this_pilot_gpu_seconds": 60497,
+  "pilot_actual_gpu_hours": 0.6777777777777778,
+  "pilot_actual_gpu_seconds": 2440,
+  "pilot_restarts": 0,
+  "private_ledger_sha256": "5bb9365a65400b7fcf3904dae0f8d71787e1a5f332534e202305f339ef6ee4ac",
+  "schema": "posteriorforge.cdf_pilot_budget.v1"
+}

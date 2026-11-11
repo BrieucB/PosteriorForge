@@ -1,0 +1,14 @@
+{
+  "cdf_adapter_executed": true,
+  "engineering_gpu_work_authorized": false,
+  "expected_patched_calls": 1008,
+  "full24_expansion_authorized": false,
+  "further_gpu_work_stopped": true,
+  "next_proposal": "One separate sufficient-statistic ablation on the corrected-unoptimizedbase; samecase/bank/checkpoint/physicalgate, no newworlds; not implemented.",
+  "original_gate_unchanged": true,
+  "passed": false,
+  "patched_calls": 1008,
+  "schema": "posteriorforge.cdf_pilot_decision.v1",
+  "scope": "case0 seed20261111 context4096 50000vectors; not the full24run screen",
+  "status": "model_failure"
+}

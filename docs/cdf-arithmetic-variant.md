@@ -66,3 +66,27 @@ before selecting residency: a cache API that stores KV on CPU may replace comput
 with large transfers. Keep stage-specific state isolated and compare distributions
 against this corrected **unoptimized** control plus the unchanged absolute gate.
 Precision/compile and independent1/2/4GPUworkers remain separate conditional tests.
+
+## Completed pilot and saved-data replay
+
+The initial pilot conclusively failed the unchanged physical gate; no expansion
+or optimization followed. See the [before/after report](../evidence/cdf-arithmetic-v1/report.md).
+Retrieve the original bank/reference/posterior archives from `docs/artifacts.md`
+and the new synthetic pilot archive from release `cdf-arithmetic-v1-pilot`.
+
+```bash
+gh release download cdf-arithmetic-v1-pilot --repo BrieucB/PosteriorForge \
+  --pattern posteriorforge-cdf-arithmetic-v1-pilot.tar.gz --pattern SHA256SUMS.cdf-pilot
+sha256sum -c SHA256SUMS.cdf-pilot
+tar -xzf posteriorforge-cdf-arithmetic-v1-pilot.tar.gz -C SAVED_DATA_ROOT/results
+PYTHONPATH=src python scripts/evaluate_cdf_pilot.py \
+  --root SAVED_DATA_ROOT \
+  --pilot-manifest SAVED_DATA_ROOT/results/cdf-arithmetic-v1/context-4096/seed-20261111-case-0/manifest.json \
+  --output FRESH_REPLAY_ASSESSMENT
+```
+
+Use the release-tagged source and original qualified reference environment.
+This replay reads saved arrays and needs neither a GPU nor checkpoint access.
+It does not authorize another inference run. The evaluated probabilities, array
+bindings and conservative metrics can be reproduced; private absolute output
+paths or rendering metadata need not be byte-identical in a different directory.

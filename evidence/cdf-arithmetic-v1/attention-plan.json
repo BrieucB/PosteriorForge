@@ -1,0 +1,42 @@
+{
+  "schema": "posteriorforge.attention_optimization_proposal.v1",
+  "status": "proposal_only_not_implemented_or_benchmarked",
+  "gate": "No optimization GPU work unless all24corrected4096context cases pass.",
+  "first_target": "Reuse fixed stage/ensemble context processing across posterior query batches while preserving all21autoregressive dependencies.",
+  "first_discriminating_experiment": "One fixed later-stage conditional on savedacceptedprefixes: corrected-unoptimizedfit_preprocessors versus SDKfit_with_cache, FP32, eightmembers, querychunks1/16/128. Compare rawmember/finalprobabilities before measuring speed.",
+  "cache_mode_caveat": "Pinned SDKfit_with_cache deepcopiesmodelsperensemble, buildsKV, movesmodels/cacheCPU; prediction moves them GPU and backCPU. It is not a proven residentGPUcache or speedup.",
+  "measure": [
+    "contextprep and repeatedpredict walls",
+    "cachebytes and residency",
+    "host/device transferbytes and time",
+    "GPUallocated/reserved and CPUmemory",
+    "member/finalprobability agreement",
+    "absolutephysicalsciencegate and corrected-control distributionchanges"
+  ],
+  "cache_keys": [
+    "stage/target",
+    "contextbank and roworder",
+    "featureorder/groupcount",
+    "preprocessor and targettransform",
+    "modelconfig/checkpoint",
+    "featureembeddingseed/state",
+    "dtype/device/precision"
+  ],
+  "additional_risks": [
+    "cachedembeddings and normalization state are not all registeredbuffers",
+    "FP32cachebuild precedes queryforceddtype",
+    "constant-training/OOD-query featurecount behavior needs equivalence testing",
+    "preservetrain/querymasks and groupedattentionheads",
+    "precision/compile/batchreordering are separate changes"
+  ],
+  "source_sha256": {
+    "tabpfn/inference.py": "62470bbfdd4879dd52db86ea7a6e53ae41fbcc22379bfb2866ad906adc71a0bd",
+    "tabpfn/model/multi_head_attention.py": "512220bbf253fb856003f7084976a478753644c9963d563ee678eb3be2c28f35",
+    "tabpfn/model/layer.py": "b7c230f917b3e346e1d9cc83eb9e06fd939dbbd3fe3b2c5f7a8e4b7505142754",
+    "tabpfn/model/transformer.py": "53471f33e5adff20af64a4730b9caba49cf6490f4e2119397b81ef6b3c0f9751",
+    "tabpfn/model/encoders.py": "e16e03c320c69dcd2e9823925d59fa20a0c52008d8cc77ca961c919c7221213e"
+  },
+  "literature_primary_source": "https://github.com/PriorLabs/TabPFN/blob/v2.0.9_/src/tabpfn/inference.py",
+  "attention_arithmetic_vs_bandwidth_bound": "unmeasured; no hardwarecounterclaim",
+  "speedup": "unmeasured; none promised"
+}
