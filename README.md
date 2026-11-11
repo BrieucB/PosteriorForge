@@ -1,5 +1,7 @@
 # PosteriorForge
 
+Built with PriorLabs-TabPFN.
+
 Reproducible frozen-transformer inference engineering on a 21-parameter,
 33-observation analytical hierarchy with six inferred noise scales.
 
@@ -11,12 +13,16 @@ not study text generation or distributed training.
 
 ## Current evidence
 
-Both pinned environments pass 55 CPU tests. A fresh public-only installation and
+Both pinned environments pass 56 CPU tests. A fresh public-only installation and
 GitHub CPU CI pass. The original 11,081,864-parameter checkpoint executed on an
 A100 in FP32 without autocast; a small 128-vector integrity probe passed. Native
 GPU float64 reference algebra agrees with two CPU formulas below 1e-12. See
 [evidence/qualification](evidence/qualification). The container recipe is provided
 but has not been built.
+
+All eight retained float64 references qualify: four scrambles at powers16→18,
+worst CDF precision0.001049 and independent checks passed. See the
+[reference evidence with inline figures](evidence/references/report.md).
 
 **Scientific feasibility is in progress; optimization and scaling are unrun.**
 The checkpoint probe is not a posterior-accuracy result. Portable scientific

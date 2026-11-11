@@ -1,0 +1,35 @@
+{
+  "budget": {
+    "actual_gpu_hours": 0.17472222222222222,
+    "actual_gpu_seconds": 629,
+    "cap_exceeded": false,
+    "cap_gpu_hours": 200,
+    "remaining_gpu_hours": 151.82527777777779,
+    "remaining_gpu_seconds": 546571,
+    "reservation_count": 34,
+    "reserved_gpu_hours": 48.0,
+    "reserved_gpu_seconds": 172800
+  },
+  "created_utc": "2026-11-11T13:43:55.737735+00:00",
+  "expected_runs": 24,
+  "figures": {
+    "budget": "compute-budget.png",
+    "reference": "reference-qualification.png"
+  },
+  "inputs": {
+    "gate_sha256": "0b213b4a7f16118270261c7a5bb7e3c2029b84f1715c1d5a2ed7b244364094f6",
+    "ledger_sha256": "4166c49e5ae5743887e0b4e98e00565ac98513e70df358e942c74fe8e69d6c66"
+  },
+  "optimization_authorized_by_gate": false,
+  "passed_runs": 0,
+  "schema": "posteriorforge.evidence_report.v1",
+  "scientific_gate_passed": false,
+  "scientific_status": "incomplete",
+  "unmeasured": [
+    "agreement",
+    "latency",
+    "memory",
+    "optimization_profiles",
+    "multi_gpu_scaling"
+  ]
+}

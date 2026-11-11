@@ -11,6 +11,31 @@ from .science.analytical_benchmark_reference_v2 import FullHierarchyReference, r
 from .validation import assess_samples, make_reference_input
 
 
+def verify_run_binding(manifest, context, query, seed, case):
+    expected = {"scientific_fingerprint": build_problem().scientific_fingerprint,
+                "parameter_order": list(build_problem().parameter_order),
+                "context_theta": array_descriptor(context.theta),
+                "context_obs": array_descriptor(context.obs),
+                "checkpoint_sha256": CHECKPOINT_SHA256,
+                "upstream_revision": UPSTREAM_REVISION,
+                "upstream_files": upstream_source_hashes(),
+                "context_filter": "no_filtering", "max_iter_rejection": None,
+                "scientific_run": True, "microbatch": 10000,
+                "seed": derive_seed(seed, "posterior", case=case),
+                "repetition": 0, "rank": 0, "world_size": 1}
+    for field, expected_value in expected.items():
+        if manifest.get(field) != expected_value:
+            raise ValueError(f"inference contract mismatch: {field}")
+    actual_settings = dict(manifest["regressor_settings"])
+    actual_settings.pop("model_path")
+    expected_settings = frozen_regressor_settings("unused.ckpt")
+    expected_settings.pop("model_path")
+    if actual_settings != expected_settings:
+        raise ValueError("frozen regressor settings mismatch")
+    if manifest["query"] != array_descriptor(query):
+        raise ValueError("inference query differs from held-out observation")
+
+
 def evaluate_gate(*, banks, references, runs, output):
     result = {"schema": "posteriorforge.scientific_gate.v1", "status": "incomplete",
               "passed": False, "expected_runs": 24, "context_size": 4096,
@@ -66,26 +91,7 @@ def evaluate_gate(*, banks, references, runs, output):
                 else:
                     query = load_heldout(banks, case).obs
                     context = load_context(banks, seed, 4096)
-                    expected = {"scientific_fingerprint": build_problem().scientific_fingerprint,
-                                "parameter_order": list(build_problem().parameter_order),
-                                "context_theta": array_descriptor(context.theta),
-                                "context_obs": array_descriptor(context.obs),
-                                "checkpoint_sha256": CHECKPOINT_SHA256,
-                                "upstream_revision": UPSTREAM_REVISION,
-                                "upstream_files": upstream_source_hashes(),
-                                "context_filter": "no_filtering", "max_iter_rejection": None,
-                                "scientific_run": True, "microbatch": 10000,
-                                "seed": derive_seed(seed, "posterior", case=case),
-                                "repetition": 0, "rank": 0, "world_size": 1}
-                    for field, expected_value in expected.items():
-                        if manifest.get(field) != expected_value:
-                            raise ValueError(f"inference contract mismatch: {field}")
-                    actual_settings = dict(manifest["regressor_settings"])
-                    actual_settings.pop("model_path")
-                    expected_settings = frozen_regressor_settings("unused.ckpt")
-                    expected_settings.pop("model_path")
-                    if actual_settings != expected_settings:
-                        raise ValueError("frozen regressor settings mismatch")
+                    verify_run_binding(manifest, context, query, seed, case)
                     if manifest["query"] != array_descriptor(query):
                         raise ValueError("inference query differs from held-out observation")
                     payload = path.parent / "samples.npz"
@@ -110,6 +116,6 @@ def evaluate_gate(*, banks, references, runs, output):
     elif any(status == "execution_failure" for status in statuses):
         result["status"] = "execution_failure"
     else:
-        result["status"] = "reference_or_cdf_inconclusive"
+        result["status"] = "numerical_inconclusive"
     write_json(output, result)
     return result

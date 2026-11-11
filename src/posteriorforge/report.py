@@ -272,7 +272,7 @@ def render_report(*, gate, ledger, output):
     expected_runs = source_gate.get("expected_runs", 24)
     status = source_gate.get("status", "unknown")
     authorized = source_gate.get("passed") is True and source_gate.get("optimization_authorized_by_gate") is True
-    lines = ["# PosteriorForge retained evidence", "", f"Scientific gate status: **{status}**. "
+    lines = ["# PosteriorForge retained evidence", "", "Built with PriorLabs-TabPFN.", "", f"Scientific gate status: **{status}**. "
              f"{passed_runs}/{expected_runs} expected upstream runs passed the absolute gate.", "",
              "This is an eight-case diagnostic screen of the analytical 21-parameter, 33-observation "
              "inferred-noise hierarchy. It is not full SBC or a global calibration certificate.", "",

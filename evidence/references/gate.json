@@ -1,0 +1,208 @@
+{
+  "context_size": 4096,
+  "expected_count": 50000,
+  "expected_runs": 24,
+  "optimization_authorized_by_gate": false,
+  "passed": false,
+  "references": [
+    {
+      "case": 0,
+      "cdf_precision": 0.0006115610036022678,
+      "manifest_sha256": "364289ef904e5a2841416851d03944646d7e958c7c55d519c1914fc3f8b23f39",
+      "state": "verified"
+    },
+    {
+      "case": 1,
+      "cdf_precision": 0.0005061619785570182,
+      "manifest_sha256": "6137794b17d51989b1a4341c2a5670f5e9ad48862ebc79e952c500aee5da93fa",
+      "state": "verified"
+    },
+    {
+      "case": 2,
+      "cdf_precision": 0.0007269440088987222,
+      "manifest_sha256": "9eb99c31add3cd68d4219f980b0f46bdaecad62d2ead651aff30d07a04d93bc8",
+      "state": "verified"
+    },
+    {
+      "case": 3,
+      "cdf_precision": 0.0007322728862213523,
+      "manifest_sha256": "37b682f7e2c666f1759bceeb52f7f99e77efa596c304af5f9d221e714a207505",
+      "state": "verified"
+    },
+    {
+      "case": 4,
+      "cdf_precision": 0.0008773673620354749,
+      "manifest_sha256": "b9e1e27354ff45a87ed172100dc23c3ba2e3dda4fa804131121406dc76f8c86f",
+      "state": "verified"
+    },
+    {
+      "case": 5,
+      "cdf_precision": 0.0008513249322765759,
+      "manifest_sha256": "9167b1561e4ee8d22d044e6ccd6834eceb2935dad6c3c1bdbf0ace0445ff5fd5",
+      "state": "verified"
+    },
+    {
+      "case": 6,
+      "cdf_precision": 0.0007491466897707189,
+      "manifest_sha256": "9426516c372528bc20ea01a101bc04a03ce87f86214bf44de93e3a66431754ea",
+      "state": "verified"
+    },
+    {
+      "case": 7,
+      "cdf_precision": 0.0010483981870132997,
+      "manifest_sha256": "83abcddf87b96f5a2619ef18f035e9913a3c2d01649137e6b1f064414bece4c3",
+      "state": "verified"
+    }
+  ],
+  "runs": [
+    {
+      "case": 0,
+      "context_seed": 20261111,
+      "manifest_file": "context-4096/seed-20261111-case-0/manifest.json",
+      "manifest_sha256": "97fdacbae665ba348599d4e21ce56fabfc6a8cca175c3a5ef812126f68f8057d",
+      "passed": false,
+      "status": "execution_failure"
+    },
+    {
+      "case": 1,
+      "context_seed": 20261111,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 2,
+      "context_seed": 20261111,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 3,
+      "context_seed": 20261111,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 4,
+      "context_seed": 20261111,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 5,
+      "context_seed": 20261111,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 6,
+      "context_seed": 20261111,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 7,
+      "context_seed": 20261111,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 0,
+      "context_seed": 20261112,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 1,
+      "context_seed": 20261112,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 2,
+      "context_seed": 20261112,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 3,
+      "context_seed": 20261112,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 4,
+      "context_seed": 20261112,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 5,
+      "context_seed": 20261112,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 6,
+      "context_seed": 20261112,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 7,
+      "context_seed": 20261112,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 0,
+      "context_seed": 20261113,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 1,
+      "context_seed": 20261113,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 2,
+      "context_seed": 20261113,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 3,
+      "context_seed": 20261113,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 4,
+      "context_seed": 20261113,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 5,
+      "context_seed": 20261113,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 6,
+      "context_seed": 20261113,
+      "passed": false,
+      "status": "missing"
+    },
+    {
+      "case": 7,
+      "context_seed": 20261113,
+      "passed": false,
+      "status": "missing"
+    }
+  ],
+  "schema": "posteriorforge.scientific_gate.v1",
+  "scope": "eight_case_diagnostic_screen_not_global_calibration_or_SBC",
+  "status": "incomplete"
+}

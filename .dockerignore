@@ -1,0 +1,15 @@
+.git
+.venv
+**/__pycache__
+**/*.egg-info
+build
+dist
+results
+.cache
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+*.npz
+*.npy
+.env
