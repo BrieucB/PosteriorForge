@@ -1,0 +1,20 @@
+{
+  "schema": "posteriorforge.performance_first_policy.v1",
+  "human_priority": "Improve runtime as much as reasonably supported before accuracy debugging; keep50000completeposteriorvectors.",
+  "supersedes_previous_optimization_stop_rule_for_this_phase": true,
+  "known_physical_accuracy_status": "model_failure; unchanged and visible",
+  "performance_control": "CDF-arithmetic-corrected unoptimized FP32 raw33obs context4096 case0",
+  "end_to_end_count": 50000,
+  "small_fixed_conditional_probes": "Engineering qualification, not reducedposteriorbenchmarks",
+  "performance_acceptance": {
+    "complete_finite_supported": true,
+    "conditional_numerical_qualification": true,
+    "relative_distribution_investigation_flags": {"cdf": 0.01, "mean_reference_sd": 0.05, "sd_fraction": 0.05},
+    "absolute_physical_gate_required_for_performance_phase": false,
+    "absolute_physical_metrics_recorded": true
+  },
+  "sequence": ["FP32cachequalification", "structural50kengine", "microbatchsweep", "separateprecision/backend/compileexperiments", "same-node1/2/4GPUreplication", "freezequalifiedfastengine", "sufficientstatisticsandcontrolledfixed-modelaccuracyvariants"],
+  "frozen": ["checkpoint", "originalscience", "originalevidence", "originalenvironmentlocks", "sixupstreamfiles", "CDFarithmeticrepair", "50kE2Ecount"],
+  "gpu_budget": {"immutable_cumulative_hours": 200, "actual_before_phase_hours": 17.4825, "optimization_planning_envelope_hours": 90, "planning_envelope_is_not_spending_target": true},
+  "outside_scope": ["newtraining", "newcheckpoint", "newworldbanks", "addedobservations", "physicalsimulators", "multi-node", "externalAPIservice"]
+}

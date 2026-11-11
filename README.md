@@ -11,6 +11,20 @@ reused through 21 autoregressive parameter stages. This project studies posterio
 sampling, memory, synchronization, and same-node independent sampling. It does
 not study text generation or distributed training.
 
+## Current performance-first phase
+
+The user explicitly authorized runtime optimization **before** the remaining
+posterior accuracy repairs, keeping **50,000 complete posterior vectors** in every
+end-to-end benchmark. This supersedes the former optimization stopping rule for
+this phase. The known scientific failures remain true and visible.
+
+The CDF-corrected unoptimized variant is the performance control. New execution
+paths must preserve conditional probabilities and complete-vector sampling,
+pass relative distribution checks, and report the absolute physical metrics
+separately. FP32 context/KV reuse comes first, followed by measured batching,
+precision/compilation and same-node independent GPU workers. Accuracy work follows
+on the qualified faster engine. See [the explicit policy](variants/performance-first-v1.json).
+
 ## Terminal scientific result
 
 **The fixed baseline fails the accepted diagnostic screen in all 24 runs.**
@@ -80,7 +94,7 @@ including reference work and failed jobs, must be reserved and reconciled in a
 single ledger against the hard cumulative **200 allocated GPU-hour** cap.
 See [budget policy](docs/budget.md).
 
-## Scientific stopping rule
+## Original scientific stopping rule
 
 Three independent 4096-world joint-prior banks provide nested prefixes
 256/1024/4096. Eight separate central-90% held-out cases are shared by all runs.
@@ -90,7 +104,8 @@ be at most 0.005 with retained refinement and independent checks. Marginal and
 32 predefined joint-projection CDF error must be at most 0.10, absolute mean
 bias at most 0.2 reference SD, and SD ratios within [0.8, 1.2].
 
-A model failure stops optimization and multi-GPU work. Reference uncertainty
+The original phase stopped optimization and multi-GPU work after model failure.
+The current performance-first phase is the explicit exception above. Reference uncertainty
 cannot yield a pass. The eight cases are a diagnostic screen, not global SBC
 or calibration certification. Lower-context failures remain visible.
 
