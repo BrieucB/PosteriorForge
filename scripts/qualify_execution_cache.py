@@ -110,41 +110,155 @@ def compare_predictions(reference, candidate):
             "final_logits": compare_log_probabilities(_numpy(reference["logits"]), _numpy(candidate["logits"]))}
 
 
-def inverse_cdf_probe(reference, candidate, cdf_delta):
-    """Use original icdf at common uniforms, with probability-error quantile brackets.
+def finite_bar_cdf64(probabilities,borders,value):
+    """Analytic diagnostic CDF only; no production value is clipped/repaired."""
+    p=np.asarray(probabilities,dtype=np.float64);b=np.asarray(borders,dtype=np.float64)
+    if np.isnan(value):return float("nan")
+    if value<=b[0]:return 0.
+    if value>=b[-1]:return 1.
+    total=p.sum();j=int(np.searchsorted(b,value,side="right")-1)
+    return float((p[:j].sum()+p[j]*(value-b[j])/(b[j+1]-b[j]))/total)
 
-    u=1 is stress only. Nonfinite original endpoint behavior is retained/reported,
-    never clipped or replaced. This is not a new production sampler.
+
+def replay_stock_icdf32(probabilities,cumulative,borders,uniform):
+    """Independent NumPy replay of the guarded original FP32 inverse arithmetic."""
+    p=np.asarray(probabilities,dtype=np.float32);c=np.asarray(cumulative,dtype=np.float32);b=np.asarray(borders,dtype=np.float32)
+    u=np.float32(uniform);index=min(max(int(np.searchsorted(c,u,side="left")),0),len(p)-1)
+    before=np.float32(0) if index==0 else c[index-1]
+    with np.errstate(invalid="ignore",divide="ignore",over="ignore",under="ignore"):
+        rest=np.float32(u-before);width=np.float32(b[index+1]-b[index]);product=np.float32(width*rest)
+        return float(np.float32(b[index]+np.float32(product/p[index])))
+
+
+def _same_float(left,right):
+    return (np.isnan(left) and np.isnan(right)) or left==right
+
+
+def inverse_cdf_probe(reference,candidate,cdf_delta):
+    """Contract2: unchanged original arithmetic plus probability-space residuals.
+
+    The independent original-FP32 replay predicts existing cumulative/endpoint
+    roundoff. It does not repair the sampler or use the candidate value to choose
+    its own error budget. u=1 is diagnostic stress only. CDF/TV tolerances elsewhere
+    are unchanged; this check does not claim a uniform quantile-value bound.
     """
-    left, right = reference["criterion"], candidate["criterion"]
-    a, b = reference["logits"], candidate["logits"]
-    rows = sorted(set([0, len(a)//2, len(a)-1]))
-    span = float((left.borders[-1]-left.borders[0]).item())
-    allowance = max(abs(span)*THRESHOLDS["quantile_coordinate_span_fraction"], np.finfo(np.float32).eps)
-    failures = []; errors = []; nonfinite = []; tested = 0; same_input_failures = 0
+    left,right=reference["criterion"],candidate["criterion"]
+    a,b=reference["logits"],candidate["logits"]
+    rows=sorted(set([0,len(a)//2,len(a)-1]));borders=_numpy(left.borders)
+    span=float(borders[-1]-borders[0]);failures=[];errors=[];nonfinite=[];tested=0;same_input_failures=0;points=[]
+    max_cumulative_roundoff=0.;max_probability_residual=0.;max_replay_residual=0.;tail_count=0;replay_failures=0
     for row in rows:
-        probabilities = a[row].softmax(-1)
-        knots = probabilities.cumsum(-1)
-        selected = [int(len(knots)*fraction) for fraction in (.1, .5, .9)]
-        uniforms = sorted(set([0., float(np.finfo(np.float32).eps), .1, .5, .9, 1.-float(np.finfo(np.float32).eps), 1., *[float(knots[index].item()) for index in selected]]))
+        pa=a[row].softmax(-1);pb=b[row].softmax(-1)
+        ca=pa.cumsum(-1);cb=pb.cumsum(-1)
+        p0,p1=_numpy(pa),_numpy(pb);c0,c1=_numpy(ca),_numpy(cb)
+        ideal0=np.cumsum(p0.astype(np.float64)/p0.astype(np.float64).sum())
+        ideal1=np.cumsum(p1.astype(np.float64)/p1.astype(np.float64).sum())
+        delta64=float(np.abs(ideal0-ideal1).max())
+        roundoff0=float(np.abs(c0.astype(np.float64)-ideal0).max())
+        roundoff1=float(np.abs(c1.astype(np.float64)-ideal1).max())
+        roundoff=max(roundoff0,roundoff1);max_cumulative_roundoff=max(max_cumulative_roundoff,roundoff)
+        tail_band=roundoff0+roundoff1+delta64
+        selected=[int(len(c0)*fraction) for fraction in (.1,.5,.9)]
+        uniforms=sorted(set([0.,float(np.finfo(np.float32).eps)/2,float(np.finfo(np.float32).eps),.1,.5,.9,1.-float(np.finfo(np.float32).eps),1.-float(np.finfo(np.float32).eps)/2,1.,*[float(c0[i]) for i in selected]]))
         for u in uniforms:
-            if not 0 <= u <= 1: continue
-            ref = float(left.icdf(a[row], u).item()); value = float(right.icdf(b[row], u).item())
-            identical = float(right.icdf(a[row], u).item())
-            if not ((np.isnan(ref) and np.isnan(identical)) or ref == identical):same_input_failures += 1
-            low = float(left.icdf(a[row], max(0.,u-cdf_delta)).item())
-            high = float(left.icdf(a[row], min(1.,u+cdf_delta)).item())
-            tested += 1
+            if not 0<=u<=1:continue
+            u32=float(np.float32(u));ref=float(left.icdf(a[row],u).item());value=float(right.icdf(b[row],u).item())
+            identical=float(right.icdf(a[row],u).item());replay=replay_stock_icdf32(p1,c1,borders,u)
+            if not _same_float(ref,identical):same_input_failures+=1
+            replay_equal=_same_float(value,replay);production=u32<1.
+            if production and not replay_equal:replay_failures+=1;failures.append({"row":row,"u":u,"reason":"candidate differs from independent stock FP32 arithmetic replay"})
+            tested+=1;endpoint_band=(u32<=tail_band or 1.-u32<=tail_band);tail_count+=int(endpoint_band and production)
             if np.isfinite(ref) and np.isfinite(value):errors.append(abs(ref-value)/max(abs(span),1e-30))
-            else:nonfinite.append({"row":row,"u":u,"reference":str(ref),"candidate":str(value)})
-            if np.isfinite(ref) and not np.isfinite(value):failures.append({"row":row,"u":u,"reason":"candidate nonfinite for finite control"})
-            elif np.isfinite(value) and np.isfinite(low) and np.isfinite(high) and not low-allowance <= value <= high+allowance:
-                failures.append({"row":row,"u":u,"reason":"outside CDF-error quantile bracket"})
-    return {"passed":not failures and same_input_failures==0,"tested_common_uniforms":tested,
-            "same_logits_and_borders_exact_failures":same_input_failures,"bracket_failures":failures[:12],
+            else:nonfinite.append({"row":row,"u":u,"reference":str(ref),"candidate":str(value),"independent_replay":str(replay),"in_measured_roundoff_tail_band":bool(endpoint_band)})
+            residual=None;replay_residual=None;budget=None
+            if np.isfinite(value) and np.isfinite(replay):
+                residual=abs(finite_bar_cdf64(p0,borders,value)-u32)
+                replay_residual=abs(finite_bar_cdf64(p1,borders,replay)-u32)
+                # Triangle bound: reference/candidate CDF separation plus the
+                # independently predicted original sampler numerical residual.
+                budget=delta64+replay_residual+8*len(p0)*np.finfo(np.float64).eps
+                max_probability_residual=max(max_probability_residual,residual)
+                max_replay_residual=max(max_replay_residual,replay_residual)
+                if production and residual>budget:failures.append({"row":row,"u":u,"reason":"probability residual exceeds CDF separation plus independent original roundoff","residual":residual,"budget":budget})
+            elif production and not endpoint_band:
+                failures.append({"row":row,"u":u,"reason":"nonfinite interior inverse outside measured roundoff tail band"})
+            points.append({"row":row,"u":u,"production_uniform":production,"in_measured_roundoff_tail_band":bool(endpoint_band),
+                           "independent_stock_replay_exact":bool(replay_equal),"probability_residual":residual,
+                           "independent_stock_roundoff_residual":replay_residual,"probability_budget":budget,
+                           "cdf_delta_float64":delta64,"measured_cumulative_roundoff":roundoff})
+    return {"icdf_contract_version":2,"passed":not failures and same_input_failures==0,
+            "tested_common_uniforms":tested,"same_logits_and_borders_exact_failures":same_input_failures,
+            "independent_fp32_replay_failures":replay_failures,"probability_space_failures":failures[:12],
             "max_normalized_common_uniform_value_difference":max(errors) if errors else None,
             "nonfinite_original_endpoint_behavior":nonfinite[:12],"u_one_is_stress_not_production":True,
-            "cdf_delta_for_bracket":cdf_delta,"coordinate_allowance":allowance}
+            "u_one_never_vetoes_probability_space_comparison":True,"cdf_delta_raw_probability_masses":cdf_delta,
+            "max_measured_cumulative_roundoff":max_cumulative_roundoff,"max_probability_residual":max_probability_residual,
+            "max_independent_stock_roundoff_residual":max_replay_residual,"production_probes_in_measured_tail_band":tail_count,
+            "diagnostic_points":points,"production_sampler_changed":False,"probabilities_normalized_only_for_analytic_CDF_diagnostic":True}
+
+
+def qualify_components(engine,full_prediction,queries,first_prediction=None):
+    """Separate optional component/mass-corrected sampler screen on prepared data."""
+    import torch
+    from posteriorforge import execution_mixture as mixture
+    component=mixture.ComponentMixtureExecutor(engine);members=[];fast_failures=0;observed_raw=[];observed_normalized=[];observed_mass=[]
+    captured=np.stack([_numpy(m["translated_probabilities"][:16]) for m in full_prediction["members"]])
+    roundoff=mixture.mixture_roundoff_report(captured)
+    for index in range(8):
+        cdf_before=engine.cdf_descriptor["patched_call_count"]
+        prediction=component.predict_component(index,queries[:16],capture_member=True)
+        cdf_delta=engine.cdf_descriptor["patched_call_count"]-cdf_before
+        corrected_fingerprint=(engine.cdf_descriptor.get("executed_corrected_cdf_code_sha256")==engine.cdf_descriptor.get("corrected_cdf_code_sha256") and engine.cdf_descriptor.get("corrected_cdf_code_sha256")!=engine.cdf_descriptor.get("original_cdf_code_sha256"))
+        original=full_prediction["members"][index];observed=prediction["member"]
+        metrics=compare_probabilities(_numpy(original["translated_probabilities"][:16]),_numpy(observed["translated_probabilities"]))
+        identity=original["configuration_identity"]==observed["configuration_identity"]
+        borders=_same(original["from_borders"],observed["from_borders"]) and _same(original["to_borders"],observed["to_borders"])
+        dtype=str(observed["raw_logits"].dtype)==str(prediction["logits"].dtype)=="torch.float32"
+        raw=_numpy(observed["translated_probabilities"]).astype(np.float64)
+        expected_mass=raw.sum(-1);mass=_numpy(prediction["component_raw_mass"])
+        observed_raw.append(raw);observed_normalized.append(_numpy(prediction["logits"].softmax(-1)).astype(np.float64));observed_mass.append(mass)
+        mass_roundoff_bound=8*raw.shape[1]*np.finfo(np.float64).eps
+        mass_error=float(np.abs(expected_mass-mass).max())
+        mass_exact=bool(mass_error<=mass_roundoff_bound)
+        normalized=compare_probabilities(raw/expected_mass[:,None],_numpy(prediction["logits"].softmax(-1)))
+        u=torch.tensor(np.resize(np.array([0.,np.finfo(np.float32).eps/2,np.finfo(np.float32).eps,.1,.5,.9,1-np.finfo(np.float32).eps,np.nextafter(np.float32(1),np.float32(0))],np.float32),16),dtype=torch.float32)
+        fast=mixture.finite_bar_icdf(prediction["logits"],prediction["criterion"].borders,u)
+        stock=torch.stack([prediction["criterion"].icdf(prediction["logits"][row],float(u[row])).reshape(()) for row in range(len(u))])
+        exact=bool(((fast==stock)|(torch.isnan(fast)&torch.isnan(stock))).all())
+        fast_failures+=int(not exact)
+        metrics.update(ensemble_index=index,configuration_identity_equal=bool(identity),exact_borders=bool(borders),float32=dtype,
+            component_raw_mass_matches_fp64_sum=mass_exact,component_raw_mass_sum_error=mass_error,component_raw_mass_fp64_roundoff_bound=mass_roundoff_bound,mass_min=float(mass.min()),mass_max=float(mass.max()),
+            component_head_mass_envelope=float(prediction["head_mass_envelope"]),normalized_component=normalized,
+            corrected_cdf_call_delta=cdf_delta,executed_corrected_helper_fingerprint_matches=corrected_fingerprint,
+            fast_icdf_same_logits_exact=exact,fast_icdf_nonfinite_matches=int((~torch.isfinite(stock)).sum()))
+        metrics["passed"]=bool(metrics["passed"] and identity and borders and dtype and mass_exact and normalized["passed"] and exact and cdf_delta==1 and corrected_fingerprint)
+        members.append(metrics)
+    full_actual=_numpy(full_prediction["logits"].softmax(-1))[:16]
+    full_ideal=captured.astype(np.float64).mean(0);full_ideal/=full_ideal.sum(-1,keepdims=True)
+    full_log_softmax=compare_probabilities(full_ideal,full_actual)
+    raw_observed=np.stack(observed_raw);raw_mean=raw_observed.mean(0);raw_mean/=raw_mean.sum(-1,keepdims=True)
+    observed_raw_vs_full=compare_probabilities(raw_mean,full_actual)
+    mass_matrix=np.stack(observed_mass);weights=mass_matrix/mass_matrix.sum(0,keepdims=True)
+    weighted_actual=(np.stack(observed_normalized)*weights[:,:,None]).sum(0)
+    observed_outputs_vs_full=compare_probabilities(weighted_actual,full_actual)
+    dedup=None
+    if first_prediction is not None:
+        single=_numpy(first_prediction["logits"].softmax(-1));all_rows=_numpy(full_prediction["logits"].softmax(-1))
+        dedup=compare_probabilities(np.repeat(single,len(all_rows),axis=0),all_rows)
+        u=torch.tensor([0.,np.finfo(np.float32).eps/2,np.finfo(np.float32).eps,.1,.5,.9,1-np.finfo(np.float32).eps,np.nextafter(np.float32(1),np.float32(0))],dtype=torch.float32)
+        fast=mixture.finite_bar_icdf(first_prediction["logits"],first_prediction["criterion"].borders,u)
+        stock=torch.stack([first_prediction["criterion"].icdf(first_prediction["logits"][0],float(value)).reshape(()) for value in u])
+        dedup["shared_icdf_same_logits_exact"]=bool(((fast==stock)|(torch.isnan(fast)&torch.isnan(stock))).all())
+        dedup["passed"]=dedup["passed"] and dedup["shared_icdf_same_logits_exact"]
+    return {"passed":all(m["passed"] for m in members) and roundoff["mass_corrected_reconstruction_passed"] and roundoff["component_mass_guard_passed"] and full_log_softmax["passed"] and observed_raw_vs_full["passed"] and observed_outputs_vs_full["passed"] and (dedup is None or dedup["passed"]),
+        "schema":"posteriorforge.execution_component_qualification.v1","module_sha256":mixture.execution_source_sha256(),
+        "engine_id":mixture.ENGINE_ID,"members":members,"roundoff":roundoff,
+        "normalized_mean_captured_raw_vs_full_fp32":full_log_softmax,"normalized_mean_observed_raw_vs_full_fp32":observed_raw_vs_full,
+        "mass_corrected_observed_outputs_vs_full_fp32":observed_outputs_vs_full,"stage0_shared_distribution":dedup,
+        "fast_icdf_same_logits_failures":fast_failures,"executor_metadata":component.metadata,
+        "sampler_policy":"independent uniform head per row/stage, accepted with observed raw mass/envelope, then independent common finite-bar inverse-CDF uniform",
+        "uniform_head_without_mass_correction_is_not_authorized":True,"stage0_dedup_scope":"full_mixture_only","component_distribution_dedup_qualified":False,"production_uniform_domain":"FP32[0,1);u=1 stock-only stress"}
+
 
 
 def rng_state(torch):
@@ -229,17 +343,18 @@ def profile_prediction(call, output, name, torch):
             "profile_memory":False,"record_shapes":False,"sampler_calls":0,"query_rows":128}
 
 
-def qualify(*,banks,prefix_run,checkpoint,ledger,output,stages=DEFAULT_STAGES,row_counts=DEFAULT_ROWS,max_seconds=1050,profile=True):
+def qualify(*,banks,prefix_run,checkpoint,ledger,output,stages=DEFAULT_STAGES,row_counts=DEFAULT_ROWS,max_seconds=2250,profile=True):
     from posteriorforge.artifacts import runtime_identity,sha256_file,write_json
     from posteriorforge.reference_grid import _require_budgeted_gpu
     if tuple(row_counts)!=DEFAULT_ROWS or any(stage not in range(21) for stage in stages) or len(set(stages))!=len(stages):
         raise ValueError("declared fixed stages and row counts1/16/128/1024 required")
-    if not 60<=max_seconds<=1050:raise ValueError("qualification deadline must be60..1050seconds")
+    if not 60<=max_seconds<=2250:raise ValueError("qualification deadline must be60..2250seconds")
     budget=_require_budgeted_gpu(ledger)
     if budget["gpus"]!=1:raise RuntimeError("one reserved GPU required")
     output=Path(output);output.mkdir(parents=True,exist_ok=False)
     started=time.perf_counter();deadline=started+max_seconds
     result={**runtime_identity(),"schema":SCHEMA,"attribution":ATTRIBUTION,"status":"running","qualified":False,"full21_qualified":False,
+        "icdf_contract_version":2,"full21_sampler_qualified":False,"full21_component_qualified":False,"component_stage_coverage":[],
         "control_variant":"cdf_arithmetic_v1","scope":"fixed_conditional_screen_not_posterior_equivalence",
         "requested_stages":list(stages),"stage_coverage":[],"row_counts":list(row_counts),"thresholds":dict(THRESHOLDS),
         "budget_binding":budget,"internal_deadline_seconds":max_seconds,"stage_results":[],"posterior_vectors_generated":0,
@@ -258,6 +373,7 @@ def qualify(*,banks,prefix_run,checkpoint,ledger,output,stages=DEFAULT_STAGES,ro
         from posteriorforge.gate import verify_run_binding
         from posteriorforge.science.analytical_benchmark_v2 import array_descriptor,build_problem
         import posteriorforge.execution_cache as cache_module
+        import posteriorforge.execution_mixture as mixture_module
         if not torch.cuda.is_available() or torch.cuda.device_count()!=1:raise RuntimeError("one visible CUDA GPU required")
         if torch.get_float32_matmul_precision()!="highest" or torch.backends.cuda.matmul.allow_tf32:raise RuntimeError("FP32 highest/TF32False required")
         source=guard_baseline_source()
@@ -275,7 +391,7 @@ def qualify(*,banks,prefix_run,checkpoint,ledger,output,stages=DEFAULT_STAGES,ro
         problem=build_problem();noise_indices=[problem.parameter_order.index(n) for n in problem.prior.noise_names]
         seed=derive_seed(20261111,"execution-cache-qualification",case=0);np.random.seed(seed);random.seed(seed);torch.manual_seed(seed);torch.cuda.manual_seed_all(seed)
         torch.set_num_threads(int(os.environ.get("OMP_NUM_THREADS","16")))
-        result.update(engine_id=ENGINE_ID,module_sha256=sha256_file(cache_module.__file__),
+        result.update(engine_id=ENGINE_ID,module_sha256=sha256_file(cache_module.__file__),mixture_module_sha256=sha256_file(mixture_module.__file__),
             checkpoint_sha256=CHECKPOINT_SHA256,scientific_fingerprint=problem.scientific_fingerprint,parameter_order=list(problem.parameter_order),
             context_theta=array_descriptor(context.theta),context_obs=array_descriptor(context.obs),query=array_descriptor(obs),
             prefix_manifest_sha256=sha256_file(prefix_run/"manifest.json"),prefix_samples_sha256=prefix_manifest["samples_sha256"],
@@ -314,9 +430,10 @@ def qualify(*,banks,prefix_run,checkpoint,ledger,output,stages=DEFAULT_STAGES,ro
                 cache_before=engine.inspect_cache();cached_contract=model_contract(engine.regressor)
                 if profile_this:
                     result.setdefault("profiles",{})["resident-stage6-predict128"]=profile_prediction(lambda:engine.predict(queries[:128],output_type="full",capture_members=False),output,"resident-stage6-predict128",torch)
-                comparisons=[]
+                comparisons=[];first_prediction=None
                 for count in row_counts:
                     before=rng_identity(rng_state(torch));candidate=engine.predict(queries[:count],output_type="full",capture_members=True)
+                    if count==1:first_prediction=candidate
                     rng_rows.append({"path":"cache","query_rows":count,"before":before,"after":rng_identity(rng_state(torch))})
                     comparisons.append({"query_rows":count,"cache_vs_same_chunk_control":compare_predictions(controls[count],candidate),
                         "control_chunk_vs_1024":compare_predictions(slice_prediction(controls[max(row_counts)],count),controls[count])})
@@ -338,6 +455,16 @@ def qualify(*,banks,prefix_run,checkpoint,ledger,output,stages=DEFAULT_STAGES,ro
                     "peak_allocated_bytes":torch.cuda.max_memory_allocated(),"peak_reserved_bytes":torch.cuda.max_memory_reserved(),
                     "cache_prepare_profiled":False,"predict128_profiled_separately":profile_this}
                 row["passed"]=all(c["cache_vs_same_chunk_control"]["passed"] and c["control_chunk_vs_1024"]["passed"] for c in comparisons) and stress_comparison["passed"] and baseline_after["input_normalization_train_only_verified"] and cached_after["input_normalization_train_only_verified"]
+                component_cdf_before=active["patched_call_count"]
+                if row["passed"]:
+                    try:
+                        row["component_qualification"]=qualify_components(engine,candidate,queries,first_prediction if stage==0 else None)
+                    except Exception as error:
+                        row["component_qualification"]={"passed":False,"error_type":type(error).__name__,"error":str(error)}
+                    if row["component_qualification"]["passed"]:result["component_stage_coverage"].append(stage)
+                else:row["component_qualification"]={"passed":False,"not_run":"base conditional stage did not pass"}
+                row["cdf_call_deltas"]["optional_components"]=active["patched_call_count"]-component_cdf_before
+                row["engine_counters_after_component"]={key:value for key,value in engine.metadata.items() if key!="stages"}
                 result["stage_results"].append(row);result["stage_coverage"].append(stage);engine.close();engine=None
                 result["elapsed_seconds"]=time.perf_counter()-started;write_json(output/"manifest.json",result)
                 del baseline,controls,control_stress,candidate,candidate_stress
@@ -346,11 +473,14 @@ def qualify(*,banks,prefix_run,checkpoint,ledger,output,stages=DEFAULT_STAGES,ro
         result["compatibility_adapter"]=dict(active)
         result["qualified"]=result["status"]=="screen_pass" and len(result["stage_coverage"])==len(stages)
         result["full21_qualified"]=result["qualified"] and set(result["stage_coverage"])==set(range(21))
+        result["component_qualified"]=result["qualified"] and len(result["component_stage_coverage"])==len(stages)
+        result["full21_component_qualified"]=result["full21_qualified"] and set(result["component_stage_coverage"])==set(range(21))
+        result["full21_sampler_qualified"]=result["full21_component_qualified"] and all(row["component_qualification"]["fast_icdf_same_logits_failures"]==0 for row in result["stage_results"])
         if guard_baseline_source()!=source:raise RuntimeError("original sources changed")
-        if sha256_file(cache_module.__file__)!=result["module_sha256"] or sha256_file(__file__)!=result["sources"]["qualification_script_sha256"]:raise RuntimeError("qualification or engine source changed")
+        if sha256_file(cache_module.__file__)!=result["module_sha256"] or sha256_file(mixture_module.__file__)!=result["mixture_module_sha256"] or sha256_file(__file__)!=result["sources"]["qualification_script_sha256"]:raise RuntimeError("qualification or engine source changed")
         result["sources_unchanged"]=True
     except BaseException as error:
-        result.update(status="failed",qualified=False,full21_qualified=False,error_type=type(error).__name__,error=str(error))
+        result.update(status="failed",qualified=False,full21_qualified=False,component_qualified=False,full21_component_qualified=False,full21_sampler_qualified=False,error_type=type(error).__name__,error=str(error))
         if active is not None:result["compatibility_adapter"]=dict(active)
         raise
     finally:
@@ -363,7 +493,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     for name in ("banks","prefix-run","checkpoint","ledger","output"):parser.add_argument("--"+name,required=True)
     parser.add_argument("--stages",default=",".join(map(str,DEFAULT_STAGES)))
-    parser.add_argument("--max-seconds",default=1050,type=int)
+    parser.add_argument("--max-seconds",default=2250,type=int)
     parser.add_argument("--no-profile",action="store_true")
     args=vars(parser.parse_args());args["stages"]=tuple(int(value) for value in args["stages"].split(","));args["profile"]=not args.pop("no_profile")
     result=qualify(**args);print(json.dumps({key:result.get(key) for key in ("schema","status","qualified","full21_qualified","stage_coverage","elapsed_seconds")},indent=2,allow_nan=False))
