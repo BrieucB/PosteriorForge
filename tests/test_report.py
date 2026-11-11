@@ -103,3 +103,33 @@ def test_report_refuses_overwrite_unknown_schema_and_inconsistent_pass(tmp_path)
     write_json(gate_path, gate)
     with pytest.raises(ValueError, match="schema"):
         render_report(gate=gate_path, ledger=ledger, output=tmp_path / "bad-schema")
+
+
+def test_budget_exports_accounted_gpu_count_and_elapsed_separately_from_request(tmp_path):
+    gate, gate_path, unused_ledger = _inputs(tmp_path)
+    ledger_path = tmp_path / "actual-ledger.json"
+    ledger = BudgetLedger(ledger_path)
+    entry = ledger.reserve(gpus=4, walltime_seconds=3600, purpose="actual allocation fixture")
+    ledger.attach_job(entry["reservation_id"], "123")
+    tres = "cpu=16,gres/gpu=1,gres/gpu:a100=1"
+    ledger.reconcile(entry["reservation_id"], {
+        "JobIDRaw": "123", "State": "FAILED", "ElapsedRaw": "900", "AllocTRES": tres,
+        "Account": "eu-26-17", "Partition": "qgpu", "JobName": "pf-fixture"})
+    output = tmp_path / "actual-report"
+    render_report(gate=gate_path, ledger=ledger_path, output=output)
+    snapshot = json.loads((output / "budget.json").read_text())
+    row = snapshot["reservations"][0]
+    assert row["gpus"] == 4  # Requested GPU count remains explicit.
+    assert row["walltime_seconds"] == 3600
+    assert row["accounted_gpus"] == 1
+    assert row["accounted_elapsed_seconds"] == 900
+    assert row["allocated_tres"] == tres
+    assert row["actual_gpu_seconds"] == 900
+    assert snapshot["summary"]["actual_gpu_hours"] == .25
+    with (output / "budget.csv").open() as stream:
+        exported = next(csv.DictReader(stream))
+    assert exported["gpus"] == "4"
+    assert exported["accounted_gpus"] == "1"
+    assert exported["accounted_elapsed_seconds"] == "900"
+    assert exported["allocated_tres"] == tres
+    assert "submitted_argv" not in exported

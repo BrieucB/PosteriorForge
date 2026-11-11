@@ -15,7 +15,8 @@ SCHEMA = "posteriorforge.evidence_report.v1"
 COLORS = {"blue": "#2563b8", "teal": "#087f8c", "green": "#24704a", "orange": "#b56a12",
           "red": "#b83d49", "grey": "#8793a4", "light": "#e6ebf1", "text": "#172b43"}
 BUDGET_FIELDS = ("reservation_id", "purpose", "gpus", "walltime_seconds", "reserved_gpu_seconds",
-                 "actual_gpu_seconds", "state", "job_id", "slurm_state", "created_at", "submitted_at",
+                 "actual_gpu_seconds", "accounted_gpus", "accounted_elapsed_seconds", "allocated_tres",
+                 "state", "job_id", "slurm_state", "created_at", "submitted_at",
                  "reconciled_at", "accounting_exceeded_reservation")
 RUN_FIELDS = ("context_seed", "case", "status", "passed", "manifest_file", "manifest_sha256",
               "max_marginal_cdf_lower", "max_marginal_cdf_upper", "max_joint_projection_cdf_lower",
@@ -255,7 +256,13 @@ def render_report(*, gate, ledger, output):
     plt = _figure_tools()
     rows = _run_rows(source_gate)
     references = source_gate.get("references", [])
-    budget_rows = [{key: entry[key] for key in BUDGET_FIELDS if key in entry} for entry in ledger_value["reservations"]]
+    budget_rows = []
+    for entry in ledger_value["reservations"]:
+        row = {key: entry[key] for key in BUDGET_FIELDS if key in entry}
+        allocated_tres = entry.get("accounting_record", {}).get("AllocTRES")
+        if isinstance(allocated_tres, str):
+            row["allocated_tres"] = allocated_tres
+        budget_rows.append(row)
     figures = {"reference": _reference_figure(plt, references, output),
                "budget": _budget_figure(plt, summary, output)}
     agreement = _agreement_figure(plt, rows, output)
@@ -311,7 +318,9 @@ def render_report(*, gate, ledger, output):
               f"Held reservations: **{summary['reserved_gpu_hours']:.4f} GPU-hours**. "
               f"Capacity after reservations: **{summary['remaining_gpu_hours']:.4f} GPU-hours**.", "",
               "The immutable cap is 200 allocated GPU-hours. Failed allocations and reference calculation "
-              "are included; unknown submission outcomes retain their full reservation.", "",
+              "are included; unknown submission outcomes retain their full reservation. Reconciled job tables "
+              "retain the actual allocated GPU count, elapsed seconds and Slurm allocation TRES separately "
+              "from the requested resources.", "",
               f"![Actual, reserved and available cumulative GPU-hours]({figures['budget']})", "",
               "## Engineering gate", "",
               ("The retained gate authorizes subsequent optimization qualification. This report contains only "

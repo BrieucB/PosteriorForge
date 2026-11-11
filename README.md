@@ -20,9 +20,12 @@ GPU float64 reference algebra agrees with two CPU formulas below 1e-12. See
 [evidence/qualification](evidence/qualification). The container recipe is provided
 but has not been built.
 
-All eight retained float64 references qualify: four scrambles at powers16→18,
-worst CDF precision0.001049 and independent checks passed. See the
+All eight retained float64 references qualify: four scrambles at powers 16 → 18,
+worst CDF precision 0.001049 and independent checks passed. See the
 [reference evidence with inline figures](evidence/references/report.md).
+Adaptive query refinement also passed for all eight cases; its worst precision
+is 0.001052 and each CDF step is below 0.005. See the
+[refined reference evidence](evidence/reference-grids/report.md).
 
 **Scientific feasibility is in progress; optimization and scaling are unrun.**
 The checkpoint probe is not a posterior-accuracy result. Portable scientific

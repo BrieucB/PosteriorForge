@@ -65,6 +65,11 @@ def _parser():
     gate.add_argument("--reference-grids")
     gate.add_argument("--runs", required=True)
     gate.add_argument("--output", required=True)
+    posterior_plot = commands.add_parser("plot-posteriors", help="plot authenticated empirical CDFs against retained references")
+    posterior_plot.add_argument("--gate", required=True)
+    posterior_plot.add_argument("--runs", required=True)
+    posterior_plot.add_argument("--references", required=True)
+    posterior_plot.add_argument("--output", required=True)
     report = commands.add_parser("report", help="render figures and portable evidence from measured artifacts")
     report.add_argument("--gate", required=True)
     report.add_argument("--ledger", required=True)
@@ -120,6 +125,9 @@ def main(argv=None):
     elif operation == "gate":
         from .gate import evaluate_gate
         result = evaluate_gate(**args)
+    elif operation == "plot-posteriors":
+        from .figures import render_posterior_agreement
+        result = render_posterior_agreement(**args)
     elif operation == "report":
         from .report import render_report
         result = render_report(**args)
