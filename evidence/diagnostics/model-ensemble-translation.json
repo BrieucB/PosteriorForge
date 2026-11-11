@@ -1,0 +1,67 @@
+{
+  "actual_cdf": [
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.5,
+      1.0
+    ]
+  ],
+  "actual_model_or_checkpoint_used": false,
+  "attribution": "Built with PriorLabs-TabPFN",
+  "baseline_impact": "The frozen regressor predict path calls this helper on every member, including target_transform=None. This constructed example proves incorrect interpolation and nonidentity translation; actual per-member baseline probability impact has not been measured. Final merged endpoint mass cannot bound this interior-probability defect.",
+  "borders": [
+    -4.0,
+    -2.0,
+    0.0
+  ],
+  "candidate_fix_implemented": false,
+  "cdf_max_abs_error": 0.5,
+  "confirmed_defect": "tabpfn.utils._cdf uses ys - border / width rather than (ys - border) / width. This is a separate internal ensemble translation path from BarDistribution.cdf.",
+  "correct_uniform_cdf": [
+    [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ]
+  ],
+  "device": "CPU",
+  "diagnostic_only": true,
+  "helper_first_line": 558,
+  "identity_translation_max_abs_error": 0.5,
+  "interpretation_limit": "This does not establish that repairing the helper would make the posterior pass its gate. No sampler, SDK source, preprocessing, checkpoint, data, original samples or gate has been changed.",
+  "original_gate_changed": false,
+  "probabilities": [
+    [
+      0.5,
+      0.5
+    ]
+  ],
+  "queries": [
+    -4.0,
+    -3.0,
+    -2.0,
+    -1.0,
+    0.0
+  ],
+  "same_borders_translation_actual": [
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "same_borders_translation_expected": [
+    [
+      0.5,
+      0.5
+    ]
+  ],
+  "schema": "posteriorforge.diagnostic.ensemble_translation.v1",
+  "source": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/utils.py",
+  "source_sha256": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1",
+  "tabpfn_version": "2.0.9",
+  "translate_first_line": 579
+}
