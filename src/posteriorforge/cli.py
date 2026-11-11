@@ -22,6 +22,12 @@ def _parser():
     reference.add_argument("--output", required=True)
     reference.add_argument("--deadline-seconds", type=int, default=7200)
     reference.add_argument("--batch-size", type=int, default=512)
+    grid = commands.add_parser("reference-grid", help="refine CDF queries using authenticated retained nodes")
+    grid.add_argument("--banks", required=True)
+    grid.add_argument("--case", type=int, required=True)
+    grid.add_argument("--reference", required=True)
+    grid.add_argument("--output", required=True)
+    grid.add_argument("--deadline-seconds", type=int, default=1500)
     qualify = commands.add_parser("qualify-reference", help="GPU float64 versus independent CPU algebra")
     qualify.add_argument("--banks", required=True)
     qualify.add_argument("--output", required=True)
@@ -56,6 +62,7 @@ def _parser():
     gate = commands.add_parser("gate", help="assess all 24 complete baseline runs and retained references")
     gate.add_argument("--banks", required=True)
     gate.add_argument("--references", required=True)
+    gate.add_argument("--reference-grids")
     gate.add_argument("--runs", required=True)
     gate.add_argument("--output", required=True)
     report = commands.add_parser("report", help="render figures and portable evidence from measured artifacts")
@@ -87,6 +94,9 @@ def main(argv=None):
         from .reference import prepare_reference
         result = prepare_reference(args["banks"], args["case"], args["output"],
                                    deadline_seconds=args["deadline_seconds"], batch_size=args["batch_size"])
+    elif operation == "reference-grid":
+        from .reference_grid import refine_reference_grid
+        result = refine_reference_grid(args["banks"], args["case"], args["reference"], args["output"], deadline_seconds=args["deadline_seconds"])
     elif operation == "qualify-reference":
         from .reference import qualify_reference
         result = qualify_reference(args["banks"], 0, args["output"])

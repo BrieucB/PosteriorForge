@@ -36,7 +36,48 @@ def verify_run_binding(manifest, context, query, seed, case):
         raise ValueError("inference query differs from held-out observation")
 
 
-def evaluate_gate(*, banks, references, runs, output):
+
+def verify_refined_grid(arrays, manifest, parent_arrays, parent_manifest, parent_sha):
+    if manifest.get("parent_manifest_sha256") != parent_sha or manifest.get("binding") != parent_manifest["binding"]:
+        raise ValueError("refined reference parent binding mismatch")
+    if any(not np.array_equal(arrays[name], parent_arrays[name]) for name in ("directions", "mean", "sd")):
+        raise ValueError("grid refinement changed directions or physical moments")
+    if manifest.get("moment_precision") != parent_manifest["moment_precision"]:
+        raise ValueError("grid refinement changed moment qualification")
+    contract = manifest["grid_contract"]
+    if (contract["schema"] != "posteriorforge.reference_grid_contract.v1"
+            or contract["reference_only_selection"] is not True
+            or contract["maximum_allowed_cdf_step"] != .005
+            or contract["directions_sha256"] != array_descriptor(arrays["directions"])["sha256"]):
+        raise ValueError("refined grid numerical contract mismatch")
+    current = np.linspace(-8., 8., 513)
+    final_queries = arrays["queries"]
+    for entry in manifest["grid_history"]:
+        if array_descriptor(current)["sha256"] != entry["queries_sha256"]:
+            raise ValueError("grid query history hash mismatch")
+        positions = np.searchsorted(final_queries, current)
+        if np.any(positions >= len(final_queries)) or not np.array_equal(final_queries[positions], current):
+            raise ValueError("refinement discarded retained queries")
+        cdfs = arrays["cdfs"][:, positions]
+        selected = np.flatnonzero(np.diff(cdfs, axis=1).max(axis=0) > .005)
+        if selected.tolist() != entry["selected_interval_indices"]:
+            raise ValueError("grid selection was not fixed-reference deterministic")
+        additions = np.asarray(entry["added_queries"])
+        expected = current[selected] + np.diff(current)[selected] / 2
+        if len(additions):
+            if not np.array_equal(additions, expected):
+                raise ValueError("grid additions were not deterministic midpoints")
+            current = np.sort(np.r_[current, additions])
+    if not np.array_equal(current, final_queries):
+        raise ValueError("grid final queries differ from retained history")
+    if manifest.get("state") == "verified":
+        if (manifest["qualification"].get("grid_gate_passed") is not True
+                or np.diff(arrays["cdfs"], axis=1).max() > .005
+                or manifest["cdf_precision"] > .005):
+            raise ValueError("refined grid incorrectly claims qualification")
+
+
+def evaluate_gate(*, banks, references, runs, output, reference_grids=None):
     result = {"schema": "posteriorforge.scientific_gate.v1", "status": "incomplete",
               "passed": False, "expected_runs": 24, "context_size": 4096,
               "expected_count": 50000, "runs": [], "references": [],
@@ -67,6 +108,20 @@ def evaluate_gate(*, banks, references, runs, output):
         if (not np.array_equal(arrays["directions"], expected_directions)
                 or not np.array_equal(arrays["queries"], np.linspace(-8., 8., 513))):
             raise ValueError("fixed joint-projection or dense query definition mismatch")
+        if reference_grids is not None:
+            grid_root = Path(reference_grids) / f"case-{case}"
+            grid_path = grid_root / "manifest.json"
+            if not grid_path.exists():
+                result["references"][-1]["grid_state"] = "missing"
+                continue
+            grid_arrays, grid_manifest = load_reference_distribution(grid_root)
+            verify_refined_grid(grid_arrays, grid_manifest, arrays, manifest, sha256_file(path))
+            result["references"][-1].update(grid_state=grid_manifest["state"],
+                grid_manifest_sha256=sha256_file(grid_path),
+                grid_point_count=len(grid_arrays["queries"]),
+                maximum_cdf_step=grid_manifest["grid_contract"]["maximum_cdf_step"],
+                cdf_precision=grid_manifest["cdf_precision"])
+            arrays, manifest = grid_arrays, grid_manifest
         refs[case] = make_reference_input(arrays, manifest)
     discovered = {}
     for path in sorted(Path(runs).rglob("manifest.json")):
