@@ -1,0 +1,54 @@
+{
+  "schema": "posteriorforge.science-provenance.v1",
+  "source_repository": "https://github.com/BrieucB/BayesArena",
+  "source_revision": "bc455e0e2389307fb72dac7dd11b62b17b58d56e",
+  "ancestor_repository": "https://github.com/BrieucB/MesoUQ",
+  "ancestor_revision": "f0df511e4273032fc2619a406f33f0a009703b34",
+  "copyright": "Copyright (c) 2026 BrieucB",
+  "license": "MIT; src/posteriorforge/science/LICENSE",
+  "scientific_schemas_retained": true,
+  "files": [
+    {
+      "source": "src/bayesarena/inference/hierarchical_problem.py",
+      "target": "src/posteriorforge/science/hierarchical_problem.py",
+      "source_sha256": "03aa2d8a3d279783cf6c599f1400f253f3db2e1e7eb027aff5b7cd1b48fe12d0",
+      "target_sha256": "03aa2d8a3d279783cf6c599f1400f253f3db2e1e7eb027aff5b7cd1b48fe12d0",
+      "adaptation": "none: byte-for-byte relative-import closure"
+    },
+    {
+      "source": "src/bayesarena/inference/hierarchical_exact.py",
+      "target": "src/posteriorforge/science/hierarchical_exact.py",
+      "source_sha256": "db001593cc7307b1290b981622705961c5953001a6c1245fae5ec779938e9687",
+      "target_sha256": "db001593cc7307b1290b981622705961c5953001a6c1245fae5ec779938e9687",
+      "adaptation": "none: byte-for-byte relative-import closure"
+    },
+    {
+      "source": "src/bayesarena/inference/hierarchical_noise.py",
+      "target": "src/posteriorforge/science/hierarchical_noise.py",
+      "source_sha256": "cbf0b8c956362a5eaa31923e9b94a3db3e3ede2072603add51e78105b8c0cbf0",
+      "target_sha256": "cbf0b8c956362a5eaa31923e9b94a3db3e3ede2072603add51e78105b8c0cbf0",
+      "adaptation": "none: byte-for-byte relative-import closure"
+    },
+    {
+      "source": "src/bayesarena/inference/analytical_independent_reference.py",
+      "target": "src/posteriorforge/science/analytical_independent_reference.py",
+      "source_sha256": "59b13a025ccd736233f094484fb52791183c6098a117958c2bf4ce4a0b41d57a",
+      "target_sha256": "59b13a025ccd736233f094484fb52791183c6098a117958c2bf4ce4a0b41d57a",
+      "adaptation": "none: byte-for-byte relative-import closure"
+    },
+    {
+      "source": "src/bayesarena/inference/analytical_benchmark_v2.py",
+      "target": "src/posteriorforge/science/analytical_benchmark_v2.py",
+      "source_sha256": "8d5f286f6d8512391dea2ae036313bec05782d28c7803f336490cbcdce3bd99f",
+      "target_sha256": "8d5f286f6d8512391dea2ae036313bec05782d28c7803f336490cbcdce3bd99f",
+      "adaptation": "none: byte-for-byte relative-import closure"
+    },
+    {
+      "source": "src/bayesarena/inference/analytical_benchmark_reference_v2.py",
+      "target": "src/posteriorforge/science/analytical_benchmark_reference_v2.py",
+      "source_sha256": "6a005b496eec94ba960271d9bc5e9f68fcb6e2c40c072c7546bab8e441479b6a",
+      "target_sha256": "6a005b496eec94ba960271d9bc5e9f68fcb6e2c40c072c7546bab8e441479b6a",
+      "adaptation": "none: byte-for-byte relative-import closure"
+    }
+  ]
+}

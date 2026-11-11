@@ -1,0 +1,12 @@
+{
+  "project": "PosteriorForge",
+  "repo_id": "Prior-Labs/TabPFN-v2-reg",
+  "revision": "02a44705ff7790b50cded404bc59adb94da456a1",
+  "filename": "tabpfn-v2-regressor.ckpt",
+  "sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+  "size_bytes": 44390977,
+  "weights_in_git": false,
+  "source_url": "https://huggingface.co/Prior-Labs/TabPFN-v2-reg/resolve/02a44705ff7790b50cded404bc59adb94da456a1/tabpfn-v2-regressor.ckpt",
+  "license": "Prior Labs License 1.1",
+  "attribution": "Built with PriorLabs-TabPFN"
+}

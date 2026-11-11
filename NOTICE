@@ -1,0 +1,14 @@
+PosteriorForge scientific source derives from BayesArena
+https://github.com/BrieucB/BayesArena at bc455e0e2389307fb72dac7dd11b62b17b58d56e,
+which derives from MesoUQ https://github.com/BrieucB/MesoUQ
+at f0df511e4273032fc2619a406f33f0a009703b34.
+Copyright (c) 2026 BrieucB. The MIT notice is retained in LICENSE.
+Per-file source hashes and adaptation records are in provenance/.
+
+The vendored NPE-PFN implementation is by Julius Vetter, Manuel Gloeckler,
+Daniel Gedon, and contributors, pinned to mackelab/npe-pfn
+29c1e900a89781ee00677df6d2415a6664e59c37. Its individual Prior Labs License 1.1
+and notices apply to that subtree. TabPFN and pretrained weights have their own
+Prior Labs terms. See src/posteriorforge/upstream and docs/environment.md.
+The root MIT notice does not relicense third-party code or model weights.
+No model weights are distributed in this repository.

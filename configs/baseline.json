@@ -1,0 +1,18 @@
+{
+  "schema": "posteriorforge.campaign.v1",
+  "scenario": "analytical21-inferred-noise-baseline",
+  "parameter_dimension": 21,
+  "observation_dimension": 33,
+  "context": {
+    "seeds": [20261111, 20261112, 20261113],
+    "complete_bank_size": 4096,
+    "nested_prefixes": [256, 1024, 4096],
+    "prior": "full_joint"
+  },
+  "heldout": {"seed": 20261114, "count": 8, "central_prior_mass": 0.9, "shared_across_runs": true},
+  "posterior": {"complete_accepted_count": 50000, "upstream_chunk_size": 10000, "parameter_order": "scientific_manifest", "clip_samples": false},
+  "reference": {"dtype": "float64", "backend": "jax", "device": "gpu", "powers": [16, 18, 20, 22], "scrambles": 4, "precision_limit": 0.005, "require_independent_nested_check": true},
+  "feasibility": {"first_context_size": 4096, "first_run_count": 24, "cdf_max": 0.1, "absolute_bias_reference_sd_max": 0.2, "sd_ratio_bounds": [0.8, 1.2], "joint_projection_count": 32, "stop_before_optimization_on_failure": true},
+  "engineering": {"requires_scientific_gate_pass": true, "profiling_case": 0, "microbatches": [1024, 4096, 10000], "same_node_gpu_counts": [1, 2, 4], "timing_repeats": 3, "initial_precision": "float32"},
+  "budget": {"hard_allocated_gpu_hours": 200, "account": "eu-26-17", "partition": "qgpu", "reserve_before_submission": true, "include_failures_and_reference": true}
+}

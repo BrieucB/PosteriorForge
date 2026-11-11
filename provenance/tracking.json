@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Qualification",
+    "milestone": 1,
+    "issue": 1,
+    "url": "https://github.com/BrieucB/PosteriorForge/issues/1"
+  },
+  {
+    "title": "Scientific feasibility",
+    "milestone": 2,
+    "issue": 2,
+    "url": "https://github.com/BrieucB/PosteriorForge/issues/2"
+  },
+  {
+    "title": "Optimization",
+    "milestone": 3,
+    "issue": 3,
+    "url": "https://github.com/BrieucB/PosteriorForge/issues/3"
+  },
+  {
+    "title": "Multi-GPU",
+    "milestone": 4,
+    "issue": 4,
+    "url": "https://github.com/BrieucB/PosteriorForge/issues/4"
+  },
+  {
+    "title": "Final audit",
+    "milestone": 5,
+    "issue": 5,
+    "url": "https://github.com/BrieucB/PosteriorForge/issues/5"
+  }
+]

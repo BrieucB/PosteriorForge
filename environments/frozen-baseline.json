@@ -1,0 +1,64 @@
+{
+  "tabpfn_version": "2.0.9",
+  "regressor_kwargs": {
+    "n_estimators": 8,
+    "categorical_features_indices": null,
+    "softmax_temperature": 0.9,
+    "average_before_softmax": false,
+    "device": "cuda",
+    "ignore_pretraining_limits": false,
+    "inference_precision": "torch.float32",
+    "fit_mode": "fit_preprocessors",
+    "memory_saving_mode": "auto",
+    "random_state": 0,
+    "n_jobs": 1,
+    "inference_config": null
+  },
+  "inference_config_defaults": {
+    "MAX_UNIQUE_FOR_CATEGORICAL_FEATURES": 30,
+    "MIN_UNIQUE_FOR_NUMERICAL_FEATURES": 4,
+    "MIN_NUMBER_SAMPLES_FOR_CATEGORICAL_INFERENCE": 100,
+    "OUTLIER_REMOVAL_STD": "auto",
+    "FEATURE_SHIFT_METHOD": "shuffle",
+    "CLASS_SHIFT_METHOD": "shuffle",
+    "FINGERPRINT_FEATURE": true,
+    "POLYNOMIAL_FEATURES": "no",
+    "SUBSAMPLE_SAMPLES": null,
+    "PREPROCESS_TRANSFORMS": null,
+    "REGRESSION_Y_PREPROCESS_TRANSFORMS": [
+      null,
+      "safepower"
+    ],
+    "USE_SKLEARN_16_DECIMAL_PRECISION": false,
+    "MAX_NUMBER_OF_CLASSES": 10,
+    "MAX_NUMBER_OF_FEATURES": 500,
+    "MAX_NUMBER_OF_SAMPLES": 10000,
+    "FIX_NAN_BORDERS_AFTER_TARGET_TRANSFORM": true,
+    "_REGRESSION_DEFAULT_OUTLIER_REMOVAL_STD": null,
+    "_CLASSIFICATION_DEFAULT_OUTLIER_REMOVAL_STD": 12.0
+  },
+  "regression_preprocessors": [
+    {
+      "name": "quantile_uni",
+      "categorical_name": "ordinal_very_common_categories_shuffled",
+      "append_original": true,
+      "subsample_features": -1,
+      "global_transformer_name": "svd"
+    },
+    {
+      "name": "safepower",
+      "categorical_name": "onehot",
+      "append_original": false,
+      "subsample_features": -1,
+      "global_transformer_name": null
+    }
+  ],
+  "embedding_net": null,
+  "filter_type": "no_filtering",
+  "max_sampling_batch_size": 10000,
+  "max_iter_rejection": null,
+  "with_log_prob": false,
+  "observation_preprocessing": "raw; TabPFN internal pinned preprocessors enabled",
+  "parameter_order": "scientific problem order, 21 sequential stages",
+  "checkpoint_manifest": "provenance/model-tabpfn-v2.json"
+}

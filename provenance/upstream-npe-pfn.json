@@ -1,0 +1,34 @@
+{
+  "repository": "https://github.com/mackelab/npe-pfn",
+  "revision": "29c1e900a89781ee00677df6d2415a6664e59c37",
+  "license": "Prior Labs License 1.1",
+  "attribution": "Built with PriorLabs-TabPFN",
+  "python_files": {
+    "npe_pfn/__init__.py": {
+      "sha256": "a32a437d7910cec8c251ceb6849fece6b61ece32c16e8a346e4afae82bf7bc08",
+      "unchanged": true
+    },
+    "npe_pfn/accept_reject_sampler.py": {
+      "sha256": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+      "unchanged": true
+    },
+    "npe_pfn/npe_pfn.py": {
+      "sha256": "29517328b3ff23e2e8040d19f33e79adef5fc7f91db2cffccf60234344399a85",
+      "unchanged": true
+    },
+    "npe_pfn/restricted_prior.py": {
+      "sha256": "13026cf8a4618aa4ca6406e0596a7ec97c0664de5b7c2b4dd7f31e4c32ece160",
+      "unchanged": true
+    },
+    "npe_pfn/support_posterior.py": {
+      "sha256": "022e5b22b9397e9faea08b73df76b5a0c5cf0c012b665decfe28c5b725c362ee",
+      "unchanged": true
+    },
+    "npe_pfn/tsnpe_pfn.py": {
+      "sha256": "f959662adf6ac6ed5aecefcebad907ef951c22bf05bbcf2c8e0e6312cb054034",
+      "unchanged": true
+    }
+  },
+  "file_count": 6,
+  "license_sha256": "08b1851b4b6136b5fb0cb124d3258e0d91e3e1623f1be5904b77e4d270d112d8"
+}

@@ -1,0 +1,6 @@
+# GPU-backed float64 reference environment, separate from sbi.
+numpy==2.2.6
+scipy==1.15.3
+jax[cuda12]==0.8.3
+matplotlib==3.10.7
+pytest==8.4.2

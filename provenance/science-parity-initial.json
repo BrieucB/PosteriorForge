@@ -1,0 +1,30 @@
+{
+  "schema": "posteriorforge.science-parity.v1",
+  "source_revision": "bc455e0e2389307fb72dac7dd11b62b17b58d56e",
+  "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+  "scientific_manifest_equal": true,
+  "stream_checks": [
+    {
+      "central": false,
+      "rows": 7,
+      "theta_equal": true,
+      "obs_equal": true,
+      "theta_sha256": "2252cfb049b20158b9bc18823c5b2ec41a4c383fd441a7658fba2aa58e6360c5",
+      "obs_sha256": "2f443616a5d37d064bcaa19d9ed13e9d13234f174aba29c4076b9430270b98ca"
+    },
+    {
+      "central": true,
+      "rows": 7,
+      "theta_equal": true,
+      "obs_equal": true,
+      "theta_sha256": "e2ab806adcf64bdd85be75d0af712d90391d10a2a030457bb162f762f0b5d96b",
+      "obs_sha256": "7ad8b4b8817b3cdaf75959ab356cd6f51f534f6b0a6613180c68482069efd153"
+    }
+  ],
+  "runtime": {
+    "python": "3.11.13",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "scope": "small CPU parity check only; no production reference integration or model qualification"
+}
