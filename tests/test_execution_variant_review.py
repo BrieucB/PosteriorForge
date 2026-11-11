@@ -126,10 +126,24 @@ def header(monkeypatch):
     context = SimpleNamespace(theta=np.zeros((4096, 21)), obs=np.zeros((4096, 33)))
     query = np.zeros((1, 33))
     settings = frozen_regressor_settings("unit-fixture.ckpt")
+    from posteriorforge.inference_cdf import guard_baseline_source
+    from posteriorforge import execution_cache
+    from posteriorforge.performance_runner import STREAM_ROLES, STREAM_DTYPES
+    stream_seeds = {key: derive_seed(20261111, role, case=0, rank=0, repetition=0)
+                    for key, role in STREAM_ROLES.items()}
+    streams = {key: {"role": STREAM_ROLES[key], "seed": seed, "dtype": STREAM_DTYPES[key], "device": "cpu"}
+               for key, seed in stream_seeds.items()}
     manifest = {
         "schema": review.RUN_SCHEMA, "variant": "execution_cache_v1", "status": "complete",
         "context_seed": 20261111, "case": 0, "context_size": 4096, "requested_count": 50000,
         "scientific_run": True, "performance_first_authorized": True,
+        "end_to_end": True, "run_purpose": "performance_execution", "sources_unchanged": True,
+        "partial_vector_filtering": False, "clipping_or_repair_performed": False,
+        "rank": 0, "world_size": 1, "completed_stage_indices": list(range(21)),
+        "baseline_execution_source": guard_baseline_source(),
+        "runner_source_sha256": sha256_file(PATH.parents[1]/"src/posteriorforge/performance_runner.py"),
+        "execution_engine": execution_cache.execution_metadata(), "seed_streams": stream_seeds,
+        "expected_patched_call_count": 1, "query_batch_size": 1024,
         "absolute_accuracy_gate_required_for_performance": False, "tail_family_changed": False,
         "observation_preprocessing": "raw; TabPFN frozen preprocessing", "log_density": "not_used",
         "scientific_fingerprint": build_problem().scientific_fingerprint,
@@ -137,10 +151,12 @@ def header(monkeypatch):
         "context_theta": array_descriptor(context.theta), "context_obs": array_descriptor(context.obs),
         "query": array_descriptor(query), "checkpoint_sha256": CHECKPOINT_SHA256,
         "upstream_revision": UPSTREAM_REVISION, "upstream_files": upstream_source_hashes(),
-        "context_filter": "no_filtering", "max_iter_rejection": None, "microbatch": 10000,
-        "seed": derive_seed(20261111, "posterior", case=0), "repetition": 0, "rank": 0, "world_size": 1,
-        "regressor_settings": dict(settings), "compatibility_adapter": {"unit_fixture": True},
-        "sampling_rng_policy": {"policy_id": "unit_fixture_isolated_sampler_v1"},
+        "context_filter": "no_filtering", "max_iter_rejection": None, "microbatch": 50000,
+        "seed": stream_seeds["component_uniform"], "repetition": 0, "rank": 0, "world_size": 1,
+         "regressor_settings": {**settings, "fit_mode": "fit_with_cache"}, "compatibility_adapter": {"unit_fixture": True},
+        "sampling_rng_policy": "independent_cpu_sampling_streams_model_rng_isolated",
+        "sampling_policy": {"head_policy": "not_used", "mass_envelope": None, "streams": streams,
+                            "stage0_dedup": {"enabled": False}},
         "model": {"dtype": "torch.float32", "autocast": False},
     }
     monkeypatch.setattr(review.bindings, "validate_adapter_descriptor", lambda d: {"patched_call_count": 1})
@@ -181,16 +197,19 @@ def qualification_case(tmp_path, header):
     manifest, context, query, _ = header
     manifest["execution_engine"] = execution_metadata()
     coverage = [0, 6, 14, 20]
-    rows = [{"stage_index": j, "passed": True, "stress_comparison": {"passed": True},
-             "comparisons": [{"query_rows": n, "cache_vs_same_chunk_control": {"passed": True},
-                              "control_chunk_vs_1024": {"passed": True}} for n in (1, 16, 128, 1024)],
+    inverse = {"icdf_contract_version": 2, "passed": True,
+               "same_logits_and_borders_exact_failures": 0, "independent_fp32_replay_failures": 0}
+    passed_comparison = {"passed": True, "inverse_cdf": inverse}
+    rows = [{"stage_index": j, "passed": True, "stress_comparison": copy.deepcopy(passed_comparison),
+             "comparisons": [{"query_rows": n, "cache_vs_same_chunk_control": copy.deepcopy(passed_comparison),
+                              "control_chunk_vs_1024": copy.deepcopy(passed_comparison)} for n in (1, 16, 128, 1024)],
              "baseline_model_contract_after": {"input_normalization_train_only_verified": True},
              "cache_model_contract_after": {"input_normalization_train_only_verified": True}}
             for j in coverage]
     q = {"schema": review.QUALIFICATION_SCHEMA, "qualified": True, "status": "screen_pass",
          "engine_id": manifest["execution_engine"]["engine_id"],
          "module_sha256": manifest["execution_engine"]["module_sha256"],
-         "control_variant": "cdf_arithmetic_v1", "stage_coverage": coverage,
+         "control_variant": "cdf_arithmetic_v1", "icdf_contract_version": 2, "stage_coverage": coverage,
          "requested_stages": coverage, "full21_qualified": False, "stage_results": rows,
          "thresholds": dict(review.QUALIFICATION_THRESHOLDS), "row_counts": [1,16,128,1024],
          "sources_unchanged": True, "prefix_manifest_sha256": review.CONTROL_MANIFEST_SHA256,
@@ -245,3 +264,150 @@ def test_engine_configuration_and_sdk_pins_are_bound():
     engine["config"]["normalize_on_train_only"] = False
     with pytest.raises(ValueError, match="configuration invariant"):
         review.validate_engine_metadata(engine)
+
+
+@pytest.fixture
+def sampling_policy():
+    from posteriorforge import execution_mixture as mixture
+    return {**mixture.execution_metadata(), "head_policy": "raw_mass_rejection_v1",
+            "mass_envelope": mixture.HEAD_MASS_ENVELOPE,
+            "stage0_dedup": {"enabled": True, "scope": "full_mixture_only", "component_distribution_dedup": False},
+            "streams": {
+                 "head_proposal": {"role": "execution-head-proposal", "seed": derive_seed(20261111,"execution-head-proposal",case=0,rank=0,repetition=0), "dtype": "int64", "device": "cpu"},
+                "head_acceptance": {"role": "execution-head-acceptance", "seed": derive_seed(20261111,"execution-head-acceptance",case=0,rank=0,repetition=0), "dtype": "float64", "device": "cpu"},
+                "component_uniform": {"role": "execution-component-uniform", "seed": derive_seed(20261111,"execution-component-uniform",case=0,rank=0,repetition=0), "dtype": "float32", "device": "cpu"}}}
+
+
+def test_explicit_mass_corrected_independent_stream_policy_is_accepted(sampling_policy):
+    review.validate_sampling_policy(sampling_policy)
+
+
+@pytest.mark.parametrize("mutation", ["uniform_heads", "envelope", "shared_seed", "wrong_dtype", "component_dedup", "source"])
+def test_biased_or_unqualified_mixture_policy_is_rejected(sampling_policy, mutation):
+    if mutation == "uniform_heads": sampling_policy["head_policy"] = "uniform_normalized_components"
+    if mutation == "envelope": sampling_policy["mass_envelope"] = 1.1
+    if mutation == "shared_seed": sampling_policy["streams"]["component_uniform"]["seed"] = sampling_policy["streams"]["head_acceptance"]["seed"]
+    if mutation == "wrong_dtype": sampling_policy["streams"]["head_acceptance"]["dtype"] = "float32"
+    if mutation == "component_dedup": sampling_policy["stage0_dedup"]["component_distribution_dedup"] = True
+    if mutation == "source": sampling_policy["module_sha256"] = "0"*64
+    with pytest.raises(ValueError):
+        review.validate_sampling_policy(sampling_policy)
+
+
+def test_mixture_header_requires_its_own_policy_not_cache_rng_label(header, sampling_policy):
+    manifest, context, query, control = header
+    manifest["variant"] = "execution_mixture_v1"
+    del manifest["sampling_policy"]
+    with pytest.raises(ValueError, match="sampling"):
+        review.validate_execution_header(manifest, context=context, query=query, control=control)
+    manifest["sampling_policy"] = sampling_policy
+    review.validate_execution_header(manifest, context=context, query=query, control=control)
+
+
+def test_old_icdf_value_contract_cannot_be_relabelled_as_v2(qualification_case):
+    q, manifest, context, query, path, save = qualification_case
+    q["icdf_contract_version"] = 1
+    save()
+    with pytest.raises(ValueError, match="version2"):
+        review.qualification_review(path, manifest, context=context, query=query)
+
+
+def test_each_base_comparison_must_include_independent_v2_replay(qualification_case):
+    q, manifest, context, query, path, save = qualification_case
+    q["stage_results"][0]["comparisons"][0]["cache_vs_same_chunk_control"]["inverse_cdf"]["independent_fp32_replay_failures"] = 1
+    save()
+    with pytest.raises(ValueError, match="ICDFv2"):
+        review.qualification_review(path, manifest, context=context, query=query)
+
+
+@pytest.fixture
+def full_component_proof(qualification_case):
+    from posteriorforge import execution_mixture as mixture
+    q, manifest, context, query, path, save = qualification_case
+    manifest["variant"] = "execution_mixture_v1"
+    q["stage_coverage"] = list(range(21))
+    q["requested_stages"] = list(range(21))
+    q.update(full21_qualified=True, full21_component_qualified=True, full21_sampler_qualified=True,
+             component_qualified=True, component_stage_coverage=list(range(21)),
+             mixture_module_sha256=mixture.execution_source_sha256())
+    row_template = copy.deepcopy(q["stage_results"][0])
+    component = {
+        "schema": "posteriorforge.execution_component_qualification.v1", "passed": True,
+        "module_sha256": mixture.execution_source_sha256(), "engine_id": mixture.ENGINE_ID,
+        "fast_icdf_same_logits_failures": 0, "uniform_head_without_mass_correction_is_not_authorized": True,
+        "executor_metadata": {"full8_member_lists_restored": True},
+        "roundoff": {"component_mass_guard_passed": True, "mass_corrected_reconstruction_passed": True},
+        "normalized_mean_captured_raw_vs_full_fp32": {"passed": True},
+        "normalized_mean_observed_raw_vs_full_fp32": {"passed": True},
+        "mass_corrected_observed_outputs_vs_full_fp32": {"passed": True},
+        "stage0_dedup_scope": "full_mixture_only", "component_distribution_dedup_qualified": False,
+        "stage0_shared_distribution": {"passed": True, "shared_icdf_same_logits_exact": True},
+        "members": [
+            {"ensemble_index": i, "passed": True, "configuration_identity_equal": True,
+             "exact_borders": True, "float32": True, "component_raw_mass_matches_fp64_sum": True,
+             "normalized_component": {"passed": True}, "corrected_cdf_call_delta": 1,
+             "executed_corrected_helper_fingerprint_matches": True, "fast_icdf_same_logits_exact": True,
+             "component_head_mass_envelope": mixture.HEAD_MASS_ENVELOPE}
+            for i in range(8)],
+    }
+    q["stage_results"] = [{**copy.deepcopy(row_template), "stage_index": i,
+                            "component_qualification": copy.deepcopy(component)} for i in range(21)]
+    save()
+    return q, manifest, context, query, path, save
+
+
+def test_complete_mixture_proof_does_not_compare_selected_head_to_full_mixture(full_component_proof):
+    q, manifest, context, query, path, save = full_component_proof
+    result = review.qualification_review(path, manifest, context=context, query=query)
+    assert result["full21_qualified"]
+    assert result["component_and_sampler_proof"]["full21_component_qualified"]
+    assert result["component_and_sampler_proof"]["selected_head_is_not_compared_as_the_full_mixture"]
+
+
+@pytest.mark.parametrize("mutation", [
+    "partial", "sampler_unqualified", "stale_source", "stale_translator", "missing_head",
+    "no_list_restore", "mass", "raw_reconstruction", "actual_api_reconstruction", "unqualified_shared_sampler",
+])
+def test_mixture_cannot_omit_component_sampler_or_reconstruction_proof(full_component_proof, mutation):
+    q, manifest, context, query, path, save = full_component_proof
+    component = q["stage_results"][0]["component_qualification"]
+    if mutation == "partial": q["full21_component_qualified"] = False
+    if mutation == "sampler_unqualified": q["full21_sampler_qualified"] = False
+    if mutation == "stale_source": q["mixture_module_sha256"] = "0"*64
+    if mutation == "stale_translator": component["members"][0]["executed_corrected_helper_fingerprint_matches"] = False
+    if mutation == "missing_head": component["members"] = component["members"][:-1]
+    if mutation == "no_list_restore": component["executor_metadata"]["full8_member_lists_restored"] = False
+    if mutation == "mass": component["roundoff"]["component_mass_guard_passed"] = False
+    if mutation == "raw_reconstruction": component["normalized_mean_observed_raw_vs_full_fp32"]["passed"] = False
+    if mutation == "actual_api_reconstruction": component["mass_corrected_observed_outputs_vs_full_fp32"]["passed"] = False
+    if mutation == "unqualified_shared_sampler": component["stage0_shared_distribution"]["shared_icdf_same_logits_exact"] = False
+    save()
+    with pytest.raises(ValueError):
+        review.qualification_review(path, manifest, context=context, query=query)
+
+
+def test_actual_runner_private_seed_and_wave_metadata_bind_without_claiming_old_rng_identity(header):
+    manifest, context, query, control = header
+    assert manifest["seed"] != derive_seed(20261111, "posterior", case=0)
+    assert manifest["microbatch"] == 50000
+    review.validate_execution_header(manifest, context=context, query=query, control=control)
+
+
+def test_50000_row_worker_cannot_masquerade_as_end_to_end_run(header):
+    manifest, context, query, control = header
+    manifest.update(end_to_end=False, run_purpose="performance_worker", scientific_run=False)
+    with pytest.raises(ValueError):
+        review.validate_execution_header(manifest, context=context, query=query, control=control)
+
+
+def test_stream_seed_label_cannot_hide_different_actual_seed(header):
+    manifest, context, query, control = header
+    manifest["seed"] += 1
+    with pytest.raises(ValueError, match="seed binding"):
+        review.validate_execution_header(manifest, context=context, query=query, control=control)
+
+
+def test_global_stage0_memo_is_not_qualified_by_wave_local_proof(sampling_policy):
+    sampling_policy["stage0_dedup"]["density_scope"] = "global case0 cache"
+    with pytest.raises(ValueError, match="cross-request"):
+        review.validate_sampling_policy(sampling_policy)

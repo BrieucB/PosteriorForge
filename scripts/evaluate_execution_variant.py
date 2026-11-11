@@ -16,7 +16,7 @@ from pathlib import Path
 import numpy as np
 
 from posteriorforge.artifacts import sha256_file, write_json
-from posteriorforge.banks import load_context, load_heldout
+from posteriorforge.banks import derive_seed, load_context, load_heldout
 from posteriorforge.gate import verify_run_binding
 from posteriorforge.inference import support_mask
 from posteriorforge.validation import assess_samples, compare_to_upstream, sample_integrity
@@ -109,41 +109,113 @@ def comparative_assessment(candidate, control, reference, *, expected_count=5000
     return result
 
 
+def validate_sampling_policy(policy):
+    from posteriorforge import execution_mixture as mixture
+    require(isinstance(policy, dict), "explicit sampling_policy mapping required")
+    for key, value in mixture.execution_metadata().items():
+        actual = policy.get(key)
+        require(actual is value if isinstance(value, bool) else actual == value,
+                "mixture sampling metadata mismatch: " + key)
+    require(policy.get("head_policy") == "raw_mass_rejection_v1",
+            "uniform normalized-component selection is not the approved mixture law")
+    require(policy.get("mass_envelope") == mixture.HEAD_MASS_ENVELOPE,
+            "mixture head mass envelope changed")
+    dedup = policy.get("stage0_dedup", {})
+    require(isinstance(dedup, dict) and dedup.get("enabled") is True
+            and dedup.get("scope") == "full_mixture_only"
+            and dedup.get("component_distribution_dedup") is False,
+            "unqualified stage0/component dedup policy")
+    require(dedup.get("density_scope", "proposal-wave-local; no cross-request/case reuse")
+            == "proposal-wave-local; no cross-request/case reuse", "cross-request stage0 memo is unqualified")
+    streams = policy.get("streams")
+    roles = {"head_proposal": ("execution-head-proposal", "int64"),
+             "head_acceptance": ("execution-head-acceptance", "float64"),
+             "component_uniform": ("execution-component-uniform", "float32")}
+    require(isinstance(streams, dict) and set(streams) == set(roles),
+            "three separate head/acceptance/component RNG streams required")
+    seeds = []
+    for key, (role, dtype) in roles.items():
+        stream = streams[key]
+        require(isinstance(stream, dict) and stream.get("role") == role
+                and str(stream.get("dtype")).removeprefix("torch.") == dtype,
+                "sampling stream role/dtype mismatch: " + key)
+        require(type(stream.get("seed")) is int and 0 <= stream["seed"] < 2**64,
+                "explicit integer sampling stream seed required: " + key)
+        require(stream.get("device", "cpu") == "cpu", "CPU sampling stream required: " + key)
+        seeds.append(stream["seed"])
+    require(len(set(seeds)) == 3, "head/acceptance/component stream seeds must differ")
+    return dict(policy)
+
+
 def validate_execution_header(manifest, *, context, query, control):
+    from posteriorforge.inference_cdf import guard_baseline_source
+    from posteriorforge.performance_runner import STREAM_ROLES, STREAM_DTYPES
+    variant = manifest.get("variant")
+    require(variant in ("execution_cache_v1", "execution_mixture_v1"), "unknown execution variant")
     expected = {
-        "schema": RUN_SCHEMA, "variant": "execution_cache_v1", "status": "complete",
+        "schema": RUN_SCHEMA, "variant": variant, "status": "complete",
         "context_seed": 20261111, "case": 0, "context_size": 4096,
         "requested_count": 50000, "scientific_run": True,
+        "end_to_end": True, "run_purpose": "performance_execution",
         "performance_first_authorized": True,
         "absolute_accuracy_gate_required_for_performance": False,
-        "tail_family_changed": False,
+        "tail_family_changed": False, "sources_unchanged": True,
+        "partial_vector_filtering": False, "clipping_or_repair_performed": False,
         "observation_preprocessing": "raw; TabPFN frozen preprocessing",
-        "log_density": "not_used",
+        "log_density": "not_used", "microbatch": 50000, "query_batch_size": 1024,
+        "rank": 0, "world_size": 1, "completed_stage_indices": list(range(21)),
+        "sampling_rng_policy": "independent_cpu_sampling_streams_model_rng_isolated",
     }
     for key, expected_value in expected.items():
         actual = manifest.get(key)
         require(actual is expected_value if isinstance(expected_value, bool) else actual == expected_value,
                 "execution manifest contract mismatch: " + key)
+    require(type(manifest.get("repetition")) is int and manifest["repetition"] >= 0,
+            "explicit nonnegative execution repetition required")
+    require(manifest.get("baseline_execution_source") == guard_baseline_source(),
+            "original execution-source guard changed")
+    runner_path = Path(__file__).resolve().parents[1]/"src/posteriorforge/performance_runner.py"
+    require(manifest.get("runner_source_sha256") == sha256_file(runner_path),
+            "execution runner differs from the recorded source")
     descriptor = bindings.validate_adapter_descriptor(manifest.get("compatibility_adapter"))
+    validate_engine_metadata(manifest.get("execution_engine"))
     original_settings = dict(control["regressor_settings"])
     actual_settings = dict(manifest["regressor_settings"])
-    require(actual_settings.get("fit_mode") in ("fit_preprocessors", "fit_with_cache"),
-            "unapproved execution fit mode")
+    require(actual_settings.get("fit_mode") == "fit_with_cache", "resident executor requires actual fit_with_cache metadata")
     actual_settings["fit_mode"] = original_settings["fit_mode"]
+    policy = manifest.get("sampling_policy", {})
+    if variant == "execution_mixture_v1":
+        validate_sampling_policy(policy)
+    else:
+        require(policy.get("head_policy") == "not_used" and policy.get("mass_envelope") is None
+                and policy.get("stage0_dedup", {}).get("enabled") is False,
+                "resident-full policy must not claim component sampling")
+    streams = policy.get("streams", {})
+    require(set(streams) == set(STREAM_ROLES), "complete sampling stream policy required")
+    seeds = {}
+    for name, role in STREAM_ROLES.items():
+        expected_seed = derive_seed(20261111, role, case=0, rank=0, repetition=manifest["repetition"])
+        stream = streams[name]
+        require(stream.get("role") == role and stream.get("seed") == expected_seed
+                and str(stream.get("dtype")).removeprefix("torch.") == STREAM_DTYPES[name].removeprefix("torch.")
+                and stream.get("device") == "cpu", "execution stream derivation mismatch: " + name)
+        seeds[name] = expected_seed
+    require(len(set(seeds.values())) == 3 and manifest.get("seed_streams") == seeds
+            and manifest.get("seed") == seeds["component_uniform"], "execution sampling seed binding mismatch")
+    # The old binder is reused only for unchanged science/context/checkpoint/settings.
+    # Its original RNG/microbatch metadata are normalized on a private copy AFTER
+    # the actual new versioned execution policy has been independently checked.
     adjusted = copy.deepcopy(manifest)
-    adjusted["regressor_settings"] = actual_settings
+    adjusted.update(regressor_settings=actual_settings, microbatch=10000, repetition=0,
+                    seed=derive_seed(20261111, "posterior", case=0))
     verify_run_binding(adjusted, context, query, 20261111, 0)
     require(manifest.get("model", {}).get("dtype") == "torch.float32"
             and manifest.get("model", {}).get("autocast") is False,
             "execution changed frozen FP32/no-autocast contract")
-    if "expected_patched_call_count" in manifest:
-        expected_calls = manifest["expected_patched_call_count"]
-        require(type(expected_calls) is int and expected_calls == descriptor["patched_call_count"],
-                "execution CDF call coverage differs from its declared plan")
-    require(isinstance(manifest.get("sampling_rng_policy"), dict)
-            and isinstance(manifest["sampling_rng_policy"].get("policy_id"), str)
-            and bool(manifest["sampling_rng_policy"]["policy_id"]),
-            "explicit versioned sampling_rng_policy required")
+    expected_calls = manifest.get("expected_patched_call_count")
+    require(type(expected_calls) is int and expected_calls > 0
+            and expected_calls == descriptor["patched_call_count"],
+            "execution CDF call coverage differs from its declared plan")
     return descriptor
 
 
@@ -157,6 +229,64 @@ def validate_engine_metadata(engine):
     for key, value in approved["config"].items():
         require(engine["config"].get(key) == value, "execution configuration invariant changed: " + key)
     return approved
+
+
+def validate_component_qualification(qualification):
+    from posteriorforge import execution_mixture as mixture
+    require(qualification.get("full21_qualified") is True
+            and qualification.get("full21_component_qualified") is True
+            and qualification.get("full21_sampler_qualified") is True
+            and qualification.get("component_qualified") is True,
+            "full21 base/component/production-sampler qualification required for mixture")
+    require(sorted(qualification.get("component_stage_coverage", [])) == list(range(21)),
+            "mixture component qualification does not cover all21 stages")
+    require(qualification.get("mixture_module_sha256") == mixture.execution_source_sha256(),
+            "mixture source differs from the qualified component module")
+    for row in qualification["stage_results"]:
+        component = row.get("component_qualification", {})
+        require(component.get("schema") == "posteriorforge.execution_component_qualification.v1"
+                and component.get("passed") is True
+                and component.get("module_sha256") == mixture.execution_source_sha256()
+                and component.get("engine_id") == mixture.ENGINE_ID,
+                "invalid or stale component qualification")
+        require(component.get("fast_icdf_same_logits_failures") == 0
+                and component.get("uniform_head_without_mass_correction_is_not_authorized") is True,
+                "production sampler or mass-corrected head law was not qualified")
+        members = component.get("members", [])
+        require([m.get("ensemble_index") for m in members] == list(range(8)),
+                "all eight component paths must be qualified")
+        for member in members:
+            require(member.get("passed") is True
+                    and member.get("configuration_identity_equal") is True
+                    and member.get("exact_borders") is True and member.get("float32") is True
+                    and member.get("component_raw_mass_matches_fp64_sum") is True
+                    and member.get("normalized_component", {}).get("passed") is True
+                    and member.get("corrected_cdf_call_delta") == 1
+                    and member.get("executed_corrected_helper_fingerprint_matches") is True
+                    and member.get("fast_icdf_same_logits_exact") is True
+                    and member.get("component_head_mass_envelope") == mixture.HEAD_MASS_ENVELOPE,
+                    "component source/CDF/mass/production-sampler parity failed")
+        require(component.get("executor_metadata", {}).get("full8_member_lists_restored") is True,
+                "component filtering did not restore all eight member lists")
+        roundoff = component.get("roundoff", {})
+        require(roundoff.get("component_mass_guard_passed") is True
+                and roundoff.get("mass_corrected_reconstruction_passed") is True,
+                "mass-corrected component reconstruction failed")
+        for key in ("normalized_mean_captured_raw_vs_full_fp32",
+                    "normalized_mean_observed_raw_vs_full_fp32",
+                    "mass_corrected_observed_outputs_vs_full_fp32"):
+            require(component.get(key, {}).get("passed") is True,
+                    "direct actual-mixture reconstruction failed: " + key)
+        require(component.get("stage0_dedup_scope") == "full_mixture_only"
+                and component.get("component_distribution_dedup_qualified") is False,
+                "component dedup scope was changed")
+        if row["stage_index"] == 0:
+            dedup = component.get("stage0_shared_distribution", {})
+            require(dedup.get("passed") is True and dedup.get("shared_icdf_same_logits_exact") is True,
+                    "shared full-mixture stage0 sampler was not qualified")
+    return {"full21_component_qualified": True, "full21_sampler_qualified": True,
+            "mixture_module_sha256": mixture.execution_source_sha256(),
+            "selected_head_is_not_compared_as_the_full_mixture": True}
 
 
 def qualification_review(path, manifest, *, context, query):
@@ -182,6 +312,7 @@ def qualification_review(path, manifest, *, context, query):
                 "query": manifest["query"]}
     for key, value in expected.items():
         require(q.get(key) == value, "pointwise qualification binding mismatch: " + key)
+    require(q.get("icdf_contract_version") == 2, "ICDF numerical contract version2 required")
     require(q.get("thresholds") == QUALIFICATION_THRESHOLDS, "pointwise numerical thresholds changed")
     require(q.get("row_counts") == [1, 16, 128, 1024], "pointwise query-count contract changed")
     require(q.get("sources_unchanged") is True, "qualification sources were not restored/unchanged")
@@ -207,12 +338,22 @@ def qualification_review(path, manifest, *, context, query):
                 and all(item.get("cache_vs_same_chunk_control", {}).get("passed") is True
                         and item.get("control_chunk_vs_1024", {}).get("passed") is True for item in comparisons),
                 "qualification has missing/failed pointwise or batching comparisons")
+        for item in [part[key] for part in comparisons
+                     for key in ("cache_vs_same_chunk_control", "control_chunk_vs_1024")] + [row["stress_comparison"]]:
+            require(item.get("inverse_cdf", {}).get("icdf_contract_version") == 2
+                    and item["inverse_cdf"].get("passed") is True
+                    and item["inverse_cdf"].get("same_logits_and_borders_exact_failures") == 0
+                    and item["inverse_cdf"].get("independent_fp32_replay_failures") == 0,
+                    "missing/failed probability-space ICDFv2 arithmetic proof")
         require(row.get("baseline_model_contract_after", {}).get("input_normalization_train_only_verified") is True
                 and row.get("cache_model_contract_after", {}).get("input_normalization_train_only_verified") is True,
                 "training-only normalization was not demonstrated")
     full = sorted(coverage) == list(range(21))
     require(q.get("full21_qualified") is full, "qualification coverage claim is inconsistent")
+    component_proof = (validate_component_qualification(q)
+                       if manifest["variant"] == "execution_mixture_v1" else None)
     return {"manifest_file": str(Path(path).resolve()), "manifest_sha256": sha256_file(path),
+            "icdf_contract_version": 2, "component_and_sampler_proof": component_proof,
             "stage_coverage": coverage, "full21_qualified": full,
             "scope": "full21_fixed_conditional_diagnostic" if full else "coverage_limited_fixed_conditional_screen",
             "thresholds": q.get("thresholds"), "qualification": q,
@@ -287,7 +428,7 @@ def run(args):
         "candidate": {"manifest_file": str(manifest_path), "manifest_sha256": sha256_file(manifest_path),
                       "samples_sha256": manifest["samples_sha256"], "samples_descriptor": manifest["samples"],
                       "execution_policy": manifest.get("execution_policy"), "execution_engine": manifest["execution_engine"],
-                      "sampling_rng_policy": manifest["sampling_rng_policy"],
+                      "sampling_rng_policy": manifest.get("sampling_rng_policy"), "sampling_policy": manifest.get("sampling_policy"),
                       "timings": manifest["timings"], "memory": manifest["memory"]},
         "reference": custody,
         "rejection_review": {

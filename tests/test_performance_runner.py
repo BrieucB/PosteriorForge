@@ -1,0 +1,164 @@
+"""CPU fake-law and fail-closed contracts; never execute a real model."""
+from copy import deepcopy
+import importlib.util
+import json
+from pathlib import Path
+import subprocess
+import sys
+import numpy as np
+import pytest
+from posteriorforge import performance_runner as runner
+
+
+class FakeEngine:
+    def __init__(self):self.prepared=[];self.queries=[];self.closed=0
+    def prepare(self,theta,obs,stage):
+        self.stage=stage;self.offset=0;self.prepared.append(stage);return {}
+    def predict(self,query,**kwargs):
+        self.queries.append((self.stage,query.copy()))
+        if self.stage==0:
+            draw=np.arange(self.offset,self.offset+len(query),dtype=np.float32)+query[:,0]
+            self.offset+=len(query)
+        else:draw=query[:,-1]+1
+        return {"draw":draw}
+    def inspect_cache(self):return {"unique_storage_bytes":0,"tensor_records":[]}
+    def close(self):self.closed+=1
+
+
+def test_stage_major_wave_visits_all_targets_and_preserves_row_prefixes():
+    engine=FakeEngine();events=[]
+    values=runner.stage_major_wave(engine,np.zeros((4096,21)),np.zeros((4096,33)),np.zeros(33),7,3,lambda prediction:prediction["draw"],progress=events.append)
+    np.testing.assert_array_equal(values,np.arange(7)[:,None]+np.arange(21)[None,:])
+    assert engine.prepared==list(range(21)) and engine.closed==21
+    assert len(events)==21 and all(event["model_query_chunks"]==3 for event in events)
+    assert all(query.shape[1]==33+stage for stage,query in engine.queries)
+
+
+def test_nan_prefix_is_passed_unchanged_and_no_partial_filtering_occurs():
+    engine=FakeEngine();first=[True]
+    def draw(prediction):
+        value=prediction["draw"].copy()
+        if first[0]:value[1]=np.nan;first[0]=False
+        return value
+    values=runner.stage_major_wave(engine,None,None,np.zeros(33),7,3,draw)
+    assert values.shape==(7,21) and np.isnan(values[1,0])
+    assert any(stage==1 and np.isnan(query[:,33]).any() for stage,query in engine.queries)
+
+
+def test_incomplete_stage_fails_and_releases_cache():
+    engine=FakeEngine()
+    with pytest.raises(RuntimeError,match="incomplete stage"):
+        runner.stage_major_wave(engine,None,None,np.zeros(33),7,3,lambda _:np.zeros(1))
+    assert engine.closed==1
+
+
+def test_case_a_b_a_queries_are_request_local_without_density_reuse():
+    engine=FakeEngine();results=[]
+    for value in (3.,8.,3.):
+        query=np.full(33,value)
+        results.append(runner.stage_major_wave(engine,None,None,query,3,2,lambda prediction:prediction["draw"]))
+    np.testing.assert_array_equal(results[0],results[2])
+    assert not np.array_equal(results[0],results[1]) and len(engine.prepared)==63
+
+
+def test_stream_roles_are_distinct_and_rank_derived():
+    streams=[runner.worker_stream_seeds(20261111,0,0,rank,4) for rank in range(4)]
+    assert len({seed for stream in streams for seed in stream.values()})==12
+    assert streams[0]==runner.worker_stream_seeds(20261111,0,0,0,1)
+    with pytest.raises(ValueError):runner.worker_stream_seeds(20261111,0,0,4,4)
+    with pytest.raises(ValueError):runner.worker_stream_seeds(20261111,0,0,0,True)
+
+
+def worker_contract(output,world=4,rank=0):
+    return {"schema":"posteriorforge.execution_worker_contract.v1","benchmark_total_count":50000,
+        "world_size":world,"rank":rank,"worker_count":50000//world,"parent_job_id":"123",
+        "context_seed":20261111,"case":0,"repetition":0,"runner_source_sha256":"runner",
+        "expected_output":str(output.resolve()),"aggregate_output":"aggregate","orchestrator_source_sha256":"orchestrator",
+        "visible_device_token":"GPU-test","seed_streams":runner.worker_stream_seeds(20261111,0,0,rank,world)}
+
+
+@pytest.mark.parametrize("world,count",[(1,50000),(2,25000),(4,12500)])
+def test_worker_subcounts_require_explicit_total50k_contract(tmp_path,monkeypatch,world,count):
+    monkeypatch.setenv("CUDA_VISIBLE_DEVICES","GPU-test")
+    contract=worker_contract(tmp_path/"worker",world)
+    value=runner.worker_partition(contract,output=tmp_path/"worker",job_id="123",context_seed=20261111,case=0,repetition=0,runner_sha256="runner")
+    assert value["requested_count"]==count and value["end_to_end"] is False
+    contract["worker_count"]+=1
+    with pytest.raises(ValueError,match="partition"):
+        runner.worker_partition(contract,output=tmp_path/"worker",job_id="123",context_seed=20261111,case=0,repetition=0,runner_sha256="runner")
+    assert runner.worker_partition(None,output=tmp_path,job_id="123",context_seed=20261111,case=0,repetition=0,runner_sha256="runner")["requested_count"]==50000
+
+
+def qualification():
+    item={"passed":True,"inverse_cdf":{"icdf_contract_version":2}}
+    return {"schema":"posteriorforge.execution_cache_qualification.v1","status":"screen_pass","qualified":True,
+        "full21_qualified":True,"icdf_contract_version":2,"sources_unchanged":True,"control_variant":"cdf_arithmetic_v1",
+        "engine_id":"resident_stage_kv_fp32_v1","module_sha256":"cache",
+        "compatibility_adapter":{"original_alias_restored":True,"sdk_sources_unchanged":True,"sdk_aliases_unchanged":True,"patched_call_count":1,"executed_corrected_cdf_code_sha256":"corrected","corrected_cdf_code_sha256":"corrected","original_cdf_code_sha256":"original"},"sources":{"qualification_script_sha256":runner.QUALIFIER_SHA256},
+        "thresholds":dict(runner.QUALIFICATION_THRESHOLDS),"row_counts":[1,16,128,1024],"stage_coverage":list(range(21)),
+        "stage_results":[{"stage_index":stage,"passed":True,"stress_comparison":deepcopy(item),
+            "comparisons":[{"query_rows":count,"cache_vs_same_chunk_control":deepcopy(item),"control_chunk_vs_1024":deepcopy(item)} for count in (1,16,128,1024)]} for stage in range(21)]}
+
+
+def test_qualification_rejects_partial_coverage_changed_source_threshold_or_chunk():
+    value=qualification()
+    assert runner.validate_qualification(value,bindings={},cache_sha256="cache",mixture_sha256="mixture",mode="resident_full",query_batch_size=1024)
+    for mutation in (lambda x:x.update(full21_qualified=False),lambda x:x["stage_coverage"].pop(),lambda x:x["thresholds"].update(max_cdf_absolute=.01),lambda x:x.update(module_sha256="different"),lambda x:x["stage_results"][0]["comparisons"].pop()):
+        broken=deepcopy(value);mutation(broken)
+        with pytest.raises(ValueError):runner.validate_qualification(broken,bindings={},cache_sha256="cache",mixture_sha256="mixture",mode="resident_full",query_batch_size=1024)
+    with pytest.raises(ValueError,match="component"):
+        runner.validate_qualification(value,bindings={},cache_sha256="cache",mixture_sha256="mixture",mode="component_mass",query_batch_size=1024)
+
+
+def test_existing_output_is_preserved_before_any_budget_or_gpu_check(tmp_path):
+    path=tmp_path/"manifest.json";path.write_text("untouched")
+    with pytest.raises(FileExistsError):runner.run_execution(banks="none",output=tmp_path,checkpoint="none",ledger="none",reference="none",reference_grid="none",qualification="none")
+    assert path.read_text()=="untouched"
+
+
+def test_import_and_help_do_not_import_torch():
+    code="import posteriorforge.performance_runner,sys;assert "+repr("torch")+" not in sys.modules"
+    subprocess.run([sys.executable,"-c",code],check=True)
+    value=subprocess.run([sys.executable,"-m","posteriorforge.performance_runner","--help"],capture_output=True,text=True,check=True)
+    assert "--worker-contract" in value.stdout
+
+
+def test_original_rejection_checks_complete_vectors_and_trims_only_valid_surplus():
+    torch=pytest.importorskip("torch")
+    from posteriorforge.inference import _prior
+    path=Path(__file__).parents[1]/"src/posteriorforge/upstream/npe_pfn/accept_reject_sampler.py"
+    spec=importlib.util.spec_from_file_location("original_rejection",path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    prior=_prior(torch);sizes=[]
+    from posteriorforge.science.analytical_benchmark_v2 import build_problem
+    indices=[build_problem().parameter_order.index(n) for n in build_problem().prior.noise_names]
+    def proposal(size):
+        sizes.append(size);values=torch.zeros(size,21);values[:,indices]=.25
+        if len(sizes)==1:values[:2,indices[0]]=.6
+        return values,None
+    samples,_,_=module.accept_reject_sample(proposal,prior.support.check,10,max_sampling_batch_size=50000,max_iter_rejection=None)
+    assert samples.shape==(10,21) and sizes==[10,100]
+    assert prior.support.calls==2 and prior.support.proposed==110 and prior.support.accepted==108
+    assert bool((samples[:,indices]==.25).all())
+
+
+def test_component_uniforms_keep_physical_row_identity_across_chunks_and_head_retries():
+    torch=pytest.importorskip("torch")
+    from posteriorforge.execution_mixture import HEAD_MASS_ENVELOPE
+    class Criterion:
+        borders=torch.tensor([-2.,0.,3.])
+    class Component:
+        def predict_component(self,member,query,**kwargs):
+            probability=.1+.08*member+.01*(query[:,0]%3)
+            probabilities=np.column_stack((probability,1-probability)).astype(np.float32)
+            return {"logits":torch.from_numpy(probabilities).log(),"criterion":Criterion(),
+                    "component_raw_mass":torch.full((len(query),),.15+.1*member,dtype=torch.float64),"head_mass_envelope":HEAD_MASS_ENVELOPE}
+    def run(chunk):
+        generators={name:torch.Generator().manual_seed(seed) for name,seed in zip(runner.STREAM_ROLES,(13,29,41))}
+        counters={"stage0_shared_predictions":0,"component_predictions":0,"head_candidates":0,"head_rejections":0}
+        def query(rows):return np.column_stack((np.asarray(rows,dtype=np.float32),np.zeros((len(rows),33),np.float32)))
+        values,metadata=runner.component_stage_sampler(Component(),torch,generators,counters)(None,1,query,17,chunk)
+        return values,metadata,generators["component_uniform"].get_state()
+    left,lmeta,lstate=run(2);right,rmeta,rstate=run(5)
+    np.testing.assert_array_equal(left,right)
+    assert lmeta["head_rejections"]>0 and rmeta["head_rejections"]==lmeta["head_rejections"]
+    assert lmeta["uniform_draws"]==rmeta["uniform_draws"]==17 and torch.equal(lstate,rstate)
