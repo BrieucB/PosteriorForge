@@ -1,0 +1,88 @@
+{
+  "schema": "posteriorforge.audit.v1",
+  "findings": [
+    {
+      "id": "A01",
+      "topic": "SBI 0.23.0 packaging",
+      "finding": "The wheel and sdist omit an eagerly imported training sampler module.",
+      "resolution": "Explicitly load unchanged NPE core through a namespace; preserve all six upstream source bytes.",
+      "status": "resolved",
+      "evidence": "tests/test_upstream_provenance.py and real checkpoint qualification"
+    },
+    {
+      "id": "A02",
+      "topic": "Rejection timeout",
+      "finding": "Upstream finite rejection timeout can append unchecked candidates.",
+      "resolution": "Mandatory max_iter_rejection=None; external Slurm timeout fails an incomplete run. No clipping or filler samples.",
+      "status": "resolved",
+      "evidence": "inference wrapper, frozen manifest contract and support integrity checks"
+    },
+    {
+      "id": "A03",
+      "topic": "Run provenance",
+      "finding": "Seed/case names alone cannot authenticate a workload.",
+      "resolution": "Bind bank/query array descriptors, scientific fingerprint/order, source hashes, checkpoint, frozen settings and derived RNG stream.",
+      "status": "resolved",
+      "evidence": "tests/test_gate.py"
+    },
+    {
+      "id": "A04",
+      "topic": "Reference moment uncertainty",
+      "finding": "CDF precision alone does not qualify mean and SD decisions.",
+      "resolution": "Retain all-coordinate scramble/refinement moment convergence and propagate numerical intervals into bias/SD gates.",
+      "status": "resolved",
+      "evidence": "tests/test_reference.py and tests/test_validation.py"
+    },
+    {
+      "id": "A05",
+      "topic": "CDF grid resolution",
+      "finding": "The original 513 queries have marginal steps up to 0.159, too coarse for reliable conservative pass certification.",
+      "resolution": "Refine only fixed-reference query intervals, retaining original CDFs and moments; require step and numerical precision at most 0.005.",
+      "status": "resolved",
+      "evidence": "all eight refined reference manifests and deterministic history replay"
+    },
+    {
+      "id": "A06",
+      "topic": "Automatic requeue",
+      "finding": "Automatic restart could outlive one cost reservation.",
+      "resolution": "Disable requeue on all subsequent submissions; first three completed jobs independently show Restarts=0.",
+      "status": "resolved",
+      "evidence": "tests/test_budget.py and evidence/qualification/audit-initial-requeue.json"
+    },
+    {
+      "id": "A07",
+      "topic": "Allocated GPU accounting",
+      "finding": "Requested ranks/model-visible devices do not establish allocated cost.",
+      "resolution": "Reconcile actual AllocTRES GPU count times ElapsedRaw; handle generic and typed entries without double-counting; export both requested and actual resources.",
+      "status": "resolved",
+      "evidence": "tests/test_budget.py and tests/test_report.py"
+    },
+    {
+      "id": "A08",
+      "topic": "Live run status",
+      "finding": "The initial live aggregator labeled unfinished runs as execution failures.",
+      "resolution": "Running/pending/missing evidence yields incomplete, never a terminal failure or pass. Historical stage snapshots are superseded by the refined-reference and final scientific reports.",
+      "status": "resolved",
+      "evidence": "test_running_manifests_are_incomplete_not_execution_failures"
+    },
+    {
+      "id": "A09",
+      "topic": "Lazy checkpoint load",
+      "finding": "Constructor duration excludes model loading in first fit.",
+      "resolution": "Name constructor/import duration explicitly and flag cold checkpoint load inside request latency; no warm-latency claim.",
+      "status": "resolved",
+      "evidence": "inference manifest timing fields and report CSV"
+    },
+    {
+      "id": "A10",
+      "topic": "Public-only reproduction",
+      "finding": "Private source or model downloads must not be required for CPU CI/base installation.",
+      "resolution": "Fresh public clone, wheel/sdist build, outside-checkout tests and CLI checks; separate pinned model preparation and notices.",
+      "status": "resolved",
+      "evidence": "evidence/qualification/public-install-current.json"
+    }
+  ],
+  "scientific_screen": "in_progress",
+  "optimization_and_scaling": "gated_unrun",
+  "container_execution": "unrun_recipe_only"
+}
