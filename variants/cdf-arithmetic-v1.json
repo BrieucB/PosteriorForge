@@ -1,0 +1,29 @@
+{
+  "schema": "posteriorforge.cdf_arithmetic_plan.v1",
+  "variant": "cdf_arithmetic_v1",
+  "baseline_release": "89404ac9e43bf9fb72d3e51a7113dbd207871221",
+  "repair": "finite ensemble CDF interpolation parentheses only",
+  "pilot": {
+    "context_seed": 20261111, "case": 0, "context_size": 4096,
+    "count": 50000, "microbatch": 10000, "repetition": 0,
+    "raw_observation_count": 33, "physical_parameter_count": 21,
+    "precision": "torch.float32", "autocast": false,
+    "rng_role": "posterior", "checkpoint_changed": false,
+    "reference_regenerated": false, "tail_family_changed": false,
+    "execution_optimized": false
+  },
+  "acceptance": {
+    "marginal_cdf_conservative_upper_max": 0.1,
+    "fixed_joint_projection_cdf_conservative_upper_max": 0.1,
+    "absolute_bias_reference_sd_upper_max": 0.2,
+    "posterior_sd_ratio_interval": [0.8, 1.2],
+    "all_complete_finite_supported": true,
+    "uncertainty_can_pass": false
+  },
+  "decision": {
+    "pilot_fail_or_inconclusive": "Stop further scientific/engineering GPU work; publish before/after evidence and propose the separate sufficient-statistic ablation.",
+    "pilot_pass": "Expand the same unoptimized variant to all24 original4096context seed/case pairs, reusing the pilot.",
+    "any_full_screen_failure": "Optimization remains blocked; preserve every outcome.",
+    "all24_pass": "Continue accepted lower-context qualification then validated GPU engineering, within the cumulative200allocatedGPUhour cap."
+  }
+}

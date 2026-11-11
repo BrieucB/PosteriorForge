@@ -1,0 +1,104 @@
+{
+  "adapter_id": "tabpfn-2.0.9-finite-cdf-parentheses-v1",
+  "adapter_sha256": "3859bcdc974a38830f22c12adf24cae28e0b1834cbbf43731e12c33f9c98391d",
+  "adapter_version": 1,
+  "attribution": "Built with PriorLabs-TabPFN",
+  "baseline_execution_source": {
+    "baseline_inference_sha256": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e",
+    "upstream_files": {
+      "__init__.py": "a32a437d7910cec8c251ceb6849fece6b61ece32c16e8a346e4afae82bf7bc08",
+      "accept_reject_sampler.py": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+      "npe_pfn.py": "29517328b3ff23e2e8040d19f33e79adef5fc7f91db2cffccf60234344399a85",
+      "restricted_prior.py": "13026cf8a4618aa4ca6406e0596a7ec97c0664de5b7c2b4dd7f31e4c32ece160",
+      "support_posterior.py": "022e5b22b9397e9faea08b73df76b5a0c5cf0c012b665decfe28c5b725c362ee",
+      "tsnpe_pfn.py": "f959662adf6ac6ed5aecefcebad907ef951c22bf05bbcf2c8e0e6312cb054034"
+    },
+    "upstream_provenance_sha256": "4caf84b49b04c79f28bcbe9f88f9da6b64ac0b99a2c60f53e01b2fc1c6833c8b"
+  },
+  "case0_reference_preflight": {
+    "parent": {
+      "binding": {
+        "observation_sha256": "57fb7625b2521ff040f6d858961ca5876276708fbe2637242b48c69fdce7bdac",
+        "parameter_order": [
+          "mu_a",
+          "mu_b",
+          "mu_d0",
+          "a_m1",
+          "b_m1",
+          "d0_m1",
+          "sigma_m1",
+          "a_m2",
+          "b_m2",
+          "d0_m2",
+          "sigma_m2",
+          "a_m3",
+          "b_m3",
+          "d0_m3",
+          "sigma_m3",
+          "a_a1",
+          "sigma_a1",
+          "a_a2",
+          "sigma_a2",
+          "a_a3",
+          "sigma_a3"
+        ],
+        "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966"
+      },
+      "cdf_precision": 0.0006115610036022678,
+      "distribution_sha256": "cab498f169e416bbc59297e1263d09ba4768bcad6028a52343362924f5a194c4",
+      "manifest_sha256": "364289ef904e5a2841416851d03944646d7e958c7c55d519c1914fc3f8b23f39"
+    },
+    "refined_grid": {
+      "binding": {
+        "observation_sha256": "57fb7625b2521ff040f6d858961ca5876276708fbe2637242b48c69fdce7bdac",
+        "parameter_order": [
+          "mu_a",
+          "mu_b",
+          "mu_d0",
+          "a_m1",
+          "b_m1",
+          "d0_m1",
+          "sigma_m1",
+          "a_m2",
+          "b_m2",
+          "d0_m2",
+          "sigma_m2",
+          "a_m3",
+          "b_m3",
+          "d0_m3",
+          "sigma_m3",
+          "a_a1",
+          "sigma_a1",
+          "a_a2",
+          "sigma_a2",
+          "a_a3",
+          "sigma_a3"
+        ],
+        "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966"
+      },
+      "cdf_precision": 0.0006185336730101243,
+      "distribution_sha256": "3b6b26234d925c0b5cf2ccb8e1a2f6476fe8b2df107e2791e4233a2fc307a99f",
+      "manifest_sha256": "0cdfb135e5b95c1c2353979005fb16f234a9ec4ed6a12a25d512920ffcc1ec59"
+    }
+  },
+  "cpu_tests_passed": 203,
+  "default_baseline_activation_changed": false,
+  "execution_optimized": false,
+  "files": {
+    "scripts/evaluate_cdf_pilot.py": "cc28fbab953b663c3d6bc06467dbdc4535117c2f4f2ba67b6014248da7b96526",
+    "src/posteriorforge/compat_cdf.py": "3859bcdc974a38830f22c12adf24cae28e0b1834cbbf43731e12c33f9c98391d",
+    "src/posteriorforge/inference_cdf.py": "efc60d03ee6acf8b0ce68a470c55e42dad7f96006dc2613f9370cfc714c34fb9",
+    "tests/test_cdf_pilot_evaluation.py": "e2f00e11754033753e2ac1bb2cdea2854db92e5a54a81db6ed46ed679f5bd34b",
+    "tests/test_cdf_variant_runner.py": "1f14650208f61b097a99d62346bded24a7e25767221d783ea34f2c8adf252f6d",
+    "tests/test_compat_cdf.py": "c73bda26def4562b5adc8a74af8dacae094ec0dc77cbed356d1abd88fdbd33bd",
+    "variants/cdf-arithmetic-v1.json": "6f511f944ed1c54cc7a2bc8bd778a5554ad1661aeea4534c88bf28fc6956c036"
+  },
+  "new_tests": 66,
+  "pinned_sdk_cpu_activation_passed": true,
+  "previous_137_tests_preserved": true,
+  "schema": "posteriorforge.cdf_arithmetic_implementation.v1",
+  "scientific_acceptance_established": false,
+  "scientific_pilot_status": "not_submitted_at_this_code_validation",
+  "tail_family_changed": false,
+  "variant": "cdf_arithmetic_v1"
+}
