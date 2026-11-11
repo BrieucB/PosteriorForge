@@ -11,25 +11,27 @@ reused through 21 autoregressive parameter stages. This project studies posterio
 sampling, memory, synchronization, and same-node independent sampling. It does
 not study text generation or distributed training.
 
-## Current evidence
+## Terminal scientific result
 
-Both pinned environments pass 108 CPU tests. A fresh public-only installation and
-GitHub CPU CI pass. The original 11,081,864-parameter checkpoint executed on an
-A100 in FP32 without autocast; a small 128-vector integrity probe passed. Native
-GPU float64 reference algebra agrees with two CPU formulas below 1e-12. See
-[evidence/qualification](evidence/qualification). The container recipe is provided
-but has not been built.
+**The fixed baseline fails the accepted diagnostic screen in all 24 runs.**
+All 1.2 million posterior vectors are finite, complete and within prior support.
+All eight independent numerical references qualify. The worst marginal CDF
+discrepancy is bounded by [0.444206, 0.449960], against a 0.10 limit; worst mean
+bias is 1.20006 reference SD, against 0.20. This is model failure under this
+protocol, not unresolved reference uncertainty.
 
-All eight retained float64 references qualify: four scrambles at powers 16 → 18,
-worst CDF precision 0.001049 and independent checks passed. See the
-[reference evidence with inline figures](evidence/references/report.md).
-Adaptive query refinement also passed for all eight cases; its worst precision
-is 0.001052 and each CDF step is below 0.005. See the
-[refined reference evidence](evidence/reference-grids/report.md).
+The accepted stopping rule leaves lower-context expansion, optimization,
+CPU/CUDA profiling and multi-GPU scaling **deferred and unrun**. No checkpoint,
+prior, preprocessing or scenario was changed to rescue the result. Eight cases
+are a diagnostic screen, not global calibration or SBC certification.
 
-**Scientific feasibility is in progress; optimization and scaling are unrun.**
-The checkpoint probe is not a posterior-accuracy result. Portable scientific
-evidence will be published as the full diagnostic screen finishes.
+The [case study](docs/case-study.md), [complete evidence](evidence/feasibility/report.md),
+[machine-readable gate](evidence/feasibility/gate.json) and
+[public artifact index](evidence/artifacts.json) contain the result and its
+reproduction chain. Total allocated cost: **16.1739 GPU-hours**, zero reserved,
+under the hard 200-hour cap. The container recipe is provided but remains unbuilt.
+
+![Posterior CDF discrepancies across all seed/case combinations](evidence/feasibility/marginal-cdf-discrepancy-heatmap.png)
 
 ## Reproduce
 

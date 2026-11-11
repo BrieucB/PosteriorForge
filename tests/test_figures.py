@@ -124,3 +124,24 @@ def test_cdf_figure_rejects_path_escape_and_marks_absent_external_samples_unavai
     metadata = json.loads(Path(result["sidecar"]).read_text())
     assert metadata["plotted_case_count"] == 0
     assert metadata["cases"][0]["reason"] == "declared external artifact unavailable"
+
+
+def test_refined_reference_uses_selected_grid_hash_and_authenticates_parent(tmp_path):
+    gate, runs, references, run, reference, value = _retained_fixture(tmp_path)
+    ref=json.loads((reference/'manifest.json').read_text())
+    parent_hash='a'*64
+    ref['parent_manifest_sha256']=parent_hash
+    write_json(reference/'manifest.json',ref)
+    value['references'][0].update(manifest_sha256=parent_hash,
+        grid_manifest_sha256=sha256_file(reference/'manifest.json'))
+    write_json(gate,value)
+    result=render_posterior_agreement(gate=gate,runs=runs,references=references,output=tmp_path/'valid')
+    metadata=json.loads(Path(result['sidecar']).read_text())
+    assert metadata['cases'][0]['reference_manifest_sha256']==value['references'][0]['grid_manifest_sha256']
+    assert metadata['cases'][0]['parent_reference_manifest_sha256']==parent_hash
+    ref['parent_manifest_sha256']='b'*64
+    write_json(reference/'manifest.json',ref)
+    value['references'][0]['grid_manifest_sha256']=sha256_file(reference/'manifest.json')
+    write_json(gate,value)
+    with pytest.raises(ValueError,match='parent manifest'):
+        render_posterior_agreement(gate=gate,runs=runs,references=references,output=tmp_path/'bad')

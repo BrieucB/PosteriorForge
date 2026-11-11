@@ -1,0 +1,160 @@
+{
+  "all_21_parameters_used": true,
+  "attribution": "Built with PriorLabs-TabPFN",
+  "case": 0,
+  "case_status": "model_failure",
+  "cdf_distance_lower_bound": 0.15471499114599252,
+  "cdf_distance_upper_bound": 0.1600199293138811,
+  "coefficients": [
+    {
+      "coefficient": -0.010175920529045965,
+      "parameter": "mu_a"
+    },
+    {
+      "coefficient": -0.22230713951804168,
+      "parameter": "mu_b"
+    },
+    {
+      "coefficient": -0.08300400549497117,
+      "parameter": "mu_d0"
+    },
+    {
+      "coefficient": -0.048668202620059255,
+      "parameter": "a_m1"
+    },
+    {
+      "coefficient": -0.1242723493703372,
+      "parameter": "b_m1"
+    },
+    {
+      "coefficient": -0.8295670595153147,
+      "parameter": "d0_m1"
+    },
+    {
+      "coefficient": -1.0303418105547297,
+      "parameter": "sigma_m1"
+    },
+    {
+      "coefficient": 0.03088680580311518,
+      "parameter": "a_m2"
+    },
+    {
+      "coefficient": -0.22170423287713079,
+      "parameter": "b_m2"
+    },
+    {
+      "coefficient": 0.15537334108323334,
+      "parameter": "d0_m2"
+    },
+    {
+      "coefficient": 1.2191096903034289,
+      "parameter": "sigma_m2"
+    },
+    {
+      "coefficient": -0.29372907947909593,
+      "parameter": "a_m3"
+    },
+    {
+      "coefficient": -0.1578973674515985,
+      "parameter": "b_m3"
+    },
+    {
+      "coefficient": 0.328087267839906,
+      "parameter": "d0_m3"
+    },
+    {
+      "coefficient": 3.9740521319213014,
+      "parameter": "sigma_m3"
+    },
+    {
+      "coefficient": -0.2045762511294881,
+      "parameter": "a_a1"
+    },
+    {
+      "coefficient": 0.8113096156816257,
+      "parameter": "sigma_a1"
+    },
+    {
+      "coefficient": 0.0538337765366656,
+      "parameter": "a_a2"
+    },
+    {
+      "coefficient": 0.08595381526831834,
+      "parameter": "sigma_a2"
+    },
+    {
+      "coefficient": 0.09665258769433024,
+      "parameter": "a_a3"
+    },
+    {
+      "coefficient": 1.0913282484784996,
+      "parameter": "sigma_a3"
+    }
+  ],
+  "context_seed": 20261111,
+  "context_size": 4096,
+  "figure": {
+    "file": "case0-worst-predefined-joint-projection.png",
+    "sha256": "42786d4a0bdf316cecaa7ff72d5fe4ff68a70396e2621596f42b50a7a4e14641"
+  },
+  "gate_changed": false,
+  "gate_interpolation": false,
+  "gate_status": "model_failure",
+  "inputs": {
+    "gate_sha256": "42163c5d77f0f1f8f7e1bb3a78c81fba43ca36a0682446a0dc533544995e490d",
+    "heldout_manifest_sha256": "c9ff2b068fc0f3861d84b085386aa3941d71a088a2d2c50d098dce397612455f",
+    "heldout_npz_sha256": "4675b1a8b24319a9baf4e51f3fcb608736c6d402449868a294ead679004ecd7b",
+    "inference_manifest_sha256": "2d99d122a4ba41d60ba8a199ddeb4585b2572e25004f0e3234590dd7b22b033b",
+    "parent_reference_manifest_sha256": "364289ef904e5a2841416851d03944646d7e958c7c55d519c1914fc3f8b23f39",
+    "reference_distribution_sha256": "3b6b26234d925c0b5cf2ccb8e1a2f6476fe8b2df107e2791e4233a2fc307a99f",
+    "reference_manifest_sha256": "0cdfb135e5b95c1c2353979005fb16f234a9ec4ed6a12a25d512920ffcc1ec59",
+    "samples_sha256": "e767ce40820e7ae8ad0e70a666fc2ba33d102752838c7e1d08de1e90f8a96e46"
+  },
+  "not_SBC": true,
+  "not_full_joint_certification": true,
+  "parameter_order": [
+    "mu_a",
+    "mu_b",
+    "mu_d0",
+    "a_m1",
+    "b_m1",
+    "d0_m1",
+    "sigma_m1",
+    "a_m2",
+    "b_m2",
+    "d0_m2",
+    "sigma_m2",
+    "a_m3",
+    "b_m3",
+    "d0_m3",
+    "sigma_m3",
+    "a_a1",
+    "sigma_a1",
+    "a_a2",
+    "sigma_a2",
+    "a_a3",
+    "sigma_a3"
+  ],
+  "predefined_projection_count": 32,
+  "projection_zero_based_index": 7,
+  "reference_cdf_precision": 0.0006185336730101243,
+  "reference_cdf_row": 28,
+  "reference_recomputed": false,
+  "reference_state": "verified",
+  "regeneration": {
+    "arguments": {
+      "banks": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/banks-v1",
+      "gate": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/gate-final.json",
+      "output": "fresh output directory",
+      "reference": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/reference-grids-v1/case-0",
+      "run": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/upstream-v1/context-4096/seed-20261111-case-0"
+    },
+    "script": "scripts/plot_joint_projection.py"
+  },
+  "sample_count": 50000,
+  "samples_altered": false,
+  "schema": "posteriorforge.joint_projection_diagnostic.v1",
+  "selection": "argmax retained joint_projection_cdf.upper for fixed seed20261111 case0; first index wins a tie",
+  "true_vector_projection": 2.2992130480199875,
+  "truth_usage": "post-inference diagnostic marker only"
+}

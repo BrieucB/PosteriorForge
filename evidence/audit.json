@@ -82,7 +82,8 @@
       "evidence": "evidence/qualification/public-install-current.json"
     }
   ],
-  "scientific_screen": "in_progress",
-  "optimization_and_scaling": "gated_unrun",
-  "container_execution": "unrun_recipe_only"
+  "scientific_screen": "terminal_model_failure_24_of_24",
+  "optimization_and_scaling": "deferred_unrun_by_accepted_gate",
+  "container_execution": "unrun_recipe_only",
+  "final_scientific_audit": "feasibility/final-scientific-audit.json"
 }

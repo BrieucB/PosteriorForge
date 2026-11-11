@@ -1,0 +1,321 @@
+{
+  "attribution": "Built with PriorLabs-TabPFN",
+  "cases": [
+    {
+      "case": 0,
+      "context_seed": 20261111,
+      "coordinate_transform": {
+        "display": "physical_parameter_units",
+        "projected_axis_scale": 9.280385586437196,
+        "reference_x": "retained_query / projected_axis_scale"
+      },
+      "manifest_file": "context-4096/seed-20261111-case-0/manifest.json",
+      "manifest_sha256": "2d99d122a4ba41d60ba8a199ddeb4585b2572e25004f0e3234590dd7b22b033b",
+      "observation_sha256": "57fb7625b2521ff040f6d858961ca5876276708fbe2637242b48c69fdce7bdac",
+      "parent_reference_manifest_sha256": "364289ef904e5a2841416851d03944646d7e958c7c55d519c1914fc3f8b23f39",
+      "plotted": true,
+      "reference_cdf_precision": 0.0006185336730101243,
+      "reference_distribution_sha256": "3b6b26234d925c0b5cf2ccb8e1a2f6476fe8b2df107e2791e4233a2fc307a99f",
+      "reference_grid_points": 2695,
+      "reference_manifest_file": "case-0/manifest.json",
+      "reference_manifest_sha256": "0cdfb135e5b95c1c2353979005fb16f234a9ec4ed6a12a25d512920ffcc1ec59",
+      "reference_state": "verified",
+      "sample_count": 50000,
+      "samples_descriptor": {
+        "dtype": "<f8",
+        "sha256": "cb6b16a0382388ad812e962b06949225e89a732f75312c3cc41dc20023be26ae",
+        "shape": [
+          50000,
+          21
+        ]
+      },
+      "samples_sha256": "e767ce40820e7ae8ad0e70a666fc2ba33d102752838c7e1d08de1e90f8a96e46",
+      "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+      "selected_marginal_cdf_upper_bound": 0.2171117226746061,
+      "selected_parameter": "sigma_m3",
+      "selected_parameter_index": 14,
+      "status": "model_failure"
+    },
+    {
+      "case": 1,
+      "context_seed": 20261111,
+      "coordinate_transform": {
+        "display": "physical_parameter_units",
+        "projected_axis_scale": 9.280385586437196,
+        "reference_x": "retained_query / projected_axis_scale"
+      },
+      "manifest_file": "context-4096/seed-20261111-case-1/manifest.json",
+      "manifest_sha256": "03dee16582a0ccb116d4f087b44aa01665036daa72a85840e90895994d23534a",
+      "observation_sha256": "26443d735403f68f5ca92eb0c99cb866516bb3c1b15af92a76d3dd9296d6aeee",
+      "parent_reference_manifest_sha256": "6137794b17d51989b1a4341c2a5670f5e9ad48862ebc79e952c500aee5da93fa",
+      "plotted": true,
+      "reference_cdf_precision": 0.0006068255845131931,
+      "reference_distribution_sha256": "b7b48f2101098b3f2139696bab13c6028c39d4217538970ecd6e503685d75102",
+      "reference_grid_points": 2949,
+      "reference_manifest_file": "case-1/manifest.json",
+      "reference_manifest_sha256": "9207faf163f8a058c2a16091dea55ab6aa69f04795e38f548ae88c9e6dae47dd",
+      "reference_state": "verified",
+      "sample_count": 50000,
+      "samples_descriptor": {
+        "dtype": "<f8",
+        "sha256": "2d3584cafaafee9f34f687e7125ee5dce1b94fbec57cb83c8bf1c803ff10ed15",
+        "shape": [
+          50000,
+          21
+        ]
+      },
+      "samples_sha256": "e122afe0dd7efbac5e69bc881fe825258eebcab1f0fd07fd94c993510134dc7c",
+      "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+      "selected_marginal_cdf_upper_bound": 0.16981438880234967,
+      "selected_parameter": "sigma_m1",
+      "selected_parameter_index": 6,
+      "status": "model_failure"
+    },
+    {
+      "case": 2,
+      "context_seed": 20261111,
+      "coordinate_transform": {
+        "display": "physical_parameter_units",
+        "projected_axis_scale": 9.280385586437196,
+        "reference_x": "retained_query / projected_axis_scale"
+      },
+      "manifest_file": "context-4096/seed-20261111-case-2/manifest.json",
+      "manifest_sha256": "22f65aa34739851aed03df5a5a93f5f7cde6d85256b1dc94a1ded679748b8d79",
+      "observation_sha256": "580116278ff2e30fedcde7580ff1df059886d843361a289877954bdec75e5646",
+      "parent_reference_manifest_sha256": "9eb99c31add3cd68d4219f980b0f46bdaecad62d2ead651aff30d07a04d93bc8",
+      "plotted": true,
+      "reference_cdf_precision": 0.0007370232201646676,
+      "reference_distribution_sha256": "2ce1fe9f550258b108b8128a29d1a092d04e22ec0af838d732fb50697423bf59",
+      "reference_grid_points": 2802,
+      "reference_manifest_file": "case-2/manifest.json",
+      "reference_manifest_sha256": "76c820575b6c14a7e6d29b250e5e736d4fda6bab4dab4547cae0a5334c36375a",
+      "reference_state": "verified",
+      "sample_count": 50000,
+      "samples_descriptor": {
+        "dtype": "<f8",
+        "sha256": "22a603a43a13641d9433eb18948499fea36cff9ced8d0133d0bad02e157e71ff",
+        "shape": [
+          50000,
+          21
+        ]
+      },
+      "samples_sha256": "5d83840dd51d8ebb91689fa33ff4094dc71b0f6148a34e40485765e3d50577c1",
+      "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+      "selected_marginal_cdf_upper_bound": 0.20656640169217128,
+      "selected_parameter": "sigma_m2",
+      "selected_parameter_index": 10,
+      "status": "model_failure"
+    },
+    {
+      "case": 3,
+      "context_seed": 20261111,
+      "coordinate_transform": {
+        "display": "physical_parameter_units",
+        "projected_axis_scale": 0.9119215051751063,
+        "reference_x": "retained_query / projected_axis_scale"
+      },
+      "manifest_file": "context-4096/seed-20261111-case-3/manifest.json",
+      "manifest_sha256": "4cb058d96a5d5cee1ce0b0670de8b1bdae8450d3eba02d6a37e66aef678bab9c",
+      "observation_sha256": "b508891582425bf0e74fb9675c358618bbdb007133b476ec76d9bada3cd4c767",
+      "parent_reference_manifest_sha256": "37b682f7e2c666f1759bceeb52f7f99e77efa596c304af5f9d221e714a207505",
+      "plotted": true,
+      "reference_cdf_precision": 0.0007337785793286589,
+      "reference_distribution_sha256": "bdc7b7956026fd5cc7bf9cb7dc753125ee53083b34152e6b470b1f51c56f96c0",
+      "reference_grid_points": 2616,
+      "reference_manifest_file": "case-3/manifest.json",
+      "reference_manifest_sha256": "ab823f7a3597dd677e70a494ed6f3e00dc81a830e26bc8888537f89989fb4ed8",
+      "reference_state": "verified",
+      "sample_count": 50000,
+      "samples_descriptor": {
+        "dtype": "<f8",
+        "sha256": "904539eab0a0162ecf83261ac7fae9d756f2c93102473a5a2618340b39e821ac",
+        "shape": [
+          50000,
+          21
+        ]
+      },
+      "samples_sha256": "2067c6a850a26cfccaf07a967799ac9f51feb0cd35b3d7762363c7a215b30330",
+      "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+      "selected_marginal_cdf_upper_bound": 0.358950896976046,
+      "selected_parameter": "a_m1",
+      "selected_parameter_index": 3,
+      "status": "model_failure"
+    },
+    {
+      "case": 4,
+      "context_seed": 20261111,
+      "coordinate_transform": {
+        "display": "physical_parameter_units",
+        "projected_axis_scale": 9.280385586437196,
+        "reference_x": "retained_query / projected_axis_scale"
+      },
+      "manifest_file": "context-4096/seed-20261111-case-4/manifest.json",
+      "manifest_sha256": "2a69905a68f1c44ef00c7dcdd592fdda3a0c49b1c3e17eca3b4f8c5004ba56f2",
+      "observation_sha256": "9e206832501c445c6f11abf6c6eb10bc75c0699834378e48caf5a33887c200f5",
+      "parent_reference_manifest_sha256": "b9e1e27354ff45a87ed172100dc23c3ba2e3dda4fa804131121406dc76f8c86f",
+      "plotted": true,
+      "reference_cdf_precision": 0.000877946999594037,
+      "reference_distribution_sha256": "3db1ba292c285ab6a396f4949ad185c455affb773b1bba651e37008f4ec6097b",
+      "reference_grid_points": 2825,
+      "reference_manifest_file": "case-4/manifest.json",
+      "reference_manifest_sha256": "3ab9222848ee21d3e2f4559723b87dbc3eb40ae5d2d780f32b4279f6e85a266e",
+      "reference_state": "verified",
+      "sample_count": 50000,
+      "samples_descriptor": {
+        "dtype": "<f8",
+        "sha256": "1c4d2d30a9cc14f9b225f607a9b4ab834e1afc0c2f56486bf6dc0e363f9b4cd4",
+        "shape": [
+          50000,
+          21
+        ]
+      },
+      "samples_sha256": "a85cc39807f3b783f4bb72b51174b6161d8a7283eb06c935d69d607d72d6f9b4",
+      "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+      "selected_marginal_cdf_upper_bound": 0.15486638815600728,
+      "selected_parameter": "sigma_m1",
+      "selected_parameter_index": 6,
+      "status": "model_failure"
+    },
+    {
+      "case": 5,
+      "context_seed": 20261111,
+      "coordinate_transform": {
+        "display": "physical_parameter_units",
+        "projected_axis_scale": 9.280385586437196,
+        "reference_x": "retained_query / projected_axis_scale"
+      },
+      "manifest_file": "context-4096/seed-20261111-case-5/manifest.json",
+      "manifest_sha256": "9e2bf34e657e033570bfc4c6a14c1aac53c8942d5905aebf1ba71448331d552a",
+      "observation_sha256": "51767a74e42c838c3cd98df4c113dd8a6688d7bf41226f2e4407299ab747fb44",
+      "parent_reference_manifest_sha256": "9167b1561e4ee8d22d044e6ccd6834eceb2935dad6c3c1bdbf0ace0445ff5fd5",
+      "plotted": true,
+      "reference_cdf_precision": 0.0008545148508871669,
+      "reference_distribution_sha256": "cc7632464335a19fd886cce32d6d612a8cf8630a2b877e2d6a735cb3dfefa6ff",
+      "reference_grid_points": 2923,
+      "reference_manifest_file": "case-5/manifest.json",
+      "reference_manifest_sha256": "b80d3021432a5efd3e2459ecdb3c88fa485b7ee6b23fc27f474cb3d2ab44c547",
+      "reference_state": "verified",
+      "sample_count": 50000,
+      "samples_descriptor": {
+        "dtype": "<f8",
+        "sha256": "1a92319ff5d0a1e8a48b9a5f78f1c169b1959ef7e3404a454f33cbf67f27482b",
+        "shape": [
+          50000,
+          21
+        ]
+      },
+      "samples_sha256": "fcbdf3d8691fd1e6e8514ddfb884f2c5d3b09d10d6fb84eb5cf126f21e42e5c4",
+      "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+      "selected_marginal_cdf_upper_bound": 0.4499598779039183,
+      "selected_parameter": "sigma_m3",
+      "selected_parameter_index": 14,
+      "status": "model_failure"
+    },
+    {
+      "case": 6,
+      "context_seed": 20261111,
+      "coordinate_transform": {
+        "display": "physical_parameter_units",
+        "projected_axis_scale": 0.9119215051751063,
+        "reference_x": "retained_query / projected_axis_scale"
+      },
+      "manifest_file": "context-4096/seed-20261111-case-6/manifest.json",
+      "manifest_sha256": "28198a73ac478aa4aeb3decab6de2eee421f531e31367d813fa5a20d4f53bc4e",
+      "observation_sha256": "e44c590f9972f8c4df862ca462b2270d3ebf51fc17b63e0700ada49f4abafa2e",
+      "parent_reference_manifest_sha256": "9426516c372528bc20ea01a101bc04a03ce87f86214bf44de93e3a66431754ea",
+      "plotted": true,
+      "reference_cdf_precision": 0.0007509684949215667,
+      "reference_distribution_sha256": "11a44eb8b0405bb9a11fdd3b1add0baec29d30ade3dc064d1a62b3377b832dbc",
+      "reference_grid_points": 2382,
+      "reference_manifest_file": "case-6/manifest.json",
+      "reference_manifest_sha256": "4ae76fbb00f1ed44897cad3d8878bb134ad72bf57c965164d4dbc252e90fa680",
+      "reference_state": "verified",
+      "sample_count": 50000,
+      "samples_descriptor": {
+        "dtype": "<f8",
+        "sha256": "766f2631285155c88a1b6b935c1fb6785e7a0dd1c08ac3b741b5f1474d195e18",
+        "shape": [
+          50000,
+          21
+        ]
+      },
+      "samples_sha256": "a70063d17e38211059741ec877d9f512ee0293f1bae8c533b92be12bf03a6650",
+      "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+      "selected_marginal_cdf_upper_bound": 0.26904710640091184,
+      "selected_parameter": "a_m1",
+      "selected_parameter_index": 3,
+      "status": "model_failure"
+    },
+    {
+      "case": 7,
+      "context_seed": 20261111,
+      "coordinate_transform": {
+        "display": "physical_parameter_units",
+        "projected_axis_scale": 0.7692307692307692,
+        "reference_x": "retained_query / projected_axis_scale"
+      },
+      "manifest_file": "context-4096/seed-20261111-case-7/manifest.json",
+      "manifest_sha256": "c1d64bcf085d03b3e857319fef3de81e2ae151c0bc536cb233ffc878a4761ed4",
+      "observation_sha256": "24e41797ae22399c988c538d1511b0683c518736f6b765983b6072fc5b76e9c7",
+      "parent_reference_manifest_sha256": "83abcddf87b96f5a2619ef18f035e9913a3c2d01649137e6b1f064414bece4c3",
+      "plotted": true,
+      "reference_cdf_precision": 0.0010510956779208325,
+      "reference_distribution_sha256": "d58356a379fd77b40f0df6acbbcf212de265af452d3f921e88ca9b92a679062c",
+      "reference_grid_points": 2415,
+      "reference_manifest_file": "case-7/manifest.json",
+      "reference_manifest_sha256": "521dfdcdb792935f718483f5bb386ab4211f5698ce065f640b0229e7185ba896",
+      "reference_state": "verified",
+      "sample_count": 50000,
+      "samples_descriptor": {
+        "dtype": "<f8",
+        "sha256": "5fecfd67348075d3b308d7799ba6fd7bc9386260fb9e072902b05d405ac67790",
+        "shape": [
+          50000,
+          21
+        ]
+      },
+      "samples_sha256": "6b17b89032b2191827b66755043d7b97789c21a0f9bd6639d44d7b3dfcb75f77",
+      "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+      "selected_marginal_cdf_upper_bound": 0.279461138867396,
+      "selected_parameter": "b_m3",
+      "selected_parameter_index": 12,
+      "status": "model_failure"
+    }
+  ],
+  "figure": {
+    "file": "posterior-cdf-agreement.png",
+    "sha256": "0fc62d54eeb14aeaef6c0f2242e137a19e84cd10168e69ea3b9df2c1f3d3ea6a"
+  },
+  "gate_status": "model_failure",
+  "gate_verdict_unchanged": true,
+  "inputs": {
+    "gate_file": "gate-final.json",
+    "gate_sha256": "42163c5d77f0f1f8f7e1bb3a78c81fba43ca36a0682446a0dc533544995e490d",
+    "references_root_hint": "reference-grids-v1",
+    "runs_root_hint": "upstream-v1"
+  },
+  "plotted_case_count": 8,
+  "regeneration": {
+    "arguments": [
+      "gate=retained_gate_json",
+      "runs=selected_run_root",
+      "references=selected_reference_root",
+      "output=fresh_output_directory"
+    ],
+    "python_api": "posteriorforge.figures.render_posterior_agreement"
+  },
+  "sample_handling": {
+    "all_complete_rows_used": true,
+    "clipping": false,
+    "gate_interpolation": false,
+    "repair": false,
+    "truncation": false
+  },
+  "schema": "posteriorforge.posterior_cdf_figure.v1",
+  "scientific_scope": "eight_case_diagnostic_screen_not_SBC_or_global_calibration",
+  "selection": {
+    "context_seed": 20261111,
+    "selection_is_adverse_case_not_a_random_marginal": true,
+    "within_case_axis": "argmax retained marginal_cdf.upper; first parameter in a tie"
+  }
+}

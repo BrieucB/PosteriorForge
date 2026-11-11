@@ -78,9 +78,12 @@ def _authenticate_case(entry, reference_entry, *, runs, references, expected_cou
         raise ValueError("posterior sample rows or array descriptor mismatch")
     ref_root = _within(references, f"case-{case}")
     reference_path = ref_root / "manifest.json"
-    if sha256_file(reference_path) != reference_entry["manifest_sha256"]:
+    selected_reference_sha = reference_entry.get("grid_manifest_sha256", reference_entry["manifest_sha256"])
+    if sha256_file(reference_path) != selected_reference_sha:
         raise ValueError("gate-selected reference manifest SHA256 mismatch")
     arrays, reference_manifest = load_reference_distribution(ref_root)
+    if reference_entry.get("grid_manifest_sha256") is not None and reference_manifest.get("parent_manifest_sha256") != reference_entry["manifest_sha256"]:
+        raise ValueError("refined reference parent manifest SHA256 mismatch")
     if reference_manifest.get("case_index") != case:
         raise ValueError("reference case identity differs from the selected run")
     binding = reference_manifest["binding"]
@@ -117,7 +120,8 @@ def _authenticate_case(entry, reference_entry, *, runs, references, expected_cou
               "manifest_file": entry["manifest_file"], "manifest_sha256": entry["manifest_sha256"],
               "samples_sha256": manifest["samples_sha256"], "samples_descriptor": manifest["samples"],
               "reference_manifest_file": f"case-{case}/manifest.json",
-              "reference_manifest_sha256": reference_entry["manifest_sha256"],
+              "reference_manifest_sha256": selected_reference_sha,
+              "parent_reference_manifest_sha256": reference_entry["manifest_sha256"],
               "reference_distribution_sha256": reference_manifest["distribution"]["sha256"],
               "scientific_fingerprint": manifest["scientific_fingerprint"],
               "observation_sha256": manifest["query"]["sha256"],

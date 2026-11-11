@@ -1,0 +1,21 @@
+{
+  "files": {
+    "budget.csv": "d6cbbd5dbce7e5d77941bef038dee809d007aafbdc30fb8a965749df25fcc0a1",
+    "budget.json": "4d576e2d473ddbae9aa9237dc8345fced04db8e89f4c4e5fbb387224e0f59c5a",
+    "compute-budget.png": "1950a305168a4eb16b9a9f0d07b278ff9347124c8f2342424eb306ece8cf028d",
+    "evidence.json": "3c2cc7425cb4fb0ee8a4b78fb3c8a3d196b2529c1c99a4760e1d9e7dbb6534fa",
+    "gate.json": "42163c5d77f0f1f8f7e1bb3a78c81fba43ca36a0682446a0dc533544995e490d",
+    "posterior-agreement.png": "189937258410485f2b56f668cafb90f368c7f9791c765bc5d18c26f66d75928f",
+    "reference-qualification.png": "919f56bce8e958e7e22b1dec5295427b937d47e27e34ac446513cf4c50ecbe91",
+    "references.csv": "3637278fb3571b0f2ed0517a5f5f29c57d043de9480993293cf817fa7cca18fd",
+    "report.md": "ad9febe32e4542dc1c21f7e19a6220e34c5c7e4daa01fe030c4fc5aefec2e9b1",
+    "runs.csv": "cc41433052d8f6c4890e349a7e17655ed2684a875ccde4a61f4630dd372878fe",
+    "upstream-latency.png": "02f338ccc0d5c175aea382f6307f0ad491926ee0e6af46598c310598bc2ff8f4",
+    "upstream-memory.png": "e6b150c202b7cbb8af8683dbe8ece72e735314039c6583041109604132872829"
+  },
+  "inputs": {
+    "gate_sha256": "42163c5d77f0f1f8f7e1bb3a78c81fba43ca36a0682446a0dc533544995e490d",
+    "ledger_sha256": "d0f1a9a4f37f85abcb83d854c2152da06a50237d433168ee9d209f5eedff4277"
+  },
+  "schema": "posteriorforge.evidence_report.v1.checksums"
+}
