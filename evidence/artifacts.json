@@ -20,6 +20,14 @@
       "size_bytes": 110763286,
       "server_digest_verified": true,
       "contents": "all24 completed50000-vector runs, final gate, allocation records, independent audit, scientific figures; no weights"
+    },
+    {
+      "name": "performance-first-v1-hybrid-pilot.tar.gz",
+      "url": "https://github.com/BrieucB/PosteriorForge/releases/download/performance-first-v1-hybrid-pilot/performance-first-v1-hybrid-pilot.tar.gz",
+      "sha256": "05dadb8c89e23be3a1bdb3c749246f811c45d8154082e3eae80c4f18d2f1c633",
+      "size_bytes": 14348280,
+      "server_digest_verified": true,
+      "contents": "first completed50000-vector FP32 hybrid pilot, full review/proof inputs, actual posterior/timing/CDF figures and raw witnesses; physical model_failure and investigation flags retained; no weights"
     }
   ]
 }
