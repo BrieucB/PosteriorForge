@@ -155,3 +155,44 @@ def test_inconsistent_tres_keeps_capacity_reserved(tmp_path):
     with pytest.raises(BudgetError, match="disagree"):
         ledger.reconcile(entry["reservation_id"], _row(tres="gres/gpu=1,gres/gpu:a100=4"))
     assert ledger.summary()["reserved_gpu_hours"] == 4
+
+
+@pytest.mark.parametrize("gpus", [1, 2, 4])
+def test_literal_node_placement_preserves_reserved_resources(tmp_path, monkeypatch, gpus):
+    ledger = BudgetLedger(tmp_path / "ledger.json")
+    script = tmp_path / "run.sh"
+    script.write_text("#!/bin/bash\ntrue\n")
+    def accepted(argv, **kwargs):
+        state = json.loads(ledger.path.read_text())
+        entry = state["reservations"][0]
+        assert entry["state"] == "submitting"
+        assert entry["reserved_gpu_seconds"] == gpus * 600
+        assert argv.count("--nodelist=acn65") == 1
+        assert "--nodes=1" in argv and "--no-requeue" in argv
+        assert f"--gpus-per-node={gpus}" in argv
+        assert f"--cpus-per-task={16*gpus}" in argv
+        assert argv[-1] == str(script)
+        return subprocess.CompletedProcess(argv, 0, "123;karolina\n", "")
+    monkeypatch.setattr(subprocess, "run", accepted)
+    entry = ledger.submit(script, gpus=gpus, walltime_seconds=600,
+        purpose="fixed-total same-node scaling", job_name="pf-placement",
+        log_directory=tmp_path / "logs", node_name="acn65")
+    assert entry["job_id"] == "123"
+    assert ledger.summary()["reserved_gpu_seconds"] == gpus * 600
+    ledger.reconcile(entry["reservation_id"], _row(elapsed="90", tres=f"gres/gpu={gpus}"))
+    assert ledger.summary()["actual_gpu_seconds"] == gpus * 90
+    assert ledger.summary()["reserved_gpu_seconds"] == 0
+
+
+@pytest.mark.parametrize("node", ["", "acn65,acn66", "acn[1-4]", "--gpus=8", "acn65\n--nodes=2", 65])
+def test_invalid_node_placement_never_reserves_or_submits(tmp_path, monkeypatch, node):
+    ledger = BudgetLedger(tmp_path / "ledger.json")
+    script = tmp_path / "run.sh"
+    script.write_text("#!/bin/bash\ntrue\n")
+    def forbidden(*args, **kwargs):
+        raise AssertionError("invalid placement must not call sbatch")
+    monkeypatch.setattr(subprocess, "run", forbidden)
+    with pytest.raises(ValueError, match="literal Karolina"):
+        ledger.submit(script, gpus=1, walltime_seconds=600, purpose="invalid",
+            job_name="pf-placement", log_directory=tmp_path / "logs", node_name=node)
+    assert ledger.summary()["reservation_count"] == 0

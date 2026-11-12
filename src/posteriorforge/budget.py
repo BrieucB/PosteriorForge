@@ -223,11 +223,12 @@ class BudgetLedger:
             return dict(entry)
 
     def submit(self, script, *, gpus, walltime_seconds, purpose, job_name,
-               log_directory, script_args=(), metadata=None, timeout=60):
+               log_directory, script_args=(), metadata=None, node_name=None, timeout=60):
         """Reserve then submit a single-node allocation; never retries sbatch.
 
         Scripts must not contain #SBATCH options. Resources are fixed here, so a
         script cannot silently override the reserved GPU count or walltime.
+        Optional node placement accepts one literal Karolina accelerator node only.
         Automatic requeue is disabled: every retry requires its own reservation.
         A nonzero exit or timeout holds capacity because acceptance is unknown.
         """
@@ -236,6 +237,9 @@ class BudgetLedger:
             raise ValueError("SBATCH directives are forbidden; use budget-controlled arguments")
         if not re.fullmatch(r"pf-[a-zA-Z0-9_-]{1,80}", job_name):
             raise ValueError("job_name must begin pf- and contain simple characters")
+        if node_name is not None and (not isinstance(node_name, str) or
+                                      re.fullmatch(r"acn[0-9]{1,3}", node_name) is None):
+            raise ValueError("node_name must be one literal Karolina accelerator node")
         if not all(isinstance(arg, str) for arg in script_args):
             raise ValueError("script_args must be strings")
         directory = Path(log_directory).resolve()
@@ -247,6 +251,7 @@ class BudgetLedger:
                 "--ntasks=1", f"--gpus-per-node={gpus}", f"--cpus-per-task={16 * gpus}",
                 f"--time={hours:02d}:{minutes:02d}:{seconds:02d}", f"--job-name={job_name}",
                 f"--output={directory}/%x-%j.out", f"--error={directory}/%x-%j.err",
+                *([f"--nodelist={node_name}"] if node_name is not None else []),
                 str(script), *script_args]
         with self._locked() as value:
             entry = self._reserve_locked(value, gpus=gpus, walltime_seconds=walltime_seconds,
