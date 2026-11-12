@@ -158,13 +158,31 @@ def check_prediction(prediction,cdf,before):
     if not all(descriptor.get(key) is True for key in keys) or cdf["patched_call_count"]-before!=1:raise RuntimeError("GQA/CDF actual execution/restoration witness failed")
 
 
+def summarize_profile_trace(path,*,boundary="pfdiagnostic/profile/request"):
+    """Use the existing reader with one host request, retaining GPU range events."""
+    reader_path=Path(__file__).with_name("diagnose_runtime.py")
+    spec=importlib.util.spec_from_file_location("_passive_trace_reader",reader_path)
+    reader=importlib.util.module_from_spec(spec);spec.loader.exec_module(reader)
+    original=reader.iter_trace_events
+    def events(trace_path):
+        for event in original(trace_path):
+            if event.get("name")==boundary:
+                event={**event,"name":"pfdiagnostic/profile/request" if event.get("cat")=="user_annotation" else "passive_gpu_range/request"}
+            yield event
+    reader.iter_trace_events=events
+    summary=reader.summarize_trace(path)
+    summary["host_request_boundary_policy"]={"source_name":boundary,"category":"user_annotation","gpu_range_events_retained_under_distinct_name":True,"raw_trace_modified":False}
+    summary["reader_source_sha256"]=sha(reader_path)
+    return summary
+
+
 def profile_call(call,path,torch):
     torch.cuda.synchronize()
     with torch.profiler.profile(activities=[torch.profiler.ProfilerActivity.CPU,torch.profiler.ProfilerActivity.CUDA],record_shapes=False,profile_memory=False,with_stack=False) as profiler:
-        with torch.profiler.record_function("pfpassive/bounded_profile_window"):result=call();torch.cuda.synchronize()
+        with torch.profiler.record_function("pfdiagnostic/profile/request"):result=call();torch.cuda.synchronize()
     profiler.export_chrome_trace(str(path));del profiler
     # Existing streaming reader avoids retaining the trace JSON in memory.
-    utility=load_numerics();summary=utility._trace_summary(path)
+    summary=summarize_profile_trace(path)
     compressed=path.with_suffix(path.suffix+".gz")
     with path.open("rb") as source,gzip.open(compressed,"wb",compresslevel=5) as target:
         while block:=source.read(1024*1024):target.write(block)

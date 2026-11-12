@@ -95,3 +95,24 @@ def test_real_sdk_scope_restores_exact_descriptors_without_model_or_cuda_calls()
     assert all(inspect.getattr_static(cls,name) is descriptor for (cls,name),descriptor in before.items())
     assert len(observer.restorations)==8 and all(row["exact_descriptor_restored"] for row in observer.restorations)
     assert bool(torch.cuda._initialized)==cuda_before
+
+
+def test_profile_boundary_matches_streaming_summary(tmp_path):
+    from contextlib import contextmanager
+    import json
+    h=helper();labels=[];token=object()
+    @contextmanager
+    def label(name):
+        labels.append(name)
+        yield
+    class Profile:
+        def __enter__(self):return self
+        def __exit__(self,*args):return False
+        def export_chrome_trace(self,path):
+            Path(path).write_text(json.dumps({"traceEvents":[{"name":labels[0],"ph":"X","cat":"user_annotation","ts":0,"dur":1000000},{ "name":labels[0],"ph":"X","cat":"gpu_user_annotation","ts":10,"dur":900000}]}))
+    torch=SimpleNamespace(cuda=SimpleNamespace(synchronize=lambda:None),profiler=SimpleNamespace(
+        profile=lambda **kwargs:Profile(),ProfilerActivity=SimpleNamespace(CPU="cpu",CUDA="cuda"),record_function=label))
+    result,trace=h.profile_call(lambda:token,tmp_path/"profile.trace.json",torch)
+    assert result is token and labels==["pfdiagnostic/profile/request"]
+    assert trace["summary"]["profiled_request_trace_span_seconds"]==1.
+    assert (tmp_path/trace["trace"]).is_file()
