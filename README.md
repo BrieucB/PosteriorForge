@@ -11,21 +11,15 @@ reused through 21 autoregressive parameter stages. This project studies posterio
 sampling, memory, synchronization, and same-node independent sampling. It does
 not study text generation or distributed training.
 
-## Current performance-first phase
+## Current accuracy phase
 
-The user explicitly authorized runtime optimization **before** the remaining
-posterior accuracy repairs, keeping **50,000 complete posterior vectors** in every
-end-to-end benchmark. This supersedes the former optimization stopping rule for
-this phase. The known scientific failures remain true and visible.
+The reviewed FP16 approximation provides the execution path for controlled accuracy work. Every end-to-end posterior request still returns **50,000 complete accepted physical vectors**. Further retained-context timing, compilation and multi-GPU scaling are deferred.
 
-The CDF-corrected unoptimized variant is the performance control. New execution
-paths must preserve conditional probabilities and complete-vector sampling,
-pass relative distribution checks, and report the absolute physical metrics
-separately. FP32 context/KV reuse comes first, followed by measured batching,
-precision/compilation and same-node independent GPU workers. Accuracy work follows
-on the qualified faster engine. See [the explicit policy](variants/performance-first-v1.json).
+The first new candidate replaces raw33 observation features with [15 exact sufficient statistics](docs/accuracy-ss15-v1.md): three fixed orthonormal signal coordinates and residual energy for each mechanical block, plus the three acoustic observations. The original prior-world banks, checkpoint, all21 physical targets, six inferred noise scales, references and accuracy thresholds stay fixed. This intentionally changes the learned conditional input and requires matching SS15 execution checks before its first complete posterior pilot. No accuracy improvement is claimed before that assessment.
 
-## Terminal scientific result
+Earlier runtime work and its preserved failures are documented in [the execution record](docs/performance-first-v1.md). The original raw33 scientific baseline remains failed.
+
+## Frozen baseline scientific result
 
 **The fixed baseline fails the accepted diagnostic screen in all 24 runs.**
 All 1.2 million posterior vectors are finite, complete and within prior support.
