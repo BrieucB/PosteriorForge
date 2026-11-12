@@ -1,0 +1,23 @@
+{
+  "CPU_probe_count": 31500,
+  "RNG_calls_in_probe_source": false,
+  "backend_exclusive_operator_seconds": 0.4183680927734381,
+  "backend_exposed_outside_kernel_copy_union_seconds": 0.32071562841796875,
+  "backend_inclusive_seconds": 0.737024798828125,
+  "code_or_GPU_changes": false,
+  "dispatch_boolean_used": true,
+  "elapsed_CPU_replay_seconds": 92.82440241891891,
+  "fraction_of_profile_request": 0.003806613220691372,
+  "fraction_relative_to_clean_request": 0.004358998336030316,
+  "matching_generic_parent_counts": {
+    "1": 31500
+  },
+  "outer_probe_SDPA_exposed_outside_kernel_copy_union_seconds": 0.37416231201171873,
+  "outer_probe_SDPA_union_seconds": 0.850797087890625,
+  "reader_sha256": "1852980b507649ecf960d0f84b58d15e24073639c7482cb7a433e4e17b51139b",
+  "returned_tensor_used": false,
+  "schema": "posteriorforge.cpu_sdpa_capability_probe_audit.v1",
+  "scope": "measured CPU operator intervals; input torch.empty constructors and Python capability/dispatch checks are outside these intervals; exposed time is not a guaranteed critical-path speedup",
+  "trace_file": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/performance-first-v1/fp16-full50000-profile-01/full50000-fp16.trace.json",
+  "trace_sha256": "aa1e132db1fa89b3aa445c71e9120e9e6ac9764385a2d65e45b4e2e10a513c77"
+}
