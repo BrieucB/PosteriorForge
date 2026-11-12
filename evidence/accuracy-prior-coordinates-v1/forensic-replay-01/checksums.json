@@ -1,0 +1,70 @@
+{
+  "external_receipts": {
+    "../forensic-cpu-tests-01/receipt.json": "e0ec530f1895c21b99a86810ee0bd3425d72c4886134e8f57fe33ad54cfa1ed5",
+    "../native-pilot-failure-01/allocation-receipt.json": "7cc2ac4e666938325f9bc4e70998c8eeaf81957a946d59203335e3081800e407"
+  },
+  "files": {
+    "01-replay.log": {
+      "bytes": 326,
+      "sha256": "3d4f97c21272eefafc2f2f3d1cfe4505badfb7b8c31945402f1d37bda0feffe2"
+    },
+    "02-ONE-actual-G3.log": {
+      "bytes": 315,
+      "sha256": "4fc4510b0c83db94ceae2582c96025fb7c46c545b22de015c29de85b0a015dc6"
+    },
+    "03-assessment-and-plots.log": {
+      "bytes": 1647,
+      "sha256": "c7422b77e4bf86b5b27b184994922a1513c9f34db64dbf2a7ef909dd34c4674e"
+    },
+    "RAW-METADATA-SHA256.txt": {
+      "bytes": 279,
+      "sha256": "e68a7e56212d007d10cf4d97e86178877034b71c12fa9147ee4f9cc809742ac1"
+    },
+    "README.md": {
+      "bytes": 4964,
+      "sha256": "f1c1ace1c332a397737b3781590f17e4e10fdc116988a2916c6755941b13bb9f"
+    },
+    "execution-receipt.json": {
+      "bytes": 3118,
+      "sha256": "15b4efa4adb32ea464835b65846f5ac413ef35c7c8f30df1f818ded8729e343a"
+    },
+    "forensic-G3-manifest.json.gz": {
+      "bytes": 3398,
+      "sha256": "86782158dc63fbd6f8c9d9f15b31857eef456bb9783cbcb5b8670a83bc391f2b"
+    },
+    "forensic-assessment.json.gz": {
+      "bytes": 9753,
+      "sha256": "f4f34f97881149acbeee2310fb713cd3608cfcdedc6a5d33983d0c00740d6ce3"
+    },
+    "forensic-density-focus.png": {
+      "bytes": 193540,
+      "sha256": "a962d2a1e46c12a08b533f69246347f4dcc7088d803655c09493713c7860b33b"
+    },
+    "forensic-density.png": {
+      "bytes": 502006,
+      "sha256": "c2826962ac0e760e4eb5e5f1ff686486b3199683bcad99ace93f3d83dd972459"
+    },
+    "forensic-joint-cdf.png": {
+      "bytes": 777646,
+      "sha256": "dcee3eac4c69227a3f79de1533ad80a4e6615dcd6de1585520bad706e04cdc83"
+    },
+    "forensic-marginal-cdf.png": {
+      "bytes": 603114,
+      "sha256": "e085190d2c9438d06e73532d7942d938ce3af9d17ba60a240bbebc74a6624d73"
+    },
+    "forensic-replay-manifest.json.gz": {
+      "bytes": 9995,
+      "sha256": "c47bfcb6e844f5697cf0684bc9c61076c404707542f79a6d25667058fa9c8d8c"
+    },
+    "summary.json": {
+      "bytes": 19012,
+      "sha256": "54995c7c57829a2424200f43c3e6711d64dbcc2df6c18a091c109d754c9d6ddb"
+    }
+  },
+  "raw_metadata_sha256": {
+    "forensic-G3-manifest.json": "8708522b5d8570e08ba25efde5a9c1d0c5907a25a91aca51b4949c2d1bc1237e",
+    "forensic-assessment.json": "95b606ff2fecc279764545d841d8a73de7cc081959731ef7e2140e4ba549b45f",
+    "forensic-replay-manifest.json": "a56cf31d5b106c4ccf25e30629c084bb9bb9c881f473fc498cdf1116f703c255"
+  },
+  "schema": "posteriorforge.forensic_evidence_checksums.v1"
+}

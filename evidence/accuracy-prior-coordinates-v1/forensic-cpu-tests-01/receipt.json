@@ -1,0 +1,104 @@
+{
+  "GPU_allocations": 0,
+  "actual_saved_cohort_replay_or_G3_runs": 0,
+  "attribution": "Built with PriorLabs-TabPFN",
+  "earlier_reference_pass_superseded_by_exact_final_reference_run": true,
+  "final_sources": {
+    "scripts/assess_prior_forensic_replay_v1.py": "c73c4e489946e018399885c981afafc5c47e3eab6e27f6561b377f836f703f8c",
+    "scripts/replay_prior_forensic_cohort_v1.py": "20bfc8b64eab433de82432f038b53740f706d37f9b43046228c0d59d821071d1",
+    "src/posteriorforge/conditional_globals.py": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+    "src/posteriorforge/execution_physical_fifo_v1.py": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "tests/test_prior_forensic_replay_v1.py": "86b37175f33f96e9e8730dae1a8147aeca021206a25c9e28f800990f42436a96"
+  },
+  "focused_scientific_scope": "deterministic synthetic codec-F64\u2192same production buffer/originalsupport integration; actual archive authentication only; synthetic one-call G3 tests. No actual saved-cohort selection/refresh yet.",
+  "inference_stdout_preserved_from_observed_tool_result": true,
+  "new_neural_proposals": 0,
+  "reference_stdout_stderr_preserved": true,
+  "runs": [
+    {
+      "command_argv": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "cache_dir=/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/forensic-reference-tests-cache",
+        "tests/test_prior_forensic_replay_v1.py"
+      ],
+      "environment": "reference",
+      "exit_code": 0,
+      "log": "reference-pytest.log",
+      "passed_tests": 15,
+      "skip_scope": [
+        "Torch unavailable",
+        "exact saved F64 archive belongs to inference version"
+      ],
+      "skipped_tests": 2,
+      "source_bytes_unchanged_during_test": true,
+      "source_hashes_after": {
+        "scripts/assess_prior_forensic_replay_v1.py": "c73c4e489946e018399885c981afafc5c47e3eab6e27f6561b377f836f703f8c",
+        "scripts/replay_prior_forensic_cohort_v1.py": "20bfc8b64eab433de82432f038b53740f706d37f9b43046228c0d59d821071d1",
+        "src/posteriorforge/conditional_globals.py": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+        "src/posteriorforge/execution_physical_fifo_v1.py": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+        "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+        "tests/test_prior_forensic_replay_v1.py": "86b37175f33f96e9e8730dae1a8147aeca021206a25c9e28f800990f42436a96"
+      },
+      "source_hashes_before": {
+        "scripts/assess_prior_forensic_replay_v1.py": "c73c4e489946e018399885c981afafc5c47e3eab6e27f6561b377f836f703f8c",
+        "scripts/replay_prior_forensic_cohort_v1.py": "20bfc8b64eab433de82432f038b53740f706d37f9b43046228c0d59d821071d1",
+        "src/posteriorforge/conditional_globals.py": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+        "src/posteriorforge/execution_physical_fifo_v1.py": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+        "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+        "tests/test_prior_forensic_replay_v1.py": "86b37175f33f96e9e8730dae1a8147aeca021206a25c9e28f800990f42436a96"
+      },
+      "versions": {
+        "numpy": "2.2.6",
+        "pytest": "8.4.2",
+        "python": "3.11.13",
+        "scipy": "1.15.3"
+      }
+    },
+    {
+      "command_argv": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_prior_forensic_replay_v1.py"
+      ],
+      "environment": "inference",
+      "exit_code": 0,
+      "final_source_snapshot": {
+        "scripts/assess_prior_forensic_replay_v1.py": "c73c4e489946e018399885c981afafc5c47e3eab6e27f6561b377f836f703f8c",
+        "scripts/replay_prior_forensic_cohort_v1.py": "20bfc8b64eab433de82432f038b53740f706d37f9b43046228c0d59d821071d1",
+        "src/posteriorforge/conditional_globals.py": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+        "src/posteriorforge/execution_physical_fifo_v1.py": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+        "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+        "tests/test_prior_forensic_replay_v1.py": "86b37175f33f96e9e8730dae1a8147aeca021206a25c9e28f800990f42436a96"
+      },
+      "known_authored_source_hashes_immediately_before_command": {
+        "scripts/assess_prior_forensic_replay_v1.py": "c73c4e489946e018399885c981afafc5c47e3eab6e27f6561b377f836f703f8c",
+        "scripts/replay_prior_forensic_cohort_v1.py": "20bfc8b64eab433de82432f038b53740f706d37f9b43046228c0d59d821071d1"
+      },
+      "log": "inference-pytest.log",
+      "log_origin": "exact completed tool stdout preserved; not rerun",
+      "passed_tests": 17,
+      "pytest_reported_seconds": 10.84,
+      "separate_atomic_full_source_snapshot_at_inference_pytest_entry_captured": false,
+      "skipped_tests": 0,
+      "test_command_environment": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "PYTHONPATH": "src"
+      },
+      "versions": {
+        "numpy": "1.26.4",
+        "pytest": "8.4.2",
+        "python": "3.11.13",
+        "scipy": "1.12.0"
+      }
+    }
+  ],
+  "schema": "posteriorforge.prior_forensic_CPU_tests.v1",
+  "status": "passed"
+}

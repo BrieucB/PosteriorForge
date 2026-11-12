@@ -1,0 +1,84 @@
+{
+  "actual_source_pins": {
+    "forensic_refresh_assessment": "c73c4e489946e018399885c981afafc5c47e3eab6e27f6561b377f836f703f8c",
+    "neural_request_final_footers_recovered": false,
+    "original_G3_kernel": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+    "original_scientific_reference_helper": "146c2ca35e15b54b7f68134d383574485ed1cc228f38e6fc611624f00b411924",
+    "prior_display_helper": "6c49e59ccee9bebeecd53990556a6e00a9f41b2fc53a2e8ecf9827014efc2d56",
+    "replay": "20bfc8b64eab433de82432f038b53740f706d37f9b43046228c0d59d821071d1"
+  },
+  "all18_physical_columns_byte_identical": true,
+  "default_numpy_python_RNG_after_sha256": "c6869ab275327211a9bcf131c3d367f667b4be223abbe70c6fd3a22ad38eb8e8",
+  "default_numpy_python_RNG_before_sha256": "c6869ab275327211a9bcf131c3d367f667b4be223abbe70c6fd3a22ad38eb8e8",
+  "exact_same_runtime_decode_and_saved_actual_Z_reconstruction": true,
+  "failed_original_request_promoted_to_complete": false,
+  "finite_supported_Float64_50000_by21_both": true,
+  "four_PNG_hashes_verified": {
+    "density": {
+      "file": "forensic-density.png",
+      "sha256": "c2826962ac0e760e4eb5e5f1ff686486b3199683bcad99ace93f3d83dd972459"
+    },
+    "focus_density": {
+      "file": "forensic-density-focus.png",
+      "sha256": "a962d2a1e46c12a08b533f69246347f4dcc7088d803655c09493713c7860b33b"
+    },
+    "joint_cdf": {
+      "file": "forensic-joint-cdf.png",
+      "sha256": "dcee3eac4c69227a3f79de1533ad80a4e6615dcd6de1585520bad706e04cdc83"
+    },
+    "marginal_cdf": {
+      "file": "forensic-marginal-cdf.png",
+      "sha256": "e085190d2c9438d06e73532d7942d938ce3af9d17ba60a240bbebc74a6624d73"
+    }
+  },
+  "generated51200_checked50000_unused1200": true,
+  "input_manifest_sha256": {
+    "G3": "8708522b5d8570e08ba25efde5a9c1d0c5907a25a91aca51b4949c2d1bc1237e",
+    "assessment": "95b606ff2fecc279764545d841d8a73de7cc081959731ef7e2140e4ba549b45f",
+    "failed": "c81001f878bc1cd04d144c4d98a22e2ab5a089698b58978e10773c33654bd488",
+    "replay": "a56cf31d5b106c4ccf25e30629c084bb9bb9c881f473fc498cdf1116f703c255"
+  },
+  "missing_original_success_footers_recovered": false,
+  "new_normal_posterior_model_GPU_reference_or_metric_computation": false,
+  "recorded_original_support_counts": {
+    "accepted_before_trim": 50000,
+    "original_checked_count": 50000,
+    "original_support_calls": 1,
+    "returned_count": 50000
+  },
+  "same_case2_reference_and_original_gate_file_hashes_verified": true,
+  "saved_metric_gate_predicates": {
+    "after": {
+      "count": 50000,
+      "failure_indices": {
+        "SD": [],
+        "bias": [],
+        "joint": [],
+        "marginal": []
+      },
+      "joint_count": 32,
+      "marginal_count": 21,
+      "passed": true,
+      "saved_metric_predicates_replayed": true
+    },
+    "before": {
+      "count": 50000,
+      "failure_indices": {
+        "SD": [],
+        "bias": [
+          0
+        ],
+        "joint": [],
+        "marginal": []
+      },
+      "joint_count": 32,
+      "marginal_count": 21,
+      "passed": false,
+      "saved_metric_predicates_replayed": true
+    }
+  },
+  "schema": "posteriorforge.independent_forensic_artifact_QA.v1",
+  "scope": "Custody and stored predicate/actual-Z reconstruction only; no new cohort, G3 draw, CDF/moment estimation or integration.",
+  "status": "passed",
+  "visual_QA": "All4 matching local copies inspected: complete panels, visible four-curve legends and FORENSIC/missing-neural-RNG-guard labels, no clipping or overlap found."
+}

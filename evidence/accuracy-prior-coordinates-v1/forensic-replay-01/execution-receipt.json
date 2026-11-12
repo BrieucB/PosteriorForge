@@ -1,0 +1,66 @@
+{
+  "CUDA_VISIBLE_DEVICES": "",
+  "attribution": "Built with PriorLabs-TabPFN",
+  "commands": [
+    {
+      "argv": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "scripts/replay_prior_forensic_cohort_v1.py",
+        "--failed-manifest",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/native-pilot-01/manifest.json",
+        "--output",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/forensic-replay-01"
+      ],
+      "exit_code": 0,
+      "log_file": "01-replay.log",
+      "log_sha256": "3d4f97c21272eefafc2f2f3d1cfe4505badfb7b8c31945402f1d37bda0feffe2",
+      "name": "01-replay"
+    },
+    {
+      "argv": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "scripts/assess_prior_forensic_replay_v1.py",
+        "refresh",
+        "--replay-manifest",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/forensic-replay-01/manifest.json",
+        "--replay-manifest-sha256",
+        "a56cf31d5b106c4ccf25e30629c084bb9bb9c881f473fc498cdf1116f703c255",
+        "--failed-manifest",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/native-pilot-01/manifest.json",
+        "--output",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/forensic-global-block-01"
+      ],
+      "exit_code": 0,
+      "log_file": "02-ONE-actual-G3.log",
+      "log_sha256": "4fc4510b0c83db94ceae2582c96025fb7c46c545b22de015c29de85b0a015dc6",
+      "name": "02-ONE-actual-G3"
+    },
+    {
+      "argv": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "scripts/assess_prior_forensic_replay_v1.py",
+        "assess",
+        "--root",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge",
+        "--replay-manifest",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/forensic-replay-01/manifest.json",
+        "--replay-manifest-sha256",
+        "a56cf31d5b106c4ccf25e30629c084bb9bb9c881f473fc498cdf1116f703c255",
+        "--failed-manifest",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/native-pilot-01/manifest.json",
+        "--hybrid-manifest",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/forensic-global-block-01/manifest.json",
+        "--hybrid-manifest-sha256",
+        "8708522b5d8570e08ba25efde5a9c1d0c5907a25a91aca51b4949c2d1bc1237e",
+        "--output",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/forensic-assessment-01"
+      ],
+      "exit_code": 0,
+      "log_file": "03-assessment-and-plots.log",
+      "log_sha256": "c7422b77e4bf86b5b27b184994922a1513c9f34db64dbf2a7ef909dd34c4674e",
+      "name": "03-assessment-and-plots"
+    }
+  ],
+  "new_GPU_runs": 0,
+  "schema": "posteriorforge.forensic_CPU_commands.v1"
+}

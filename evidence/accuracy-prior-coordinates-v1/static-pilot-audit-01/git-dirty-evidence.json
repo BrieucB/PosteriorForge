@@ -1,0 +1,43 @@
+{
+  "candidate_status_in_THIS_posthoc_snapshot": {
+    "scripts/diagnose_host_reuse.py": true,
+    "scripts/evaluate_ss15_campaign.py": true,
+    "src/posteriorforge/execution_tail_observer.py": true,
+    "tests/test_execution_tail_observer.py": true,
+    "tests/test_host_reuse_diagnostic.py": true
+  },
+  "checkout_cleanliness_repaired_or_history_rewritten": false,
+  "contemporaneous_original_job_log_scan": {
+    "pf-prior-pilot-01-5411061.err": {
+      "bytes": 2101,
+      "matching_git_dirty_untracked_lines": [],
+      "sha256": "43566dc3238e872236b03637bebb7270656e70d81d9e31bbb970fb9cfc53134f",
+      "total_matches": 0
+    },
+    "pf-prior-pilot-01-5411061.out": {
+      "bytes": 0,
+      "matching_git_dirty_untracked_lines": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "total_matches": 0
+    }
+  },
+  "exhaustive_runtime_dirty_filename_list_claimed": false,
+  "known_legacy_candidates_named_by_coordinator": [
+    "scripts/diagnose_host_reuse.py",
+    "scripts/evaluate_ss15_campaign.py",
+    "src/posteriorforge/execution_tail_observer.py",
+    "tests/test_execution_tail_observer.py",
+    "tests/test_host_reuse_diagnostic.py"
+  ],
+  "new_source_closure_requirement": "Corrected production implementation/helper/dependencies must be committed and pinned before any later authorized run; none executed here.",
+  "posthoc_revision": "5e0299a75c235821bf6a26097f58087eb07c17cf",
+  "posthoc_snapshot_UTC": "2026-11-12T23:21:54.295543+00:00",
+  "posthoc_status_file": "POSTHOC-git-status.txt",
+  "posthoc_status_sha256": "833781134a87cfda1f207ea1a03669afe6d09f6dbdd6fe223296112700a4b4e3",
+  "raw_manifest_sha256": "c81001f878bc1cd04d144c4d98a22e2ab5a089698b58978e10773c33654bd488",
+  "recorded_git_dirty_boolean": true,
+  "recorded_producer_revision": "b25365a1275b5e9a4d549612a81674ad9002d15f",
+  "runtime_filename_inventory_in_manifest": false,
+  "schema": "posteriorforge.prior_failed_pilot_git_dirty_evidence.v1",
+  "scope": "c810 records only dirtyTrue; current untracked files are a later observation and do not prove an exhaustive runtime inventory."
+}

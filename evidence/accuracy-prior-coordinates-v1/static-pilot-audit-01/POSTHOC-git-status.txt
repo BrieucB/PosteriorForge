@@ -1,0 +1,9 @@
+?? evidence/accuracy-prior-coordinates-v1/forensic-cpu-tests-01/
+?? evidence/accuracy-prior-coordinates-v1/static-pilot-audit-01/
+?? scripts/diagnose_host_reuse.py
+?? scripts/evaluate_ss15_campaign.py
+?? src/posteriorforge/execution_tail_observer.py
+?? src/posteriorforge/performance_prior_physical_fifo_v1.py
+?? tests/test_execution_tail_observer.py
+?? tests/test_host_reuse_diagnostic.py
+?? tests/test_performance_prior_physical_fifo_v1.py
