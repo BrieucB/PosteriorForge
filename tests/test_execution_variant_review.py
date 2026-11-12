@@ -493,6 +493,8 @@ def aggregate_case(tmp_path,monkeypatch,header,sampling_policy):
         descriptor=payload_manifest["compatibility_adapter"]
         child=copy.deepcopy(manifest)
         child.update(schema=review.RUN_SCHEMA,variant="execution_hybrid_v1",mode="component_hybrid",
+            runner_source_sha256=review.RUNNER_V3_SHA256,runner_version=3,engine_query_batch_cap=1024,
+            torch_float32_matmul_precision="highest",cuda_matmul_allow_tf32=False,
             rank=rank,world_size=2,requested_count=25000,scientific_run=False,
             end_to_end=False,run_purpose="performance_worker",benchmark_total_count=50000,
             worker_contract_sha256=sha256_file(path),qualification_full21=True,
@@ -525,7 +527,8 @@ def aggregate_case(tmp_path,monkeypatch,header,sampling_policy):
        "aggregate_published":True,"worker_counts":[25000,25000],"worker_return_codes":[0,0],
        "budget":{"job_id":"123","reservation_id":"reservation"},
        "orchestrator_source_sha256":sha256_file(PATH.with_name("run_execution_workers.py")),
-       "runner_source_sha256":sha256_file(performance_runner.__file__),"qualification_manifest_sha256":qsha,
+       "runner_source_sha256":review.RUNNER_V3_SHA256,"runner_version":3,"query_batch_size":1024,"engine_query_batch_cap":1024,
+       "qualification_manifest_sha256":qsha,
        "worker_contracts":[{"path":str(path),"sha256":sha256_file(path)} for path in paths],
        "rank_seed_streams":[contract["seed_streams"] for contract in contracts],
        "visible_device_tokens":["0","1"],"workers":records,
@@ -676,7 +679,7 @@ def test_real_recovered_gqa_proof_archives_and_all_numeric_predicates_validate(m
     m={key:q[key] for key in ("scientific_fingerprint","parameter_order","context_seed","case","context_size",
                               "context_theta","context_obs","query","checkpoint_sha256")}
     m.update(variant="execution_gqa_hybrid_v1",runner_version=2,runner_source_sha256=review.RUNNER_V2_SHA256,
-             qualification_producer_schema=q["schema"],qualification_recovery_source_sha256=q.get("recovery_source_sha256"))
+             query_batch_size=1024,qualification_producer_schema=q["schema"],qualification_recovery_source_sha256=q.get("recovery_source_sha256"))
     descriptor=q["stage_results"][0]["comparisons"][0]["actual_gqa_execution"]["members"][0]["descriptor"]
     fingerprints={key:descriptor[key] for key in ("original_attention_code_sha256",
                  "active_attention_code_sha256","executed_original_attention_code_sha256")}
@@ -701,12 +704,18 @@ def gqa_aggregate_case(aggregate_case,monkeypatch):
         contract_path=Path(identity["path"]);contract=json.loads(contract_path.read_text())
         child_path=Path(contract["expected_output"])/"manifest.json";child=json.loads(child_path.read_text())
         child.update(gqa_runtime_fields());child["variant"]="execution_gqa_hybrid_v1";child.pop("hybrid_execution",None)
+        from posteriorforge import execution_cache
+        child.update(runner_version=3,runner_source_sha256=review.RUNNER_V3_SHA256,engine_query_batch_cap=1024,
+                     execution_counters={**execution_cache.execution_metadata(),"config":{**execution_cache.execution_metadata()["config"],"query_batch_size":1024},"prepare_count":21},
+                     qualification_family="gqa_hybrid_1024_v2",qualification_large_batch_size=None,
+                     qualification_large_batch_producer_sha256=None,qualification_portable_source_verified=False,
+                     historical_install_ctime_replayed=True)
         child["compatibility_adapter"]["patched_call_count"]=168
         child["sampling_policy"].update(uniform_assignment="preassigned_per_stage_by_physical_row",
                                        head_retry_preserves_row_uniform=True)
         child_path.write_text(json.dumps(child));contracts.append(contract);paths.append(contract_path)
     m.update(mode="component_gqa_hybrid",worker_execution_variant="execution_gqa_hybrid_v1",
-             gqa_hybrid_execution=gqa_runtime_fields()["gqa_hybrid_execution"])
+             gqa_hybrid_execution=gqa_runtime_fields()["gqa_hybrid_execution"],qualification_family="gqa_hybrid_1024_v2")
     m.pop("hybrid_execution",None)
     expected={key:control[key] for key in ("scientific_fingerprint","parameter_order","context_seed","case","context_size",
                                           "context_theta","context_obs","query","checkpoint_sha256","baseline_execution_source")}
@@ -724,7 +733,7 @@ def test_gqa_aggregate_authenticates_actual_new_worker_policy_and_checks(gqa_agg
                                                                custody=custody,qualification_path=proof)
     np.testing.assert_array_equal(values,combined)
     assert effective["variant"]=="execution_gqa_hybrid_v1"
-    assert detail["runner_source_authentication"]["version"]==2
+    assert detail["runner_source_authentication"]["version"]==3
     assert [c["verified_calls"] for c in detail["GQA_runtime_checks_by_rank"]]==[161,161]
 
 
@@ -776,3 +785,170 @@ def test_v2_missing_version_is_only_permitted_for_aggregate_summary(gqa_header):
 def test_cli_summary_includes_distinct_gqa_hybrid_qualification_flag():
     source=PATH.read_text()
     assert '"full21_gqa_hybrid_fixed_conditional_qualified":qualification.get("full21_gqa_hybrid_qualified",False)' in source
+
+
+def large_batch_fields(chunk):
+    from posteriorforge import execution_cache
+    return {"runner_version":3,"runner_source_sha256":review.RUNNER_V3_SHA256,"query_batch_size":chunk,
+        "engine_query_batch_cap":10000,"torch_float32_matmul_precision":"highest","cuda_matmul_allow_tf32":False,
+        "qualification_family":"large_batch_v1","qualification_large_batch_size":chunk,
+        "qualification_large_batch_producer_sha256":review.GQA_BATCH_QUALIFIER_SHA256,
+        "qualification_portable_source_verified":True,"historical_install_ctime_replayed":False,
+        "qualification_producer_schema":review.GQA_BATCH_SCHEMA,"qualification_recovery_source_sha256":None,
+        "execution_engine":{**execution_cache.execution_metadata(),"query_batch_size":chunk,"posterior_count":50000,
+                            "sampling_rng_policy":"independent_cpu_sampling_streams_model_rng_isolated"},
+        "execution_counters":{**execution_cache.execution_metadata(),
+            "config":{**execution_cache.execution_metadata()["config"],"query_batch_size":10000},"prepare_count":21},
+        "rejection":{"support_calls":1,"proposed":50000,"accepted_before_final_trim":50000,"returned":50000}}
+
+
+@pytest.fixture
+def portable_header(gqa_header):
+    m,context,query,control=gqa_header;m=copy.deepcopy(m);m.update(large_batch_fields(6250))
+    return m,context,query,control
+
+
+@pytest.mark.parametrize("chunk",review.LARGE_BATCHES)
+def test_version3_distinguishes_sampler_chunk_from_actual_engine_cap(portable_header,chunk):
+    m,context,query,control=portable_header;m.update(large_batch_fields(chunk))
+    review.validate_execution_header(m,context=context,query=query,control=control)
+    assert m["execution_engine"]["query_batch_size"]==chunk
+    assert m["execution_counters"]["config"]["query_batch_size"]==10000
+
+
+@pytest.mark.parametrize("field,value",[
+    ("engine_query_batch_cap",6250),("query_batch_size",8192),("runner_version",2),
+    ("qualification_large_batch_size",4096),("qualification_portable_source_verified",False),
+    ("historical_install_ctime_replayed",True),("qualification_family","gqa_hybrid_1024_v2"),
+    ("qualification_large_batch_producer_sha256","f"*64),("cuda_matmul_allow_tf32",True)])
+def test_version3_rejects_unqualified_chunk_or_portable_family_tampering(portable_header,field,value):
+    m,context,query,control=portable_header;m[field]=value
+    with pytest.raises(ValueError):
+        review.validate_execution_header(m,context=context,query=query,control=control)
+
+
+@pytest.mark.parametrize("field",["cap","prepares","engine_chunk"])
+def test_version3_actual_engine_counters_cannot_be_relabelled(portable_header,field):
+    m,context,query,control=portable_header
+    if field=="cap":m["execution_counters"]["config"]["query_batch_size"]=6250
+    elif field=="prepares":m["execution_counters"]["prepare_count"]=20
+    else:m["execution_engine"]["query_batch_size"]=10000
+    with pytest.raises(ValueError):
+        review.validate_execution_header(m,context=context,query=query,control=control)
+
+
+def test_version3_historical_source_does_not_depend_on_current_runner_file(portable_header,monkeypatch):
+    m,_,_,_=portable_header
+    real=review.sha256_file
+    monkeypatch.setattr(review,"sha256_file",lambda p:"f"*64 if str(p).endswith("performance_runner.py") else real(p))
+    result=review.validate_runner_source(m)
+    assert result["historical_git_revision"]==review.RUNNER_V3_GIT_REVISION
+
+
+def test_real_portable_all21_proof_all3_sizes_and_path_independent_runtime_fingerprints(portable_header,monkeypatch):
+    import os
+    path=os.environ.get("POSTERIORFORGE_GQA_BATCH_QUALIFICATION")
+    if not path:pytest.skip("set POSTERIORFORGE_GQA_BATCH_QUALIFICATION for actual all21 portable CPU replay")
+    path=Path(path);q=json.loads(path.read_text());m=copy.deepcopy(portable_header[0])
+    m.update({key:q[key] for key in ("checkpoint_sha256","scientific_fingerprint","parameter_order","context_theta","context_obs","query")})
+    for chunk in review.LARGE_BATCHES:
+        m.update(large_batch_fields(chunk))
+        result=review.gqa_batch_qualification_review(path,m,q)
+        assert result["full21_large_batch_qualified"] is True and result["full21_qualified"] is False
+        assert result["portable_source_verification"]["sdk_python_source_count"]==22
+        assert result["portable_source_verification"]["historical_install_ctime_replayed"] is False
+    # Self-consistent runtime code hashes may differ from proof hashes solely
+    # because code.co_filename changes after relocation. Source bytes bind them.
+    m["gqa_prediction_checks"]["attention_fingerprints"]={
+        "original_attention_code_sha256":"d"*64,"active_attention_code_sha256":"e"*64,
+        "executed_original_attention_code_sha256":"d"*64}
+    assert review.gqa_batch_qualification_review(path,m,q)["full21_large_batch_qualified"]
+    corrupt=copy.deepcopy(q);corrupt["full21_batch_qualified"]["10000"]=False
+    with pytest.raises(ValueError):
+        review.gqa_batch_qualification_review(path,m,corrupt)
+
+
+def test_portable_sdk_locator_does_not_use_historical_metadata_paths(tmp_path):
+    with pytest.raises(ValueError,match="sdk-root"):
+        review.portable_sdk_root(tmp_path/"manifest.json")
+    current=tmp_path/"new-install"/"tabpfn";current.mkdir(parents=True)
+    assert review.portable_sdk_root(tmp_path/"manifest.json",current)==current.resolve()
+
+
+@pytest.fixture
+def large_batch_aggregate_case(gqa_aggregate_case):
+    path,m,context,query,control,custody,proof,combined,contracts,paths,orchestrator,expected=gqa_aggregate_case
+    for rank,contract in enumerate(contracts):
+        contract["query_batch_size"]=6250
+        paths[rank].write_text(json.dumps(contract))
+        child_path=Path(contract["expected_output"])/"manifest.json";child=json.loads(child_path.read_text())
+        child.update(large_batch_fields(6250))
+        child["execution_engine"]["posterior_count"]=25000
+        child["rejection"].update(proposed=25000,accepted_before_final_trim=25000,returned=25000)
+        child["worker_contract_sha256"]=sha256_file(paths[rank])
+        # Distinct but self-consistent code fingerprints emulate workers whose
+        # byte-identical sources were loaded from different installation paths.
+        if rank:
+            child["gqa_prediction_checks"]["attention_fingerprints"].update(
+                original_attention_code_sha256="d"*64,active_attention_code_sha256="e"*64,
+                executed_original_attention_code_sha256="d"*64)
+        child_path.write_text(json.dumps(child))
+    m.update(query_batch_size=6250,engine_query_batch_cap=10000,qualification_family="large_batch_v1")
+    m["execution_engine"]["query_batch_size"]=6250
+    m["worker_contracts"]=[{"path":str(p),"sha256":sha256_file(p)} for p in paths]
+    _,m["workers"]=orchestrator.validate_worker_payloads(contracts,paths,expected_bindings=expected,
+                   driver_schema=review.RUN_SCHEMA,qualification_sha256=sha256_file(proof))
+    path.write_text(json.dumps(m))
+    return path,m,context,query,control,custody,proof,combined,contracts,paths,orchestrator,expected
+
+
+def test_portable_v3_aggregate_accepts_self_consistent_worker_code_paths_not_cross_install_marshals(large_batch_aggregate_case):
+    path,m,context,query,control,custody,proof,combined,*_=large_batch_aggregate_case
+    values,effective,detail=review.authenticate_worker_aggregate(path,m,context=context,query=query,control=control,
+                                                               custody=custody,qualification_path=proof)
+    np.testing.assert_array_equal(values,combined)
+    assert effective["query_batch_size"]==6250 and effective["engine_query_batch_cap"]==10000
+    assert detail["GQA_runtime_checks_by_rank"][0]["attention_fingerprints"]!=detail["GQA_runtime_checks_by_rank"][1]["attention_fingerprints"]
+
+
+def test_portable_aggregate_cannot_relabel_sampler_chunk_as_engine_cap(large_batch_aggregate_case):
+    path,m,context,query,control,custody,proof,*_=large_batch_aggregate_case
+    m["engine_query_batch_cap"]=6250
+    with pytest.raises(ValueError,match="query cap"):
+        review.authenticate_worker_aggregate(path,m,context=context,query=query,control=control,
+                                            custody=custody,qualification_path=proof)
+
+
+def test_real_portable_bundle_accepts_relocated_bytes_and_never_replays_old_install_ctime(portable_header,tmp_path,monkeypatch):
+    import os,shutil
+    path=os.environ.get("POSTERIORFORGE_GQA_BATCH_QUALIFICATION")
+    if not path:pytest.skip("set POSTERIORFORGE_GQA_BATCH_QUALIFICATION for actual portable source test")
+    path=Path(path);q=json.loads(path.read_text());old=review.portable_sdk_root(path)
+    relocated=tmp_path/"relocated"/"tabpfn";relocated.mkdir(parents=True)
+    for name in q["portable_source_authentication"]["sdk_source_sha256"]:
+        rel=Path(name).relative_to("tabpfn");target=relocated/rel;target.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copyfile(old/rel,target)
+    m=copy.deepcopy(portable_header[0])
+    m.update({key:q[key] for key in ("checkpoint_sha256","scientific_fingerprint","parameter_order","context_theta","context_obs","query")})
+    from posteriorforge import performance_runner
+    math=performance_runner.gqa_recovery_helper()
+    monkeypatch.setattr(math,"verify_recovery_artifact",lambda *a:(_ for _ in ()).throw(AssertionError("historical ctime replay forbidden")))
+    result=review.gqa_batch_qualification_review(path,m,q,sdk_root=relocated)
+    assert result["portable_source_verification"]["tree_path_is_identity"] is False
+    assert result["portable_source_verification"]["sdk_python_source_count"]==22
+    # Same passed booleans cannot conceal a strict threshold violation.
+    bad=copy.deepcopy(q)
+    bad["stage_results"][0]["batch_results"][0]["members"][0]["direct_raw_probability_comparison"]["max_cdf_absolute_error"]=2.1e-5
+    with pytest.raises(ValueError):
+        review.gqa_batch_qualification_review(path,m,bad,sdk_root=relocated)
+    changed=relocated/"regressor.py";changed.write_text(changed.read_text()+"\n# altered bytes\n")
+    with pytest.raises(RuntimeError,match="relocated SDK source mismatch"):
+        review.gqa_batch_qualification_review(path,m,q,sdk_root=relocated)
+
+
+def test_version3_historical_blob_tampering_is_rejected(portable_header,monkeypatch):
+    m,_,_,_=portable_header
+    monkeypatch.setattr(review,"_HISTORICAL_V3_RUNNER_VERIFIED",False)
+    monkeypatch.setattr(review.subprocess,"run",lambda *a,**kw:SimpleNamespace(stdout=b"tampered v3"))
+    with pytest.raises(ValueError,match="version3 runner Git blob"):
+        review.validate_runner_source(m)

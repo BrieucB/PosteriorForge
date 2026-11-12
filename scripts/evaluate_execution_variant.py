@@ -15,6 +15,7 @@ import json
 import hashlib
 import re
 import subprocess
+from types import ModuleType
 from pathlib import Path
 import numpy as np
 
@@ -39,11 +40,18 @@ RUNNER_V1_GIT_REVISION = "ea2d673c30c3d8c047c9d1b3f349d0b142b38652"
 RUNNER_V2_SHA256 = "0a071ae7d016b4e99b75940da878d6c37eeab7f25a92b921efb2a39d66fd429d"
 RUNNER_V2_GIT_REVISION = "2bb6f3809a32b6ebe8933669172c681058151f50"
 ORCHESTRATOR_SHA256 = "6731e392a63c21a0dbcd2f5df585619691f604fde9ed23df852a3bfaf512df99"
+RUNNER_V3_SHA256 = "be9a7d38413f797b72377f048d69db8f948953e0cd8d54e361ee690893337ff1"
+RUNNER_V3_GIT_REVISION = "a768ba06af054e68e2c478d690c43b05f3299f80"
+ORCHESTRATOR_V3_SHA256 = "87bfdce4716f8899e964d457a96372ddca788a951eb1d3004506d1e1c3bdee54"
+GQA_BATCH_QUALIFIER_SHA256 = "31422927077911879b6cd155605a6a668796305ee97ccf6585819d8fe494cfde"
+GQA_BATCH_SCHEMA = "posteriorforge.execution_gqa_batch_qualification.v1"
+LARGE_BATCHES = (4096,6250,10000)
 GQA_WRAPPER_SHA256 = "ac22c67c23403723902805666d1239bd30a8af355554df58a8638a8fd1f21e82"
 GQA_MODULE_SHA256 = "8b2cff752855e1b1966d2e374322602fa71368b1926da9d3b0261edd111aee6b"
 GQA_RECOVERY_SHA256 = "83064f54712014b5c4c66569e854872caff03593cfdc337f2472a7b5723aea02"
 _HISTORICAL_RUNNER_VERIFIED = False
 _HISTORICAL_V2_RUNNER_VERIFIED = False
+_HISTORICAL_V3_RUNNER_VERIFIED = False
 CONTROL_MANIFEST_SHA256 = "a0114fd74721cf9bed31e9131045e841f262db123c8f849e5cb3f15814a14f4b"
 CONTROL_SAMPLES_SHA256 = "27e51ad1b1ee615fc921ee4f5c237155139304da3e7c193f7781a389cee6d53e"
 QUALIFICATION_THRESHOLDS = {"normalization_absolute": 1e-5, "max_cdf_absolute": 2e-5,
@@ -162,7 +170,7 @@ def validate_sampling_policy(policy):
 
 def validate_runner_source(manifest, *, aggregate=False):
     """Authenticate a versioned source; historical artifacts never use current SHA."""
-    global _HISTORICAL_RUNNER_VERIFIED, _HISTORICAL_V2_RUNNER_VERIFIED
+    global _HISTORICAL_RUNNER_VERIFIED, _HISTORICAL_V2_RUNNER_VERIFIED, _HISTORICAL_V3_RUNNER_VERIFIED
     value, version = manifest.get("runner_source_sha256"), manifest.get("runner_version")
     repo = Path(__file__).resolve().parents[1]
     if value == RUNNER_V1_SHA256:
@@ -180,6 +188,15 @@ def validate_runner_source(manifest, *, aggregate=False):
         return {"version": 1, "sha256": value, "historical_git_revision": RUNNER_V1_GIT_REVISION,
                 "version_field_absent_in_original": version is None,
                 "authentication": "SHA256 of the exact pinned historical Git blob"}
+    if value == RUNNER_V3_SHA256:
+        require(type(version) is int and version == 3, "runner version3/source mismatch")
+        if not _HISTORICAL_V3_RUNNER_VERIFIED:
+            content=subprocess.run(["git","-C",str(repo),"show",
+                RUNNER_V3_GIT_REVISION+":src/posteriorforge/performance_runner.py"],check=True,capture_output=True).stdout
+            require(hashlib.sha256(content).hexdigest()==RUNNER_V3_SHA256,"historical pinned version3 runner Git blob mismatch")
+            _HISTORICAL_V3_RUNNER_VERIFIED=True
+        return {"version":3,"sha256":value,"historical_git_revision":RUNNER_V3_GIT_REVISION,
+                "authentication":"SHA256 of the exact pinned historical version3 Git blob"}
     require(value == RUNNER_V2_SHA256, "unknown/unreviewed execution runner source")
     require((aggregate and version is None) or type(version) is int and version == 2,
             "runner version2/source mismatch")
@@ -252,6 +269,25 @@ def validate_gqa_runtime_metadata(manifest):
             "well-formed actual attention fingerprints required")
     require(fingerprints[keys[0]] == fingerprints[keys[2]] != fingerprints[keys[1]],
             "actual original attention execution fingerprint mismatch")
+    if manifest.get("runner_source_sha256") == RUNNER_V3_SHA256:
+        chunk=manifest.get("query_batch_size")
+        native=manifest.get("execution_counters",{})
+        validate_engine_metadata(native)
+        cap=manifest.get("engine_query_batch_cap")
+        require(native.get("config",{}).get("query_batch_size")==cap,
+                "actual prepared engine config differs from declared cap")
+        support_calls=manifest.get("rejection",{}).get("support_calls")
+        require(type(support_calls) is int and support_calls>0
+                and native.get("prepare_count")==21*support_calls,
+                "version3 actual stage prepare coverage mismatch")
+        large=chunk in LARGE_BATCHES
+        expected={"qualification_family":"large_batch_v1" if large else "gqa_hybrid_1024_v2",
+                  "qualification_large_batch_size":chunk if large else None,
+                  "qualification_large_batch_producer_sha256":GQA_BATCH_QUALIFIER_SHA256 if large else None,
+                  "qualification_portable_source_verified":large,"historical_install_ctime_replayed":not large}
+        for key,value in expected.items():
+            require(manifest.get(key) is value if isinstance(value,bool) else manifest.get(key)==value,
+                    "version3 qualification family/portability mismatch: "+key)
     policy = manifest.get("sampling_policy", {})
     require(policy.get("uniform_assignment") == "preassigned_per_stage_by_physical_row"
             and policy.get("head_retry_preserves_row_uniform") is True,
@@ -279,7 +315,7 @@ def validate_execution_header(manifest, *, context, query, control, worker_parti
         "tail_family_changed": False, "sources_unchanged": True,
         "partial_vector_filtering": False, "clipping_or_repair_performed": False,
         "observation_preprocessing": "raw; TabPFN frozen preprocessing",
-        "log_density": "not_used", "microbatch": 50000, "query_batch_size": 1024,
+        "log_density": "not_used", "microbatch": 50000, "query_batch_size": manifest.get("query_batch_size") if manifest.get("runner_source_sha256")==RUNNER_V3_SHA256 else 1024,
         "rank": rank, "world_size": world, "completed_stage_indices": list(range(21)),
         "sampling_rng_policy": "independent_cpu_sampling_streams_model_rng_isolated",
     }
@@ -291,11 +327,29 @@ def validate_execution_header(manifest, *, context, query, control, worker_parti
             "explicit nonnegative execution repetition required")
     require(manifest.get("baseline_execution_source") == guard_baseline_source(),
             "original execution-source guard changed")
-    validate_runner_source(manifest)
+    source_identity = validate_runner_source(manifest)
+    chunk = manifest.get("query_batch_size")
+    if source_identity["version"] == 3:
+        expected_mode={"execution_cache_v1":"resident_full","execution_mixture_v1":"component_mass",
+                       "execution_hybrid_v1":"component_hybrid","execution_gqa_hybrid_v1":"component_gqa_hybrid"}[variant]
+        require(manifest.get("mode") == expected_mode, "version3 mode/variant mismatch")
+        require(type(chunk) is int and (chunk == 1024 or variant == "execution_gqa_hybrid_v1" and chunk in LARGE_BATCHES),
+                "unqualified version3 sampler chunk")
+        require(manifest.get("engine_query_batch_cap") == (10000 if chunk in LARGE_BATCHES else 1024),
+                "actual engine query cap differs from sampler/qualified cap")
+        require(manifest.get("torch_float32_matmul_precision") == "highest"
+                and manifest.get("cuda_matmul_allow_tf32") is False, "version3 frozen FP32/TF32-off flags changed")
+    else:
+        require(chunk == 1024, "historical runner only qualified sampler chunk1024")
     if variant == "execution_gqa_hybrid_v1":
         validate_gqa_runtime_metadata(manifest)
     descriptor = bindings.validate_adapter_descriptor(manifest.get("compatibility_adapter"))
     validate_engine_metadata(manifest.get("execution_engine"))
+    if source_identity["version"]==3:
+        actual_engine=manifest["execution_engine"]
+        require(actual_engine.get("query_batch_size")==chunk and actual_engine.get("posterior_count")==count
+                and actual_engine.get("sampling_rng_policy")=="independent_cpu_sampling_streams_model_rng_isolated",
+                "version3 sampler engine chunk/count/RNG metadata mismatch")
     original_settings = dict(control["regressor_settings"])
     actual_settings = dict(manifest["regressor_settings"])
     require(actual_settings.get("fit_mode") == "fit_with_cache", "resident executor requires actual fit_with_cache metadata")
@@ -511,7 +565,8 @@ def gqa_hybrid_qualification_review(path, manifest, qualification):
     from posteriorforge import execution_gqa_hybrid as execution
     require(manifest.get("variant") == "execution_gqa_hybrid_v1",
             "GQA proof cannot qualify another execution family")
-    require(validate_runner_source(manifest)["version"] == 2, "GQA proof requires runner2")
+    require(validate_runner_source(manifest)["version"] in (2,3) and manifest.get("query_batch_size")==1024,
+            "legacy GQA proof requires original1024 sampler path")
     bindings_value = {key:manifest[key] for key in
         ("scientific_fingerprint", "parameter_order", "context_seed", "case", "context_size",
          "context_theta", "context_obs", "query", "checkpoint_sha256")}
@@ -548,10 +603,73 @@ def gqa_hybrid_qualification_review(path, manifest, qualification):
             "not_a_proof_of_posterior_equivalence":True}
 
 
-def qualification_review(path, manifest, *, context, query):
+def portable_sdk_root(qualification_path, explicit=None):
+    """A local locator, never an identity; all22 bytes are authenticated afterward."""
+    if explicit is not None:
+        path=Path(explicit).resolve()
+        require(path.is_dir(), "explicit current SDK source directory missing")
+        return path
+    for parent in Path(qualification_path).resolve().parents:
+        path=parent/"envs/inference/lib/python3.11/site-packages/tabpfn"
+        if path.is_dir():return path
+    raise ValueError("current SDK source tree required: pass --sdk-root; historical paths are not identities")
+
+
+def gqa_batch_qualification_review(path,manifest,qualification,*,sdk_root=None):
+    from posteriorforge import performance_runner as runner, execution_cache as cache
+    from posteriorforge import execution_mixture as mixture, execution_hybrid as hybrid
+    require(manifest.get("variant")=="execution_gqa_hybrid_v1"
+            and validate_runner_source(manifest)["version"]==3, "portable large-batch proof requires version3 GQA hybrid")
+    chunk=manifest.get("query_batch_size")
+    require(type(chunk) is int and chunk in LARGE_BATCHES,"declared qualified neural sampler chunk required")
+    require(manifest.get("engine_query_batch_cap")==10000,"large sampler chunk requires actual10000 engine cap")
+    root=portable_sdk_root(path,sdk_root)
+    require(sha256_file(Path(__file__).with_name("qualify_execution_gqa_batches.py"))==GQA_BATCH_QUALIFIER_SHA256,
+            "reviewed large-batch qualification producer changed")
+    expected={key:manifest[key] for key in ("checkpoint_sha256","scientific_fingerprint","parameter_order",
+                                           "context_theta","context_obs","query")}
+    runner.validate_gqa_batch_qualification(qualification,bindings=expected,
+        cache_sha256=cache.execution_source_sha256(),mixture_sha256=mixture.execution_source_sha256(),
+        hybrid_sha256=hybrid.execution_source_sha256(),query_batch_size=chunk,qualification_path=path,sdk_root=root)
+    require(qualification.get("prefix_manifest_sha256")==CONTROL_MANIFEST_SHA256
+            and qualification.get("prefix_samples_sha256")==CONTROL_SAMPLES_SHA256
+            and qualification.get("fixed_prefix_row_indices")==np.linspace(0,49999,1024,dtype=int).tolist(),
+            "portable batch fixed-prefix source/order changed")
+    bundle=qualification["portable_source_authentication"]
+    require(bundle.get("marshal_code_fingerprints_are_within_process_execution_witnesses_not_cross_install_path_identifiers") is True
+            and bundle.get("verification_requires_original_machine_paths") is False
+            and bundle.get("verification_uses_file_ctime") is False,
+            "portable source/marshal interpretation changed")
+    require(manifest.get("qualification_producer_schema")==GQA_BATCH_SCHEMA
+            and manifest.get("qualification_recovery_source_sha256") is None,
+            "runner did not consume the portable batch proof independently of historical recovery")
+    bindings.validate_adapter_descriptor(qualification.get("compatibility_adapter"))
+    # Marshaled code includes co_filename. Authenticate cross-install identity
+    # through source bytes/RECORD, and runtime execution through its own process
+    # original==executed!=active plus stable counters. Never compare to old paths.
+    runtime_fingerprints=validate_gqa_runtime_metadata(manifest)
+    return {"manifest_file":str(Path(path).resolve()),"manifest_sha256":sha256_file(path),
+            "stage_coverage":list(range(21)),"full21_qualified":False,
+            "full21_gqa_hybrid_qualified":True,"full21_component_qualified":True,"full21_sampler_qualified":True,
+            "full21_large_batch_qualified":True,"qualified_sampler_chunk":chunk,"engine_query_batch_cap":10000,
+            "scope":"full21 fixed-conditionals at declared larger batch; repeated1032-row pool is not a posterior",
+            "icdf_contract_version":2,"qualification":qualification,
+            "portable_source_verification":{"current_sdk_tree":str(root),"tree_path_is_identity":False,
+                "sdk_python_source_count":len(bundle["sdk_source_sha256"]),"wheel_RECORD_checked":True,
+                "historical_install_ctime_replayed":False,"historical_base_role":"authenticated provenance only",
+                "marshal_role":"within-process witnesses; not cross-install path identities",
+                "runtime_fingerprints_self_consistent":runtime_fingerprints},
+            "not_a_proof_of_posterior_equivalence":True}
+
+
+def qualification_review(path, manifest, *, context, query, sdk_root=None):
     require(sha256_file(path) == manifest.get("qualification_manifest_sha256"),
             "execution qualification manifest SHA256 mismatch")
     q = json.loads(Path(path).read_text())
+    if q.get("schema")==GQA_BATCH_SCHEMA:
+        return gqa_batch_qualification_review(path,manifest,q,sdk_root=sdk_root)
+    if manifest.get("runner_source_sha256")==RUNNER_V3_SHA256 and manifest.get("query_batch_size") in LARGE_BATCHES:
+        raise ValueError("version3 large sampler chunk requires portable all21 batch proof")
     if q.get("schema") in ("posteriorforge.execution_gqa_hybrid_qualification.v1",
                             "posteriorforge.execution_gqa_hybrid_recovery.v1"):
         return gqa_hybrid_qualification_review(path,manifest,q)
@@ -627,11 +745,30 @@ def qualification_review(path, manifest, *, context, query):
             "not_a_proof_of_posterior_equivalence": True}
 
 
+def reviewed_orchestrator(manifest):
+    script=Path(__file__).with_name("run_execution_workers.py")
+    identity=manifest.get("orchestrator_source_sha256")
+    if identity==ORCHESTRATOR_SHA256:
+        content=subprocess.run(["git","-C",str(script.parents[1]),"show",
+            RUNNER_V2_GIT_REVISION+":scripts/run_execution_workers.py"],check=True,capture_output=True).stdout
+        require(hashlib.sha256(content).hexdigest()==ORCHESTRATOR_SHA256,"historical orchestrator Git blob changed")
+        module=ModuleType("reviewed_historical_worker_orchestrator")
+        module.__file__=str(script);exec(compile(content,str(script),"exec"),module.__dict__)
+        return module,{"sha256":identity,"historical_git_revision":RUNNER_V2_GIT_REVISION}
+    require(identity==ORCHESTRATOR_V3_SHA256,"unreviewed aggregate orchestrator source")
+    content=subprocess.run(["git","-C",str(script.parents[1]),"show",
+        RUNNER_V3_GIT_REVISION+":scripts/run_execution_workers.py"],check=True,capture_output=True).stdout
+    require(hashlib.sha256(content).hexdigest()==ORCHESTRATOR_V3_SHA256,"historical version3 orchestrator Git blob changed")
+    module=ModuleType("reviewed_version3_worker_orchestrator");module.__file__=str(script)
+    exec(compile(content,str(script),"exec"),module.__dict__)
+    return module,{"sha256":identity,"historical_git_revision":RUNNER_V3_GIT_REVISION}
+
+
 def authenticate_worker_aggregate(path, manifest, *, context, query, control, custody, qualification_path):
     """Authenticate all complete leaf cohorts and exact rank-order concatenation."""
     script=Path(__file__).with_name("run_execution_workers.py")
-    spec=importlib.util.spec_from_file_location("execution_review_worker_orchestrator",script)
-    orchestrator=importlib.util.module_from_spec(spec);spec.loader.exec_module(orchestrator)
+    orchestrator,orchestrator_identity=reviewed_orchestrator(manifest)
+    orchestrator_sha=orchestrator_identity["sha256"]
     from posteriorforge import performance_runner
     root=Path(path).resolve().parent
     world=manifest.get("world_size")
@@ -644,8 +781,6 @@ def authenticate_worker_aggregate(path, manifest, *, context, query, control, cu
     for key,value in required.items():
         require(manifest.get(key) is value if isinstance(value,bool) else manifest.get(key)==value,
                 "aggregate contract mismatch: "+key)
-    require(manifest.get("orchestrator_source_sha256") == ORCHESTRATOR_SHA256
-            and sha256_file(script) == ORCHESTRATOR_SHA256, "unreviewed aggregate orchestrator source")
     aggregate_runner = validate_runner_source(manifest, aggregate=True)
     qsha=sha256_file(qualification_path)
     require(manifest.get("qualification_manifest_sha256")==qsha,"aggregate qualification SHA mismatch")
@@ -653,6 +788,12 @@ def authenticate_worker_aggregate(path, manifest, *, context, query, control, cu
     modes={"execution_cache_v1":"resident_full","execution_mixture_v1":"component_mass",
            "execution_hybrid_v1":"component_hybrid","execution_gqa_hybrid_v1":"component_gqa_hybrid"}
     require(underlying in modes and manifest.get("mode")==modes[underlying],"aggregate execution family mismatch")
+    chunk=manifest.get("query_batch_size",1024)
+    if aggregate_runner["version"]==3:
+        require(type(chunk) is int and (chunk==1024 or underlying=="execution_gqa_hybrid_v1" and chunk in LARGE_BATCHES),
+                "unqualified aggregate sampler chunk")
+        require(manifest.get("engine_query_batch_cap")==(10000 if chunk in LARGE_BATCHES else 1024),
+                "aggregate actual query cap mismatch")
     expected={key:control[key] for key in ("scientific_fingerprint","parameter_order","context_seed","case","context_size",
                                           "context_theta","context_obs","query","checkpoint_sha256","baseline_execution_source")}
     expected.update(mode=modes[underlying],variant=underlying,reference_binding=custody["runner_reference_binding"])
@@ -672,7 +813,7 @@ def authenticate_worker_aggregate(path, manifest, *, context, query, control, cu
                 and contract.get("worker_count")==50000//world
                 and contract.get("expected_output")==str((root/f"worker-{rank}").resolve())
                 and contract.get("aggregate_output")==str(root)
-                and contract.get("orchestrator_source_sha256")==sha256_file(script)
+                and contract.get("orchestrator_source_sha256")==orchestrator_sha
                 and contract.get("parent_job_id")==str(manifest["budget"]["job_id"])
                 and contract.get("budget_reservation_id")==manifest["budget"]["reservation_id"]
                 and contract.get("visible_device_token")==devices[rank],
@@ -690,8 +831,13 @@ def authenticate_worker_aggregate(path, manifest, *, context, query, control, cu
         bindings.validate_run_reference_binding(worker,custody)
         require(worker.get("qualification_manifest_sha256")==qsha
                 and worker.get("variant")==underlying,"worker qualification/execution family mismatch")
-        require(worker.get("runner_source_sha256") == manifest.get("runner_source_sha256"),
-                "aggregate/worker runner source mismatch")
+        require(worker.get("runner_source_sha256") == manifest.get("runner_source_sha256")
+                and worker.get("query_batch_size")==chunk,
+                "aggregate/worker runner source or sampler chunk mismatch")
+        if aggregate_runner["version"]==3:
+            require(contract.get("query_batch_size",1024)==chunk,"worker contract sampler chunk mismatch")
+            require(worker.get("engine_query_batch_cap")==manifest.get("engine_query_batch_cap"),
+                    "aggregate/worker native query cap mismatch")
         all_seeds.extend(worker["seed_streams"].values());rejections.append(worker["rejection"]);workers.append(worker)
     require(len(set(all_seeds))==len(all_seeds),"worker/rank sampling streams collide")
     require(manifest.get("rank_seed_streams")==[worker["seed_streams"] for worker in workers],
@@ -704,13 +850,20 @@ def authenticate_worker_aggregate(path, manifest, *, context, query, control, cu
                 "aggregate hybrid policy differs from authenticated workers")
     if underlying == "execution_gqa_hybrid_v1":
         require(manifest.get("gqa_hybrid_execution") == workers[0].get("gqa_hybrid_execution")
-                and all(worker.get("gqa_hybrid_execution") == workers[0]["gqa_hybrid_execution"]
-                        and worker["gqa_prediction_checks"]["attention_fingerprints"]
-                            == workers[0]["gqa_prediction_checks"]["attention_fingerprints"] for worker in workers),
-                "aggregate GQA policy/fingerprints differ across authenticated workers")
+                and all(worker.get("gqa_hybrid_execution")==workers[0]["gqa_hybrid_execution"] for worker in workers),
+                "aggregate GQA policy differs across authenticated workers")
+        portable=aggregate_runner["version"]==3 and chunk in LARGE_BATCHES
+        if portable:
+            require(manifest.get("qualification_family")=="large_batch_v1"
+                    and all(worker.get("qualification_family")=="large_batch_v1" for worker in workers),
+                    "aggregate portable proof family differs from workers")
+        else:
+            require(all(worker["gqa_prediction_checks"]["attention_fingerprints"]
+                        ==workers[0]["gqa_prediction_checks"]["attention_fingerprints"] for worker in workers),
+                    "aggregate GQA fingerprints differ across authenticated workers")
     summed={key:sum(item[key] for item in rejections) for key in
             ("support_calls","proposed","accepted_before_final_trim","returned")}
-    detail={"orchestrator_source_sha256":sha256_file(script),"runner_source_authentication":aggregate_runner,"worker_count":world,
+    detail={"orchestrator_source_sha256":orchestrator_sha,"orchestrator_source_authentication":orchestrator_identity,"runner_source_authentication":aggregate_runner,"worker_count":world,
             "worker_records":records,"rank_seed_streams":[worker["seed_streams"] for worker in workers],
             "rank_order_concatenation_exact":True,"partial_worker_fallback_performed":False,
             "worker_timings":[worker["timings"] for worker in workers],
@@ -823,11 +976,11 @@ def run(args):
         candidate,effective_manifest,aggregate_detail=authenticate_worker_aggregate(
             manifest_path,manifest,context=context,query=query,control=control_manifest,
             custody=custody,qualification_path=args.qualification_manifest)
-        qualification=qualification_review(args.qualification_manifest,effective_manifest,context=context,query=query)
+        qualification=qualification_review(args.qualification_manifest,effective_manifest,context=context,query=query,sdk_root=getattr(args,"sdk_root",None))
     else:
         validate_execution_header(manifest,context=context,query=query,control=control_manifest)
         bindings.validate_run_reference_binding(manifest,custody)
-        qualification=qualification_review(args.qualification_manifest,manifest,context=context,query=query)
+        qualification=qualification_review(args.qualification_manifest,manifest,context=context,query=query,sdk_root=getattr(args,"sdk_root",None))
         candidate=bindings.load_samples(manifest_path,manifest)
     assessment = comparative_assessment(candidate, control, reference)
     output = Path(args.output).resolve()
@@ -920,6 +1073,7 @@ def main():
     parser.add_argument("--qualification-manifest")
     parser.add_argument("--output")
     parser.add_argument("--preflight-only", action="store_true")
+    parser.add_argument("--sdk-root", help="current SDK source tree for portable byte verification; path is not identity")
     run(parser.parse_args())
 
 
