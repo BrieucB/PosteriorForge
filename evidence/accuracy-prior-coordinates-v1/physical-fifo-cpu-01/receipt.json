@@ -1,0 +1,53 @@
+{
+  "environments": {
+    "inference": {
+      "command": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_execution_physical_fifo_v1.py"
+      ],
+      "log": "work/accuracy-prior-coordinates-v1/physical-fifo-cpu-01/inference.log",
+      "log_sha256": "6c7429c0591f360b58d33f4b5e36634f3068aeb073740e3f4115653ddc06d14f",
+      "output": "...........                                                              [100%]\n11 passed in 10.44s\n",
+      "python_executable": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+      "returncode": 0,
+      "versions": {
+        "CUDA_initialized": false,
+        "NumPy": "1.26.4",
+        "Python": "3.11.13",
+        "SciPy": "1.12.0",
+        "Torch": "2.6.0+cu124",
+        "Torch_available": true
+      }
+    },
+    "reference": {
+      "command": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_execution_physical_fifo_v1.py"
+      ],
+      "log": "work/accuracy-prior-coordinates-v1/physical-fifo-cpu-01/reference.log",
+      "log_sha256": "f866b7af5070c8181b8ffcf4e5c4034fa15168a7ed4ca28f35a995a64c36dce4",
+      "output": ".......sss.                                                              [100%]\n=========================== short test summary info ============================\nSKIPPED [1] tests/test_execution_physical_fifo_v1.py:84: could not import 'torch': No module named 'torch'\nSKIPPED [1] tests/test_execution_physical_fifo_v1.py:103: could not import 'torch': No module named 'torch'\nSKIPPED [1] tests/test_execution_physical_fifo_v1.py:127: could not import 'torch': No module named 'torch'\n8 passed, 3 skipped in 2.22s\n",
+      "python_executable": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python",
+      "returncode": 0,
+      "versions": {
+        "NumPy": "2.2.6",
+        "Python": "3.11.13",
+        "SciPy": "1.15.3",
+        "Torch_available": false
+      }
+    }
+  },
+  "passed": true,
+  "schema": "posteriorforge.physical_fifo.cpu_tests.v1",
+  "scope": "Synthetic CPU tests only; no model, simulator, reference integration, actual cohort or CUDA initialization",
+  "sources": {
+    "src/posteriorforge/execution_physical_fifo_v1.py": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+    "tests/test_execution_physical_fifo_v1.py": "81245d09a46a6d93615f8741fdda1894715a744070ab5cf07dbb6dc9c21f7d69"
+  }
+}

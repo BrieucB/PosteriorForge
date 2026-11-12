@@ -1,0 +1,6 @@
+.......sss.                                                              [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_execution_physical_fifo_v1.py:84: could not import 'torch': No module named 'torch'
+SKIPPED [1] tests/test_execution_physical_fifo_v1.py:103: could not import 'torch': No module named 'torch'
+SKIPPED [1] tests/test_execution_physical_fifo_v1.py:127: could not import 'torch': No module named 'torch'
+8 passed, 3 skipped in 2.22s
