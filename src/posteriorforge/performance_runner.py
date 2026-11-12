@@ -18,10 +18,13 @@ from .banks import derive_seed
 
 SCHEMA="posteriorforge.inference.execution.v1"
 COUNT=50000
-RUNNER_VERSION=2
+RUNNER_VERSION=3
 GQA_QUALIFIER_SHA256="ab0c289ad051aa3553ca47402da07ac2643c576e660a297be9242c357787848a"
 GQA_RECOVERY_SHA256="83064f54712014b5c4c66569e854872caff03593cfdc337f2472a7b5723aea02"
 _GQA_RECOVERY_MODULE=None
+GQA_BATCH_QUALIFIER_SHA256="31422927077911879b6cd155605a6a668796305ee97ccf6585819d8fe494cfde"
+GQA_LARGE_BATCHES=(4096,6250,10000)
+_GQA_BATCH_MODULE=None
 QUALIFIER_SHA256="6c927a5c278c7fc54b556ac557ecef64f5e6338f5ae13bf466f3b1e6a4640f90"
 HYBRID_FALLBACK_MAP={"10":[5],"13":[6]}
 HYBRID_QUALIFIER_SHA256="15e8e9ce844d3352e49534714f0e0569f42e970a3d9876630f877a346eaaf9b6"
@@ -180,6 +183,103 @@ def validate_gqa_hybrid_qualification(value,*,bindings,cache_sha256,mixture_sha2
     return True
 
 
+def valid_execution_chunk(mode,query_batch_size):
+    return type(query_batch_size) is int and (query_batch_size==1024 or (mode=="component_gqa_hybrid" and query_batch_size in GQA_LARGE_BATCHES))
+
+
+def execution_query_cap(mode,query_batch_size):
+    return 10000 if mode=="component_gqa_hybrid" and query_batch_size in GQA_LARGE_BATCHES else query_batch_size
+
+
+def gqa_batch_helper():
+    import importlib.util
+    global _GQA_BATCH_MODULE
+    path=Path(__file__).resolve().parents[2]/"scripts/qualify_execution_gqa_batches.py"
+    if sha256_file(path)!=GQA_BATCH_QUALIFIER_SHA256:raise ValueError("reviewed large-batch producer source changed")
+    if _GQA_BATCH_MODULE is None:
+        spec=importlib.util.spec_from_file_location("_reviewed_gqa_batch_qualification",path)
+        module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);_GQA_BATCH_MODULE=module
+    return _GQA_BATCH_MODULE
+
+
+def validate_gqa_batch_qualification(value,*,bindings,cache_sha256,mixture_sha256,hybrid_sha256,query_batch_size,qualification_path,sdk_root=None):
+    """Fresh same-process batch proof; portable source bytes, no historic ctime."""
+    from . import execution_gqa_hybrid as execution
+    from .compat_cdf import adapter_source_sha256
+    from .science.analytical_benchmark_v2 import array_descriptor
+    helper=gqa_batch_helper();math=gqa_recovery_helper();metadata=execution.execution_metadata()
+    if type(query_batch_size) is not int or query_batch_size not in GQA_LARGE_BATCHES or qualification_path is None:raise ValueError("exact source-bound4096/6250/10000 batch proof required")
+    required={"schema":"posteriorforge.execution_gqa_batch_qualification.v1","status":"batch_screen_pass","qualified":True,
+        "qualifier_source_sha256":GQA_BATCH_QUALIFIER_SHA256,"full21_qualified":False,"cache_only_full21_qualified":False,
+        "posterior_vectors_generated":0,"scientific_gate_evaluated":False,"sources_unchanged":True,
+        "requested_batch_sizes":list(GQA_LARGE_BATCHES),"candidate_query_batch_cap":10000,"comparison_block_cap":1024,
+        "thresholds":QUALIFICATION_THRESHOLDS,"module_sha256":execution.execution_source_sha256(),"gqa_module_sha256":execution.PINNED_GQA_SHA256,
+        "hybrid_module_sha256":hybrid_sha256,"cache_module_sha256":cache_sha256,"mixture_module_sha256":mixture_sha256,
+        "execution_engine":metadata,"fallback_map":{"10":[5]},"fallback_policy_sha256":metadata["fallback_policy_sha256"],
+        "base_full21_gqa_hybrid_qualified":True,"base_qualification_schema":"posteriorforge.execution_gqa_hybrid_recovery.v1","recovered_producer_sha256":GQA_RECOVERY_SHA256,
+        "reference_pool":{"main_rows":1024,"stress_rows":8,"pool_rows":1032,"main_member_count":8,"stress_member_count":8,"original_calls_per_stage":2}}
+    for key,expected in required.items():
+        if type(value.get(key)) is not type(expected) or value.get(key)!=expected:raise ValueError("large-batch qualification mismatch: "+key)
+    for key,expected in bindings.items():
+        if value.get(key)!=expected:raise ValueError("large-batch scientific binding mismatch: "+key)
+    if value.get("stage_coverage")!=list(range(21)) or [r.get("stage_index") for r in value.get("stage_results",[])]!=list(range(21)):raise ValueError("all21 fresh batch stages required")
+    outcomes=helper.full21_batch_outcomes(value["stage_results"],value["stage_coverage"])
+    if value.get("full21_batch_qualified")!=outcomes or outcomes.get(str(query_batch_size)) is not True:raise ValueError("requested neural batch size is not full21 qualified")
+    if value.get("qualified_batch_sizes")!=[n for n in GQA_LARGE_BATCHES if outcomes[str(n)]]:raise ValueError("per-size qualification summary differs")
+    root=Path(qualification_path).resolve().parent;bundle=value.get("portable_source_authentication",{})
+    if sdk_root is None:sdk_root=Path(import_module("tabpfn").__file__).parent
+    helper.verify_portable_sources(root,bundle,sdk_root=sdk_root)
+    if bundle.get("sdk_distribution")!="tabpfn==2.0.9" or bundle.get("all_wheel_sdk_python_sources_checked") is not True or bundle.get("verification_uses_file_ctime") is not False or bundle.get("verification_requires_original_machine_paths") is not False:raise ValueError("portable proof must not require historical install paths/ctime")
+    base_entry=bundle["archives"]["base_qualification"]
+    if base_entry["sha256"]!=value.get("base_qualification_manifest_sha256"):raise ValueError("archived base proof hash differs")
+    base=json.loads((root/base_entry["file"]).read_text())
+    if base.get("schema")!="posteriorforge.execution_gqa_hybrid_recovery.v1" or base.get("status")!="gqa_hybrid_screen_pass" or base.get("recovery_source_sha256")!=GQA_RECOVERY_SHA256 or base.get("raw_status_preserved") is not True or base.get("raw_producer_status")!="conditional_mismatch" or base.get("full21_gqa_hybrid_qualified") is not True:
+        raise ValueError("archived historical base qualification lineage differs")
+    if base.get("execution_engine")!=metadata or base.get("fallback_map")!={"10":[5]} or base.get("module_sha256")!=execution.execution_source_sha256() or base.get("gqa_module_sha256")!=execution.PINNED_GQA_SHA256 or base.get("hybrid_module_sha256")!=hybrid_sha256 or base.get("cache_module_sha256")!=cache_sha256 or base.get("mixture_module_sha256")!=mixture_sha256 or base.get("raw_qualifier_source_sha256")!=GQA_QUALIFIER_SHA256 or base.get("full21_qualified") is not False or base.get("cache_only_full21_qualified") is not False:
+        raise ValueError("archived base source/fallback graph changed")
+    for key in ("checkpoint_sha256","scientific_fingerprint","parameter_order","context_theta","context_obs","query","prefix_manifest_sha256","prefix_samples_sha256"):
+        if value.get(key)!=base.get(key):raise ValueError("fresh batch/historical base binding differs: "+key)
+    adapter=value.get("compatibility_adapter",{})
+    if adapter.get("adapter_sha256")!=adapter_source_sha256() or not all(adapter.get(k) is True for k in ("original_alias_restored","sdk_sources_unchanged","sdk_aliases_unchanged","source_guard_passed","original_alias_identity_verified","translator_code_unchanged")) or adapter.get("patched_call_count",0)<=0 or adapter.get("executed_corrected_cdf_code_sha256")!=adapter.get("corrected_cdf_code_sha256") or adapter.get("corrected_cdf_code_sha256")==adapter.get("original_cdf_code_sha256"):
+        raise ValueError("large-batch actual corrected CDF source/restoration failed")
+    expected_graph={"wrapper":execution.execution_source_sha256(),"gqa":execution.PINNED_GQA_SHA256,"hybrid":hybrid_sha256,"cache":cache_sha256,"mixture":mixture_sha256,"recovery":GQA_RECOVERY_SHA256}
+    if value.get("source_graph_at_end")!=expected_graph:raise ValueError("large-batch source graph changed")
+    def direct(item,rows):
+        math.probability(item)
+        if item.get("passed") is not True or item.get("rows_compared")!=rows or item.get("comparison_block_cap")!=1024 or item.get("blocks")!=(rows+1023)//1024 or type(item.get("worst_cdf_row")) is not int or not 0<=item["worst_cdf_row"]<rows:
+            raise ValueError("complete direct all-row probability comparison required")
+    for row in value["stage_results"]:
+        stage=row["stage_index"]
+        if row.get("reference_main_rows")!=1024 or row.get("reference_stress_rows")!=8 or row.get("reference_pool_query",{}).get("shape")!=[1032,33+stage]:raise ValueError("fresh main1024 plusstress8 pool required")
+        if not all(row.get(k) is True for k in ("prepare_rng_unchanged","normalization_train_only_verified","all8_preprocessor_identity","final_prepared_state_unchanged")):raise ValueError("fresh batch state/normalization/RNG failed")
+        contracts=row.get("model_contracts",[])
+        if len(contracts)!=(3 if stage==10 else 2) or not all(c.get("input_normalization_train_only_verified") is True and c.get("autocast") is False and c.get("forced_inference_dtype")=="torch.float32" for c in contracts):raise ValueError("actual FP32 model normalizer contracts required")
+        if not all(c.get("preprocessor_sha256")==contracts[0].get("preprocessor_sha256") and len(c.get("preprocessor_sha256",[]))==8 for c in contracts):raise ValueError("all8 fresh fitted preprocessors differ")
+        if [b.get("query_rows") for b in row.get("batch_results",[])]!=list(GQA_LARGE_BATCHES):raise ValueError("all requested batch outcomes must be preserved")
+        for batch in row["batch_results"]:
+            n=batch["query_rows"]
+            if not outcomes[str(n)]:continue  # Preserve failing/unsupported sizes; never select them.
+            if batch.get("status")!="batch_pass" or batch.get("passed") is not True or batch.get("actual_input_query_shape")!=[n,33+stage] or batch.get("explicit_query_batch_cap")!=10000:raise ValueError("actual qualified batch shape/cap differs")
+            indices=helper.repeated_pool_indices(n)
+            if batch.get("reference_row_indices")!=array_descriptor(indices):raise ValueError("repeated-pool row identity differs")
+            if not all(batch.get(k) is True for k in ("rng_unchanged","prepared_state_unchanged","normalized_mixture_comparison_is_direct_not_error_bound")):raise ValueError("batch state/RNG/direct mixture proof failed")
+            direct(batch["ideal_raw_mixture_vs_original"],n);direct(batch["actual_mass_weighted_component_mixture_vs_original"],n)
+            if [m.get("ensemble_index") for m in batch.get("members",[])]!=list(range(8)):raise ValueError("all8 full actual neural batches required")
+            for member in batch["members"]:
+                index=member["ensemble_index"];fallback=stage==10 and index==5
+                direct(member["direct_raw_probability_comparison"],n)
+                if not all(member.get(k) is True for k in ("passed","configuration_identity_equal","exact_borders","float32","component_raw_mass_matches_fp64_sum","normalized_component_passed")):raise ValueError("actual member distribution/state failed")
+                if member.get("reference_configuration_identity")!=member.get("candidate_configuration_identity"):raise ValueError("fresh same-process original/candidate identity differs")
+                if member.get("actual_execution_route")!=("original_fit_preprocessors" if fallback else "resident_cache") or member.get("corrected_cdf_call_delta")!=1 or member.get("rng_before")!=member.get("rng_after"):raise ValueError("actual member route/CDF/RNG differs")
+                math.context(member["actual_gqa_descriptor"],expanded=not fallback,gqa_sha=execution.PINNED_GQA_SHA256)
+                if member.get("actual_neural_shape")!=helper.shape_evidence(member["actual_gqa_descriptor"],n) or member["actual_neural_shape"].get("passed") is not True:raise ValueError("observed neural query length differs")
+                error,bound=member.get("component_raw_mass_sum_error"),member.get("component_raw_mass_fp64_roundoff_bound")
+                if type(error) not in (int,float) or type(bound) not in (int,float) or not np.isfinite(error) or not np.isfinite(bound) or not 0<=error<=bound<=8*5000*np.finfo(np.float64).eps or not 0<member.get("mass_min",0)<=member.get("mass_max",0)<=1.00001 or member.get("head_mass_envelope")!=1.00001:raise ValueError("actual FP64 mass/envelope bound failed")
+                replay=member.get("stock_fixed_uniform_replay",{})
+                if replay.get("passed") is not True or replay.get("exact_same_logits_finite_bar_semantics") is not True or replay.get("row_indices")!=np.linspace(0,n-1,8,dtype=np.int64).tolist():raise ValueError("actual stock finite-bar common-uniform replay failed")
+    return True
+
+
 def validate_gqa_prediction(prediction,stage,member,*,cdf_descriptor,report):
     from . import execution_gqa_hybrid as execution
     helper=gqa_recovery_helper();descriptor=prediction.get("gqa_attention_descriptor",{})
@@ -196,8 +296,10 @@ def validate_gqa_prediction(prediction,stage,member,*,cdf_descriptor,report):
     report["all_aliases_restored"]=True;report["all_sources_unchanged"]=True
 
 
-def validate_qualification(value,*,bindings,cache_sha256,mixture_sha256,mode,query_batch_size,hybrid_sha256=None,qualification_path=None):
-    if mode=="component_gqa_hybrid":return validate_gqa_hybrid_qualification(value,bindings=bindings,cache_sha256=cache_sha256,mixture_sha256=mixture_sha256,hybrid_sha256=hybrid_sha256,query_batch_size=query_batch_size,qualification_path=qualification_path)
+def validate_qualification(value,*,bindings,cache_sha256,mixture_sha256,mode,query_batch_size,hybrid_sha256=None,qualification_path=None,sdk_root=None):
+    if mode=="component_gqa_hybrid":
+        if query_batch_size in GQA_LARGE_BATCHES:return validate_gqa_batch_qualification(value,bindings=bindings,cache_sha256=cache_sha256,mixture_sha256=mixture_sha256,hybrid_sha256=hybrid_sha256,query_batch_size=query_batch_size,qualification_path=qualification_path,sdk_root=sdk_root)
+        return validate_gqa_hybrid_qualification(value,bindings=bindings,cache_sha256=cache_sha256,mixture_sha256=mixture_sha256,hybrid_sha256=hybrid_sha256,query_batch_size=query_batch_size,qualification_path=qualification_path)
     if mode=="component_hybrid":return validate_hybrid_qualification(value,bindings=bindings,cache_sha256=cache_sha256,mixture_sha256=mixture_sha256,hybrid_sha256=hybrid_sha256,query_batch_size=query_batch_size)
     if (value.get("schema")!="posteriorforge.execution_cache_qualification.v1" or value.get("status")!="screen_pass"
             or value.get("qualified") is not True or value.get("full21_qualified") is not True
@@ -342,8 +444,8 @@ def component_stage_sampler(component,torch,generators,counters,*,prediction_che
 def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,context_seed=20261111,case=0,repetition=0,query_batch_size=1024,mode="resident_full",worker_contract=None):
     output=Path(output)
     if output.exists():raise FileExistsError("fresh execution output required")
-    if mode not in ("resident_full","component_mass","component_hybrid","component_gqa_hybrid") or query_batch_size!=1024 or type(repetition) is not int or repetition<0:
-        raise ValueError("explicit qualified mode, querychunk1024 and nonnegative repetition required")
+    if mode not in ("resident_full","component_mass","component_hybrid","component_gqa_hybrid") or not valid_execution_chunk(mode,query_batch_size) or type(repetition) is not int or repetition<0:
+        raise ValueError("explicit qualified mode/query chunk and nonnegative repetition required")
     from .reference_grid import _require_budgeted_gpu
     from .inference_cdf import guard_baseline_source,reference_binding
     from .inference import CHECKPOINT_SHA256,frozen_regressor_settings,support_mask,_prior
@@ -363,7 +465,7 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
         "absolute_accuracy_gate_required_for_performance":False,"known_physical_control_status":"model_failure",
         "count_contract":"50000 total complete physical vectors per E2E benchmark","benchmark_total_count":COUNT,
         **partition,"scientific_run":partition["requested_count"]==COUNT and partition["end_to_end"],"sampling_rng_policy":"independent_cpu_sampling_streams_model_rng_isolated","context_seed":context_seed,"case":case,"repetition":repetition,"context_size":4096,
-        "query_batch_size":query_batch_size,"microbatch":COUNT,"max_iter_rejection":None,"log_density":"not_used",
+        "query_batch_size":query_batch_size,"engine_query_batch_cap":execution_query_cap(mode,query_batch_size),"microbatch":COUNT,"max_iter_rejection":None,"log_density":"not_used",
         "context_filter":"no_filtering","observation_preprocessing":"raw; TabPFN frozen preprocessing",
         "budget_binding":budget,"baseline_execution_source":source,"runner_source_sha256":runner_sha,
         "worker_contract_sha256":sha256_file(worker_contract) if worker_contract else None,
@@ -399,6 +501,11 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
             status["gqa_hybrid_execution"]=gqa_hybrid.execution_metadata()
             status["qualification_full21_gqa_hybrid"]=True;status["qualification_cache_only_full21"]=False
             status["qualification_producer_schema"]=q["schema"];status["qualification_recovery_source_sha256"]=q.get("recovery_source_sha256")
+            status["qualification_family"]="large_batch_v1" if query_batch_size in GQA_LARGE_BATCHES else "gqa_hybrid_1024_v2"
+            status["qualification_large_batch_size"]=query_batch_size if query_batch_size in GQA_LARGE_BATCHES else None
+            status["qualification_large_batch_producer_sha256"]=GQA_BATCH_QUALIFIER_SHA256 if query_batch_size in GQA_LARGE_BATCHES else None
+            status["qualification_portable_source_verified"]=query_batch_size in GQA_LARGE_BATCHES
+            status["historical_install_ctime_replayed"]=query_batch_size not in GQA_LARGE_BATCHES
             if np.__version__!="1.26.4":raise RuntimeError("qualified NumPy1.26.4 required for GQA hybrid")
         from . import inference as baseline_module
         if baseline_module.write_json is not write_json:raise RuntimeError("original metadata writer must remain unchanged")
@@ -421,7 +528,7 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
         counters={"stage0_shared_predictions":0,"component_predictions":0,"head_candidates":0,"head_rejections":0}
         with finite_cdf_compatibility() as descriptor:
             if mode=="component_gqa_hybrid":
-                engine=gqa_hybrid.GQAHybridStageExecutor(checkpoint,cdf_descriptor=descriptor,query_batch_size=query_batch_size);component=engine
+                engine=gqa_hybrid.GQAHybridStageExecutor(checkpoint,cdf_descriptor=descriptor,query_batch_size=execution_query_cap(mode,query_batch_size));component=engine
             elif mode=="component_hybrid":
                 engine=hybrid.HybridStageExecutor(checkpoint,cdf_descriptor=descriptor,fallback_map=HYBRID_FALLBACK_MAP,query_batch_size=query_batch_size);component=engine
             else:
@@ -472,6 +579,8 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
         if cache.execution_source_sha256()!=expected_cache_sha or (mode in ("component_mass","component_hybrid","component_gqa_hybrid") and mixture.execution_source_sha256()!=q["mixture_module_sha256"]) or (mode in ("component_hybrid","component_gqa_hybrid") and hybrid.execution_source_sha256()!=q["hybrid_module_sha256"]):
             raise RuntimeError("qualified executor source changed during execution")
         if mode=="component_gqa_hybrid":
+            if query_batch_size in GQA_LARGE_BATCHES:
+                helper=gqa_batch_helper();helper.verify_portable_sources(qpath.parent,q["portable_source_authentication"],sdk_root=Path(import_module("tabpfn").__file__).parent)
             gqa_hybrid.require_frozen_sources()
             if gqa_hybrid.execution_source_sha256()!=q["module_sha256"]:raise RuntimeError("qualified GQA wrapper changed during execution")
         with (output/"samples.npz").open("xb") as stream:np.savez(stream,samples=values)

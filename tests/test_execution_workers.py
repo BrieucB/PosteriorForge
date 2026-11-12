@@ -46,7 +46,7 @@ def test_device_partition_rejects_duplicates_missing_and_extra_gpus():
 
 
 
-def actual_driver_execution_engine_header(mode,worker_count):
+def actual_driver_execution_engine_header(mode,worker_count,query_batch_size=1024):
     # Evaluate the actual pure metadata expression from the production header,
     # rather than a handwritten fixture that can drift from the driver.
     from posteriorforge import performance_runner,execution_cache,execution_mixture
@@ -55,11 +55,11 @@ def actual_driver_execution_engine_header(mode,worker_count):
     assert len(fields)==1
     expression=ast.Expression(fields[0]);ast.fix_missing_locations(expression)
     namespace={**vars(performance_runner),"cache":execution_cache,"mixture":execution_mixture,
-               "partition":{"requested_count":worker_count},"query_batch_size":1024,"mode":mode}
+               "partition":{"requested_count":worker_count},"query_batch_size":query_batch_size,"mode":mode}
     return eval(compile(expression,"<actual-driver-metadata>","eval"),namespace)
 
 
-def _payloads(tmp_path,mode="component_mass"):
+def _payloads(tmp_path,mode="component_mass",query_batch_size=1024):
     contracts=[];paths=[]
     problem=build_problem();noise=[problem.parameter_order.index(name) for name in problem.prior.noise_names]
     for rank in range(2):
@@ -67,6 +67,7 @@ def _payloads(tmp_path,mode="component_mass"):
         contract=workers.build_contract(rank=rank,workers=2,output=root,aggregate_output=tmp_path,
             budget={"job_id":"123","reservation_id":"reservation"},context_seed=20261111,case=0,repetition=0,
             runner_source_sha256="runner",visible_device_token=str(rank))
+        contract.update(mode=mode,query_batch_size=query_batch_size)
         path=tmp_path/f"contract-{rank}.json";write_json(path,contract);contracts.append(contract);paths.append(path)
         samples=np.zeros((25000,21),dtype=np.float64);samples[:,noise]=.2;samples[:,0]=rank*.01
         with (root/"samples.npz").open("wb") as stream:np.savez(stream,samples=samples)
@@ -84,10 +85,15 @@ def _payloads(tmp_path,mode="component_mass"):
             "worker_contract_sha256":sha256_file(path),"end_to_end":False,
             "completed_stage_indices":list(range(21)),"qualification_manifest_sha256":"qualification",
             "runner_source_sha256":"runner","sources_unchanged":True,"qualification_full21":True,
-            "execution_engine":actual_driver_execution_engine_header(mode,25000),
+            "execution_engine":actual_driver_execution_engine_header(mode,25000,query_batch_size),
+            "engine_query_batch_cap":workers.import_module("posteriorforge.performance_runner").execution_query_cap(mode,query_batch_size),
             **({"hybrid_execution":workers.expected_hybrid_metadata()} if mode=="component_hybrid" else {}),
             **({"gqa_hybrid_execution":workers.expected_gqa_hybrid_metadata(),"qualification_full21_gqa_hybrid":True,
-                "qualification_cache_only_full21":False,"gqa_prediction_checks":{"verified_calls":21,"all_aliases_restored":True,"all_sources_unchanged":True},
+                "qualification_cache_only_full21":False,
+                **({"qualification_family":"large_batch_v1","qualification_large_batch_size":query_batch_size,
+                    "qualification_large_batch_producer_sha256":workers.import_module("posteriorforge.performance_runner").GQA_BATCH_QUALIFIER_SHA256,
+                    "qualification_portable_source_verified":True,"historical_install_ctime_replayed":False} if query_batch_size!=1024 else {}),
+                "gqa_prediction_checks":{"verified_calls":21,"all_aliases_restored":True,"all_sources_unchanged":True},
                 "gqa_execution_counters":{"contexts":21,"all_contexts_restored":True,"all_sources_unchanged":True}} if mode=="component_gqa_hybrid" else {}),
             "compatibility_adapter":descriptor,"sampling_policy":{"streams":{key:{"seed":value}
                 for key,value in contract["seed_streams"].items()}},
@@ -202,3 +208,12 @@ def test_gqa_workers_require_new_source_policy_and_actual_restoration_counts(tmp
         broken=json.loads(json.dumps(original));mutation(broken);write_json(target,broken)
         with pytest.raises(ValueError,match="GQA"):
             workers.validate_worker_payloads(contracts,paths,expected_bindings=bindings,driver_schema="test.worker.v1",qualification_sha256="qualification")
+
+
+def test_large_batch_workers_require_exact_portable_family_and_qualified_cap(tmp_path):
+    contracts,paths=_payloads(tmp_path,mode="component_gqa_hybrid",query_batch_size=4096)
+    bindings={"mode":"component_gqa_hybrid","variant":"execution_gqa_hybrid_v1"}
+    values,_=workers.validate_worker_payloads(contracts,paths,expected_bindings=bindings,driver_schema="test.worker.v1",qualification_sha256="qualification")
+    assert values.shape==(50000,21)
+    path=Path(contracts[0]["expected_output"])/"manifest.json";manifest=json.loads(path.read_text());manifest["historical_install_ctime_replayed"]=True;write_json(path,manifest)
+    with pytest.raises(ValueError,match="portable large-batch"):workers.validate_worker_payloads(contracts,paths,expected_bindings=bindings,driver_schema="test.worker.v1",qualification_sha256="qualification")

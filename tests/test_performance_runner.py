@@ -256,3 +256,95 @@ def test_optional_execution_audit_does_not_change_sampler_values_or_rng():
         return values,metadata,{name:g.get_state() for name,g in generators.items()},calls
     a,am,ar,_=execute(False);b,bm,br,calls=execute(True)
     np.testing.assert_array_equal(a,b);assert am==bm and all(torch.equal(ar[k],br[k]) for k in ar) and calls
+
+
+def large_batch_fixture(tmp_path,monkeypatch):
+    from types import SimpleNamespace
+    from posteriorforge import execution_gqa_hybrid as execution,execution_cache as cache,execution_mixture as mixture,execution_hybrid as hybrid
+    from posteriorforge.science.analytical_benchmark_v2 import array_descriptor
+    from posteriorforge.compat_cdf import adapter_source_sha256
+    helper=runner.gqa_batch_helper();calls=[]
+    monkeypatch.setattr(runner,"gqa_batch_helper",lambda:SimpleNamespace(full21_batch_outcomes=helper.full21_batch_outcomes,repeated_pool_indices=helper.repeated_pool_indices,
+        shape_evidence=helper.shape_evidence,verify_portable_sources=lambda *a,**k:calls.append("portable_source_bytes")))
+    monkeypatch.setattr(runner.gqa_recovery_helper(),"verify_recovery_artifact",lambda *a:(_ for _ in ()).throw(AssertionError("historical ctime replay forbidden for fresh large-batch proof")))
+    binding={key:{"value":key} for key in ("checkpoint_sha256","scientific_fingerprint","parameter_order","context_theta","context_obs","query","prefix_manifest_sha256","prefix_samples_sha256")}
+    base={**binding,"schema":"posteriorforge.execution_gqa_hybrid_recovery.v1","status":"gqa_hybrid_screen_pass","recovery_source_sha256":runner.GQA_RECOVERY_SHA256,
+        "raw_status_preserved":True,"raw_producer_status":"conditional_mismatch","full21_gqa_hybrid_qualified":True,
+        "execution_engine":execution.execution_metadata(),"fallback_map":{"10":[5]},"module_sha256":execution.execution_source_sha256(),
+        "gqa_module_sha256":execution.PINNED_GQA_SHA256,"hybrid_module_sha256":hybrid.execution_source_sha256(),"cache_module_sha256":cache.execution_source_sha256(),
+        "mixture_module_sha256":mixture.execution_source_sha256(),"raw_qualifier_source_sha256":runner.GQA_QUALIFIER_SHA256,"full21_qualified":False,"cache_only_full21_qualified":False}
+    base_path=tmp_path/"base.json";base_path.write_text(json.dumps(base))
+    metadata=execution.execution_metadata();v={**binding,"schema":"posteriorforge.execution_gqa_batch_qualification.v1","status":"batch_screen_pass","qualified":True,
+        "qualifier_source_sha256":runner.GQA_BATCH_QUALIFIER_SHA256,"full21_qualified":False,"cache_only_full21_qualified":False,"posterior_vectors_generated":0,
+        "scientific_gate_evaluated":False,"sources_unchanged":True,"requested_batch_sizes":list(runner.GQA_LARGE_BATCHES),"candidate_query_batch_cap":10000,"comparison_block_cap":1024,
+        "thresholds":dict(runner.QUALIFICATION_THRESHOLDS),"module_sha256":execution.execution_source_sha256(),"gqa_module_sha256":execution.PINNED_GQA_SHA256,
+        "hybrid_module_sha256":hybrid.execution_source_sha256(),"cache_module_sha256":cache.execution_source_sha256(),"mixture_module_sha256":mixture.execution_source_sha256(),
+        "execution_engine":metadata,"fallback_map":{"10":[5]},"fallback_policy_sha256":metadata["fallback_policy_sha256"],"base_full21_gqa_hybrid_qualified":True,
+        "base_qualification_schema":"posteriorforge.execution_gqa_hybrid_recovery.v1","recovered_producer_sha256":runner.GQA_RECOVERY_SHA256,
+        "reference_pool":{"main_rows":1024,"stress_rows":8,"pool_rows":1032,"main_member_count":8,"stress_member_count":8,"original_calls_per_stage":2},
+        "stage_coverage":list(range(21)),"stage_results":[],"qualified_batch_sizes":list(runner.GQA_LARGE_BATCHES),"full21_batch_qualified":{str(n):True for n in runner.GQA_LARGE_BATCHES},
+        "portable_source_authentication":{"archives":{"base_qualification":{"file":"base.json","sha256":runner.sha256_file(base_path)}},"verification_uses_file_ctime":False,"verification_requires_original_machine_paths":False,"sdk_distribution":"tabpfn==2.0.9","all_wheel_sdk_python_sources_checked":True},
+        "base_qualification_manifest_sha256":runner.sha256_file(base_path),
+        "compatibility_adapter":{"adapter_sha256":adapter_source_sha256(),**{k:True for k in ("original_alias_restored","sdk_sources_unchanged","sdk_aliases_unchanged","source_guard_passed","original_alias_identity_verified","translator_code_unchanged")},
+            "patched_call_count":840,"executed_corrected_cdf_code_sha256":"fixed","corrected_cdf_code_sha256":"fixed","original_cdf_code_sha256":"old"},
+        "source_graph_at_end":{"wrapper":execution.execution_source_sha256(),"gqa":execution.PINNED_GQA_SHA256,"hybrid":hybrid.execution_source_sha256(),"cache":cache.execution_source_sha256(),"mixture":mixture.execution_source_sha256(),"recovery":runner.GQA_RECOVERY_SHA256}}
+    def metric(n):return {"passed":True,"minimum_probability":0.,"max_normalization_error":0.,"max_cdf_absolute_error":0.,"max_row_total_variation":0.,"rows_compared":n,"comparison_block_cap":1024,"blocks":(n+1023)//1024,"worst_cdf_row":0}
+    contract={"input_normalization_train_only_verified":True,"autocast":False,"forced_inference_dtype":"torch.float32","preprocessor_sha256":[str(i) for i in range(8)]}
+    for stage in range(21):
+        row={"stage_index":stage,"reference_main_rows":1024,"reference_stress_rows":8,"reference_pool_query":{"shape":[1032,33+stage]},
+            "prepare_rng_unchanged":True,"normalization_train_only_verified":True,"all8_preprocessor_identity":True,"final_prepared_state_unchanged":True,
+            "model_contracts":[deepcopy(contract) for _ in range(3 if stage==10 else 2)],"batch_results":[]}
+        for n in runner.GQA_LARGE_BATCHES:
+            batch={"query_rows":n,"status":"batch_pass","passed":True,"actual_input_query_shape":[n,33+stage],"explicit_query_batch_cap":10000,
+                "reference_row_indices":array_descriptor(helper.repeated_pool_indices(n)),"rng_unchanged":True,"prepared_state_unchanged":True,
+                "normalized_mixture_comparison_is_direct_not_error_bound":True,"ideal_raw_mixture_vs_original":metric(n),"actual_mass_weighted_component_mixture_vs_original":metric(n),"members":[]}
+            for i in range(8):
+                fallback=stage==10 and i==5;d=gqa_descriptor(not fallback);d["expanded_tensor_views"]=0 if fallback else 12
+                d["head_shape_histogram"]={str({"q":[2,n,6,32],"qkv":None}):12};d["effective_head_shape_histogram"]=deepcopy(d["head_shape_histogram"])
+                identity={"type":"Config","sha256":str(i),"repr":str(i)}
+                batch["members"].append({"ensemble_index":i,"direct_raw_probability_comparison":metric(n),
+                    **{k:True for k in ("passed","configuration_identity_equal","exact_borders","float32","component_raw_mass_matches_fp64_sum","normalized_component_passed")},
+                    "reference_configuration_identity":identity,"candidate_configuration_identity":identity,
+                    "actual_execution_route":"original_fit_preprocessors" if fallback else "resident_cache","corrected_cdf_call_delta":1,"rng_before":{"cpu":"same"},"rng_after":{"cpu":"same"},
+                    "actual_gqa_descriptor":d,"actual_neural_shape":helper.shape_evidence(d,n),"component_raw_mass_sum_error":0.,"component_raw_mass_fp64_roundoff_bound":float(8*5000*np.finfo(np.float64).eps),
+                    "mass_min":1.,"mass_max":1.,"head_mass_envelope":1.00001,
+                    "stock_fixed_uniform_replay":{"passed":True,"exact_same_logits_finite_bar_semantics":True,"row_indices":np.linspace(0,n-1,8,dtype=np.int64).tolist()}})
+            row["batch_results"].append(batch)
+        v["stage_results"].append(row)
+    kwargs=dict(bindings=binding,cache_sha256=cache.execution_source_sha256(),mixture_sha256=mixture.execution_source_sha256(),hybrid_sha256=hybrid.execution_source_sha256(),
+        mode="component_gqa_hybrid",query_batch_size=4096,qualification_path=tmp_path/"manifest.json",sdk_root=tmp_path/"relocated-sdk")
+    return v,kwargs,calls
+
+
+def test_v3_large_batch_accepts_portable_fresh_proof_without_historical_ctime(tmp_path,monkeypatch):
+    value,kwargs,calls=large_batch_fixture(tmp_path,monkeypatch)
+    assert runner.validate_qualification(value,**kwargs) and calls==["portable_source_bytes"]
+    assert runner.execution_query_cap("component_gqa_hybrid",4096)==10000 and runner.execution_query_cap("component_gqa_hybrid",1024)==1024
+    assert runner.execution_query_cap("component_mass",1024)==1024
+
+
+@pytest.mark.parametrize("mutation",[
+    lambda v:v["stage_results"][3]["batch_results"][0]["members"][5]["direct_raw_probability_comparison"].update(max_cdf_absolute_error=2.1e-5),
+    lambda v:v["stage_results"][7]["batch_results"][1]["members"][2]["actual_neural_shape"].update(requested_neural_query_rows=1024),
+    lambda v:v["stage_results"][10]["batch_results"][0]["members"][5].update(actual_execution_route="resident_cache"),
+    lambda v:v["stage_results"][1]["batch_results"][0]["members"][0].update(corrected_cdf_call_delta=0),
+    lambda v:v["stage_results"][20].update(final_prepared_state_unchanged=False)])
+def test_v3_large_batch_rejects_threshold_shape_route_source_or_state_tampering(tmp_path,monkeypatch,mutation):
+    value,kwargs,_=large_batch_fixture(tmp_path,monkeypatch);mutation(value)
+    with pytest.raises(ValueError):runner.validate_qualification(value,**kwargs)
+
+
+def test_v3_never_selects_an_oom_or_failed_neural_size(tmp_path,monkeypatch):
+    value,kwargs,_=large_batch_fixture(tmp_path,monkeypatch)
+    value["stage_results"][5]["batch_results"][2].update(status="cuda_out_of_memory",passed=False)
+    value["full21_batch_qualified"]["10000"]=False;value["qualified_batch_sizes"]=[4096,6250]
+    assert runner.validate_qualification(value,**kwargs)
+    kwargs["query_batch_size"]=10000
+    with pytest.raises(ValueError,match="not full21 qualified"):runner.validate_qualification(value,**kwargs)
+
+
+def test_v3_query_chunk_domain_keeps_other_modes_at1024_and_rejects_float_or_boolean_caps():
+    for n in (1024,4096,6250,10000):assert runner.valid_execution_chunk("component_gqa_hybrid",n)
+    for n in (True,4096.,2048,10001):assert not runner.valid_execution_chunk("component_gqa_hybrid",n)
+    for mode in ("resident_full","component_mass","component_hybrid"):
+        assert runner.valid_execution_chunk(mode,1024) and not runner.valid_execution_chunk(mode,4096)

@@ -132,6 +132,10 @@ def validate_worker_payloads(contracts,contract_paths,*,expected_bindings,driver
             if any(hybrid.get(key)!=value for key,value in expected_hybrid_metadata().items()):
                 raise ValueError("worker hybrid source/policy identity mismatch")
         if manifest.get("mode")=="component_gqa_hybrid":
+            from posteriorforge import performance_runner as driver
+            chunk=contract.get("query_batch_size",1024)
+            if manifest.get("engine_query_batch_cap")!=driver.execution_query_cap("component_gqa_hybrid",chunk):raise ValueError("worker actual GQA neural batch cap mismatch")
+            if chunk in driver.GQA_LARGE_BATCHES and (manifest.get("qualification_family")!="large_batch_v1" or manifest.get("qualification_large_batch_size")!=chunk or manifest.get("qualification_large_batch_producer_sha256")!=driver.GQA_BATCH_QUALIFIER_SHA256 or manifest.get("qualification_portable_source_verified") is not True or manifest.get("historical_install_ctime_replayed") is not False):raise ValueError("worker portable large-batch qualification mismatch")
             gqa=manifest.get("gqa_hybrid_execution",{});checks=manifest.get("gqa_prediction_checks",{});counters=manifest.get("gqa_execution_counters",{})
             if any(gqa.get(key)!=value for key,value in expected_gqa_hybrid_metadata().items()) or manifest.get("qualification_full21_gqa_hybrid") is not True or manifest.get("qualification_cache_only_full21") is not False:
                 raise ValueError("worker GQA hybrid source/policy identity mismatch")
@@ -239,6 +243,7 @@ def run(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,
     effective_threads,allocated_cpus=worker_thread_plan(workers,os.getenv("SLURM_CPUS_PER_TASK"),threads_per_worker)
     if type(timeout_seconds) is not int or timeout_seconds<1:raise ValueError("positive aggregate deadline required")
     driver=import_module("posteriorforge.performance_runner")
+    if not driver.valid_execution_chunk(mode,query_batch_size):raise ValueError("explicit qualified worker query chunk required")
     driver_source=sha256_file(inspect.getfile(driver))
     driver_schema=getattr(driver,"SCHEMA","posteriorforge.inference.execution.v1")
     root=Path(output).resolve();root.mkdir(parents=True,exist_ok=False)
@@ -251,7 +256,8 @@ def run(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,
         "accuracy_acceptance":"evaluated separately after genuine performance run",
         "performance_first_authorized":True,"absolute_accuracy_gate_required_for_performance":False,
         "known_physical_control_status":"model_failure",
-        "qualification_manifest_sha256":sha256_file(qualification),"mode":mode}
+        "qualification_manifest_sha256":sha256_file(qualification),"mode":mode,"query_batch_size":query_batch_size,
+        "engine_query_batch_cap":driver.execution_query_cap(mode,query_batch_size),"runner_version":driver.RUNNER_VERSION}
     write_json(root/"manifest.json",result)
     try:
         from posteriorforge.inference_cdf import reference_binding
@@ -266,7 +272,9 @@ def run(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,
         result["worker_execution_variant"]=bindings["variant"]
         result["execution_engine"]=worker_engine
         if mode=="component_hybrid":result["hybrid_execution"]=expected_hybrid_metadata()
-        if mode=="component_gqa_hybrid":result["gqa_hybrid_execution"]=expected_gqa_hybrid_metadata()
+        if mode=="component_gqa_hybrid":
+            result["gqa_hybrid_execution"]=expected_gqa_hybrid_metadata()
+            result["qualification_family"]="large_batch_v1" if query_batch_size in driver.GQA_LARGE_BATCHES else "gqa_hybrid_1024_v2"
         contracts=[];contract_paths=[];commands=[];environments=[];logs=[]
         for rank in range(workers):
             worker_output=root/f"worker-{rank}"
