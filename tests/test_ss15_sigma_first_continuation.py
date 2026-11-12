@@ -1,6 +1,6 @@
 """CPU-only proof of private single-stage continuation and partial labeling."""
 from copy import deepcopy
-import importlib.util,json,types
+import gzip,hashlib,importlib.util,json,types
 from pathlib import Path
 import pytest
 
@@ -12,11 +12,15 @@ fixtures=imported("_sigma_row_fixtures",ROOT/"tests/test_ss15_sigma_first_condit
 original=w.frozen_helper()
 FAILED=Path("/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-ss15-v1/sigma-first-conditionals-01/manifest.json")
 
+def failed_bytes():
+ # Public CI can replay the exact preserved failed proof without scratch access.
+ archive=ROOT/"evidence/accuracy-ss15-v1/structured-candidates-01/sigma-failed-screen.json.gz"
+ payload=FAILED.read_bytes() if FAILED.is_file() else gzip.decompress(archive.read_bytes())
+ assert hashlib.sha256(payload).hexdigest()==w.FAILED_SHA
+ return payload
+
 def failed():
- if not FAILED.is_file():pytest.skip("actual Karolina failed proof unavailable")
- d=json.loads(FAILED.read_bytes())
- assert w.sha256_file(FAILED)==w.FAILED_SHA
- return d
+ return json.loads(failed_bytes())
 
 def child(stage,passed=True):
  d={k:deepcopy(v) for k,v in failed().items()}
@@ -84,8 +88,9 @@ def test_outer_loop_collects_all6_even_when_numeric_only_children_fail(tmp_path,
  monkeypatch.setattr(w,"frozen_helper",lambda:fake)
  monkeypatch.setattr(w,"source_pins",lambda unused=None:{"wrapper":"CPU-synthetic-engineering-test"})
  out=tmp_path/"inventory"
+ failed_path=tmp_path/"failed.json";failed_path.write_bytes(failed_bytes())
  report=w.run(banks="unused",prefix_run="unused",checkpoint="unused",ledger="unused",
-  failed_manifest=FAILED,output=out,max_seconds=600)
+  failed_manifest=failed_path,output=out,max_seconds=600)
  assert report["status"]=="partial_inventory_complete"
  assert report["selected6_matching_FP32_failed_stages"]==[16,19]
  assert report["deterministic_native_stage_inventory"]==[14,16,19]
@@ -96,3 +101,8 @@ def test_outer_loop_collects_all6_even_when_numeric_only_children_fail(tmp_path,
 def test_actual_frozen_source_preflight_is_Torch_free():
  import subprocess,sys
  subprocess.run([sys.executable,"-c","import importlib.util,sys;s=importlib.util.spec_from_file_location('w','scripts/continue_ss15_sigma_first_map2.py');w=importlib.util.module_from_spec(s);s.loader.exec_module(w);w.source_pins();assert 'torch' not in sys.modules"],cwd=ROOT,check=True)
+
+
+def test_public_preserved_proof_is_exact_without_scratch(monkeypatch,tmp_path):
+ monkeypatch.setattr(__import__(__name__),"FAILED",tmp_path/"absent")
+ assert hashlib.sha256(failed_bytes()).hexdigest()==w.FAILED_SHA
