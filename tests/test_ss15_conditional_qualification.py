@@ -151,3 +151,25 @@ def test_real_source_pins_and_training_slices_are_Torch_free_and_width15():
  tree=ast.parse(textwrap.dedent(inspect.getsource(q.run)))
  fits=[ast.unparse(node) for node in ast.walk(tree) if isinstance(node,ast.Call) and ast.unparse(node.func)=="control.fit"]
  assert fits==["control.fit(joint[:, :15 + stage], joint[:, 15 + stage])"]
+
+
+def test_actual_prefix_gate_preflight_executes_exact_run_expression():
+ """Execute the collector's actual custody call; no alternate query expression."""
+ import ast,inspect,textwrap
+ from posteriorforge.banks import load_context,load_heldout
+ from posteriorforge.gate import verify_run_binding
+ root=Path("/scratch/project/eu-26-17/eubrieucb/posteriorforge")
+ path=root/"results/cdf-arithmetic-v1/context-4096/seed-20261111-case-0/manifest.json"
+ if not path.is_file():pytest.skip("remote authenticated prefix fixture unavailable")
+ context=load_context(root/"results/banks-v1",20261111,4096)
+ raw_query=load_heldout(root/"results/banks-v1",0).obs.reshape(1,33)
+ prefix_header=json.loads(path.read_bytes())
+ tree=ast.parse(textwrap.dedent(inspect.getsource(q.run)))
+ calls=[node for node in ast.walk(tree) if isinstance(node,ast.Call) and ast.unparse(node.func)=="verify_run_binding"]
+ assert len(calls)==1
+ expression=ast.Expression(calls[0]);ast.fix_missing_locations(expression)
+ namespace={"verify_run_binding":verify_run_binding,"prefix_header":prefix_header,"context":context,"raw_query":raw_query}
+ eval(compile(expression,"<actual-SS15-collector-prefix-custody>","eval"),namespace)
+ namespace["raw_query"]=raw_query[0]
+ with pytest.raises(ValueError,match="query differs"):
+  eval(compile(expression,"<actual-SS15-collector-prefix-custody>","eval"),namespace)

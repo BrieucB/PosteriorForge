@@ -285,7 +285,7 @@ def run(*,banks,prefix_run,checkpoint,output,ledger,max_seconds=2250):
  initial_model_inputs=model_input_descriptors(theta,stats,query)
  raw.update(checkpoint_sha256=CHECKPOINT_SHA256,scientific_fingerprint=problem.scientific_fingerprint,parameter_order=list(problem.parameter_order))
  prefix_run=Path(prefix_run);prefix_manifest=prefix_run/"manifest.json";prefix_payload=prefix_run/"samples.npz"
- prefix_header=json.loads(prefix_manifest.read_bytes());verify_run_binding(prefix_header,context,raw_query[0],20261111,0)
+ prefix_header=json.loads(prefix_manifest.read_bytes());verify_run_binding(prefix_header,context,raw_query,20261111,0)
  require(sha256_file(prefix_payload)==prefix_header["samples_sha256"],"existing physical prefix payload differs")
  with np.load(prefix_payload,allow_pickle=False) as saved:prefix_values=saved["samples"].copy()
  require(prefix_values.shape==(50000,21) and support_mask(prefix_values).all(),"existing complete supported physical prefixes required")
