@@ -1,0 +1,779 @@
+{
+  "all_rows_used": true,
+  "attribution": "Built with PriorLabs-TabPFN",
+  "candidate_change": false,
+  "case": 2,
+  "conditioning_parent": "original neural parent before the later joint-global update",
+  "context_seed": 20261111,
+  "count": 50000,
+  "custody": {
+    "actual_raw_query": {
+      "dtype": "<f8",
+      "sha256": "580116278ff2e30fedcde7580ff1df059886d843361a289877954bdec75e5646",
+      "shape": [
+        1,
+        33
+      ]
+    },
+    "assessment_sha256": "4590a8acff216737d04b8c6144d72df0a14c0246ca5333a330ad365a07a857cb",
+    "evaluator_source": {
+      "evaluator_sha256": "146c2ca35e15b54b7f68134d383574485ed1cc228f38e6fc611624f00b411924",
+      "git_revision": "bc5e13d3ed2210af2d15f1223815c9b31e0f881a",
+      "kernel_sha256": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+      "wrapper_sha256": "fc3c99732c39e96b0e704d28b90323a523337c9c560828656b0bb5972d747a4f"
+    },
+    "frozen_sources": {
+      "src/posteriorforge/inference.py": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e",
+      "src/posteriorforge/performance_runner.py": "23ccad8b5bbcdd7a48340b349d515ca870763359cfeb71333e02fc2b6a8aca3b",
+      "src/posteriorforge/performance_ss15_scientific_campaign.py": "3965e36206d7f750c66350df54b6d855d6c9f8f4f81a0e069aeeb478492cd453",
+      "src/posteriorforge/science/analytical_benchmark_v2.py": "8d5f286f6d8512391dea2ae036313bec05782d28c7803f336490cbcdce3bd99f",
+      "src/posteriorforge/science/hierarchical_exact.py": "db001593cc7307b1290b981622705961c5953001a6c1245fae5ec779938e9687",
+      "src/posteriorforge/science/hierarchical_noise.py": "cbf0b8c956362a5eaa31923e9b94a3db3e3ede2072603add51e78105b8c0cbf0",
+      "src/posteriorforge/upstream/npe_pfn/accept_reject_sampler.py": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+      "src/posteriorforge/validation.py": "92ddfd79a1c42cdbc56dfc9ad0f2c987fa70ee69387b0c5decff53c20b9aa694"
+    },
+    "original_gate_sha256": "42163c5d77f0f1f8f7e1bb3a78c81fba43ca36a0682446a0dc533544995e490d",
+    "parent_array": {
+      "dtype": "<f8",
+      "sha256": "da4009e1bb5acf01cc9cc9946d57c05e9ccebe089002ad5f2f329b99f5ae1ca2",
+      "shape": [
+        50000,
+        21
+      ]
+    },
+    "parent_manifest_sha256": "28de1d121e5e89a5b55f630625c0f60e86551473c8bbaa3b2840797683f12e6a",
+    "parent_samples_sha256": "9ce954f75b73c54348733c3068179d542ed050ec1aaae772734b3def67fc752b",
+    "reference": {
+      "binding": {
+        "observation_sha256": "580116278ff2e30fedcde7580ff1df059886d843361a289877954bdec75e5646",
+        "parameter_order": [
+          "mu_a",
+          "mu_b",
+          "mu_d0",
+          "a_m1",
+          "b_m1",
+          "d0_m1",
+          "sigma_m1",
+          "a_m2",
+          "b_m2",
+          "d0_m2",
+          "sigma_m2",
+          "a_m3",
+          "b_m3",
+          "d0_m3",
+          "sigma_m3",
+          "a_a1",
+          "sigma_a1",
+          "a_a2",
+          "sigma_a2",
+          "a_a3",
+          "sigma_a3"
+        ],
+        "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966"
+      },
+      "cdf_precision": 0.0007370232201646676,
+      "directions": {
+        "dtype": "<f8",
+        "sha256": "864a704fafd90c6e82cf520f9e544267792ba16c81c523e242557712e8a65064",
+        "shape": [
+          53,
+          21
+        ]
+      },
+      "grid_manifest_sha256": "76c820575b6c14a7e6d29b250e5e736d4fda6bab4dab4547cae0a5334c36375a",
+      "grid_state": "verified",
+      "parent_manifest_sha256": "9eb99c31add3cd68d4219f980b0f46bdaecad62d2ead651aff30d07a04d93bc8",
+      "queries": {
+        "dtype": "<f8",
+        "sha256": "e7c3ebfe41866f5c3235c7d39781c58baf0e1c2e2710a495917feb523daffb76",
+        "shape": [
+          2802
+        ]
+      },
+      "reference_case": 2,
+      "reference_distribution_sha256": "2ce1fe9f550258b108b8128a29d1a092d04e22ec0af838d732fb50697423bf59",
+      "runner_reference_binding": {
+        "parent": {
+          "binding": {
+            "observation_sha256": "580116278ff2e30fedcde7580ff1df059886d843361a289877954bdec75e5646",
+            "parameter_order": [
+              "mu_a",
+              "mu_b",
+              "mu_d0",
+              "a_m1",
+              "b_m1",
+              "d0_m1",
+              "sigma_m1",
+              "a_m2",
+              "b_m2",
+              "d0_m2",
+              "sigma_m2",
+              "a_m3",
+              "b_m3",
+              "d0_m3",
+              "sigma_m3",
+              "a_a1",
+              "sigma_a1",
+              "a_a2",
+              "sigma_a2",
+              "a_a3",
+              "sigma_a3"
+            ],
+            "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966"
+          },
+          "cdf_precision": 0.0007269440088987222,
+          "distribution_sha256": "043e3ded07dcdda34c23fdb885ca3d6155f0bcd9ae410a5d66f36a8df5125a5d",
+          "manifest_sha256": "9eb99c31add3cd68d4219f980b0f46bdaecad62d2ead651aff30d07a04d93bc8"
+        },
+        "refined_grid": {
+          "binding": {
+            "observation_sha256": "580116278ff2e30fedcde7580ff1df059886d843361a289877954bdec75e5646",
+            "parameter_order": [
+              "mu_a",
+              "mu_b",
+              "mu_d0",
+              "a_m1",
+              "b_m1",
+              "d0_m1",
+              "sigma_m1",
+              "a_m2",
+              "b_m2",
+              "d0_m2",
+              "sigma_m2",
+              "a_m3",
+              "b_m3",
+              "d0_m3",
+              "sigma_m3",
+              "a_a1",
+              "sigma_a1",
+              "a_a2",
+              "sigma_a2",
+              "a_a3",
+              "sigma_a3"
+            ],
+            "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966"
+          },
+          "cdf_precision": 0.0007370232201646676,
+          "distribution_sha256": "2ce1fe9f550258b108b8128a29d1a092d04e22ec0af838d732fb50697423bf59",
+          "manifest_sha256": "76c820575b6c14a7e6d29b250e5e736d4fda6bab4dab4547cae0a5334c36375a"
+        }
+      }
+    },
+    "reference_moment_qualification": {
+      "checks": [
+        "final_four_scramble_moments",
+        "previous_power_combined_moments",
+        "independent_global_mean_and_sd",
+        "independent_noise_mean",
+        "separate_axis_independent_corner_changes"
+      ],
+      "compared_powers": [
+        16,
+        18
+      ],
+      "contract": "retained empirical numerical convergence diagnostics; validation propagates these uncertainties",
+      "max_mean_error_reference_sd": 0.0003953926251129426,
+      "max_sd_error_reference_sd": 0.0012486984290218095,
+      "mean_error_physical": [
+        9.078979673252108e-05,
+        9.140663850526476e-05,
+        2.51443372999427e-05,
+        2.4184790199700823e-06,
+        2.8551191348924476e-06,
+        3.321272362688532e-07,
+        2.798190054914551e-06,
+        2.1232563095635593e-06,
+        3.1172988370631316e-06,
+        2.3364466386066596e-06,
+        8.114984138773984e-06,
+        4.658092441434114e-06,
+        5.921849716594707e-06,
+        4.144103479264416e-07,
+        5.197088012331985e-06,
+        1.651442624414634e-06,
+        1.48626208091307e-05,
+        1.8017382383828107e-06,
+        6.367071990143192e-06,
+        3.641904564255505e-06,
+        1.613056039112548e-05
+      ],
+      "mean_error_reference_sd": [
+        0.0003953926251129426,
+        0.00020608231087484478,
+        0.00016115980617387483,
+        6.707590647353967e-06,
+        7.754623077240936e-06,
+        3.3201338347795273e-06,
+        5.516367755718841e-05,
+        5.976921820010366e-06,
+        8.674818416519351e-06,
+        2.3647946793884578e-05,
+        0.0001628504759474259,
+        1.1569322146207905e-05,
+        1.3764329561925647e-05,
+        3.153003243623051e-06,
+        8.78181784533821e-05,
+        9.290191281686629e-06,
+        0.00013860780350635936,
+        1.0821008065728016e-05,
+        5.9219046751883896e-05,
+        2.380710237152797e-05,
+        0.00015002716951986918
+      ],
+      "passed": true,
+      "sd_error_physical": [
+        0.00028672531896295483,
+        0.00044398860704464305,
+        0.00018712377605123454,
+        1.488418068740227e-06,
+        1.6742284063564483e-06,
+        6.703439937444378e-07,
+        4.151783234977724e-06,
+        4.342816867952681e-06,
+        6.291691856119552e-06,
+        3.805996331471273e-06,
+        7.995122146775557e-06,
+        2.5063536660541175e-06,
+        3.263472669268186e-06,
+        1.6209911967435264e-06,
+        6.6492070650708834e-06,
+        5.9761884498299445e-06,
+        1.4387009797042771e-05,
+        4.143137094819727e-06,
+        2.2955179009992444e-05,
+        9.036824899749663e-06,
+        9.939121896923586e-06
+      ],
+      "sd_error_reference_sd": [
+        0.0012486984290218095,
+        0.001001001673818181,
+        0.0011993488282949992,
+        4.1280900246792736e-06,
+        4.54727442993131e-06,
+        6.701142006825722e-06,
+        8.184849033374383e-05,
+        1.2224938073402414e-05,
+        1.7508518508270746e-05,
+        3.8521743769858344e-05,
+        0.00016044510064278612,
+        6.225040258321248e-06,
+        7.585385561249088e-06,
+        1.2333163316964175e-05,
+        0.00011235546737486798,
+        3.361905101244793e-05,
+        0.00013417228714921424,
+        2.4883148376038224e-05,
+        0.0002135021908178605,
+        5.907365547506961e-05,
+        9.244181786323897e-05
+      ],
+      "threshold_reference_sd": 0.005
+    },
+    "script_sha256": "87a59767574703d25b6bf630605611a2e18dbae4c83d709770c16a05b54393c2"
+  },
+  "decomposition": "E_q[beta]-reference_mean = E_q[beta-m(G,sigma,y)] + E_q[m(G,sigma,y)]-reference_mean",
+  "default_numpy_python_RNG_preserved": true,
+  "diagnostic_only": true,
+  "gate_or_threshold_waiver": false,
+  "hybrid_physical_status_retained": "model_failure",
+  "independent_math_checks": {
+    "actual_prior_likelihood_log_ratio_errors": [
+      6.661338147750939e-16,
+      4.107825191113079e-15,
+      1.5543122344752192e-15
+    ],
+    "covariance_max_abs_difference": 6.938893903907228e-16,
+    "covariance_space_rows": 33,
+    "mean_max_abs_difference": 1.4578616092109087e-14
+  },
+  "input_unchanged": true,
+  "interpretation": {
+    "conditioning_observation": "original scientific raw Float64 heldout y; stored parent globals/noise used unchanged",
+    "first_term": "accepted-sampler conditional residual; not solely neural-model bias",
+    "second_term": "conditional-mean mixing discrepancy under the accepted original joint(G,sigma); not separate global-versus-noise attribution",
+    "uncertainty": "Paired row covariance preserves residual/mixing cancellation. MCSE and CLT95 are approximate under iid accepted-row/finite-variance assumptions, not rigorous coverage or posterior accuracy proof. Declared qualified numerical mean/SD error envelopes are propagated separately; no independence or Gaussian law assumed for numerical reference error."
+  },
+  "model_GPU_calls": 0,
+  "original_physical_status": "model_failure",
+  "parameters": [
+    {
+      "MCSE_total_variance_identity_abs_error": 1.6940658945086007e-20,
+      "components": {
+        "accepted_sampler_conditional_residual": {
+          "approximate_CLT95_MC_only_refSD": [
+            0.1321953346157536,
+            0.14763999548179585
+          ],
+          "approximate_CLT95_enlarged_by_declared_reference_errors_refSD": [
+            0.1321937185557306,
+            0.1476418003936627
+          ],
+          "approximate_iid_row_MCSE_refSD": 0.00394003690574616,
+          "declared_reference_numerical_interval_refSD": [
+            0.13991595458489445,
+            0.13991937555447614
+          ],
+          "signed_refSD": 0.13991766504877473
+        },
+        "conditional_mean_mixing_discrepancy": {
+          "approximate_CLT95_MC_only_refSD": [
+            0.10195020014006285,
+            0.11050079812812015
+          ],
+          "approximate_CLT95_enlarged_by_declared_reference_errors_refSD": [
+            0.10194297697166234,
+            0.11050812600493719
+          ],
+          "approximate_iid_row_MCSE_refSD": 0.0021813150791298525,
+          "declared_reference_numerical_interval_refSD": [
+            0.10621822370106447,
+            0.10623277474500414
+          ],
+          "signed_refSD": 0.1062254991340915
+        },
+        "total_signed_error": {
+          "approximate_CLT95_MC_only_refSD": [
+            0.2371272642435549,
+            0.25515906412217887
+          ],
+          "approximate_CLT95_enlarged_by_declared_reference_errors_refSD": [
+            0.23711838856411865,
+            0.2551681604589588
+          ],
+          "approximate_iid_row_MCSE_refSD": 0.004600033475323148,
+          "declared_reference_numerical_interval_refSD": [
+            0.2461341782859596,
+            0.24615215029948093
+          ],
+          "signed_refSD": 0.24614316418286689
+        }
+      },
+      "exact_conditional_mean_averaged_over_neural_parent": 0.015264876308380445,
+      "mean_decomposition_abs_error_refSD": 6.38378239159465e-16,
+      "neural_parent_mean": 0.06496956947328057,
+      "paired_mean_covariance_refSD2": [
+        [
+          1.5523890818641777e-05,
+          4.391408405062458e-07,
+          1.5963031659148027e-05
+        ],
+        [
+          4.391408405062458e-07,
+          4.758135474439274e-06,
+          5.1972763149455205e-06
+        ],
+        [
+          1.5963031659148027e-05,
+          5.1972763149455205e-06,
+          2.1160307974093558e-05
+        ]
+      ],
+      "paired_row_covariance_refSD2": [
+        [
+          0.7761945409320888,
+          0.02195704202531229,
+          0.7981515829574014
+        ],
+        [
+          0.02195704202531229,
+          0.23790677372196367,
+          0.259863815747276
+        ],
+        [
+          0.7981515829574014,
+          0.259863815747276,
+          1.0580153987046779
+        ]
+      ],
+      "parameter": "a_m2",
+      "physical_index": 7,
+      "reference_mean": -0.02247092952362688,
+      "reference_mean_error_refSD": 5.976921820010366e-06,
+      "reference_sd": 0.35524244310089986,
+      "reference_sd_error_refSD": 1.2224938073402414e-05,
+      "residual_mixing_correlation": 0.05109579225063311,
+      "rowwise_decomposition_max_abs_error_refSD": 8.881784197001252e-16
+    },
+    {
+      "MCSE_total_variance_identity_abs_error": 3.3881317890172014e-21,
+      "components": {
+        "accepted_sampler_conditional_residual": {
+          "approximate_CLT95_MC_only_refSD": [
+            -0.1900606315739895,
+            -0.1736300450021926
+          ],
+          "approximate_CLT95_enlarged_by_declared_reference_errors_refSD": [
+            -0.19006395931233888,
+            -0.1736270050505611
+          ],
+          "approximate_iid_row_MCSE_refSD": 0.004191553187048144,
+          "declared_reference_numerical_interval_refSD": [
+            -0.18184852218630745,
+            -0.18184215450136337
+          ],
+          "signed_refSD": -0.18184533828809105
+        },
+        "conditional_mean_mixing_discrepancy": {
+          "approximate_CLT95_MC_only_refSD": [
+            -0.09492532914199141,
+            -0.08674369808518058
+          ],
+          "approximate_CLT95_enlarged_by_declared_reference_errors_refSD": [
+            -0.09493566614327568,
+            -0.08673350469159188
+          ],
+          "approximate_iid_row_MCSE_refSD": 0.0020871891323887837,
+          "declared_reference_numerical_interval_refSD": [
+            -0.09084477898949682,
+            -0.09082424859713191
+          ],
+          "signed_refSD": -0.090834513613586
+        },
+        "total_signed_error": {
+          "approximate_CLT95_MC_only_refSD": [
+            -0.2820788479908728,
+            -0.26328085581248895
+          ],
+          "approximate_CLT95_enlarged_by_declared_reference_errors_refSD": [
+            -0.28209246183037834,
+            -0.26326757156892294
+          ],
+          "approximate_iid_row_MCSE_refSD": 0.004795494286287909,
+          "declared_reference_numerical_interval_refSD": [
+            -0.27269330117580814,
+            -0.2726664030984991
+          ],
+          "signed_refSD": -0.27267985190168087
+        }
+      },
+      "exact_conditional_mean_averaged_over_neural_parent": -1.2386168348872637,
+      "mean_decomposition_abs_error_refSD": 3.83026943495679e-15,
+      "neural_parent_mean": -1.303963016715271,
+      "paired_mean_covariance_refSD2": [
+        [
+          1.7569118119853455e-05,
+          5.356444278023396e-07,
+          1.8104762547655792e-05
+        ],
+        [
+          5.356444278023396e-07,
+          4.356358474361844e-06,
+          4.8920029021641834e-06
+        ],
+        [
+          1.8104762547655792e-05,
+          4.8920029021641834e-06,
+          2.299676544981998e-05
+        ]
+      ],
+      "paired_row_covariance_refSD2": [
+        [
+          0.8784559059926728,
+          0.02678222139011698,
+          0.9052381273827896
+        ],
+        [
+          0.02678222139011698,
+          0.21781792371809222,
+          0.24460014510820918
+        ],
+        [
+          0.9052381273827896,
+          0.24460014510820918,
+          1.149838272490999
+        ]
+      ],
+      "parameter": "b_m2",
+      "physical_index": 8,
+      "reference_mean": -1.205975422691982,
+      "reference_mean_error_refSD": 8.674818416519351e-06,
+      "reference_sd": 0.359350327279116,
+      "reference_sd_error_refSD": 1.7508518508270746e-05,
+      "residual_mixing_correlation": 0.06122655236830284,
+      "rowwise_decomposition_max_abs_error_refSD": 8.881784197001252e-16
+    }
+  ],
+  "posterior_draws": 0,
+  "reference_integrations": 0,
+  "rejection": {
+    "counters": {
+      "accepted_before_final_trim": 50143,
+      "proposed": 50442,
+      "returned": 50000,
+      "support_calls": 2
+    },
+    "rejected_checked_rows": 299,
+    "rejected_fraction_of_checked": 0.0059276000158597995,
+    "saved_parent_directory_files": [
+      "manifest.json",
+      "samples.npz"
+    ],
+    "saved_rejected_proposal_arrays_present": false,
+    "scope_limit": "Only final accepted/truncated rows are saved. Rejected vectors and their conditional residuals are unavailable; rejection contribution is not identified. A small rejection rate gives no finite mean-error bound for unbounded beta/residuals. No neural-only bias or rejection-causes-bias claim.",
+    "source_sha256": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+    "surplus_accepted_trimmed": 143,
+    "unused_FIFO_rows": 758,
+    "whole_vector_support": "all21 finite AND all6 noise bounds [.01,.5]; local Gaussian coordinates unbounded"
+  },
+  "schema": "posteriorforge.case2_conditional_mean_attribution.v1",
+  "source_assumptions": {
+    "conditional": "Vpost=(V0^-1+X^T X/sigma^2)^-1; m=Vpost[V0^-1(population_map G+prior_offset)+X^T(y-forward_offset)/sigma^2]",
+    "forward": {
+      "covariance": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "dataset_id": "mechanical_2",
+      "design": [
+        [
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.1111111111111111,
+          0.012345679012345678,
+          1.0
+        ],
+        [
+          0.2222222222222222,
+          0.04938271604938271,
+          1.0
+        ],
+        [
+          0.3333333333333333,
+          0.1111111111111111,
+          1.0
+        ],
+        [
+          0.4444444444444444,
+          0.19753086419753085,
+          1.0
+        ],
+        [
+          0.5555555555555556,
+          0.308641975308642,
+          1.0
+        ],
+        [
+          0.6666666666666666,
+          0.4444444444444444,
+          1.0
+        ],
+        [
+          0.7777777777777777,
+          0.6049382716049381,
+          1.0
+        ],
+        [
+          0.8888888888888888,
+          0.7901234567901234,
+          1.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "local_names": [
+        "a_m2",
+        "b_m2",
+        "d0_m2"
+      ],
+      "offset": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "global_indices": [
+      0,
+      1,
+      2
+    ],
+    "likelihood": "y=X beta+forward_offset+Normal(0,sigma_m2^2 I); absolute SD; independent noise prior",
+    "local_indices": [
+      7,
+      8,
+      9
+    ],
+    "other_blocks_cancel_given_globals_and_sigma": true,
+    "prior": {
+      "covariance": [
+        [
+          0.2025,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.48999999999999994,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0625
+        ]
+      ],
+      "dataset_id": "mechanical_2",
+      "local_names": [
+        "a_m2",
+        "b_m2",
+        "d0_m2"
+      ],
+      "offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "population_map": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+    "sigma_index": 10,
+    "uses_conditional_prior_covariance_not_global_marginal_covariance": true
+  },
+  "wall_seconds": 0.34748043213039637
+}
