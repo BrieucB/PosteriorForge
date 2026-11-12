@@ -1,7 +1,52 @@
 {
   "CPU_joint_refresh_seconds_separate": 0.04194624722003937,
   "assessment_sha256": "5c37506204f58231914322b21838015b9a6e2f875b4242be7f6c32790a045aeb",
+  "before_after": {
+    "after_joint_global_refresh": {
+      "SD_ratio_interval_max": 1.0272201624585275,
+      "SD_ratio_interval_min": 0.9150386981369806,
+      "all_rows_used": 50000,
+      "bias_upper_refSD_max": 0.20506453455509546,
+      "bias_upper_worst_parameter": "sigma_m2",
+      "failed_SD_ratio_interval_indices": [],
+      "failed_bias_upper_indices": [
+        10
+      ],
+      "failed_joint_CDF_indices": [],
+      "failed_marginal_CDF_indices": [],
+      "joint_CDF_upper_max": 0.0743938632728019,
+      "joint_CDF_upper_worst_index": 12,
+      "marginal_CDF_upper_max": 0.09871508929505457,
+      "marginal_CDF_upper_worst_parameter": "sigma_m2",
+      "passed": false,
+      "reference_qualified": true,
+      "reference_uncertainty_included": true,
+      "status": "model_failure"
+    },
+    "parent": {
+      "SD_ratio_interval_max": 1.0272201624585275,
+      "SD_ratio_interval_min": 0.9150386981369806,
+      "all_rows_used": 50000,
+      "bias_upper_refSD_max": 0.20506453455509546,
+      "bias_upper_worst_parameter": "sigma_m2",
+      "failed_SD_ratio_interval_indices": [],
+      "failed_bias_upper_indices": [
+        10
+      ],
+      "failed_joint_CDF_indices": [],
+      "failed_marginal_CDF_indices": [],
+      "joint_CDF_upper_max": 0.06635650476105254,
+      "joint_CDF_upper_worst_index": 12,
+      "marginal_CDF_upper_max": 0.09871508929505457,
+      "marginal_CDF_upper_worst_parameter": "sigma_m2",
+      "passed": false,
+      "reference_qualified": true,
+      "reference_uncertainty_included": true,
+      "status": "model_failure"
+    }
+  },
   "case": 4,
+  "cohort_gate_monotonicity_claimed": false,
   "compressed_manifests_raw_bytes_preserved": true,
   "context_seed": 20261111,
   "copied_source_files_byte_exact": true,

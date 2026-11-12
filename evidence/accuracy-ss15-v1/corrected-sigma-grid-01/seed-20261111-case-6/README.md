@@ -13,6 +13,14 @@ Failed mean coordinates: mu_a, a_m1, b_m1, a_m2, a_m3, d0_m3.
 Failed joint CDF indices: 10, 15, 19.
 Failed SD-ratio coordinates: none.
 The full SD-ratio interval range is [0.924813139, 1.047581899].
+Before the exact global refresh, the parent status was model_failure, with
+marginal CDF maximum 0.189656352, joint CDF maximum
+0.157595464, and mean-bias maximum 0.456834808.
+Its failed mean coordinates were mu_a, mu_b, a_m1, b_m1, a_m2, a_m3, d0_m3;
+failed joint indices were 10, 15, 19.
+Both before and after summaries are preserved; the exact global kernel is not
+claimed to improve every finite-cohort criterion.
+
 The predeclared focus uses indices [0,4,11,12]; every coordinate remains in the
 full density plot and exact assessment. No failure is omitted.
 

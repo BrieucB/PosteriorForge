@@ -1,0 +1,103 @@
+{
+  "CPU_joint_refresh_seconds_separate": 0.02385477628558874,
+  "assessment_sha256": "1a89346f8bd8c6fe212b655c1eb8420fcda754c4be857dac9b958c2ba24432b4",
+  "before_after": {
+    "after_joint_global_refresh": {
+      "SD_ratio_interval_max": 1.397881848000684,
+      "SD_ratio_interval_min": 0.8208556990441956,
+      "all_rows_used": 50000,
+      "bias_upper_refSD_max": 0.32488696810419637,
+      "bias_upper_worst_parameter": "d0_m2",
+      "failed_SD_ratio_interval_indices": [
+        3,
+        4
+      ],
+      "failed_bias_upper_indices": [
+        7,
+        8,
+        9
+      ],
+      "failed_joint_CDF_indices": [],
+      "failed_marginal_CDF_indices": [
+        3,
+        4,
+        7,
+        8,
+        9
+      ],
+      "joint_CDF_upper_max": 0.06745665375502902,
+      "joint_CDF_upper_worst_index": 10,
+      "marginal_CDF_upper_max": 0.13382536029607534,
+      "marginal_CDF_upper_worst_parameter": "d0_m2",
+      "passed": false,
+      "reference_qualified": true,
+      "reference_uncertainty_included": true,
+      "status": "model_failure"
+    },
+    "parent": {
+      "SD_ratio_interval_max": 1.397881848000684,
+      "SD_ratio_interval_min": 0.8208556990441956,
+      "all_rows_used": 50000,
+      "bias_upper_refSD_max": 0.32488696810419637,
+      "bias_upper_worst_parameter": "d0_m2",
+      "failed_SD_ratio_interval_indices": [
+        3,
+        4
+      ],
+      "failed_bias_upper_indices": [
+        0,
+        7,
+        8,
+        9
+      ],
+      "failed_joint_CDF_indices": [],
+      "failed_marginal_CDF_indices": [
+        0,
+        3,
+        4,
+        7,
+        8,
+        9
+      ],
+      "joint_CDF_upper_max": 0.0772796500172922,
+      "joint_CDF_upper_worst_index": 10,
+      "marginal_CDF_upper_max": 0.13382536029607534,
+      "marginal_CDF_upper_worst_parameter": "d0_m2",
+      "passed": false,
+      "reference_qualified": true,
+      "reference_uncertainty_included": true,
+      "status": "model_failure"
+    }
+  },
+  "case": 5,
+  "cohort_gate_monotonicity_claimed": false,
+  "compressed_manifests_raw_bytes_preserved": true,
+  "context_seed": 20261112,
+  "copied_source_files_byte_exact": true,
+  "fresh_corrected_point": true,
+  "metric_scope": "copied saved assessment summary; no cohort or reference calculations rerun",
+  "parent_payload_sha256_not_copied": "f57de47b70992288a34d41fe299ba43e6daff47af344b5f5e19d4031260bbdf7",
+  "parent_raw_sha256": "0c3c4815cc7de1126be9ff0fd74adf0d679dec261134ccd8cebbf0c084ab1a9b",
+  "prototype_reused": false,
+  "raw_samples_included": false,
+  "refreshed_payload_sha256_not_copied": "691a5e09a34fdac5ad51470ebcdf47ddf2e0b194c4aff9c2380cd9f2bb9fdacc",
+  "refreshed_raw_sha256": "f410e3baa63f7ac96ecb0666eb40e0e888fb37ec8c060b6b71f35ea73199c94e",
+  "scheduler": {
+    "allocated_gpu_seconds": 167,
+    "job_id": "5410000",
+    "restarts": 0,
+    "state": "COMPLETED"
+  },
+  "schema": "posteriorforge.corrected_sigma_grid_point_publication.v1",
+  "source_assessment": "sigma-native-grid-assessment-01/seed-20261112-case-5/assessment.json",
+  "source_parent_manifest": "sigma-native-grid-01/seed-20261112-case-5/manifest.json",
+  "source_refreshed_manifest": "sigma-native-grid-refresh-01/seed-20261112-case-5/manifest.json",
+  "timings": {
+    "accepted_samples_per_second": 312.8983080013391,
+    "includes_CPU_sampling": true,
+    "includes_stage_preparation": true,
+    "posterior_request_seconds": 159.79632590338588,
+    "total_seconds": 164.26078519131988
+  },
+  "wrapper_total_seconds": 164.2610823782161
+}
