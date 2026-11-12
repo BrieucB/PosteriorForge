@@ -1,0 +1,1 @@
+93ddc495a3c57c2741608437ff566199fe0b052a297c9f5e9228fb5fb4c25387  reference-inventory-manifest.json

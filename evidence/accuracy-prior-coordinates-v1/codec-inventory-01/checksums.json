@@ -1,0 +1,8 @@
+{
+  "CPU-receipt.json": "d9facb9256a2c975d745ed6e9a6cb68e4346a875976ebd6e749509113d2650a0",
+  "README.txt": "7ec9b8ea80df5a34ea7bf11691dde503dbfee1597842fa93f06db41a440c6e9c",
+  "inference-inventory-manifest.json.gz": "dbc044256143f57aeda59c9513dc935aeee2c0bbb0d3f2b209bc52e4628f112b",
+  "inference-inventory-raw-sha256.txt": "5f4314bb0b09a883c0b72f6d4da5b99831b16dc546f49c5914e7c299cad5cc09",
+  "reference-inventory-manifest.json.gz": "665600724aa3b12e6c68654f4a6ee8db0553266b66cdeaeae0b7deb6b310e06f",
+  "reference-inventory-raw-sha256.txt": "2610ec8f71440f46eb9f41694c5b273aa699f26e65014f98810543a66813c83c"
+}
