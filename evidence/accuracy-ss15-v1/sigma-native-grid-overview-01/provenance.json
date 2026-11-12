@@ -1,0 +1,23 @@
+{
+  "GPU_hours": 0,
+  "SD_scope": "minimum lower and maximum upper among21 marginal uncertainty intervals; not one coordinate or joint interval",
+  "global_calibration_or_SBC_claimed": false,
+  "method": "hybrid sigma-first block-local NPE-PFN plus one exact joint-global Gibbs refresh",
+  "metrics_recomputed": false,
+  "model_failures": 21,
+  "new_model_calls": 0,
+  "passed": 3,
+  "plot_library": {
+    "matplotlib": "3.10.7"
+  },
+  "points": 24,
+  "prior_candidate_qualification_claimed": false,
+  "qualification_job_id_display_trigger": "5410894",
+  "raw_sample_arrays_loaded": false,
+  "rounded_numbers_are_display_only": true,
+  "rows_per_point": 50000,
+  "schema": "posteriorforge.sigma_native_grid_overview.v1",
+  "source_flags_not_recomputed": true,
+  "source_grid_index_sha256": "da5c31350734ab97d7a4baf07a264d19e93aaaade0df1a5727fb9893dd1b5016",
+  "source_plot_helper_sha256": "cb18c4704bce97456939db8eda8096fb7f322e094ed0c619d853cb82302e9e82"
+}
