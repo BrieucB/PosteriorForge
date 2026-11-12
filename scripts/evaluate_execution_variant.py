@@ -18,7 +18,7 @@ import numpy as np
 from posteriorforge.artifacts import sha256_file, write_json
 from posteriorforge.banks import derive_seed, load_context, load_heldout
 from posteriorforge.gate import verify_run_binding
-from posteriorforge.inference import support_mask
+from posteriorforge.inference import support_mask, UPSTREAM_REVISION
 from posteriorforge.validation import assess_samples, compare_to_upstream, sample_integrity
 
 _BINDING_PATH = Path(__file__).with_name("evaluate_cdf_pilot.py")
@@ -147,23 +147,28 @@ def validate_sampling_policy(policy):
     return dict(policy)
 
 
-def validate_execution_header(manifest, *, context, query, control):
+def validate_execution_header(manifest, *, context, query, control, worker_partition=None):
     from posteriorforge.inference_cdf import guard_baseline_source
     from posteriorforge.performance_runner import STREAM_ROLES, STREAM_DTYPES
     variant = manifest.get("variant")
-    require(variant in ("execution_cache_v1", "execution_mixture_v1"), "unknown execution variant")
+    require(variant in ("execution_cache_v1", "execution_mixture_v1", "execution_hybrid_v1"), "unknown execution variant")
+    partition = worker_partition or {"rank":0,"world_size":1,"requested_count":50000}
+    rank,world,count = (partition[key] for key in ("rank","world_size","requested_count"))
+    require(type(world) is int and world in (1,2,4) and type(rank) is int and 0<=rank<world
+            and count==50000//world, "invalid declared execution partition")
+    is_worker = worker_partition is not None
     expected = {
         "schema": RUN_SCHEMA, "variant": variant, "status": "complete",
         "context_seed": 20261111, "case": 0, "context_size": 4096,
-        "requested_count": 50000, "scientific_run": True,
-        "end_to_end": True, "run_purpose": "performance_execution",
+        "requested_count": count, "scientific_run": not is_worker,
+        "end_to_end": not is_worker, "run_purpose": "performance_worker" if is_worker else "performance_execution",
         "performance_first_authorized": True,
         "absolute_accuracy_gate_required_for_performance": False,
         "tail_family_changed": False, "sources_unchanged": True,
         "partial_vector_filtering": False, "clipping_or_repair_performed": False,
         "observation_preprocessing": "raw; TabPFN frozen preprocessing",
         "log_density": "not_used", "microbatch": 50000, "query_batch_size": 1024,
-        "rank": 0, "world_size": 1, "completed_stage_indices": list(range(21)),
+        "rank": rank, "world_size": world, "completed_stage_indices": list(range(21)),
         "sampling_rng_policy": "independent_cpu_sampling_streams_model_rng_isolated",
     }
     for key, expected_value in expected.items():
@@ -184,17 +189,23 @@ def validate_execution_header(manifest, *, context, query, control):
     require(actual_settings.get("fit_mode") == "fit_with_cache", "resident executor requires actual fit_with_cache metadata")
     actual_settings["fit_mode"] = original_settings["fit_mode"]
     policy = manifest.get("sampling_policy", {})
-    if variant == "execution_mixture_v1":
+    if variant in ("execution_mixture_v1", "execution_hybrid_v1"):
         validate_sampling_policy(policy)
     else:
         require(policy.get("head_policy") == "not_used" and policy.get("mass_envelope") is None
                 and policy.get("stage0_dedup", {}).get("enabled") is False,
                 "resident-full policy must not claim component sampling")
+    if variant == "execution_hybrid_v1":
+        from posteriorforge import execution_hybrid as hybrid
+        approved = hybrid.execution_metadata({10:[5],13:[6]})
+        actual = manifest.get("hybrid_execution", {})
+        require(isinstance(actual, dict) and all(actual.get(key) == value for key,value in approved.items()),
+                "declared hybrid source/member fallback policy mismatch")
     streams = policy.get("streams", {})
     require(set(streams) == set(STREAM_ROLES), "complete sampling stream policy required")
     seeds = {}
     for name, role in STREAM_ROLES.items():
-        expected_seed = derive_seed(20261111, role, case=0, rank=0, repetition=manifest["repetition"])
+        expected_seed = derive_seed(20261111, role, case=0, rank=rank, repetition=manifest["repetition"])
         stream = streams[name]
         require(stream.get("role") == role and stream.get("seed") == expected_seed
                 and str(stream.get("dtype")).removeprefix("torch.") == STREAM_DTYPES[name].removeprefix("torch.")
@@ -206,7 +217,10 @@ def validate_execution_header(manifest, *, context, query, control):
     # Its original RNG/microbatch metadata are normalized on a private copy AFTER
     # the actual new versioned execution policy has been independently checked.
     adjusted = copy.deepcopy(manifest)
+    adjusted.setdefault("upstream_revision",UPSTREAM_REVISION)
+    adjusted.setdefault("upstream_files",manifest["baseline_execution_source"]["upstream_files"])
     adjusted.update(regressor_settings=actual_settings, microbatch=10000, repetition=0,
+                    rank=0,world_size=1,scientific_run=True,
                     seed=derive_seed(20261111, "posterior", case=0))
     verify_run_binding(adjusted, context, query, 20261111, 0)
     require(manifest.get("model", {}).get("dtype") == "torch.float32"
@@ -289,10 +303,103 @@ def validate_component_qualification(qualification):
             "selected_head_is_not_compared_as_the_full_mixture": True}
 
 
+def hybrid_qualification_review(path, manifest, qualification):
+    from posteriorforge import execution_hybrid as hybrid
+    require(manifest.get("variant") == "execution_hybrid_v1", "hybrid proof cannot qualify an all-cache engine")
+    require(qualification.get("status") == "hybrid_screen_pass" and qualification.get("qualified") is True
+            and qualification.get("full21_hybrid_qualified") is True
+            and qualification.get("full21_component_qualified") is True
+            and qualification.get("full21_sampler_qualified") is True
+            and qualification.get("full21_qualified") is False
+            and qualification.get("cache_only_full21_qualified") is False,
+            "explicit complete hybrid proof required; failed all-cache qualification must stay false")
+    script=Path(__file__).with_name("assemble_hybrid_qualification.py")
+    require(qualification.get("assembler_source_sha256")==sha256_file(script),
+            "hybrid proof assembler source changed")
+    spec=importlib.util.spec_from_file_location("execution_review_hybrid_assembler",script)
+    assembler=importlib.util.module_from_spec(spec);spec.loader.exec_module(assembler)
+    sources=assembler.current_sources()
+    for key,value in sources.items():
+        require(qualification.get(key)==value,"assembled hybrid source mismatch: "+key)
+    approved=hybrid.execution_metadata({10:[5],13:[6]})
+    actual=manifest.get("hybrid_execution",{})
+    require(all(actual.get(key)==value for key,value in approved.items()),
+            "execution hybrid source/policy differs from qualified policy")
+    require(qualification.get("fallback_map")==approved["fallback_map"]
+            and qualification.get("fallback_policy_sha256")==approved["fallback_policy_sha256"],
+            "assembled fallback map/policy identity mismatch")
+    require(qualification.get("thresholds")==QUALIFICATION_THRESHOLDS
+            and qualification.get("row_counts")==[1,16,128,1024]
+            and qualification.get("icdf_contract_version")==2
+            and qualification.get("sources_unchanged") is True
+            and qualification.get("input_statuses_preserved") is True,
+            "hybrid numerical/source/input-status contract changed")
+    expected={"control_variant":"cdf_arithmetic_v1","prefix_manifest_sha256":CONTROL_MANIFEST_SHA256,
+              "prefix_samples_sha256":CONTROL_SAMPLES_SHA256,
+              "fixed_prefix_row_indices":np.linspace(0,49999,1024,dtype=int).tolist()}
+    for key in ("checkpoint_sha256","scientific_fingerprint","parameter_order","context_theta","context_obs","query"):
+        expected[key]=manifest[key]
+    for key,value in expected.items():
+        require(qualification.get(key)==value,"hybrid scientific/query/prefix binding mismatch: "+key)
+    validate_engine_metadata(manifest.get("execution_engine"))
+    require(qualification.get("stage_coverage")==list(range(21))
+            and qualification.get("component_stage_coverage")==list(range(21)),
+            "complete hybrid stage coverage required")
+    common={key:qualification[key] for key in assembler.COMMON}
+    inputs={}
+    root=Path(path).resolve().parent
+    for identity in qualification.get("source_inputs",[]):
+        archive=bindings.within(root,identity["archived_manifest"])
+        require(sha256_file(archive)==identity["sha256"],"archived producer proof checksum mismatch")
+        value=json.loads(archive.read_text())
+        require(value.get("status")==identity["producer_status"]
+                and value.get("qualified")==identity["producer_qualified"]
+                and value.get("full21_qualified")==identity["producer_full21_qualified"],
+                "failed/partial producer proof was reclassified")
+        assembler.header_check(value,identity["kind"],common,sources)
+        require(identity["sha256"] not in inputs,"duplicate archived source proof")
+        inputs[identity["sha256"]]=(identity,value)
+    require(inputs,"authenticated original stage proofs required")
+    rows=qualification.get("stage_results",[])
+    require([row.get("stage_index") for row in rows]==list(range(21)),"assembled hybrid rows incomplete")
+    for stage,row in enumerate(rows):
+        is_hybrid=str(stage) in approved["fallback_map"]
+        assembler.stage_check(row,stage,sources,hybrid=is_hybrid)
+        selected=row.get("selected_source",{})
+        require(selected.get("sha256") in inputs,"selected stage source is not archived")
+        identity,value=inputs[selected["sha256"]]
+        require(identity["kind"]==("hybrid" if is_hybrid else "cache")
+                and selected.get("producer_status")==identity["producer_status"]
+                and row.get("assembled_route")==("hybrid" if is_hybrid else "cached"),
+                "assembled stage/source route mismatch")
+        original=value if is_hybrid else next((r for r in value.get("stage_results",[]) if r.get("stage_index")==stage),None)
+        copied={key:value for key,value in row.items() if key not in ("assembled_route","selected_source")}
+        require(original is not None and copied==original,"assembled numerical stage record differs from original producer")
+        expected_routes={str(i):("uncached" if i in approved["fallback_map"].get(str(stage),[]) else "cached") for i in range(8)}
+        require(qualification.get("stage_routes",{}).get(str(stage),{}).get("member_routes")==expected_routes,
+                "assembled per-member route map changed")
+        if is_hybrid:
+            require(original.get("fallback_members")==approved["fallback_map"][str(stage)]
+                    and original.get("member_routes")==expected_routes,"fresh fallback member policy changed")
+            for member in original["component_qualification"]["members"]:
+                require(member.get("execution_route")==expected_routes[str(member["ensemble_index"])]
+                        and member.get("route_counter_delta")==1 and member.get("other_route_counter_delta")==0,
+                        "fallback did not execute the declared real route")
+    return {"manifest_file":str(Path(path).resolve()),"manifest_sha256":sha256_file(path),
+            "stage_coverage":list(range(21)),"full21_qualified":False,"full21_hybrid_qualified":True,
+            "full21_component_qualified":True,"full21_sampler_qualified":True,
+            "scope":"full21_declared_hybrid_fixed_conditional_diagnostic","icdf_contract_version":2,
+            "qualification":qualification,"not_a_proof_of_posterior_equivalence":True,
+            "failed_cache_producer_statuses_preserved":True}
+
+
 def qualification_review(path, manifest, *, context, query):
     require(sha256_file(path) == manifest.get("qualification_manifest_sha256"),
             "execution qualification manifest SHA256 mismatch")
     q = json.loads(Path(path).read_text())
+    if q.get("schema")=="posteriorforge.execution_hybrid_qualification.v1":
+        return hybrid_qualification_review(path,manifest,q)
+    require(manifest.get("variant")!="execution_hybrid_v1","hybrid engine requires its separately assembled hybrid proof")
     require(q.get("schema") == QUALIFICATION_SCHEMA, "unknown pointwise qualification schema")
     require(q.get("qualified") is True and q.get("status") == "screen_pass",
             "completed passing fixed-conditional qualification required")
@@ -360,6 +467,143 @@ def qualification_review(path, manifest, *, context, query):
             "not_a_proof_of_posterior_equivalence": True}
 
 
+def authenticate_worker_aggregate(path, manifest, *, context, query, control, custody, qualification_path):
+    """Authenticate all complete leaf cohorts and exact rank-order concatenation."""
+    script=Path(__file__).with_name("run_execution_workers.py")
+    spec=importlib.util.spec_from_file_location("execution_review_worker_orchestrator",script)
+    orchestrator=importlib.util.module_from_spec(spec);spec.loader.exec_module(orchestrator)
+    from posteriorforge import performance_runner
+    root=Path(path).resolve().parent
+    world=manifest.get("world_size")
+    require(type(world) is int and world in (1,2,4),"aggregate world size must be1/2/4")
+    required={"schema":"posteriorforge.inference.execution.aggregate.v1","variant":"execution_workers_v1",
+              "status":"complete","requested_count":50000,"returned_count":50000,
+              "end_to_end":True,"rank":None,"run_purpose":"performance_e2e_aggregate",
+              "aggregate_published":True,"worker_counts":orchestrator.partition_counts(world),
+              "worker_return_codes":[0]*world}
+    for key,value in required.items():
+        require(manifest.get(key) is value if isinstance(value,bool) else manifest.get(key)==value,
+                "aggregate contract mismatch: "+key)
+    require(manifest.get("orchestrator_source_sha256")==sha256_file(script)
+            and manifest.get("runner_source_sha256")==sha256_file(performance_runner.__file__),
+            "aggregate/original worker source changed")
+    qsha=sha256_file(qualification_path)
+    require(manifest.get("qualification_manifest_sha256")==qsha,"aggregate qualification SHA mismatch")
+    underlying=manifest.get("worker_execution_variant")
+    modes={"execution_cache_v1":"resident_full","execution_mixture_v1":"component_mass","execution_hybrid_v1":"component_hybrid"}
+    require(underlying in modes and manifest.get("mode")==modes[underlying],"aggregate execution family mismatch")
+    expected={key:control[key] for key in ("scientific_fingerprint","parameter_order","context_seed","case","context_size",
+                                          "context_theta","context_obs","query","checkpoint_sha256","baseline_execution_source")}
+    expected.update(mode=modes[underlying],variant=underlying,reference_binding=custody["runner_reference_binding"])
+    for key,value in expected.items():
+        if key!="variant":require(manifest.get(key)==value,"aggregate science/source binding mismatch: "+key)
+    contracts=[];paths=[]
+    devices=manifest.get("visible_device_tokens",[])
+    require(len(devices)==world and len(set(devices))==world,"distinct aggregate GPU device assignments required")
+    identities=manifest.get("worker_contracts",[])
+    require(len(identities)==world,"all worker contracts required")
+    for rank,identity in enumerate(identities):
+        contract_path=Path(identity["path"])
+        require(sha256_file(contract_path)==identity["sha256"],"worker contract SHA mismatch")
+        contract=json.loads(contract_path.read_text())
+        require(contract.get("schema")=="posteriorforge.execution_worker_contract.v1"
+                and contract.get("rank")==rank and contract.get("world_size")==world
+                and contract.get("worker_count")==50000//world
+                and contract.get("expected_output")==str((root/f"worker-{rank}").resolve())
+                and contract.get("aggregate_output")==str(root)
+                and contract.get("orchestrator_source_sha256")==sha256_file(script)
+                and contract.get("parent_job_id")==str(manifest["budget"]["job_id"])
+                and contract.get("budget_reservation_id")==manifest["budget"]["reservation_id"]
+                and contract.get("visible_device_token")==devices[rank],
+                "worker contract rank/output/source binding changed")
+        contracts.append(contract);paths.append(contract_path)
+    combined,records=orchestrator.validate_worker_payloads(contracts,paths,expected_bindings=expected,
+        driver_schema=RUN_SCHEMA,qualification_sha256=qsha)
+    require(manifest.get("workers")==records,"aggregate worker hash/count records differ from actual children")
+    workers=[];all_seeds=[];rejections=[]
+    for rank,contract in enumerate(contracts):
+        worker_path=Path(contract["expected_output"])/"manifest.json"
+        worker=json.loads(worker_path.read_text())
+        validate_execution_header(worker,context=context,query=query,control=control,
+            worker_partition={"rank":rank,"world_size":world,"requested_count":50000//world})
+        bindings.validate_run_reference_binding(worker,custody)
+        require(worker.get("qualification_manifest_sha256")==qsha
+                and worker.get("variant")==underlying,"worker qualification/execution family mismatch")
+        all_seeds.extend(worker["seed_streams"].values());rejections.append(worker["rejection"]);workers.append(worker)
+    require(len(set(all_seeds))==len(all_seeds),"worker/rank sampling streams collide")
+    require(manifest.get("rank_seed_streams")==[worker["seed_streams"] for worker in workers],
+            "aggregate rank-seed metadata differs from actual children")
+    values=bindings.load_samples(Path(path),manifest)
+    require(np.array_equal(values,combined),"aggregate cohort is not exact rank-order worker concatenation")
+    validate_engine_metadata(manifest.get("execution_engine"))
+    if underlying=="execution_hybrid_v1":
+        require(manifest.get("hybrid_execution")==workers[0].get("hybrid_execution"),
+                "aggregate hybrid policy differs from authenticated workers")
+    summed={key:sum(item[key] for item in rejections) for key in
+            ("support_calls","proposed","accepted_before_final_trim","returned")}
+    detail={"orchestrator_source_sha256":sha256_file(script),"worker_count":world,
+            "worker_records":records,"rank_seed_streams":[worker["seed_streams"] for worker in workers],
+            "rank_order_concatenation_exact":True,"partial_worker_fallback_performed":False,
+            "worker_timings":[worker["timings"] for worker in workers],
+            "worker_memory":[worker["memory"] for worker in workers],
+            "sampling_policies_by_rank":[worker["sampling_policy"] for worker in workers],
+            "summed_rejection":summed,
+            "rejection_scope":"sum of independent authenticated worker counters; not a single serial rejection process"}
+    return values,workers[0],detail
+
+
+def control_repeat_diagnostics(folder, candidate, primary, reference, *, custody, context, query):
+    """Independent corrected controls contextualize flags without removing them."""
+    from posteriorforge import performance_control
+    from posteriorforge.inference_cdf import guard_baseline_source
+    folder=Path(folder)
+    paths=[folder/f"rep-{rep}/seed-20261111-case-0/manifest.json" for rep in range(3)]
+    if not all(path.is_file() for path in paths):
+        return {"status":"not_available","cohorts_fabricated":False,"expected_manifest_files":[str(p) for p in paths]}
+    records=[];seeds=[]
+    for rep,path in enumerate(paths):
+        manifest=json.loads(path.read_text())
+        expected={"schema":"posteriorforge.inference.execution.v1","variant":"performance_control_v1","status":"complete",
+                  "run_purpose":"performance_control","context_seed":20261111,"case":0,"context_size":4096,
+                  "requested_count":50000,"scientific_run":True,"repetition":rep,
+                  "performance_first_authorized":True,"absolute_accuracy_gate_required_for_performance":False,
+                  "execution_optimized":False,"tail_family_changed":False,"metadata_writer_restored":True}
+        for key,value in expected.items():
+            require(manifest.get(key) is value if isinstance(value,bool) else manifest.get(key)==value,
+                    "independent corrected-control contract mismatch: "+key)
+        require(manifest.get("baseline_execution_source")==guard_baseline_source()
+                and manifest.get("execution_engine",{}).get("module_sha256")==sha256_file(performance_control.__file__)
+                and manifest["execution_engine"].get("engine_id")=="corrected_unoptimized"
+                and manifest["execution_engine"].get("cache_policy")=="original_fit_preprocessors"
+                and manifest["execution_engine"].get("rng_role")=="posterior",
+                "independent corrected-control source/path changed")
+        expected_seed=derive_seed(20261111,"posterior",case=0,repetition=rep)
+        require(manifest.get("seed")==expected_seed,"independent control posterior RNG repetition mismatch")
+        seeds.append(expected_seed)
+        adjusted=copy.deepcopy(manifest);adjusted.update(repetition=0,seed=derive_seed(20261111,"posterior",case=0))
+        verify_run_binding(adjusted,context,query,20261111,0)
+        descriptor=bindings.validate_adapter_descriptor(manifest["compatibility_adapter"])
+        require(descriptor["patched_call_count"]==manifest.get("expected_patched_call_count")
+                ==21*8*manifest["rejection"]["support_calls"],"corrected-control call coverage changed")
+        bindings.validate_run_reference_binding(manifest,custody)
+        samples=bindings.load_samples(path,manifest)
+        own=comparative_assessment(samples,primary,reference)
+        candidate_review=comparative_assessment(candidate,samples,reference)
+        require(own["sample_integrity"]["passed"],"independent control samples are invalid")
+        records.append({"repetition":rep,"seed":expected_seed,"manifest_file":str(path),
+                        "manifest_sha256":sha256_file(path),"samples_sha256":manifest["samples_sha256"],
+                        "identical_to_primary_payload":manifest["samples_sha256"]==CONTROL_SAMPLES_SHA256,
+                        "control_vs_primary":own["relative_distribution_review"],
+                        "control_absolute_physical_assessment":own["absolute_physical_assessment"],
+                        "candidate_vs_this_control":candidate_review["relative_distribution_review"],
+                        "timings":manifest["timings"],"wrapper_total_seconds":manifest["wrapper_total_seconds"]})
+    require(len(set(seeds))==3,"control posterior RNG repetitions are not distinct")
+    return {"status":"available","distinct_posterior_rng_repetitions":3,"cohorts":records,
+            "primary_old_control_is_not_a_fourth_independent_repetition":True,
+            "flags_suppressed_or_thresholds_changed":False,
+            "interpretation":"Control-to-control flags are diagnostic evidence of finite-cohort variation in the unchanged implemented sampler. They do not waive candidate flags or establish population equivalence."}
+
+
 def write_csv(path, rows):
     with Path(path).open("w", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
@@ -403,10 +647,17 @@ def run(args):
             "--variant-manifest, --qualification-manifest and --output required")
     manifest_path = Path(args.variant_manifest).resolve()
     manifest = json.loads(manifest_path.read_text())
-    validate_execution_header(manifest, context=context, query=query, control=control_manifest)
-    bindings.validate_run_reference_binding(manifest, custody)
-    qualification = qualification_review(args.qualification_manifest, manifest, context=context, query=query)
-    candidate = bindings.load_samples(manifest_path, manifest)
+    aggregate_detail=None
+    if manifest.get("schema")=="posteriorforge.inference.execution.aggregate.v1":
+        candidate,effective_manifest,aggregate_detail=authenticate_worker_aggregate(
+            manifest_path,manifest,context=context,query=query,control=control_manifest,
+            custody=custody,qualification_path=args.qualification_manifest)
+        qualification=qualification_review(args.qualification_manifest,effective_manifest,context=context,query=query)
+    else:
+        validate_execution_header(manifest,context=context,query=query,control=control_manifest)
+        bindings.validate_run_reference_binding(manifest,custody)
+        qualification=qualification_review(args.qualification_manifest,manifest,context=context,query=query)
+        candidate=bindings.load_samples(manifest_path,manifest)
     assessment = comparative_assessment(candidate, control, reference)
     output = Path(args.output).resolve()
     for protected in ("banks-v1", "upstream-v1", "references-v1", "reference-grids-v1", "cdf-arithmetic-v1"):
@@ -426,17 +677,21 @@ def run(args):
                     "timings": control_manifest["timings"],
                     "sampling_rng_policy": "original shared Torch RNG; seed role posterior, repetition0"},
         "candidate": {"manifest_file": str(manifest_path), "manifest_sha256": sha256_file(manifest_path),
-                      "samples_sha256": manifest["samples_sha256"], "samples_descriptor": manifest["samples"],
+                      "samples_sha256": manifest["samples_sha256"], "samples_descriptor": manifest["samples"], "hybrid_execution": manifest.get("hybrid_execution"),
                       "execution_policy": manifest.get("execution_policy"), "execution_engine": manifest["execution_engine"],
                       "sampling_rng_policy": manifest.get("sampling_rng_policy"), "sampling_policy": manifest.get("sampling_policy"),
-                      "timings": manifest["timings"], "memory": manifest["memory"]},
+                      "timings": manifest["timings"], "memory": manifest.get("memory"), "aggregate_authentication": aggregate_detail},
         "reference": custody,
         "rejection_review": {
             "control": rejection_review(control_manifest.get("rejection"), returned=50000),
-            "candidate": rejection_review(manifest.get("rejection"), returned=50000)},
+            "candidate": rejection_review(aggregate_detail["summed_rejection"] if aggregate_detail else manifest.get("rejection"), returned=50000)},
         "source": {"evaluation_script_sha256": sha256_file(__file__),
                    "binding_helper_sha256": sha256_file(_BINDING_PATH),
-                   "original_validation_sha256": sha256_file(Path(__file__).resolve().parents[1]/"src/posteriorforge/validation.py")},
+                   "original_validation_sha256": sha256_file(Path(__file__).resolve().parents[1]/"src/posteriorforge/validation.py"),
+                   "legacy_binding_copy_supplements": {
+                       "missing_upstream_revision":"constant authenticated by the frozen original inference source hash",
+                       "missing_upstream_files":"independently authenticated baseline_execution_source.upstream_files",
+                       "actual_manifest_changed":False}},
         "interpretation": [
             "Relative CDF differences are exact two-sample ECDF distances, not reference-grid bounds; no reference numerical error is added to them.",
             "Absolute physical CDF bounds include the unchanged saved-reference uncertainty and whole-line monotonicity/tail bounds.",
@@ -446,6 +701,13 @@ def run(args):
             "Performance-first authorization explicitly permits engineering review while the original physical accuracy criteria remain failed and visible.",
         ],
     }
+    result["control_repetition_context"]=control_repeat_diagnostics(
+        results/"performance-first-v1/controls",candidate,control,reference,
+        custody=custody,context=context,query=query)
+    tail_path=results/"performance-first-v1/control-tail-diagnostic/science-control-repeat-tails.json"
+    result["existing_control_tail_diagnostic"] = ({"file":str(tail_path),"sha256":sha256_file(tail_path),
+        "role":"existing diagnostic context only; no row removed, criterion waived or artifact cause assumed"}
+        if tail_path.is_file() else None)
     relative = result["relative_distribution_review"]
     if relative is not None:
         rows = []
@@ -469,6 +731,7 @@ def run(args):
     print(json.dumps({"output":str(output), "numeric_review_status":result["numeric_review_status"],
                       "integrity_passed":result["sample_integrity"]["passed"],
                       "full21_fixed_conditional_qualified":qualification["full21_qualified"],
+                      "full21_hybrid_fixed_conditional_qualified":qualification.get("full21_hybrid_qualified",False),
                       "absolute_physical_passed":result["absolute_physical_assessment"]["passed"],
                       "absolute_accuracy_gate_required_for_performance":False}, indent=2))
     return result

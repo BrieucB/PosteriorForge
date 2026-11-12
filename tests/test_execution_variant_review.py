@@ -411,3 +411,169 @@ def test_global_stage0_memo_is_not_qualified_by_wave_local_proof(sampling_policy
     sampling_policy["stage0_dedup"]["density_scope"] = "global case0 cache"
     with pytest.raises(ValueError, match="cross-request"):
         review.validate_sampling_policy(sampling_policy)
+
+
+@pytest.fixture
+def assembled_hybrid_case(tmp_path,monkeypatch,header,sampling_policy):
+    # Reuse the assembler's explicitly synthetic protocol fixtures; no model or
+    # posterior cohort is generated, and no fixture is exported as run evidence.
+    fixture_path=PATH.parents[1]/"tests/test_hybrid_qualification_assembly.py"
+    fixture_spec=importlib.util.spec_from_file_location("hybrid_protocol_fixture_for_evaluator",fixture_path)
+    fixture_module=importlib.util.module_from_spec(fixture_spec);fixture_spec.loader.exec_module(fixture_module)
+    actual_sources=fixture_module.assembly.current_sources()
+    monkeypatch.setattr(fixture_module,"SOURCES",actual_sources)
+    cached,hybrids,fallback=fixture_module.fixture(tmp_path/"producer-fixtures",monkeypatch)
+    manifest,context,query,control=header
+    for proof_path in [cached,*hybrids]:
+        value=json.loads(proof_path.read_text())
+        for key in ("checkpoint_sha256","scientific_fingerprint","parameter_order","context_theta","context_obs","query"):
+            value[key]=manifest[key]
+        value.update(prefix_manifest_sha256=review.CONTROL_MANIFEST_SHA256,
+                     prefix_samples_sha256=review.CONTROL_SAMPLES_SHA256,
+                     fixed_prefix_row_indices=np.linspace(0,49999,1024,dtype=int).tolist())
+        proof_path.write_text(json.dumps(value))
+    output=tmp_path/"assembled"
+    fixture_module.assembly.assemble(cache_proofs=[cached],hybrid_proofs=hybrids,fallback_map=fallback,output=output)
+    from posteriorforge import execution_hybrid
+    manifest.update(variant="execution_hybrid_v1",mode="component_hybrid",sampling_policy=sampling_policy,
+                    hybrid_execution=execution_hybrid.execution_metadata(fallback))
+    path=output/"manifest.json";manifest["qualification_manifest_sha256"]=sha256_file(path)
+    return manifest,context,query,control,path
+
+
+def test_hybrid_metadata_end_to_end_preflight_preserves_failed_cache_statuses(assembled_hybrid_case):
+    manifest,context,query,control,path=assembled_hybrid_case
+    review.validate_execution_header(manifest,context=context,query=query,control=control)
+    result=review.qualification_review(path,manifest,context=context,query=query)
+    assert result["full21_hybrid_qualified"]
+    assert result["full21_qualified"] is False
+    assert result["failed_cache_producer_statuses_preserved"]
+    assert result["qualification"]["source_inputs"][0]["producer_status"]=="conditional_mismatch"
+    assert result["qualification"]["source_inputs"][0]["producer_qualified"] is False
+
+
+@pytest.mark.parametrize("issue",["cache_upgrade","fallback_policy","numeric","archive_status","hybrid_source"])
+def test_hybrid_assembly_cannot_hide_or_reclassify_source_failures(assembled_hybrid_case,issue):
+    manifest,context,query,control,path=assembled_hybrid_case
+    value=json.loads(path.read_text())
+    if issue=="cache_upgrade":value["full21_qualified"]=True
+    if issue=="fallback_policy":value["fallback_policy_sha256"]="0"*64
+    if issue=="numeric":
+        value["stage_results"][0]["comparisons"][0]["cache_vs_same_chunk_control"]["final"]["max_cdf_absolute_error"]=.01
+    if issue=="hybrid_source":value["hybrid_module_sha256"]="0"*64
+    if issue=="archive_status":
+        archive=path.parent/value["source_inputs"][0]["archived_manifest"]
+        original=json.loads(archive.read_text());original["status"]="screen_pass";archive.write_text(json.dumps(original))
+    path.write_text(json.dumps(value));manifest["qualification_manifest_sha256"]=sha256_file(path)
+    with pytest.raises(ValueError):
+        review.qualification_review(path,manifest,context=context,query=query)
+
+
+@pytest.fixture
+def aggregate_case(tmp_path,monkeypatch,header,sampling_policy):
+    # Synthetic 50k-shaped custody fixtures only. No model, speed benchmark,
+    # physical-gate verdict or posterior evidence is generated here.
+    worker_test=PATH.parents[1]/"tests/test_execution_workers.py"
+    fixture_spec=importlib.util.spec_from_file_location("worker_protocol_fixture_for_review",worker_test)
+    wf=importlib.util.module_from_spec(fixture_spec);fixture_spec.loader.exec_module(wf)
+    root=tmp_path/"aggregate";root.mkdir()
+    contracts,paths=wf._payloads(root,mode="component_hybrid")
+    manifest,context,query,control=header
+    from posteriorforge import execution_cache,execution_hybrid,performance_runner
+    custody={"runner_reference_binding":{"parent":{"manifest_sha256":"synthetic-parent"},
+                                          "refined_grid":{"manifest_sha256":"synthetic-grid"}}}
+    proof=tmp_path/"qualification-only-fixture.json";proof.write_text("protocol fixture, not a real proof")
+    qsha=sha256_file(proof)
+    for rank,(contract,path) in enumerate(zip(contracts,paths)):
+        contract.update(runner_source_sha256=sha256_file(performance_runner.__file__),
+                        orchestrator_source_sha256=sha256_file(PATH.with_name("run_execution_workers.py")))
+        path.write_text(json.dumps(contract))
+        child_path=Path(contract["expected_output"])/"manifest.json"
+        payload_manifest=json.loads(child_path.read_text())
+        descriptor=payload_manifest["compatibility_adapter"]
+        child=copy.deepcopy(manifest)
+        child.update(schema=review.RUN_SCHEMA,variant="execution_hybrid_v1",mode="component_hybrid",
+            rank=rank,world_size=2,requested_count=25000,scientific_run=False,
+            end_to_end=False,run_purpose="performance_worker",benchmark_total_count=50000,
+            worker_contract_sha256=sha256_file(path),qualification_full21=True,
+            qualification_manifest_sha256=qsha,reference_binding=custody["runner_reference_binding"],
+            execution_engine={**execution_cache.execution_metadata(),"query_batch_size":1024,"posterior_count":25000,
+                              "sampling_rng_policy":"independent_cpu_sampling_streams_model_rng_isolated"},
+            hybrid_execution=execution_hybrid.execution_metadata({10:[5],13:[6]}),
+            compatibility_adapter=descriptor,expected_patched_call_count=1,
+            timings={"posterior_request_seconds":1.0},memory={"peak_allocated_bytes":1,"peak_reserved_bytes":1},
+            rejection={"support_calls":1,"proposed":25000,"accepted_before_final_trim":25000,"returned":25000})
+        child["sampling_policy"]=copy.deepcopy(sampling_policy)
+        for name,seed in contract["seed_streams"].items():child["sampling_policy"]["streams"][name]["seed"]=seed
+        child["seed_streams"]=contract["seed_streams"];child["seed"]=contract["seed_streams"]["component_uniform"]
+        child["samples"]=payload_manifest["samples"];child["samples_sha256"]=payload_manifest["samples_sha256"]
+        child_path.write_text(json.dumps(child))
+    expected={key:control[key] for key in ("regressor_settings",)}
+    # The real control metadata has these bindings; fixture control is deliberately
+    # minimal, so copy the same unit-fixture scientific/header identities.
+    control.update({key:manifest[key] for key in ("scientific_fingerprint","parameter_order","context_seed","case",
+                   "context_size","context_theta","context_obs","query","checkpoint_sha256","baseline_execution_source")})
+    bindings={key:control[key] for key in ("scientific_fingerprint","parameter_order","context_seed","case","context_size",
+                                         "context_theta","context_obs","query","checkpoint_sha256","baseline_execution_source")}
+    bindings.update(mode="component_hybrid",variant="execution_hybrid_v1",reference_binding=custody["runner_reference_binding"])
+    combined,records=wf.workers.validate_worker_payloads(contracts,paths,expected_bindings=bindings,
+            driver_schema=review.RUN_SCHEMA,qualification_sha256=qsha)
+    with (root/"samples.npz").open("wb") as stream:np.savez(stream,samples=combined)
+    m={**bindings,"schema":"posteriorforge.inference.execution.aggregate.v1","variant":"execution_workers_v1",
+       "worker_execution_variant":"execution_hybrid_v1","status":"complete","requested_count":50000,"returned_count":50000,
+       "world_size":2,"rank":None,"end_to_end":True,"run_purpose":"performance_e2e_aggregate",
+       "aggregate_published":True,"worker_counts":[25000,25000],"worker_return_codes":[0,0],
+       "budget":{"job_id":"123","reservation_id":"reservation"},
+       "orchestrator_source_sha256":sha256_file(PATH.with_name("run_execution_workers.py")),
+       "runner_source_sha256":sha256_file(performance_runner.__file__),"qualification_manifest_sha256":qsha,
+       "worker_contracts":[{"path":str(path),"sha256":sha256_file(path)} for path in paths],
+       "rank_seed_streams":[contract["seed_streams"] for contract in contracts],
+       "visible_device_tokens":["0","1"],"workers":records,
+       "samples":array_descriptor(combined),"samples_sha256":sha256_file(root/"samples.npz"),
+       "execution_engine":{**execution_cache.execution_metadata(),"query_batch_size":1024,"posterior_count":50000,
+                           "sampling_rng_policy":"independent_cpu_sampling_streams_model_rng_isolated"},
+       "hybrid_execution":execution_hybrid.execution_metadata({10:[5],13:[6]})}
+    path=root/"manifest.json";path.write_text(json.dumps(m))
+    return path,m,context,query,control,custody,proof,combined
+
+
+def test_aggregate_authenticates_exact_complete_rank_order_and_private_worker_streams(aggregate_case):
+    path,m,context,query,control,custody,proof,expected=aggregate_case
+    values,effective,detail=review.authenticate_worker_aggregate(path,m,context=context,query=query,control=control,
+                                                               custody=custody,qualification_path=proof)
+    np.testing.assert_array_equal(values,expected)
+    assert detail["rank_order_concatenation_exact"]
+    assert detail["summed_rejection"]["returned"]==50000
+    assert effective["variant"]=="execution_hybrid_v1"
+    assert effective["end_to_end"] is False
+
+
+@pytest.mark.parametrize("issue",["rankorder","seed_record","partial_worker","device","contract"])
+def test_aggregate_cannot_hide_incomplete_reordered_or_misbound_worker_data(aggregate_case,issue):
+    path,m,context,query,control,custody,proof,expected=aggregate_case
+    if issue=="rankorder":
+        swapped=np.concatenate((expected[25000:],expected[:25000]))
+        with (path.parent/"samples.npz").open("wb") as stream:np.savez(stream,samples=swapped)
+        m["samples"]=array_descriptor(swapped);m["samples_sha256"]=sha256_file(path.parent/"samples.npz")
+    if issue=="seed_record":m["rank_seed_streams"][1]["component_uniform"]+=1
+    if issue=="partial_worker":
+        child=path.parent/"worker-1/manifest.json";value=json.loads(child.read_text());value["completed_stage_indices"]=list(range(20));child.write_text(json.dumps(value))
+    if issue=="device":m["visible_device_tokens"]=["0","0"]
+    if issue=="contract":m["worker_contracts"][0]["sha256"]="0"*64
+    with pytest.raises(ValueError):
+        review.authenticate_worker_aggregate(path,m,context=context,query=query,control=control,
+                                             custody=custody,qualification_path=proof)
+
+
+def test_actual_driver_can_bind_guarded_upstream_identity_without_redundant_top_fields(header):
+    manifest,context,query,control=header
+    del manifest["upstream_revision"];del manifest["upstream_files"]
+    review.validate_execution_header(manifest,context=context,query=query,control=control)
+    assert "upstream_revision" not in manifest and "upstream_files" not in manifest
+
+
+def test_supplied_wrong_upstream_identity_is_never_overridden_by_supplement(header):
+    manifest,context,query,control=header
+    manifest["upstream_revision"]="incorrect"
+    with pytest.raises(ValueError,match="upstream_revision"):
+        review.validate_execution_header(manifest,context=context,query=query,control=control)
