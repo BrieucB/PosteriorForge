@@ -23,7 +23,7 @@ from posteriorforge.banks import derive_seed
 TOTAL_COUNT=50000
 CONTRACT_SCHEMA="posteriorforge.execution_worker_contract.v1"
 AGGREGATE_SCHEMA="posteriorforge.inference.execution.aggregate.v1"
-WORKER_VARIANTS={"resident_full":"execution_cache_v1","component_mass":"execution_mixture_v1","component_hybrid":"execution_hybrid_v1"}
+WORKER_VARIANTS={"resident_full":"execution_cache_v1","component_mass":"execution_mixture_v1","component_hybrid":"execution_hybrid_v1","component_gqa_hybrid":"execution_gqa_hybrid_v1"}
 STREAM_ROLES={"head_proposal":"execution-head-proposal","head_acceptance":"execution-head-acceptance",
               "component_uniform":"execution-component-uniform"}
 
@@ -82,6 +82,11 @@ def expected_hybrid_metadata():
     return execution_metadata({10:[5],13:[6]})
 
 
+def expected_gqa_hybrid_metadata():
+    from posteriorforge.execution_gqa_hybrid import execution_metadata
+    return execution_metadata()
+
+
 def scientific_bindings(banks,context_seed,case):
     from posteriorforge.banks import load_context,load_heldout
     from posteriorforge.science.analytical_benchmark_v2 import build_problem,array_descriptor
@@ -126,6 +131,12 @@ def validate_worker_payloads(contracts,contract_paths,*,expected_bindings,driver
             hybrid=manifest.get("hybrid_execution",{})
             if any(hybrid.get(key)!=value for key,value in expected_hybrid_metadata().items()):
                 raise ValueError("worker hybrid source/policy identity mismatch")
+        if manifest.get("mode")=="component_gqa_hybrid":
+            gqa=manifest.get("gqa_hybrid_execution",{});checks=manifest.get("gqa_prediction_checks",{});counters=manifest.get("gqa_execution_counters",{})
+            if any(gqa.get(key)!=value for key,value in expected_gqa_hybrid_metadata().items()) or manifest.get("qualification_full21_gqa_hybrid") is not True or manifest.get("qualification_cache_only_full21") is not False:
+                raise ValueError("worker GQA hybrid source/policy identity mismatch")
+            if type(checks.get("verified_calls")) is not int or checks["verified_calls"]<=0 or checks["verified_calls"]!=counters.get("contexts") or not all(checks.get(key) is True for key in ("all_aliases_restored","all_sources_unchanged")) or not all(counters.get(key) is True for key in ("all_contexts_restored","all_sources_unchanged")):
+                raise ValueError("worker actual GQA source/alias coverage mismatch")
         if manifest.get("qualification_manifest_sha256")!=qualification_sha256:
             raise ValueError("worker qualification artifact mismatch")
         adapter=manifest["compatibility_adapter"]
@@ -255,6 +266,7 @@ def run(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,
         result["worker_execution_variant"]=bindings["variant"]
         result["execution_engine"]=worker_engine
         if mode=="component_hybrid":result["hybrid_execution"]=expected_hybrid_metadata()
+        if mode=="component_gqa_hybrid":result["gqa_hybrid_execution"]=expected_gqa_hybrid_metadata()
         contracts=[];contract_paths=[];commands=[];environments=[];logs=[]
         for rank in range(workers):
             worker_output=root/f"worker-{rank}"

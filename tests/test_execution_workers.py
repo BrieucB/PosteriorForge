@@ -86,6 +86,9 @@ def _payloads(tmp_path,mode="component_mass"):
             "runner_source_sha256":"runner","sources_unchanged":True,"qualification_full21":True,
             "execution_engine":actual_driver_execution_engine_header(mode,25000),
             **({"hybrid_execution":workers.expected_hybrid_metadata()} if mode=="component_hybrid" else {}),
+            **({"gqa_hybrid_execution":workers.expected_gqa_hybrid_metadata(),"qualification_full21_gqa_hybrid":True,
+                "qualification_cache_only_full21":False,"gqa_prediction_checks":{"verified_calls":21,"all_aliases_restored":True,"all_sources_unchanged":True},
+                "gqa_execution_counters":{"contexts":21,"all_contexts_restored":True,"all_sources_unchanged":True}} if mode=="component_gqa_hybrid" else {}),
             "compatibility_adapter":descriptor,"sampling_policy":{"streams":{key:{"seed":value}
                 for key,value in contract["seed_streams"].items()}},
             "samples":array_descriptor(samples),"samples_sha256":sha256_file(root/"samples.npz")}
@@ -158,7 +161,7 @@ def test_existing_aggregate_output_is_never_overwritten(tmp_path,monkeypatch):
 
 def test_actual_driver_header_uses_base_cache_identity_for_all_sampling_modes():
     from posteriorforge.execution_cache import execution_metadata
-    for mode in ("resident_full","component_mass","component_hybrid"):
+    for mode in ("resident_full","component_mass","component_hybrid","component_gqa_hybrid"):
         header=actual_driver_execution_engine_header(mode,12500)
         assert header["engine_id"]==execution_metadata()["engine_id"]
         assert header["module_sha256"]==execution_metadata()["module_sha256"]
@@ -185,3 +188,17 @@ def test_hybrid_workers_bind_fixed_fallback_map_and_source(tmp_path):
     with pytest.raises(ValueError,match="hybrid source/policy"):
         workers.validate_worker_payloads(contracts,paths,expected_bindings=bindings,
                   driver_schema="test.worker.v1",qualification_sha256="qualification")
+
+
+def test_gqa_workers_require_new_source_policy_and_actual_restoration_counts(tmp_path):
+    contracts,paths=_payloads(tmp_path,mode="component_gqa_hybrid")
+    bindings={"mode":"component_gqa_hybrid","variant":"execution_gqa_hybrid_v1"}
+    values,_=workers.validate_worker_payloads(contracts,paths,expected_bindings=bindings,driver_schema="test.worker.v1",qualification_sha256="qualification")
+    assert values.shape==(50000,21)
+    target=Path(contracts[1]["expected_output"])/"manifest.json";original=json.loads(target.read_text())
+    for mutation in [lambda m:m["gqa_hybrid_execution"]["fallback_map"].update({"13":[6]}),
+                     lambda m:m["gqa_prediction_checks"].update(verified_calls=20),
+                     lambda m:m["gqa_execution_counters"].update(all_contexts_restored=False)]:
+        broken=json.loads(json.dumps(original));mutation(broken);write_json(target,broken)
+        with pytest.raises(ValueError,match="GQA"):
+            workers.validate_worker_payloads(contracts,paths,expected_bindings=bindings,driver_schema="test.worker.v1",qualification_sha256="qualification")

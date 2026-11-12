@@ -18,6 +18,10 @@ from .banks import derive_seed
 
 SCHEMA="posteriorforge.inference.execution.v1"
 COUNT=50000
+RUNNER_VERSION=2
+GQA_QUALIFIER_SHA256="ab0c289ad051aa3553ca47402da07ac2643c576e660a297be9242c357787848a"
+GQA_RECOVERY_SHA256="83064f54712014b5c4c66569e854872caff03593cfdc337f2472a7b5723aea02"
+_GQA_RECOVERY_MODULE=None
 QUALIFIER_SHA256="6c927a5c278c7fc54b556ac557ecef64f5e6338f5ae13bf466f3b1e6a4640f90"
 HYBRID_FALLBACK_MAP={"10":[5],"13":[6]}
 HYBRID_QUALIFIER_SHA256="15e8e9ce844d3352e49534714f0e0569f42e970a3d9876630f877a346eaaf9b6"
@@ -113,7 +117,87 @@ def validate_hybrid_qualification(value,*,bindings,cache_sha256,mixture_sha256,h
     return True
 
 
-def validate_qualification(value,*,bindings,cache_sha256,mixture_sha256,mode,query_batch_size,hybrid_sha256=None):
+def gqa_recovery_helper():
+    import importlib.util
+    global _GQA_RECOVERY_MODULE
+    path=Path(__file__).resolve().parents[2]/"scripts/recover_gqa_hybrid_qualification.py"
+    if sha256_file(path)!=GQA_RECOVERY_SHA256:raise ValueError("reviewed GQA recovery source changed")
+    if _GQA_RECOVERY_MODULE is None:
+        spec=importlib.util.spec_from_file_location("_reviewed_execution_gqa_recovery",path)
+        module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);_GQA_RECOVERY_MODULE=module
+    return _GQA_RECOVERY_MODULE
+
+
+def validate_gqa_hybrid_qualification(value,*,bindings,cache_sha256,mixture_sha256,hybrid_sha256,query_batch_size,qualification_path):
+    from . import execution_gqa_hybrid as execution
+    from .compat_cdf import adapter_source_sha256
+    metadata=execution.execution_metadata();helper=gqa_recovery_helper()
+    if value.get("schema")==helper.SCHEMA:
+        if qualification_path is None:raise ValueError("source-bound recovered proof file required")
+        if helper.verify_recovery_artifact(qualification_path)!=value:raise ValueError("recovered proof differs from archived predicate replay")
+    elif value.get("schema")!="posteriorforge.execution_gqa_hybrid_qualification.v1":raise ValueError("explicit GQA hybrid proof schema required")
+    required={"status":"gqa_hybrid_screen_pass","qualified":True,"full21_gqa_hybrid_qualified":True,
+        "full21_qualified":False,"cache_only_full21_qualified":False,"full21_component_qualified":True,"full21_sampler_qualified":True,
+        "sources_unchanged":True,"qualifier_source_sha256":GQA_QUALIFIER_SHA256,"module_sha256":execution.execution_source_sha256(),
+        "gqa_module_sha256":execution.PINNED_GQA_SHA256,"hybrid_module_sha256":hybrid_sha256,
+        "cache_module_sha256":cache_sha256,"mixture_module_sha256":mixture_sha256,
+        "thresholds":QUALIFICATION_THRESHOLDS,"row_counts":[1,16,128,1024],"icdf_contract_version":2,
+        "fallback_map":{"10":[5]},"fallback_policy_sha256":metadata["fallback_policy_sha256"],"execution_engine":metadata,
+        "posterior_vectors_generated":0,"scientific_gate_evaluated":False}
+    for key,expected in required.items():
+        if type(value.get(key)) is not type(expected) or value.get(key)!=expected:raise ValueError("GQA qualification mismatch: "+key)
+    if query_batch_size!=1024 or value.get("stage_coverage")!=list(range(21)):raise ValueError("all21 original1024 GQA coverage required")
+    for key,expected in bindings.items():
+        if value.get(key)!=expected:raise ValueError("GQA qualification scientific binding changed: "+key)
+    coverage=value.get("producer_coverage",{})
+    if coverage.get("fresh_original_control")!={"rows":1024,"members":8,"member_rows":1024,"stress_rows":8,"calls_per_stage_main":1} or coverage.get("saved_golden",{}).get("member_rows")!=128:
+        raise ValueError("fresh all8 member1024 and separate saved128 coverage required")
+    adapter=value.get("compatibility_adapter",{})
+    if adapter.get("adapter_sha256")!=adapter_source_sha256() or adapter.get("original_alias_restored") is not True or adapter.get("sdk_aliases_unchanged") is not True or adapter.get("executed_corrected_cdf_code_sha256")!=adapter.get("corrected_cdf_code_sha256") or adapter.get("corrected_cdf_code_sha256")==adapter.get("original_cdf_code_sha256"):
+        raise ValueError("qualified actual corrected CDF source/restoration required")
+    rows=value.get("stage_results",[])
+    if [row.get("stage_index") for row in rows]!=list(range(21)):raise ValueError("all21 ordered GQA stage records required")
+    for stage,row in enumerate(rows):
+        fallback=[5] if stage==10 else [];routes={str(i):"uncached" if i in fallback else "cached" for i in range(8)}
+        if row.get("passed") is not True or row.get("fallback_members")!=fallback or row.get("member_routes")!=routes:raise ValueError("GQA actual member routes changed")
+        if not all(row.get(k) is True for k in ("normalization_train_only_verified","preprocessor_identity","golden_fit_context_equal","prepared_state_unchanged","rng_unchanged")):raise ValueError("GQA state/preprocessing/RNG proof incomplete")
+        if not row.get("rng") or not all(v.get("before")==v.get("after") for v in row.get("rng",[])):raise ValueError("GQA measured RNG state changed")
+        comparisons=row.get("comparisons",[])
+        if [v.get("query_rows") for v in comparisons]!=[1,16,128,1024]:raise ValueError("GQA candidate chunk coverage incomplete")
+        for comparison in comparisons:
+            helper.prediction(comparison["candidate_vs_fresh_control1024_slice"]);helper.gqa_report(comparison["actual_gqa_execution"],stage,execution.PINNED_GQA_SHA256)
+        for key in ("fresh_control_vs_saved_golden","stress_control_vs_saved_golden","stress_comparison"):helper.prediction(row[key])
+        helper.gqa_report(row["stress_gqa_execution"],stage,execution.PINNED_GQA_SHA256)
+        for key in ("component_qualification","stress_component_qualification"):
+            helper.component(row[key],stage,wrapper_sha=execution.execution_source_sha256(),hybrid_sha=hybrid_sha256,mixture_sha=mixture_sha256)
+        for outlier in row.get("outlier_checks",[]):
+            if outlier.get("passed") is not True or outlier.get("target_excluded_from_query") is not True:raise ValueError("GQA outlier proof incomplete")
+            helper.prediction(outlier["prediction_comparison"]);helper.gqa_report(outlier["actual_gqa_execution"],stage,execution.PINNED_GQA_SHA256)
+            helper.component(outlier["component_qualification"],stage,wrapper_sha=execution.execution_source_sha256(),hybrid_sha=hybrid_sha256,mixture_sha=mixture_sha256,outlier=True)
+        if stage==0:
+            dedup=row.get("stage0_shared_distribution",{});helper.probability(dedup);helper.prediction(dedup["full1024_comparison"])
+            if dedup.get("passed") is not True or dedup.get("shared_icdf_same_logits_exact") is not True:raise ValueError("GQA stage0 full-mixture dedup proof failed")
+    return True
+
+
+def validate_gqa_prediction(prediction,stage,member,*,cdf_descriptor,report):
+    from . import execution_gqa_hybrid as execution
+    helper=gqa_recovery_helper();descriptor=prediction.get("gqa_attention_descriptor",{})
+    fallback=stage==10 and member==5
+    helper.context(descriptor,expanded=not fallback,gqa_sha=execution.PINNED_GQA_SHA256)
+    if member is not None and prediction.get("hybrid_execution_path")!=("original_fit_preprocessors" if fallback else "resident_cache"):
+        raise RuntimeError("actual GQA member route differs from qualified policy")
+    if cdf_descriptor.get("executed_corrected_cdf_code_sha256")!=cdf_descriptor.get("corrected_cdf_code_sha256") or cdf_descriptor.get("corrected_cdf_code_sha256")==cdf_descriptor.get("original_cdf_code_sha256"):
+        raise RuntimeError("actual GQA call did not execute private corrected CDF")
+    fingerprint={k:descriptor[k] for k in ("original_attention_code_sha256","active_attention_code_sha256","executed_original_attention_code_sha256")}
+    if report.get("attention_fingerprints") not in (None,fingerprint):raise RuntimeError("actual GQA attention code fingerprint changed")
+    report["attention_fingerprints"]=fingerprint;report["verified_calls"]=report.get("verified_calls",0)+1
+    report["uncached_fallback_calls"]=report.get("uncached_fallback_calls",0)+int(fallback)
+    report["all_aliases_restored"]=True;report["all_sources_unchanged"]=True
+
+
+def validate_qualification(value,*,bindings,cache_sha256,mixture_sha256,mode,query_batch_size,hybrid_sha256=None,qualification_path=None):
+    if mode=="component_gqa_hybrid":return validate_gqa_hybrid_qualification(value,bindings=bindings,cache_sha256=cache_sha256,mixture_sha256=mixture_sha256,hybrid_sha256=hybrid_sha256,query_batch_size=query_batch_size,qualification_path=qualification_path)
     if mode=="component_hybrid":return validate_hybrid_qualification(value,bindings=bindings,cache_sha256=cache_sha256,mixture_sha256=mixture_sha256,hybrid_sha256=hybrid_sha256,query_batch_size=query_batch_size)
     if (value.get("schema")!="posteriorforge.execution_cache_qualification.v1" or value.get("status")!="screen_pass"
             or value.get("qualified") is not True or value.get("full21_qualified") is not True
@@ -215,7 +299,7 @@ def stage_major_wave(engine,theta_context,obs_context,observation,proposed_count
     return values
 
 
-def component_stage_sampler(component,torch,generators,counters):
+def component_stage_sampler(component,torch,generators,counters,*,prediction_check=None):
     from .execution_mixture import finite_bar_icdf,head_acceptance
     def sample_stage(engine,stage,query_for,count,chunk_size):
         chunks=0;head_candidates=0;head_rejected=0;draws=np.empty(count,dtype=np.float32)
@@ -225,6 +309,7 @@ def component_stage_sampler(component,torch,generators,counters):
         stage_uniforms=torch.rand(count,generator=generators["component_uniform"],dtype=torch.float32,device="cpu")
         if stage==0:
             prediction=engine.predict(query_for([0]),output_type="full",capture_members=False)
+            if prediction_check:prediction_check(prediction,stage,None)
             draws[:]=finite_bar_icdf(prediction["logits"],prediction["criterion"].borders,stage_uniforms).numpy()
             for member in range(8):note_size(member,1)
             counters["stage0_shared_predictions"]+=1
@@ -239,6 +324,7 @@ def component_stage_sampler(component,torch,generators,counters):
                 for first in range(0,len(locations),chunk_size):
                     selected=locations[first:first+chunk_size];rows=pending[selected]
                     prediction=component.predict_component(member,query_for(rows),capture_member=False);note_size(member,len(rows))
+                    if prediction_check:prediction_check(prediction,stage,member)
                     mass=prediction["component_raw_mass"].numpy();accepted=head_acceptance(mass,acceptance[selected])
                     chunks+=1;counters["component_predictions"]+=1
                     if np.any(accepted):
@@ -256,7 +342,7 @@ def component_stage_sampler(component,torch,generators,counters):
 def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,context_seed=20261111,case=0,repetition=0,query_batch_size=1024,mode="resident_full",worker_contract=None):
     output=Path(output)
     if output.exists():raise FileExistsError("fresh execution output required")
-    if mode not in ("resident_full","component_mass","component_hybrid") or query_batch_size!=1024 or type(repetition) is not int or repetition<0:
+    if mode not in ("resident_full","component_mass","component_hybrid","component_gqa_hybrid") or query_batch_size!=1024 or type(repetition) is not int or repetition<0:
         raise ValueError("explicit qualified mode, querychunk1024 and nonnegative repetition required")
     from .reference_grid import _require_budgeted_gpu
     from .inference_cdf import guard_baseline_source,reference_binding
@@ -272,8 +358,8 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
         orchestrator=Path(__file__).resolve().parents[2]/"scripts/run_execution_workers.py"
         if not orchestrator.is_file() or sha256_file(orchestrator)!=contract["orchestrator_source_sha256"]:raise ValueError("orchestrator source mismatch")
     output.mkdir(parents=True,exist_ok=False)
-    status={**runtime_identity(),"schema":SCHEMA,"variant":{"resident_full":"execution_cache_v1","component_mass":"execution_mixture_v1","component_hybrid":"execution_hybrid_v1"}[mode],
-        "status":"running","attribution":"Built with PriorLabs-TabPFN","performance_first_authorized":True,
+    status={**runtime_identity(),"schema":SCHEMA,"variant":{"resident_full":"execution_cache_v1","component_mass":"execution_mixture_v1","component_hybrid":"execution_hybrid_v1","component_gqa_hybrid":"execution_gqa_hybrid_v1"}[mode],
+        "runner_version":RUNNER_VERSION,"status":"running","attribution":"Built with PriorLabs-TabPFN","performance_first_authorized":True,
         "absolute_accuracy_gate_required_for_performance":False,"known_physical_control_status":"model_failure",
         "count_contract":"50000 total complete physical vectors per E2E benchmark","benchmark_total_count":COUNT,
         **partition,"scientific_run":partition["requested_count"]==COUNT and partition["end_to_end"],"sampling_rng_policy":"independent_cpu_sampling_streams_model_rng_isolated","context_seed":context_seed,"case":case,"repetition":repetition,"context_size":4096,
@@ -289,6 +375,7 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
         from . import execution_cache as cache
         from . import execution_mixture as mixture
         from . import execution_hybrid as hybrid
+        from . import execution_gqa_hybrid as gqa_hybrid
         from .compat_cdf import finite_cdf_compatibility
         from .upstream import load_baseline
         if not torch.cuda.is_available() or torch.cuda.device_count()!=1:raise RuntimeError("one visible CUDA GPU required per process")
@@ -299,7 +386,7 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
         problem=build_problem();bindings={"checkpoint_sha256":CHECKPOINT_SHA256,"scientific_fingerprint":problem.scientific_fingerprint,
             "parameter_order":list(problem.parameter_order),"context_theta":array_descriptor(context.theta),"context_obs":array_descriptor(context.obs),"query":array_descriptor(query)}
         qpath=Path(qualification);qsha=sha256_file(qpath);q=json.loads(qpath.read_text())
-        validate_qualification(q,bindings=bindings,cache_sha256=cache.execution_source_sha256(),mixture_sha256=mixture.execution_source_sha256(),mode=mode,query_batch_size=query_batch_size,hybrid_sha256=hybrid.execution_source_sha256())
+        validate_qualification(q,bindings=bindings,cache_sha256=cache.execution_source_sha256(),mixture_sha256=mixture.execution_source_sha256(),mode=mode,query_batch_size=query_batch_size,hybrid_sha256=hybrid.execution_source_sha256(),qualification_path=qpath)
         status.update(**bindings,qualification_manifest_sha256=qsha,qualification_scope=q["scope"],qualification_full21=True,
             reference_binding=reference_binding(banks=banks,reference=reference,reference_grid=reference_grid,case=case),
             execution_engine={**cache.execution_metadata(),"sampling_rng_policy":"independent_cpu_sampling_streams_model_rng_isolated","query_batch_size":query_batch_size,"posterior_count":partition["requested_count"]},
@@ -308,6 +395,11 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
         if mode=="component_hybrid":
             status["hybrid_execution"]=hybrid.execution_metadata(HYBRID_FALLBACK_MAP)
             status["qualification_full21_hybrid"]=True;status["qualification_cache_only_full21"]=False
+        if mode=="component_gqa_hybrid":
+            status["gqa_hybrid_execution"]=gqa_hybrid.execution_metadata()
+            status["qualification_full21_gqa_hybrid"]=True;status["qualification_cache_only_full21"]=False
+            status["qualification_producer_schema"]=q["schema"];status["qualification_recovery_source_sha256"]=q.get("recovery_source_sha256")
+            if np.__version__!="1.26.4":raise RuntimeError("qualified NumPy1.26.4 required for GQA hybrid")
         from . import inference as baseline_module
         if baseline_module.write_json is not write_json:raise RuntimeError("original metadata writer must remain unchanged")
         load_baseline();accept_reject=import_module("npe_pfn.accept_reject_sampler").accept_reject_sample
@@ -318,22 +410,26 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
         torch.set_num_threads(int(os.environ.get("OMP_NUM_THREADS","16")))
         streams={name:{"role":STREAM_ROLES[name],"seed":seed,"dtype":STREAM_DTYPES[name],"device":"cpu","generator":"torch.Generator"} for name,seed in seeds.items()}
         if mode=="resident_full":streams["component_uniform"]["generator"]="torch.default_generator; original criterion.sample"
-        status["sampling_policy"]={**(mixture.execution_metadata() if mode in ("component_mass","component_hybrid") else {}),
-            "head_policy":"raw_mass_rejection_v1" if mode in ("component_mass","component_hybrid") else "not_used",
-            "uniform_assignment":"preassigned_per_stage_by_physical_row" if mode in ("component_mass","component_hybrid") else "original_chunk_sampler_global_cpu","head_retry_preserves_row_uniform":mode in ("component_mass","component_hybrid"),
+        status["sampling_policy"]={**(mixture.execution_metadata() if mode in ("component_mass","component_hybrid","component_gqa_hybrid") else {}),
+            "head_policy":"raw_mass_rejection_v1" if mode in ("component_mass","component_hybrid","component_gqa_hybrid") else "not_used",
+            "uniform_assignment":"preassigned_per_stage_by_physical_row" if mode in ("component_mass","component_hybrid","component_gqa_hybrid") else "original_chunk_sampler_global_cpu","head_retry_preserves_row_uniform":mode in ("component_mass","component_hybrid","component_gqa_hybrid"),
             "streams":streams,"model_rng_isolation":"CPU and selected CUDA fork_rng in frozen executor",
-            "mass_envelope":1.00001 if mode in ("component_mass","component_hybrid") else None,
-            "stage0_dedup":{"enabled":mode in ("component_mass","component_hybrid"),"scope":"full_mixture_only","component_distribution_dedup":False,"density_scope":"proposal-wave-local; no cross-request/case reuse"}}
+            "mass_envelope":1.00001 if mode in ("component_mass","component_hybrid","component_gqa_hybrid") else None,
+            "stage0_dedup":{"enabled":mode in ("component_mass","component_hybrid","component_gqa_hybrid"),"scope":"full_mixture_only","component_distribution_dedup":False,"density_scope":"proposal-wave-local; no cross-request/case reuse"}}
         status["seed_streams"]=seeds;status["seed"]=seeds["component_uniform"]
         theta=context.theta.astype(np.float32);obs=context.obs.astype(np.float32);prior=_prior(torch)
         counters={"stage0_shared_predictions":0,"component_predictions":0,"head_candidates":0,"head_rejections":0}
         with finite_cdf_compatibility() as descriptor:
-            if mode=="component_hybrid":
+            if mode=="component_gqa_hybrid":
+                engine=gqa_hybrid.GQAHybridStageExecutor(checkpoint,cdf_descriptor=descriptor,query_batch_size=query_batch_size);component=engine
+            elif mode=="component_hybrid":
                 engine=hybrid.HybridStageExecutor(checkpoint,cdf_descriptor=descriptor,fallback_map=HYBRID_FALLBACK_MAP,query_batch_size=query_batch_size);component=engine
             else:
                 engine=cache.ResidentStageExecutor(checkpoint,cdf_descriptor=descriptor,query_batch_size=query_batch_size)
                 component=mixture.ComponentMixtureExecutor(engine) if mode=="component_mass" else None
-            stage_draw=component_stage_sampler(component,torch,generators,counters) if component else None
+            gqa_checks={}
+            prediction_check=(lambda prediction,stage,member:validate_gqa_prediction(prediction,stage,member,cdf_descriptor=descriptor,report=gqa_checks)) if mode=="component_gqa_hybrid" else None
+            stage_draw=component_stage_sampler(component,torch,generators,counters,prediction_check=prediction_check) if component else None
             def progress(event):
                 status["stage_events"].append({"proposal_round":len(status["proposal_wave_sizes"]),**event})
                 status["elapsed_seconds"]=time.perf_counter()-start;write_json(output/"manifest.json",status)
@@ -350,10 +446,16 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
             if values.shape!=(partition["requested_count"],21) or not support_mask(values).all():raise RuntimeError("incomplete/nonfinite/unsupported output; no row repair")
             status["execution_counters"]={key:value for key,value in engine.metadata.items() if key!="stages"}
             status["sampling_counters"]=dict(counters)
-            if mode=="component_hybrid":
+            if mode in ("component_hybrid","component_gqa_hybrid"):
                 status["component_execution_counters"]=engine.cached_component.metadata
                 status["hybrid_execution_counters"]={key:value for key,value in engine.hybrid_counters.items() if key!="stages"}
             elif component:status["component_execution_counters"]=component.metadata
+            if mode=="component_gqa_hybrid":
+                status["gqa_execution_counters"]=dict(engine.gqa_counters);status["gqa_prediction_checks"]=dict(gqa_checks)
+                expected_contexts=counters["stage0_shared_predictions"]+counters["component_predictions"]
+                if gqa_checks.get("verified_calls")!=expected_contexts or engine.gqa_counters["contexts"]!=expected_contexts or not engine.gqa_counters["all_contexts_restored"] or not engine.gqa_counters["all_sources_unchanged"] or engine.gqa_counters["expanded_attention_calls"]<=0:
+                    raise RuntimeError("GQA actual per-call source/restoration coverage failed")
+                if gqa_checks.get("uncached_fallback_calls")!=engine.hybrid_counters["uncached_predict_count"]:raise RuntimeError("GQA original fallback count mismatch")
             expected_calls=8*engine.metadata["predict_count"] if mode=="resident_full" else 8*counters["stage0_shared_predictions"]+counters["component_predictions"]
             if descriptor["patched_call_count"]!=expected_calls or engine.metadata["prepare_count"]!=21*prior.support.calls:
                 raise RuntimeError("model/CDF stage coverage mismatch")
@@ -366,9 +468,12 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
         status["metadata_writer_restored"]=True;status["metadata_writer_policy"]="never replaced by execution driver"
         if guard_baseline_source()!=source or sha256_file(__file__)!=runner_sha or sha256_file(qpath)!=qsha:
             raise RuntimeError("source/qualification changed during execution")
-        expected_cache_sha=q["cache_module_sha256"] if mode=="component_hybrid" else q["module_sha256"]
-        if cache.execution_source_sha256()!=expected_cache_sha or (mode in ("component_mass","component_hybrid") and mixture.execution_source_sha256()!=q["mixture_module_sha256"]) or (mode=="component_hybrid" and hybrid.execution_source_sha256()!=q["hybrid_module_sha256"]):
+        expected_cache_sha=q["cache_module_sha256"] if mode in ("component_hybrid","component_gqa_hybrid") else q["module_sha256"]
+        if cache.execution_source_sha256()!=expected_cache_sha or (mode in ("component_mass","component_hybrid","component_gqa_hybrid") and mixture.execution_source_sha256()!=q["mixture_module_sha256"]) or (mode in ("component_hybrid","component_gqa_hybrid") and hybrid.execution_source_sha256()!=q["hybrid_module_sha256"]):
             raise RuntimeError("qualified executor source changed during execution")
+        if mode=="component_gqa_hybrid":
+            gqa_hybrid.require_frozen_sources()
+            if gqa_hybrid.execution_source_sha256()!=q["module_sha256"]:raise RuntimeError("qualified GQA wrapper changed during execution")
         with (output/"samples.npz").open("xb") as stream:np.savez(stream,samples=values)
         status.update(status="complete",samples=array_descriptor(values),samples_file="samples.npz",samples_sha256=sha256_file(output/"samples.npz"),
             completed_stage_indices=list(range(21)),compatibility_adapter=dict(descriptor),sources_unchanged=True,
@@ -390,7 +495,7 @@ def main():
     for name in ("banks","output","checkpoint","ledger","reference","reference-grid","qualification"):parser.add_argument("--"+name,required=True)
     parser.add_argument("--context-seed",type=int,default=20261111);parser.add_argument("--case",type=int,default=0)
     parser.add_argument("--repetition",type=int,default=0);parser.add_argument("--query-batch-size",type=int,default=1024)
-    parser.add_argument("--mode",choices=("resident_full","component_mass","component_hybrid"),default="resident_full");parser.add_argument("--worker-contract")
+    parser.add_argument("--mode",choices=("resident_full","component_mass","component_hybrid","component_gqa_hybrid"),default="resident_full");parser.add_argument("--worker-contract")
     result=run_execution(**vars(parser.parse_args()));print(json.dumps({key:result.get(key) for key in ("schema","variant","status","requested_count","rank","world_size","end_to_end","timings")},indent=2))
 
 

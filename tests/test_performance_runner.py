@@ -204,3 +204,55 @@ def test_hybrid_proof_is_accepted_without_promoting_cache_flags_or_mutating_inpu
                      lambda x:x["stage_results"][2]["comparisons"][0]["cache_vs_same_chunk_control"]["final"].update(max_cdf_absolute_error=3e-5)):
         broken=deepcopy(value);mutation(broken)
         with pytest.raises(ValueError):runner.validate_qualification(broken,bindings={},cache_sha256="cache",mixture_sha256="mixture",hybrid_sha256="hybrid",mode="component_hybrid",query_batch_size=1024)
+
+
+def gqa_descriptor(expanded=True):
+    from posteriorforge.execution_gqa_hybrid import PINNED_GQA_SHA256
+    return {**{k:True for k in ("original_alias_restored","original_function_restored","original_code_unchanged","active_code_unchanged",
+        "gqa_source_unchanged","sdk_sources_unchanged","source_guard_passed")},"module_sha256":PINNED_GQA_SHA256,
+        "original_attention_code_sha256":"original","executed_original_attention_code_sha256":"original","active_attention_code_sha256":"wrapper",
+        "attention_call_count":24,"expanded_attention_calls":12 if expanded else 0,"prediction_math_dtype":"torch.float32",
+        **{k:False for k in ("prefill_projection_changed","dtype_changed","dropout_changed","softmax_scale_changed","sdk_files_modified")},"view_examples":[]}
+
+
+def test_gqa_raw_failed_proof_and_unarchived_recovery_cannot_run():
+    from posteriorforge import execution_cache,execution_mixture,execution_hybrid
+    kwargs=dict(bindings={},cache_sha256=execution_cache.execution_source_sha256(),mixture_sha256=execution_mixture.execution_source_sha256(),
+                hybrid_sha256=execution_hybrid.execution_source_sha256(),mode="component_gqa_hybrid",query_batch_size=1024)
+    with pytest.raises(ValueError,match="GQA qualification mismatch"):
+        runner.validate_qualification({"schema":"posteriorforge.execution_gqa_hybrid_qualification.v1","status":"conditional_mismatch"},**kwargs)
+    with pytest.raises(ValueError,match="source-bound recovered proof file"):
+        runner.validate_qualification({"schema":"posteriorforge.execution_gqa_hybrid_recovery.v1"},**kwargs)
+
+
+def test_actual_gqa_callback_requires_route_alias_fingerprint_and_corrected_cdf():
+    cdf={"executed_corrected_cdf_code_sha256":"fixed","corrected_cdf_code_sha256":"fixed","original_cdf_code_sha256":"old"};report={}
+    prediction={"gqa_attention_descriptor":gqa_descriptor(),"hybrid_execution_path":"resident_cache"}
+    runner.validate_gqa_prediction(prediction,13,6,cdf_descriptor=cdf,report=report)
+    fallback={"gqa_attention_descriptor":gqa_descriptor(False),"hybrid_execution_path":"original_fit_preprocessors"}
+    runner.validate_gqa_prediction(fallback,10,5,cdf_descriptor=cdf,report=report)
+    assert report["verified_calls"]==2 and report["uncached_fallback_calls"]==1 and report["all_aliases_restored"]
+    wrong=deepcopy(prediction);wrong["gqa_attention_descriptor"]["executed_original_attention_code_sha256"]="stale"
+    with pytest.raises(ValueError,match="fingerprint"):runner.validate_gqa_prediction(wrong,13,6,cdf_descriptor=cdf,report={})
+    with pytest.raises((ValueError,RuntimeError)):runner.validate_gqa_prediction(fallback,13,6,cdf_descriptor=cdf,report={})
+    cdf["executed_corrected_cdf_code_sha256"]="old"
+    with pytest.raises(RuntimeError,match="corrected CDF"):runner.validate_gqa_prediction(prediction,13,6,cdf_descriptor=cdf,report={})
+
+
+def test_optional_execution_audit_does_not_change_sampler_values_or_rng():
+    torch=pytest.importorskip("torch")
+    from posteriorforge.execution_mixture import HEAD_MASS_ENVELOPE
+    class Criterion:borders=torch.tensor([-2.,0.,3.])
+    class Component:
+        def predict_component(self,member,query,**kwargs):
+            p=torch.tensor([[.25+.04*member,.75-.04*member]],dtype=torch.float32).repeat(len(query),1)
+            return {"logits":p.log(),"criterion":Criterion(),"component_raw_mass":torch.full((len(query),),.3+.08*member,dtype=torch.float64),"head_mass_envelope":HEAD_MASS_ENVELOPE}
+    def execute(audit):
+        generators={name:torch.Generator().manual_seed(seed) for name,seed in zip(runner.STREAM_ROLES,(17,29,53))}
+        counters={"stage0_shared_predictions":0,"component_predictions":0,"head_candidates":0,"head_rejections":0};calls=[]
+        callback=(lambda prediction,stage,member:calls.append((stage,member))) if audit else None
+        draw=runner.component_stage_sampler(Component(),torch,generators,counters,prediction_check=callback)
+        values,metadata=draw(None,13,lambda rows:np.zeros((len(rows),46),np.float32),37,8)
+        return values,metadata,{name:g.get_state() for name,g in generators.items()},calls
+    a,am,ar,_=execute(False);b,bm,br,calls=execute(True)
+    np.testing.assert_array_equal(a,b);assert am==bm and all(torch.equal(ar[k],br[k]) for k in ar) and calls
