@@ -1,0 +1,366 @@
+{
+  "attribution": "Built with PriorLabs-TabPFN",
+  "case": 0,
+  "conditional_kernel": {
+    "attribution": "Built with PriorLabs-TabPFN",
+    "clipping_filtering_or_repair": false,
+    "conditional": "p(mu_a | other20, observation) = p(mu_a | other20)",
+    "conditional_id": "one_exact_prior_mu_a_fullconditional_v1",
+    "conditional_mean_coefficients_physical_order": [
+      0.0,
+      0.003355079217148182,
+      0.0019053536294915607,
+      0.16115425770598182,
+      0.0,
+      0.0,
+      0.0,
+      0.16115425770598182,
+      0.0,
+      0.0,
+      0.0,
+      0.16115425770598182,
+      0.0,
+      0.0,
+      0.0,
+      0.16115425770598182,
+      0.0,
+      0.16115425770598182,
+      0.0,
+      0.16115425770598182,
+      0.0
+    ],
+    "conditional_mean_intercept": 0.010402816609713159,
+    "conditional_variance": 0.03263373718546132,
+    "exactness_scope": "prior-derived Gaussian full conditional in real arithmetic; NumPy float64 execution",
+    "feature_order_changed": false,
+    "global_fullconditional_precision": [
+      [
+        30.64313456705506,
+        -0.1028101439342015,
+        -0.05838600766633666
+      ],
+      [
+        -0.1028101439342015,
+        6.9677768297174945,
+        0.06854009595613435
+      ],
+      [
+        -0.05838600766633666,
+        0.06854009595613433,
+        50.508059807580025
+      ]
+    ],
+    "global_indices": [
+      0,
+      1,
+      2
+    ],
+    "global_order": [
+      "mu_a",
+      "mu_b",
+      "mu_d0"
+    ],
+    "global_prior_natural": [
+      0.31877490924783586,
+      -0.19305460360977839,
+      0.21958215926687485
+    ],
+    "global_prior_precision": [
+      [
+        1.0135049374254308,
+        -0.1028101439342015,
+        -0.05838600766633666
+      ],
+      [
+        -0.1028101439342015,
+        0.8453278501256568,
+        0.06854009595613435
+      ],
+      [
+        -0.05838600766633666,
+        0.06854009595613433,
+        2.508059807580027
+      ]
+    ],
+    "input_output_dtype": "float64; no implicit conversion",
+    "module_sha256": "850df8d6498f78c12500ffdf60c4c9126f5c1ab67bc29867002d4c991373d2e8",
+    "noise_and_likelihood_cancel": true,
+    "noise_indices": [
+      6,
+      10,
+      14,
+      16,
+      18,
+      20
+    ],
+    "observation_reference_truth_arguments": false,
+    "physical_parameter_order": [
+      "mu_a",
+      "mu_b",
+      "mu_d0",
+      "a_m1",
+      "b_m1",
+      "d0_m1",
+      "sigma_m1",
+      "a_m2",
+      "b_m2",
+      "d0_m2",
+      "sigma_m2",
+      "a_m3",
+      "b_m3",
+      "d0_m3",
+      "sigma_m3",
+      "a_a1",
+      "sigma_a1",
+      "a_a2",
+      "sigma_a2",
+      "a_a3",
+      "sigma_a3"
+    ],
+    "posterior_accuracy_guaranteed": false,
+    "rng": "one standard_normal draw per row from caller-owned numpy.random.Generator",
+    "scalar_calibration": false,
+    "schema": "posteriorforge.conditional_mu_a.v1",
+    "scientific_count_enforced_by_producer": 50000,
+    "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+    "scientific_sources_sha256": {
+      "analytical_benchmark_v2.py": "8d5f286f6d8512391dea2ae036313bec05782d28c7803f336490cbcdce3bd99f",
+      "hierarchical_exact.py": "db001593cc7307b1290b981622705961c5953001a6c1245fae5ec779938e9687",
+      "hierarchical_noise.py": "cbf0b8c956362a5eaa31923e9b94a3db3e3ede2072603add51e78105b8c0cbf0",
+      "hierarchical_problem.py": "03aa2d8a3d279783cf6c599f1400f253f3db2e1e7eb027aff5b7cd1b48fe12d0"
+    },
+    "sweeps": 1,
+    "target_index": 0,
+    "target_name": "mu_a",
+    "target_order_changed": false,
+    "unchanged_indices": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ]
+  },
+  "context_seed": 20261111,
+  "default_RNG_observation": {
+    "after_sha256": "7dd3c51354d3ce932d3b53c08beec0d2879676a3d4b9a4faf004e61cdc3eb842",
+    "before_sha256": "7dd3c51354d3ce932d3b53c08beec0d2879676a3d4b9a4faf004e61cdc3eb842",
+    "observed_generators": [
+      "NumPy legacy default",
+      "Python random"
+    ],
+    "preserved": true,
+    "scope": "run entry through samples save and final source/parent authentication; JSON footer follows",
+    "torch_CPU_CUDA_RNG_hashes_observed": false
+  },
+  "end_to_end_posterior_request_timing_claimed": false,
+  "method": "hybrid NPE-PFN/Gibbs; ONE scalar mu_a full-conditional refresh",
+  "observations_references_truth_loaded": false,
+  "original_cohort_preserved": true,
+  "parameter_order": [
+    "mu_a",
+    "mu_b",
+    "mu_d0",
+    "a_m1",
+    "b_m1",
+    "d0_m1",
+    "sigma_m1",
+    "a_m2",
+    "b_m2",
+    "d0_m2",
+    "sigma_m2",
+    "a_m3",
+    "b_m3",
+    "d0_m3",
+    "sigma_m3",
+    "a_a1",
+    "sigma_a1",
+    "a_a2",
+    "sigma_a2",
+    "a_a3",
+    "sigma_a3"
+  ],
+  "parent": {
+    "git_revision": "e9d38530f05663fb9b4664f3304e8ad2626a3af4",
+    "manifest_sha256": "28da396e0af6cf26009b4eb8feab8b75ed7a1d7a5add30440a35b38539da4f94",
+    "producer_sha256": "4099da3c19366997ab0800e5430b5bb1c129b4b3e535f678b3d4652233303480",
+    "samples": {
+      "dtype": "<f8",
+      "sha256": "8c832a13961dc8f1c9b85dbda56b65ce3315730071c04b2d6ae3d5aff07386f1",
+      "shape": [
+        50000,
+        21
+      ]
+    },
+    "samples_sha256": "f263f712d943d7916205b2f2b77f9243ac4ba3819f5f739c45f00710d5b4be47"
+  },
+  "posterior_accuracy_guaranteed": false,
+  "pure_TFM_inference": false,
+  "raw_scientific_bindings": {
+    "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+    "context_obs": {
+      "dtype": "<f8",
+      "sha256": "aee2030d63158a3baf3b731e1231e17972ed80a19def10152b4e67d6d1e6ffb8",
+      "shape": [
+        4096,
+        33
+      ]
+    },
+    "context_theta": {
+      "dtype": "<f8",
+      "sha256": "73c4c282c136a1fd86459e7b1b736629b459075def9176956a90d232d4c30f4d",
+      "shape": [
+        4096,
+        21
+      ]
+    },
+    "parameter_order": [
+      "mu_a",
+      "mu_b",
+      "mu_d0",
+      "a_m1",
+      "b_m1",
+      "d0_m1",
+      "sigma_m1",
+      "a_m2",
+      "b_m2",
+      "d0_m2",
+      "sigma_m2",
+      "a_m3",
+      "b_m3",
+      "d0_m3",
+      "sigma_m3",
+      "a_a1",
+      "sigma_a1",
+      "a_a2",
+      "sigma_a2",
+      "a_a3",
+      "sigma_a3"
+    ],
+    "query": {
+      "dtype": "<f8",
+      "sha256": "57fb7625b2521ff040f6d858961ca5876276708fbe2637242b48c69fdce7bdac",
+      "shape": [
+        1,
+        33
+      ]
+    },
+    "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966"
+  },
+  "raw_scientific_bindings_scope": "inherited parent provenance only; no bound observation files loaded",
+  "refresh": {
+    "bit_generator": "PCG64",
+    "conditional_residual_diagnostic": {
+      "after": {
+        "mean": -0.004202681149397888,
+        "sd": 0.9991363042276243
+      },
+      "before": {
+        "mean": 0.18221318035633347,
+        "sd": 0.9704183860567219
+      },
+      "scope": "model-only standardized full-conditional residual; not an accuracy gate"
+    },
+    "default_numpy_python_RNG_after_sha256": "7dd3c51354d3ce932d3b53c08beec0d2879676a3d4b9a4faf004e61cdc3eb842",
+    "default_numpy_python_RNG_before_sha256": "7dd3c51354d3ce932d3b53c08beec0d2879676a3d4b9a4faf004e61cdc3eb842",
+    "default_numpy_python_RNG_preserved": true,
+    "final_private_state": {
+      "bit_generator": "PCG64",
+      "has_uint32": 0,
+      "state": {
+        "inc": 36159684099168448012174650107273505179,
+        "state": 332178163905092610796178568295478226682
+      },
+      "uinteger": 0
+    },
+    "final_private_state_sha256": "d16b43a4e38cb67a1290ec924e1d435609dccec7af2cad36480c2d2ec6f74796",
+    "finite_supported_complete_count": 50000,
+    "independent_draw_replay_passed": true,
+    "initial_private_state": {
+      "bit_generator": "PCG64",
+      "has_uint32": 0,
+      "state": {
+        "inc": 36159684099168448012174650107273505179,
+        "state": 226167725007245827611860375600892961920
+      },
+      "uinteger": 0
+    },
+    "initial_private_state_sha256": "2c10a9b02c1668529405c43e3a2194870c45651651a818a4ac84e0077ac33640",
+    "input_array_unchanged": true,
+    "other20_columns_byte_identical": true,
+    "refresh_count_per_row": 1,
+    "refresh_seconds": 0.014080471359193325,
+    "role": "ss15_mu_a_gibbs_once_v1",
+    "seed": 2020043410,
+    "standard_normal_draw_count": 50000,
+    "standard_normal_draws": {
+      "dtype": "<f8",
+      "sha256": "a7213a4811efc42c6e7a0439358122b76e061e86c8c0a2030d190016ef7e9017",
+      "shape": [
+        50000
+      ]
+    },
+    "torch_RNG_observation": "not imported or observed; CPU NumPy-only producer"
+  },
+  "repetition": 0,
+  "requested_count": 50000,
+  "runtime": {
+    "created_unix": 1794503471.6395676,
+    "git_dirty": true,
+    "git_revision": "94acc42ef16a23918861fee37ebd3046e116814c",
+    "hostname": "login4.karolina.it4i.cz",
+    "schema": "posteriorforge.runtime.v1",
+    "slurm_job_id": null,
+    "versions": {
+      "jax": "0.8.3",
+      "jaxlib": "0.8.3",
+      "numpy": "2.2.6",
+      "platform": "Linux-4.18.0-553.146.1.el8_10.x86_64-x86_64-with-glibc2.28",
+      "posteriorforge": null,
+      "python": "3.11.13",
+      "sbi": null,
+      "scipy": "1.15.3",
+      "tabpfn": null,
+      "torch": null
+    }
+  },
+  "samples": {
+    "dtype": "<f8",
+    "sha256": "3482b8b70f3852a5dcf37c729a7cf556e14a3298e4116acf92aca6a2ffbc3482",
+    "shape": [
+      50000,
+      21
+    ]
+  },
+  "samples_file": "samples.npz",
+  "samples_sha256": "90d4813ba5d1d1b8fa5158b5ba92268cbeda57c4d83e951984f7407134274f28",
+  "schema": "posteriorforge.ss15_mu_a_refresh.v1",
+  "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+  "source_pins": {
+    "git_revision": "94acc42ef16a23918861fee37ebd3046e116814c",
+    "kernel_sha256": "850df8d6498f78c12500ffdf60c4c9126f5c1ab67bc29867002d4c991373d2e8",
+    "math_contract_origin_commit": "e600df6e36c98e169d82503e6c84c50415e7d4f5",
+    "math_contract_sha256": "932bbcb7efb95a9298af6668cf5f4a550c78bb52b6af3d42d667d031c24ca1a5",
+    "producer_committed_before_run": true,
+    "producer_sha256": "5c1997f2b5e830f88aca1e29a4871c47c7b51940740e866acc7c8801e8a42feb"
+  },
+  "sources_unchanged": true,
+  "status": "complete",
+  "support_filtering_clipping_redraw_or_trimming": false,
+  "variant": "hybrid_ss15_mu_a_gibbs_once_v1"
+}
