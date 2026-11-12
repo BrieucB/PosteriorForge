@@ -141,7 +141,7 @@ def header(monkeypatch):
         "partial_vector_filtering": False, "clipping_or_repair_performed": False,
         "rank": 0, "world_size": 1, "completed_stage_indices": list(range(21)),
         "baseline_execution_source": guard_baseline_source(),
-        "runner_source_sha256": sha256_file(PATH.parents[1]/"src/posteriorforge/performance_runner.py"),
+        "runner_source_sha256": review.RUNNER_V2_SHA256, "runner_version":2,
         "execution_engine": execution_cache.execution_metadata(), "seed_streams": stream_seeds,
         "expected_patched_call_count": 1, "query_batch_size": 1024,
         "absolute_accuracy_gate_required_for_performance": False, "tail_family_changed": False,
@@ -577,3 +577,173 @@ def test_supplied_wrong_upstream_identity_is_never_overridden_by_supplement(head
     manifest["upstream_revision"]="incorrect"
     with pytest.raises(ValueError,match="upstream_revision"):
         review.validate_execution_header(manifest,context=context,query=query,control=control)
+
+
+def gqa_runtime_fields():
+    # Synthetic metadata protocol fixture only; these are not model-call evidence.
+    from posteriorforge import execution_gqa_hybrid as gqa, execution_hybrid as hybrid
+    return {
+        "mode":"component_gqa_hybrid", "runner_version":2, "runner_source_sha256":review.RUNNER_V2_SHA256,
+        "metadata_writer_restored":True, "gqa_hybrid_execution":gqa.execution_metadata(),
+        "qualification_full21":True, "qualification_full21_gqa_hybrid":True, "qualification_cache_only_full21":False,
+        "sampling_counters":{"stage0_shared_predictions":1,"component_predictions":160},
+        "gqa_prediction_checks":{"verified_calls":161,"uncached_fallback_calls":1,
+            "all_aliases_restored":True,"all_sources_unchanged":True,
+            "attention_fingerprints":{"original_attention_code_sha256":"a"*64,
+                "active_attention_code_sha256":"b"*64,"executed_original_attention_code_sha256":"a"*64}},
+        "gqa_execution_counters":{**gqa.execution_metadata(),"contexts":161,"attention_call_count":2016,
+            "expanded_attention_calls":2004,"expanded_tensor_views":2004,
+            "all_contexts_restored":True,"all_sources_unchanged":True},
+        "hybrid_execution_counters":{**hybrid.execution_metadata({10:[5]}),
+            "uncached_predict_count":1,"original_preprocessing_lists_restored":True,"original_translator_alias_restored":True},
+        "component_execution_counters":{"full8_member_lists_restored":True},
+        "expected_patched_call_count":168}
+
+
+@pytest.fixture
+def gqa_header(header,sampling_policy,monkeypatch):
+    m,context,query,control=header
+    m=copy.deepcopy(m);m.update(gqa_runtime_fields());m["variant"]="execution_gqa_hybrid_v1"
+    m["sampling_policy"]=copy.deepcopy(sampling_policy)
+    m["sampling_policy"].update(uniform_assignment="preassigned_per_stage_by_physical_row",
+                               head_retry_preserves_row_uniform=True)
+    monkeypatch.setattr(review.bindings,"validate_adapter_descriptor",lambda value:{"patched_call_count":168})
+    return m,context,query,control
+
+
+def test_new_gqa_header_authenticates_actual_route_and_frozen_sources(gqa_header):
+    m,context,query,control=gqa_header
+    review.validate_execution_header(m,context=context,query=query,control=control)
+    assert m["gqa_hybrid_execution"]["fallback_map"]=={"10":[5]}
+
+
+@pytest.mark.parametrize("field,value", [
+    ("contexts",160),("expanded_attention_calls",0),("expanded_tensor_views",0),
+    ("all_contexts_restored",False),("all_sources_unchanged",False),
+    ("module_sha256","0"*64),("fallback_map",{"10":[5],"13":[6]})])
+def test_gqa_runtime_counter_source_or_policy_tampering_rejected(gqa_header,field,value):
+    m,context,query,control=gqa_header
+    m["gqa_execution_counters"][field]=value
+    with pytest.raises(ValueError):
+        review.validate_execution_header(m,context=context,query=query,control=control)
+
+
+@pytest.mark.parametrize("field,value", [
+    ("verified_calls",160),("uncached_fallback_calls",2),
+    ("all_aliases_restored",False),("all_sources_unchanged",False),
+    ("attention_fingerprints",{"original_attention_code_sha256":"a"*64,
+         "active_attention_code_sha256":"b"*64,"executed_original_attention_code_sha256":"c"*64})])
+def test_gqa_actual_attention_fingerprint_or_check_coverage_rejected(gqa_header,field,value):
+    m,context,query,control=gqa_header
+    m["gqa_prediction_checks"][field]=value
+    with pytest.raises(ValueError):
+        review.validate_execution_header(m,context=context,query=query,control=control)
+
+
+@pytest.mark.parametrize("field,value",[
+    ("runner_version",1),("runner_version",None),("runner_source_sha256","f"*64),
+    ("expected_patched_call_count",167),("qualification_cache_only_full21",True),
+    ("qualification_full21_gqa_hybrid",False),("metadata_writer_restored",False)])
+def test_new_gqa_version_proof_or_cdf_coverage_tampering_rejected(gqa_header,field,value):
+    m,context,query,control=gqa_header;m[field]=value
+    with pytest.raises(ValueError):
+        review.validate_execution_header(m,context=context,query=query,control=control)
+
+
+def test_original_completed_c121_without_version_retains_explicit_historical_source_path(header):
+    m,context,query,control=header;m=copy.deepcopy(m)
+    m["runner_source_sha256"]=review.RUNNER_V1_SHA256;m.pop("runner_version")
+    review.validate_execution_header(m,context=context,query=query,control=control)
+    result=review.validate_runner_source(m)
+    assert result["version"]==1 and result["version_field_absent_in_original"]
+    assert result["historical_git_revision"]==review.RUNNER_V1_GIT_REVISION
+    m["runner_version"]=2
+    with pytest.raises(ValueError,match="historical"):
+        review.validate_runner_source(m)
+
+
+def test_original_v1_source_cannot_claim_new_gqa_family(gqa_header):
+    m,_,_,_=gqa_header;m["runner_source_sha256"]=review.RUNNER_V1_SHA256;m.pop("runner_version")
+    with pytest.raises(ValueError,match="version2"):
+        review.validate_runner_source(m)
+
+
+def test_real_recovered_gqa_proof_archives_and_all_numeric_predicates_validate(monkeypatch):
+    import os
+    path=os.environ.get("POSTERIORFORGE_GQA_QUALIFICATION")
+    if not path:pytest.skip("set POSTERIORFORGE_GQA_QUALIFICATION for actual CPU-only proof replay")
+    path=Path(path);q=json.loads(path.read_text())
+    m={key:q[key] for key in ("scientific_fingerprint","parameter_order","context_seed","case","context_size",
+                              "context_theta","context_obs","query","checkpoint_sha256")}
+    m.update(variant="execution_gqa_hybrid_v1",runner_version=2,runner_source_sha256=review.RUNNER_V2_SHA256,
+             qualification_producer_schema=q["schema"],qualification_recovery_source_sha256=q.get("recovery_source_sha256"))
+    descriptor=q["stage_results"][0]["comparisons"][0]["actual_gqa_execution"]["members"][0]["descriptor"]
+    fingerprints={key:descriptor[key] for key in ("original_attention_code_sha256",
+                 "active_attention_code_sha256","executed_original_attention_code_sha256")}
+    # Runtime header/counter validity is tested independently above; this fixture
+    # exclusively exercises actual archived CPU recovery and numeric proof replay.
+    monkeypatch.setattr(review,"validate_gqa_runtime_metadata",lambda value:fingerprints)
+    result=review.gqa_hybrid_qualification_review(path,m,q)
+    assert result["full21_gqa_hybrid_qualified"] is True and result["full21_qualified"] is False
+    assert result["raw_producer_status_preserved"] is True
+    corrupt=copy.deepcopy(q);corrupt["full21_qualified"]=True
+    with pytest.raises(ValueError):
+        review.gqa_hybrid_qualification_review(path,m,corrupt)
+
+
+@pytest.fixture
+def gqa_aggregate_case(aggregate_case,monkeypatch):
+    path,m,context,query,control,custody,proof,combined=aggregate_case
+    worker_spec=importlib.util.spec_from_file_location("gqa_worker_protocol",PATH.with_name("run_execution_workers.py"))
+    orchestrator=importlib.util.module_from_spec(worker_spec);worker_spec.loader.exec_module(orchestrator)
+    contracts=[];paths=[]
+    for identity in m["worker_contracts"]:
+        contract_path=Path(identity["path"]);contract=json.loads(contract_path.read_text())
+        child_path=Path(contract["expected_output"])/"manifest.json";child=json.loads(child_path.read_text())
+        child.update(gqa_runtime_fields());child["variant"]="execution_gqa_hybrid_v1";child.pop("hybrid_execution",None)
+        child["compatibility_adapter"]["patched_call_count"]=168
+        child["sampling_policy"].update(uniform_assignment="preassigned_per_stage_by_physical_row",
+                                       head_retry_preserves_row_uniform=True)
+        child_path.write_text(json.dumps(child));contracts.append(contract);paths.append(contract_path)
+    m.update(mode="component_gqa_hybrid",worker_execution_variant="execution_gqa_hybrid_v1",
+             gqa_hybrid_execution=gqa_runtime_fields()["gqa_hybrid_execution"])
+    m.pop("hybrid_execution",None)
+    expected={key:control[key] for key in ("scientific_fingerprint","parameter_order","context_seed","case","context_size",
+                                          "context_theta","context_obs","query","checkpoint_sha256","baseline_execution_source")}
+    expected.update(mode=m["mode"],variant=m["worker_execution_variant"],reference_binding=custody["runner_reference_binding"])
+    _,m["workers"]=orchestrator.validate_worker_payloads(contracts,paths,expected_bindings=expected,
+             driver_schema=review.RUN_SCHEMA,qualification_sha256=sha256_file(proof))
+    path.write_text(json.dumps(m))
+    monkeypatch.setattr(review.bindings,"validate_adapter_descriptor",lambda value:{"patched_call_count":168})
+    return path,m,context,query,control,custody,proof,combined,contracts,paths,orchestrator,expected
+
+
+def test_gqa_aggregate_authenticates_actual_new_worker_policy_and_checks(gqa_aggregate_case):
+    path,m,context,query,control,custody,proof,combined,*_=gqa_aggregate_case
+    values,effective,detail=review.authenticate_worker_aggregate(path,m,context=context,query=query,control=control,
+                                                               custody=custody,qualification_path=proof)
+    np.testing.assert_array_equal(values,combined)
+    assert effective["variant"]=="execution_gqa_hybrid_v1"
+    assert detail["runner_source_authentication"]["version"]==2
+    assert [c["verified_calls"] for c in detail["GQA_runtime_checks_by_rank"]]==[161,161]
+
+
+def test_gqa_aggregate_rejects_different_attention_fingerprints_even_if_child_self_consistent(gqa_aggregate_case):
+    path,m,context,query,control,custody,proof,_,contracts,paths,orchestrator,expected=gqa_aggregate_case
+    child_path=Path(contracts[1]["expected_output"])/"manifest.json";child=json.loads(child_path.read_text())
+    child["gqa_prediction_checks"]["attention_fingerprints"].update(
+        original_attention_code_sha256="c"*64,executed_original_attention_code_sha256="c"*64)
+    child_path.write_text(json.dumps(child))
+    _,m["workers"]=orchestrator.validate_worker_payloads(contracts,paths,expected_bindings=expected,
+             driver_schema=review.RUN_SCHEMA,qualification_sha256=sha256_file(proof))
+    with pytest.raises(ValueError,match="fingerprints differ"):
+        review.authenticate_worker_aggregate(path,m,context=context,query=query,control=control,
+                                            custody=custody,qualification_path=proof)
+
+
+def test_gqa_may_not_copy_legacy_stage13_fallback_header(gqa_header):
+    m,context,query,control=gqa_header
+    from posteriorforge import execution_hybrid
+    m["hybrid_execution"]=execution_hybrid.execution_metadata({10:[5],13:[6]})
+    with pytest.raises(ValueError,match="legacy"):
+        review.validate_execution_header(m,context=context,query=query,control=control)

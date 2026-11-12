@@ -12,6 +12,9 @@ import copy
 import csv
 import importlib.util
 import json
+import hashlib
+import re
+import subprocess
 from pathlib import Path
 import numpy as np
 
@@ -31,6 +34,14 @@ SCHEMA = "posteriorforge.execution_variant_review.v1"
 RUN_SCHEMA = "posteriorforge.inference.execution.v1"
 QUALIFICATION_SCHEMA = "posteriorforge.execution_cache_qualification.v1"
 ATTRIBUTION = "Built with PriorLabs-TabPFN"
+RUNNER_V1_SHA256 = "c121e897ab583dc846fcb04da6c3c74930713f5d9025411d66e042b8d817899b"
+RUNNER_V1_GIT_REVISION = "ea2d673c30c3d8c047c9d1b3f349d0b142b38652"
+RUNNER_V2_SHA256 = "0a071ae7d016b4e99b75940da878d6c37eeab7f25a92b921efb2a39d66fd429d"
+ORCHESTRATOR_SHA256 = "6731e392a63c21a0dbcd2f5df585619691f604fde9ed23df852a3bfaf512df99"
+GQA_WRAPPER_SHA256 = "ac22c67c23403723902805666d1239bd30a8af355554df58a8638a8fd1f21e82"
+GQA_MODULE_SHA256 = "8b2cff752855e1b1966d2e374322602fa71368b1926da9d3b0261edd111aee6b"
+GQA_RECOVERY_SHA256 = "83064f54712014b5c4c66569e854872caff03593cfdc337f2472a7b5723aea02"
+_HISTORICAL_RUNNER_VERIFIED = False
 CONTROL_MANIFEST_SHA256 = "a0114fd74721cf9bed31e9131045e841f262db123c8f849e5cb3f15814a14f4b"
 CONTROL_SAMPLES_SHA256 = "27e51ad1b1ee615fc921ee4f5c237155139304da3e7c193f7781a389cee6d53e"
 QUALIFICATION_THRESHOLDS = {"normalization_absolute": 1e-5, "max_cdf_absolute": 2e-5,
@@ -147,11 +158,104 @@ def validate_sampling_policy(policy):
     return dict(policy)
 
 
+def validate_runner_source(manifest, *, aggregate=False):
+    """Authenticate a versioned source; historical artifacts never use current SHA."""
+    global _HISTORICAL_RUNNER_VERIFIED
+    value, version = manifest.get("runner_source_sha256"), manifest.get("runner_version")
+    repo = Path(__file__).resolve().parents[1]
+    if value == RUNNER_V1_SHA256:
+        require(version is None or type(version) is int and version == 1,
+                "historical runner version/source mismatch")
+        require(manifest.get("variant") != "execution_gqa_hybrid_v1",
+                "GQA hybrid requires reviewed runner version2")
+        if not _HISTORICAL_RUNNER_VERIFIED:
+            content = subprocess.run(["git", "-C", str(repo), "show",
+                RUNNER_V1_GIT_REVISION+":src/posteriorforge/performance_runner.py"],
+                check=True, capture_output=True).stdout
+            require(hashlib.sha256(content).hexdigest() == RUNNER_V1_SHA256,
+                    "historical pinned runner Git blob mismatch")
+            _HISTORICAL_RUNNER_VERIFIED = True
+        return {"version": 1, "sha256": value, "historical_git_revision": RUNNER_V1_GIT_REVISION,
+                "version_field_absent_in_original": version is None,
+                "authentication": "SHA256 of the exact pinned historical Git blob"}
+    require(value == RUNNER_V2_SHA256, "unknown/unreviewed execution runner source")
+    require((aggregate and version is None) or type(version) is int and version == 2,
+            "runner version2/source mismatch")
+    require(sha256_file(repo/"src/posteriorforge/performance_runner.py") == RUNNER_V2_SHA256,
+            "reviewed runner version2 disk source changed")
+    return {"version": 2, "sha256": value, "authentication": "SHA256 of reviewed current runner source"}
+
+
+def validate_gqa_runtime_metadata(manifest):
+    from posteriorforge import execution_gqa_hybrid as execution, execution_hybrid as hybrid
+    execution.require_frozen_sources()
+    require(execution.execution_source_sha256() == GQA_WRAPPER_SHA256
+            and execution.PINNED_GQA_SHA256 == GQA_MODULE_SHA256,
+            "unreviewed GQA wrapper/attention source")
+    approved = execution.execution_metadata()
+    for field in ("gqa_hybrid_execution", "gqa_execution_counters"):
+        actual = manifest.get(field)
+        require(isinstance(actual, dict), "GQA runtime mapping missing: "+field)
+        for key, value in approved.items():
+            require(actual.get(key) is value if isinstance(value, bool) else actual.get(key) == value,
+                    "GQA runtime source/policy mismatch: "+field+"/"+key)
+    require(manifest.get("mode") == "component_gqa_hybrid"
+            and manifest.get("qualification_full21") is True
+            and manifest.get("qualification_full21_gqa_hybrid") is True
+            and manifest.get("qualification_cache_only_full21") is False,
+            "explicit GQA hybrid qualification/cache-only distinction required")
+    require("hybrid_execution" not in manifest,
+            "GQA hybrid must not carry the different legacy top-level hybrid policy")
+    require(manifest.get("metadata_writer_restored") is True, "GQA metadata writer restoration missing")
+    checks, counters = manifest.get("gqa_prediction_checks", {}), manifest["gqa_execution_counters"]
+    sampling, hybrid_counters = manifest.get("sampling_counters", {}), manifest.get("hybrid_execution_counters", {})
+    numbers = [sampling.get(key) for key in ("stage0_shared_predictions", "component_predictions")]
+    require(all(type(n) is int and n > 0 for n in numbers), "actual stage0/component prediction counts required")
+    expected_calls = sum(numbers)
+    require(type(checks.get("verified_calls")) is int and checks["verified_calls"] == expected_calls
+            and counters.get("contexts") == expected_calls,
+            "actual GQA context/check coverage differs from sampling")
+    require(manifest.get("expected_patched_call_count") == 8*numbers[0]+numbers[1],
+            "GQA corrected CDF coverage differs from actual predictions")
+    require(all(checks.get(key) is True for key in ("all_aliases_restored", "all_sources_unchanged"))
+            and all(counters.get(key) is True for key in ("all_contexts_restored", "all_sources_unchanged")),
+            "GQA actual source/alias restoration failed")
+    for key in ("attention_call_count", "expanded_attention_calls", "expanded_tensor_views"):
+        require(type(counters.get(key)) is int and counters[key] > 0,
+                "actual positive GQA attention counter required: "+key)
+    require(counters["attention_call_count"] >= counters["expanded_attention_calls"]
+            and counters["expanded_tensor_views"] >= counters["expanded_attention_calls"],
+            "inconsistent actual GQA attention/view counters")
+    fallback = checks.get("uncached_fallback_calls")
+    require(type(fallback) is int and fallback > 0
+            and fallback == hybrid_counters.get("uncached_predict_count"),
+            "actual original stage10/member5 fallback coverage mismatch")
+    for key, value in hybrid.execution_metadata({10:[5]}).items():
+        require(hybrid_counters.get(key) is value if isinstance(value, bool) else hybrid_counters.get(key) == value,
+                "GQA underlying hybrid policy/source mismatch: "+key)
+    require(hybrid_counters.get("original_preprocessing_lists_restored") is True
+            and hybrid_counters.get("original_translator_alias_restored") is True
+            and manifest.get("component_execution_counters", {}).get("full8_member_lists_restored") is True,
+            "GQA component/preprocessor/CDF aliases were not restored")
+    fingerprints = checks.get("attention_fingerprints", {})
+    keys = ("original_attention_code_sha256", "active_attention_code_sha256", "executed_original_attention_code_sha256")
+    require(set(fingerprints) == set(keys) and all(isinstance(fingerprints[key], str)
+            and re.fullmatch("[0-9a-f]{64}", fingerprints[key]) for key in keys),
+            "well-formed actual attention fingerprints required")
+    require(fingerprints[keys[0]] == fingerprints[keys[2]] != fingerprints[keys[1]],
+            "actual original attention execution fingerprint mismatch")
+    policy = manifest.get("sampling_policy", {})
+    require(policy.get("uniform_assignment") == "preassigned_per_stage_by_physical_row"
+            and policy.get("head_retry_preserves_row_uniform") is True,
+            "GQA head retries must preserve the preassigned row uniform")
+    return dict(fingerprints)
+
+
 def validate_execution_header(manifest, *, context, query, control, worker_partition=None):
     from posteriorforge.inference_cdf import guard_baseline_source
     from posteriorforge.performance_runner import STREAM_ROLES, STREAM_DTYPES
     variant = manifest.get("variant")
-    require(variant in ("execution_cache_v1", "execution_mixture_v1", "execution_hybrid_v1"), "unknown execution variant")
+    require(variant in ("execution_cache_v1", "execution_mixture_v1", "execution_hybrid_v1", "execution_gqa_hybrid_v1"), "unknown execution variant")
     partition = worker_partition or {"rank":0,"world_size":1,"requested_count":50000}
     rank,world,count = (partition[key] for key in ("rank","world_size","requested_count"))
     require(type(world) is int and world in (1,2,4) and type(rank) is int and 0<=rank<world
@@ -179,9 +283,9 @@ def validate_execution_header(manifest, *, context, query, control, worker_parti
             "explicit nonnegative execution repetition required")
     require(manifest.get("baseline_execution_source") == guard_baseline_source(),
             "original execution-source guard changed")
-    runner_path = Path(__file__).resolve().parents[1]/"src/posteriorforge/performance_runner.py"
-    require(manifest.get("runner_source_sha256") == sha256_file(runner_path),
-            "execution runner differs from the recorded source")
+    validate_runner_source(manifest)
+    if variant == "execution_gqa_hybrid_v1":
+        validate_gqa_runtime_metadata(manifest)
     descriptor = bindings.validate_adapter_descriptor(manifest.get("compatibility_adapter"))
     validate_engine_metadata(manifest.get("execution_engine"))
     original_settings = dict(control["regressor_settings"])
@@ -189,7 +293,7 @@ def validate_execution_header(manifest, *, context, query, control, worker_parti
     require(actual_settings.get("fit_mode") == "fit_with_cache", "resident executor requires actual fit_with_cache metadata")
     actual_settings["fit_mode"] = original_settings["fit_mode"]
     policy = manifest.get("sampling_policy", {})
-    if variant in ("execution_mixture_v1", "execution_hybrid_v1"):
+    if variant in ("execution_mixture_v1", "execution_hybrid_v1", "execution_gqa_hybrid_v1"):
         validate_sampling_policy(policy)
     else:
         require(policy.get("head_policy") == "not_used" and policy.get("mass_envelope") is None
@@ -393,10 +497,58 @@ def hybrid_qualification_review(path, manifest, qualification):
             "failed_cache_producer_statuses_preserved":True}
 
 
+def gqa_hybrid_qualification_review(path, manifest, qualification):
+    from posteriorforge import performance_runner as runner, execution_cache as cache
+    from posteriorforge import execution_mixture as mixture, execution_hybrid as hybrid
+    from posteriorforge import execution_gqa_hybrid as execution
+    require(manifest.get("variant") == "execution_gqa_hybrid_v1",
+            "GQA proof cannot qualify another execution family")
+    require(validate_runner_source(manifest)["version"] == 2, "GQA proof requires runner2")
+    bindings_value = {key:manifest[key] for key in
+        ("scientific_fingerprint", "parameter_order", "context_seed", "case", "context_size",
+         "context_theta", "context_obs", "query", "checkpoint_sha256")}
+    require(sha256_file(Path(__file__).with_name("recover_gqa_hybrid_qualification.py")) == GQA_RECOVERY_SHA256,
+            "reviewed recovery source changed")
+    runner.validate_gqa_hybrid_qualification(qualification, bindings=bindings_value,
+        cache_sha256=cache.execution_source_sha256(), mixture_sha256=mixture.execution_source_sha256(),
+        hybrid_sha256=hybrid.execution_source_sha256(), query_batch_size=1024, qualification_path=path)
+    require(qualification.get("prefix_manifest_sha256") == CONTROL_MANIFEST_SHA256
+            and qualification.get("prefix_samples_sha256") == CONTROL_SAMPLES_SHA256
+            and qualification.get("fixed_prefix_row_indices") == np.linspace(0,49999,1024,dtype=int).tolist(),
+            "GQA original fixed-prefix binding changed")
+    bindings.validate_adapter_descriptor(qualification.get("compatibility_adapter"))
+    require(manifest.get("qualification_producer_schema") == qualification["schema"]
+            and manifest.get("qualification_recovery_source_sha256") == qualification.get("recovery_source_sha256"),
+            "runner did not consume the declared GQA proof/recovery")
+    actual = validate_gqa_runtime_metadata(manifest)
+    helper = runner.gqa_recovery_helper()
+    fingerprints = []
+    for stage, row in enumerate(qualification["stage_results"]):
+        for comparison in row["comparisons"]:
+            descriptors = helper.gqa_report(comparison["actual_gqa_execution"], stage, GQA_MODULE_SHA256)
+            fingerprints.extend({key:descriptor[key] for key in actual} for descriptor in descriptors)
+    require(fingerprints and all(value == actual for value in fingerprints),
+            "actual attention code fingerprints differ from qualified executions")
+    require(execution.execution_source_sha256() == GQA_WRAPPER_SHA256, "GQA wrapper changed after proof validation")
+    return {"manifest_file":str(Path(path).resolve()), "manifest_sha256":sha256_file(path),
+            "stage_coverage":list(range(21)), "full21_qualified":False,
+            "full21_gqa_hybrid_qualified":True, "full21_component_qualified":True,
+            "full21_sampler_qualified":True, "scope":"full21_GQA_hybrid_fixed_conditional_diagnostic",
+            "icdf_contract_version":2, "qualification":qualification,
+            "raw_producer_status_preserved":qualification.get("raw_status_preserved", False),
+            "recovery_scope":qualification.get("recovery_scope"),
+            "not_a_proof_of_posterior_equivalence":True}
+
+
 def qualification_review(path, manifest, *, context, query):
     require(sha256_file(path) == manifest.get("qualification_manifest_sha256"),
             "execution qualification manifest SHA256 mismatch")
     q = json.loads(Path(path).read_text())
+    if q.get("schema") in ("posteriorforge.execution_gqa_hybrid_qualification.v1",
+                            "posteriorforge.execution_gqa_hybrid_recovery.v1"):
+        return gqa_hybrid_qualification_review(path,manifest,q)
+    require(manifest.get("variant") != "execution_gqa_hybrid_v1",
+            "GQA hybrid requires its own complete source-bound proof")
     if q.get("schema")=="posteriorforge.execution_hybrid_qualification.v1":
         return hybrid_qualification_review(path,manifest,q)
     require(manifest.get("variant")!="execution_hybrid_v1","hybrid engine requires its separately assembled hybrid proof")
@@ -484,13 +636,14 @@ def authenticate_worker_aggregate(path, manifest, *, context, query, control, cu
     for key,value in required.items():
         require(manifest.get(key) is value if isinstance(value,bool) else manifest.get(key)==value,
                 "aggregate contract mismatch: "+key)
-    require(manifest.get("orchestrator_source_sha256")==sha256_file(script)
-            and manifest.get("runner_source_sha256")==sha256_file(performance_runner.__file__),
-            "aggregate/original worker source changed")
+    require(manifest.get("orchestrator_source_sha256") == ORCHESTRATOR_SHA256
+            and sha256_file(script) == ORCHESTRATOR_SHA256, "unreviewed aggregate orchestrator source")
+    aggregate_runner = validate_runner_source(manifest, aggregate=True)
     qsha=sha256_file(qualification_path)
     require(manifest.get("qualification_manifest_sha256")==qsha,"aggregate qualification SHA mismatch")
     underlying=manifest.get("worker_execution_variant")
-    modes={"execution_cache_v1":"resident_full","execution_mixture_v1":"component_mass","execution_hybrid_v1":"component_hybrid"}
+    modes={"execution_cache_v1":"resident_full","execution_mixture_v1":"component_mass",
+           "execution_hybrid_v1":"component_hybrid","execution_gqa_hybrid_v1":"component_gqa_hybrid"}
     require(underlying in modes and manifest.get("mode")==modes[underlying],"aggregate execution family mismatch")
     expected={key:control[key] for key in ("scientific_fingerprint","parameter_order","context_seed","case","context_size",
                                           "context_theta","context_obs","query","checkpoint_sha256","baseline_execution_source")}
@@ -529,6 +682,8 @@ def authenticate_worker_aggregate(path, manifest, *, context, query, control, cu
         bindings.validate_run_reference_binding(worker,custody)
         require(worker.get("qualification_manifest_sha256")==qsha
                 and worker.get("variant")==underlying,"worker qualification/execution family mismatch")
+        require(worker.get("runner_source_sha256") == manifest.get("runner_source_sha256"),
+                "aggregate/worker runner source mismatch")
         all_seeds.extend(worker["seed_streams"].values());rejections.append(worker["rejection"]);workers.append(worker)
     require(len(set(all_seeds))==len(all_seeds),"worker/rank sampling streams collide")
     require(manifest.get("rank_seed_streams")==[worker["seed_streams"] for worker in workers],
@@ -539,14 +694,22 @@ def authenticate_worker_aggregate(path, manifest, *, context, query, control, cu
     if underlying=="execution_hybrid_v1":
         require(manifest.get("hybrid_execution")==workers[0].get("hybrid_execution"),
                 "aggregate hybrid policy differs from authenticated workers")
+    if underlying == "execution_gqa_hybrid_v1":
+        require(manifest.get("gqa_hybrid_execution") == workers[0].get("gqa_hybrid_execution")
+                and all(worker.get("gqa_hybrid_execution") == workers[0]["gqa_hybrid_execution"]
+                        and worker["gqa_prediction_checks"]["attention_fingerprints"]
+                            == workers[0]["gqa_prediction_checks"]["attention_fingerprints"] for worker in workers),
+                "aggregate GQA policy/fingerprints differ across authenticated workers")
     summed={key:sum(item[key] for item in rejections) for key in
             ("support_calls","proposed","accepted_before_final_trim","returned")}
-    detail={"orchestrator_source_sha256":sha256_file(script),"worker_count":world,
+    detail={"orchestrator_source_sha256":sha256_file(script),"runner_source_authentication":aggregate_runner,"worker_count":world,
             "worker_records":records,"rank_seed_streams":[worker["seed_streams"] for worker in workers],
             "rank_order_concatenation_exact":True,"partial_worker_fallback_performed":False,
             "worker_timings":[worker["timings"] for worker in workers],
             "worker_memory":[worker["memory"] for worker in workers],
             "sampling_policies_by_rank":[worker["sampling_policy"] for worker in workers],
+            "GQA_runtime_checks_by_rank":[worker.get("gqa_prediction_checks") for worker in workers],
+            "GQA_runtime_counters_by_rank":[worker.get("gqa_execution_counters") for worker in workers],
             "summed_rejection":summed,
             "rejection_scope":"sum of independent authenticated worker counters; not a single serial rejection process"}
     return values,workers[0],detail
@@ -678,6 +841,10 @@ def run(args):
                     "sampling_rng_policy": "original shared Torch RNG; seed role posterior, repetition0"},
         "candidate": {"manifest_file": str(manifest_path), "manifest_sha256": sha256_file(manifest_path),
                       "samples_sha256": manifest["samples_sha256"], "samples_descriptor": manifest["samples"], "hybrid_execution": manifest.get("hybrid_execution"),
+                      "runner_source_authentication":validate_runner_source(effective_manifest if aggregate_detail else manifest),
+                      "gqa_hybrid_execution":manifest.get("gqa_hybrid_execution"),
+                      "gqa_prediction_checks":manifest.get("gqa_prediction_checks"),
+                      "gqa_execution_counters":manifest.get("gqa_execution_counters"),
                       "execution_policy": manifest.get("execution_policy"), "execution_engine": manifest["execution_engine"],
                       "sampling_rng_policy": manifest.get("sampling_rng_policy"), "sampling_policy": manifest.get("sampling_policy"),
                       "timings": manifest["timings"], "memory": manifest.get("memory"), "aggregate_authentication": aggregate_detail},
