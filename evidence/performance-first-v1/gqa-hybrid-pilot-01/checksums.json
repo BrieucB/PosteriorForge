@@ -1,25 +1,26 @@
 {
   "algorithm": "sha256",
   "files": {
-    "README.md": "fa303835aaefa68b3075b3df5637f6bdff56154495cff24ca9b1074f6cca839d",
+    "README.md": "583d0e4d20338f5e52abe21ddfa9ae2b8a4d4c119757e3476fc49abbc3993b91",
     "actual-stage-costs.png": "707467413ac9bab9c62ce1c634bd35b21977e46564d3c2f78d85ccc9f9987b5f",
     "budget-gqa-hybrid-pilot-snapshot.json": "e88cec04266e68f7bd7d780252554733e3d09c205f15f6201b32eb2062766e9d",
     "complete-cdf-family.png": "dc9fc3fe32bcc633203114e6924c08bfa63130a624f27d10e1d5e85f096fe43f",
-    "cuda-memory.png": "763aec7440cf47948a287428a16785ec7463b5ba2c1383de4b831c8b49b3a09f",
+    "cuda-memory.png": "3377473b82b17f5fd95b9f834f365b4be4606230364b981ba9515746dbaa7d2d",
     "earlier-hybrid-comparison.json": "c29ce0001211749dfb40f45f3523bd760d72e90648ec84cea8a31a8bb5660a43",
     "execution-review-extract.json": "faef67e8a6fb0df28690d3da7adb223774d50c3c08df1e5b6158711ea23ad1a6",
-    "figure-data.json": "57131bac3c95f0a88396c5d4baf53f020135e49938841e401a26e60c66840d4c",
-    "pilot-cdf-family.csv": "150e06cdd5942b6757e33198b03a8069d62f60ea308dda6f8ffe9ee70061f169",
-    "pilot-stage-events.csv": "b77c99b7fcfdc43991d04ea16b06c2b944d78c3b8c0c09e1b0c15fca6b555b70",
-    "pilot-summary.json": "b34e37d2d5bdff471b7ffda8fd5481e097d37437f5a34e2f489bf5f2d3f3c9ec",
+    "figure-data.json": "e263ad21a4da364fb272211085b55b35fffebb472e20785bde68bd7a0e336b4b",
+    "memory-peak-scope-audit.json": "43e7c073aaf2b61caddfad6caf65be8e4585fdea1b6601c5f8655dbed94f5dda",
+    "pilot-cdf-family.csv": "c8572636d3e990c7362d49bde3234284c8b04fa7670936ebaa190d23eb4d1e73",
+    "pilot-stage-events.csv": "2cf4704583956a8a36870a28a94090f05e4c37f2a2e9760d8204d154185cd28b",
+    "pilot-summary.json": "ae3c7fe52738b365130aad2ca9f9f1d76c8ac33a0df8771d45d9715f58da4514",
     "posterior-all-21-cdfs.png": "6236d129b680cbfdecf02bcf1a763da88e2edfc969c0a88712b3e1bbb90481a3",
     "posterior-worst-four-densities.png": "6129cdcd2ccfcf926c7db658614affc5792920e509777f128e022a23476f05d9",
-    "render-verification.json": "871ca98ef1d521fe320f52f7c8eb031287dd51aac00db5b266650f94e1011dfb",
-    "report.md": "70dae47b3b45bc3dc5c55b494fe17f15069722534158a2aae34eddecaccb974d",
-    "runtime-and-request-cost.png": "b5c7956e1f3d8b8e234074f6c6c91a3fd056413e7962bf8a01e6305dd0ad810f",
+    "render-verification.json": "a0131e23b611adb3c9be311cbdacac0b4e9f3c903211fc6738c2df489accce71",
+    "report.md": "a3f4aaf04a281fcbe04ec94307c992bb44291ebfe584d388952a83e85888f3aa",
+    "runtime-and-request-cost.png": "6bbc586a60a216cddb4193ebb9b8174c817b62d8c95119148a0338b2760f2ae4",
     "science-control-repeat-tails.json": "ee73f13057daac0f9cd990f7587fab905025d63fa50de1b6998641633983fae0",
     "signed-cdf-flags.png": "3f5d9a07edf49c6336d8bf7555f6c2e1e227e66823c3df57798230be196c859e",
-    "timings.csv": "060160eb5fe3ca077e3658935dec80733dc4b46d1cdade93cecb1a207d0fd163"
+    "timings.csv": "072cbf1159ba98e21e5b2df90e1ae375a8c6ef6af934d7bea6a87312f48d4972"
   },
   "schema": "posteriorforge.evidence_checksums.v1"
 }

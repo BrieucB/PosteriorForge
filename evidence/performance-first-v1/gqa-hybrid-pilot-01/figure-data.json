@@ -3606,14 +3606,22 @@
     ]
   ],
   "figures": {
-    "cuda-memory.png": "763aec7440cf47948a287428a16785ec7463b5ba2c1383de4b831c8b49b3a09f",
+    "cuda-memory.png": "3377473b82b17f5fd95b9f834f365b4be4606230364b981ba9515746dbaa7d2d",
     "posterior-all-21-cdfs.png": "6236d129b680cbfdecf02bcf1a763da88e2edfc969c0a88712b3e1bbb90481a3",
     "posterior-worst-four-densities.png": "6129cdcd2ccfcf926c7db658614affc5792920e509777f128e022a23476f05d9",
-    "runtime-and-request-cost.png": "b5c7956e1f3d8b8e234074f6c6c91a3fd056413e7962bf8a01e6305dd0ad810f"
+    "runtime-and-request-cost.png": "6bbc586a60a216cddb4193ebb9b8174c817b62d8c95119148a0338b2760f2ae4"
   },
   "original_gate_sha256": "42163c5d77f0f1f8f7e1bb3a78c81fba43ca36a0682446a0dc533544995e490d",
   "plotted_posterior_cohorts": [
     "Corrected control",
+    "Control rep 1",
+    "Control rep 2",
+    "FP32 hybrid pilot",
+    "FP32 GQA hybrid pilot"
+  ],
+  "plotted_timing_cohorts": [
+    "Corrected control",
+    "Control rep 0",
     "Control rep 1",
     "Control rep 2",
     "FP32 hybrid pilot",
@@ -3741,7 +3749,7 @@
   "samples_clipped_or_repaired": false,
   "schema": "posteriorforge.execution_figures.v1",
   "scope": "Saved finite-cohort visual evidence; not population equivalence, global calibration, or an execution acceptance decision.",
-  "script_sha256": "948055a03bef0247d6d3998f65164d54112df67c8b09685287deeb9695a886ff",
+  "script_sha256": "6295641979f58f2b17ef1098fcbf6ea9d295cc694a8649eacc54b55ba8a19b09",
   "tail_diagnostic": {
     "attribution": "Built with PriorLabs-TabPFN",
     "classification": {
@@ -3941,6 +3949,16 @@
     ]
   },
   "tail_diagnostic_sha256": "ee73f13057daac0f9cd990f7587fab905025d63fa50de1b6998641633983fae0",
+  "timing_only_cohorts": [
+    {
+      "binding": {
+        "manifest_sha256": "1d13af13123be5b57d5ce07cc4cf684932d5a5338a486770cfe60663efc031c0",
+        "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/performance-first-v1/controls/rep-0/seed-20261111-case-0",
+        "samples_sha256": "27e51ad1b1ee615fc921ee4f5c237155139304da3e7c193f7781a389cee6d53e"
+      },
+      "label": "Control rep 0"
+    }
+  ],
   "timings": [
     {
       "accepted_per_second": 20.669262477245518,
@@ -3952,6 +3970,18 @@
       "proposed": 50461,
       "request_wall_gpu_hours": 0.6719586102396715,
       "total_seconds": 2434.466050017858,
+      "workers": 1
+    },
+    {
+      "accepted_per_second": 21.145665860013512,
+      "label": "Control rep 0",
+      "peak_allocated_gib": 8.359045028686523,
+      "peak_reserved_gib": 22.3203125,
+      "physical_status": "model_failure",
+      "posterior_request_seconds": 2364.5507467584684,
+      "proposed": 50461,
+      "request_wall_gpu_hours": 0.6568196518773524,
+      "total_seconds": 2372.390916720964,
       "workers": 1
     },
     {

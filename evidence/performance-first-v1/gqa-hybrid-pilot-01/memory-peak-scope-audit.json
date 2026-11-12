@@ -1,0 +1,72 @@
+{
+  "attribution": "Built with PriorLabs-TabPFN",
+  "audited_source_sha256": {
+    "historical:src/posteriorforge/performance_runner.py": "0a071ae7d016b4e99b75940da878d6c37eeab7f25a92b921efb2a39d66fd429d",
+    "src/posteriorforge/compat_cdf.py": "7a86fbbefdb0fa7e850a394bea8af710c2e5f0139c10cdce1fd272fb9709eec0",
+    "src/posteriorforge/execution_cache.py": "45cd3107c50dcf73d03167e2b6dd045cccdb798337e8d3c47b5210cc30dc1a03",
+    "src/posteriorforge/execution_gqa.py": "8b2cff752855e1b1966d2e374322602fa71368b1926da9d3b0261edd111aee6b",
+    "src/posteriorforge/execution_gqa_hybrid.py": "ac22c67c23403723902805666d1239bd30a8af355554df58a8638a8fd1f21e82",
+    "src/posteriorforge/execution_hybrid.py": "5dfdefa870489ded594de1db13a55a3da5948c720d7a9fd587ebe3a8f8be00a2",
+    "src/posteriorforge/execution_mixture.py": "e71f43b73ae8259c20b5d7b52feccc7c851e9a2fbb86d869bc0a5f7f3af792a1",
+    "src/posteriorforge/inference.py": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e",
+    "src/posteriorforge/inference_cdf.py": "efc60d03ee6acf8b0ce68a470c55e42dad7f96006dc2613f9370cfc714c34fb9",
+    "src/posteriorforge/upstream/__init__.py": "2b280199c35aa50c215df250f60e9c656c5d563dfc1eb9dcf4605d019f0c6733",
+    "src/posteriorforge/upstream/npe_pfn/__init__.py": "a32a437d7910cec8c251ceb6849fece6b61ece32c16e8a346e4afae82bf7bc08",
+    "src/posteriorforge/upstream/npe_pfn/accept_reject_sampler.py": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+    "src/posteriorforge/upstream/npe_pfn/npe_pfn.py": "29517328b3ff23e2e8040d19f33e79adef5fc7f91db2cffccf60234344399a85",
+    "src/posteriorforge/upstream/npe_pfn/restricted_prior.py": "13026cf8a4618aa4ca6406e0596a7ec97c0664de5b7c2b4dd7f31e4c32ece160",
+    "src/posteriorforge/upstream/npe_pfn/support_posterior.py": "022e5b22b9397e9faea08b73df76b5a0c5cf0c012b665decfe28c5b725c362ee",
+    "src/posteriorforge/upstream/npe_pfn/tsnpe_pfn.py": "f959662adf6ac6ed5aecefcebad907ef951c22bf05bbcf2c8e0e6312cb054034",
+    "tabpfn/__init__.py": "d849d4b3c11b18901fd64b0a68faa20d6bda7145b49e6901562fda750f28d7bf",
+    "tabpfn/base.py": "b80fbf83b8f8a7eb69ae77c0a7f0b397a43e32c1c29b8392a0ff9ee525218837",
+    "tabpfn/classifier.py": "78224a6b50e7ad7429850643e1c52b5c6e308728a410ce1cd12040966d8d7d13",
+    "tabpfn/config.py": "d6ac4523f5553b469b49a1e2b954bef6828d52dc23163d67f62656556c36cc8e",
+    "tabpfn/constants.py": "5f8a5a3bc8f328d3dd62ca2bee16d72c11b94e25d8130af5586e9101fe483334",
+    "tabpfn/inference.py": "62470bbfdd4879dd52db86ea7a6e53ae41fbcc22379bfb2866ad906adc71a0bd",
+    "tabpfn/misc/_sklearn_compat.py": "28d7c010f1db6601fb104962de6b803b9d70b7064dedea235a5f7a090349415a",
+    "tabpfn/misc/debug_versions.py": "2f39ce878a3c45d1bf29ec7bcf4fba6bdea3296aa2a5f871d15f06124878c548",
+    "tabpfn/model/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tabpfn/model/bar_distribution.py": "3e753389dcb8f3970452e82ff832d40857cf3def29b60f6d4f95c0e1b52937bf",
+    "tabpfn/model/config.py": "23c9be98a870a0b3042677561d3bd410b7886c1cbd06a5e05e10d3bd8befc427",
+    "tabpfn/model/encoders.py": "e16e03c320c69dcd2e9823925d59fa20a0c52008d8cc77ca961c919c7221213e",
+    "tabpfn/model/layer.py": "b7c230f917b3e346e1d9cc83eb9e06fd939dbbd3fe3b2c5f7a8e4b7505142754",
+    "tabpfn/model/loading.py": "bfdccc072046d242c7d0b5c6b91f0d00c33ade9a3296adbe56f0dfbb800d6929",
+    "tabpfn/model/memory.py": "80783faf3a29e8bbafeaeedfc069bfd1ae275cb9dc607c234548aeaba2aa2050",
+    "tabpfn/model/mlp.py": "6e91b3141dc5f21ab50d2f1d10acede48b35c0f5373eee5f3b8268ee339f620f",
+    "tabpfn/model/multi_head_attention.py": "512220bbf253fb856003f7084976a478753644c9963d563ee678eb3be2c28f35",
+    "tabpfn/model/preprocessing.py": "7da6b7c6d060a396b4aa7024fd5ac2c9bfddbc7d62029b113962cecbdaca6787",
+    "tabpfn/model/transformer.py": "53471f33e5adff20af64a4730b9caba49cf6490f4e2119397b81ef6b3c0f9751",
+    "tabpfn/preprocessing.py": "fba9df553f3f7d190972a531c5627f09b88e8b8f537d298df7083f7dd972843d",
+    "tabpfn/regressor.py": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+    "tabpfn/utils.py": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1"
+  },
+  "candidate_manifest_sha256": "87a54e1627cf8d48e9a5bb00daaccdc32671838b9b9573f2f5a81da0e4506abc",
+  "full_request_peak_scope": true,
+  "interpretation": "allocated and reserved peaks cover the whole request; reserved pool capacity is distinct from concurrently live allocated tensors",
+  "limitation": "static source audit authenticated by executed runner/engine source guards; no allocator-policy change or new profiler run",
+  "literal_peak_reset_sites": [
+    {
+      "line": 441,
+      "source": "historical:src/posteriorforge/performance_runner.py",
+      "text": "torch.cuda.synchronize();torch.cuda.reset_peak_memory_stats();request_start=time.perf_counter()"
+    },
+    {
+      "line": 119,
+      "source": "src/posteriorforge/inference.py",
+      "text": "torch.cuda.reset_peak_memory_stats()"
+    }
+  ],
+  "memory": {
+    "peak_allocated_bytes": 5784094720,
+    "peak_reserved_bytes": 32096911360
+  },
+  "peak_allocated_gib": 5.386857986450195,
+  "peak_reserved_gib": 29.892578125,
+  "per_stage_peak_reset_on_active_path": false,
+  "reset_count_on_active_execution_path": 1,
+  "reset_position": "immediately before complete accept_reject request, including all stage preparation and refill waves",
+  "runner_source_revision": "2bb6f3809a32b6ebe8933669172c681058151f50",
+  "runner_source_sha256": "0a071ae7d016b4e99b75940da878d6c37eeab7f25a92b921efb2a39d66fd429d",
+  "schema": "posteriorforge.request_memory_peak_scope_audit.v1",
+  "snapshot_position": "after all50000 supported vectors and complete request, before final close"
+}

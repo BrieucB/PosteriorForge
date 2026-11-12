@@ -127,6 +127,23 @@ def render(*, root, output):
     require([(row["label"], row["binding"]["samples_sha256"])
              for row in figure_data["assessments"]] == list(zip(expected_labels, expected_payloads)),
             "base report cohort labels or payload bindings changed")
+    timing_only = figure_data.get("timing_only_cohorts", [])
+    require(len(timing_only) == 1 and timing_only[0]["label"] == "Control rep 0" and
+            timing_only[0]["binding"]["manifest_sha256"] == controls[0][1]["manifest_sha256"] and
+            timing_only[0]["binding"]["samples_sha256"] == controls[0][1]["samples_sha256"],
+            "base report must retain control repetition 0 as an authenticated timing-only run")
+    expected_timing_labels = expected_labels[:1] + ["Control rep 0"] + expected_labels[1:]
+    require(figure_data.get("plotted_timing_cohorts") == expected_timing_labels,
+            "base report must show all three distinct control timing measurements")
+    timing_rows = figure_data["timings"]
+    require([row["label"] for row in timing_rows] == expected_timing_labels,
+            "base timing labels changed")
+    for repetition, (control_manifest, _) in enumerate(controls):
+        row = timing_rows[repetition + 1]
+        require(row["posterior_request_seconds"] ==
+                control_manifest["timings"]["posterior_request_seconds"] and
+                row["total_seconds"] == control_manifest["wrapper_total_seconds"],
+                "control timing measurement mismatch")
     for key in ("scientific_fingerprint", "parameter_order", "context_seed", "case",
                 "context_size", "query", "checkpoint_sha256", "context_theta", "context_obs"):
         require(manifest[key] == earlier_manifest[key], "earlier hybrid mismatch: " + key)
@@ -308,14 +325,14 @@ def render(*, root, output):
     save(fig, "complete-cdf-family.png")
     np.savez_compressed(output / "signed-cdf-witnesses.npz", **witnesses)
     with (output / "pilot-cdf-family.csv").open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(family[0]))
+        writer = csv.DictWriter(handle, fieldnames=list(family[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(family)
     stage_fields = ("proposal_round", "proposed_rows", "stage_index", "prepare_seconds",
                     "predict_and_sample_seconds", "fit_stock_cache_seconds",
                     "resident_move_seconds", "uncached_fit_seconds")
     with (output / "pilot-stage-events.csv").open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=stage_fields)
+        writer = csv.DictWriter(handle, fieldnames=stage_fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows({key: row[key] for key in stage_fields} for row in events)
     meta = {
@@ -341,7 +358,9 @@ def render(*, root, output):
         "metadata_writer_restored": manifest["metadata_writer_restored"],
         "sources_unchanged": manifest["sources_unchanged"],
         "plotted_posterior_cohorts": expected_labels,
-        "control_rep_0_omitted_from_plots_because_payload_matches_primary": True,
+        "control_rep_0_omitted_from_posterior_plots_because_payload_matches_primary": True,
+        "control_rep_0_timing_and_memory_plotted_separately": True,
+        "plotted_timing_cohorts": expected_timing_labels,
         "count": 50000, "one_optimized_repetition_only": True, "control_repetitions": 3,
         "controls": [{"binding": binding, "request_seconds": m["timings"]["posterior_request_seconds"],
                       "wrapper_seconds": m["wrapper_total_seconds"]} for m, binding in controls],
@@ -434,7 +453,7 @@ All 21 marginal and 32 joint comparisons remain in the complete family plot, pil
 
 The declared full-21 GQA hybrid fixed-conditional screen passed, with the original corrected uncached route retained only for stage 10, member 5. The cache-only full-21 screen remains failed. The raw GPU qualification producer remains archived with its original failed status: a separate source-bound CPU recovery resolves only process addresses of two pinned preprocessing functions, preserving exact configuration type/pickle, numeric, state, RNG and source checks. These fixed-prefix engineering checks do not prove the full posterior law. All {checks['verified_calls']:,} actual prediction contexts passed source and attention-alias restoration checks. The run recorded {counters['attention_call_count']:,} attention calls, including {counters['expanded_attention_calls']:,} expanded shared-KV views. The original engine descriptor still records qualified=false; the separately authenticated recovered qualification records the declared full-21 GQA hybrid pass. Host reuse remains a separate candidate and contributes no speedup to this pilot.
 
-The plotted cohorts omit control repetition 0 because its posterior payload is byte-identical to the corrected primary control; all three contemporaneous control timings still contribute to the reported median. The earlier hybrid pilot is plotted for execution context.
+The posterior CDF and density curves omit control repetition 0 because its payload is byte-identical to the corrected primary control. Its distinct 2364.550747-second request measurement remains a separate timing bar, alongside control repetitions 1 and 2; all three contemporaneous control timings contribute to the reported median. The historical primary control retains its own timing bar. The earlier hybrid pilot is plotted for execution context.
 
 Compared with that earlier hybrid, the GQA pilot was {earlier_comparison['request_speedup_vs_earlier_hybrid']:.3f}x faster by request wall time and {earlier_comparison['wrapper_speedup_vs_earlier_hybrid']:.3f}x faster by wrapper wall time. The saved-cohort comparison has maximum exact CDF distance {earlier_relative['max_cdf_difference']:.5f}, mean change at most {earlier_relative['max_mean_difference_reference_sd']:.6f} reference SD and SD change at most {100 * earlier_relative['max_sd_fraction_difference']:.4f}%, with no investigation thresholds exceeded in that pair. Both pilots used the same named sampling-stream roles and seeds, so these are coupled cohorts rather than independent repetitions. Their 452- and 457-proposal refills can alter retained-row alignment. All 53 paired distances, stream metadata and rejection counts remain in earlier-hybrid-comparison.json; their close agreement is diagnostic evidence, not a population-equivalence claim.
 

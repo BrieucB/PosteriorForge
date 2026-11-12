@@ -10,7 +10,8 @@
   },
   "candidate_request_seconds": 607.0815207690466,
   "candidate_wrapper_seconds": 617.2958688519429,
-  "control_rep_0_omitted_from_plots_because_payload_matches_primary": true,
+  "control_rep_0_omitted_from_posterior_plots_because_payload_matches_primary": true,
+  "control_rep_0_timing_and_memory_plotted_separately": true,
   "control_repetitions": 3,
   "control_request_median_seconds": 2380.309143734048,
   "control_wrapper_median_seconds": 2397.317791893147,
@@ -568,6 +569,14 @@
     "FP32 hybrid pilot",
     "FP32 GQA hybrid pilot"
   ],
+  "plotted_timing_cohorts": [
+    "Corrected control",
+    "Control rep 0",
+    "Control rep 1",
+    "Control rep 2",
+    "FP32 hybrid pilot",
+    "FP32 GQA hybrid pilot"
+  ],
   "prediction_and_sampling_seconds": 216.98219142656308,
   "preparation_seconds": 374.7139566987753,
   "primary": {
@@ -723,11 +732,11 @@
   "sampling_stream_roles_and_seeds_equal_to_earlier_hybrid": true,
   "schema": "posteriorforge.completed_gqa_hybrid_pilot_summary.v1",
   "signed_curves_sha256": "b32cf1f46205f04ea6d3face809cfc79c540c5f0e60376f2a8f3de164efd32d3",
-  "source_sha256": "2e31bc239853e0e77e85643146f0ffd6d520e6b436879b0d85af7be07f4c9db5",
+  "source_sha256": "41b77c796a433342f41b5541ea98a7e3bc52926dd917e96214862e8f2feaa84c",
   "sources_unchanged": true,
   "tables": {
-    "pilot-cdf-family.csv": "150e06cdd5942b6757e33198b03a8069d62f60ea308dda6f8ffe9ee70061f169",
-    "pilot-stage-events.csv": "b77c99b7fcfdc43991d04ea16b06c2b944d78c3b8c0c09e1b0c15fca6b555b70"
+    "pilot-cdf-family.csv": "c8572636d3e990c7362d49bde3234284c8b04fa7670936ebaa190d23eb4d1e73",
+    "pilot-stage-events.csv": "2cf4704583956a8a36870a28a94090f05e4c37f2a2e9760d8204d154185cd28b"
   },
   "wrapper_speedup": 3.8835798404932116
 }

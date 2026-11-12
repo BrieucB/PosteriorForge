@@ -5,10 +5,13 @@ Built with PriorLabs-TabPFN. Every posterior curve contains 50,000 complete acce
 | Run | Request seconds | Vectors/s | Physical result |
 |---|---:|---:|---|
 | Corrected control | 2419.0509968628176 | 20.669262477245518 | model_failure |
+| Control rep 0 | 2364.5507467584684 | 21.145665860013512 | model_failure |
 | Control rep 1 | 2383.4860378028825 | 20.977676901388698 | model_failure |
 | Control rep 2 | 2380.309143734048 | 21.005674885390643 | model_failure |
 | FP32 hybrid pilot | 935.5202134829015 | 53.44619953624749 | model_failure |
 | FP32 GQA hybrid pilot | 607.0815207690466 | 82.36126169128052 | model_failure |
+
+Timing-only runs retain their distinct runtime and memory measurements without adding duplicate posterior curves or relative-assessment rows. Their complete 50k payload and scientific bindings pass the same checks as the plotted cohorts.
 
 | Run | Max two-sample CDF | Max mean change / reference SD | Max SD fractional change | Investigation flag |
 |---|---:|---:|---:|---|
@@ -59,7 +62,7 @@ All 21 marginal and 32 joint comparisons remain in the complete family plot, pil
 
 The declared full-21 GQA hybrid fixed-conditional screen passed, with the original corrected uncached route retained only for stage 10, member 5. The cache-only full-21 screen remains failed. The raw GPU qualification producer remains archived with its original failed status: a separate source-bound CPU recovery resolves only process addresses of two pinned preprocessing functions, preserving exact configuration type/pickle, numeric, state, RNG and source checks. These fixed-prefix engineering checks do not prove the full posterior law. All 1,285 actual prediction contexts passed source and attention-alias restoration checks. The run recorded 31,272 attention calls, including 15,492 expanded shared-KV views. The original engine descriptor still records qualified=false; the separately authenticated recovered qualification records the declared full-21 GQA hybrid pass. Host reuse remains a separate candidate and contributes no speedup to this pilot.
 
-The plotted cohorts omit control repetition 0 because its posterior payload is byte-identical to the corrected primary control; all three contemporaneous control timings still contribute to the reported median. The earlier hybrid pilot is plotted for execution context.
+The posterior CDF and density curves omit control repetition 0 because its payload is byte-identical to the corrected primary control. Its distinct 2364.550747-second request measurement remains a separate timing bar, alongside control repetitions 1 and 2; all three contemporaneous control timings contribute to the reported median. The historical primary control retains its own timing bar. The earlier hybrid pilot is plotted for execution context.
 
 Compared with that earlier hybrid, the GQA pilot was 1.541x faster by request wall time and 1.596x faster by wrapper wall time. The saved-cohort comparison has maximum exact CDF distance 0.00136, mean change at most 0.000652 reference SD and SD change at most 0.0678%, with no investigation thresholds exceeded in that pair. Both pilots used the same named sampling-stream roles and seeds, so these are coupled cohorts rather than independent repetitions. Their 452- and 457-proposal refills can alter retained-row alignment. All 53 paired distances, stream metadata and rejection counts remain in earlier-hybrid-comparison.json; their close agreement is diagnostic evidence, not a population-equivalence claim.
 

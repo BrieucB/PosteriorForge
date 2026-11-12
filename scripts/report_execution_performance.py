@@ -31,7 +31,7 @@ def load_run(path):
     return values,manifest,{'manifest_sha256':sha256_file(path/'manifest.json'),'samples_sha256':sha256_file(payload),'path':str(path)}
 
 
-def render(*,control,reference,output,runs=(),qualification=None,tail_diagnostic=None,budget_summary=None):
+def render(*,control,reference,output,runs=(),timing_runs=(),qualification=None,tail_diagnostic=None,budget_summary=None):
     output=Path(output);output.mkdir(parents=True,exist_ok=False)
     control_values,control_manifest,control_binding=load_run(control)
     binding_script=Path(__file__).with_name('evaluate_cdf_pilot.py')
@@ -58,6 +58,14 @@ def render(*,control,reference,output,runs=(),qualification=None,tail_diagnostic
         for key in ('scientific_fingerprint','parameter_order','context_seed','case','context_size','query','checkpoint_sha256','context_theta','context_obs'):
             if manifest[key]!=control_manifest[key]:raise ValueError('incomparable run binding: '+key)
         data.append((label,values,manifest,binding))
+    timing_only=[]
+    for declaration in timing_runs:
+        label,path=declaration.split('=',1);values,manifest,binding=load_run(path)
+        if label in {item[0] for item in data+timing_only}:raise ValueError('duplicate timing-only label: '+label)
+        for key in ('scientific_fingerprint','parameter_order','context_seed','case','context_size','query','checkpoint_sha256','context_theta','context_obs'):
+            if manifest[key]!=control_manifest[key]:raise ValueError('incomparable timing-only run binding: '+key)
+        timing_only.append((label,values,manifest,binding))
+    timing_data=data[:1]+timing_only+data[1:]
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -74,6 +82,10 @@ def render(*,control,reference,output,runs=(),qualification=None,tail_diagnostic
         relative['policy_override']='Explicit human performance-first authorization; physical assessment retained separately.'
         assessments.append({'label':label,'binding':binding,'absolute':absolute,'relative':relative,
                             'absolute_physical_gate_required_for_performance':False})
+    for label,values,manifest,binding in timing_data:
+        absolute=next((item['absolute'] for item in assessments
+                       if item['binding']['samples_sha256']==binding['samples_sha256']),None)
+        if absolute is None:absolute=assess_samples(values,ref,support_mask=support_mask(values))
         t=manifest.get('timings',{});m=manifest.get('memory',{});g=manifest.get('world_size',1)
         request=t.get('posterior_request_seconds');total=manifest.get('wrapper_total_seconds',t.get('total_seconds'))
         timing_rows.append({'label':label,'workers':g,'posterior_request_seconds':request,'total_seconds':total,
@@ -139,7 +151,7 @@ def render(*,control,reference,output,runs=(),qualification=None,tail_diagnostic
                 ax.barh(np.arange(len(rows)),values,color='#238e8b');ax.set_yticks(np.arange(len(rows)),[r['name'][:75] for r in rows],fontsize=7);ax.invert_yaxis();ax.set(xlabel='Summed kernel seconds (may overlap)',title=label)
             fig.suptitle('Actual bounded CPU/CUDA trace windows; query counts and capture scope retained in provenance');fig.tight_layout();save(fig,'bounded-trace-kernels.png')
     with (output/'timings.csv').open('w',newline='') as f:
-        writer=csv.DictWriter(f,fieldnames=list(timing_rows[0]));writer.writeheader();writer.writerows(timing_rows)
+        writer=csv.DictWriter(f,fieldnames=list(timing_rows[0]),lineterminator="\n");writer.writeheader();writer.writerows(timing_rows)
     tail=json.loads(Path(tail_diagnostic).read_text()) if tail_diagnostic else None
     budget=json.loads(Path(budget_summary).read_text()) if budget_summary else None
     meta={'schema':'posteriorforge.execution_figures.v1','attribution':'Built with PriorLabs-TabPFN','script_sha256':sha256_file(__file__),
@@ -148,9 +160,14 @@ def render(*,control,reference,output,runs=(),qualification=None,tail_diagnostic
         'qualification_manifest_sha256':sha256_file(qualification) if qualification else None,
         'tail_diagnostic_sha256':sha256_file(tail_diagnostic) if tail_diagnostic else None,'tail_diagnostic':tail,'budget_summary_sha256':sha256_file(budget_summary) if budget_summary else None,'budget_summary':budget,
         'scope':'Saved finite-cohort visual evidence; not population equivalence, global calibration, or an execution acceptance decision.'}
+    if timing_only:
+        meta.update(timing_only_cohorts=[{'label':label,'binding':binding} for label,_,_,binding in timing_only],
+                    plotted_timing_cohorts=[row['label'] for row in timing_rows])
     write_json(output/'figure-data.json',meta)
     lines=['# PosteriorForge performance evidence','','Built with PriorLabs-TabPFN. Every posterior curve contains 50,000 complete accepted physical vectors. Runtime qualification and absolute physical accuracy are separate decisions. These plots alone do not establish an optimized execution pass.','','| Run | Request seconds | Vectors/s | Physical result |','|---|---:|---:|---|']
     for r in timing_rows:lines.append(f"| {r['label']} | {r['posterior_request_seconds']} | {r['accepted_per_second']} | {r['physical_status']} |")
+    if timing_only:
+        lines.extend(['','Timing-only runs retain their distinct runtime and memory measurements without adding duplicate posterior curves or relative-assessment rows. Their complete 50k payload and scientific bindings pass the same checks as the plotted cohorts.'])
     lines.extend(['','| Run | Max two-sample CDF | Max mean change / reference SD | Max SD fractional change | Investigation flag |','|---|---:|---:|---:|---|'])
     for item in assessments:
         relative=item['relative']
@@ -170,5 +187,5 @@ def render(*,control,reference,output,runs=(),qualification=None,tail_diagnostic
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     for key in ('control','reference','output'):p.add_argument('--'+key,required=True)
-    p.add_argument('--run',action='append',dest='runs',default=[]);p.add_argument('--qualification');p.add_argument('--tail-diagnostic');p.add_argument('--budget-summary')
+    p.add_argument('--run',action='append',dest='runs',default=[]);p.add_argument('--timing-run',action='append',dest='timing_runs',default=[],help='label=path: authenticated timing/memory run without an additional posterior curve');p.add_argument('--qualification');p.add_argument('--tail-diagnostic');p.add_argument('--budget-summary')
     print(json.dumps(render(**vars(p.parse_args())),indent=2))

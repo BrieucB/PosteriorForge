@@ -1,12 +1,14 @@
 {
   "actual_gqa_sources_and_alias_restoration_checks_passed": true,
-  "all_seven_figures_byte_identical_to_saved_actual_report": true,
+  "all_seven_existing_figure_hashes_unchanged": true,
   "attribution": "Built with PriorLabs-TabPFN",
+  "authenticated_timing_only_cohort_checks_passed": true,
   "cdf_family_axes": 53,
   "cdf_family_review_match_absolute_tolerance": 1e-12,
   "cdf_family_tick_labels_overlap": false,
   "complete_stage_events": 42,
   "control_median_uses_all_three_repetitions": true,
+  "csv_lineterminator": "LF",
   "earlier_hybrid_comparison_match_absolute_tolerance": 1e-12,
   "earlier_hybrid_stream_coupling_verified": true,
   "environment": "verified reference Python 3.11 environment",
@@ -31,7 +33,7 @@
         1687,
         756
       ],
-      "sha256": "763aec7440cf47948a287428a16785ec7463b5ba2c1383de4b831c8b49b3a09f"
+      "sha256": "3377473b82b17f5fd95b9f834f365b4be4606230364b981ba9515746dbaa7d2d"
     },
     "posterior-all-21-cdfs.png": {
       "pixels": [
@@ -49,10 +51,10 @@
     },
     "runtime-and-request-cost.png": {
       "pixels": [
-        2294,
+        2296,
         766
       ],
-      "sha256": "b5c7956e1f3d8b8e234074f6c6c91a3fd056413e7962bf8a01e6305dd0ad810f"
+      "sha256": "6bbc586a60a216cddb4193ebb9b8174c817b62d8c95119148a0338b2760f2ae4"
     },
     "signed-cdf-flags.png": {
       "pixels": [
@@ -62,8 +64,10 @@
       "sha256": "3f5d9a07edf49c6336d8bf7555f6c2e1e227e66823c3df57798230be196c859e"
     }
   },
+  "five_nontiming_figures_byte_identical_to_saved_actual_report": true,
   "fresh_generic_report_then_details_render": true,
   "full_independent_review_in_git_package": false,
+  "generic_renderer_source_sha256": "0f48d04c1cc544c8e2a55ec99fb0524241dbe5df3117e0aca09ed2cea0e5909d",
   "guard_checks": {
     "legacy_section_replacement": true,
     "malformed_markers_rejected_without_write": true,
@@ -73,22 +77,32 @@
     "portable_source_paths": true,
     "wrong_cohort_label_rejected_without_write": true
   },
+  "lf_csv_reproduction_verified": true,
   "no_earlier_randomized_p_values_transferred": true,
   "no_new_permutation_diagnostic": true,
   "overall_runtime_phase_complete": false,
   "plot_omits_identical_control_rep_0_payload": true,
+  "posterior_curve_cohorts": 5,
   "posterior_rows_or_flags_removed": false,
   "raw_posterior_npz_in_git_package": false,
   "render_surface": "remote Karolina CPU, Agg; saved artifacts only",
   "repeated_details_render_all_outputs_byte_stable": true,
-  "reporting_source_sha256": "2e31bc239853e0e77e85643146f0ffd6d520e6b436879b0d85af7be07f4c9db5",
+  "reporting_source_sha256": "e326346ef9e50e7f290d13b99d6a29e273ebe27fd88331247aeedf4f82b013a2",
+  "reporting_sources_after_lf_normalization": {
+    "report_execution_performance.py": "6295641979f58f2b17ef1098fcbf6ea9d295cc694a8649eacc54b55ba8a19b09",
+    "report_gqa_pilot_details.py": "41b77c796a433342f41b5541ea98a7e3bc52926dd917e96214862e8f2feaa84c"
+  },
   "request_legend_overlaps_cost_bars": false,
   "schema": "posteriorforge.gqa_hybrid_pilot_render_verification.v1",
   "signed_cdf_curve_npz_in_git_package": false,
   "strict_five_cohort_labels_and_payload_bindings_verified": true,
+  "timing_and_memory_cohorts": 6,
+  "timing_and_memory_figures_regenerated_with_all_three_controls": true,
+  "timing_and_memory_plots_retain_distinct_control_rep_0_measurement": true,
+  "timing_only_scientific_binding_mismatch_rejected_before_figures": true,
   "visual_review": {
     "interpretation": "Primary CDF investigations, absolute model_failure and the supported control tail remain visible.",
-    "method": "remote previews of all seven figures, all 21 CDF panels and shared legends",
+    "method": "Remote previews of all seven figures; updated timing/memory plots show historical primary, controls 0/1/2, earlier hybrid and GQA pilot with clear labels.",
     "result": "pass"
   }
 }

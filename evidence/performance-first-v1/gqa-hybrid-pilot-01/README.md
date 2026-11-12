@@ -11,7 +11,7 @@ The request took **607.081521 seconds** (10.12 minutes), versus a **2380.309144-
 | Repetition 2 | 2380.309144 | 2399.943702 |
 | Median | 2380.309144 | 2397.317792 |
 
-The plots omit control repetition 0 because its posterior payload is byte-identical to the corrected historical primary control. All three contemporaneous control timings contribute to the medians above. The five plotted cohorts are the corrected primary control, control repetitions 1 and 2, the earlier FP32 hybrid, and the new FP32 GQA hybrid.
+The posterior CDF and density curves omit control repetition 0 because its payload is byte-identical to the corrected historical primary control. Its distinct runtime and memory measurements remain visible as a separate bar. All three contemporaneous control timings contribute to the medians above. The five posterior-curve cohorts are the corrected primary control, control repetitions 1 and 2, the earlier FP32 hybrid, and the new FP32 GQA hybrid; the timing/memory plots include those five plus control repetition 0.
 
 ![Measured request time, accepted-vector rate and nominal request cost](runtime-and-request-cost.png)
 
@@ -43,7 +43,7 @@ The saved budget snapshot records **21.036389 allocated GPU-hours** and **0.6666
 
 ## Files and custody
 
-- [report.md](report.md) embeds all seven verified figures. [figure-data.json](figure-data.json) binds the base-report cohorts, physical assessments, saved reference and accounting snapshot; [timings.csv](timings.csv) contains the five plotted runs.
+- [report.md](report.md) embeds all seven verified figures. [figure-data.json](figure-data.json) binds the base-report cohorts, physical assessments, saved reference and accounting snapshot; [timings.csv](timings.csv) contains all six timing/memory runs, including control repetition 0.
 - [pilot-summary.json](pilot-summary.json) binds the reporting source, raw candidate/control manifests and payloads, independent review, earlier-hybrid comparison, exact tables and three detail figures.
 - [execution-review-extract.json](execution-review-extract.json) preserves all numeric decisions, primary/control-repetition metrics, physical assessment and qualification scope without the large audit traces. The full source review SHA256 is `e00b5e18ce61d27dfbf437a0dba4d43a5d57a10f729c8b4f059efda5d9a9254e`.
 - [render-verification.json](render-verification.json) records the CPU render, all-seven-figure visual review, exact metric checks, strict cohort-label checks and byte-stable repeat. [checksums.json](checksums.json) hashes every other package file.
@@ -55,7 +55,7 @@ The GQA pilot's raw manifest SHA256 is `87a54e1627cf8d48e9a5bb00daaccdc32671838b
 
 Use Python 3.11 with the project's NumPy, SciPy and Matplotlib dependencies. This package was rendered with the verified reference environment on Karolina using CPU-only saved-artifact reads. No model calls, new reference integrations or GPU allocation are needed.
 
-The artifact root must preserve the original `results/` layout, including `gate-final.json`, `banks-v1`, authenticated parent/refined reference grids, corrected primary cohort, all three controls, the earlier FP32 hybrid, the GQA pilot and its independent review, and the tail diagnostic. The details command authenticates the fixed pilot/review, validates actual GQA source/restoration metadata and the expected five plotted cohorts, and recomputes the exact comparisons.
+The artifact root must preserve the original `results/` layout, including `gate-final.json`, `banks-v1`, authenticated parent/refined reference grids, corrected primary cohort, all three controls, the earlier FP32 hybrid, the GQA pilot and its independent review, and the tail diagnostic. The details command authenticates the fixed pilot/review, validates actual GQA source/restoration metadata, the expected five posterior-curve cohorts and all three distinct control timing measurements, and recomputes the exact comparisons.
 
 From the repository root, set paths to the saved-artifact root, a verified Python environment and a new output directory:
 
@@ -70,6 +70,7 @@ PYTHONPATH=src OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 "$PF_PYTHON" \
   --control "$PF_ROOT/results/cdf-arithmetic-v1/context-4096/seed-20261111-case-0" \
   --reference "$PF_ROOT/results/reference-grids-v1/case-0" \
   --output "$PF_OUTPUT" \
+  --timing-run "Control rep 0=$PF_PHASE/controls/rep-0/seed-20261111-case-0" \
   --run "Control rep 1=$PF_PHASE/controls/rep-1/seed-20261111-case-0" \
   --run "Control rep 2=$PF_PHASE/controls/rep-2/seed-20261111-case-0" \
   --run "FP32 hybrid pilot=$PF_PHASE/hybrid-fp32-batch-1024/rep-0/seed-20261111-case-0" \
@@ -82,3 +83,5 @@ PYTHONPATH=src OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 "$PF_PYTHON" \
 ```
 
 The details script infers its checkout from `__file__`; `--root` locates only saved artifacts. Repeating it replaces a marked report block without duplicates and reproduces byte-identical outputs in the verified environment.
+
+The [source-bound memory-scope audit](memory-peak-scope-audit.json) confirms one peak reset immediately before the complete request, covering all 42 stage preparations and both proposal waves. The active engine, all 22 SDK Python files and upstream sampler contain no per-stage peak reset. The measured whole-request peaks are 5.386858 GiB allocated and 29.892578 GiB reserved; allocator pool reservation is distinct from concurrently live allocated tensors. No allocator policy was changed.
