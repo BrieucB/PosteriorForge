@@ -1,0 +1,13 @@
+{
+  "README.md": "bfac6c432b98a8f1bf534b3892253b6d8fea220715a9e92973423c575e0114c2",
+  "assessment.json": "e657b4a3bbd0c731ee8d0944fb9468e016ceeb7abd55f4820a3e5a8bb2700b15",
+  "checksums.json": "7827db471a00a5ae8447db85c87e5a66b760e9cb6c639bc6bd38c129a688e132",
+  "producer-manifest.json": "28da396e0af6cf26009b4eb8feab8b75ed7a1d7a5add30440a35b38539da4f94",
+  "source/evaluate_ss15_pilot-layout.py": "3156d54b7d29f7aec29c2846782729a8c73da3bfcda16bb2e03cec3084899552",
+  "source/evaluate_ss15_pilot-scientific-547af39d.py": "547af39d761079f5af857dc4647174d8ac9b59aac433fb152d23ea6c20163943",
+  "ss15-pilot-density-focus.png": "3125c1371583b324925eb28cd273fdaa63e34952f722d5b79e2576a0ceddfa8a",
+  "ss15-pilot-density.png": "9b8964bf4c92fef38a5db1f4df6a5262426f73c875cbedea81eedc7f4485b889",
+  "ss15-pilot-joint-cdf.png": "1d57f48d00a62810350e72ce381ff242973bc6892e8f9e42c4cff8ddc3f609e8",
+  "ss15-pilot-marginal-cdf.png": "f24a7a5130dfc931d4ecd593efd1f1d54ac8a454f5ba42717656d18125142da6",
+  "stage0-density-diagnostic.json": "4570c30bf8278b3c8f6e7a463cc978e7c5f3e005367cac690ccff141372d726f"
+}

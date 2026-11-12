@@ -1,0 +1,23 @@
+{
+  "FP16_saved_singleton_vs_original_FP32_CDF_drift": 0.00017412749309597686,
+  "assessment_sha256": "1ed0910634845b72fc443114d3a7e34077f207b4688e9884330589bd83bf114b",
+  "duplicate_queries_exact": true,
+  "golden_sha256": "fb3426bc72352d46b7ef58d5aee0af785fadf29091889679f8077861fb2ebb50",
+  "grid_witness": 0.10183749329568315,
+  "new_model_calls": 0,
+  "new_simulator_calls": 0,
+  "note": "FP16 probabilities were not archived; its measured finite conditional drift is separate from the saved FP32 CDF. No production density is reconstructed from that scalar.",
+  "parameter": "mu_a",
+  "posterior_vectors_generated": 0,
+  "qualification_manifest_sha256": "5dc422946763156d9f876b2f07d9781e7b350265746ffa1024854d579f819deb",
+  "reference_distribution_sha256": "3b6b26234d925c0b5cf2ccb8e1a2f6476fe8b2df107e2791e4233a2fc307a99f",
+  "reference_grid_count": 2695,
+  "reference_precision": 0.0006185336730101243,
+  "saved_probability_raw_sum": 0.9999998476774715,
+  "saved_row_probability_max_difference": 0.0,
+  "scope": "deterministic normalized saved original FP32 finite-bar CDF versus qualified reference; no production-ICDF moment inference",
+  "source_sha256": "8b2b2121acfc629ccc6ebb6b4a05970e92a0a0db98a282c9453a555397ff07ce",
+  "stage": 0,
+  "whole_line_lower": 0.10121895962267302,
+  "whole_line_upper": 0.10580055652680886
+}
