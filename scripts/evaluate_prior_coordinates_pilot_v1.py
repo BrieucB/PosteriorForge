@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only physical assessment of the prior-coordinate cached-FP32 pilot.
+"""Read-only physical assessment of the prior-coordinate cached/native-FP32 pilot.
 
 Built with PriorLabs-TabPFN. Replays archived full-wave decode, physical G3,
 actual-case bindings and finite execution screen, then unchanged physical gates.
@@ -16,19 +16,19 @@ from posteriorforge.artifacts import sha256_file,write_json
 from posteriorforge.banks import load_context,load_heldout
 from posteriorforge.science.analytical_benchmark_v2 import array_descriptor
 
-SCHEMA="posteriorforge.prior_coordinates_pilot_assessment.v1"
+SCHEMA="posteriorforge.prior_coordinates_native_pilot_assessment.v1"
 WRAPPER_FILENAME="refresh_prior_coordinates_global_block_v1.py"
-WRAPPER_SHA256=None
-PARENT_SOURCE_SHA256=None
+WRAPPER_SHA256="452280e5597cf2ac987fa10db2386157923c596ac70aff84b8c5e2f1dfa97940"
+PARENT_SOURCE_SHA256="71e5e2906fd663534e56878de1fc4aff55093e3d950a13f348f57417ca7c01d3"
 FROZEN_EVALUATOR_SHA256="146c2ca35e15b54b7f68134d383574485ed1cc228f38e6fc611624f00b411924"
 BASELINE_ASSESSMENT_SHA256="4590a8acff216737d04b8c6144d72df0a14c0246ca5333a330ad365a07a857cb"
 COMPLETED_GRID_SHA256="6136487ee78375a802c8a0cb0c225a7f1b207063b4083514614c0d97a35c2425"
-DISPLAY_DOC_SHA256="f588c842f6b6e6d2a83afcb46fd839b23d5a2de5014b632dae07796f11dd0974"
+DISPLAY_DOC_SHA256="20a69b39272556984771c2e64a81f65e9a0cc378abd3af9e13664aec11e73321"
 FOCUS=(0,7,8,10)
 COLORS=("#c58a37","#777777","#1479b8","#111111")
-LABELS=("OLD physical-target mixed FP16/FP32 + G3",
-        "NEW causal prior coordinates: cached FP32",
-        "NEW same physical parent + one G3 block","qualified reference")
+LABELS=("OLD physical-target neural mixed FP16/FP32 + physical G3",
+        "NEW prior coords: neural FP32 (19 cached; original all8 at6/10)",
+        "NEW same physical cohort + one separate G3 block","qualified reference")
 
 
 def require(value,message):
@@ -120,22 +120,29 @@ def execution_checks(parent,producer,actual,helper):
     require(len(scopes)==len(training)==len(parent["stage_events"])==21
         and execution["prepare_count"]==21 and execution["all_stage_aliases_restored"] is True,
         "actual all21 stage scopes differ")
-    old=helper.load("qualify_ss15_conditionals.py",helper.SS15_QUALIFIER_SHA256)
     cursor=0
     for stage,(scope,binding,event) in enumerate(zip(scopes,training,parent["stage_events"])):
         require(scope["stage_index"]==stage and scope["failed"] is False
                 and scope["engine_release_succeeded"] is True
                 and binding==backend.training_bindings(theta,obs,stage),
                 "actual latent training mask/target or owner release differs")
-        helper.witness_guard(scope["precision_session"],producer.MODE,stage,old)
+        helper.witness_guard(scope["precision_session"],stage,backend)
         model_guard(scope["model"])
-        require(scope["prefill"]["passed"] is True,"actual prefill witness failed")
+        require(scope["preparation_witness"]["passed"] is True,"actual preparation witness failed")
+        if stage in backend.NATIVE_STAGES:
+            require(scope["preparation_witness"]["native_neural_prefill_calls"]==0
+                and scope["preparation_witness"]["cached_prefill_claimed"] is False
+                and scope["actual_original_all8_fit_count"]==1
+                and scope["immutable_native_before"]==scope["immutable_native_after"]
+                and scope["immutable_native_before"] is not None,
+                "native original preparation/immutable state differs")
         observed=Counter()
         subset=calls[cursor:cursor+scope["actual_head_contexts"]]
         for call in subset:
             shape=call["query_unmasked"]["shape"];masked=call["query_masked"]
-            require(call["stage"]==stage and call["execution_route"]=="resident_cache"
-                and call["policy_sha256"]==backend.policy_metadata()["policy_sha256"]
+            require(call["stage"]==stage and call["execution_route"]==backend.route(stage)
+                and call["policy_sha256"]==backend.cached.policy_metadata()["policy_sha256"]
+                and call["native_execution_policy_sha256"]==backend.policy_metadata()["policy_sha256"]
                 and call["mask"]==backend.stage_policy(stage)
                 and call["actual_target_coordinate"]==backend.stage_policy(stage)["target_coordinate"]
                 and shape==masked["shape"] and shape[1]==15+stage
@@ -150,8 +157,10 @@ def execution_checks(parent,producer,actual,helper):
                          for rows,count in hist[str(member)].items() for _ in range(count))
         require(observed==expected,"actual per-member query rows/head counts differ")
         routes=scope["route_counters"]
-        require(routes["resident_component_predict_count"]==sum(expected.values())
-                and routes["uncached_predict_count"]==0,"cached-only route conservation differs")
+        native_stage=stage in backend.NATIVE_STAGES
+        require(routes.get("resident_component_predict_count",0)==(0 if native_stage else sum(expected.values()))
+                and routes.get("uncached_predict_count",0)==(sum(expected.values()) if native_stage else 0),
+                "cached/native route conservation differs")
         cursor+=scope["actual_head_contexts"]
     require(cursor==len(calls)==execution["actual_head_contexts"],"actual query journal coverage differs")
     frozen=producer.clean.frozen_sampling()
@@ -172,7 +181,8 @@ def execution_checks(parent,producer,actual,helper):
     return {"passed":True,"actual_training_masks_recomputed":True,"actual_query_policy_shape_dtype_routes_verified":True,
         "query_value_arrays_independently_reconstructed":False,
         "scope":"source-bound actual query descriptors and independent head/shape conservation",
-        "stage_count":21,"actual_head_contexts":heads,"fallback_map":{},"mode":producer.MODE}
+        "stage_count":21,"actual_head_contexts":heads,"inner88_precision_fallback_map":{},
+        "native_all8_stages":list(backend.NATIVE_STAGES),"mode":producer.MODE}
 
 
 def load_baseline(frozen,completed_grid,parent_path,hybrid_path,assessment_path,raw):
@@ -204,7 +214,7 @@ def load_baseline(frozen,completed_grid,parent_path,hybrid_path,assessment_path,
 
 
 def run(*,root,parent_manifest,hybrid_manifest,hybrid_manifest_sha256,execution_screen,
-        codec_inventory,codec_reference_inventory,codec_combined_inventory,completed_grid,prefix_run,
+        codec_inventory,codec_reference_inventory,codec_combined_inventory,completed_grid,prefix_run,failed_screen,
         baseline_assessment,baseline_parent_manifest,baseline_hybrid_manifest,output,plots_enabled=True):
     w,frozen,sources=source_guard()
     parent,hybrid,before,after,auth=authenticate(
@@ -229,7 +239,7 @@ def run(*,root,parent_manifest,hybrid_manifest,hybrid_manifest_sha256,execution_
                 "actual physical/source/model target binding differs: "+key)
     helper=producer.load_script(producer.QUALIFIER_FILENAME,producer.QUALIFIER_SHA256)
     _,screen_replay=producer.qualification_receipt(
-        execution_screen,banks=banks,prefix_run=prefix_run,codec_inventory=codec_inventory,
+        execution_screen,banks=banks,prefix_run=prefix_run,failed_screen=failed_screen,codec_inventory=codec_inventory,
         codec_reference_inventory=codec_reference_inventory,codec_combined_inventory=codec_combined_inventory,
         completed_grid=completed_grid,raw_bindings=raw,model_inputs=model)
     execution=execution_checks(parent,producer,actual,helper)
@@ -253,9 +263,12 @@ def run(*,root,parent_manifest,hybrid_manifest,hybrid_manifest_sha256,execution_
         "summary":{k:pure.summary(v,parent["parameter_order"]) for k,v in assessments.items()},
         "configuration_comparison":{"baseline_assessment_sha256":BASELINE_ASSESSMENT_SHA256,
             "baseline_summary":baseline["summary"],"baseline_custody":baseline_custody,"baseline":"physical targets; mixed FP16/FP32 with native14",
-            "candidate":"causal prior coordinates; cached FP32 all heads",
-            "both_coordinates_and_precision_changed":True,"isolated_coordinate_causal_effect_claimed":False},
-        "pure_NPE_claimed":False,"method":"prior-coordinate cached-FP32 NPE-PFN plus one physical G3 block",
+            "candidate":"causal prior coordinates; neural FP32; 19 cached stages, all8 original-control at6/10",
+            "both_coordinates_and_precision_changed":True,"execution_routing_also_changed":True,
+            "isolated_coordinate_causal_effect_claimed":False},
+        "pure_NPE_claimed":False,"method":"prior-coordinate NPE-PFN plus one separate physical G3 block",
+        "neural_execution_description":"FP32; 19 cached stages, all8 original-control at6/10",
+        "physical_G3_policy":"separate ONE frozen joint-global Gibbs block; physical18 columns byte-identical",
         "current_environment_F64_runtime_provenance":encoding,
         "F64_latent_bytes_required_equal_to_producer_environment":False,
         "exact_decode_G3_and_assessment_bound_to_actual_producer_environment":True,
@@ -289,7 +302,7 @@ def plots(output,before,after,arrays,assessments,order,binder,labels,*,seed,case
  footer="Built with PriorLabs-TabPFN\nReference-selected display; all50000 rows normalize each histogram/CDF; unchanged whole-line gate."
  def figure(rows,cols,size,title):
   f,ax=plt.subplots(rows,cols,figsize=size,squeeze=False)
-  f.suptitle(title+f"\nseed{seed}, case{case}; NEW causal prior coordinates / cached FP32; OLD physical targets / mixed FP16-FP32 + G3",fontsize=13,y=.995)
+  f.suptitle(title+f"\nseed{seed}, case{case}; NEURAL FP32: 19 cached stages, all8 original-control at6/10; physical G3 is separate",fontsize=13,y=.995)
   f.legend(handles=legend,loc="upper center",bbox_to_anchor=(.5,.955),ncol=2,fontsize=9)
   f.text(.5,.012,footer,ha="center",va="bottom",fontsize=8)
   f.subplots_adjust(left=.07,right=.99,bottom=.07,top=.89,wspace=.28,hspace=.55)
@@ -309,7 +322,7 @@ def plots(output,before,after,arrays,assessments,order,binder,labels,*,seed,case
   path=output/name;f.savefig(path,dpi=155);plt.close(f)
   return {"file":name,"sha256":sha256_file(path)}
  figs={}
- focus,axes=figure(2,2,(12,8.6),"Prior-coordinate cached-FP32 hybrid: four fixed physical coordinates")
+ focus,axes=figure(2,2,(12,8.6),"Prior-coordinate neural cohort and separate physical G3: four fixed coordinates")
  focus.subplots_adjust(top=.81,bottom=.11,hspace=.5,wspace=.27)
  for ax,j in zip(axes,FOCUS):density(ax,j)
  figs["focus_density"]=save(focus,"joint-global-density-focus.png")
@@ -343,7 +356,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     for name in ("root","parent-manifest","hybrid-manifest","hybrid-manifest-sha256","execution-screen",
                  "codec-inventory","codec-reference-inventory","codec-combined-inventory","completed-grid",
-                 "prefix-run","baseline-assessment","baseline-parent-manifest","baseline-hybrid-manifest","output"):
+                 "prefix-run","failed-screen","baseline-assessment","baseline-parent-manifest","baseline-hybrid-manifest","output"):
         parser.add_argument("--"+name,required=True)
     parser.add_argument("--no-plots",action="store_true")
     options=vars(parser.parse_args());options["plots_enabled"]=not options.pop("no_plots")

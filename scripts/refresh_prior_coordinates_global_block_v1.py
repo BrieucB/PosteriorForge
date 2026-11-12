@@ -13,13 +13,16 @@ import numpy as np
 from posteriorforge.artifacts import runtime_identity,sha256_file,write_json,versions
 from posteriorforge.science.analytical_benchmark_v2 import array_descriptor
 from posteriorforge import prior_coordinates_v1 as codec
+from posteriorforge import execution_prior_native_v1 as native
 
-SCHEMA="posteriorforge.prior_coordinates_global_block_refresh.v1"
-VARIANT="hybrid_prior_coordinates_cached_fp32_fifo_global_block_gibbs_v1"
-PARENT_SCHEMA="posteriorforge.inference.prior_coordinates.v1"
-PARENT_VARIANT="accuracy_prior_coordinates_cached_fp32_fifo_v1"
-PARENT_SOURCE_SHA256=None
-BACKEND_SHA256=None
+SCHEMA="posteriorforge.prior_coordinates_native_global_block_refresh.v1"
+VARIANT="hybrid_prior_coordinates_cached_native_fp32_fifo_global_block_gibbs_v1"
+PARENT_SCHEMA="posteriorforge.inference.prior_coordinates_native.v1"
+PARENT_VARIANT="accuracy_prior_coordinates_cached_native_fp32_fifo_v1"
+PARENT_SOURCE_SHA256="71e5e2906fd663534e56878de1fc4aff55093e3d950a13f348f57417ca7c01d3"
+BACKEND_SHA256="e5a2733e767b187e573315547ec9253267e43d1e3700596f61e97116c53f3256"
+CACHED_SHA256="88f28c5a1f01c086661243c5d3bfb59631eb3c95fe3567b7f1ede325ddba0aea"
+NATIVE_PROTOCOL_SHA256="82b731edc9d57410e5343bb82833658931de728bd99940707908438dbbcdfc7b"
 CODEC_SHA256="d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5"
 PREREGISTRATION_SHA256="7c4aca04c4571960108c0296ec5d4770940ce0b51fa0a77cdd0c27182b4ed849"
 BACKBONE_SHA256="a995ab5e48fab6ddea8355344d9f77fe94bd30357d6451370daf69ed5693f8a4"
@@ -58,9 +61,11 @@ def source_guard():
     sources=[
         (str(Path(__file__).resolve().relative_to(root)),sha256_file(__file__)),
         ("src/posteriorforge/performance_prior_coordinates_v1.py",PARENT_SOURCE_SHA256),
-        ("src/posteriorforge/execution_prior_coordinates_v1.py",BACKEND_SHA256),
+        ("src/posteriorforge/execution_prior_native_v1.py",BACKEND_SHA256),
+        ("src/posteriorforge/execution_prior_coordinates_v1.py",CACHED_SHA256),
         ("src/posteriorforge/prior_coordinates_v1.py",CODEC_SHA256),
         ("docs/accuracy-prior-coordinate-pilot-v1.md",PREREGISTRATION_SHA256),
+        ("docs/accuracy-prior-coordinate-native-control-v1.md",NATIVE_PROTOCOL_SHA256),
     ]
     for name,digest in sources:
         require(sha256_file(root/name)==digest
@@ -69,6 +74,7 @@ def source_guard():
     return {"producer_sha256":sha256_file(__file__),"git_revision":old["git_revision"],
             "parent_producer_sha256":PARENT_SOURCE_SHA256,"backend_sha256":BACKEND_SHA256,
             "codec_sha256":CODEC_SHA256,"preregistration_sha256":PREREGISTRATION_SHA256,
+            "native_protocol_sha256":NATIVE_PROTOCOL_SHA256,"cached_source_sha256":CACHED_SHA256,
             "frozen_joint_refresh_sha256":BACKBONE_SHA256,"kernel_sha256":KERNEL_SHA256,
             "joint_source":old,"sources_committed_before_run":True}
 
@@ -98,6 +104,8 @@ def validate_parent(document,values,metadata):
         "requested_count":COUNT,"context_size":4096,"repetition":0,"rank":0,"world_size":1,
         "sources_unchanged":True,"default_rng_preserved":True,
         "mode":"fp32_transparent_control_v1","fallback_map":{},
+        "fallback_map_scope":"INNER frozen88 precision owner only; outer native all8 stages6/10 are explicit",
+        "native_all8_stages":[6,10],"native_protocol_sha256":NATIVE_PROTOCOL_SHA256,
         "FP16_activated":False,"learned_targets_are_original_physical_values":False,
         "samples_in_original_physical_order_before_FIFO_support":True,
         "all_generated_rows_strictly_decoded_including_unused_FIFO_tail":True,
@@ -116,8 +124,10 @@ def validate_parent(document,values,metadata):
             and document.get("parameter_order")==metadata["physical_parameter_order"],
             "original physical scientific identity differs")
     require(document.get("codec")==codec.metadata(),"coordinate source/geometry descriptor differs")
-    require(document.get("coordinate_policy",{}).get("module_sha256")==BACKEND_SHA256,
-            "new backend coordinate policy differs")
+    require(native.source_sha256()==BACKEND_SHA256
+            and document.get("coordinate_policy")==native.cached.policy_metadata()
+            and document.get("native_execution_policy")==native.policy_metadata(),
+            "new coordinate policy or explicit native execution routing differs")
     require(document.get("stage_to_physical_order")==list(codec.ORDER)
             and document.get("physical_to_stage_order")==list(codec.INVERSE_ORDER),
             "latent stage/physical order differs")
@@ -131,7 +141,7 @@ def validate_parent(document,values,metadata):
             "CDF/source restoration differs")
     require(document.get("default_rng_before")==document.get("default_rng_after"),
             "actual default RNG hashes differ")
-    require(document.get("matching_cached_FP32_execution_passed_all21") is True
+    require(document.get("matching_cached_native_FP32_execution_passed_all21") is True
             and backbone.digest(document.get("matching_conditional_qualification_sha256"))
             and document.get("fresh_same_policy_all21_screen_replayed") is True
             and document.get("actual_fixed_conditional_screen_performed_during_request") is False,
@@ -140,14 +150,14 @@ def validate_parent(document,values,metadata):
             "request_count":COUNT,"separate_joint_update":True}
 
 
-def replay_generated_decode(document,latent_waves,physical_values):
+def replay_generated_decode(document,latent_waves,physical_values,decoded_waves):
     """Replay strict decode on all generated rows, then recorded checked prefix."""
     from posteriorforge.inference import support_mask
     environment=require_replay_environment(document)
     keys=document["latent_wave_archive"]["keys"]
     require(keys==[f"wave_{j:04d}" for j in range(len(keys))] and len(keys)>0,
             "ordered generated-wave keys required")
-    require(set(latent_waves)==set(keys),"latent archive keys differ")
+    require(set(latent_waves)==set(keys)==set(decoded_waves),"latent/valid decoded archive keys differ")
     records=document["decode_wave_records"]
     require(len(records)==len(keys)==len(document["proposal_wave_sizes"]),
             "all generated waves must be journaled")
@@ -161,6 +171,10 @@ def replay_generated_decode(document,latent_waves,physical_values):
                 and records[index]["actual_latent_draws"]==array_descriptor(latent),
                 "actual generated latent descriptor differs")
         physical=codec.decode_ordered(latent)
+        archived=decoded_waves[key]
+        require(archived.dtype==np.float64 and archived.shape==physical.shape
+                and archived.tobytes()==physical.tobytes(),
+                "valid full physical proposal archive differs from exact decode")
         require(records[index]["decoded_physical"]==array_descriptor(physical)
                 and records[index]["strict_decode_passed"] is True
                 and records[index]["includes_unused_FIFO_tail"] is True
@@ -182,7 +196,8 @@ def replay_generated_decode(document,latent_waves,physical_values):
             "unused FIFO tail omitted")
     return {"passed":True,"generated_rows_strictly_replayed":len(all_physical),
             "checked_rows":checked,"unused_FIFO_tail_rows":len(all_physical)-COUNT,
-            "physical_saved_output_byte_identical":True,"source":CODEC_SHA256,
+            "physical_saved_output_byte_identical":True,"valid_full_decoded_proposal_archive_byte_identical":True,
+            "source":CODEC_SHA256,
             "exact_replay_environment":environment}
 
 
@@ -205,11 +220,24 @@ def load_parent(path,expected_sha256,metadata):
     require(sha256_file(latent_path)==archive_info["sha256"],"actual latent wave archive hash differs")
     with np.load(latent_path,allow_pickle=False) as archive:
         waves={key:archive[key] for key in archive.files}
-    decode=replay_generated_decode(document,waves,values)
+    decoded_info=document["decoded_wave_archive"]
+    require(decoded_info["file"]=="decoded-physical-proposal-waves.npz"
+            and decoded_info["only_valid_decoded_complete_waves"] is True
+            and decoded_info["all_rows_including_unused_FIFO_tail"] is True,
+            "valid full physical proposal archive contract differs")
+    decoded_path=path.with_name(decoded_info["file"])
+    require(sha256_file(decoded_path)==decoded_info["sha256"],"decoded physical archive hash differs")
+    with np.load(decoded_path,allow_pickle=False) as archive:
+        decoded={key:archive[key] for key in archive.files}
+    require(decoded_info["keys"]==archive_info["keys"]
+            and decoded_info["generated_valid_row_count"]==archive_info["generated_row_count"],
+            "valid decoded proposal coverage differs")
+    decode=replay_generated_decode(document,waves,values,decoded)
     root=Path(__file__).resolve().parents[1]
     for name,digest in [
         ("src/posteriorforge/performance_prior_coordinates_v1.py",PARENT_SOURCE_SHA256),
-        ("src/posteriorforge/execution_prior_coordinates_v1.py",BACKEND_SHA256),
+        ("src/posteriorforge/execution_prior_native_v1.py",BACKEND_SHA256),
+        ("src/posteriorforge/execution_prior_coordinates_v1.py",CACHED_SHA256),
         ("src/posteriorforge/prior_coordinates_v1.py",CODEC_SHA256),
         ("docs/accuracy-prior-coordinate-pilot-v1.md",PREREGISTRATION_SHA256)]:
         require(hashlib.sha256(backbone.git_bytes(root,document["git_revision"],name)).hexdigest()==digest,
@@ -217,6 +245,7 @@ def load_parent(path,expected_sha256,metadata):
     return document,values,{"manifest_sha256":expected_sha256,"samples_sha256":document["samples_sha256"],
         "samples":array_descriptor(values),"producer_sha256":PARENT_SOURCE_SHA256,
         "git_revision":document["git_revision"],"latent_archive_sha256":archive_info["sha256"],
+        "decoded_physical_archive_sha256":decoded_info["sha256"],
         "input_validation":receipt,"full_generated_decode_replay":decode}
 
 
@@ -232,7 +261,9 @@ def run(parent_manifest,expected_parent_sha256,output):
         "exact_decode_and_G3_replay_environment":lineage["full_generated_decode_replay"]["exact_replay_environment"],
         "raw_scientific_bindings":parent["raw_scientific_bindings"],
         "raw_scientific_bindings_scope":"inherited provenance only; no bound data files loaded",
-        "method_description":"prior-coordinate cached-FP32 neural sampler plus ONE frozen joint-global Gibbs block",
+        "method_description":"prior-coordinate neural FP32 (19 cached stages; all8 original-control at6/10), then ONE separate physical joint-global Gibbs block",
+        "neural_execution_description":"FP32; 19 cached stages, all8 original-control at6/10",
+        "physical_G3_policy":"separate ONE frozen joint-global Gibbs block; physical18 columns byte-identical",
         "pure_NPE_claimed":False,"posterior_accuracy_guaranteed":False,
         "observations_references_truth_or_banks_loaded":False,
         "noise_or_local_likelihood_update_performed":False,

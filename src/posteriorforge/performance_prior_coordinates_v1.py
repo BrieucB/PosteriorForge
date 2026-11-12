@@ -1,4 +1,4 @@
-"""Cached-FP32 prior-coordinate pilot; new source and qualification identity.
+"""Prior-coordinate FP32 neural pilot; 19 cached stages and all8 original-control at6/10.
 
 Built with PriorLabs-TabPFN. Exactly 50,000 complete physical outputs for
 seed 20261111 / case 2. Full generated latent waves are decoded strictly before
@@ -19,26 +19,29 @@ from pathlib import Path
 import numpy as np
 
 from . import performance_ss15 as ancestry
-from . import execution_prior_coordinates_v1 as backend
+from . import execution_prior_native_v1 as backend
 from . import prior_coordinates_v1 as codec
+from . import prior_coordinate_forensics_v1 as forensics
 from . import representation_ss15 as representation
 from . import execution_ss15_sampling as wave
 from .artifacts import runtime_identity, sha256_file, write_json
 
-SCHEMA = "posteriorforge.inference.prior_coordinates.v1"
-VARIANT = "accuracy_prior_coordinates_cached_fp32_fifo_v1"
+SCHEMA = "posteriorforge.inference.prior_coordinates_native.v1"
+VARIANT = "accuracy_prior_coordinates_cached_native_fp32_fifo_v1"
 MODE = backend.CONTROL_MODE
 COUNT = 50000
 CONTEXT_SEED = 20261111
 CASE = 2
 ANCESTRY_SHA256 = "4099da3c19366997ab0800e5430b5bb1c129b4b3e535f678b3d4652233303480"
 CODEC_SHA256 = "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5"
-BACKEND_SHA256 = None
-QUALIFIER_FILENAME = "qualify_prior_conditionals_v1.py"
-QUALIFIER_SHA256 = None
-CONDITIONAL_QUALIFICATION_SHA256 = None
-INVENTORY_HELPER_SHA256 = None
-INVENTORY_SHA256 = None
+FORENSICS_SHA256 = "81399b3beb34760a9b25ac99805e6a500a90f3f505193d4acf00b83b4c3eb5c0"
+BACKEND_SHA256 = "e5a2733e767b187e573315547ec9253267e43d1e3700596f61e97116c53f3256"
+QUALIFIER_FILENAME = "qualify_prior_native_conditionals_v1.py"
+QUALIFIER_SHA256 = "9221da7853d1ecea3606d9001c70589f61bb89a28717bbc333bc8a280ff81bf9"
+CONDITIONAL_QUALIFICATION_SHA256 = "5ec69eb7aadbd74c7d96ee534b71d0d8bee2b6dd6f6e3d2f44e74607452f682b"
+INVENTORY_HELPER_SHA256 = "ce68e237f15d239f99f091c2310cf15791d1cf7f7cf7442c2db029241834a636"
+INVENTORY_SHA256 = "f3266ab6fd36887c95291020b2cdd2d2a5529f2e6c984b32de22a28b9d31da04"
+NATIVE_PROTOCOL_SHA256 = "82b731edc9d57410e5343bb82833658931de728bd99940707908438dbbcdfc7b"
 PREREGISTRATION_SHA256 = "7c4aca04c4571960108c0296ec5d4770940ce0b51fa0a77cdd0c27182b4ed849"
 clean = ancestry.clean
 require = ancestry.require
@@ -55,13 +58,17 @@ def require_sources():
     ancestry.require_sources()
     require(codec.source_sha256() == CODEC_SHA256, "prior codec changed")
     codec.require_sources()
+    require(forensics.source_sha256() == FORENSICS_SHA256, "forensic observer source changed")
+    forensics.require_sources()
     require(isinstance(BACKEND_SHA256, str) and backend.source_sha256() == BACKEND_SHA256,
             "fresh prior-coordinate backend is not pinned or changed")
     backend.require_sources()
-    require(MODE == backend.CONTROL_MODE and tuple(codec.ORDER) == tuple(backend.ORDER),
+    require(MODE == backend.CONTROL_MODE and tuple(codec.ORDER) == tuple(backend.cached.ORDER),
             "cached FP32 or latent order changed")
     doc = Path(__file__).resolve().parents[2] / "docs/accuracy-prior-coordinate-pilot-v1.md"
     require(sha256_file(doc) == PREREGISTRATION_SHA256, "prior-coordinate preregistration changed")
+    native_doc = doc.with_name("accuracy-prior-coordinate-native-control-v1.md")
+    require(sha256_file(native_doc) == NATIVE_PROTOCOL_SHA256, "native execution correction protocol changed")
 
 
 def execution_metadata():
@@ -69,22 +76,31 @@ def execution_metadata():
     return {
         "schema": "posteriorforge.prior_coordinate_pilot.execution.v1",
         "module_sha256": source_sha256(),
-        "backend": backend.execution_metadata(MODE),
+        "backend": backend.execution_metadata(),
+        "coordinate_policy": backend.cached.policy_metadata(),
+        "native_execution_policy": backend.policy_metadata(),
         "codec": codec.metadata(),
         "observation_representation": representation.representation_metadata(),
         "sampler_source_sha256": clean.SAMPLING_SHA,
         "sampling_wave": wave.execution_metadata(),
         "stage0_assembler_source_sha256": ancestry.ALL21_SOURCE_SHA,
-        "mode": MODE, "query_batch_size": 1024, "fallback_map": {},
+        "neural_execution_description": "FP32; 19 cached stages, all8 original-control at6/10",
+        "physical_G3_in_this_neural_request": False,
+        "mode": MODE, "query_batch_size": 1024, "inner88_precision_fallback_map": {},
+        "native_all8_stages": list(backend.NATIVE_STAGES),
         "postprocessing_dtype": "torch.float32",
         "decode": "actual complete latent wave, without an extra cast, before FIFO/support",
         "all_generated_latent_rows_archived": True,
+        "all_valid_decoded_physical_proposal_rows_archived": True,
+        "forensic_observer_source_sha256": FORENSICS_SHA256,
+        "forensic_recomputation_scope": "bounded CPU-only after failure; never sampler or acceptance",
         "unused_FIFO_tail_also_decoded": True,
         "old_numerical_qualification_inherited": False,
         "comparison_to_old_grid_changes_both_coordinates_and_precision": True,
         "isolated_causal_effect_of_coordinates_claimed": False,
         "physical_log_density_claimed": False,
         "preregistration_sha256": PREREGISTRATION_SHA256,
+        "native_protocol_sha256": NATIVE_PROTOCOL_SHA256,
         "attribution": "Built with PriorLabs-TabPFN",
     }
 
@@ -136,7 +152,7 @@ def decode_complete_wave(values):
     return physical
 
 
-def record_decode_wave(latent, latent_waves, status):
+def record_decode_wave(latent, latent_waves, status, *, decoded_waves=None):
     """Retain every complete actual wave BEFORE strict decoding can fail."""
     from .science.analytical_benchmark_v2 import array_descriptor
     index = len(latent_waves)
@@ -155,6 +171,8 @@ def record_decode_wave(latent, latent_waves, status):
                       failed_decode_wave_descriptor=array_descriptor(latent))
         raise
     record.update(decoded_physical=array_descriptor(physical), strict_decode_passed=True)
+    if decoded_waves is not None:
+        decoded_waves.append((index, physical.copy(order="C")))
     return physical
 
 
@@ -168,6 +186,59 @@ def archive_latent_waves(output, latent_waves):
             "all_generated_rows_including_unused_tail": True,
             "generated_row_count": sum(map(len, latent_waves)),
             "complete_generated_wave_count": len(latent_waves)}
+
+
+def archive_decoded_waves(output, decoded_waves):
+    """Archive only actually valid full decoded waves, including unused FIFO rows."""
+    path = Path(output) / "decoded-physical-proposal-waves.npz"
+    arrays = {f"wave_{index:04d}": physical for index, physical in decoded_waves}
+    for physical in arrays.values():
+        require(physical.dtype == np.float64 and physical.ndim == 2 and physical.shape[1] == 21,
+                "actual full physical Float64 proposal waves required without recast")
+    with path.open("xb") as stream:
+        np.savez(stream, **arrays)
+    return {"file": path.name, "sha256": sha256_file(path), "keys": list(arrays),
+            "wave_indices": [index for index, _ in decoded_waves],
+            "only_valid_decoded_complete_waves": True,
+            "all_rows_including_unused_FIFO_tail": True,
+            "generated_valid_row_count": sum(len(v) for v in arrays.values())}
+
+
+def preserve_failure_artifacts(output, status, latent_waves, decoded_waves, observer=None,
+                               *, active_stage=None, buffer_metadata=None):
+    """Persist raw evidence first; every forensic exception stays secondary."""
+    output = Path(output)
+    def attempt(label, action):
+        try:
+            status[label] = action()
+        except BaseException as error:
+            status[label + "_preservation_error"] = {"type": type(error).__name__, "error": str(error)}
+    if latent_waves and not (output / "latent-proposal-waves.npz").exists():
+        attempt("latent_wave_archive", lambda: archive_latent_waves(output, latent_waves))
+    if observer is not None and not (output / "latent-stage-returns.npz").exists():
+        attempt("actual_stage_return_archive", lambda: forensics.archive_actual_stage_returns(
+            output, observer, active_stage=active_stage))
+    if decoded_waves and not (output / "decoded-physical-proposal-waves.npz").exists():
+        attempt("decoded_wave_archive", lambda: archive_decoded_waves(output, decoded_waves))
+    # Raw full and partial evidence is already on disk before codec recomputation.
+    prefix = None
+    if observer is not None:
+        try:
+            prefix = observer.prefix()
+            status["stage_draw_observation"] = observer.metadata(active_stage=active_stage)
+        except BaseException as error:
+            status["partial_prefix_observation_error"] = {"type": type(error).__name__, "error": str(error)}
+    if prefix is not None and prefix.shape[1]:
+        attempt("failure_forensics", lambda: forensics.safe_diagnose_prefix(prefix))
+    elif latent_waves:
+        attempt("failure_forensics", lambda: forensics.safe_diagnose_prefix(latent_waves[-1]))
+    else:
+        status["failure_forensics"] = {
+            "status": "no_actual_completed_latent_prefix_available",
+            "active_stage": active_stage, "current_incomplete_stage_outputs_fabricated": False,
+            "coverage": "no uninitialized or unreturned columns serialized"}
+    if buffer_metadata is not None:
+        attempt("proposal_buffer", buffer_metadata)
 
 
 class PriorCoordinateStageAdapter:
@@ -194,22 +265,29 @@ class PriorCoordinateStageAdapter:
         self.stage_heads = 0
         self.members = set()
         self.prefill = self.model = None
+        self.prepared_result = None
+        self.model_at_prepare = None
+        self.immutable_native_before = self.immutable_native_after = None
         self.entered = False
         entry = backend.training_bindings(theta, obs, stage)
         masked_theta, masked_obs = backend.mask_training(theta, obs, stage)
-        self.session = backend.PriorCoordinateSession(MODE)
+        self.session = backend.PriorNativeSession()
         try:
             self.session.__enter__()
             self.entered = True
-            self.engine = backend.PriorCoordinateStageExecutor(
+            self.engine = backend.PriorNativeStageExecutor(
                 self.checkpoint, cdf_descriptor=self.cdf_descriptor, query_batch_size=1024)
             result = self.engine.prepare(masked_theta, masked_obs, stage)
+            self.prepared_result = result
             self.prepare_count += 1
-            self.prefill = backend.prefill_witness_passed(self.session.report(), stage, mode=MODE)
-            require(self.prefill["passed"], "actual FP32 prefill/cache witness failed")
+            self.prefill = backend.preparation_witness(self.session.report(), stage, result)
+            require(self.prefill["passed"], "actual FP32 preparation witness failed")
             base = load_script("characterize_precision_approximation.py", ancestry.BASE_SHA)
             self.model = base.model_summary(
                 self.engine.regressor, load_script("qualify_execution_cache.py", base.UTILITY_SHA))
+            self.model_at_prepare = self.model
+            if stage in backend.NATIVE_STAGES:
+                self.immutable_native_before = backend.immutable_native_snapshot(self.engine)
             self.training_inputs.append(entry)
             return result
         except BaseException:
@@ -228,9 +306,25 @@ class PriorCoordinateStageAdapter:
             prediction = self.engine.predict_component(
                 member, masked, capture_member=capture_member, with_log_prob=with_log_prob)
             witness = backend.query_witness_delta(before, self.session.report(),
-                stage=self.stage_index, member=member, mode=MODE)
-            require(prediction.get("hybrid_execution_path") == "resident_cache",
-                    "initial prior-coordinate policy must use cached-only route")
+                stage=self.stage_index, member=member)
+            native_stage = self.stage_index in backend.NATIVE_STAGES
+            expected_sdk_route = "original_fit_preprocessors" if native_stage else "resident_cache"
+            execution_route = backend.route(self.stage_index)
+            require(prediction.get("hybrid_execution_path") == expected_sdk_route,
+                    "actual cached/native FP32 SDK route differs")
+            native_proof = prediction.get("prior_native_execution", {})
+            require(native_proof.get("module_sha256") == BACKEND_SHA256
+                    and native_proof.get("policy_sha256") == backend.policy_metadata()["policy_sha256"]
+                    and native_proof.get("route") == execution_route
+                    and native_proof.get("stage") == self.stage_index
+                    and native_proof.get("member") == member,
+                    "actual cached/native source policy witness differs")
+            if native_stage:
+                require(native_proof.get("original_query_views_disabled") is True
+                        and native_proof.get("query_view_setting_restored") is True
+                        and native_proof.get("native_KV_cache_used") is False,
+                        "native original attention or query-view restoration differs")
+            witness = {**witness, "mode": self.session.report()["mode"]}
             require(self.cdf_descriptor["patched_call_count"] - cdf_before == 1,
                     "one actual corrected CDF call per head required")
             require(self.cdf_descriptor.get("executed_corrected_cdf_code_sha256")
@@ -254,9 +348,11 @@ class PriorCoordinateStageAdapter:
                 "stage": self.stage_index, "member": member,
                 "query_unmasked": array_descriptor(np.asarray(query)),
                 "query_masked": array_descriptor(masked),
-                "mask": rule, "policy_sha256": backend.policy_metadata()["policy_sha256"],
+                "mask": rule, "policy_sha256": backend.cached.policy_metadata()["policy_sha256"],
+                "native_execution_policy_sha256": backend.policy_metadata()["policy_sha256"],
                 "actual_target_coordinate": rule["target_coordinate"],
-                "execution_route": "resident_cache", "witness": witness,
+                "execution_route": execution_route, "actual_SDK_route": expected_sdk_route,
+                "native_execution_proof": native_proof, "witness": witness,
             })
             prediction["prior_coordinate_execution_proof"] = {
                 "module_sha256": source_sha256(), "backend_source_sha256": backend.source_sha256(),
@@ -306,7 +402,23 @@ class PriorCoordinateStageAdapter:
         try:
             if engine is not None:
                 try:
-                    routes = {k: v for k, v in getattr(engine, "hybrid_counters", {}).items() if k != "stages"}
+                    child = engine.child
+                    routes = {k: v for k, v in getattr(child, "hybrid_counters", {}).items() if k != "stages"}
+                    if not self.failure:
+                        native_stage = self.stage_index in backend.NATIVE_STAGES
+                        expected_cached = 0 if native_stage else self.stage_heads
+                        expected_native = self.stage_heads if native_stage else 0
+                        require(routes.get("resident_component_predict_count", 0) == expected_cached
+                                and routes.get("uncached_predict_count", 0) == expected_native,
+                                "actual cached/native route counts differ")
+                        if self.model is not None:
+                            base = load_script("characterize_precision_approximation.py", ancestry.BASE_SHA)
+                            self.model = base.model_summary(self.engine.regressor,
+                                load_script("qualify_execution_cache.py", base.UTILITY_SHA))
+                        if native_stage:
+                            self.immutable_native_after = backend.immutable_native_snapshot(engine)
+                            require(self.immutable_native_before == self.immutable_native_after,
+                                    "original all8 immutable weights/targets/configs/fitted context changed")
                 except BaseException as error:
                     audit_error = error
                 finally:
@@ -315,10 +427,6 @@ class PriorCoordinateStageAdapter:
                         released = True
                     except BaseException as error:
                         release_error = error
-                if audit_error is None and release_error is None and not self.failure:
-                    require(routes.get("resident_component_predict_count", 0) == self.stage_heads
-                            and routes.get("uncached_predict_count", 0) == 0,
-                            "actual cached-only route counts differ")
                 if audit_error is not None:
                     if release_error is not None:
                         raise audit_error from release_error
@@ -333,8 +441,16 @@ class PriorCoordinateStageAdapter:
                     report = session.report()
                     self.stages.append({
                         "stage_index": self.stage_index, "actual_head_contexts": self.stage_heads,
-                        "queried_members": sorted(self.members), "failed": self.failure,
-                        "prefill": self.prefill, "model": self.model,
+                        "queried_members": sorted(self.members),
+                        "failed": bool(self.failure or audit_error is not None or release_error is not None),
+                        "preparation_witness": self.prefill, "model_at_prepare": getattr(self, "model_at_prepare", None),
+                        "model": self.model, "model_scope": "after actual final queried member; no cross-member encoder-state equality claimed",
+                        "execution_route": backend.route(self.stage_index),
+                        "actual_original_all8_fit_count": int(self.stage_index in backend.NATIVE_STAGES
+                            and getattr(self, "prepared_result", None) is not None),
+                        "immutable_native_before": getattr(self, "immutable_native_before", None),
+                        "immutable_native_after": getattr(self, "immutable_native_after", None),
+                        "native_state_scope": "immutable all8 weights/targets/criterion/configs/preprocessors/fitted X/y; legitimate cold/warm encoder initialization excluded",
                         "route_counters": routes, "precision_session": report,
                         "engine_release_attempted": engine is not None,
                         "engine_release_succeeded": released,
@@ -386,7 +502,7 @@ def validate_prediction(prediction, stage, member, *, report):
     report["shared_densities"] = report.get("shared_densities", 0) + int(member is None)
 
 
-def qualification_receipt(path, *, banks, prefix_run, codec_inventory, codec_reference_inventory,
+def qualification_receipt(path, *, banks, prefix_run, failed_screen, codec_inventory, codec_reference_inventory,
                           codec_combined_inventory, completed_grid,
                           raw_bindings, model_inputs):
     for value in (QUALIFIER_SHA256, CONDITIONAL_QUALIFICATION_SHA256,
@@ -396,30 +512,34 @@ def qualification_receipt(path, *, banks, prefix_run, codec_inventory, codec_ref
     require(sha256_file(path) == CONDITIONAL_QUALIFICATION_SHA256,
             "fresh conditional screen artifact differs")
     helper = load_script(QUALIFIER_FILENAME, QUALIFIER_SHA256)
-    require(helper.INVENTORY_HELPER_SHA256 == INVENTORY_HELPER_SHA256
-            and helper.INVENTORY_SHA256 == INVENTORY_SHA256,
+    data = helper.data_helper()
+    require(data.INVENTORY_HELPER_SHA256 == INVENTORY_HELPER_SHA256
+            and data.INVENTORY_SHA256 == INVENTORY_SHA256,
             "fresh screen codec inventory bindings differ")
-    grid = helper.grid_receipt(completed_grid)
-    inventory, inventory_replay = helper.inventory_receipt(
+    grid = data.grid_receipt(completed_grid)
+    inventory, inventory_replay = data.inventory_receipt(
         codec_inventory, codec_reference_inventory, codec_combined_inventory)
-    theta, obs, query, _, raw, transformed, prefix_custody = helper.input_bindings(
+    theta, obs, query, _, raw, transformed, prefix_custody = data.input_bindings(
         banks, prefix_run, inventory)
     require(raw == raw_bindings, "actual physical bank/query differs from the fresh screen")
     from .science.analytical_benchmark_v2 import array_descriptor
     require(model_inputs == {
         "context_theta": array_descriptor(theta), "context_obs": array_descriptor(obs),
         "query": array_descriptor(query)}, "actual latent model inputs differ from fresh screen")
+    failed_inventory = helper.failed_screen_receipt(failed_screen, raw, transformed)
     document = json.loads(Path(path).read_bytes())
     receipt = helper.validate_screen(
         document, expected_sources=helper.source_pins(), raw_bindings=raw,
-        transformed_bindings=transformed, coordinate_policy=backend.policy_metadata(),
-        inventory_replay=inventory_replay)
+        transformed_bindings=transformed, coordinate_policy=backend.cached.policy_metadata(),
+        native_policy=backend.policy_metadata(), inventory_replay=inventory_replay)
     require(receipt["passed"] and document["matching_FP32_execution_passed_all21"],
-            "fresh matching cached FP32 all21 screen did not pass")
+            "fresh matching cached/native FP32 all21 screen did not pass")
     # FP16 is a separately retained comparison, never this candidate or a veto.
     return document, {
         "screen_sha256": CONDITIONAL_QUALIFICATION_SHA256, "replay": receipt,
         "codec_inventory": inventory_replay, "completed_baseline_grid": grid,
+        "failed_empty_cache_inventory": failed_inventory,
+        "native_execution_policy": backend.policy_metadata(),
         "fixed_prefix_custody": prefix_custody,
         "raw_scientific_bindings": raw, "transformed_bindings": transformed,
         "scope": "separate same-case finite prefixes; request only replays artifact",
@@ -434,7 +554,8 @@ def proposal_scope(frozen, raw_bindings, model_inputs, seeds):
     scope.update(
         prior_coordinate_producer_sha256=source_sha256(),
         codec_sha256=CODEC_SHA256, backend_sha256=BACKEND_SHA256,
-        coordinate_policy_sha256=backend.policy_metadata()["policy_sha256"],
+        coordinate_policy_sha256=backend.cached.policy_metadata()["policy_sha256"],
+        native_execution_policy_sha256=backend.policy_metadata()["policy_sha256"],
         model_inputs=model_inputs, stage_to_physical_order=list(codec.ORDER),
         physical_to_stage_order=list(codec.INVERSE_ORDER),
         strict_full_wave_decode_before_FIFO_and_support=True)
@@ -442,7 +563,7 @@ def proposal_scope(frozen, raw_bindings, model_inputs, seeds):
 
 
 def run(*, banks, output, checkpoint, ledger, reference, reference_grid, qualification,
-        codec_inventory, codec_reference_inventory, codec_combined_inventory, completed_grid, prefix_run):
+        codec_inventory, codec_reference_inventory, codec_combined_inventory, completed_grid, prefix_run, failed_screen):
     start = time.perf_counter()
     output = Path(output)
     require(not output.exists(), "fresh prior-coordinate pilot output required")
@@ -469,7 +590,7 @@ def run(*, banks, output, checkpoint, ledger, reference, reference_grid, qualifi
     }
     theta, obs, query, model_inputs, encoding = model_bindings(context, raw_query)
     screen, receipt = qualification_receipt(
-        qualification, banks=banks, prefix_run=prefix_run, codec_inventory=codec_inventory,
+        qualification, banks=banks, prefix_run=prefix_run, failed_screen=failed_screen, codec_inventory=codec_inventory,
         codec_reference_inventory=codec_reference_inventory, codec_combined_inventory=codec_combined_inventory,
         completed_grid=completed_grid, raw_bindings=raw, model_inputs=model_inputs)
     refs = reference_binding(banks=banks, reference=reference,
@@ -479,11 +600,15 @@ def run(*, banks, output, checkpoint, ledger, reference, reference_grid, qualifi
     output.mkdir(parents=True, exist_ok=False)
     engine = descriptor = buffer = None
     latent_waves = []
+    decoded_waves = []
+    stage_observer = None
     status = {
         **runtime_identity(), "schema": SCHEMA, "variant": VARIANT, "status": "running",
         "attribution": "Built with PriorLabs-TabPFN", "runner_source_sha256": initial_source,
         "execution_policy": execution_metadata(), "codec": codec.metadata(),
-        "coordinate_policy": backend.policy_metadata(), "model_inputs": model_inputs,
+        "coordinate_policy": backend.cached.policy_metadata(),
+        "native_execution_policy": backend.policy_metadata(), "native_all8_stages": list(backend.NATIVE_STAGES),
+        "native_protocol_sha256": NATIVE_PROTOCOL_SHA256, "model_inputs": model_inputs,
         "model_target_descriptors": encoding, "raw_scientific_bindings": raw,
         "physical_parameter_order": list(problem.parameter_order),
         "learned_target_coordinate_system": "causal_prior_latent_sigma_first_stage_order",
@@ -498,10 +623,12 @@ def run(*, banks, output, checkpoint, ledger, reference, reference_grid, qualifi
         "matched_execution_screen": receipt,
         "actual_fixed_conditional_screen_performed_during_request": False,
         "fresh_same_policy_all21_screen_replayed": True,
-        "matching_cached_FP32_execution_passed_all21": True,
-        "FP16_comparison_hard_validity": screen.get("FP16_hard_validity_passed_all21"),
-        "FP16_comparison_strict_failed_stages": screen.get("FP16_strict_failed_stages"),
+        "matching_cached_native_FP32_execution_passed_all21": True,
+        "new_screen_FP16_comparison_performed": False,
         "FP16_activated": False, "mode": MODE, "fallback_map": {},
+        "neural_execution_description": "FP32; 19 cached stages, all8 original-control at6/10",
+        "physical_G3_in_this_neural_request": False,
+        "fallback_map_scope": "INNER frozen88 precision owner only; outer native all8 stages6/10 are explicit",
         "requested_count": COUNT, "benchmark_total_count": COUNT, "context_seed": CONTEXT_SEED,
         "context_size": 4096, "case": CASE, "repetition": 0, "rank": 0, "world_size": 1,
         "end_to_end": True, "scientific_run": True,
@@ -516,7 +643,8 @@ def run(*, banks, output, checkpoint, ledger, reference, reference_grid, qualifi
         "budget_binding": budget, "reference_binding": refs,
         "baseline_execution_source": baseline_source, "preregistration_sha256": PREREGISTRATION_SHA256,
         "completed_stage_indices": [], "stage_events": [], "proposal_wave_sizes": [],
-        "decode_wave_records": [], **raw,
+        "decode_wave_records": [],
+        "forensic_observer_source_sha256": FORENSICS_SHA256, **raw,
     }
     write_json(output / "manifest.json", status)
     try:
@@ -556,19 +684,33 @@ def run(*, banks, output, checkpoint, ledger, reference, reference_grid, qualifi
                 checkpoint, cdf_descriptor=descriptor) as engine:
             callback = lambda prediction, stage, member: validate_prediction(
                 prediction, stage, member, report=actual)
-            stage_draw = frozen.component_stage_sampler(
+            original_stage_draw = frozen.component_stage_sampler(
                 engine, torch, generators, counters, prediction_check=callback)
+            stage_observer = forensics.StageDrawObserver(
+                original_stage_draw, rng_snapshot=lambda: {name: hashlib.sha256(
+                    generator.get_state().numpy().tobytes()).hexdigest()
+                    for name, generator in generators.items()})
+            stage_draw = stage_observer
 
             def progress(event):
-                status["stage_events"].append({"proposal_round": len(status["proposal_wave_sizes"]), **event})
+                stage = event["stage_index"]
+                status["stage_events"].append({"proposal_round": len(status["proposal_wave_sizes"]), **event,
+                    "actual_execution_route": backend.route(stage),
+                    "native_all8_members": list(range(8)) if stage in backend.NATIVE_STAGES else [],
+                    "native_neural_prefill_calls": 0 if stage in backend.NATIVE_STAGES else None})
                 write_json(output / "manifest.json", status)
 
             def proposal(size):
                 status["proposal_wave_sizes"].append(int(size))
+                stage_observer.begin_wave(len(status["proposal_wave_sizes"]) - 1, int(size))
                 latent = wave.stage_major_wave(
                     engine, theta, obs, query, int(size), 1024, lambda _: None,
                     stage_draw=stage_draw, progress=progress)
-                physical = record_decode_wave(latent, latent_waves, status)
+                physical = record_decode_wave(latent, latent_waves, status, decoded_waves=decoded_waves)
+                observation = stage_observer.metadata()
+                require(not observation["capture_errors"] and observation["filled_stage_count"] == 21,
+                        "actual returned-stage observation incomplete")
+                status["decode_wave_records"][-1]["stage_draw_observation"] = observation
                 return torch.from_numpy(physical), None
 
             scope = proposal_scope(frozen, raw, model_inputs, seeds)
@@ -626,12 +768,14 @@ def run(*, banks, output, checkpoint, ledger, reference, reference_grid, qualifi
                 "fresh screen artifact changed")
         archive_start = time.perf_counter()
         wave_archive = archive_latent_waves(output, latent_waves)
+        decoded_archive = archive_decoded_waves(output, decoded_waves)
         with (output / "samples.npz").open("xb") as stream:
             np.savez(stream, samples=values)
         status.update(
             status="complete", samples=array_descriptor(values), samples_file="samples.npz",
             samples_sha256=sha256_file(output / "samples.npz"),
             latent_wave_archive=wave_archive,
+            decoded_wave_archive=decoded_archive,
             compatibility_adapter=dict(descriptor), sources_unchanged=True,
             completed_stage_indices=list(range(21)),
             rejection={"support_calls": prior.support.calls, "proposed": prior.support.proposed,
@@ -648,15 +792,10 @@ def run(*, banks, output, checkpoint, ledger, reference, reference_grid, qualifi
         status.update(status="failed", error_type=type(error).__name__, error=str(error))
         if descriptor is not None:
             status["compatibility_adapter"] = dict(descriptor)
-        if buffer is not None:
-            status["proposal_buffer"] = buffer.metadata()
-        if latent_waves and not (output / "latent-proposal-waves.npz").exists():
-            try:
-                status["latent_wave_archive"] = archive_latent_waves(output, latent_waves)
-                status["latent_wave_archive"]["preserved_after_request_failure"] = True
-            except BaseException as archive_error:
-                status["latent_wave_archive_preservation_error"] = {
-                    "type": type(archive_error).__name__, "error": str(archive_error)}
+        preserve_failure_artifacts(
+            output, status, latent_waves, decoded_waves, stage_observer,
+            active_stage=getattr(engine, "stage_index", None),
+            buffer_metadata=buffer.metadata if buffer is not None else None)
         # An archive error is secondary evidence; retain the original failure.
         raise
     finally:
@@ -671,7 +810,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("banks", "output", "checkpoint", "ledger", "reference", "reference-grid",
                  "qualification", "codec-inventory", "codec-reference-inventory",
-                 "codec-combined-inventory", "completed-grid", "prefix-run"):
+                 "codec-combined-inventory", "completed-grid", "prefix-run", "failed-screen"):
         parser.add_argument("--" + name, required=True)
     record = run(**vars(parser.parse_args()))
     print(json.dumps({key: record[key] for key in ("schema", "variant", "status", "case", "context_seed", "samples_sha256")}, sort_keys=True))

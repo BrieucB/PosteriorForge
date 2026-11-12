@@ -1,0 +1,787 @@
+{
+  "actual_CDF_calls": 1008,
+  "actual_CDF_contexts": 1,
+  "attribution": "Built with PriorLabs-TabPFN",
+  "baseline_execution_source": {
+    "baseline_inference_sha256": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e",
+    "upstream_files": {
+      "__init__.py": "a32a437d7910cec8c251ceb6849fece6b61ece32c16e8a346e4afae82bf7bc08",
+      "accept_reject_sampler.py": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+      "npe_pfn.py": "29517328b3ff23e2e8040d19f33e79adef5fc7f91db2cffccf60234344399a85",
+      "restricted_prior.py": "13026cf8a4618aa4ca6406e0596a7ec97c0664de5b7c2b4dd7f31e4c32ece160",
+      "support_posterior.py": "022e5b22b9397e9faea08b73df76b5a0c5cf0c012b665decfe28c5b725c362ee",
+      "tsnpe_pfn.py": "f959662adf6ac6ed5aecefcebad907ef951c22bf05bbcf2c8e0e6312cb054034"
+    },
+    "upstream_provenance_sha256": "4caf84b49b04c79f28bcbe9f88f9da6b64ac0b99a2c60f53e01b2fc1c6833c8b"
+  },
+  "cached19_guard_scope": {
+    "execution": "exact frozen88 delegation",
+    "full_KV_byte_inventory_claimed": false,
+    "prepared_before_after_utility_model_contract_preserved": true,
+    "scope": "existing recorded settings/normalizers/outlier/train-feature/cached-embedding/preprocessor/target/border, dtype, source, RNG and numerical guards; no invented parameter/KV hashes",
+    "separate_full_weight_value_hashes_during_cached_arms_recorded": false,
+    "stages": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ]
+  },
+  "checkpoint_postrun_corroboration": {
+    "expected_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+    "file_name": "tabpfn-v2-regressor.ckpt",
+    "observed_at_UTC": "2026-11-12T22:34:00.360365+00:00",
+    "observed_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+    "passed": true,
+    "scope": "independent post-run file-byte check; corroboration, not a fabricated in-run snapshot or additional qualification"
+  },
+  "corrected_CDF_actual_context": {
+    "activation": "explicit",
+    "active_translator_code_sha256": "8a13551c263346388cee3326e17daabcae89274dd7fa9dcf0f07aded35498367",
+    "adapter_id": "tabpfn-2.0.9-finite-cdf-parentheses-v1",
+    "adapter_sha256": "7a86fbbefdb0fa7e850a394bea8af710c2e5f0139c10cdce1fd272fb9709eec0",
+    "adapter_version": 1,
+    "corrected_cdf_code_sha256": "ae3c7d841ba63f2fd27f7a317848834bdf4bcf5330c780e5dad6dd678b4ba140",
+    "correction": "finite_cdf_parentheses_only",
+    "exact_patch_target": "tabpfn.regressor.translate_probs_across_borders.__globals__['_cdf']",
+    "executed_corrected_cdf_code_sha256": "ae3c7d841ba63f2fd27f7a317848834bdf4bcf5330c780e5dad6dd678b4ba140",
+    "execution_optimized": false,
+    "original_alias_identity_verified": true,
+    "original_alias_restored": true,
+    "original_cdf_code_sha256": "5e7eebe9521dba64daa2148b35d0ff4f8d88f618a1193cb2b6ea3404249c4945",
+    "original_translator_code_sha256": "8a13551c263346388cee3326e17daabcae89274dd7fa9dcf0f07aded35498367",
+    "patched_call_count": 1008,
+    "schema": "posteriorforge.compat.finite_cdf.v1",
+    "scope": "finite_ensemble_cdf_parentheses_only",
+    "sdk_aliases_unchanged": true,
+    "sdk_files_modified": false,
+    "sdk_source_sha256": {
+      "tabpfn/regressor.py": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "tabpfn/utils.py": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1"
+    },
+    "sdk_source_sha256_after": {
+      "tabpfn/regressor.py": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "tabpfn/utils.py": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1"
+    },
+    "sdk_sources_unchanged": true,
+    "source_guard_passed": true,
+    "tabpfn_version": "2.0.9",
+    "tail_family_changed": false,
+    "translator_code_unchanged": true,
+    "variant": "cdf_arithmetic_v1"
+  },
+  "ephemeral_forward_query_tensor_inventory_claimed": false,
+  "first_planned_N1_remains_in_numeric_comparisons": true,
+  "global_RNG_preserved": true,
+  "native_stages": [
+    {
+      "actual_attention_calls": 864,
+      "actual_query_QKV_calls": 864,
+      "all_four_snapshots_equal": true,
+      "cold_equals_warm_claimed": false,
+      "cold_to_planned_N1_transition_observed": true,
+      "immutable_snapshot": {
+        "configuration_identities": [
+          {
+            "sha256": "8dfee3b3a6008983c3e73c38bbe2be5975003d71f66c212747b93f83633d7276",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "sha256": "a37ffbaff13b48a924bed0beeda2d0479cf0fc2647dd5eabadc4af26b18eef14",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "sha256": "2ac185005a73cce46dc7c34ef6f078fb5c446aaa80e69c93ebfab61cdd5239c0",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "sha256": "fd831d33afa757f4bf668b6c700628602a77f2d69c2c554c6e0dc2af3380ff7e",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "sha256": "01899063b8274249e0b5149793a29b3fb56bbd353a7065acc87fd0c58bf75c46",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "sha256": "895ebdc0ae460a215486cbbe2f1b6e3e0d30f6a9873beacd0f9b0fc3ed31ae7f",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "sha256": "e381d11bfdf1e333a9fd4cc45d320ce3446f273f327756d62c6af101b8673425",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "sha256": "4299b57acb514c4a5ccbd681f95c6db2e6df9f19025743b873a3e322eea37cd0",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          }
+        ],
+        "criterion_borders": {
+          "dtype": "<f4",
+          "sha256": "f915afa3c6ecd50ac3f1e2d2eb16ef94756da1284d538fbc75218101fbf52c6c",
+          "shape": [
+            5001
+          ]
+        },
+        "fitted_context_X": [
+          {
+            "dtype": "<f8",
+            "sha256": "ca7f37a713d31b3171eb96410da3d76ce36b5522a453c1662394901412f02424",
+            "shape": [
+              4096,
+              26
+            ]
+          },
+          {
+            "dtype": "<f8",
+            "sha256": "1ac6442f326652d81624d3478f558a8447486f1ce0607ecd83a6f9957bdf715d",
+            "shape": [
+              4096,
+              26
+            ]
+          },
+          {
+            "dtype": "<f8",
+            "sha256": "1a0d1b1d959a9f1d45b2ddfb4e4aa2207b8990b785a25acb761d3d5f088dd20a",
+            "shape": [
+              4096,
+              26
+            ]
+          },
+          {
+            "dtype": "<f8",
+            "sha256": "7a270ebcda0f82008be23f96b05401825cd8e2b09bf8232d49382b507d3cbaaf",
+            "shape": [
+              4096,
+              26
+            ]
+          },
+          {
+            "dtype": "<f8",
+            "sha256": "de8f4457625ca50c8fd31569d52d6bd45d41cd9d01c96ea4d01e4e0480b57065",
+            "shape": [
+              4096,
+              11
+            ]
+          },
+          {
+            "dtype": "<f8",
+            "sha256": "616c3dd91c58ce21c87a1275bb1cac875388640343fdd4163a29dc7aeea8be4a",
+            "shape": [
+              4096,
+              11
+            ]
+          },
+          {
+            "dtype": "<f8",
+            "sha256": "90ad2440d419ed0dad4c57e839442b55a58effd2e20ed55a242a453c7f654f24",
+            "shape": [
+              4096,
+              11
+            ]
+          },
+          {
+            "dtype": "<f8",
+            "sha256": "529ec12854577dfaa8b1c2b597013bb738db24b83ab192d7d701ca4b60f5c3f0",
+            "shape": [
+              4096,
+              11
+            ]
+          }
+        ],
+        "fitted_context_y": [
+          {
+            "dtype": "<f4",
+            "sha256": "a071efe3e19d34d3af3281581b2aefe2e478a3691a962a0e8b09e32acb90a0ac",
+            "shape": [
+              4096
+            ]
+          },
+          {
+            "dtype": "<f4",
+            "sha256": "a071efe3e19d34d3af3281581b2aefe2e478a3691a962a0e8b09e32acb90a0ac",
+            "shape": [
+              4096
+            ]
+          },
+          {
+            "dtype": "<f4",
+            "sha256": "5ae6b2fcff2e1c47a1c32dda1fdc724f5cbdf0229280fda686132a8ae0dd975d",
+            "shape": [
+              4096
+            ]
+          },
+          {
+            "dtype": "<f4",
+            "sha256": "5ae6b2fcff2e1c47a1c32dda1fdc724f5cbdf0229280fda686132a8ae0dd975d",
+            "shape": [
+              4096
+            ]
+          },
+          {
+            "dtype": "<f4",
+            "sha256": "a071efe3e19d34d3af3281581b2aefe2e478a3691a962a0e8b09e32acb90a0ac",
+            "shape": [
+              4096
+            ]
+          },
+          {
+            "dtype": "<f4",
+            "sha256": "a071efe3e19d34d3af3281581b2aefe2e478a3691a962a0e8b09e32acb90a0ac",
+            "shape": [
+              4096
+            ]
+          },
+          {
+            "dtype": "<f4",
+            "sha256": "5ae6b2fcff2e1c47a1c32dda1fdc724f5cbdf0229280fda686132a8ae0dd975d",
+            "shape": [
+              4096
+            ]
+          },
+          {
+            "dtype": "<f4",
+            "sha256": "5ae6b2fcff2e1c47a1c32dda1fdc724f5cbdf0229280fda686132a8ae0dd975d",
+            "shape": [
+              4096
+            ]
+          }
+        ],
+        "parameter_count": 11081864,
+        "preprocessor_sha256": [
+          "ba1bba81f965df3276a755cf14f8f979d5fc612704683c56149c8441f05a6fad",
+          "0357e30285abe7b9af8e772c9c7ef4bdab43cd7c6eb31c1b583375017cc35362",
+          "374fd27cdfcde8d0e5040ab9bc42291f6c55f1a08fe82b1641f7b751ffe8e03a",
+          "74dfb65d1c07d89f162984fb60cfae72c77425ccbaf78975c89ab61caa4dbf25",
+          "904448bf082dd61c615067b63bbc21bc8a5939df98b44c3256df1f3168aa56e4",
+          "44e642ca88a800df1aa462f8ee5096281927ac57a4411c9b88a784db392265e3",
+          "204fc3f73f07b406d9669bbadf4f8fb50891b2853c81a0232c6c725e2a16fbaf",
+          "9da2ad469a3f12451e8f5b8054fe1d9adc61786ee5181482beeefe1c4f0c5aab"
+        ],
+        "scope": "immutable weights/targets/criterion/configs/preprocessors/all8 fitted X/y; excludes legitimate cold-to-warm normalization/embedding initialization",
+        "target_mean": -0.008352767676115036,
+        "target_sd": 1.0017503499984741,
+        "weight_values_sha256": "df8255dcfbaebc758780ee531438229bdd55c5d7b446f03eaa17754ec68cbfc6"
+      },
+      "immutable_snapshot_count": 4,
+      "immutable_snapshot_observation_times": [
+        "before planned N1",
+        "after planned N1",
+        "after planned N1024",
+        "after planned stress"
+      ],
+      "normalizer_embedding_known_contracts_equal_postN1": true,
+      "owner_aliases_and_flags_restored": true,
+      "preparation": {
+        "autocast": false,
+        "configuration_identities": [
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='quantile_uni', categorical_name='ordinal_very_common_categories_shuffled', append_original=True, subsample_features=-1, global_transformer_name='svd'), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=636, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=None)",
+            "sha256": "8dfee3b3a6008983c3e73c38bbe2be5975003d71f66c212747b93f83633d7276",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='quantile_uni', categorical_name='ordinal_very_common_categories_shuffled', append_original=True, subsample_features=-1, global_transformer_name='svd'), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=637, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=None)",
+            "sha256": "a37ffbaff13b48a924bed0beeda2d0479cf0fc2647dd5eabadc4af26b18eef14",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='quantile_uni', categorical_name='ordinal_very_common_categories_shuffled', append_original=True, subsample_features=-1, global_transformer_name='svd'), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=639, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=Pipeline(steps=[('input_transformer', SafePowerTransformer()),\n                ('standard',\n                 Pipeline(steps=[('inf_to_nan_pre ',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_pre ',\n                                  SimpleImputer(keep_empty_features=True)),\n                                 ('standard', StandardScaler()),\n                                 ('inf_to_nan_post',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_post',\n                                  SimpleImputer(keep_empty_features=True))]))]))",
+            "sha256": "2ac185005a73cce46dc7c34ef6f078fb5c446aaa80e69c93ebfab61cdd5239c0",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='quantile_uni', categorical_name='ordinal_very_common_categories_shuffled', append_original=True, subsample_features=-1, global_transformer_name='svd'), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=643, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=Pipeline(steps=[('input_transformer', SafePowerTransformer()),\n                ('standard',\n                 Pipeline(steps=[('inf_to_nan_pre ',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_pre ',\n                                  SimpleImputer(keep_empty_features=True)),\n                                 ('standard', StandardScaler()),\n                                 ('inf_to_nan_post',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_post',\n                                  SimpleImputer(keep_empty_features=True))]))]))",
+            "sha256": "fd831d33afa757f4bf668b6c700628602a77f2d69c2c554c6e0dc2af3380ff7e",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='safepower', categorical_name='onehot', append_original=False, subsample_features=-1, global_transformer_name=None), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=638, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=None)",
+            "sha256": "01899063b8274249e0b5149793a29b3fb56bbd353a7065acc87fd0c58bf75c46",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='safepower', categorical_name='onehot', append_original=False, subsample_features=-1, global_transformer_name=None), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=641, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=None)",
+            "sha256": "895ebdc0ae460a215486cbbe2f1b6e3e0d30f6a9873beacd0f9b0fc3ed31ae7f",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='safepower', categorical_name='onehot', append_original=False, subsample_features=-1, global_transformer_name=None), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=640, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=Pipeline(steps=[('input_transformer', SafePowerTransformer()),\n                ('standard',\n                 Pipeline(steps=[('inf_to_nan_pre ',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_pre ',\n                                  SimpleImputer(keep_empty_features=True)),\n                                 ('standard', StandardScaler()),\n                                 ('inf_to_nan_post',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_post',\n                                  SimpleImputer(keep_empty_features=True))]))]))",
+            "sha256": "e381d11bfdf1e333a9fd4cc45d320ce3446f273f327756d62c6af101b8673425",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='safepower', categorical_name='onehot', append_original=False, subsample_features=-1, global_transformer_name=None), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=642, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=Pipeline(steps=[('input_transformer', SafePowerTransformer()),\n                ('standard',\n                 Pipeline(steps=[('inf_to_nan_pre ',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_pre ',\n                                  SimpleImputer(keep_empty_features=True)),\n                                 ('standard', StandardScaler()),\n                                 ('inf_to_nan_post',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_post',\n                                  SimpleImputer(keep_empty_features=True))]))]))",
+            "sha256": "4299b57acb514c4a5ccbd681f95c6db2e6df9f19025743b873a3e322eea37cd0",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          }
+        ],
+        "fit_mode": "fit_preprocessors",
+        "forced_dtype": "torch.float32",
+        "native_KV_cache_used": false,
+        "native_neural_prefill_calls": 0,
+        "original_all8_lists_verified": true,
+        "preprocessor_sha256": [
+          "ba1bba81f965df3276a755cf14f8f979d5fc612704683c56149c8441f05a6fad",
+          "0357e30285abe7b9af8e772c9c7ef4bdab43cd7c6eb31c1b583375017cc35362",
+          "374fd27cdfcde8d0e5040ab9bc42291f6c55f1a08fe82b1641f7b751ffe8e03a",
+          "74dfb65d1c07d89f162984fb60cfae72c77425ccbaf78975c89ab61caa4dbf25",
+          "904448bf082dd61c615067b63bbc21bc8a5939df98b44c3256df1f3168aa56e4",
+          "44e642ca88a800df1aa462f8ee5096281927ac57a4411c9b88a784db392265e3",
+          "204fc3f73f07b406d9669bbadf4f8fb50891b2853c81a0232c6c725e2a16fbaf",
+          "9da2ad469a3f12451e8f5b8054fe1d9adc61786ee5181482beeefe1c4f0c5aab"
+        ],
+        "route": "original_fit_preprocessors_all8",
+        "stage_index": 6,
+        "target_codec_coordinate": {
+          "dataset_id": "mechanical_1",
+          "decode_latent_dependencies": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "encode_physical_dependencies": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "kind": "local_conditional_gaussian_residual_given_all_globals",
+          "latent_name": "z_d0_m1",
+          "physical_name": "d0_m1",
+          "physical_slot": 5,
+          "stage": 6
+        }
+      },
+      "preparation_witness": {
+        "cached_prefill_claimed": false,
+        "native_neural_prefill_calls": 0,
+        "passed": true,
+        "route": "original_fit_preprocessors_all8",
+        "stage": 6
+      },
+      "snapshot0_equals_original_control_snapshot": true,
+      "stage": 6,
+      "state_scope": "native cold fit guarded; warmed baseline after planned N1, then N1024/stress",
+      "target": {
+        "dataset_id": "mechanical_1",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_d0_m1",
+        "physical_name": "d0_m1",
+        "physical_slot": 5,
+        "stage": 6
+      },
+      "warm_contract_scope": {
+        "all_observed_fields_claimed_query_independent": false,
+        "cold_to_warm_equality_claimed": false,
+        "ephemeral_forward_query_tensors_inventoried": false,
+        "native_KV_cache_used": false,
+        "number_of_used_features_source_scope": "SDK _fit uses full supplied x; field remains protected observationally, not exempted",
+        "protected": "all observed frozen utility model_contract fields after planned N1, including normalization/outlier/train-feature/cached-embedding/number-of-used-features"
+      },
+      "whole_summary_sha256_by_time": {
+        "1024": "7bc79380d28fa6cc6882930b7e947a9dd706bb44b1c9d10e440e62fce8ed51ed",
+        "cold": "0f72e57a3ca929673ecfb42ec9713ed0d74abe70a3283d7127a46fdfe75ceead",
+        "planned_N1": "7bc79380d28fa6cc6882930b7e947a9dd706bb44b1c9d10e440e62fce8ed51ed",
+        "stress": "7bc79380d28fa6cc6882930b7e947a9dd706bb44b1c9d10e440e62fce8ed51ed"
+      }
+    },
+    {
+      "actual_attention_calls": 864,
+      "actual_query_QKV_calls": 864,
+      "all_four_snapshots_equal": true,
+      "cold_equals_warm_claimed": false,
+      "cold_to_planned_N1_transition_observed": true,
+      "immutable_snapshot": {
+        "configuration_identities": [
+          {
+            "sha256": "8dfee3b3a6008983c3e73c38bbe2be5975003d71f66c212747b93f83633d7276",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "sha256": "a37ffbaff13b48a924bed0beeda2d0479cf0fc2647dd5eabadc4af26b18eef14",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "sha256": "29fdf9c5835be2830cfcae7e8f3f1358fe3343761bf7b6b25586b0fd28500f61",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "sha256": "8125aa4d73d746e5d12a7f70d9987d5d3e8c8e779777164c708d910f382a8705",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "sha256": "01899063b8274249e0b5149793a29b3fb56bbd353a7065acc87fd0c58bf75c46",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "sha256": "895ebdc0ae460a215486cbbe2f1b6e3e0d30f6a9873beacd0f9b0fc3ed31ae7f",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "sha256": "de4de00da937760b28997c5bf1e718d157762c060729875149a0c64c5e217234",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "sha256": "4e046b4784a5f667a9dee24061a468dea18d7ff49bab3393051a6299ece6051b",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          }
+        ],
+        "criterion_borders": {
+          "dtype": "<f4",
+          "sha256": "126a49e72360774ea6b517add2d22764e4d94cbf02ca71e06b9fd466433e0459",
+          "shape": [
+            5001
+          ]
+        },
+        "fitted_context_X": [
+          {
+            "dtype": "<f8",
+            "sha256": "fd7a803249deae4bca411f2209f8ca49b42bbddbf1c288f7231691098cba18d7",
+            "shape": [
+              4096,
+              26
+            ]
+          },
+          {
+            "dtype": "<f8",
+            "sha256": "9f953ff61f7dd0fe95d52d00cd4dd5c4051e52783a76793f7ae42f5f4a22fbe2",
+            "shape": [
+              4096,
+              26
+            ]
+          },
+          {
+            "dtype": "<f8",
+            "sha256": "16ac9944aecd3c46fdea1c292e399712847773925e711ce853bf9e6aac0b7b1d",
+            "shape": [
+              4096,
+              26
+            ]
+          },
+          {
+            "dtype": "<f8",
+            "sha256": "6d70ae8ae7f22dc53e6258ec59f43fd211ed7e451545a958597434eceaafccf8",
+            "shape": [
+              4096,
+              26
+            ]
+          },
+          {
+            "dtype": "<f8",
+            "sha256": "bab4ed7a10a2b3d6790d0a9e81db3a2df65b0b2a58d01b1012ac4bebe053d4c9",
+            "shape": [
+              4096,
+              11
+            ]
+          },
+          {
+            "dtype": "<f8",
+            "sha256": "e00d62c28ca3e575d2fbde49eb1a88d7d21f04ffd10345de56d434de52ee9de5",
+            "shape": [
+              4096,
+              11
+            ]
+          },
+          {
+            "dtype": "<f8",
+            "sha256": "cbc25934cf0c2d413518916859058157164b8bb0b1a5efd44f8585c17dc8b8e4",
+            "shape": [
+              4096,
+              11
+            ]
+          },
+          {
+            "dtype": "<f8",
+            "sha256": "af027b093190af1098c98ed9a59c42e21846947d6d04d9f6f84250d3082e43f8",
+            "shape": [
+              4096,
+              11
+            ]
+          }
+        ],
+        "fitted_context_y": [
+          {
+            "dtype": "<f4",
+            "sha256": "4f5e2babe12d346348d541d81f382809464a8835c27ab91c3530cb5d5d9d97f4",
+            "shape": [
+              4096
+            ]
+          },
+          {
+            "dtype": "<f4",
+            "sha256": "4f5e2babe12d346348d541d81f382809464a8835c27ab91c3530cb5d5d9d97f4",
+            "shape": [
+              4096
+            ]
+          },
+          {
+            "dtype": "<f4",
+            "sha256": "4f1aaf90a2bb1373cfa098f326b857fb097adc845d9bbbe31b0157b16b0ce3ae",
+            "shape": [
+              4096
+            ]
+          },
+          {
+            "dtype": "<f4",
+            "sha256": "4f1aaf90a2bb1373cfa098f326b857fb097adc845d9bbbe31b0157b16b0ce3ae",
+            "shape": [
+              4096
+            ]
+          },
+          {
+            "dtype": "<f4",
+            "sha256": "4f5e2babe12d346348d541d81f382809464a8835c27ab91c3530cb5d5d9d97f4",
+            "shape": [
+              4096
+            ]
+          },
+          {
+            "dtype": "<f4",
+            "sha256": "4f5e2babe12d346348d541d81f382809464a8835c27ab91c3530cb5d5d9d97f4",
+            "shape": [
+              4096
+            ]
+          },
+          {
+            "dtype": "<f4",
+            "sha256": "4f1aaf90a2bb1373cfa098f326b857fb097adc845d9bbbe31b0157b16b0ce3ae",
+            "shape": [
+              4096
+            ]
+          },
+          {
+            "dtype": "<f4",
+            "sha256": "4f1aaf90a2bb1373cfa098f326b857fb097adc845d9bbbe31b0157b16b0ce3ae",
+            "shape": [
+              4096
+            ]
+          }
+        ],
+        "parameter_count": 11081864,
+        "preprocessor_sha256": [
+          "3460d3326a5fecd6c80a84e00c15cba32066104036b129c143c7582d92ecee2e",
+          "5b6ae7854755d4221245f82901ba0f2ce39216f5203e3327ae85f0ddf0612c38",
+          "f70e43cef403824373e25695da5cd3b4dd8994fca40d871d0dc55ca97562580f",
+          "e74f97eb15c747b6e64587e013a8c143e801b8b4f26f9d6a24b94ff84d6c90c3",
+          "c41f88d7cedb728bca567a7385b36522510b49ce7e58b8c8bc0db634b2393edb",
+          "a383f74058b3f124ba7391b448142fb1bfcfa438e5b2bff0e165b15f424b674d",
+          "28cf676100d8b23f83ac0ecfaf22295e1982fff35e12f0b3e0cd483b955a32e2",
+          "7924a70348aea462e5dc9b44aa29a571d597fe388d95e06dbbd582806ea70ccc"
+        ],
+        "scope": "immutable weights/targets/criterion/configs/preprocessors/all8 fitted X/y; excludes legitimate cold-to-warm normalization/embedding initialization",
+        "target_mean": 0.006403517443686724,
+        "target_sd": 0.9827307462692261,
+        "weight_values_sha256": "df8255dcfbaebc758780ee531438229bdd55c5d7b446f03eaa17754ec68cbfc6"
+      },
+      "immutable_snapshot_count": 4,
+      "immutable_snapshot_observation_times": [
+        "before planned N1",
+        "after planned N1",
+        "after planned N1024",
+        "after planned stress"
+      ],
+      "normalizer_embedding_known_contracts_equal_postN1": true,
+      "owner_aliases_and_flags_restored": true,
+      "preparation": {
+        "autocast": false,
+        "configuration_identities": [
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='quantile_uni', categorical_name='ordinal_very_common_categories_shuffled', append_original=True, subsample_features=-1, global_transformer_name='svd'), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=636, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=None)",
+            "sha256": "8dfee3b3a6008983c3e73c38bbe2be5975003d71f66c212747b93f83633d7276",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='quantile_uni', categorical_name='ordinal_very_common_categories_shuffled', append_original=True, subsample_features=-1, global_transformer_name='svd'), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=637, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=None)",
+            "sha256": "a37ffbaff13b48a924bed0beeda2d0479cf0fc2647dd5eabadc4af26b18eef14",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='quantile_uni', categorical_name='ordinal_very_common_categories_shuffled', append_original=True, subsample_features=-1, global_transformer_name='svd'), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=639, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=Pipeline(steps=[('input_transformer', SafePowerTransformer()),\n                ('standard',\n                 Pipeline(steps=[('inf_to_nan_pre ',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_pre ',\n                                  SimpleImputer(keep_empty_features=True)),\n                                 ('standard', StandardScaler()),\n                                 ('inf_to_nan_post',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_post',\n                                  SimpleImputer(keep_empty_features=True))]))]))",
+            "sha256": "29fdf9c5835be2830cfcae7e8f3f1358fe3343761bf7b6b25586b0fd28500f61",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='quantile_uni', categorical_name='ordinal_very_common_categories_shuffled', append_original=True, subsample_features=-1, global_transformer_name='svd'), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=643, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=Pipeline(steps=[('input_transformer', SafePowerTransformer()),\n                ('standard',\n                 Pipeline(steps=[('inf_to_nan_pre ',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_pre ',\n                                  SimpleImputer(keep_empty_features=True)),\n                                 ('standard', StandardScaler()),\n                                 ('inf_to_nan_post',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_post',\n                                  SimpleImputer(keep_empty_features=True))]))]))",
+            "sha256": "8125aa4d73d746e5d12a7f70d9987d5d3e8c8e779777164c708d910f382a8705",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='safepower', categorical_name='onehot', append_original=False, subsample_features=-1, global_transformer_name=None), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=638, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=None)",
+            "sha256": "01899063b8274249e0b5149793a29b3fb56bbd353a7065acc87fd0c58bf75c46",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='safepower', categorical_name='onehot', append_original=False, subsample_features=-1, global_transformer_name=None), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=641, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=None)",
+            "sha256": "895ebdc0ae460a215486cbbe2f1b6e3e0d30f6a9873beacd0f9b0fc3ed31ae7f",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='safepower', categorical_name='onehot', append_original=False, subsample_features=-1, global_transformer_name=None), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=640, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=Pipeline(steps=[('input_transformer', SafePowerTransformer()),\n                ('standard',\n                 Pipeline(steps=[('inf_to_nan_pre ',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_pre ',\n                                  SimpleImputer(keep_empty_features=True)),\n                                 ('standard', StandardScaler()),\n                                 ('inf_to_nan_post',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_post',\n                                  SimpleImputer(keep_empty_features=True))]))]))",
+            "sha256": "de4de00da937760b28997c5bf1e718d157762c060729875149a0c64c5e217234",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          },
+          {
+            "repr": "RegressorEnsembleConfig(preprocess_config=PreprocessorConfig(name='safepower', categorical_name='onehot', append_original=False, subsample_features=-1, global_transformer_name=None), add_fingerprint_feature=True, polynomial_features='no', feature_shift_count=642, feature_shift_decoder='shuffle', subsample_ix=None, target_transform=Pipeline(steps=[('input_transformer', SafePowerTransformer()),\n                ('standard',\n                 Pipeline(steps=[('inf_to_nan_pre ',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_pre ',\n                                  SimpleImputer(keep_empty_features=True)),\n                                 ('standard', StandardScaler()),\n                                 ('inf_to_nan_post',\n                                  FunctionTransformer(check_inverse=False,\n                                                      func=<function _inf_to_nan_func at 0x1458564207c0>,\n                                                      inverse_func=<function _identity at 0x1458564209a0>)),\n                                 ('nan_impute_post',\n                                  SimpleImputer(keep_empty_features=True))]))]))",
+            "sha256": "4e046b4784a5f667a9dee24061a468dea18d7ff49bab3393051a6299ece6051b",
+            "type": "tabpfn.preprocessing.RegressorEnsembleConfig"
+          }
+        ],
+        "fit_mode": "fit_preprocessors",
+        "forced_dtype": "torch.float32",
+        "native_KV_cache_used": false,
+        "native_neural_prefill_calls": 0,
+        "original_all8_lists_verified": true,
+        "preprocessor_sha256": [
+          "3460d3326a5fecd6c80a84e00c15cba32066104036b129c143c7582d92ecee2e",
+          "5b6ae7854755d4221245f82901ba0f2ce39216f5203e3327ae85f0ddf0612c38",
+          "f70e43cef403824373e25695da5cd3b4dd8994fca40d871d0dc55ca97562580f",
+          "e74f97eb15c747b6e64587e013a8c143e801b8b4f26f9d6a24b94ff84d6c90c3",
+          "c41f88d7cedb728bca567a7385b36522510b49ce7e58b8c8bc0db634b2393edb",
+          "a383f74058b3f124ba7391b448142fb1bfcfa438e5b2bff0e165b15f424b674d",
+          "28cf676100d8b23f83ac0ecfaf22295e1982fff35e12f0b3e0cd483b955a32e2",
+          "7924a70348aea462e5dc9b44aa29a571d597fe388d95e06dbbd582806ea70ccc"
+        ],
+        "route": "original_fit_preprocessors_all8",
+        "stage_index": 10,
+        "target_codec_coordinate": {
+          "dataset_id": "mechanical_2",
+          "decode_latent_dependencies": [
+            0,
+            1,
+            2,
+            7,
+            8,
+            9
+          ],
+          "encode_physical_dependencies": [
+            0,
+            1,
+            2,
+            7,
+            8,
+            9
+          ],
+          "kind": "local_conditional_gaussian_residual_given_all_globals",
+          "latent_name": "z_d0_m2",
+          "physical_name": "d0_m2",
+          "physical_slot": 9,
+          "stage": 10
+        }
+      },
+      "preparation_witness": {
+        "cached_prefill_claimed": false,
+        "native_neural_prefill_calls": 0,
+        "passed": true,
+        "route": "original_fit_preprocessors_all8",
+        "stage": 10
+      },
+      "snapshot0_equals_original_control_snapshot": true,
+      "stage": 10,
+      "state_scope": "native cold fit guarded; warmed baseline after planned N1, then N1024/stress",
+      "target": {
+        "dataset_id": "mechanical_2",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          7,
+          8,
+          9
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          7,
+          8,
+          9
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_d0_m2",
+        "physical_name": "d0_m2",
+        "physical_slot": 9,
+        "stage": 10
+      },
+      "warm_contract_scope": {
+        "all_observed_fields_claimed_query_independent": false,
+        "cold_to_warm_equality_claimed": false,
+        "ephemeral_forward_query_tensors_inventoried": false,
+        "native_KV_cache_used": false,
+        "number_of_used_features_source_scope": "SDK _fit uses full supplied x; field remains protected observationally, not exempted",
+        "protected": "all observed frozen utility model_contract fields after planned N1, including normalization/outlier/train-feature/cached-embedding/number-of-used-features"
+      },
+      "whole_summary_sha256_by_time": {
+        "1024": "af125fff4939c7a962a290a7b2a8b30e4778c6d2eb494d4443b28ff527e81343",
+        "cold": "04d1dc18167025c1bd53a63d8b85aab8ddf24436ff09d850e727b038a4b5dc28",
+        "planned_N1": "af125fff4939c7a962a290a7b2a8b30e4778c6d2eb494d4443b28ff527e81343",
+        "stress": "af125fff4939c7a962a290a7b2a8b30e4778c6d2eb494d4443b28ff527e81343"
+      }
+    }
+  ],
+  "no_extra_warmup_predictions": true,
+  "original_control_guard_scope": "stock source/checkpoint/settings plus exact same masked features and target; native original-control immutable snapshots recorded after its three planned queries and compared to candidate cold snapshots; no claim to per-query original-control weight snapshots at other19 stages",
+  "raw_manifest_sha256": "5ec69eb7aadbd74c7d96ee534b71d0d8bee2b6dd6f6e3d2f44e74607452f682b",
+  "schema": "posteriorforge.prior_native_screen_guard_scope.v1",
+  "sources": {
+    "ancestral_sources": {
+      "SS15_representation": "46323c0b94301c2f7e678538881d5cbbdd8bc52c62a60021798176bffe81eb85",
+      "backend": "88f28c5a1f01c086661243c5d3bfb59631eb3c95fe3567b7f1ede325ddba0aea",
+      "codec": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+      "codec_inventory_helper": "ce68e237f15d239f99f091c2310cf15791d1cf7f7cf7442c2db029241834a636",
+      "numeric_comparison_helper": "0c3dd7274d6741bba2ba0ae2744542865f48b2f887a6831e1d2aa6bce47f78c0",
+      "numeric_hard_guards": "c55c00a1697f8d4341880af18676c29b4d99551e131c89ff79bea238c693f8bd",
+      "numeric_utility": "6c927a5c278c7fc54b556ac557ecef64f5e6338f5ae13bf466f3b1e6a4640f90",
+      "preregistration": "7c4aca04c4571960108c0296ec5d4770940ce0b51fa0a77cdd0c27182b4ed849",
+      "prior_and_order_sources": {
+        "execution_ss15_sigma_first.py": "d48d1638ef9e540bdd629d321fba657af4db757700b1092fc58fb9ded1f79ad2",
+        "science/analytical_benchmark_v2.py": "8d5f286f6d8512391dea2ae036313bec05782d28c7803f336490cbcdce3bd99f",
+        "science/hierarchical_exact.py": "db001593cc7307b1290b981622705961c5953001a6c1245fae5ec779938e9687",
+        "science/hierarchical_noise.py": "cbf0b8c956362a5eaa31923e9b94a3db3e3ede2072603add51e78105b8c0cbf0",
+        "science/hierarchical_problem.py": "03aa2d8a3d279783cf6c599f1400f253f3db2e1e7eb027aff5b7cd1b48fe12d0"
+      },
+      "qualifier": "3ae723d4748f23af40b89b9508713e270730985b6a8b5d4ccca1959e60ae17f9"
+    },
+    "execution": "e5a2733e767b187e573315547ec9253267e43d1e3700596f61e97116c53f3256",
+    "failed_empty_cache_screen": "550b91af4a031a3393f59146e1aa5360c75b0e716362ee727aeb1397af149593",
+    "input_numeric_ancestry": "3ae723d4748f23af40b89b9508713e270730985b6a8b5d4ccca1959e60ae17f9",
+    "native_protocol": "82b731edc9d57410e5343bb82833658931de728bd99940707908438dbbcdfc7b",
+    "qualifier": "9221da7853d1ecea3606d9001c70589f61bb89a28717bbc333bc8a280ff81bf9"
+  },
+  "sources_unchanged": true
+}

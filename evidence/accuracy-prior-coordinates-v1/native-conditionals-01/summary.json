@@ -1,0 +1,1584 @@
+{
+  "CPU_tests": {
+    "GPU_allocations": 0,
+    "inference_passed": true,
+    "receipt": "../native-cpu-tests-01/receipt.json",
+    "receipt_sha256": "c3a4da86ec4188c022259463a8d3001afe5689a3aa34a870c4435bc644f01a85",
+    "reference_passed": true,
+    "tests_per_environment": 39
+  },
+  "actual_CDF_calls": 1008,
+  "actual_CDF_contexts": 1,
+  "actual_query_counts_per_arm_per_stage": [
+    1,
+    1024,
+    8
+  ],
+  "allocation": {
+    "allocated_GPU_seconds": 426,
+    "project_actual_GPU_hours": 28.2625,
+    "project_actual_GPU_seconds": 101745,
+    "project_reserved_GPU_seconds": 0,
+    "receipt": "allocation-receipt.json",
+    "receipt_sha256": "8df196702b3f193425563b04fe2ed2677f285e9c12b1372a4bc9d9f5e9db8e27"
+  },
+  "attribution": "Built with PriorLabs-TabPFN",
+  "cached_stages": 19,
+  "codec_inventory": {
+    "Float64_latent_byte_identity_claimed": false,
+    "combined_CPU_receipt_sha256": "d9facb9256a2c975d745ed6e9a6cb68e4346a875976ebd6e749509113d2650a0",
+    "helper_sha256": "ce68e237f15d239f99f091c2310cf15791d1cf7f7cf7442c2db029241834a636",
+    "manifest_sha256": "f3266ab6fd36887c95291020b2cdd2d2a5529f2e6c984b32de22a28b9d31da04",
+    "model_Float32_bytes_match_across_environments": true,
+    "original_case2_prefix_rows": 1024,
+    "original_training_rows": 12288,
+    "passed": true,
+    "reference_manifest_sha256": "93ddc495a3c57c2741608437ff566199fe0b052a297c9f5e9228fb5fb4c25387",
+    "scope": "codec/domain preflight only; no backend numeric or posterior pass"
+  },
+  "completed_grid": {
+    "manifest_sha256": "6136487ee78375a802c8a0cb0c225a7f1b207063b4083514614c0d97a35c2425",
+    "passed": true,
+    "physical_accuracy_gate_passed": false,
+    "points": 24
+  },
+  "elapsed_seconds": 421.22062737599845,
+  "ensemble_members": 8,
+  "failed_empty_cache_inventory": {
+    "manifest_sha256": "550b91af4a031a3393f59146e1aa5360c75b0e716362ee727aeb1397af149593",
+    "passed_as_failure_inventory": true,
+    "predeclared_all8_native_stages": [
+      6,
+      10
+    ],
+    "qualification_passed": false,
+    "source_status_preserved": "prior_coordinates_matching_FP32_structural_or_hard_failure"
+  },
+  "independent_CPU_replay": {
+    "Torch_imported": false,
+    "actual_raw_model_masked_training_query_target_stress_bindings_recomputed": true,
+    "dual_CPU_inventory_completion_and_failed_proof_authentication_passed": true,
+    "new_models_or_draws_or_reference_integrations_or_writes_to_raw_proof": 0,
+    "passed": true
+  },
+  "limits": {
+    "FP16_activated": false,
+    "finite_prefix_scope_only": true,
+    "old_failed550_relabelled": false,
+    "physical_accuracy_assessed": false,
+    "posterior_equivalence_claimed": false,
+    "posterior_vectors_generated": 0,
+    "reference_integrations": 0
+  },
+  "matching_FP32_execution_passed_all21": true,
+  "native_all8_stages": [
+    6,
+    10
+  ],
+  "raw_manifest_sha256": "5ec69eb7aadbd74c7d96ee534b71d0d8bee2b6dd6f6e3d2f44e74607452f682b",
+  "runtime_input_audit": {
+    "Float64_latent_cross_environment_byte_identity_claimed": false,
+    "context_latent_physical_slots_Float64": {
+      "dtype": "<f8",
+      "sha256": "e26b0d9af0f93ec3d6b4095b058e8abda271a16584d85b0adfa8a9c8d57145e7",
+      "shape": [
+        4096,
+        21
+      ]
+    },
+    "environment": {
+      "numpy": "1.26.4",
+      "python": "3.11.13",
+      "scipy": "1.12.0"
+    },
+    "fixed_prefix_latent_physical_slots_Float64": {
+      "dtype": "<f8",
+      "sha256": "1f10526806adb745bed63cb566824b4f78893ad87ce4589a687c7148b6ca85df",
+      "shape": [
+        1024,
+        21
+      ]
+    },
+    "model_Float32_exactly_matches_runtime_inventory": true,
+    "scope": "actual qualifier environment recomputation; separate from archived runtime-inventory provenance and common Float32 model bindings"
+  },
+  "schema": "posteriorforge.prior_native_screen_summary.v1",
+  "source_scope": "full exact archived manifest plus policy.json/source-guards.json; unchanged scientific inputs and numeric predicates",
+  "stage_count": 21,
+  "stages": [
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "decode_latent_dependencies": [
+          0
+        ],
+        "encode_physical_dependencies": [
+          0
+        ],
+        "kind": "global_lower_cholesky_residual",
+        "latent_name": "z_mu_a",
+        "physical_name": "mu_a",
+        "physical_slot": 0,
+        "stage": 0
+      },
+      "final_CDF_max": {
+        "TV": 7.954119256197124e-07,
+        "error": 2.581459189743285e-07,
+        "normalization_error": 1.2737499510695471e-07,
+        "rows": "1",
+        "stage": 0
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 6.020069126361468e-06,
+        "error": 6.258487701416016e-07,
+        "member": 4,
+        "normalization_error": 0.0,
+        "rows": "stress",
+        "stage": 0
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 0
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "decode_latent_dependencies": [
+          0,
+          1
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1
+        ],
+        "kind": "global_lower_cholesky_residual",
+        "latent_name": "z_mu_b",
+        "physical_name": "mu_b",
+        "physical_slot": 1,
+        "stage": 1
+      },
+      "final_CDF_max": {
+        "TV": 4.840206928535817e-06,
+        "error": 4.4652632935626713e-07,
+        "normalization_error": 9.375402807432209e-07,
+        "rows": "stress",
+        "stage": 1
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 5.647198128050758e-06,
+        "error": 1.2516975402832031e-06,
+        "member": 4,
+        "normalization_error": 0.0,
+        "rows": "1024",
+        "stage": 1
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 1
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2
+        ],
+        "kind": "global_lower_cholesky_residual",
+        "latent_name": "z_mu_d0",
+        "physical_name": "mu_d0",
+        "physical_slot": 2,
+        "stage": 2
+      },
+      "final_CDF_max": {
+        "TV": 2.996993457972174e-06,
+        "error": 7.620580345646388e-07,
+        "normalization_error": 1.7457522323294228e-06,
+        "rows": "stress",
+        "stage": 2
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 4.842877388763767e-06,
+        "error": 2.6226043701171875e-06,
+        "member": 4,
+        "normalization_error": 0.0,
+        "rows": "1024",
+        "stage": 2
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 2
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "decode_latent_dependencies": [
+          6
+        ],
+        "encode_physical_dependencies": [
+          6
+        ],
+        "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+        "latent_name": "z_sigma_m1",
+        "physical_name": "sigma_m1",
+        "physical_slot": 6,
+        "stage": 3
+      },
+      "final_CDF_max": {
+        "TV": 5.72147388007687e-06,
+        "error": 6.012093699547805e-07,
+        "normalization_error": 7.958960241971624e-07,
+        "rows": "stress",
+        "stage": 3
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 1.7375487252446753e-05,
+        "error": 4.112720489501953e-06,
+        "member": 3,
+        "normalization_error": 3.5762786865234375e-07,
+        "rows": "stress",
+        "stage": 3
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 3
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "dataset_id": "mechanical_1",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_a_m1",
+        "physical_name": "a_m1",
+        "physical_slot": 3,
+        "stage": 4
+      },
+      "final_CDF_max": {
+        "TV": 3.8959022988600475e-06,
+        "error": 9.044731715812659e-07,
+        "normalization_error": 5.899207741189016e-07,
+        "rows": "1024",
+        "stage": 4
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 1.047095124695474e-05,
+        "error": 2.9802322387695312e-06,
+        "member": 2,
+        "normalization_error": 5.960464477539062e-07,
+        "rows": "1024",
+        "stage": 4
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 4
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "dataset_id": "mechanical_1",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_b_m1",
+        "physical_name": "b_m1",
+        "physical_slot": 4,
+        "stage": 5
+      },
+      "final_CDF_max": {
+        "TV": 3.624251100370888e-06,
+        "error": 2.777947915366674e-06,
+        "normalization_error": 3.908296618226892e-06,
+        "rows": "1024",
+        "stage": 5
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 1.0222228558509627e-05,
+        "error": 9.417533874511719e-06,
+        "member": 4,
+        "normalization_error": 0.0,
+        "rows": "1024",
+        "stage": 5
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 5
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "dataset_id": "mechanical_1",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_d0_m1",
+        "physical_name": "d0_m1",
+        "physical_slot": 5,
+        "stage": 6
+      },
+      "final_CDF_max": {
+        "TV": 0.0,
+        "error": 0.0,
+        "normalization_error": 3.791177780598787e-07,
+        "rows": "1",
+        "stage": 6
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 0.0,
+        "error": 0.0,
+        "member": 0,
+        "normalization_error": 3.5762786865234375e-07,
+        "rows": "1",
+        "stage": 6
+      },
+      "route": "original_fit_preprocessors_all8",
+      "stage": 6
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "decode_latent_dependencies": [
+          10
+        ],
+        "encode_physical_dependencies": [
+          10
+        ],
+        "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+        "latent_name": "z_sigma_m2",
+        "physical_name": "sigma_m2",
+        "physical_slot": 10,
+        "stage": 7
+      },
+      "final_CDF_max": {
+        "TV": 7.283678583422382e-06,
+        "error": 5.550078983063145e-07,
+        "normalization_error": 1.9803297661713515e-06,
+        "rows": "stress",
+        "stage": 7
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 1.2278605093118955e-05,
+        "error": 2.86102294921875e-06,
+        "member": 5,
+        "normalization_error": 0.0,
+        "rows": "stress",
+        "stage": 7
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 7
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "dataset_id": "mechanical_2",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          7
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          7
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_a_m2",
+        "physical_name": "a_m2",
+        "physical_slot": 7,
+        "stage": 8
+      },
+      "final_CDF_max": {
+        "TV": 3.710744436860331e-06,
+        "error": 7.158108876748059e-07,
+        "normalization_error": 9.663514376478943e-07,
+        "rows": "1024",
+        "stage": 8
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 1.1717911281849958e-05,
+        "error": 2.9206275939941406e-06,
+        "member": 7,
+        "normalization_error": 5.364418029785156e-07,
+        "rows": "1024",
+        "stage": 8
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 8
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "dataset_id": "mechanical_2",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          7,
+          8
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          7,
+          8
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_b_m2",
+        "physical_name": "b_m2",
+        "physical_slot": 8,
+        "stage": 9
+      },
+      "final_CDF_max": {
+        "TV": 3.309264730206674e-06,
+        "error": 2.4786063301807104e-06,
+        "normalization_error": 3.98240365018232e-06,
+        "rows": "1024",
+        "stage": 9
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 1.004349113487013e-05,
+        "error": 8.463859558105469e-06,
+        "member": 6,
+        "normalization_error": 1.4901161193847656e-06,
+        "rows": "1024",
+        "stage": 9
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 9
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "dataset_id": "mechanical_2",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          7,
+          8,
+          9
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          7,
+          8,
+          9
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_d0_m2",
+        "physical_name": "d0_m2",
+        "physical_slot": 9,
+        "stage": 10
+      },
+      "final_CDF_max": {
+        "TV": 0.0,
+        "error": 0.0,
+        "normalization_error": 2.0281966517377015e-07,
+        "rows": "1",
+        "stage": 10
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 0.0,
+        "error": 0.0,
+        "member": 0,
+        "normalization_error": 2.980232238769531e-07,
+        "rows": "1",
+        "stage": 10
+      },
+      "route": "original_fit_preprocessors_all8",
+      "stage": 10
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "decode_latent_dependencies": [
+          14
+        ],
+        "encode_physical_dependencies": [
+          14
+        ],
+        "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+        "latent_name": "z_sigma_m3",
+        "physical_name": "sigma_m3",
+        "physical_slot": 14,
+        "stage": 11
+      },
+      "final_CDF_max": {
+        "TV": 2.9143994741359733e-06,
+        "error": 5.055212140003817e-07,
+        "normalization_error": 9.620370811092016e-07,
+        "rows": "1024",
+        "stage": 11
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 1.4946363357637438e-05,
+        "error": 1.8775463104248047e-06,
+        "member": 2,
+        "normalization_error": 2.384185791015625e-07,
+        "rows": "stress",
+        "stage": 11
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 11
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "dataset_id": "mechanical_3",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          11
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          11
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_a_m3",
+        "physical_name": "a_m3",
+        "physical_slot": 11,
+        "stage": 12
+      },
+      "final_CDF_max": {
+        "TV": 3.538912853449927e-06,
+        "error": 5.052425090523727e-07,
+        "normalization_error": 6.66780709424053e-07,
+        "rows": "1024",
+        "stage": 12
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 1.0205880373037601e-05,
+        "error": 1.6093254089355469e-06,
+        "member": 7,
+        "normalization_error": 4.172325134277344e-07,
+        "rows": "1024",
+        "stage": 12
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 12
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "dataset_id": "mechanical_3",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          11,
+          12
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          11,
+          12
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_b_m3",
+        "physical_name": "b_m3",
+        "physical_slot": 12,
+        "stage": 13
+      },
+      "final_CDF_max": {
+        "TV": 2.843276457372985e-06,
+        "error": 1.5666805186498323e-06,
+        "normalization_error": 2.435772236353273e-06,
+        "rows": "1024",
+        "stage": 13
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 1.169742750439795e-05,
+        "error": 6.318092346191406e-06,
+        "member": 7,
+        "normalization_error": 6.556510925292969e-07,
+        "rows": "1024",
+        "stage": 13
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 13
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "dataset_id": "mechanical_3",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          11,
+          12,
+          13
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          11,
+          12,
+          13
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_d0_m3",
+        "physical_name": "d0_m3",
+        "physical_slot": 13,
+        "stage": 14
+      },
+      "final_CDF_max": {
+        "TV": 4.974936391840203e-06,
+        "error": 4.257148145003775e-06,
+        "normalization_error": 1.8405553612321768e-06,
+        "rows": "1024",
+        "stage": 14
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 1.9192712742185924e-05,
+        "error": 1.5139579772949219e-05,
+        "member": 3,
+        "normalization_error": 8.940696716308594e-07,
+        "rows": "1024",
+        "stage": 14
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 14
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "decode_latent_dependencies": [
+          16
+        ],
+        "encode_physical_dependencies": [
+          16
+        ],
+        "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+        "latent_name": "z_sigma_a1",
+        "physical_name": "sigma_a1",
+        "physical_slot": 16,
+        "stage": 15
+      },
+      "final_CDF_max": {
+        "TV": 3.2117003297138513e-06,
+        "error": 4.508673734360258e-07,
+        "normalization_error": 1.710125941301044e-06,
+        "rows": "1024",
+        "stage": 15
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 9.095840464823368e-06,
+        "error": 5.364418029785156e-07,
+        "member": 2,
+        "normalization_error": 4.172325134277344e-07,
+        "rows": "1024",
+        "stage": 15
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 15
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "dataset_id": "acoustic_1",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          15
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          15
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_a_a1",
+        "physical_name": "a_a1",
+        "physical_slot": 15,
+        "stage": 16
+      },
+      "final_CDF_max": {
+        "TV": 3.0770908253374696e-06,
+        "error": 2.4077998398430722e-06,
+        "normalization_error": 2.697538191043236e-06,
+        "rows": "1024",
+        "stage": 16
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 1.1533513429640152e-05,
+        "error": 1.043081283569336e-05,
+        "member": 3,
+        "normalization_error": 1.0728836059570312e-06,
+        "rows": "1024",
+        "stage": 16
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 16
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "decode_latent_dependencies": [
+          18
+        ],
+        "encode_physical_dependencies": [
+          18
+        ],
+        "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+        "latent_name": "z_sigma_a2",
+        "physical_name": "sigma_a2",
+        "physical_slot": 18,
+        "stage": 17
+      },
+      "final_CDF_max": {
+        "TV": 3.1917822084504e-06,
+        "error": 4.960352812943825e-07,
+        "normalization_error": 1.4072657790187293e-06,
+        "rows": "1024",
+        "stage": 17
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 5.876804138438274e-06,
+        "error": 5.960464477539062e-07,
+        "member": 5,
+        "normalization_error": 0.0,
+        "rows": "1024",
+        "stage": 17
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 17
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "dataset_id": "acoustic_2",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          17
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          17
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_a_a2",
+        "physical_name": "a_a2",
+        "physical_slot": 17,
+        "stage": 18
+      },
+      "final_CDF_max": {
+        "TV": 3.350984185656637e-06,
+        "error": 3.167226574896098e-06,
+        "normalization_error": 1.7522459522245626e-06,
+        "rows": "1024",
+        "stage": 18
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 1.9192801975265184e-05,
+        "error": 1.8358230590820312e-05,
+        "member": 1,
+        "normalization_error": 0.0,
+        "rows": "1024",
+        "stage": 18
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 18
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "decode_latent_dependencies": [
+          20
+        ],
+        "encode_physical_dependencies": [
+          20
+        ],
+        "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+        "latent_name": "z_sigma_a3",
+        "physical_name": "sigma_a3",
+        "physical_slot": 20,
+        "stage": 19
+      },
+      "final_CDF_max": {
+        "TV": 3.3342812407188838e-06,
+        "error": 4.5384667823888947e-07,
+        "normalization_error": 1.6684014625401034e-06,
+        "rows": "1024",
+        "stage": 19
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 8.385139395272745e-06,
+        "error": 5.960464477539062e-07,
+        "member": 2,
+        "normalization_error": 4.76837158203125e-07,
+        "rows": "1024",
+        "stage": 19
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 19
+    },
+    {
+      "CDF_call_counts": {
+        "candidate_FP32": 24,
+        "original_FP32": 24
+      },
+      "RNG_identity_after": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "RNG_identity_before": {
+        "numpy": "9dfcd109b9e07cb036186d858f365da1056c3db5a1fd8608318b1798906dcfea",
+        "python": "5c2b1659988c492a00dc1f21e10e7748c9c402c313ede1dc59d28c3537d0d24b",
+        "torch_cpu": "169426a4df26f99684857cd3a3e93ba0b8ef8d58a21cb6c5fc24b82f59ed5b9e",
+        "torch_cuda": "a45f2768e2cf021a8b3adf0e131eb430542cafa13071dd0d012623b2b29cd6ab"
+      },
+      "all_actual_guard_flags": {
+        "FP32_statistics_normalizers_borders": true,
+        "actual_dtype_witnesses": true,
+        "aliases_restored": true,
+        "corrected_CDF_executed": true,
+        "identical_latent_inputs": true,
+        "immutable_native_state_preserved": true,
+        "latent_target_bytes_unchanged": true,
+        "model_RNG_preserved": true,
+        "preprocessor_identity_preserved": true,
+        "sources_unchanged": true,
+        "state_contract_preserved": true,
+        "target_statistics_preserved": true
+      },
+      "coordinate": {
+        "dataset_id": "acoustic_3",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          19
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          19
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_a_a3",
+        "physical_name": "a_a3",
+        "physical_slot": 19,
+        "stage": 20
+      },
+      "final_CDF_max": {
+        "TV": 2.6234109827519454e-06,
+        "error": 2.280162561985044e-06,
+        "normalization_error": 2.0072846524943344e-06,
+        "rows": "1024",
+        "stage": 20
+      },
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "member_CDF_max": {
+        "TV": 1.2099753935679303e-05,
+        "error": 1.1324882507324219e-05,
+        "member": 2,
+        "normalization_error": 1.0132789611816406e-06,
+        "rows": "1024",
+        "stage": 20
+      },
+      "route": "frozen88_resident_cache",
+      "stage": 20
+    }
+  ],
+  "status": "prior_native_control_screen_pass",
+  "thresholds": {
+    "max_cdf_absolute": 2e-05,
+    "max_row_total_variation": 0.0001,
+    "normalization_absolute": 1e-05,
+    "quantile_coordinate_span_fraction": 2e-06
+  },
+  "worst_final_CDF": {
+    "TV": 4.974936391840203e-06,
+    "error": 4.257148145003775e-06,
+    "normalization_error": 1.8405553612321768e-06,
+    "rows": "1024",
+    "stage": 14
+  },
+  "worst_member_CDF": {
+    "TV": 1.9192801975265184e-05,
+    "error": 1.8358230590820312e-05,
+    "member": 1,
+    "normalization_error": 0.0,
+    "rows": "1024",
+    "stage": 18
+  }
+}

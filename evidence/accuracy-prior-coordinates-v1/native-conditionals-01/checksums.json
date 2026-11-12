@@ -1,0 +1,11 @@
+{
+  "RAW-MANIFEST-SHA256.txt": "52126205152b668c36c910ad34559fefee9a205ff4432b8b7d8638085d08e7bb",
+  "README.md": "31f810b3cc3c6ff3121fdda7771bb27288d8b350579002be9b8f0dcb36379d9c",
+  "Slurm-accounting.psv": "bfbe2ae3f0242b33d460bf6b1d946876e91600a81edc9a94b3d16b3fb0d11b9c",
+  "allocation-receipt.json": "8df196702b3f193425563b04fe2ed2677f285e9c12b1372a4bc9d9f5e9db8e27",
+  "conditional-CDF-screen.png": "91430f5ab84d5e6aeee9e81e799e2cfeea7911e2e5f5a6c6091557150355acf8",
+  "manifest.json.gz": "37816d2fcf5cd68de041890d34f782745966c8c4b2393783625b540b7fe06628",
+  "policy.json": "e06b496f536e8259a64bca6c13cdf877a2fb06d8a01c0fcfefbc7cbf2373c11e",
+  "source-guards.json": "1e5c8388945d8d38b053294aa3288e95079eb9fd27e459586fd29269d402dec3",
+  "summary.json": "47df139364a7f3ed291a104f6e6e80f3b19582a9979ed5b8c0310284ed78c2d0"
+}

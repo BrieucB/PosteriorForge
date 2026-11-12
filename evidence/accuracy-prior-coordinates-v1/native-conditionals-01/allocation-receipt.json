@@ -1,0 +1,39 @@
+{
+  "GPUs": 1,
+  "Slurm": {
+    "Account": "eu-26-17",
+    "AllocTRES": "billing=1,cpu=16,gres/gpu=1,mem=124160M,node=1",
+    "ElapsedRaw": "426",
+    "JobIDRaw": "5410978",
+    "JobName": "pf-prior-native-qual-01",
+    "Partition": "qgpu",
+    "Restarts": "0",
+    "State": "COMPLETED"
+  },
+  "Slurm_raw_file": "Slurm-accounting.psv",
+  "Slurm_raw_sha256": "bfbe2ae3f0242b33d460bf6b1d946876e91600a81edc9a94b3d16b3fb0d11b9c",
+  "allocated_GPU_seconds": 426,
+  "job_id": "5410978",
+  "ledger_fully_reconciled": true,
+  "ledger_mutated_by_receipt": false,
+  "no_requeue_verified_from_submitted_argv": true,
+  "posterior_vectors_generated": 0,
+  "project_ledger_sha256": "0a14174893ddd6a2a2d75b3877e0be95eb3d919efaecf112f27da78c00bc3e4a",
+  "project_ledger_summary_at_reconciliation": {
+    "actual_gpu_hours": 28.2625,
+    "actual_gpu_seconds": 101745,
+    "cap_exceeded": false,
+    "cap_gpu_hours": 200,
+    "remaining_gpu_hours": 171.7375,
+    "remaining_gpu_seconds": 618255,
+    "reservation_count": 122,
+    "reserved_gpu_hours": 0.0,
+    "reserved_gpu_seconds": 0
+  },
+  "raw_proof_sha256": "5ec69eb7aadbd74c7d96ee534b71d0d8bee2b6dd6f6e3d2f44e74607452f682b",
+  "reference_integrations": 0,
+  "reservation_id": "c1b472392a5b42b4954c55ecac3b53a4",
+  "reserved_before_submission_GPU_seconds": 1200,
+  "restarts": 0,
+  "schema": "posteriorforge.prior_native_qualification_allocation.v1"
+}
