@@ -23,4 +23,4 @@ full density plot and exact assessment. No failure is omitted.
 The JSON assessment, source figure bytes and checksums are unchanged copies.
 The two gzip archives decompress to the exact original producer manifests;
 their raw SHA256 sidecars verify that identity. Payload hashes are retained,
-but no raw samples or private CV material are included.
+but raw sample arrays are not included.

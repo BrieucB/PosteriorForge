@@ -1,0 +1,34 @@
+{
+  "CPU_joint_refresh_seconds_separate": 0.055163743905723095,
+  "assessment_sha256": "ef42f09b1865a2f64112d953c700292e105252962e5993314ab0585ba40c47ee",
+  "case": 6,
+  "compressed_manifests_raw_bytes_preserved": true,
+  "context_seed": 20261111,
+  "copied_source_files_byte_exact": true,
+  "fresh_corrected_point": true,
+  "metric_scope": "copied saved assessment summary; no cohort or reference calculations rerun",
+  "parent_payload_sha256_not_copied": "3fbfb038fc90549c130a1cb2ea1b78bdaa76a6e308d79a467a2b0832b614a8c5",
+  "parent_raw_sha256": "8dfd304445909cdc8eec8e2fda9c0405dc2a67c8c294ec6e3e2eeb210256c77c",
+  "prototype_reused": false,
+  "raw_samples_included": false,
+  "refreshed_payload_sha256_not_copied": "ef070af1b87bfe1934759f7d7eb736f8f555b260992e86e77687a6fc26b8250e",
+  "refreshed_raw_sha256": "789ca17f038e9b4c09014825328f4116a544aa50888233f7db44b6c74bb60822",
+  "scheduler": {
+    "allocated_gpu_seconds": 201,
+    "job_id": "5409967",
+    "restarts": 0,
+    "state": "COMPLETED"
+  },
+  "schema": "posteriorforge.corrected_sigma_grid_point_publication.v1",
+  "source_assessment": "sigma-native-grid-assessment-01/seed-20261111-case-6/assessment.json",
+  "source_parent_manifest": "sigma-native-grid-01/seed-20261111-case-6/manifest.json",
+  "source_refreshed_manifest": "sigma-native-grid-refresh-01/seed-20261111-case-6/manifest.json",
+  "timings": {
+    "accepted_samples_per_second": 260.721448968184,
+    "includes_CPU_sampling": true,
+    "includes_stage_preparation": true,
+    "posterior_request_seconds": 191.77555278968066,
+    "total_seconds": 196.4497454771772
+  },
+  "wrapper_total_seconds": 196.45000992249697
+}

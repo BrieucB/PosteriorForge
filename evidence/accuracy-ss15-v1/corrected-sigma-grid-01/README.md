@@ -1,8 +1,9 @@
 # Corrected sigma-first grid: partial failure
 
-Built with PriorLabs-TabPFN. **6/24 points assessed: 2 pass, 4 model failures,
-18 pending in this snapshot. The all-point candidate gate has failed.**
-The fixed 3-context-seed by 8-case diagnostic continues, retaining every result.
+Built with PriorLabs-TabPFN. **8/24 points assessed: 2 pass, 6 model failures,
+16 pending in this snapshot. The all-point candidate gate has failed.**
+All eight cases for context seed 20261111 are now assessed. The fixed grid
+of three context seeds and eight cases continues, retaining every result.
 
 The method is explicitly **hybrid NPE-PFN/Gibbs**, not pure TFM inference:
 SS15 observations, all-three-global block-local conditioning, the fixed
@@ -30,6 +31,8 @@ or establish posterior accuracy.
 | 20261111 | 3 | [model_failure](seed-20261111-case-3/README.md) | 0.231336 | 0.126481 | 0.585035 |
 | 20261111 | 4 | [model_failure](seed-20261111-case-4/README.md) | 0.098715 | 0.074394 | 0.205065 |
 | 20261111 | 5 | [model_failure](seed-20261111-case-5/README.md) | 0.215403 | 0.166750 | 0.488252 |
+| 20261111 | 6 | [model_failure](seed-20261111-case-6/README.md) | 0.189656 | 0.148233 | 0.456835 |
+| 20261111 | 7 | [model_failure](seed-20261111-case-7/README.md) | 0.102106 | 0.074185 | 0.229597 |
 
 Case 2 retains its qualified-reference model failure: a_m2 and b_m2 fail
 both marginal CDF and mean-bias limits. Its joint CDF and SD-ratio checks pass.
@@ -78,5 +81,5 @@ Each point has its exact assessment, figures, original checksums, a provenance
 JSON file, and gzip copies of the **unmodified raw parent/refreshed manifests**.
 Decompress each archive and compare it with its corresponding raw SHA256
 sidecar. publication-checksums.json checks every packaged file.
-No raw sample arrays or private CV material are included. The frozen source
+Raw sample arrays are not included. The frozen source
 and proof identities are recorded in grid-index.json.
