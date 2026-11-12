@@ -1,5 +1,5 @@
 {
-  "README.md": "d19fcdd3d018235be8bef5ce939c3fc79883fa1b0015ba76afa9ad834fb59862",
+  "README.md": "de6773a609119beccecfc42e9cd5d17cd9d2f82dc74a301ece19d710273e47bf",
   "graph-joint/assessment.json": "1a673e1d314617049eb3bee08c5f7948a6c45232b7a530695915b2aee696680a",
   "graph-joint/checksums.json": "154a53e60d7017dcba1af64b4df7b6aa236f0eeb52ace1da95d7a20bbdb8d3f1",
   "graph-joint/joint-global-density-focus.png": "bc55c7af53058580e7180768136d10395926b4b5137294613f874af051d08481",
@@ -50,6 +50,8 @@
   "sigma-map2-remaining/stage-19.json.gz": "31cb0f82c12a11c61420a70f23ec8c8fe059f701a3a65210b7b50075ea6c0b9e",
   "sigma-map2-remaining/stage-20-sha256.txt": "2238c83c74e7f85490caa7d5ca801967f209573d90555084dbb470317084fee8",
   "sigma-map2-remaining/stage-20.json.gz": "f6e32e7a814acccaa0ecb836fe838fc3af7ef2c01917da007d5ccbd588223017",
+  "sigma-native-matching-screen-sha256.txt": "b1f47bae4e5d0fed38260e4293fbacf2486477b11381071695dd83c29d11c5e0",
+  "sigma-native-matching-screen.json.gz": "43bdac8bf957570e469da5373cf01dd0131be0e6bfc768f597bc8c6ac486d407",
   "ss15-joint/assessment.json": "3300c77f8fcc780418b31d97e6f24d6f17fd1a0d31d1272db89971bdec705217",
   "ss15-joint/checksums.json": "066a576388b1fa138ffb6201f40f33c278d1e1e4cadde368fcd1a5c13fb2195c",
   "ss15-joint/joint-global-density-focus.png": "c5c60877193c3196de939b9f64e26f4d0d364394e6547ff67dbe55db5ce84ca6",
