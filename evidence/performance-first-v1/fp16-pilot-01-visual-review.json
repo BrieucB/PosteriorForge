@@ -1,0 +1,65 @@
+{
+  "schema": "posteriorforge.visual_review.v1",
+  "reviewer": "root",
+  "reviewed_at_utc": "2026-11-12T14:37:07.494034+00:00",
+  "scope": "All ten delivered PNGs viewed individually at native image rendering",
+  "figures": [
+    {
+      "path": "cuda-memory.png",
+      "sha256": "57bd289b89e858291688b450a32ae75c4214bea0246825fe6c20b9f86ca4b872",
+      "status": "pass_readable_labels_legends_scopes_no_clipping"
+    },
+    {
+      "path": "fp16-complete-cdf-family.png",
+      "sha256": "5d42fd593431999546bae2f70f22a0c98c8b7867b6d502583d536dffbbb0e1ff",
+      "status": "pass_readable_labels_legends_scopes_no_clipping"
+    },
+    {
+      "path": "fp16-primary-signed-flags.png",
+      "sha256": "fd5be80082b1d8db36a2b67cf420d10696bb7f3ee59c7394aad95637978c569c",
+      "status": "pass_readable_labels_legends_scopes_no_clipping"
+    },
+    {
+      "path": "fp16-stage-and-cost-scopes.png",
+      "sha256": "0eff0144a257d9375348dc9d2001c87883149e114eb43064ae0ab51c939e5d81",
+      "status": "pass_readable_labels_legends_scopes_no_clipping"
+    },
+    {
+      "path": "fp16-strict-fifo-signed.png",
+      "sha256": "048eb140e789778a70b53dbfce1479604c2279f7db7869204a9424250bc2e1ff",
+      "status": "pass_readable_labels_legends_scopes_no_clipping"
+    },
+    {
+      "path": "host-B-own-reference-densities.png",
+      "sha256": "68dcc3fc62a7d13143656362d8a5c01dfd938736a0ac83b9bdb7747960ccbbbf",
+      "status": "pass_readable_labels_legends_scopes_no_clipping"
+    },
+    {
+      "path": "host-aba-timing-scopes.png",
+      "sha256": "574b43ed7dd271f295766e937f93df021ca599dd109c6a282edddaf051337feb",
+      "status": "pass_readable_labels_legends_scopes_no_clipping"
+    },
+    {
+      "path": "posterior-all-21-cdfs.png",
+      "sha256": "492a0c599afe5c2fa51ec86def850df3083017a2b4dd24282cf5493d80428632",
+      "status": "pass_readable_labels_legends_scopes_no_clipping"
+    },
+    {
+      "path": "posterior-worst-four-densities.png",
+      "sha256": "9cf12b0e9e66caffe0f4882eabffec7c1db8861671d06492425138d9dda7708b",
+      "status": "pass_readable_labels_legends_scopes_no_clipping"
+    },
+    {
+      "path": "runtime-and-request-cost.png",
+      "sha256": "44e4b870ddd56062a1581e3977fb29913b13632cb963dbe7b90bc420b0131e7b",
+      "status": "pass_readable_labels_legends_scopes_no_clipping"
+    }
+  ],
+  "package_checksums_sha256": "1b1eb1fa4866158bab15a9fd48f72cb6937fcec6d6da4bd08d7d71a5b87cc345",
+  "notes": [
+    "Complete 53-axis comparisons and retained primary flags visible.",
+    "Request, wrapper, scheduler allocation and host session scopes distinguished.",
+    "All21 posterior CDF and ordinary density plots visibly preserve physical model failure.",
+    "Host B own reference and absent same-case control are explicit."
+  ]
+}

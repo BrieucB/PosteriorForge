@@ -1,0 +1,472 @@
+{
+  "ENTIRE_REQUEST_GPU_SCOPE": {
+    "cuda_copy_event_count": 83002,
+    "cuda_copy_interval_union_seconds": 11.339560481933594,
+    "cuda_copy_summed_seconds": 11.339559675999453,
+    "cuda_kernel_and_copy_interval_union_seconds": 62.3528860053711,
+    "cuda_kernel_event_count": 595390,
+    "cuda_kernel_interval_union_seconds": 51.00955358935547,
+    "cuda_kernel_summed_seconds": 51.009554389009125,
+    "cuda_runtime_sync_event_count": 63667,
+    "cuda_runtime_sync_host_seconds": 7.785259270000145,
+    "cuda_runtime_sync_interval_union_seconds": 7.785254806152344,
+    "kernel_busy_fraction_of_profile_span": 0.22822585272356466,
+    "overlap_cautions": [
+      "Kernel sum may overlap; union avoids double counting within its event class.",
+      "Kernel/copy/synchronization views are not disjoint additive wall-time partitions.",
+      "Synchronization is host wait and can overlap CUDA execution."
+    ],
+    "rounded_display_seconds": {
+      "copy_union": 11.34,
+      "kernel_union": 51.01
+    },
+    "scope": "Entire annotated profiled posterior request including ALL21 preparations, all actual queries, sampler, support and close; not query-only"
+  },
+  "GPU_LAUNCH_CORRELATION_PHASE_SCOPE": {
+    "all_copy_events_attributed": true,
+    "all_kernel_events_attributed": true,
+    "correlation_conflicts": 0,
+    "groups": {
+      "prepare": {
+        "copy_bytes": 231235079696,
+        "copy_count": 51024,
+        "copy_interval_union_seconds": 9.34756082855165,
+        "copy_sum_seconds": 9.347560803222567,
+        "kernel_count": 86593,
+        "kernel_interval_union_seconds": 18.66138098621741,
+        "kernel_sum_seconds": 18.661380995606446
+      },
+      "query_head": {
+        "copy_bytes": 229113968174,
+        "copy_count": 31713,
+        "copy_interval_union_seconds": 1.9913347498513758,
+        "copy_sum_seconds": 1.9913347734373426,
+        "kernel_count": 505226,
+        "kernel_interval_union_seconds": 32.31934660486877,
+        "kernel_sum_seconds": 32.31934641506189
+      },
+      "query_shared_stage0": {
+        "copy_bytes": 2750400,
+        "copy_count": 265,
+        "copy_interval_union_seconds": 0.000664902850985527,
+        "copy_sum_seconds": 0.0006649052734375002,
+        "kernel_count": 3571,
+        "kernel_interval_union_seconds": 0.028826192021369934,
+        "kernel_sum_seconds": 0.028826178710937487
+      }
+    },
+    "phase_labels": {
+      "prepare": "all actual preparation work; kernel union18.661s",
+      "query_head": "1133 member query calls, excludes shared stage0; kernel union32.319s",
+      "query_shared_stage0": "one shared stage0 query containing8 real heads; kernel union0.02883s"
+    },
+    "phase_unions_are_not_additive_in_general": true,
+    "scope": "CUDA runtime launch correlation to most-specific observed owner-thread range; GPU durations clipped to host request boundary",
+    "unmatched_copy_events": 0,
+    "unmatched_kernel_events": 0
+  },
+  "HOST_RANGE_SCOPE": {
+    "exclusive_sampling": {
+      "exclusive_host_seconds": 5.354252126999199,
+      "overlap_caution": "Never add exclusive host intervals to GPU kernel/copy/synchronization unions as disjoint costs.",
+      "scope": "owner-thread sampler bookkeeping/RNG/head selection/inverse arithmetic/query assembly, excluding union of original query and callback spans; host wall, not CPU compute"
+    },
+    "operations": {
+      "close": {
+        "count": 21,
+        "inclusive_host_wall_seconds": 9.124280002899468
+      },
+      "inspect_guard": {
+        "count": 42,
+        "inclusive_host_wall_seconds": 0.5450747441500425
+      },
+      "prediction_check": {
+        "count": 1134,
+        "inclusive_host_wall_seconds": 0.6459705336019397
+      },
+      "prepare": {
+        "count": 21,
+        "inclusive_host_wall_seconds": 119.80170237086713
+      },
+      "query_head": {
+        "count": 1133,
+        "inclusive_host_wall_seconds": 87.05890574678779
+      },
+      "query_shared_stage0": {
+        "count": 1,
+        "inclusive_host_wall_seconds": 0.5548444734886289
+      },
+      "sampling_stage": {
+        "count": 21,
+        "inclusive_host_wall_seconds": 93.61397288087755
+      },
+      "support": {
+        "count": 2,
+        "inclusive_host_wall_seconds": 0.02920734789222479
+      }
+    },
+    "scope": "owner-thread inclusive method wall durations, includes waits/transfers; not CPU compute"
+  },
+  "attribution": "Built with PriorLabs-TabPFN",
+  "backend_evidence": {
+    "Flash_kernel_summed_seconds": 24.74989472070306,
+    "Flash_not_inferred_from_flags": true,
+    "actual_attention_kernel_names": [
+      {
+        "count": 13464,
+        "name": "void pytorch_flash::flash_fwd_kernel<pytorch_flash::Flash_fwd_kernel_traits<32, 128, 128, 4, false, false, cutlass::half_t, pytorch_flash::Flash_kernel_traits<32, 128, 128, 4, cutlass::half_t> >, false, false, false, false, true, true, false>(pytorch_flash::Flash_fwd_params)",
+        "sum_seconds": 20.148819822753858
+      },
+      {
+        "count": 17628,
+        "name": "void pytorch_flash::flash_fwd_kernel<pytorch_flash::Flash_fwd_kernel_traits<32, 128, 128, 4, false, false, cutlass::half_t, pytorch_flash::Flash_kernel_traits<32, 128, 128, 4, cutlass::half_t> >, false, false, false, false, false, true, false>(pytorch_flash::Flash_fwd_params)",
+        "sum_seconds": 4.593122097656237
+      },
+      {
+        "count": 276,
+        "name": "fmha_cutlassF_f32_aligned_64x64_rf_sm80(PyTorchMemEffAttention::AttentionKernel<float, cutlass::arch::Sm80, true, 64, 64, 64, true, true>::Params)",
+        "sum_seconds": 2.681175111816404
+      },
+      {
+        "count": 132,
+        "name": "void pytorch_flash::flash_fwd_splitkv_kernel<pytorch_flash::Flash_fwd_kernel_traits<32, 64, 256, 4, false, false, cutlass::half_t, pytorch_flash::Flash_kernel_traits<32, 64, 256, 4, cutlass::half_t> >, false, false, false, false, true, true, false>(pytorch_flash::Flash_fwd_params)",
+        "sum_seconds": 0.007299375000000001
+      },
+      {
+        "count": 60,
+        "name": "void pytorch_flash::flash_fwd_splitkv_combine_kernel<pytorch_flash::Flash_fwd_kernel_traits<32, 64, 256, 4, false, false, cutlass::half_t, pytorch_flash::Flash_kernel_traits<32, 64, 256, 4, cutlass::half_t> >, 16, 2, true>(pytorch_flash::Flash_fwd_params)",
+        "sum_seconds": 0.00028354345703125006
+      },
+      {
+        "count": 48,
+        "name": "void pytorch_flash::flash_fwd_splitkv_combine_kernel<pytorch_flash::Flash_fwd_kernel_traits<32, 64, 256, 4, false, false, cutlass::half_t, pytorch_flash::Flash_kernel_traits<32, 64, 256, 4, cutlass::half_t> >, 16, 1, true>(pytorch_flash::Flash_fwd_params)",
+        "sum_seconds": 0.00021407714843749988
+      },
+      {
+        "count": 24,
+        "name": "void pytorch_flash::flash_fwd_splitkv_combine_kernel<pytorch_flash::Flash_fwd_kernel_traits<32, 64, 256, 4, false, false, cutlass::half_t, pytorch_flash::Flash_kernel_traits<32, 64, 256, 4, cutlass::half_t> >, 16, 3, true>(pytorch_flash::Flash_fwd_params)",
+        "sum_seconds": 0.0001558046875
+      }
+    ],
+    "actual_operator_counts": {
+      "aten::_scaled_dot_product_efficient_attention": 276,
+      "aten::_scaled_dot_product_flash_attention": 31224,
+      "aten::_scaled_dot_product_flash_attention_for_cpu": 31500,
+      "aten::scaled_dot_product_attention": 94224
+    },
+    "operator_count_scope": "generic/nested backend operator counts are not exclusive attention call totals",
+    "tiny_CPU_capability_probe_is_not_real_CPU_model_attention": true
+  },
+  "closed_attention_folding_lead": {
+    "FP16_scope": "Frozen051 changes forward dtype and shared-head view expansion, not these query/item/feature axis operations.",
+    "conclusion": "Cached item queries already use all neural draw rows as long Q sequence with shared train KV. Feature attention is separate per draw and has row-specific feature/prefix KV; unmasked draw folding would mix conditionals.",
+    "folding_candidate_implemented": false,
+    "measured_FP32_saved_layouts": [
+      {
+        "KV_after_head_expansion_stride": [
+          262144,
+          64,
+          32,
+          0,
+          1
+        ],
+        "KV_before_head_expansion_stride": [
+          262144,
+          64,
+          32,
+          32,
+          1
+        ],
+        "KV_expansion_shares_storage": true,
+        "actual_neural_query_rows": 4096,
+        "dtype": "torch.float32",
+        "feature_attention_packed_QKV_N_F_3_H_D": [
+          4096,
+          68,
+          3,
+          6,
+          32
+        ],
+        "item_attention_packed_KV_B_T_2_H_D": [
+          68,
+          4096,
+          2,
+          1,
+          32
+        ],
+        "item_attention_q_before_SDPA_transpose_B_L_H_D": [
+          68,
+          4096,
+          6,
+          32
+        ],
+        "member_index": 0,
+        "stage_index": 20
+      },
+      {
+        "KV_after_head_expansion_stride": [
+          262144,
+          64,
+          32,
+          0,
+          1
+        ],
+        "KV_before_head_expansion_stride": [
+          262144,
+          64,
+          32,
+          32,
+          1
+        ],
+        "KV_expansion_shares_storage": true,
+        "actual_neural_query_rows": 6250,
+        "dtype": "torch.float32",
+        "feature_attention_packed_QKV_N_F_3_H_D": [
+          6250,
+          68,
+          3,
+          6,
+          32
+        ],
+        "item_attention_packed_KV_B_T_2_H_D": [
+          68,
+          4096,
+          2,
+          1,
+          32
+        ],
+        "item_attention_q_before_SDPA_transpose_B_L_H_D": [
+          68,
+          6250,
+          6,
+          32
+        ],
+        "member_index": 0,
+        "stage_index": 20
+      },
+      {
+        "KV_after_head_expansion_stride": [
+          262144,
+          64,
+          32,
+          0,
+          1
+        ],
+        "KV_before_head_expansion_stride": [
+          262144,
+          64,
+          32,
+          32,
+          1
+        ],
+        "KV_expansion_shares_storage": true,
+        "actual_neural_query_rows": 10000,
+        "dtype": "torch.float32",
+        "feature_attention_packed_QKV_N_F_3_H_D": [
+          10000,
+          68,
+          3,
+          6,
+          32
+        ],
+        "item_attention_packed_KV_B_T_2_H_D": [
+          68,
+          4096,
+          2,
+          1,
+          32
+        ],
+        "item_attention_q_before_SDPA_transpose_B_L_H_D": [
+          68,
+          10000,
+          6,
+          32
+        ],
+        "member_index": 0,
+        "stage_index": 20
+      }
+    ],
+    "passive_SDPA_observer_implemented": false,
+    "source_line_bindings": [
+      {
+        "lines": [
+          304,
+          313
+        ],
+        "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/model/layer.py",
+        "sha256": "b7c230f917b3e346e1d9cc83eb9e06fd939dbbd3fe3b2c5f7a8e4b7505142754",
+        "supports": "state axes are batch/items/featureblocks/model_dim; cached query locally disables save_peak_mem_factor"
+      },
+      {
+        "lines": [
+          332,
+          339
+        ],
+        "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/model/layer.py",
+        "sha256": "b7c230f917b3e346e1d9cc83eb9e06fd939dbbd3fe3b2c5f7a8e4b7505142754",
+        "supports": "feature attention receives original state axes, leaving independent query draws in the batch axes"
+      },
+      {
+        "lines": [
+          341,
+          358
+        ],
+        "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/model/layer.py",
+        "sha256": "b7c230f917b3e346e1d9cc83eb9e06fd939dbbd3fe3b2c5f7a8e4b7505142754",
+        "supports": "item query path transposes item and featureblock axes and uses cached train KV with first-head reuse"
+      },
+      {
+        "lines": [
+          519,
+          532
+        ],
+        "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/model/multi_head_attention.py",
+        "sha256": "512220bbf253fb856003f7084976a478753644c9963d563ee678eb3be2c28f35",
+        "supports": "flatten only leading batch axes; last sequence and embedding axes are retained"
+      },
+      {
+        "lines": [
+          561,
+          574
+        ],
+        "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/model/multi_head_attention.py",
+        "sha256": "512220bbf253fb856003f7084976a478753644c9963d563ee678eb3be2c28f35",
+        "supports": "unpack QKV/KV and interpret q as batch, query sequence, heads, head_dim; absent dropout is zero"
+      },
+      {
+        "lines": [
+          710,
+          717
+        ],
+        "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/model/multi_head_attention.py",
+        "sha256": "512220bbf253fb856003f7084976a478753644c9963d563ee678eb3be2c28f35",
+        "supports": "actual SDPA receives q/k/v.transpose(1,2), hence B,H,L,D"
+      },
+      {
+        "lines": [
+          595,
+          615
+        ],
+        "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/model/multi_head_attention.py",
+        "sha256": "512220bbf253fb856003f7084976a478753644c9963d563ee678eb3be2c28f35",
+        "supports": "tiny CPU SDPA enable_gqa capability check precedes actual model attention; CPU SDPA names are not evidence real model attention ran on CPU"
+      }
+    ],
+    "status": "closed_no_new_implementation_or_probe",
+    "unmeasured": "Complete current FP16 Q/K/V boundary strides were not saved; no direct FP16 boundary-stride claim is made."
+  },
+  "copies": {
+    "events": {
+      "Memcpy DtoD (Device -> Device)": {
+        "bytes": 332934258144,
+        "count": 19402,
+        "sum_seconds": 0.41091401367187286
+      },
+      "Memcpy DtoH (Device -> Pageable)": {
+        "bytes": 69940721188,
+        "count": 20334,
+        "sum_seconds": 6.8535353730469595
+      },
+      "Memcpy DtoH (Device -> Pinned)": {
+        "bytes": 23562,
+        "count": 7854,
+        "sum_seconds": 0.016394483886718162
+      },
+      "Memcpy HtoD (Pageable -> Device)": {
+        "bytes": 57476795376,
+        "count": 35412,
+        "sum_seconds": 4.058716611328174
+      }
+    },
+    "missing_bytes_would_not_prove_zero_traffic": true,
+    "scope": "entire profiled request, direction/names/bytes from actual recorded GPU memcpy events"
+  },
+  "created_unix": 1794494227.8049166,
+  "inputs_sha256": {
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/performance-first-v1/fp16-fifo-50k-01/rep-0/seed-20261111-case-0/manifest.json": "3546de7f867d3aeaefbbf4e1dab03d90fe867e8355506629319a6e9eed492133",
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/performance-first-v1/fp16-full50000-profile-01/manifest.json": "0b42c6ed66059eb20aa1547514e474e27ac0325007470c68fe89b517469ee24c",
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/performance-first-v1/gqa-large-batch-qualification-01/manifest.json": "7bc0e4449abe4aaf0a62b0df55fb25eda423f821524955c9266f8f91761aa77c"
+  },
+  "integrity": {
+    "CDF_alias_restored": true,
+    "CDF_calls": 1141,
+    "actual_prediction_checks": {
+      "actual_head_contexts": 1141,
+      "original_full_API_identity_claimed": false,
+      "sampler_callback_calls": 1134,
+      "shared_densities": 1
+    },
+    "all_guards_passed": true,
+    "all_precision_stage_aliases_restored": true,
+    "clean_full_array_comparison": {
+      "changed_entries": 0,
+      "changed_rows": 0,
+      "exact_array_bytes_equal": true,
+      "max_absolute": 0.0,
+      "passed": true,
+      "scope": "coupled complete50000-array diagnostic against clean5406772; NPZ encoding bytes are not the scientific payload"
+    },
+    "global_rng_preserved": true,
+    "returned_vectors": 50000,
+    "sampling_counters": {
+      "component_predictions": 1133,
+      "head_candidates": 1024015,
+      "head_rejections": 15,
+      "stage0_shared_predictions": 1
+    },
+    "sources_unchanged": true,
+    "support_counts": {
+      "accepted_before_final_trim": 50152,
+      "proposed": 50463,
+      "returned": 50000,
+      "support_calls": 2
+    }
+  },
+  "next_step_interpretation": {
+    "cold_scope": "Reuse cannot remove the INITIALcold preparation from a cold benchmark; cold, warm and amortized timings must remain separate.",
+    "measured_priority": "Repeated context/model preparation and copying merit reuse investigation for repeated requests; compilation is lower priority than the measured preparation span.",
+    "new_FP16_retention_requires_fresh_proof": true,
+    "original_physical_model_failure_unchanged": true
+  },
+  "profile_job": {
+    "cpus": 16,
+    "elapsed_allocated_seconds": 482,
+    "exit_code": "0:0",
+    "gpus": 1,
+    "job_id": "5407207",
+    "node": "acn30",
+    "restarts": 0,
+    "slurm_maxrss_kib": 18305792,
+    "state": "COMPLETED"
+  },
+  "read_only_analysis": true,
+  "schema": "posteriorforge.fp16_profile_scope_summary.v1",
+  "source_runs_modified": false,
+  "timings": {
+    "clean_job_5406772_node": "acn65",
+    "clean_request_seconds": 195.18178771901876,
+    "clean_wrapper_seconds": 213.29899211693555,
+    "comparison_scope": "Clean and profiled requests are separate runs on different nodes; no causal profiler-overhead factor is estimated.",
+    "instrumented_entire_request_seconds": 223.50471246191407,
+    "later_attribution_output_and_guard_checks_seconds": 93.35532823204994,
+    "postrequest_export_summary_gzip_seconds": 145.8182138237626,
+    "profile_call_with_export_summary_gzip_seconds": 369.32292628567666,
+    "startup_wall_costs": {
+      "checkpoint_bank_screen_reference_and_clean_auth_seconds": 3.3387150447815657,
+      "imports_and_source_auth_seconds": 0.19740453455597162,
+      "torch_CUDA_seed_and_thread_setup_seconds": 7.718530987389386,
+      "total_before_profile_seconds": 11.371484412811697
+    },
+    "stream_summary_seconds": 72.87386185955256,
+    "total_with_export_and_checks_seconds": 474.0497389305383
+  },
+  "trace_artifacts": {
+    "events": 10749137,
+    "gzip_bytes": 209536783,
+    "gzip_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/performance-first-v1/fp16-full50000-profile-01/full50000-fp16.trace.json.gz",
+    "gzip_sha256": "aa1e132db1fa89b3aa445c71e9120e9e6ac9764385a2d65e45b4e2e10a513c77",
+    "raw_bytes": 2722231955,
+    "raw_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/performance-first-v1/fp16-full50000-profile-01/full50000-fp16.trace.json",
+    "raw_trace_rewritten": false
+  }
+}

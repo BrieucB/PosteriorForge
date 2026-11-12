@@ -1,0 +1,250 @@
+{
+  "RNG_evidence": {
+    "characterization_default_CPU_CUDA_RNG_preserved": true,
+    "characterization_manifest_sha256": "f01bfddb87dcd16c9bd7c9df15f482ed3ea46756b1d84f3c04f6584644a0687a",
+    "production_default_CPU_CUDA_state_hash_equality_observed": false,
+    "production_default_CPU_CUDA_state_hashes_recorded": false,
+    "production_stream_policy": "recorded roles, seeds, dtypes, CPU generators and source-bound fork_rng isolation policy",
+    "scope": "observed RNG preservation belongs to immutable all21 characterization; full-production isolation is source-policy evidence"
+  },
+  "all21_manifest_sha256": "f01bfddb87dcd16c9bd7c9df15f482ed3ea46756b1d84f3c04f6584644a0687a",
+  "all21_strict_failures_preserved": true,
+  "allocated_seconds": 216,
+  "approximate_experiment": true,
+  "attribution": "Built with PriorLabs-TabPFN",
+  "clean": {
+    "manifest_sha256": "3546de7f867d3aeaefbbf4e1dab03d90fe867e8355506629319a6e9eed492133",
+    "path": "results/performance-first-v1/fp16-fifo-50k-01/rep-0/seed-20261111-case-0",
+    "samples_sha256": "61d0a058233ab2ff6e12d1ad29b17ef9d80c3fe10cf1f474be4d33bd716f1f11"
+  },
+  "clean_runner_sha256": "2280e1ceef807f05a264b5318be18eb8bee7c52c8bab21884d6682f84cafcba9",
+  "control_request_median_seconds": 2380.309143734048,
+  "figures": {
+    "fp16-complete-cdf-family.png": "5d42fd593431999546bae2f70f22a0c98c8b7867b6d502583d536dffbbb0e1ff",
+    "fp16-primary-signed-flags.png": "fd5be80082b1d8db36a2b67cf420d10696bb7f3ee59c7394aad95637978c569c",
+    "fp16-stage-and-cost-scopes.png": "0eff0144a257d9375348dc9d2001c87883149e114eb43064ae0ab51c939e5d81",
+    "fp16-strict-fifo-signed.png": "048eb140e789778a70b53dbfce1479604c2279f7db7869204a9424250bc2e1ff",
+    "host-B-own-reference-densities.png": "68dcc3fc62a7d13143656362d8a5c01dfd938736a0ac83b9bdb7747960ccbbbf",
+    "host-aba-timing-scopes.png": "574b43ed7dd271f295766e937f93df021ca599dd109c6a282edddaf051337feb"
+  },
+  "generic_renderer_source_sha256": "6295641979f58f2b17ef1098fcbf6ea9d295cc694a8649eacc54b55ba8a19b09",
+  "host_ABA_predicates": {
+    "passed": true,
+    "predicates": {
+      "array_payload_sha256": true,
+      "fifo_scopes_and_counts": true,
+      "fresh_fifo_each_request": true,
+      "fresh_sampling_generators_each_request": true,
+      "npz_payload_sha256": true,
+      "proposal_wave_sizes": true,
+      "rejection": true,
+      "rng_after": true,
+      "rng_before": true,
+      "sampling_counters": true,
+      "seed_streams": true
+    },
+    "scope": "same case/repetition/streams and original counts; host cold/hit counts intentionally differ and remain separately reported"
+  },
+  "host_B_density": [
+    {
+      "axis": 6,
+      "displayed_count": 49605,
+      "edges": [
+        0.15195017888705728,
+        0.49752108433379977
+      ],
+      "normalization_count": 50000
+    },
+    {
+      "axis": 9,
+      "displayed_count": 49992,
+      "edges": [
+        -0.5127116812863165,
+        0.5313074417474782
+      ],
+      "normalization_count": 50000
+    },
+    {
+      "axis": 8,
+      "displayed_count": 49964,
+      "edges": [
+        -2.686328125,
+        0.5370117187500001
+      ],
+      "normalization_count": 50000
+    },
+    {
+      "axis": 7,
+      "displayed_count": 49967,
+      "edges": [
+        -0.5011738920580027,
+        2.3902139467381662
+      ],
+      "normalization_count": 50000
+    }
+  ],
+  "host_allocated_seconds": 1274,
+  "host_manifest_sha256": "8d66ac1a4a8eea1284f93e66f24c4e5ab72b04f8a4ded97516dabe0d2fd62fbb",
+  "host_other_intervals_seconds": 30.00971795246005,
+  "host_requests": [
+    {
+      "actual_stage_fits": 21,
+      "case": 0,
+      "global_rng_hashes_observed_preserved": true,
+      "physical_status": "model_failure",
+      "request_seconds": 554.5020185597241,
+      "retained_stage_hits": 0,
+      "returned_vectors": 50000,
+      "same_case_unoptimized_control": "available",
+      "visit": 0
+    },
+    {
+      "actual_stage_fits": 0,
+      "case": 1,
+      "global_rng_hashes_observed_preserved": true,
+      "physical_status": "model_failure",
+      "request_seconds": 275.7407271657139,
+      "retained_stage_hits": 21,
+      "returned_vectors": 50000,
+      "same_case_unoptimized_control": "not_available",
+      "visit": 1
+    },
+    {
+      "actual_stage_fits": 0,
+      "case": 0,
+      "global_rng_hashes_observed_preserved": true,
+      "physical_status": "model_failure",
+      "request_seconds": 314.32715357095003,
+      "retained_stage_hits": 21,
+      "returned_vectors": 50000,
+      "same_case_unoptimized_control": "available",
+      "visit": 2
+    }
+  ],
+  "host_review_sha256": "eead7c3342e3e57ee8d1d3e31576b94c76e71f2d45eef00a0807249dec413750",
+  "host_session_seconds": 1252.4390188092366,
+  "host_setup_seconds": 77.8594015603885,
+  "hostname": "acn65.karolina.it4i.cz",
+  "memory": {
+    "peak_allocated_bytes": 3514011136,
+    "peak_reserved_bytes": 16133390336
+  },
+  "no_old_pvalues_or_equivalence_claim": true,
+  "one_clean_optimized_repetition_only": true,
+  "original_fallback_fit_seconds": 1.6624913401901722,
+  "other_request_seconds": 9.19793981127441,
+  "overall_runtime_phase_complete": false,
+  "predict_and_sample_seconds": 81.50427646562457,
+  "prepare_seconds": 104.47957144211978,
+  "profiling_is_not_a_clean_repeat": true,
+  "proposal_buffer": {
+    "actual_generated_wave_sizes": [
+      51200
+    ],
+    "all_rows_are_complete_vectors": true,
+    "api_requested_sizes": [
+      50000,
+      463
+    ],
+    "attribution": "Built with PriorLabs-TabPFN",
+    "benchmark_total_count": 50000,
+    "buffer_reset_count": 0,
+    "data_dtype": "CPU FP32; unchanged",
+    "enabled": true,
+    "failed": false,
+    "failure": null,
+    "finalized": true,
+    "generated_count": 51200,
+    "generated_wave_attempt_sizes": [
+      51200
+    ],
+    "generated_wave_count": 1,
+    "global_initial_lookahead": 1200,
+    "law_scope": "FIFO rechunking preserves an iid complete-vector proposal stream; provider batch law must be qualified separately",
+    "live_buffer_rows": 0,
+    "log_density": "not_used",
+    "module_sha256": "8fb2ba1fb63cd917378ff9bc8b6f70be7410862c509cd22cb2fb6f454d3d35fa",
+    "original_api_delivered_count": 50463,
+    "original_sampler_counts": {
+      "accepted_before_trim": 50152,
+      "original_checked_count": 50463,
+      "original_support_calls": 2,
+      "returned_count": 50000
+    },
+    "original_sampler_source_sha256": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+    "partial_vector_filtering": false,
+    "policy_id": "complete_vector_fifo_lookahead_v1",
+    "policy_sha256": "dbeca85d7107cd9a5d9cf9f967aa02807cc38d10b7493ecc42d2181a503391af",
+    "rank": 0,
+    "remaining_unused_buffer_count": 737,
+    "request_scope": {
+      "case": 0,
+      "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+      "context_obs": {
+        "dtype": "<f8",
+        "sha256": "aee2030d63158a3baf3b731e1231e17972ed80a19def10152b4e67d6d1e6ffb8",
+        "shape": [
+          4096,
+          33
+        ]
+      },
+      "context_seed": 20261111,
+      "context_theta": {
+        "dtype": "<f8",
+        "sha256": "73c4c282c136a1fd86459e7b1b736629b459075def9176956a90d232d4c30f4d",
+        "shape": [
+          4096,
+          21
+        ]
+      },
+      "query": {
+        "dtype": "<f8",
+        "sha256": "57fb7625b2521ff040f6d858961ca5876276708fbe2637242b48c69fdce7bdac",
+        "shape": [
+          1,
+          33
+        ]
+      },
+      "rank": 0,
+      "repetition": 0,
+      "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+      "scope": "one posterior request; no cross-query/case/context reuse",
+      "seed_streams": {
+        "component_uniform": 3175593578,
+        "head_acceptance": 179600625,
+        "head_proposal": 1681898578
+      },
+      "world_size": 1
+    },
+    "request_scope_sha256": "1ddb0b34ffca9992f45b716c53ebdce6cdc91f3ecb93139f80bdff65c8a3d3b3",
+    "required_stage_preparations_for_generated_waves": 21,
+    "rng_draws_by_buffer": 0,
+    "row_repair_or_reordering": false,
+    "schema": "posteriorforge.execution.proposal_buffer.v1",
+    "seed_coupling": "provider generates lookahead rows; role/seed definitions unchanged but seeded vectors need not be bitwise identical",
+    "source_unchanged": true,
+    "support_filtering_performed_by_buffer": false,
+    "unused_rows_discarded_only_after_original_sampler_completion": true,
+    "vector_width": 21,
+    "worker_expected_return_count": 50000,
+    "worker_initial_lookahead": 1200,
+    "world_size": 1
+  },
+  "qualified_FP32": false,
+  "report_source_sha256": "97a1ee4776a1136174239fe17a170d6982b42a6dafc8d1427384e87a18e9ded3",
+  "request_seconds": 195.18178771901876,
+  "resident_move_seconds": 4.528026952408254,
+  "review_v1_sha256": "589ed262d9eb97b98b0c78690eb001edc207bbb4b258b5896ec172ae74a50aca",
+  "review_v2_sha256": "b5e7532473a62dc88eabba5a8b32c5204c789f77bc8ce4be3389a56d33a86f93",
+  "schema": "posteriorforge.fp16_pilot_ABA_report.v1",
+  "signed_curves_sha256": "25a6c5f8439f8b3b1561906ef7f128f01dc4d5cbab5c5defe2d598be89a7953d",
+  "speedup_vs_control_median": 12.195344512166837,
+  "speedup_vs_strict_FIFO1024": 2.1055418254680296,
+  "stock_cache_fit_seconds": 81.64990429580212,
+  "timing_boundaries": {
+    "posterior_request": "first proposal through final support/FIFO validation and CUDA synchronization",
+    "wrapper": "function entry through NPZ/hash completion; final manifest write/interpreter startup reported by outer job timer"
+  },
+  "v1_v2_metrics_identical": true,
+  "wrapper_seconds": 213.29899211693555
+}

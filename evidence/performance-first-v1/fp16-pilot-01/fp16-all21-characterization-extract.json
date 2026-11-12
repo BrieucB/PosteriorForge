@@ -1,0 +1,2318 @@
+{
+  "all21_hard_validity_passed": true,
+  "all21_strict_screen_passed": false,
+  "end_to_end_benchmark": false,
+  "hostname": "acn53.karolina.it4i.cz",
+  "job_id": "5406017",
+  "observed_RNG_preservation_scope": "this immutable characterization, not clean production hashes",
+  "posterior_sampling_rng_used": false,
+  "posterior_vectors_generated": 0,
+  "qualified": false,
+  "raw_cache_JSON_included": false,
+  "rng_role": "fp16-all21-conditional-characterizer",
+  "schema": "posteriorforge.fp16_characterization_extract.v1",
+  "scope": "all21 approximate cache plus declared view-layout conditionals; not KV-only/exact/posterior qualification",
+  "source_manifest_sha256": "f01bfddb87dcd16c9bd7c9df15f482ed3ea46756b1d84f3c04f6584644a0687a",
+  "sources": {
+    "base": "c55c00a1697f8d4341880af18676c29b4d99551e131c89ff79bea238c693f8bd",
+    "characterizer": "20e64a64357de7862c20b2fa846c6d128c181ca564c261800b626e6c4bd32208",
+    "portable": "3234694dc1d2bb242d0995d465ddc69250cf67fb05e9127e7380fe0eb70ea6ee",
+    "precision": "051f477ff4b9ab8bbcfbaf3c1afa4dcf6b111d2f2fbcf9efb9c94a00d2b2ad3d",
+    "utility": "6c927a5c278c7fc54b556ac557ecef64f5e6338f5ae13bf466f3b1e6a4640f90"
+  },
+  "stage_results": [
+    {
+      "Cp_prepare_seconds": 4.418077727779746,
+      "G0_prepare_seconds": 21.202433770522475,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0002831744894767896,
+            "max_normalization_error": 2.792080888713855e-07,
+            "max_probability_absolute_error": 6.698537617921829e-06,
+            "max_row_total_variation": 0.000355988657305966,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 0.6931476695191527,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0002831744894767896,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 2.905726621538207e-07,
+            "max_measured_cumulative_roundoff": 3.058756656848516e-07,
+            "max_normalized_common_uniform_value_difference": 0.9409440641066524,
+            "max_probability_residual": 0.0002494838444637715,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.00012200213734697707,
+            "max_normalization_error": 4.0029722092604914e-07,
+            "max_probability_absolute_error": 7.150694727897644e-06,
+            "max_row_total_variation": 0.00022136145396201405,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.6094378939759153,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.00012200213734697707,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 2.160666744410733e-07,
+            "max_measured_cumulative_roundoff": 4.247592194639438e-07,
+            "max_normalized_common_uniform_value_difference": 2.523950012042535,
+            "max_probability_residual": 0.00012132073547344024,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 48,
+      "hard_validity_passed": true,
+      "parameter": "mu_a",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 0,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 4.163218781352043,
+      "G0_prepare_seconds": 11.543376594781876,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.001490819209860439,
+            "max_normalization_error": 1.7502281325354474e-06,
+            "max_probability_absolute_error": 1.5244586393237114e-05,
+            "max_row_total_variation": 0.0015121806344181225,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.0794410725639167,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.001490819209860439,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 4.693864754656829e-07,
+            "max_measured_cumulative_roundoff": 5.140900296574102e-07,
+            "max_normalized_common_uniform_value_difference": 0.003365930114107619,
+            "max_probability_residual": 0.0010714460633783895,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 18,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 33,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0012428928090520985,
+            "max_normalization_error": 1.1052431357905235e-06,
+            "max_probability_absolute_error": 1.2303702533245087e-05,
+            "max_row_total_variation": 0.0017969606442420627,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.7917594942248662,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0012428928090520985,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 1.0286525413683023e-06,
+            "max_measured_cumulative_roundoff": 1.0360969291411948e-06,
+            "max_normalized_common_uniform_value_difference": 0.6641945431870941,
+            "max_probability_residual": 0.0012348851785833892,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 19,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "mu_b",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 1,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 4.160921649076045,
+      "G0_prepare_seconds": 24.560273923911154,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0012176300256213635,
+            "max_normalization_error": 4.5403187753922936e-07,
+            "max_probability_absolute_error": 1.51866115629673e-05,
+            "max_row_total_variation": 0.0012300962073179926,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.6390571536647904,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0012176300256213635,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 1.1920928955078125e-07,
+            "max_measured_cumulative_roundoff": 1.869013886990345e-07,
+            "max_normalized_common_uniform_value_difference": 2.248044308315296,
+            "max_probability_residual": 0.0003752619995305295,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 33,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0008872994022865455,
+            "max_normalization_error": 1.0710614167797061e-06,
+            "max_probability_absolute_error": 1.1915341019630432e-05,
+            "max_row_total_variation": 0.0009061207111993365,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.6094379216322352,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0008872994022865455,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 1.0430808855543816e-06,
+            "max_measured_cumulative_roundoff": 1.095405209539102e-06,
+            "max_normalized_common_uniform_value_difference": 2.790780167147031,
+            "max_probability_residual": 0.00042990521128183357,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 19,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 35,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "mu_d0",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 2,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 4.512632108293474,
+      "G0_prepare_seconds": 17.562057393603027,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0007094403593124188,
+            "max_normalization_error": 7.487673076012058e-07,
+            "max_probability_absolute_error": 1.5371013432741165e-05,
+            "max_row_total_variation": 0.0007832053075586307,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.397893888395103,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0007094403593124188,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 8.94068841184037e-08,
+            "max_measured_cumulative_roundoff": 2.3096798074107028e-07,
+            "max_normalized_common_uniform_value_difference": 0.8058949322483302,
+            "max_probability_residual": 0.0003028280228162261,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 19,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 34,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0009802277672861237,
+            "max_normalization_error": 2.617560484696746e-06,
+            "max_probability_absolute_error": 1.7629936337471008e-05,
+            "max_row_total_variation": 0.0017797251243791834,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.6094379644092989,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0009802277672861237,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 2.458970005614347e-06,
+            "max_measured_cumulative_roundoff": 2.645056695560477e-06,
+            "max_normalized_common_uniform_value_difference": 9.463234772765414,
+            "max_probability_residual": 0.0008517474028169048,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 18,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 35,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "a_m1",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 3,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 4.166678117588162,
+      "G0_prepare_seconds": 8.614070544019341,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.00258400414666371,
+            "max_normalization_error": 7.99302131371249e-07,
+            "max_probability_absolute_error": 3.941310569643974e-05,
+            "max_row_total_variation": 0.002584677114954594,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.9459095326730775,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.00258400414666371,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 3.948807545395283e-07,
+            "max_measured_cumulative_roundoff": 4.101459788463657e-07,
+            "max_normalized_common_uniform_value_difference": 0.42252511234505447,
+            "max_probability_residual": 0.0018288779609624273,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 24,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.000767800213190728,
+            "max_normalization_error": 1.6270686973296478e-06,
+            "max_probability_absolute_error": 3.5606324672698975e-05,
+            "max_row_total_variation": 0.0009360883735389939,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.945909512297117,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.000767800213190728,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 8.941278322183166e-07,
+            "max_measured_cumulative_roundoff": 9.395881294116393e-07,
+            "max_normalized_common_uniform_value_difference": 4.317264368092305,
+            "max_probability_residual": 0.0005032563445442895,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "b_m1",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 4,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 3.5616883784532547,
+      "G0_prepare_seconds": 8.50696953292936,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.004054074044555822,
+            "max_normalization_error": 4.804836765126552e-07,
+            "max_probability_absolute_error": 8.502323180437088e-05,
+            "max_row_total_variation": 0.004054306161037792,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.890371347928486,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.004054074044555822,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 2.2429066348639282e-07,
+            "max_measured_cumulative_roundoff": 2.607803628595917e-07,
+            "max_normalized_common_uniform_value_difference": 0.8605984738056401,
+            "max_probability_residual": 0.0009732093240920059,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 23,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 35,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0019599621843802706,
+            "max_normalization_error": 2.2152302476818875e-06,
+            "max_probability_absolute_error": 2.878718078136444e-05,
+            "max_row_total_variation": 0.001967570536532161,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.7917594116342421,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0019599621843802706,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 7.823208770796342e-07,
+            "max_measured_cumulative_roundoff": 8.71923104717176e-07,
+            "max_normalized_common_uniform_value_difference": 0.8413141609434202,
+            "max_probability_residual": 0.00062931007406547,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 19,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "d0_m1",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 5,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 4.655113496817648,
+      "G0_prepare_seconds": 11.67370846029371,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0040326487851155,
+            "max_normalization_error": 9.229848583203193e-07,
+            "max_probability_absolute_error": 3.0381372198462486e-05,
+            "max_row_total_variation": 0.004034593046938482,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.564948999465809,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0040326487851155,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 5.736947801260328e-07,
+            "max_measured_cumulative_roundoff": 6.037135018566175e-07,
+            "max_normalized_common_uniform_value_difference": 1.8265402365814245,
+            "max_probability_residual": 0.0012127084049604608,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0019367841850004286,
+            "max_normalization_error": 7.873199798780206e-07,
+            "max_probability_absolute_error": 2.3972010239958763e-05,
+            "max_row_total_variation": 0.001941094941859399,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.386293425156559,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0019367841850004286,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 1.9156766939421033e-07,
+            "max_measured_cumulative_roundoff": 2.3229865608875855e-07,
+            "max_normalized_common_uniform_value_difference": 2.024216880199998,
+            "max_probability_residual": 0.0019116623465514904,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 18,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 35,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "sigma_m1",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 6,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 4.4346839394420385,
+      "G0_prepare_seconds": 9.077385541982949,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0009649871334950211,
+            "max_normalization_error": 5.581363603512912e-07,
+            "max_probability_absolute_error": 1.3768207281827927e-05,
+            "max_row_total_variation": 0.0010127679471114452,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.5649490369357864,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0009649871334950211,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 2.470457159953199e-07,
+            "max_measured_cumulative_roundoff": 2.6998406987832624e-07,
+            "max_normalized_common_uniform_value_difference": 1.9925874703908781,
+            "max_probability_residual": 0.00010575267857676485,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0006997901185451516,
+            "max_normalization_error": 3.120114354659975e-07,
+            "max_probability_absolute_error": 1.1279946193099022e-05,
+            "max_row_total_variation": 0.0007718494064448508,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.6094379930705074,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0006997901185451516,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 1.6355543508428383e-07,
+            "max_measured_cumulative_roundoff": 1.9379309845746207e-07,
+            "max_normalized_common_uniform_value_difference": 3.4538134007352776,
+            "max_probability_residual": 0.0006637379084030726,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 19,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 34,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "a_m2",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 7,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 4.121506101451814,
+      "G0_prepare_seconds": 9.926818247884512,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.001889161264024497,
+            "max_normalization_error": 9.38064012356854e-07,
+            "max_probability_absolute_error": 2.9449351131916046e-05,
+            "max_row_total_variation": 0.0018916385621769354,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.9459095282263839,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.001889161264024497,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 6.854533836087029e-07,
+            "max_measured_cumulative_roundoff": 8.121518265680194e-07,
+            "max_normalized_common_uniform_value_difference": 0.31628297962590296,
+            "max_probability_residual": 0.0010450983747173348,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 24,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0009882976406760946,
+            "max_normalization_error": 1.1516089140073404e-06,
+            "max_probability_absolute_error": 1.7680227756500244e-05,
+            "max_row_total_variation": 0.0009956939508173966,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.791759541066689,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0009882976406760946,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 1.1702666397050976e-06,
+            "max_measured_cumulative_roundoff": 1.178121763256712e-06,
+            "max_normalized_common_uniform_value_difference": 2.5808747853974734,
+            "max_probability_residual": 0.0008202161740295533,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 23,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "b_m2",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 8,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 4.350995901040733,
+      "G0_prepare_seconds": 10.386204361915588,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.005809675963125871,
+            "max_normalization_error": 5.279359682752727e-07,
+            "max_probability_absolute_error": 0.000135764479637146,
+            "max_row_total_variation": 0.005810122427457167,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.7725887418656523,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.005809675963125871,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 2.717966174348163e-07,
+            "max_measured_cumulative_roundoff": 3.650956312828413e-07,
+            "max_normalized_common_uniform_value_difference": 1.106992312554261,
+            "max_probability_residual": 0.0020715975444105528,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 24,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.002968332921568617,
+            "max_normalization_error": 5.433847363178756e-07,
+            "max_probability_absolute_error": 3.941729664802551e-05,
+            "max_row_total_variation": 0.0029756566138736673,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.7917595322254805,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.002968332921568617,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 5.662561564090396e-07,
+            "max_measured_cumulative_roundoff": 5.96046446199594e-07,
+            "max_normalized_common_uniform_value_difference": 0.8855936986834585,
+            "max_probability_residual": 0.0029383740264234404,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 22,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "d0_m2",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 9,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 6.481505583040416,
+      "G0_prepare_seconds": 11.004101045429707,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0024913368119942048,
+            "max_normalization_error": 8.716300976541191e-07,
+            "max_probability_absolute_error": 1.8389779143035412e-05,
+            "max_row_total_variation": 0.0024986111169428755,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.564948083280372,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0024913368119942048,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 5.58793641247668e-07,
+            "max_measured_cumulative_roundoff": 6.706034498815683e-07,
+            "max_normalized_common_uniform_value_difference": 0.5825040862706216,
+            "max_probability_residual": 0.000907813770543997,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0010748904135294834,
+            "max_normalization_error": 4.886011627514009e-07,
+            "max_probability_absolute_error": 9.891577064990997e-06,
+            "max_row_total_variation": 0.0010765885676174737,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.6094379686368256,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0010748904135294834,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 3.5762786865234375e-07,
+            "max_measured_cumulative_roundoff": 4.3979440489394506e-07,
+            "max_normalized_common_uniform_value_difference": 1.5497888882889692,
+            "max_probability_residual": 0.0006183189412331536,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "sigma_m2",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 10,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 4.231817975640297,
+      "G0_prepare_seconds": 9.141804723069072,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.003277542481924023,
+            "max_normalization_error": 7.00361614924816e-07,
+            "max_probability_absolute_error": 3.2271724194288254e-05,
+            "max_row_total_variation": 0.003293726318076572,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.0794410858946577,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.003277542481924023,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 1.9854547594899685e-07,
+            "max_measured_cumulative_roundoff": 2.387537305637011e-07,
+            "max_normalized_common_uniform_value_difference": 0.4723570009416342,
+            "max_probability_residual": 0.0025155005202334157,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 20,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 35,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.003994605731667322,
+            "max_normalization_error": 1.2144705523464694e-06,
+            "max_probability_absolute_error": 2.586469054222107e-05,
+            "max_row_total_variation": 0.0040110696592133045,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.6094379567737533,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.003994605731667322,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 9.909271846408885e-07,
+            "max_measured_cumulative_roundoff": 1.244247123999287e-06,
+            "max_normalized_common_uniform_value_difference": 1.3283920549033235,
+            "max_probability_residual": 0.0036545024439193496,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 22,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "a_m3",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 11,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 4.458447266370058,
+      "G0_prepare_seconds": 9.956305076368153,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0023265735014093014,
+            "max_normalization_error": 8.011367934601665e-07,
+            "max_probability_absolute_error": 3.561330959200859e-05,
+            "max_row_total_variation": 0.0023270235786320187,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.9924297163216025,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0023265735014093014,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 3.3527967868707265e-07,
+            "max_measured_cumulative_roundoff": 3.5814456533778127e-07,
+            "max_normalized_common_uniform_value_difference": 0.6115568386170943,
+            "max_probability_residual": 0.0015871373639058106,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 23,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 35,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0005437047888428026,
+            "max_normalization_error": 1.223799685035054e-06,
+            "max_probability_absolute_error": 1.3292301446199417e-05,
+            "max_row_total_variation": 0.0008212506166445279,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.302585726636547,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0005437047888428026,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 1.2361772560032236e-06,
+            "max_measured_cumulative_roundoff": 1.251953257175309e-06,
+            "max_normalized_common_uniform_value_difference": 50.4789351882128,
+            "max_probability_residual": 0.0005350009084668095,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 24,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "b_m3",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 12,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 4.996061272919178,
+      "G0_prepare_seconds": 10.20268742274493,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0048680509215546786,
+            "max_normalization_error": 4.987208167550605e-07,
+            "max_probability_absolute_error": 0.00012712553143501282,
+            "max_row_total_variation": 0.004868236535425089,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.7080497776737467,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0048680509215546786,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 3.544514411979449e-07,
+            "max_measured_cumulative_roundoff": 1.267220788303547e-07,
+            "max_normalized_common_uniform_value_difference": 1.024278019337938,
+            "max_probability_residual": 0.002082937428526055,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 22,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 34,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0010596801076411255,
+            "max_normalization_error": 1.4429950043748363e-06,
+            "max_probability_absolute_error": 2.1892599761486053e-05,
+            "max_row_total_variation": 0.0010723587844077697,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.7917595514568276,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0010596801076411255,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 4.771713687512502e-07,
+            "max_measured_cumulative_roundoff": 1.4684686253652046e-06,
+            "max_normalized_common_uniform_value_difference": 2.656780754162524,
+            "max_probability_residual": 0.0009538425909584314,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 22,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "d0_m3",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 13,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 4.322912338189781,
+      "G0_prepare_seconds": 9.627890512347221,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0038146675290393617,
+            "max_normalization_error": 5.305586443515864e-07,
+            "max_probability_absolute_error": 2.229376696050167e-05,
+            "max_row_total_variation": 0.0038186659619290787,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.397893906354801,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0038146675290393617,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 2.9419414904197083e-07,
+            "max_measured_cumulative_roundoff": 2.982941866847e-07,
+            "max_normalized_common_uniform_value_difference": 0.7997845463772228,
+            "max_probability_residual": 0.0008968242956847172,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 19,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 34,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0008595055635358673,
+            "max_normalization_error": 1.1632048700915831e-06,
+            "max_probability_absolute_error": 9.268056601285934e-06,
+            "max_row_total_variation": 0.0008661948395664706,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.7917594870102498,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0008595055635358673,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 1.1249979626759554e-06,
+            "max_measured_cumulative_roundoff": 1.1399339072681869e-06,
+            "max_normalized_common_uniform_value_difference": 2.2582732541873027,
+            "max_probability_residual": 0.0006622021584813398,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "sigma_m3",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 14,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 4.354258355684578,
+      "G0_prepare_seconds": 10.46036583185196,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0028060141175014763,
+            "max_normalization_error": 1.070920469969927e-06,
+            "max_probability_absolute_error": 5.0916336476802826e-05,
+            "max_row_total_variation": 0.002811534418859729,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.0794410852385,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0028060141175014763,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 6.973383581687642e-07,
+            "max_measured_cumulative_roundoff": 7.52508641510552e-07,
+            "max_normalized_common_uniform_value_difference": 0.22123704448501233,
+            "max_probability_residual": 0.0006319097847525823,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 23,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 35,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0012278110200129033,
+            "max_normalization_error": 1.4282419193989426e-06,
+            "max_probability_absolute_error": 2.331892028450966e-05,
+            "max_row_total_variation": 0.0012339171028743652,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.7917594657386111,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0012278110200129033,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 9.089740150569625e-07,
+            "max_measured_cumulative_roundoff": 1.4528603042851529e-06,
+            "max_normalized_common_uniform_value_difference": 4.649364744532016,
+            "max_probability_residual": 0.00036094595239177796,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "a_a1",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 15,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 5.2428208496421576,
+      "G0_prepare_seconds": 11.323430215008557,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0002947320662692876,
+            "max_normalization_error": 6.167974984094826e-07,
+            "max_probability_absolute_error": 2.5477493181824684e-06,
+            "max_row_total_variation": 0.00033390995008055944,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.890371329626422,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0002947320662692876,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 2.0954741675183186e-07,
+            "max_measured_cumulative_roundoff": 2.4638234852325525e-07,
+            "max_normalized_common_uniform_value_difference": 1.5814173252860195,
+            "max_probability_residual": 0.00012376180004519677,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.00013646033237230126,
+            "max_normalization_error": 4.6555547350557447e-07,
+            "max_probability_absolute_error": 1.8514692783355713e-06,
+            "max_row_total_variation": 0.00024791168077257933,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.6094379690303313,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.00013646033237230126,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 3.663724272850999e-07,
+            "max_measured_cumulative_roundoff": 4.92187166578617e-07,
+            "max_normalized_common_uniform_value_difference": 13.283906687631793,
+            "max_probability_residual": 5.772407574655691e-05,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "sigma_a1",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 16,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 5.0687037082389,
+      "G0_prepare_seconds": 12.322070393711329,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0013205144930460433,
+            "max_normalization_error": 4.287403759795083e-07,
+            "max_probability_absolute_error": 2.86763533949852e-05,
+            "max_row_total_variation": 0.0013226194580954818,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.945909495000251,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0013205144930460433,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 1.685091199910005e-07,
+            "max_measured_cumulative_roundoff": 2.166811634563004e-07,
+            "max_normalized_common_uniform_value_difference": 0.2043682798797968,
+            "max_probability_residual": 0.0006604820361814645,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0007378296847850851,
+            "max_normalization_error": 1.0906993581638602e-06,
+            "max_probability_absolute_error": 1.8194317817687988e-05,
+            "max_row_total_variation": 0.0007452057423199594,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.7917594837371986,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0007378296847850851,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 9.886612557519214e-07,
+            "max_measured_cumulative_roundoff": 1.1181679955285517e-06,
+            "max_normalized_common_uniform_value_difference": 1.4366800060332172,
+            "max_probability_residual": 0.0006285717172407335,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "a_a2",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 17,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 5.184799182228744,
+      "G0_prepare_seconds": 10.587936785072088,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0025872225079017763,
+            "max_normalization_error": 7.314179348849592e-07,
+            "max_probability_absolute_error": 1.2448988854885101e-05,
+            "max_row_total_variation": 0.0025877114180120125,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.484907173877744,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0025872225079017763,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 3.5776951656796285e-07,
+            "max_measured_cumulative_roundoff": 3.7304516531389e-07,
+            "max_normalized_common_uniform_value_difference": 1.7711893163076087,
+            "max_probability_residual": 0.0005417971659085058,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0011019361842479203,
+            "max_normalization_error": 4.992839013340244e-07,
+            "max_probability_absolute_error": 4.887580871582031e-06,
+            "max_row_total_variation": 0.0011621412792014222,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.6094379275546906,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0011019361842479203,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 2.248730017750944e-07,
+            "max_measured_cumulative_roundoff": 5.215431216898381e-07,
+            "max_normalized_common_uniform_value_difference": 3.6733556010156545,
+            "max_probability_residual": 0.0004733021358546141,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 20,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 35,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "sigma_a2",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 18,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 5.036133700050414,
+      "G0_prepare_seconds": 11.623485315591097,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0018388502060075473,
+            "max_normalization_error": 6.272248068706077e-07,
+            "max_probability_absolute_error": 3.942754119634628e-05,
+            "max_row_total_variation": 0.0018417732486620958,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.079441074111269,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0018388502060075473,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 4.097821159065873e-07,
+            "max_measured_cumulative_roundoff": 4.0979439985822097e-07,
+            "max_normalized_common_uniform_value_difference": 0.6279677682860386,
+            "max_probability_residual": 0.000909319254924712,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 24,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0008133753222164808,
+            "max_normalization_error": 6.672154850839718e-07,
+            "max_probability_absolute_error": 1.899711787700653e-05,
+            "max_row_total_variation": 0.0008172437602585744,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.791759499865055,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0008133753222164808,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 6.637868360526156e-07,
+            "max_measured_cumulative_roundoff": 6.942709145363324e-07,
+            "max_normalized_common_uniform_value_difference": 1.0199817574814267,
+            "max_probability_residual": 0.0007496103644651919,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "a_a3",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 19,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    },
+    {
+      "Cp_prepare_seconds": 4.474495869129896,
+      "G0_prepare_seconds": 10.670166635885835,
+      "G0_source_restoration_valid": true,
+      "approximation_accepted": false,
+      "comparisons": {
+        "1024": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0013416976724032192,
+            "max_normalization_error": 6.07415117981347e-07,
+            "max_probability_absolute_error": 5.506444722414017e-06,
+            "max_row_total_variation": 0.0013433236116222704,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 2.484907147722886,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0013416976724032192,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 1.7461207801883205e-07,
+            "max_measured_cumulative_roundoff": 2.235237362979703e-07,
+            "max_normalized_common_uniform_value_difference": 0.7951097167155153,
+            "max_probability_residual": 0.0006541940198162566,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        },
+        "stress": {
+          "eight_members": true,
+          "exact_final_borders": true,
+          "final": {
+            "max_cdf_absolute_error": 0.0008833069178667552,
+            "max_normalization_error": 1.1789087491775874e-06,
+            "max_probability_absolute_error": 6.288173608481884e-06,
+            "max_row_total_variation": 0.0009274131628130345,
+            "minimum_probability": 0.0,
+            "passed": false
+          },
+          "final_float32": true,
+          "final_logits": {
+            "max_centered_logit_error_on_common_finite_bins": 1.6094379360145084,
+            "negative_infinity_pattern_equal": false,
+            "shape_equal": true
+          },
+          "inverse_cdf": {
+            "cdf_delta_raw_probability_masses": 0.0008833069178667552,
+            "icdf_contract_version": 2,
+            "independent_fp32_replay_failures": 0,
+            "max_independent_stock_roundoff_residual": 8.866188820899623e-07,
+            "max_measured_cumulative_roundoff": 1.207129511127114e-06,
+            "max_normalized_common_uniform_value_difference": 3.670328576564463,
+            "max_probability_residual": 0.0008478688881299323,
+            "passed": true,
+            "probabilities_normalized_only_for_analytic_CDF_diagnostic": true,
+            "production_probes_in_measured_tail_band": 21,
+            "production_sampler_changed": false,
+            "same_logits_and_borders_exact_failures": 0,
+            "tested_common_uniforms": 36,
+            "u_one_is_stress_not_production": true,
+            "u_one_never_vetoes_probability_space_comparison": true
+          },
+          "passed": false
+        }
+      },
+      "computed_prefill_passed": true,
+      "computed_query_passed": true,
+      "corrected_CDF_calls": 32,
+      "hard_validity_passed": true,
+      "parameter": "sigma_a3",
+      "qualified": false,
+      "rng_preserved": true,
+      "sampler_parity": {
+        "1024": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        },
+        "stress": {
+          "passed": true,
+          "production_sampler_changed": false,
+          "same_whole_batch_logits_borders_uniforms": true,
+          "u_one_not_called": true,
+          "uniform_domain": "production CPU FP32[0,1);0/.5/1-2^-24"
+        }
+      },
+      "stage_index": 20,
+      "strict_failure_preserved": true,
+      "strict_numeric_comparisons_passed": false,
+      "strict_screen_passed": false,
+      "target_statistics_preserved": true
+    }
+  ],
+  "strict_failed_stages": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "timing_order": "G0 first; Cp later, no randomized/interleaved timing",
+  "timing_repetitions": 0
+}

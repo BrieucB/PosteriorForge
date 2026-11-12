@@ -1,0 +1,54 @@
+{
+  "cap_gpu_seconds": 720000,
+  "completed_records_sha256": "953285fd8ee0e8bc42bc369fd410a7a4208500e6615e71f2d190ce80a32cbe71",
+  "records": [
+    {
+      "accounted_elapsed_seconds": 216,
+      "accounted_gpus": 1,
+      "accounting_record": {
+        "AllocTRES": "billing=1,cpu=16,gres/gpu=1,mem=124160M,node=1",
+        "ElapsedRaw": "216",
+        "JobIDRaw": "5406772",
+        "State": "COMPLETED"
+      },
+      "actual_gpu_seconds": 216,
+      "job_id": "5406772",
+      "reservation_id": "f1beaa5d52cc4164a0f3cbc79066246e",
+      "slurm_state": "COMPLETED",
+      "state": "reconciled"
+    },
+    {
+      "accounted_elapsed_seconds": 1274,
+      "accounted_gpus": 1,
+      "accounting_record": {
+        "AllocTRES": "billing=1,cpu=16,gres/gpu=1,mem=124160M,node=1",
+        "ElapsedRaw": "1274",
+        "JobIDRaw": "5406016",
+        "State": "COMPLETED"
+      },
+      "actual_gpu_seconds": 1274,
+      "job_id": "5406016",
+      "reservation_id": "d6caa91dfc064b9cb274d3029077472c",
+      "slurm_state": "COMPLETED",
+      "state": "reconciled"
+    },
+    {
+      "accounted_elapsed_seconds": 717,
+      "accounted_gpus": 1,
+      "accounting_record": {
+        "AllocTRES": "billing=1,cpu=16,gres/gpu=1,mem=124160M,node=1",
+        "ElapsedRaw": "717",
+        "JobIDRaw": "5406017",
+        "State": "COMPLETED"
+      },
+      "actual_gpu_seconds": 717,
+      "job_id": "5406017",
+      "reservation_id": "e32e9d562f1849e79ed0a37f0cb5db1e",
+      "slurm_state": "COMPLETED",
+      "state": "reconciled"
+    }
+  ],
+  "schema": "posteriorforge.completed_allocation_extract.v1",
+  "scope": "Completed scheduler allocations; request/wrapper wall-products are separate.",
+  "source_path": "budget/ledger.json"
+}

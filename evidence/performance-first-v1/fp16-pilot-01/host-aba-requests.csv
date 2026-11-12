@@ -1,0 +1,4 @@
+visit,case,request_seconds,actual_stage_fits,retained_stage_hits,returned_vectors,physical_status,same_case_unoptimized_control,global_rng_hashes_observed_preserved
+0,0,554.5020185597241,21,0,50000,model_failure,available,True
+1,1,275.7407271657139,0,21,50000,model_failure,not_available,True
+2,0,314.32715357095003,0,21,50000,model_failure,available,True

@@ -1,0 +1,14 @@
+{
+  "all106_ECDF_metrics_match_review_tolerance": 1e-12,
+  "all11_ABA_predicates": true,
+  "all150000_host_integrity_passed": true,
+  "clean_production_global_RNG_observation_claimed": false,
+  "no_new_model_or_GPU_calls": true,
+  "parent_visual_review": "pending",
+  "posterior_cohorts": 4,
+  "report_source_sha256": "97a1ee4776a1136174239fe17a170d6982b42a6dafc8d1427384e87a18e9ded3",
+  "same_actual_A_arrays_and_NPZ_as_prior": true,
+  "schema": "posteriorforge.fp16_ABA_report_checks.v1",
+  "timing_measurements": 7,
+  "v1_v2_numeric_comparisons_identical": true
+}
