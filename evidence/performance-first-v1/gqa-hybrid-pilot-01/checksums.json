@@ -1,0 +1,25 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "README.md": "fa303835aaefa68b3075b3df5637f6bdff56154495cff24ca9b1074f6cca839d",
+    "actual-stage-costs.png": "707467413ac9bab9c62ce1c634bd35b21977e46564d3c2f78d85ccc9f9987b5f",
+    "budget-gqa-hybrid-pilot-snapshot.json": "e88cec04266e68f7bd7d780252554733e3d09c205f15f6201b32eb2062766e9d",
+    "complete-cdf-family.png": "dc9fc3fe32bcc633203114e6924c08bfa63130a624f27d10e1d5e85f096fe43f",
+    "cuda-memory.png": "763aec7440cf47948a287428a16785ec7463b5ba2c1383de4b831c8b49b3a09f",
+    "earlier-hybrid-comparison.json": "c29ce0001211749dfb40f45f3523bd760d72e90648ec84cea8a31a8bb5660a43",
+    "execution-review-extract.json": "faef67e8a6fb0df28690d3da7adb223774d50c3c08df1e5b6158711ea23ad1a6",
+    "figure-data.json": "57131bac3c95f0a88396c5d4baf53f020135e49938841e401a26e60c66840d4c",
+    "pilot-cdf-family.csv": "150e06cdd5942b6757e33198b03a8069d62f60ea308dda6f8ffe9ee70061f169",
+    "pilot-stage-events.csv": "b77c99b7fcfdc43991d04ea16b06c2b944d78c3b8c0c09e1b0c15fca6b555b70",
+    "pilot-summary.json": "b34e37d2d5bdff471b7ffda8fd5481e097d37437f5a34e2f489bf5f2d3f3c9ec",
+    "posterior-all-21-cdfs.png": "6236d129b680cbfdecf02bcf1a763da88e2edfc969c0a88712b3e1bbb90481a3",
+    "posterior-worst-four-densities.png": "6129cdcd2ccfcf926c7db658614affc5792920e509777f128e022a23476f05d9",
+    "render-verification.json": "871ca98ef1d521fe320f52f7c8eb031287dd51aac00db5b266650f94e1011dfb",
+    "report.md": "70dae47b3b45bc3dc5c55b494fe17f15069722534158a2aae34eddecaccb974d",
+    "runtime-and-request-cost.png": "b5c7956e1f3d8b8e234074f6c6c91a3fd056413e7962bf8a01e6305dd0ad810f",
+    "science-control-repeat-tails.json": "ee73f13057daac0f9cd990f7587fab905025d63fa50de1b6998641633983fae0",
+    "signed-cdf-flags.png": "3f5d9a07edf49c6336d8bf7555f6c2e1e227e66823c3df57798230be196c859e",
+    "timings.csv": "060160eb5fe3ca077e3658935dec80733dc4b46d1cdade93cecb1a207d0fd163"
+  },
+  "schema": "posteriorforge.evidence_checksums.v1"
+}

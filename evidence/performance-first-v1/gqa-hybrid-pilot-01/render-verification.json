@@ -1,0 +1,94 @@
+{
+  "actual_gqa_sources_and_alias_restoration_checks_passed": true,
+  "all_seven_figures_byte_identical_to_saved_actual_report": true,
+  "attribution": "Built with PriorLabs-TabPFN",
+  "cdf_family_axes": 53,
+  "cdf_family_review_match_absolute_tolerance": 1e-12,
+  "cdf_family_tick_labels_overlap": false,
+  "complete_stage_events": 42,
+  "control_median_uses_all_three_repetitions": true,
+  "earlier_hybrid_comparison_match_absolute_tolerance": 1e-12,
+  "earlier_hybrid_stream_coupling_verified": true,
+  "environment": "verified reference Python 3.11 environment",
+  "exactly_one_details_section_after_rerun": true,
+  "figures": {
+    "actual-stage-costs.png": {
+      "pixels": [
+        1997,
+        1523
+      ],
+      "sha256": "707467413ac9bab9c62ce1c634bd35b21977e46564d3c2f78d85ccc9f9987b5f"
+    },
+    "complete-cdf-family.png": {
+      "pixels": [
+        1998,
+        678
+      ],
+      "sha256": "dc9fc3fe32bcc633203114e6924c08bfa63130a624f27d10e1d5e85f096fe43f"
+    },
+    "cuda-memory.png": {
+      "pixels": [
+        1687,
+        756
+      ],
+      "sha256": "763aec7440cf47948a287428a16785ec7463b5ba2c1383de4b831c8b49b3a09f"
+    },
+    "posterior-all-21-cdfs.png": {
+      "pixels": [
+        2300,
+        3578
+      ],
+      "sha256": "6236d129b680cbfdecf02bcf1a763da88e2edfc969c0a88712b3e1bbb90481a3"
+    },
+    "posterior-worst-four-densities.png": {
+      "pixels": [
+        1997,
+        1311
+      ],
+      "sha256": "6129cdcd2ccfcf926c7db658614affc5792920e509777f128e022a23476f05d9"
+    },
+    "runtime-and-request-cost.png": {
+      "pixels": [
+        2294,
+        766
+      ],
+      "sha256": "b5c7956e1f3d8b8e234074f6c6c91a3fd056413e7962bf8a01e6305dd0ad810f"
+    },
+    "signed-cdf-flags.png": {
+      "pixels": [
+        1998,
+        733
+      ],
+      "sha256": "3f5d9a07edf49c6336d8bf7555f6c2e1e227e66823c3df57798230be196c859e"
+    }
+  },
+  "fresh_generic_report_then_details_render": true,
+  "full_independent_review_in_git_package": false,
+  "guard_checks": {
+    "legacy_section_replacement": true,
+    "malformed_markers_rejected_without_write": true,
+    "markdown_links_resolve": true,
+    "missing_base_report_rejected": true,
+    "no_raw_npz_or_full_review_in_git_package": true,
+    "portable_source_paths": true,
+    "wrong_cohort_label_rejected_without_write": true
+  },
+  "no_earlier_randomized_p_values_transferred": true,
+  "no_new_permutation_diagnostic": true,
+  "overall_runtime_phase_complete": false,
+  "plot_omits_identical_control_rep_0_payload": true,
+  "posterior_rows_or_flags_removed": false,
+  "raw_posterior_npz_in_git_package": false,
+  "render_surface": "remote Karolina CPU, Agg; saved artifacts only",
+  "repeated_details_render_all_outputs_byte_stable": true,
+  "reporting_source_sha256": "2e31bc239853e0e77e85643146f0ffd6d520e6b436879b0d85af7be07f4c9db5",
+  "request_legend_overlaps_cost_bars": false,
+  "schema": "posteriorforge.gqa_hybrid_pilot_render_verification.v1",
+  "signed_cdf_curve_npz_in_git_package": false,
+  "strict_five_cohort_labels_and_payload_bindings_verified": true,
+  "visual_review": {
+    "interpretation": "Primary CDF investigations, absolute model_failure and the supported control tail remain visible.",
+    "method": "remote previews of all seven figures, all 21 CDF panels and shared legends",
+    "result": "pass"
+  }
+}

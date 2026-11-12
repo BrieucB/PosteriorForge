@@ -1,0 +1,15 @@
+{
+  "schema": "posteriorforge.public_budget_snapshot.v1",
+  "scope": "saved while host warmed qualification runs; all failures and diagnostic allocations included",
+  "summary": {
+    "actual_gpu_hours": 21.03638888888889,
+    "actual_gpu_seconds": 75731,
+    "cap_exceeded": false,
+    "cap_gpu_hours": 200,
+    "remaining_gpu_hours": 178.29694444444445,
+    "remaining_gpu_seconds": 641869,
+    "reservation_count": 62,
+    "reserved_gpu_hours": 0.6666666666666666,
+    "reserved_gpu_seconds": 2400
+  }
+}
