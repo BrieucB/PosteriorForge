@@ -1,0 +1,170 @@
+{
+  "HPC_only_array_archives": {
+    "actual_stage_return_archive": {
+      "bytes": 8607475,
+      "file": "latent-stage-returns.npz",
+      "raw_array_in_public_package": false,
+      "sha256": "c5fdbbf160ff486772e04f00785a9dadfd74513ea8ffb0c226dc2e1e09e85b91"
+    },
+    "decoded_wave_archive": {
+      "bytes": 8601872,
+      "file": "decoded-physical-proposal-waves.npz",
+      "raw_array_in_public_package": false,
+      "sha256": "bd43889ede987d055a3d810887e94ac9824d2bffb524b2d1bb9a114794a4e84a"
+    },
+    "latent_wave_archive": {
+      "bytes": 4301072,
+      "file": "latent-proposal-waves.npz",
+      "raw_array_in_public_package": false,
+      "sha256": "83c0047df699fad399e04372f8e4cbbb5a60634eb77d8005f9091d281bc4a229"
+    }
+  },
+  "allocation_reconciliation": {
+    "FAILED_job_allocated_GPU_seconds": 752,
+    "project_actual_GPU_hours": 28.47138888888889,
+    "project_reserved_GPU_seconds": 0,
+    "receipt": "allocation-receipt.json",
+    "sha256": "7cc2ac4e666938325f9bc4e70998c8eeaf81957a946d59203335e3081800e407"
+  },
+  "attribution": "Built with PriorLabs-TabPFN",
+  "boundary_interpretation": {
+    "generated51200_is_not_buffer_bookkeeping_generated0": "Both original observations are retained, with their distinct scopes.",
+    "mechanism": "Provider returns decoded CPU Float64; immutable FIFO8fb requires CPU Float32 and raises before recording generated/delivered rows.",
+    "support_not_reached_basis": "Source-path inference from dtype guard before FIFO delivery; no original support-counter footer was recorded."
+  },
+  "case": 2,
+  "classification": "integration_failure_at_decoded_Float64_FIFO_boundary",
+  "clean_checkout_claimed": false,
+  "codec_failure_claimed": false,
+  "context_seed": 20261111,
+  "context_size": 4096,
+  "independent_failure_archive_audit": {
+    "full_missing_success_footer_inferred": false,
+    "owner": "independent science agent",
+    "reported_clear": true,
+    "scope": "read-only failure archive, source, complete latent/decoded wave and failure-boundary custody",
+    "separate_audit_artifact_invented": false
+  },
+  "job_id": "5411061",
+  "missing_normal_success_footer_fields": [
+    "execution_counters",
+    "default_rng_after",
+    "default_rng_preserved",
+    "sources_unchanged",
+    "samples",
+    "samples_sha256",
+    "rejection",
+    "timings",
+    "memory",
+    "sampling_counters",
+    "actual_prediction_checks",
+    "expected_patched_call_count",
+    "expected_stage_prepare_count",
+    "generated_proposal_wave_count"
+  ],
+  "new_model_GPU_posterior_or_reference_calls_by_packaging": 0,
+  "observed": {
+    "CDF_SDK_sources_unchanged": true,
+    "CDF_original_alias_restored": true,
+    "actual_generated_wave_sizes": [
+      51200
+    ],
+    "actual_stage_return_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "buffer_api_requested_sizes": [
+      50000
+    ],
+    "buffer_finalized": false,
+    "buffer_generation_attempt_sizes": [
+      51200
+    ],
+    "buffer_original_API_delivered_count": 0,
+    "buffer_original_sampler_counts": null,
+    "buffer_recorded_generated_count": 0,
+    "buffer_recorded_generated_wave_count": 0,
+    "corrected_CDF_calls_in_restored_adapter": 1138,
+    "decoded_physical": {
+      "dtype": "<f8",
+      "sha256": "dbc1b8b3fe4de21f4380f9afe352a39a7bd5e1153880ea336d9e91748cf33292",
+      "shape": [
+        51200,
+        21
+      ]
+    },
+    "diagnostic_default_numpy_python_RNG_preserved": true,
+    "failure_forensics_scope": "diagnostic recomputation only; not actual PFN or ICDF intermediates",
+    "latent": {
+      "dtype": "<f4",
+      "sha256": "96e03e7b31f2155ee249567248721bbf883dd31762ec57934e9674bb0bf1b2bb",
+      "shape": [
+        51200,
+        21
+      ]
+    },
+    "raw_completed_stage_indices_field": [],
+    "strict_decode_includes_unused_FIFO_tail": true,
+    "strict_decode_passed": true,
+    "wrapper_total_seconds": 748.5380248269066
+  },
+  "original_error": "unmodified CPU FP32 vectors required; no implicit casting",
+  "original_error_type": "ValueError",
+  "original_machine_status": "failed",
+  "physical_G3_executed": false,
+  "producer_git_dirty_observed": true,
+  "producer_git_revision": "b25365a1275b5e9a4d549612a81674ad9002d15f",
+  "raw_arrays_in_public_package": false,
+  "raw_manifest_archived_byte_equal": true,
+  "raw_manifest_bytes": 3559587,
+  "raw_manifest_sha256": "c81001f878bc1cd04d144c4d98a22e2ab5a089698b58978e10773c33654bd488",
+  "recorded_stage_timing_evidence": {
+    "file": "stage-timings.json",
+    "normal_success_posterior_request_seconds": null,
+    "observed_wrapper_total_seconds": 748.5380248269066,
+    "predict_and_sample_seconds_sum": 644.3417515009642,
+    "prepare_seconds_sum": 84.5931307291612,
+    "sha256": "0064b3afabd68cbf5b05760af83d33ab453ca3189ee76435d9a43282592d1938"
+  },
+  "requested_count": 50000,
+  "samples_file_present": false,
+  "saved_completed_posterior_cohort_count": 0,
+  "schema": "posteriorforge.prior_native_failed_pilot_evidence.v1",
+  "scientific_accuracy_assessed": false,
+  "scientific_accuracy_failure_claimed": false,
+  "source_hashes_observed_during_packaging": {
+    "scripts/evaluate_prior_coordinates_pilot_v1.py": "6c49e59ccee9bebeecd53990556a6e00a9f41b2fc53a2e8ecf9827014efc2d56",
+    "scripts/refresh_prior_coordinates_global_block_v1.py": "452280e5597cf2ac987fa10db2386157923c596ac70aff84b8c5e2f1dfa97940",
+    "src/posteriorforge/execution_proposal_buffer.py": "8fb2ba1fb63cd917378ff9bc8b6f70be7410862c509cd22cb2fb6f454d3d35fa",
+    "src/posteriorforge/performance_prior_coordinates_v1.py": "71e5e2906fd663534e56878de1fc4aff55093e3d950a13f348f57417ca7c01d3",
+    "src/posteriorforge/prior_coordinate_forensics_v1.py": "81399b3beb34760a9b25ac99805e6a500a90f3f505193d4acf00b83b4c3eb5c0"
+  },
+  "unobserved_checks": {
+    "complete_per_stage_execution_footer": true,
+    "full_request_default_RNG_after_or_equality": true,
+    "normal_original_support_counter_footer": true,
+    "normal_success_sampling_counters_and_prediction_checks": true,
+    "normal_success_source_unchanged_footer": true,
+    "peak_GPU_memory": true,
+    "posterior_request_timing": true
+  }
+}

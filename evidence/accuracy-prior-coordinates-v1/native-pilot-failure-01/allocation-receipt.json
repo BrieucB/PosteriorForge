@@ -1,0 +1,38 @@
+{
+  "GPUs": 1,
+  "Slurm": {
+    "Account": "eu-26-17",
+    "AllocTRES": "billing=1,cpu=16,gres/gpu=1,mem=124160M,node=1",
+    "ElapsedRaw": "752",
+    "JobIDRaw": "5411061",
+    "JobName": "pf-prior-pilot-01",
+    "Partition": "qgpu",
+    "Restarts": "0",
+    "State": "FAILED"
+  },
+  "Slurm_raw_file": "Slurm-accounting.psv",
+  "Slurm_raw_sha256": "1fc6d7d7bdf2f4245c226d014d3bf1ee109b1d53249d5f7ed01f84a76b54e739",
+  "allocated_GPU_hours": 0.2088888888888889,
+  "allocated_GPU_seconds": 752,
+  "completed_posterior_cohort_count": 0,
+  "job_id": "5411061",
+  "ledger_fully_reconciled": true,
+  "ledger_mutated_by_packaging": false,
+  "no_requeue_verified_from_submitted_argv": true,
+  "normal_success_posterior_timing_recorded": false,
+  "observed_wrapper_total_seconds": 748.5380248269066,
+  "project_ledger_sha256": "90eef149598159814e46c4c49f9caabc0b48b7de33f7013fcf6f680cfc91757c",
+  "project_ledger_summary_at_packaging": {
+    "actual_gpu_hours": 28.47138888888889,
+    "actual_gpu_seconds": 102497,
+    "cap_gpu_hours": 200.0,
+    "reservation_count": 123,
+    "reserved_gpu_seconds": 0
+  },
+  "raw_manifest_sha256": "c81001f878bc1cd04d144c4d98a22e2ab5a089698b58978e10773c33654bd488",
+  "reservation_id": "87245fab7bde450b9a96dbc5ae187c2e",
+  "reserved_before_submission_GPU_seconds": 1200,
+  "restarts": 0,
+  "schema": "posteriorforge.prior_native_failed_pilot_allocation.v1",
+  "scope": "FAILED integration request; complete provider wave existed, no50000 cohort or physical assessment"
+}
