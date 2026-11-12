@@ -1,0 +1,269 @@
+{
+  "cost_plan": {
+    "actual_proxy_basis_failed_full_neural_pilot_GPU_seconds": 752,
+    "actual_proxy_basis_qualification_GPU_seconds": 426,
+    "posterior_reservation_GPU_seconds_each": 1200,
+    "proxy_is_not_a_guarantee": true,
+    "proxy_total_remaining_GPU_hours": 7.526111111111111,
+    "proxy_total_remaining_GPU_seconds": 27094,
+    "qualification_reservation_GPU_seconds_each": 1200,
+    "remaining_pair_count": 23,
+    "total_additional_reservation_GPU_hours": 15.333333333333334,
+    "total_additional_reservation_GPU_seconds": 55200
+  },
+  "covered_finite_prefix_pairs": [
+    [
+      20261111,
+      2
+    ]
+  ],
+  "current_corrected_production_credit": "Pending Root review of closed production manifest; no running output was read/copied. Prior forensic pass is not a completed production request.",
+  "other_pairs_not_qualified_by_this_proof": [
+    [
+      20261111,
+      0
+    ],
+    [
+      20261111,
+      1
+    ],
+    [
+      20261111,
+      3
+    ],
+    [
+      20261111,
+      4
+    ],
+    [
+      20261111,
+      5
+    ],
+    [
+      20261111,
+      6
+    ],
+    [
+      20261111,
+      7
+    ],
+    [
+      20261112,
+      0
+    ],
+    [
+      20261112,
+      1
+    ],
+    [
+      20261112,
+      2
+    ],
+    [
+      20261112,
+      3
+    ],
+    [
+      20261112,
+      4
+    ],
+    [
+      20261112,
+      5
+    ],
+    [
+      20261112,
+      6
+    ],
+    [
+      20261112,
+      7
+    ],
+    [
+      20261113,
+      0
+    ],
+    [
+      20261113,
+      1
+    ],
+    [
+      20261113,
+      2
+    ],
+    [
+      20261113,
+      3
+    ],
+    [
+      20261113,
+      4
+    ],
+    [
+      20261113,
+      5
+    ],
+    [
+      20261113,
+      6
+    ],
+    [
+      20261113,
+      7
+    ]
+  ],
+  "panel_context_size": 4096,
+  "prefix_custody": {
+    "entire_payload_shape": [
+      50000,
+      21
+    ],
+    "manifest_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-ss15-v1/sigma-native-grid-01/seed-20261111-case-2/manifest.json",
+    "manifest_sha256": "28de1d121e5e89a5b55f630625c0f60e86551473c8bbaa3b2840797683f12e6a",
+    "payload_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-ss15-v1/sigma-native-grid-01/seed-20261111-case-2/samples.npz",
+    "payload_sha256": "9ce954f75b73c54348733c3068179d542ed050ec1aaae772734b3def67fc752b",
+    "rule": "original_accepted_case2_first1024_in_saved_order_v1",
+    "selected_indices_summary": {
+      "count": 1024,
+      "exact_list_verified_equal_range_1024": true,
+      "first": 0,
+      "last": 1023
+    },
+    "selection_replaced_or_filtered": false
+  },
+  "proof_sha256": "5ec69eb7aadbd74c7d96ee534b71d0d8bee2b6dd6f6e3d2f44e74607452f682b",
+  "qualification_is_not_posterior_or_population_calibration": true,
+  "raw_bindings": {
+    "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+    "context_obs": {
+      "dtype": "<f8",
+      "sha256": "aee2030d63158a3baf3b731e1231e17972ed80a19def10152b4e67d6d1e6ffb8",
+      "shape": [
+        4096,
+        33
+      ]
+    },
+    "context_theta": {
+      "dtype": "<f8",
+      "sha256": "73c4c282c136a1fd86459e7b1b736629b459075def9176956a90d232d4c30f4d",
+      "shape": [
+        4096,
+        21
+      ]
+    },
+    "parameter_order": [
+      "mu_a",
+      "mu_b",
+      "mu_d0",
+      "a_m1",
+      "b_m1",
+      "d0_m1",
+      "sigma_m1",
+      "a_m2",
+      "b_m2",
+      "d0_m2",
+      "sigma_m2",
+      "a_m3",
+      "b_m3",
+      "d0_m3",
+      "sigma_m3",
+      "a_a1",
+      "sigma_a1",
+      "a_a2",
+      "sigma_a2",
+      "a_a3",
+      "sigma_a3"
+    ],
+    "query": {
+      "dtype": "<f8",
+      "sha256": "580116278ff2e30fedcde7580ff1df059886d843361a289877954bdec75e5646",
+      "shape": [
+        1,
+        33
+      ]
+    },
+    "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966"
+  },
+  "requested_samples_each_pair": 50000,
+  "row_counts": [
+    1,
+    1024
+  ],
+  "schema": "posteriorforge.prior_physical_fifo.fixed_panel_readonly_plan.v1",
+  "scope": "Source/metadata-only plan; no new cohort/qualification/codec execution, model call, GPU submission or reservation",
+  "source_sha256": {
+    "scripts/qualify_prior_conditionals_v1.py": "3ae723d4748f23af40b89b9508713e270730985b6a8b5d4ccca1959e60ae17f9",
+    "scripts/qualify_prior_native_conditionals_v1.py": "9221da7853d1ecea3606d9001c70589f61bb89a28717bbc333bc8a280ff81bf9",
+    "src/posteriorforge/execution_prior_native_v1.py": "e5a2733e767b187e573315547ec9253267e43d1e3700596f61e97116c53f3256",
+    "src/posteriorforge/performance_prior_coordinates_v1.py": "71e5e2906fd663534e56878de1fc4aff55093e3d950a13f348f57417ca7c01d3",
+    "src/posteriorforge/performance_prior_physical_fifo_v1.py": "a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5"
+  },
+  "stress_rows": 8,
+  "transformed_bindings": {
+    "archived_runtime_inventory_context_latent_Float64": {
+      "dtype": "<f8",
+      "sha256": "e26b0d9af0f93ec3d6b4095b058e8abda271a16584d85b0adfa8a9c8d57145e7",
+      "shape": [
+        4096,
+        21
+      ]
+    },
+    "archived_runtime_inventory_prefix_latent_Float64": {
+      "dtype": "<f8",
+      "sha256": "1f10526806adb745bed63cb566824b4f78893ad87ce4589a687c7148b6ca85df",
+      "shape": [
+        1024,
+        21
+      ]
+    },
+    "context_SS15_Float64": {
+      "dtype": "<f8",
+      "sha256": "dd41235ddd32f8034fe0687aa9f7e5be7344b98d5f9831cb636e52f8cc0a7660",
+      "shape": [
+        4096,
+        15
+      ]
+    },
+    "context_SS15_model_Float32": {
+      "dtype": "<f4",
+      "sha256": "8d00c23f46feaa06c22ae4c92206db28aa4bb3e222f4bdb750fa324b4abec883",
+      "shape": [
+        4096,
+        15
+      ]
+    },
+    "context_ordered_latent_model_Float32": {
+      "dtype": "<f4",
+      "sha256": "ac4ee26bb3ebe8ecebf6286e370758db7e1fcc34b6cd473037ca09b7f2d64137",
+      "shape": [
+        4096,
+        21
+      ]
+    },
+    "fixed_prefix_ordered_latent_model_Float32": {
+      "dtype": "<f4",
+      "sha256": "2ccaa592db0b6a51e2f42097c8e8c295faae2b6b1d950cc3f1f6ad07abcd6c86",
+      "shape": [
+        1024,
+        21
+      ]
+    },
+    "query_SS15_Float64": {
+      "dtype": "<f8",
+      "sha256": "0cba99d3133d19488917a750f68cf77ab00e797ede8cb846842f9fdc23a172cf",
+      "shape": [
+        1,
+        15
+      ]
+    },
+    "query_SS15_model_Float32": {
+      "dtype": "<f4",
+      "sha256": "9da8e2bd869ace157b2c3e23cb0333dae92413a36726f3d524836393ddacb235",
+      "shape": [
+        1,
+        15
+      ]
+    }
+  }
+}
