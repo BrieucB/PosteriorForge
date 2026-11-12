@@ -747,3 +747,32 @@ def test_gqa_may_not_copy_legacy_stage13_fallback_header(gqa_header):
     m["hybrid_execution"]=execution_hybrid.execution_metadata({10:[5],13:[6]})
     with pytest.raises(ValueError,match="legacy"):
         review.validate_execution_header(m,context=context,query=query,control=control)
+
+
+def test_v2_runner_uses_exact_historical_blob_even_after_current_file_advances(gqa_header,monkeypatch):
+    m,_,_,_=gqa_header
+    real_sha=review.sha256_file
+    monkeypatch.setattr(review,"sha256_file",lambda path:
+        "f"*64 if str(path).endswith("src/posteriorforge/performance_runner.py") else real_sha(path))
+    result=review.validate_runner_source(m)
+    assert result["version"]==2 and result["historical_git_revision"]==review.RUNNER_V2_GIT_REVISION
+
+
+def test_v2_historical_runner_tampered_blob_is_rejected(gqa_header,monkeypatch):
+    m,_,_,_=gqa_header
+    monkeypatch.setattr(review,"_HISTORICAL_V2_RUNNER_VERIFIED",False)
+    monkeypatch.setattr(review.subprocess,"run",lambda *args,**kwargs:SimpleNamespace(stdout=b"tampered source"))
+    with pytest.raises(ValueError,match="version2 runner Git blob"):
+        review.validate_runner_source(m)
+
+
+def test_v2_missing_version_is_only_permitted_for_aggregate_summary(gqa_header):
+    m,_,_,_=gqa_header;m.pop("runner_version")
+    with pytest.raises(ValueError,match="version2"):
+        review.validate_runner_source(m)
+    assert review.validate_runner_source(m,aggregate=True)["version"]==2
+
+
+def test_cli_summary_includes_distinct_gqa_hybrid_qualification_flag():
+    source=PATH.read_text()
+    assert '"full21_gqa_hybrid_fixed_conditional_qualified":qualification.get("full21_gqa_hybrid_qualified",False)' in source

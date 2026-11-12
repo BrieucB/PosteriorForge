@@ -37,11 +37,13 @@ ATTRIBUTION = "Built with PriorLabs-TabPFN"
 RUNNER_V1_SHA256 = "c121e897ab583dc846fcb04da6c3c74930713f5d9025411d66e042b8d817899b"
 RUNNER_V1_GIT_REVISION = "ea2d673c30c3d8c047c9d1b3f349d0b142b38652"
 RUNNER_V2_SHA256 = "0a071ae7d016b4e99b75940da878d6c37eeab7f25a92b921efb2a39d66fd429d"
+RUNNER_V2_GIT_REVISION = "2bb6f3809a32b6ebe8933669172c681058151f50"
 ORCHESTRATOR_SHA256 = "6731e392a63c21a0dbcd2f5df585619691f604fde9ed23df852a3bfaf512df99"
 GQA_WRAPPER_SHA256 = "ac22c67c23403723902805666d1239bd30a8af355554df58a8638a8fd1f21e82"
 GQA_MODULE_SHA256 = "8b2cff752855e1b1966d2e374322602fa71368b1926da9d3b0261edd111aee6b"
 GQA_RECOVERY_SHA256 = "83064f54712014b5c4c66569e854872caff03593cfdc337f2472a7b5723aea02"
 _HISTORICAL_RUNNER_VERIFIED = False
+_HISTORICAL_V2_RUNNER_VERIFIED = False
 CONTROL_MANIFEST_SHA256 = "a0114fd74721cf9bed31e9131045e841f262db123c8f849e5cb3f15814a14f4b"
 CONTROL_SAMPLES_SHA256 = "27e51ad1b1ee615fc921ee4f5c237155139304da3e7c193f7781a389cee6d53e"
 QUALIFICATION_THRESHOLDS = {"normalization_absolute": 1e-5, "max_cdf_absolute": 2e-5,
@@ -160,7 +162,7 @@ def validate_sampling_policy(policy):
 
 def validate_runner_source(manifest, *, aggregate=False):
     """Authenticate a versioned source; historical artifacts never use current SHA."""
-    global _HISTORICAL_RUNNER_VERIFIED
+    global _HISTORICAL_RUNNER_VERIFIED, _HISTORICAL_V2_RUNNER_VERIFIED
     value, version = manifest.get("runner_source_sha256"), manifest.get("runner_version")
     repo = Path(__file__).resolve().parents[1]
     if value == RUNNER_V1_SHA256:
@@ -181,9 +183,15 @@ def validate_runner_source(manifest, *, aggregate=False):
     require(value == RUNNER_V2_SHA256, "unknown/unreviewed execution runner source")
     require((aggregate and version is None) or type(version) is int and version == 2,
             "runner version2/source mismatch")
-    require(sha256_file(repo/"src/posteriorforge/performance_runner.py") == RUNNER_V2_SHA256,
-            "reviewed runner version2 disk source changed")
-    return {"version": 2, "sha256": value, "authentication": "SHA256 of reviewed current runner source"}
+    if not _HISTORICAL_V2_RUNNER_VERIFIED:
+        content = subprocess.run(["git", "-C", str(repo), "show",
+            RUNNER_V2_GIT_REVISION+":src/posteriorforge/performance_runner.py"],
+            check=True, capture_output=True).stdout
+        require(hashlib.sha256(content).hexdigest() == RUNNER_V2_SHA256,
+                "historical pinned version2 runner Git blob mismatch")
+        _HISTORICAL_V2_RUNNER_VERIFIED = True
+    return {"version": 2, "sha256": value, "historical_git_revision": RUNNER_V2_GIT_REVISION,
+            "authentication": "SHA256 of the exact pinned historical version2 Git blob"}
 
 
 def validate_gqa_runtime_metadata(manifest):
@@ -899,6 +907,7 @@ def run(args):
                       "integrity_passed":result["sample_integrity"]["passed"],
                       "full21_fixed_conditional_qualified":qualification["full21_qualified"],
                       "full21_hybrid_fixed_conditional_qualified":qualification.get("full21_hybrid_qualified",False),
+                      "full21_gqa_hybrid_fixed_conditional_qualified":qualification.get("full21_gqa_hybrid_qualified",False),
                       "absolute_physical_passed":result["absolute_physical_assessment"]["passed"],
                       "absolute_accuracy_gate_required_for_performance":False}, indent=2))
     return result
