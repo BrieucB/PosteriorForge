@@ -14,7 +14,7 @@ BUDGET={'job_id':'123','reservation_id':'test-reservation','gpus':2}
 
 @pytest.mark.parametrize('world',[1,2,4])
 def test_contract_partitions_fixed_total_and_distinct_rank_role_seeds(tmp_path,world):
- parts=a.cpu_partitions(world,list(range(128)),16*world)
+ parts=a.cpu_partitions(world,list(range(16*world)),16*world)
  assert len(set(sum(parts,[])))==16*world
  cs=[a.build_contract(rank=r,world=world,output=tmp_path/f'r{r}',aggregate=tmp_path,budget={**BUDGET,'gpus':world},
    repetition=2,device=str(r),affinity=parts[r]) for r in range(world)]
@@ -23,7 +23,7 @@ def test_contract_partitions_fixed_total_and_distinct_rank_role_seeds(tmp_path,w
  assert len({s for c in cs for s in c['seed_streams'].values()})==3*world
  assert all(c['individual_worker_is_end_to_end'] is False for c in cs)
 
-@pytest.mark.parametrize('world,allowed,allocated',[(3,list(range(64)),48),(2,list(range(31)),32),(2,[0]*32,32),(2,list(range(64)),64),(True,list(range(16)),16)])
+@pytest.mark.parametrize('world,allowed,allocated',[(3,list(range(64)),48),(2,list(range(31)),32),(2,[0]*32,32),(2,list(range(64)),64),(2,list(range(64)),32),(True,list(range(16)),16)])
 def test_affinity_or_world_mismatch_refused(world,allowed,allocated):
  with pytest.raises(RuntimeError):a.cpu_partitions(world,allowed,allocated)
 

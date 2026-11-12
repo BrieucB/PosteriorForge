@@ -34,8 +34,8 @@ def original_helpers():
 def cpu_partitions(workers,allowed,allocated):
  require(type(workers) is int and workers in (1,2,4),"one/two/four workers required")
  require(type(allocated) is int and allocated==16*workers,"exactly sixteen allocated CPUs per rank required")
- require(isinstance(allowed,list) and len(set(allowed))==len(allowed) and len(allowed)>=allocated
-     and all(type(i) is int and i>=0 for i in allowed),"incomplete allowed CPU affinity")
+ require(isinstance(allowed,list) and len(set(allowed))==len(allowed) and len(allowed)==allocated
+     and all(type(i) is int and i>=0 for i in allowed),"allowed CPU affinity must match the allocated count exactly; launch in a Slurm thread-bound step")
  chosen=sorted(allowed)[:allocated]
  return [chosen[16*rank:16*(rank+1)] for rank in range(workers)]
 
@@ -137,13 +137,16 @@ def run(*,banks,output,checkpoint,ledger,reference,reference_grid,approximation,
  require(clean.source_sha256()==worker.CLEAN_SHA,"frozen2280 source changed")
  budget=_require_budgeted_gpu(ledger);require(budget['gpus']==workers,"allocated GPU count must equal worker count")
  tokens=h.visible_device_tokens(os.environ.get('CUDA_VISIBLE_DEVICES'),workers)
- cpus=cpu_partitions(workers,sorted(os.sched_getaffinity(0)),int(os.environ.get('SLURM_CPUS_PER_TASK','0')))
+ allowed_affinity=sorted(os.sched_getaffinity(0))
+ cpus=cpu_partitions(workers,allowed_affinity,int(os.environ.get('SLURM_CPUS_PER_TASK','0')))
  taskset=Path('/usr/bin/taskset');require(taskset.is_file(),"explicit Linux affinity launcher required")
  root=Path(output).resolve();root.mkdir(parents=True,exist_ok=False)
  result={**runtime_identity(),'schema':SCHEMA,'variant':VARIANT,'status':'running','attribution':'Built with PriorLabs-TabPFN',
    'requested_count':TOTAL_COUNT,'worker_counts':counts,'world_size':workers,'end_to_end':True,'run_purpose':'performance_e2e_aggregate',
    'approximate_experiment':True,'qualified_fp32':False,'all21_strict_screen_passed':False,'known_physical_control_status':'model_failure',
    'budget':budget,'threads_per_worker':16,'worker_cpu_affinity':cpus,'visible_device_tokens':tokens,
+   'parent_actual_cpu_affinity':allowed_affinity,'slurm_cpu_binding':{k:v for k,v in os.environ.items() if k.startswith('SLURM_CPU_BIND')},
+   'affinity_protocol':'exact allocated16W mask; Slurm thread-bound step then disjoint per-rank taskset',
    'orchestrator_source_sha256':sha256_file(__file__),'worker_source_sha256':worker.source_sha256(),
    'canonical_clean_producer_sha256':worker.CLEAN_SHA,'orchestration_helper_sha256':ORCHESTRATION_HELPER_SHA,
    'repetition':repetition,'global_proposal_lookahead':1200,'worker_proposal_lookahead':[1200//workers]*workers,
