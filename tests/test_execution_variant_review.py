@@ -476,6 +476,8 @@ def aggregate_case(tmp_path,monkeypatch,header,sampling_policy):
     worker_test=PATH.parents[1]/"tests/test_execution_workers.py"
     fixture_spec=importlib.util.spec_from_file_location("worker_protocol_fixture_for_review",worker_test)
     wf=importlib.util.module_from_spec(fixture_spec);fixture_spec.loader.exec_module(wf)
+    # Historical fixture artifacts use the historical producer, never current SHA.
+    wf.workers=review.reviewed_orchestrator({"orchestrator_source_sha256":review.ORCHESTRATOR_V3_SHA256})[0]
     root=tmp_path/"aggregate";root.mkdir()
     contracts,paths=wf._payloads(root,mode="component_hybrid")
     manifest,context,query,control=header
@@ -485,8 +487,8 @@ def aggregate_case(tmp_path,monkeypatch,header,sampling_policy):
     proof=tmp_path/"qualification-only-fixture.json";proof.write_text("protocol fixture, not a real proof")
     qsha=sha256_file(proof)
     for rank,(contract,path) in enumerate(zip(contracts,paths)):
-        contract.update(runner_source_sha256=sha256_file(performance_runner.__file__),
-                        orchestrator_source_sha256=sha256_file(PATH.with_name("run_execution_workers.py")))
+        contract.update(runner_source_sha256=review.RUNNER_V3_SHA256,
+                        orchestrator_source_sha256=review.ORCHESTRATOR_V3_SHA256)
         path.write_text(json.dumps(contract))
         child_path=Path(contract["expected_output"])/"manifest.json"
         payload_manifest=json.loads(child_path.read_text())
@@ -526,7 +528,7 @@ def aggregate_case(tmp_path,monkeypatch,header,sampling_policy):
        "world_size":2,"rank":None,"end_to_end":True,"run_purpose":"performance_e2e_aggregate",
        "aggregate_published":True,"worker_counts":[25000,25000],"worker_return_codes":[0,0],
        "budget":{"job_id":"123","reservation_id":"reservation"},
-       "orchestrator_source_sha256":sha256_file(PATH.with_name("run_execution_workers.py")),
+       "orchestrator_source_sha256":review.ORCHESTRATOR_V3_SHA256,
        "runner_source_sha256":review.RUNNER_V3_SHA256,"runner_version":3,"query_batch_size":1024,"engine_query_batch_cap":1024,
        "qualification_manifest_sha256":qsha,
        "worker_contracts":[{"path":str(path),"sha256":sha256_file(path)} for path in paths],
@@ -697,8 +699,7 @@ def test_real_recovered_gqa_proof_archives_and_all_numeric_predicates_validate(m
 @pytest.fixture
 def gqa_aggregate_case(aggregate_case,monkeypatch):
     path,m,context,query,control,custody,proof,combined=aggregate_case
-    worker_spec=importlib.util.spec_from_file_location("gqa_worker_protocol",PATH.with_name("run_execution_workers.py"))
-    orchestrator=importlib.util.module_from_spec(worker_spec);worker_spec.loader.exec_module(orchestrator)
+    orchestrator=review.reviewed_orchestrator({"orchestrator_source_sha256":review.ORCHESTRATOR_V3_SHA256})[0]
     contracts=[];paths=[]
     for identity in m["worker_contracts"]:
         contract_path=Path(identity["path"]);contract=json.loads(contract_path.read_text())
@@ -952,3 +953,152 @@ def test_version3_historical_blob_tampering_is_rejected(portable_header,monkeypa
     monkeypatch.setattr(review.subprocess,"run",lambda *a,**kw:SimpleNamespace(stdout=b"tampered v3"))
     with pytest.raises(ValueError,match="version3 runner Git blob"):
         review.validate_runner_source(m)
+
+
+def attach_fifo_protocol(manifest,*,world,rank):
+    # Synthetic protocol data only, never actual neural execution evidence.
+    runner=review.reviewed_v4_runner();fifo=runner.guarded_proposal_buffer()
+    count=50000//world;refill=400//world
+    manifest.update(runner_version=4,runner_source_sha256=review.RUNNER_V4_SHA256,
+        variant="execution_gqa_hybrid_fifo_v1",proposal_lookahead=1200,
+        proposal_buffer_policy=runner.proposal_buffer_policy(1200),
+        torch_float32_matmul_precision="highest",cuda_matmul_allow_tf32=False,
+        engine_query_batch_cap=10000 if manifest["query_batch_size"] in review.LARGE_BATCHES else 1024,
+        qualification_family="large_batch_v1" if manifest["query_batch_size"] in review.LARGE_BATCHES else "gqa_hybrid_1024_v2",
+        qualification_large_batch_size=manifest["query_batch_size"] if manifest["query_batch_size"] in review.LARGE_BATCHES else None,
+        qualification_large_batch_producer_sha256=review.GQA_BATCH_QUALIFIER_SHA256 if manifest["query_batch_size"] in review.LARGE_BATCHES else None,
+        qualification_portable_source_verified=manifest["query_batch_size"] in review.LARGE_BATCHES,
+        historical_install_ctime_replayed=manifest["query_batch_size"] not in review.LARGE_BATCHES)
+    from posteriorforge import execution_cache
+    manifest["execution_engine"].update(query_batch_size=manifest["query_batch_size"],posterior_count=count,
+        sampling_rng_policy="independent_cpu_sampling_streams_model_rng_isolated")
+    manifest["execution_counters"]={**execution_cache.execution_metadata(),
+        "config":{**execution_cache.execution_metadata()["config"],"query_batch_size":manifest["engine_query_batch_cap"]},"prepare_count":21}
+    scope=runner.proposal_buffer_scope(manifest,context_seed=20261111,case=0,repetition=manifest["repetition"],
+        rank=rank,world_size=world,seeds=manifest["seed_streams"])
+    proposal=fifo.ProposalBuffer(lambda n:(np.zeros((n,21),dtype=np.float32),None),scope=scope,
+        concatenate=np.concatenate,world_size=world,rank=rank)
+    proposal(count);proposal(refill)
+    record=proposal.finalize(original_checked_count=count+refill,accepted_before_trim=count+10,
+        returned_count=count,original_support_calls=2)
+    record.update(enabled=True,source_unchanged=True,policy_sha256=manifest["proposal_buffer_policy"]["policy_sha256"])
+    manifest.update(proposal_buffer=record,proposal_wave_sizes=record["actual_generated_wave_sizes"],
+        generated_proposal_wave_count=1,expected_stage_prepare_count=21,
+        rejection={"support_calls":2,"proposed":count+refill,"accepted_before_final_trim":count+10,"returned":count},
+        stage_events=[{"proposal_round":1,"stage_index":stage,"proposed_rows":count+1200//world} for stage in range(21)])
+    return manifest
+
+
+@pytest.fixture
+def fifo_header(gqa_header):
+    m,context,query,control=gqa_header
+    return attach_fifo_protocol(copy.deepcopy(m),world=1,rank=0),context,query,control
+
+
+def test_v4_fifo_accepts_two_support_calls_one_generated_wave_and_exact_50000(fifo_header):
+    m,context,query,control=fifo_header
+    review.validate_execution_header(m,context=context,query=query,control=control)
+    result=review.validate_fifo_runtime_metadata(m,rank=0,world=1,count=50000)
+    assert result["record"]["generated_count"]==51200
+    assert result["record"]["original_sampler_counts"]["original_checked_count"]==50400
+    assert result["record"]["remaining_unused_buffer_count"]==800
+    assert result["accepted_final_trim_count"]==10
+    assert m["execution_counters"]["prepare_count"]==21 and m["rejection"]["support_calls"]==2
+    assert not result["seeded_rowwise_equality_claim"]
+
+
+@pytest.mark.parametrize("issue",["source","policy","unused","checked","scope","reset","filter","stage_count","stage_order",
+                                  "stage_rows","API_as_generation","variant","version","lookahead","partial_row"])
+def test_v4_fifo_rejects_source_scope_count_and_actual_coverage_tampering(fifo_header,issue):
+    m,context,query,control=fifo_header
+    if issue=="source":m["proposal_buffer"]["module_sha256"]="0"*64
+    elif issue=="policy":m["proposal_buffer_policy"]["policy_sha256"]="0"*64
+    elif issue=="unused":m["proposal_buffer"]["remaining_unused_buffer_count"]+=1
+    elif issue=="checked":m["rejection"]["proposed"]-=1
+    elif issue=="scope":m["proposal_buffer"]["request_scope"]["query"]["sha256"]="changed"
+    elif issue=="reset":m["proposal_buffer"]["buffer_reset_count"]=1
+    elif issue=="filter":m["proposal_buffer"]["support_filtering_performed_by_buffer"]=True
+    elif issue=="stage_count":m["execution_counters"]["prepare_count"]=42
+    elif issue=="stage_order":m["stage_events"][3]["stage_index"]=4
+    elif issue=="stage_rows":m["stage_events"][3]["proposed_rows"]=50000
+    elif issue=="API_as_generation":m["proposal_wave_sizes"]=[50000,400]
+    elif issue=="variant":m["variant"]="execution_gqa_hybrid_v1"
+    elif issue=="version":m["runner_version"]=3
+    elif issue=="lookahead":m["proposal_lookahead"]=1200.
+    else:m["proposal_buffer"]["vector_width"]=20
+    with pytest.raises((ValueError,RuntimeError)):review.validate_execution_header(m,context=context,query=query,control=control)
+
+
+@pytest.mark.parametrize("chunk",review.LARGE_BATCHES)
+def test_v4_fifo_preserves_large_batch_qualified_cap_and_portable_family(fifo_header,chunk):
+    m,context,query,control=fifo_header;m.update(large_batch_fields(chunk))
+    attach_fifo_protocol(m,world=1,rank=0)
+    review.validate_execution_header(m,context=context,query=query,control=control)
+    assert m["engine_query_batch_cap"]==10000 and m["query_batch_size"]==chunk
+
+
+def test_v4_zero_lookahead_does_not_claim_buffer_or_new_variant(fifo_header):
+    m,context,query,control=fifo_header;m.update(variant="execution_gqa_hybrid_v1",proposal_lookahead=0,
+        proposal_buffer_policy=review.reviewed_v4_runner().proposal_buffer_policy(0),proposal_buffer=None)
+    m["rejection"].update(support_calls=1,proposed=50000,accepted_before_final_trim=50000)
+    review.validate_execution_header(m,context=context,query=query,control=control)
+    m["proposal_buffer"]={}
+    with pytest.raises(ValueError):review.validate_execution_header(m,context=context,query=query,control=control)
+
+
+def test_v4_source_authentication_is_historical_and_rejects_bad_blob(fifo_header,monkeypatch):
+    m,*_=fifo_header
+    monkeypatch.setattr(review,"sha256_file",lambda path:(_ for _ in ()).throw(AssertionError("current file SHA forbidden")))
+    assert review.validate_runner_source(m)["historical_git_revision"]==review.RUNNER_V4_GIT_REVISION
+    monkeypatch.setattr(review,"_REVIEWED_V4_RUNNER",None)
+    monkeypatch.setattr(review.subprocess,"run",lambda *a,**k:SimpleNamespace(stdout=b"changed source"))
+    with pytest.raises(ValueError,match="version4 runner Git blob"):review.validate_runner_source(m)
+
+
+@pytest.fixture
+def fifo_aggregate_case(gqa_aggregate_case):
+    path,m,context,query,control,custody,proof,combined,contracts,paths,old,expected=gqa_aggregate_case
+    orchestrator=review.reviewed_orchestrator({"orchestrator_source_sha256":review.ORCHESTRATOR_V4_SHA256})[0]
+    for rank,(contract,contract_path) in enumerate(zip(contracts,paths)):
+        contract.update(runner_source_sha256=review.RUNNER_V4_SHA256,orchestrator_source_sha256=review.ORCHESTRATOR_V4_SHA256,
+            proposal_lookahead=1200,query_batch_size=1024)
+        contract_path.write_text(json.dumps(contract))
+        child_path=Path(contract["expected_output"])/"manifest.json";child=json.loads(child_path.read_text())
+        attach_fifo_protocol(child,world=2,rank=rank)
+        child["worker_contract_sha256"]=sha256_file(contract_path);child_path.write_text(json.dumps(child))
+    expected.update(variant="execution_gqa_hybrid_fifo_v1",proposal_lookahead=1200,
+        proposal_buffer_policy=review.reviewed_v4_runner().proposal_buffer_policy(1200))
+    _,records=orchestrator.validate_worker_payloads(contracts,paths,expected_bindings=expected,
+        driver_schema=review.RUN_SCHEMA,qualification_sha256=sha256_file(proof))
+    buffers=[row["proposal_buffer"] for row in records];policy=review.reviewed_v4_runner().proposal_buffer_policy(1200)
+    m.update(runner_version=4,runner_source_sha256=review.RUNNER_V4_SHA256,orchestrator_source_sha256=review.ORCHESTRATOR_V4_SHA256,
+        worker_execution_variant="execution_gqa_hybrid_fifo_v1",proposal_lookahead=1200,proposal_buffer_policy=policy,workers=records,
+        worker_contracts=[{"path":str(p),"sha256":sha256_file(p)} for p in paths])
+    m["proposal_buffer"]={"schema":"posteriorforge.execution.proposal_buffer.aggregate.v1",**policy,"world_size":2,
+        "worker_initial_lookahead":[600,600],"generated_count":51200,"original_checked_count":50400,"accepted_before_trim":50020,
+        "returned_count":50000,"remaining_unused_buffer_count":800,"actual_generated_wave_count":2,"worker_records":buffers}
+    path.write_text(json.dumps(m))
+    return path,m,context,query,control,custody,proof,combined
+
+
+def test_v4_fifo_aggregate_authenticates_global_1200_lookahead_and_exact_joint_gather(fifo_aggregate_case):
+    path,m,context,query,control,custody,proof,combined=fifo_aggregate_case
+    actual,effective,detail=review.authenticate_worker_aggregate(path,m,context=context,query=query,control=control,
+        custody=custody,qualification_path=proof)
+    np.testing.assert_array_equal(actual,combined)
+    assert effective["variant"]=="execution_gqa_hybrid_fifo_v1"
+    assert detail["proposal_buffer"]["generated_count"]==51200
+    assert sum(detail["proposal_buffer"]["worker_initial_lookahead"])==1200
+
+
+@pytest.mark.parametrize("issue",["unused","lookahead","returned","contract"])
+def test_v4_fifo_aggregate_rejects_summary_or_worker_policy_tampering(fifo_aggregate_case,issue):
+    path,m,context,query,control,custody,proof,combined=fifo_aggregate_case
+    if issue=="unused":m["proposal_buffer"]["remaining_unused_buffer_count"]-=1
+    elif issue=="lookahead":m["proposal_buffer"]["worker_initial_lookahead"]=[1200,1200]
+    elif issue=="returned":m["proposal_buffer"]["returned_count"]=25000
+    else:
+        cp=Path(m["worker_contracts"][0]["path"]);c=json.loads(cp.read_text());c["proposal_lookahead"]=0;cp.write_text(json.dumps(c))
+        m["worker_contracts"][0]["sha256"]=sha256_file(cp)
+    with pytest.raises(ValueError):review.authenticate_worker_aggregate(path,m,context=context,query=query,control=control,
+        custody=custody,qualification_path=proof)

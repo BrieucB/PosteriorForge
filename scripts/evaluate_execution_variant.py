@@ -43,6 +43,13 @@ ORCHESTRATOR_SHA256 = "6731e392a63c21a0dbcd2f5df585619691f604fde9ed23df852a3bfaf
 RUNNER_V3_SHA256 = "be9a7d38413f797b72377f048d69db8f948953e0cd8d54e361ee690893337ff1"
 RUNNER_V3_GIT_REVISION = "a768ba06af054e68e2c478d690c43b05f3299f80"
 ORCHESTRATOR_V3_SHA256 = "87bfdce4716f8899e964d457a96372ddca788a951eb1d3004506d1e1c3bdee54"
+RUNNER_V4_SHA256 = "23ccad8b5bbcdd7a48340b349d515ca870763359cfeb71333e02fc2b6a8aca3b"
+RUNNER_V4_GIT_REVISION = "36594f45debeaf1921b10b7bc12a1daa8539ee37"
+ORCHESTRATOR_V4_SHA256 = "2136a19ca8d8d081b03dfe0a0069c271f800a0a236fcc76bcd740ba9694365a2"
+FIFO_MODULE_SHA256 = "8fb2ba1fb63cd917378ff9bc8b6f70be7410862c509cd22cb2fb6f454d3d35fa"
+FIFO_POLICY_SHA256 = "dbeca85d7107cd9a5d9cf9f967aa02807cc38d10b7493ecc42d2181a503391af"
+GQA_VARIANTS = ("execution_gqa_hybrid_v1","execution_gqa_hybrid_fifo_v1")
+_REVIEWED_V4_RUNNER = None
 GQA_BATCH_QUALIFIER_SHA256 = "31422927077911879b6cd155605a6a668796305ee97ccf6585819d8fe494cfde"
 GQA_BATCH_SCHEMA = "posteriorforge.execution_gqa_batch_qualification.v1"
 LARGE_BATCHES = (4096,6250,10000)
@@ -168,6 +175,65 @@ def validate_sampling_policy(policy):
     return dict(policy)
 
 
+def reviewed_v4_runner():
+    """Read the exact committed CPU validator; never trust a future current file."""
+    global _REVIEWED_V4_RUNNER
+    if _REVIEWED_V4_RUNNER is None:
+        repo=Path(__file__).resolve().parents[1]
+        content=subprocess.run(["git","-C",str(repo),"show",
+            RUNNER_V4_GIT_REVISION+":src/posteriorforge/performance_runner.py"],check=True,capture_output=True).stdout
+        require(hashlib.sha256(content).hexdigest()==RUNNER_V4_SHA256,"historical pinned version4 runner Git blob mismatch")
+        module=ModuleType("posteriorforge._reviewed_execution_runner_v4")
+        module.__file__=str(repo/"src/posteriorforge/performance_runner.py");module.__package__="posteriorforge"
+        exec(compile(content,module.__file__,"exec"),module.__dict__)
+        require(module.RUNNER_VERSION==4 and module.PROPOSAL_BUFFER_SHA256==FIFO_MODULE_SHA256,
+                "reviewed version4 FIFO source constant mismatch")
+        _REVIEWED_V4_RUNNER=module
+    return _REVIEWED_V4_RUNNER
+
+
+def validate_fifo_runtime_metadata(manifest,*,rank,world,count):
+    require(manifest.get("runner_source_sha256")==RUNNER_V4_SHA256 and manifest.get("runner_version")==4,
+            "FIFO requires reviewed version4 runner")
+    runner=reviewed_v4_runner();lookahead=manifest.get("proposal_lookahead")
+    runner.validate_proposal_lookahead(manifest.get("mode"),lookahead)
+    policy=runner.proposal_buffer_policy(lookahead)
+    require(manifest.get("proposal_buffer_policy")==policy,"FIFO declared source/policy mismatch")
+    if lookahead==0:
+        require(manifest.get("variant")!="execution_gqa_hybrid_fifo_v1" and manifest.get("proposal_buffer") is None,
+                "zero lookahead cannot claim FIFO execution")
+        return None
+    require(lookahead==1200 and manifest.get("variant")=="execution_gqa_hybrid_fifo_v1"
+            and policy.get("module_sha256")==FIFO_MODULE_SHA256 and policy.get("policy_sha256")==FIFO_POLICY_SHA256,
+            "explicit reviewed FIFO family/global lookahead required")
+    scope=runner.proposal_buffer_scope(manifest,context_seed=manifest["context_seed"],case=manifest["case"],
+        repetition=manifest["repetition"],rank=rank,world_size=world,seeds=manifest["seed_streams"])
+    record=manifest.get("proposal_buffer",{})
+    runner.validate_proposal_buffer_record(record,world_size=world,rank=rank,scope=scope)
+    counts=record["original_sampler_counts"]
+    require(counts["returned_count"]==count and manifest.get("rejection")=={
+        "support_calls":counts["original_support_calls"],"proposed":counts["original_checked_count"],
+        "accepted_before_final_trim":counts["accepted_before_trim"],"returned":count},
+        "FIFO delivery/support/accepted/trim counts mismatch")
+    waves=record["actual_generated_wave_sizes"];preparations=21*len(waves)
+    require(manifest.get("proposal_wave_sizes")==waves and manifest.get("generated_proposal_wave_count")==len(waves)
+            and manifest.get("expected_stage_prepare_count")==preparations
+            and manifest.get("execution_counters",{}).get("prepare_count")==preparations,
+            "FIFO actual generated waves/stage preparations mismatch")
+    events=manifest.get("stage_events",[])
+    require(len(events)==preparations,"FIFO actual all21 stage event coverage missing")
+    for index,event in enumerate(events):
+        wave,stage=divmod(index,21)
+        require(all(type(event.get(key)) is int for key in ("proposal_round","stage_index","proposed_rows"))
+                and event.get("proposal_round")==wave+1 and event.get("stage_index")==stage
+                and event.get("proposed_rows")==waves[wave],
+                "FIFO stage order/full-wave row coverage mismatch")
+    return {"policy":policy,"record":record,"all21_per_generated_wave_verified":True,
+        "original_support_calls_are_not_generated_waves":True,
+        "accepted_final_trim_count":counts["accepted_before_trim"]-count,
+        "seeded_rowwise_equality_claim":False}
+
+
 def validate_runner_source(manifest, *, aggregate=False):
     """Authenticate a versioned source; historical artifacts never use current SHA."""
     global _HISTORICAL_RUNNER_VERIFIED, _HISTORICAL_V2_RUNNER_VERIFIED, _HISTORICAL_V3_RUNNER_VERIFIED
@@ -176,7 +242,7 @@ def validate_runner_source(manifest, *, aggregate=False):
     if value == RUNNER_V1_SHA256:
         require(version is None or type(version) is int and version == 1,
                 "historical runner version/source mismatch")
-        require(manifest.get("variant") != "execution_gqa_hybrid_v1",
+        require(manifest.get("variant") not in GQA_VARIANTS,
                 "GQA hybrid requires reviewed runner version2")
         if not _HISTORICAL_RUNNER_VERIFIED:
             content = subprocess.run(["git", "-C", str(repo), "show",
@@ -197,6 +263,11 @@ def validate_runner_source(manifest, *, aggregate=False):
             _HISTORICAL_V3_RUNNER_VERIFIED=True
         return {"version":3,"sha256":value,"historical_git_revision":RUNNER_V3_GIT_REVISION,
                 "authentication":"SHA256 of the exact pinned historical version3 Git blob"}
+    if value == RUNNER_V4_SHA256:
+        require(type(version) is int and version==4,"runner version4/source mismatch")
+        reviewed_v4_runner()
+        return {"version":4,"sha256":value,"historical_git_revision":RUNNER_V4_GIT_REVISION,
+                "authentication":"SHA256 of the exact pinned historical version4 Git blob"}
     require(value == RUNNER_V2_SHA256, "unknown/unreviewed execution runner source")
     require((aggregate and version is None) or type(version) is int and version == 2,
             "runner version2/source mismatch")
@@ -269,7 +340,7 @@ def validate_gqa_runtime_metadata(manifest):
             "well-formed actual attention fingerprints required")
     require(fingerprints[keys[0]] == fingerprints[keys[2]] != fingerprints[keys[1]],
             "actual original attention execution fingerprint mismatch")
-    if manifest.get("runner_source_sha256") == RUNNER_V3_SHA256:
+    if manifest.get("runner_source_sha256") in (RUNNER_V3_SHA256,RUNNER_V4_SHA256):
         chunk=manifest.get("query_batch_size")
         native=manifest.get("execution_counters",{})
         validate_engine_metadata(native)
@@ -277,9 +348,15 @@ def validate_gqa_runtime_metadata(manifest):
         require(native.get("config",{}).get("query_batch_size")==cap,
                 "actual prepared engine config differs from declared cap")
         support_calls=manifest.get("rejection",{}).get("support_calls")
-        require(type(support_calls) is int and support_calls>0
-                and native.get("prepare_count")==21*support_calls,
-                "version3 actual stage prepare coverage mismatch")
+        if manifest.get("proposal_lookahead",0):
+            record=manifest.get("proposal_buffer",{})
+            generated=record.get("generated_wave_count")
+            require(type(generated) is int and generated>0 and native.get("prepare_count")==21*generated,
+                    "version4 FIFO actual generated-stage coverage mismatch")
+        else:
+            require(type(support_calls) is int and support_calls>0
+                    and native.get("prepare_count")==21*support_calls,
+                    "version3/4 actual stage prepare coverage mismatch")
         large=chunk in LARGE_BATCHES
         expected={"qualification_family":"large_batch_v1" if large else "gqa_hybrid_1024_v2",
                   "qualification_large_batch_size":chunk if large else None,
@@ -299,7 +376,7 @@ def validate_execution_header(manifest, *, context, query, control, worker_parti
     from posteriorforge.inference_cdf import guard_baseline_source
     from posteriorforge.performance_runner import STREAM_ROLES, STREAM_DTYPES
     variant = manifest.get("variant")
-    require(variant in ("execution_cache_v1", "execution_mixture_v1", "execution_hybrid_v1", "execution_gqa_hybrid_v1"), "unknown execution variant")
+    require(variant in ("execution_cache_v1", "execution_mixture_v1", "execution_hybrid_v1", *GQA_VARIANTS), "unknown execution variant")
     partition = worker_partition or {"rank":0,"world_size":1,"requested_count":50000}
     rank,world,count = (partition[key] for key in ("rank","world_size","requested_count"))
     require(type(world) is int and world in (1,2,4) and type(rank) is int and 0<=rank<world
@@ -315,7 +392,7 @@ def validate_execution_header(manifest, *, context, query, control, worker_parti
         "tail_family_changed": False, "sources_unchanged": True,
         "partial_vector_filtering": False, "clipping_or_repair_performed": False,
         "observation_preprocessing": "raw; TabPFN frozen preprocessing",
-        "log_density": "not_used", "microbatch": 50000, "query_batch_size": manifest.get("query_batch_size") if manifest.get("runner_source_sha256")==RUNNER_V3_SHA256 else 1024,
+        "log_density": "not_used", "microbatch": 50000, "query_batch_size": manifest.get("query_batch_size") if manifest.get("runner_source_sha256") in (RUNNER_V3_SHA256,RUNNER_V4_SHA256) else 1024,
         "rank": rank, "world_size": world, "completed_stage_indices": list(range(21)),
         "sampling_rng_policy": "independent_cpu_sampling_streams_model_rng_isolated",
     }
@@ -329,11 +406,11 @@ def validate_execution_header(manifest, *, context, query, control, worker_parti
             "original execution-source guard changed")
     source_identity = validate_runner_source(manifest)
     chunk = manifest.get("query_batch_size")
-    if source_identity["version"] == 3:
+    if source_identity["version"] in (3,4):
         expected_mode={"execution_cache_v1":"resident_full","execution_mixture_v1":"component_mass",
-                       "execution_hybrid_v1":"component_hybrid","execution_gqa_hybrid_v1":"component_gqa_hybrid"}[variant]
+                       "execution_hybrid_v1":"component_hybrid","execution_gqa_hybrid_v1":"component_gqa_hybrid","execution_gqa_hybrid_fifo_v1":"component_gqa_hybrid"}[variant]
         require(manifest.get("mode") == expected_mode, "version3 mode/variant mismatch")
-        require(type(chunk) is int and (chunk == 1024 or variant == "execution_gqa_hybrid_v1" and chunk in LARGE_BATCHES),
+        require(type(chunk) is int and (chunk == 1024 or variant in GQA_VARIANTS and chunk in LARGE_BATCHES),
                 "unqualified version3 sampler chunk")
         require(manifest.get("engine_query_batch_cap") == (10000 if chunk in LARGE_BATCHES else 1024),
                 "actual engine query cap differs from sampler/qualified cap")
@@ -341,11 +418,16 @@ def validate_execution_header(manifest, *, context, query, control, worker_parti
                 and manifest.get("cuda_matmul_allow_tf32") is False, "version3 frozen FP32/TF32-off flags changed")
     else:
         require(chunk == 1024, "historical runner only qualified sampler chunk1024")
-    if variant == "execution_gqa_hybrid_v1":
+    if source_identity["version"]==4:
+        validate_fifo_runtime_metadata(manifest,rank=rank,world=world,count=count)
+    else:
+        require(variant!="execution_gqa_hybrid_fifo_v1" and manifest.get("proposal_lookahead",0)==0
+                and manifest.get("proposal_buffer") is None,"historical runner cannot claim FIFO")
+    if variant in GQA_VARIANTS:
         validate_gqa_runtime_metadata(manifest)
     descriptor = bindings.validate_adapter_descriptor(manifest.get("compatibility_adapter"))
     validate_engine_metadata(manifest.get("execution_engine"))
-    if source_identity["version"]==3:
+    if source_identity["version"] in (3,4):
         actual_engine=manifest["execution_engine"]
         require(actual_engine.get("query_batch_size")==chunk and actual_engine.get("posterior_count")==count
                 and actual_engine.get("sampling_rng_policy")=="independent_cpu_sampling_streams_model_rng_isolated",
@@ -355,7 +437,7 @@ def validate_execution_header(manifest, *, context, query, control, worker_parti
     require(actual_settings.get("fit_mode") == "fit_with_cache", "resident executor requires actual fit_with_cache metadata")
     actual_settings["fit_mode"] = original_settings["fit_mode"]
     policy = manifest.get("sampling_policy", {})
-    if variant in ("execution_mixture_v1", "execution_hybrid_v1", "execution_gqa_hybrid_v1"):
+    if variant in ("execution_mixture_v1", "execution_hybrid_v1", *GQA_VARIANTS):
         validate_sampling_policy(policy)
     else:
         require(policy.get("head_policy") == "not_used" and policy.get("mass_envelope") is None
@@ -563,9 +645,9 @@ def gqa_hybrid_qualification_review(path, manifest, qualification):
     from posteriorforge import performance_runner as runner, execution_cache as cache
     from posteriorforge import execution_mixture as mixture, execution_hybrid as hybrid
     from posteriorforge import execution_gqa_hybrid as execution
-    require(manifest.get("variant") == "execution_gqa_hybrid_v1",
+    require(manifest.get("variant") in GQA_VARIANTS,
             "GQA proof cannot qualify another execution family")
-    require(validate_runner_source(manifest)["version"] in (2,3) and manifest.get("query_batch_size")==1024,
+    require(validate_runner_source(manifest)["version"] in (2,3,4) and manifest.get("query_batch_size")==1024,
             "legacy GQA proof requires original1024 sampler path")
     bindings_value = {key:manifest[key] for key in
         ("scientific_fingerprint", "parameter_order", "context_seed", "case", "context_size",
@@ -618,8 +700,8 @@ def portable_sdk_root(qualification_path, explicit=None):
 def gqa_batch_qualification_review(path,manifest,qualification,*,sdk_root=None):
     from posteriorforge import performance_runner as runner, execution_cache as cache
     from posteriorforge import execution_mixture as mixture, execution_hybrid as hybrid
-    require(manifest.get("variant")=="execution_gqa_hybrid_v1"
-            and validate_runner_source(manifest)["version"]==3, "portable large-batch proof requires version3 GQA hybrid")
+    require(manifest.get("variant") in GQA_VARIANTS
+            and validate_runner_source(manifest)["version"] in (3,4), "portable large-batch proof requires version3 GQA hybrid")
     chunk=manifest.get("query_batch_size")
     require(type(chunk) is int and chunk in LARGE_BATCHES,"declared qualified neural sampler chunk required")
     require(manifest.get("engine_query_batch_cap")==10000,"large sampler chunk requires actual10000 engine cap")
@@ -668,12 +750,12 @@ def qualification_review(path, manifest, *, context, query, sdk_root=None):
     q = json.loads(Path(path).read_text())
     if q.get("schema")==GQA_BATCH_SCHEMA:
         return gqa_batch_qualification_review(path,manifest,q,sdk_root=sdk_root)
-    if manifest.get("runner_source_sha256")==RUNNER_V3_SHA256 and manifest.get("query_batch_size") in LARGE_BATCHES:
+    if manifest.get("runner_source_sha256") in (RUNNER_V3_SHA256,RUNNER_V4_SHA256) and manifest.get("query_batch_size") in LARGE_BATCHES:
         raise ValueError("version3 large sampler chunk requires portable all21 batch proof")
     if q.get("schema") in ("posteriorforge.execution_gqa_hybrid_qualification.v1",
                             "posteriorforge.execution_gqa_hybrid_recovery.v1"):
         return gqa_hybrid_qualification_review(path,manifest,q)
-    require(manifest.get("variant") != "execution_gqa_hybrid_v1",
+    require(manifest.get("variant") not in GQA_VARIANTS,
             "GQA hybrid requires its own complete source-bound proof")
     if q.get("schema")=="posteriorforge.execution_hybrid_qualification.v1":
         return hybrid_qualification_review(path,manifest,q)
@@ -755,6 +837,13 @@ def reviewed_orchestrator(manifest):
         module=ModuleType("reviewed_historical_worker_orchestrator")
         module.__file__=str(script);exec(compile(content,str(script),"exec"),module.__dict__)
         return module,{"sha256":identity,"historical_git_revision":RUNNER_V2_GIT_REVISION}
+    if identity==ORCHESTRATOR_V4_SHA256:
+        content=subprocess.run(["git","-C",str(script.parents[1]),"show",
+            RUNNER_V4_GIT_REVISION+":scripts/run_execution_workers.py"],check=True,capture_output=True).stdout
+        require(hashlib.sha256(content).hexdigest()==ORCHESTRATOR_V4_SHA256,"historical version4 orchestrator Git blob changed")
+        module=ModuleType("reviewed_version4_worker_orchestrator");module.__file__=str(script)
+        exec(compile(content,str(script),"exec"),module.__dict__)
+        return module,{"sha256":identity,"historical_git_revision":RUNNER_V4_GIT_REVISION}
     require(identity==ORCHESTRATOR_V3_SHA256,"unreviewed aggregate orchestrator source")
     content=subprocess.run(["git","-C",str(script.parents[1]),"show",
         RUNNER_V3_GIT_REVISION+":scripts/run_execution_workers.py"],check=True,capture_output=True).stdout
@@ -786,11 +875,11 @@ def authenticate_worker_aggregate(path, manifest, *, context, query, control, cu
     require(manifest.get("qualification_manifest_sha256")==qsha,"aggregate qualification SHA mismatch")
     underlying=manifest.get("worker_execution_variant")
     modes={"execution_cache_v1":"resident_full","execution_mixture_v1":"component_mass",
-           "execution_hybrid_v1":"component_hybrid","execution_gqa_hybrid_v1":"component_gqa_hybrid"}
+           "execution_hybrid_v1":"component_hybrid","execution_gqa_hybrid_v1":"component_gqa_hybrid","execution_gqa_hybrid_fifo_v1":"component_gqa_hybrid"}
     require(underlying in modes and manifest.get("mode")==modes[underlying],"aggregate execution family mismatch")
     chunk=manifest.get("query_batch_size",1024)
-    if aggregate_runner["version"]==3:
-        require(type(chunk) is int and (chunk==1024 or underlying=="execution_gqa_hybrid_v1" and chunk in LARGE_BATCHES),
+    if aggregate_runner["version"] in (3,4):
+        require(type(chunk) is int and (chunk==1024 or underlying in GQA_VARIANTS and chunk in LARGE_BATCHES),
                 "unqualified aggregate sampler chunk")
         require(manifest.get("engine_query_batch_cap")==(10000 if chunk in LARGE_BATCHES else 1024),
                 "aggregate actual query cap mismatch")
@@ -799,6 +888,16 @@ def authenticate_worker_aggregate(path, manifest, *, context, query, control, cu
     expected.update(mode=modes[underlying],variant=underlying,reference_binding=custody["runner_reference_binding"])
     for key,value in expected.items():
         if key!="variant":require(manifest.get(key)==value,"aggregate science/source binding mismatch: "+key)
+    if aggregate_runner["version"]==4:
+        v4=reviewed_v4_runner();lookahead=manifest.get("proposal_lookahead")
+        v4.validate_proposal_lookahead(modes[underlying],lookahead)
+        require(underlying==v4.execution_variant(modes[underlying],lookahead)
+                and manifest.get("proposal_buffer_policy")==v4.proposal_buffer_policy(lookahead),
+                "aggregate FIFO source/variant/policy mismatch")
+        expected.update(proposal_lookahead=lookahead,proposal_buffer_policy=v4.proposal_buffer_policy(lookahead))
+    else:
+        require(underlying!="execution_gqa_hybrid_fifo_v1" and manifest.get("proposal_lookahead",0)==0,
+                "historical aggregate cannot claim FIFO")
     contracts=[];paths=[]
     devices=manifest.get("visible_device_tokens",[])
     require(len(devices)==world and len(set(devices))==world,"distinct aggregate GPU device assignments required")
@@ -818,6 +917,9 @@ def authenticate_worker_aggregate(path, manifest, *, context, query, control, cu
                 and contract.get("budget_reservation_id")==manifest["budget"]["reservation_id"]
                 and contract.get("visible_device_token")==devices[rank],
                 "worker contract rank/output/source binding changed")
+        if aggregate_runner["version"]==4:
+            require(contract.get("proposal_lookahead")==manifest["proposal_lookahead"],
+                    "worker contract FIFO lookahead mismatch")
         contracts.append(contract);paths.append(contract_path)
     combined,records=orchestrator.validate_worker_payloads(contracts,paths,expected_bindings=expected,
         driver_schema=RUN_SCHEMA,qualification_sha256=qsha)
@@ -834,7 +936,7 @@ def authenticate_worker_aggregate(path, manifest, *, context, query, control, cu
         require(worker.get("runner_source_sha256") == manifest.get("runner_source_sha256")
                 and worker.get("query_batch_size")==chunk,
                 "aggregate/worker runner source or sampler chunk mismatch")
-        if aggregate_runner["version"]==3:
+        if aggregate_runner["version"] in (3,4):
             require(contract.get("query_batch_size",1024)==chunk,"worker contract sampler chunk mismatch")
             require(worker.get("engine_query_batch_cap")==manifest.get("engine_query_batch_cap"),
                     "aggregate/worker native query cap mismatch")
@@ -848,11 +950,11 @@ def authenticate_worker_aggregate(path, manifest, *, context, query, control, cu
     if underlying=="execution_hybrid_v1":
         require(manifest.get("hybrid_execution")==workers[0].get("hybrid_execution"),
                 "aggregate hybrid policy differs from authenticated workers")
-    if underlying == "execution_gqa_hybrid_v1":
+    if underlying in GQA_VARIANTS:
         require(manifest.get("gqa_hybrid_execution") == workers[0].get("gqa_hybrid_execution")
                 and all(worker.get("gqa_hybrid_execution")==workers[0]["gqa_hybrid_execution"] for worker in workers),
                 "aggregate GQA policy differs across authenticated workers")
-        portable=aggregate_runner["version"]==3 and chunk in LARGE_BATCHES
+        portable=aggregate_runner["version"] in (3,4) and chunk in LARGE_BATCHES
         if portable:
             require(manifest.get("qualification_family")=="large_batch_v1"
                     and all(worker.get("qualification_family")=="large_batch_v1" for worker in workers),
@@ -861,6 +963,21 @@ def authenticate_worker_aggregate(path, manifest, *, context, query, control, cu
             require(all(worker["gqa_prediction_checks"]["attention_fingerprints"]
                         ==workers[0]["gqa_prediction_checks"]["attention_fingerprints"] for worker in workers),
                     "aggregate GQA fingerprints differ across authenticated workers")
+    if aggregate_runner["version"]==4:
+        if manifest["proposal_lookahead"]:
+            buffers=[worker["proposal_buffer"] for worker in workers]
+            expected_buffer={"schema":"posteriorforge.execution.proposal_buffer.aggregate.v1",**manifest["proposal_buffer_policy"],
+                "world_size":world,"worker_initial_lookahead":[row["worker_initial_lookahead"] for row in buffers],
+                "generated_count":sum(row["generated_count"] for row in buffers),
+                "original_checked_count":sum(row["original_sampler_counts"]["original_checked_count"] for row in buffers),
+                "accepted_before_trim":sum(row["original_sampler_counts"]["accepted_before_trim"] for row in buffers),
+                "returned_count":50000,"remaining_unused_buffer_count":sum(row["remaining_unused_buffer_count"] for row in buffers),
+                "actual_generated_wave_count":sum(row["generated_wave_count"] for row in buffers),"worker_records":buffers}
+            require(manifest.get("proposal_buffer")==expected_buffer
+                    and sum(expected_buffer["worker_initial_lookahead"])==1200
+                    and expected_buffer["generated_count"]==expected_buffer["original_checked_count"]+expected_buffer["remaining_unused_buffer_count"],
+                    "aggregate FIFO counts/conservation differ from authenticated workers")
+        else:require(manifest.get("proposal_buffer") is None,"zero-lookahead aggregate cannot contain FIFO")
     summed={key:sum(item[key] for item in rejections) for key in
             ("support_calls","proposed","accepted_before_final_trim","returned")}
     detail={"orchestrator_source_sha256":orchestrator_sha,"orchestrator_source_authentication":orchestrator_identity,"runner_source_authentication":aggregate_runner,"worker_count":world,
@@ -871,6 +988,7 @@ def authenticate_worker_aggregate(path, manifest, *, context, query, control, cu
             "sampling_policies_by_rank":[worker["sampling_policy"] for worker in workers],
             "GQA_runtime_checks_by_rank":[worker.get("gqa_prediction_checks") for worker in workers],
             "GQA_runtime_counters_by_rank":[worker.get("gqa_execution_counters") for worker in workers],
+            "proposal_buffer_policy":manifest.get("proposal_buffer_policy"),"proposal_buffer":manifest.get("proposal_buffer"),
             "summed_rejection":summed,
             "rejection_scope":"sum of independent authenticated worker counters; not a single serial rejection process"}
     return values,workers[0],detail
@@ -1004,6 +1122,8 @@ def run(args):
                       "samples_sha256": manifest["samples_sha256"], "samples_descriptor": manifest["samples"], "hybrid_execution": manifest.get("hybrid_execution"),
                       "runner_source_authentication":validate_runner_source(effective_manifest if aggregate_detail else manifest),
                       "gqa_hybrid_execution":manifest.get("gqa_hybrid_execution"),
+                      "proposal_lookahead":manifest.get("proposal_lookahead",0),"proposal_buffer_policy":manifest.get("proposal_buffer_policy"),
+                      "proposal_buffer":manifest.get("proposal_buffer"),
                       "gqa_prediction_checks":manifest.get("gqa_prediction_checks"),
                       "gqa_execution_counters":manifest.get("gqa_execution_counters"),
                       "execution_policy": manifest.get("execution_policy"), "execution_engine": manifest["execution_engine"],
@@ -1025,6 +1145,7 @@ def run(args):
             "Absolute physical CDF bounds include the unchanged saved-reference uncertainty and whole-line monotonicity/tail bounds.",
             "The .01 CDF, .05 reference-SD mean and .05 SD-fraction thresholds flag investigation; they neither establish population equivalence nor waive absolute scientific failure.",
             "Changed forward/batch/RNG consumption can change finite Monte Carlo cohorts even if fixed-conditional distributions agree.",
+            "FIFO lookahead generates extra complete unfiltered vectors; original API deliveries, support checks, final accepted trim and unused rows remain separately counted. Extra stream consumption changes seeded row mapping; no pointwise cohort equality is claimed.",
             "A fixed-conditional screen only covers its declared prefixes, stages and chunks; accepted-prefix probes do not establish the unfiltered proposal or rejection-conditioned joint law.",
             "Performance-first authorization explicitly permits engineering review while the original physical accuracy criteria remain failed and visible.",
         ],
