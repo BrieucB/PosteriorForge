@@ -1,0 +1,49 @@
+{
+  "assessment_sha256": "4590a8acff216737d04b8c6144d72df0a14c0246ca5333a330ad365a07a857cb",
+  "count": 50000,
+  "independent_implementation": "all-row covariance-space m=m0+D X.T (X D X.T+sigma\u00b2 I)^-1(y-offset-Xm0); primary precision-space mean helper not used",
+  "neural_GPU_calls": 0,
+  "original_report_sha256": "bd5929843f369d2d5a72d2e2b29e809504b41c92a285391cbdf448c61c85ec5b",
+  "parameters": [
+    {
+      "MCSE_refSD": [
+        0.0039400369057461596,
+        0.0021813150791298564,
+        0.004600033475323148
+      ],
+      "max_MCSE_difference_refSD": 3.903127820947816e-18,
+      "max_component_difference_refSD": 5.717648576819556e-15,
+      "parameter": "a_m2",
+      "signed_components_refSD": [
+        0.13991766504878045,
+        0.1062254991340858,
+        0.24614316418286689
+      ]
+    },
+    {
+      "MCSE_refSD": [
+        0.004191553187048143,
+        0.0020871891323887863,
+        0.004795494286287909
+      ],
+      "max_MCSE_difference_refSD": 2.6020852139652106e-18,
+      "max_component_difference_refSD": 4.690692279041286e-15,
+      "parameter": "b_m2",
+      "signed_components_refSD": [
+        -0.18184533828809574,
+        -0.09083451361358161,
+        -0.27267985190168087
+      ]
+    }
+  ],
+  "parent_manifest_sha256": "28de1d121e5e89a5b55f630625c0f60e86551473c8bbaa3b2840797683f12e6a",
+  "parent_samples_sha256": "9ce954f75b73c54348733c3068179d542ed050ec1aaae772734b3def67fc752b",
+  "passed": true,
+  "posterior_draws": 0,
+  "primary_raw_row_replay_scientific_fields_exact": true,
+  "reference_integrations": 0,
+  "schema": "posteriorforge.case2_conditional_mean_independent_replay.v1",
+  "source_sha256": "87a59767574703d25b6bf630605611a2e18dbae4c83d709770c16a05b54393c2",
+  "torch_imported": false,
+  "wall_seconds": 0.5439056502655149
+}
