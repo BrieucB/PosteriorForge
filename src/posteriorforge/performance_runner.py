@@ -18,7 +18,10 @@ from .banks import derive_seed
 
 SCHEMA="posteriorforge.inference.execution.v1"
 COUNT=50000
-RUNNER_VERSION=3
+RUNNER_VERSION=4
+PROPOSAL_BUFFER_SHA256="8fb2ba1fb63cd917378ff9bc8b6f70be7410862c509cd22cb2fb6f454d3d35fa"
+FIFO_VARIANT="execution_gqa_hybrid_fifo_v1"
+BASE_VARIANTS={"resident_full":"execution_cache_v1","component_mass":"execution_mixture_v1","component_hybrid":"execution_hybrid_v1","component_gqa_hybrid":"execution_gqa_hybrid_v1"}
 GQA_QUALIFIER_SHA256="ab0c289ad051aa3553ca47402da07ac2643c576e660a297be9242c357787848a"
 GQA_RECOVERY_SHA256="83064f54712014b5c4c66569e854872caff03593cfdc337f2472a7b5723aea02"
 _GQA_RECOVERY_MODULE=None
@@ -32,6 +35,85 @@ HYBRID_ASSEMBLER_SHA256="29dcbc62f273fba0dad50f3a4063b445dbe0329f30371b164237c31
 STREAM_ROLES={"head_proposal":"execution-head-proposal","head_acceptance":"execution-head-acceptance","component_uniform":"execution-component-uniform"}
 STREAM_DTYPES={"head_proposal":"torch.int64","head_acceptance":"torch.float64","component_uniform":"torch.float32"}
 QUALIFICATION_THRESHOLDS={"normalization_absolute":1e-5,"max_cdf_absolute":2e-5,"max_row_total_variation":1e-4,"quantile_coordinate_span_fraction":2e-6}
+
+
+def validate_proposal_lookahead(mode,proposal_lookahead):
+    if type(proposal_lookahead) is not int or proposal_lookahead not in (0,1200) or (proposal_lookahead and mode!="component_gqa_hybrid"):
+        raise ValueError("global proposal lookahead0/1200; nonzero requires component_gqa_hybrid")
+    return proposal_lookahead
+
+
+def execution_variant(mode,proposal_lookahead=0):
+    validate_proposal_lookahead(mode,proposal_lookahead)
+    if mode not in BASE_VARIANTS:raise ValueError("explicit execution mode required")
+    return FIFO_VARIANT if proposal_lookahead else BASE_VARIANTS[mode]
+
+
+def guarded_proposal_buffer():
+    from . import execution_proposal_buffer as fifo
+    if fifo.source_sha256()!=PROPOSAL_BUFFER_SHA256:raise RuntimeError("reviewed FIFO complete-vector buffer source changed")
+    return fifo
+
+
+def proposal_buffer_policy(proposal_lookahead=0):
+    import hashlib
+    if type(proposal_lookahead) is not int or proposal_lookahead not in (0,1200):raise ValueError("explicit global lookahead0/1200 required")
+    if not proposal_lookahead:return {"enabled":False,"global_lookahead":0,"policy_id":"none"}
+    fifo=guarded_proposal_buffer()
+    policy={"enabled":True,"global_lookahead":1200,"policy_id":fifo.POLICY_ID,"module_sha256":PROPOSAL_BUFFER_SHA256,
+        "original_sampler_source_sha256":fifo.ORIGINAL_SAMPLER_SHA256,"worker_lookahead":"1200/world_size",
+        "first_wave":"original_requested_count plus worker lookahead","later_wave":"exact FIFO deficit only",
+        "delivery":"original requested count; FIFO complete vectors; unfiltered","rng_draws_by_buffer":0,
+        "seed_coupling":"extra rowU/head-stream consumption changes seeded vector mapping; no rowwise equality claim"}
+    return {**policy,"policy_sha256":hashlib.sha256(json.dumps(policy,sort_keys=True,separators=(",",":")).encode()).hexdigest()}
+
+
+def proposal_buffer_scope(bindings,*,context_seed,case,repetition,rank,world_size,seeds):
+    return {"case":case,"query":bindings["query"],"context_theta":bindings["context_theta"],"context_obs":bindings["context_obs"],
+        "checkpoint_sha256":bindings["checkpoint_sha256"],"scientific_fingerprint":bindings["scientific_fingerprint"],
+        "context_seed":context_seed,"repetition":repetition,"rank":rank,"world_size":world_size,"seed_streams":dict(seeds),
+        "scope":"one posterior request; no cross-query/case/context reuse"}
+
+
+def validate_proposal_buffer_record(record,*,world_size,rank,scope=None):
+    """Portable CPU validation of actual FIFO deliveries, waves and output counts."""
+    import hashlib
+    fifo=guarded_proposal_buffer();policy=fifo.worker_policy(world_size,rank)
+    required={"enabled":True,"policy_sha256":proposal_buffer_policy(1200)["policy_sha256"],"schema":fifo.SCHEMA,"policy_id":fifo.POLICY_ID,"module_sha256":PROPOSAL_BUFFER_SHA256,**policy,
+        "finalized":True,"failed":False,"failure":None,"live_buffer_rows":0,"buffer_reset_count":0,
+        "support_filtering_performed_by_buffer":False,"row_repair_or_reordering":False,"partial_vector_filtering":False,
+        "all_rows_are_complete_vectors":True,"vector_width":21,"rng_draws_by_buffer":0,"log_density":"not_used",
+        "original_sampler_source_sha256":fifo.ORIGINAL_SAMPLER_SHA256,"unused_rows_discarded_only_after_original_sampler_completion":True,
+        "source_unchanged":True}
+    for key,expected in required.items():
+        if type(record.get(key)) is not type(expected) or record.get(key)!=expected:raise ValueError("FIFO record mismatch: "+key)
+    saved_scope=record.get("request_scope")
+    if not isinstance(saved_scope,dict) or (scope is not None and saved_scope!=scope):raise ValueError("FIFO request scope differs")
+    encoded=json.dumps(saved_scope,sort_keys=True,separators=(",",":"),allow_nan=False)
+    if hashlib.sha256(encoded.encode()).hexdigest()!=record.get("request_scope_sha256"):raise ValueError("FIFO request scope hash differs")
+    api=record.get("api_requested_sizes")
+    if not isinstance(api,list) or not api or any(type(n) is not int or n<=0 for n in api) or api[0]!=policy["worker_expected_return_count"]:
+        raise ValueError("FIFO original API requests/count contract differ")
+    expected_waves=[];remaining=0
+    for n in api:
+        if n<=remaining:remaining-=n
+        else:
+            lookahead=policy["worker_initial_lookahead"] if not expected_waves else 0
+            expected_waves.append(n-remaining+lookahead);remaining=lookahead
+    count=sum(expected_waves);checked=sum(api)
+    expected={"actual_generated_wave_sizes":expected_waves,"generated_wave_attempt_sizes":expected_waves,
+        "generated_wave_count":len(expected_waves),"required_stage_preparations_for_generated_waves":21*len(expected_waves),
+        "generated_count":count,"original_api_delivered_count":checked,"remaining_unused_buffer_count":remaining}
+    for key,value in expected.items():
+        if type(record.get(key)) is not type(value) or record.get(key)!=value:raise ValueError("FIFO conservation/wave mismatch: "+key)
+    result=record.get("original_sampler_counts",{})
+    if not isinstance(result,dict) or any(type(result.get(key)) is not int for key in ("original_checked_count","original_support_calls","returned_count","accepted_before_trim")):
+        raise ValueError("FIFO typed original support counts required")
+    if result.get("original_checked_count")!=checked or result.get("original_support_calls")!=len(api) or result.get("returned_count")!=policy["worker_expected_return_count"]:
+        raise ValueError("FIFO original support/output counts differ")
+    accepted=result.get("accepted_before_trim")
+    if type(accepted) is not int or not policy["worker_expected_return_count"]<=accepted<=checked:raise ValueError("FIFO accepted-before-trim count differs")
+    return True
 
 
 def worker_stream_seeds(context_seed,case,repetition,rank=0,world_size=1):
@@ -441,11 +523,13 @@ def component_stage_sampler(component,torch,generators,counters,*,prediction_che
     return sample_stage
 
 
-def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,context_seed=20261111,case=0,repetition=0,query_batch_size=1024,mode="resident_full",worker_contract=None):
+def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,context_seed=20261111,case=0,repetition=0,query_batch_size=1024,mode="resident_full",worker_contract=None,proposal_lookahead=0):
     output=Path(output)
     if output.exists():raise FileExistsError("fresh execution output required")
     if mode not in ("resident_full","component_mass","component_hybrid","component_gqa_hybrid") or not valid_execution_chunk(mode,query_batch_size) or type(repetition) is not int or repetition<0:
         raise ValueError("explicit qualified mode/query chunk and nonnegative repetition required")
+    validate_proposal_lookahead(mode,proposal_lookahead)
+    if proposal_lookahead:guarded_proposal_buffer()
     from .reference_grid import _require_budgeted_gpu
     from .inference_cdf import guard_baseline_source,reference_binding
     from .inference import CHECKPOINT_SHA256,frozen_regressor_settings,support_mask,_prior
@@ -454,14 +538,15 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
     start=time.perf_counter();runner_sha=sha256_file(__file__);source=guard_baseline_source();budget=_require_budgeted_gpu(ledger)
     contract=json.loads(Path(worker_contract).read_text()) if worker_contract else None
     partition=worker_partition(contract,output=output,job_id=os.getenv("SLURM_JOB_ID"),context_seed=context_seed,case=case,repetition=repetition,runner_sha256=runner_sha)
+    if contract and contract.get("proposal_lookahead",0)!=proposal_lookahead:raise ValueError("worker FIFO lookahead differs from aggregate contract")
     if budget["gpus"]!=partition["world_size"]:raise RuntimeError("reserved GPU count must equal declared worker world")
     if contract:
         if contract.get("budget_reservation_id")!=budget["reservation_id"]:raise ValueError("worker reservation mismatch")
         orchestrator=Path(__file__).resolve().parents[2]/"scripts/run_execution_workers.py"
         if not orchestrator.is_file() or sha256_file(orchestrator)!=contract["orchestrator_source_sha256"]:raise ValueError("orchestrator source mismatch")
     output.mkdir(parents=True,exist_ok=False)
-    status={**runtime_identity(),"schema":SCHEMA,"variant":{"resident_full":"execution_cache_v1","component_mass":"execution_mixture_v1","component_hybrid":"execution_hybrid_v1","component_gqa_hybrid":"execution_gqa_hybrid_v1"}[mode],
-        "runner_version":RUNNER_VERSION,"status":"running","attribution":"Built with PriorLabs-TabPFN","performance_first_authorized":True,
+    status={**runtime_identity(),"schema":SCHEMA,"variant":execution_variant(mode,proposal_lookahead),
+        "runner_version":RUNNER_VERSION,"proposal_lookahead":proposal_lookahead,"proposal_buffer_policy":proposal_buffer_policy(proposal_lookahead),"proposal_buffer":None,"status":"running","attribution":"Built with PriorLabs-TabPFN","performance_first_authorized":True,
         "absolute_accuracy_gate_required_for_performance":False,"known_physical_control_status":"model_failure",
         "count_contract":"50000 total complete physical vectors per E2E benchmark","benchmark_total_count":COUNT,
         **partition,"scientific_run":partition["requested_count"]==COUNT and partition["end_to_end"],"sampling_rng_policy":"independent_cpu_sampling_streams_model_rng_isolated","context_seed":context_seed,"case":case,"repetition":repetition,"context_size":4096,
@@ -471,7 +556,7 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
         "worker_contract_sha256":sha256_file(worker_contract) if worker_contract else None,
         "completed_stage_indices":[],"stage_events":[],"proposal_wave_sizes":[],"partial_vector_filtering":False,"original_gate_unchanged":True,
         "clipping_or_repair_performed":False,"mode":mode,"execution_optimized":True,"tail_family_changed":False}
-    write_json(output/"manifest.json",status);engine=None;descriptor=None
+    write_json(output/"manifest.json",status);engine=None;descriptor=None;proposal_adapter=None
     try:
         import torch
         from . import execution_cache as cache
@@ -545,9 +630,24 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
                 values=stage_major_wave(engine,theta,obs,query,int(size),query_batch_size,
                     lambda prediction:prediction["criterion"].sample(prediction["logits"]).detach().cpu().numpy(),stage_draw=stage_draw,progress=progress)
                 return torch.from_numpy(values),None
+            selected_proposal=proposal
+            if proposal_lookahead:
+                fifo=guarded_proposal_buffer()
+                scope=proposal_buffer_scope(bindings,context_seed=context_seed,case=case,repetition=repetition,
+                    rank=partition["rank"],world_size=partition["world_size"],seeds=seeds)
+                proposal_adapter=fifo.ProposalBuffer(proposal,scope=scope,concatenate=lambda parts:torch.cat(parts,dim=0),
+                    world_size=partition["world_size"],rank=partition["rank"])
+                selected_proposal=proposal_adapter
+                status["proposal_buffer"]={**proposal_adapter.metadata(),"enabled":True,"policy_sha256":status["proposal_buffer_policy"]["policy_sha256"]}
             torch.cuda.synchronize();torch.cuda.reset_peak_memory_stats();request_start=time.perf_counter()
-            with torch.no_grad():samples,_,_=accept_reject(proposal=proposal,accept_reject_fn=prior.support.check,
+            with torch.no_grad():samples,_,_=accept_reject(proposal=selected_proposal,accept_reject_fn=prior.support.check,
                 num_samples=partition["requested_count"],max_sampling_batch_size=COUNT,max_iter_rejection=None,show_progress_bars=False,proposal_sampling_kwargs={})
+            if proposal_adapter is not None:
+                record=proposal_adapter.finalize(original_checked_count=prior.support.proposed,accepted_before_trim=prior.support.accepted,
+                    returned_count=len(samples),original_support_calls=prior.support.calls)
+                guarded_proposal_buffer();record.update(source_unchanged=True,enabled=True,policy_sha256=status["proposal_buffer_policy"]["policy_sha256"])
+                validate_proposal_buffer_record(record,world_size=partition["world_size"],rank=partition["rank"],scope=scope)
+                status["proposal_buffer"]=record
             torch.cuda.synchronize();finished=time.perf_counter()
             values=samples.detach().cpu().numpy().astype(np.float64)
             if values.shape!=(partition["requested_count"],21) or not support_mask(values).all():raise RuntimeError("incomplete/nonfinite/unsupported output; no row repair")
@@ -564,15 +664,21 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
                     raise RuntimeError("GQA actual per-call source/restoration coverage failed")
                 if gqa_checks.get("uncached_fallback_calls")!=engine.hybrid_counters["uncached_predict_count"]:raise RuntimeError("GQA original fallback count mismatch")
             expected_calls=8*engine.metadata["predict_count"] if mode=="resident_full" else 8*counters["stage0_shared_predictions"]+counters["component_predictions"]
-            if descriptor["patched_call_count"]!=expected_calls or engine.metadata["prepare_count"]!=21*prior.support.calls:
+            generated_waves=len(status["proposal_wave_sizes"])
+            if proposal_adapter is not None and status["proposal_buffer"]["actual_generated_wave_sizes"]!=status["proposal_wave_sizes"]:raise RuntimeError("FIFO/provider generated-wave mismatch")
+            if descriptor["patched_call_count"]!=expected_calls or engine.metadata["prepare_count"]!=21*generated_waves:
                 raise RuntimeError("model/CDF stage coverage mismatch")
             status["expected_patched_call_count"]=expected_calls
+            status["expected_stage_prepare_count"]=21*generated_waves;status["generated_proposal_wave_count"]=generated_waves
             actual_cache=status["stage_events"][-1]["cache_after"];actual_precision=status["stage_events"][-1]["precision"]
             if len(actual_cache["parameter_count_by_member"])!=8 or set(actual_cache["parameter_count_by_member"].values())!={11081864} or actual_cache["parameter_dtypes"]!=["torch.float32"] or actual_precision!={"autocast":False,"forced_inference_dtype":"torch.float32"}:raise RuntimeError("actual frozen FP32 model/parameter contract mismatch")
             status["model"]={"dtype":"torch.float32","autocast":False,"forced_inference_dtype":"torch.float32","parameter_count":next(iter(status["stage_events"][-1]["cache_after"]["parameter_count_by_member"].values())),"parameter_count_by_member":status["stage_events"][-1]["cache_after"]["parameter_count_by_member"],"prepared_member_count":8,"post_request_residency":"stage caches released"}
         if not descriptor.get("original_alias_restored") or not descriptor.get("sdk_sources_unchanged"):raise RuntimeError("CDF context failed restoration")
         if baseline_module.write_json is not write_json:raise RuntimeError("original metadata writer changed")
         status["metadata_writer_restored"]=True;status["metadata_writer_policy"]="never replaced by execution driver"
+        if proposal_lookahead:
+            guarded_proposal_buffer()
+            validate_proposal_buffer_record(status["proposal_buffer"],world_size=partition["world_size"],rank=partition["rank"],scope=scope)
         if guard_baseline_source()!=source or sha256_file(__file__)!=runner_sha or sha256_file(qpath)!=qsha:
             raise RuntimeError("source/qualification changed during execution")
         expected_cache_sha=q["cache_module_sha256"] if mode in ("component_hybrid","component_gqa_hybrid") else q["module_sha256"]
@@ -592,6 +698,7 @@ def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qual
     except BaseException as error:
         status.update(status="failed",error_type=type(error).__name__,error=str(error))
         if descriptor is not None:status["compatibility_adapter"]=dict(descriptor)
+        if proposal_adapter is not None:status["proposal_buffer"]={**proposal_adapter.metadata(),"enabled":True,"policy_sha256":status["proposal_buffer_policy"]["policy_sha256"]}
         raise
     finally:
         if engine is not None:engine.close()
@@ -604,6 +711,7 @@ def main():
     for name in ("banks","output","checkpoint","ledger","reference","reference-grid","qualification"):parser.add_argument("--"+name,required=True)
     parser.add_argument("--context-seed",type=int,default=20261111);parser.add_argument("--case",type=int,default=0)
     parser.add_argument("--repetition",type=int,default=0);parser.add_argument("--query-batch-size",type=int,default=1024)
+    parser.add_argument("--proposal-lookahead",type=int,choices=(0,1200),default=0)
     parser.add_argument("--mode",choices=("resident_full","component_mass","component_hybrid","component_gqa_hybrid"),default="resident_full");parser.add_argument("--worker-contract")
     result=run_execution(**vars(parser.parse_args()));print(json.dumps({key:result.get(key) for key in ("schema","variant","status","requested_count","rank","world_size","end_to_end","timings")},indent=2))
 

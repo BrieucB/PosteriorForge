@@ -118,6 +118,26 @@ def validate_worker_payloads(contracts,contract_paths,*,expected_bindings,driver
             "sources_unchanged":True,"qualification_full21":True}
         for key,value in {**expected_bindings,**expected}.items():
             if manifest.get(key)!=value:raise ValueError("worker artifact binding mismatch: "+key)
+        from posteriorforge import performance_runner as driver
+        lookahead=contract.get("proposal_lookahead",0)
+        driver.validate_proposal_lookahead(manifest.get("mode"),lookahead)
+        if manifest.get("proposal_lookahead",0)!=lookahead or manifest.get("variant")!=driver.execution_variant(manifest.get("mode"),lookahead):
+            raise ValueError("worker proposal lookahead/variant differs from contract")
+        if lookahead:
+            if manifest.get("proposal_buffer_policy")!=driver.proposal_buffer_policy(lookahead):raise ValueError("worker FIFO source/policy differs")
+            scope=driver.proposal_buffer_scope(manifest,context_seed=contract["context_seed"],case=contract["case"],repetition=contract["repetition"],
+                rank=contract["rank"],world_size=contract["world_size"],seeds=contract["seed_streams"])
+            record=manifest.get("proposal_buffer",{})
+            driver.validate_proposal_buffer_record(record,world_size=contract["world_size"],rank=contract["rank"],scope=scope)
+            counts=record["original_sampler_counts"]
+            rejection=manifest.get("rejection",{})
+            if rejection!={"support_calls":counts["original_support_calls"],"proposed":counts["original_checked_count"],
+                "accepted_before_final_trim":counts["accepted_before_trim"],"returned":counts["returned_count"]}:
+                raise ValueError("worker FIFO/original support counts differ")
+            if manifest.get("proposal_wave_sizes")!=record["actual_generated_wave_sizes"] or manifest.get("expected_stage_prepare_count")!=21*record["generated_wave_count"] or manifest.get("generated_proposal_wave_count")!=record["generated_wave_count"] or manifest.get("execution_counters",{}).get("prepare_count")!=21*record["generated_wave_count"]:
+                raise ValueError("worker FIFO actual stage/wave coverage differs")
+        elif manifest.get("proposal_buffer") is not None:
+            raise ValueError("worker zero-lookahead path cannot contain a FIFO buffer")
         if _stream_seed_map(manifest)!=contract["seed_streams"]:raise ValueError("worker sampling seeds differ from contract")
         all_streams.append(contract["seed_streams"])
         engine=manifest.get("execution_engine",{})
@@ -171,7 +191,7 @@ def validate_worker_payloads(contracts,contract_paths,*,expected_bindings,driver
         arrays.append(samples.astype(np.float64,copy=False))
         records.append({"rank":contract["rank"],"manifest":str(manifest_path),
             "manifest_sha256":sha256_file(manifest_path),"samples_sha256":digest,
-            "accepted_count":len(samples),"seed_streams":contract["seed_streams"]})
+            "accepted_count":len(samples),"seed_streams":contract["seed_streams"],"proposal_buffer":manifest.get("proposal_buffer")})
     if len(contracts)!=len(contract_paths) or len(arrays) not in (1,2,4):
         raise ValueError("worker artifact set incomplete")
     flat=[seed for streams in all_streams for seed in streams.values()]
@@ -230,13 +250,16 @@ def execute_workers(commands,environments,logs,*,timeout_seconds,on_progress=Non
 
 def run(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,workers=1,
         context_seed=20261111,case=0,repetition=0,query_batch_size=1024,
-        mode="component_mass",timeout_seconds=3000,threads_per_worker=None):
+        mode="component_mass",timeout_seconds=3000,threads_per_worker=None,proposal_lookahead=0):
     started=_PROGRAM_START if __name__=="__main__" else time.perf_counter()
     from posteriorforge.reference_grid import _require_budgeted_gpu
     from posteriorforge.science.analytical_benchmark_v2 import array_descriptor
     import numpy as np
     counts=partition_counts(workers)
     if mode not in WORKER_VARIANTS:raise ValueError("explicit supported worker sampling mode required")
+    driver=import_module("posteriorforge.performance_runner")
+    driver.validate_proposal_lookahead(mode,proposal_lookahead)
+    policy=driver.proposal_buffer_policy(proposal_lookahead)
     budget=_require_budgeted_gpu(ledger)
     if budget["gpus"]!=workers:raise RuntimeError("registered allocation GPU count must equal worker count")
     tokens=visible_device_tokens(os.getenv("CUDA_VISIBLE_DEVICES"),workers)
@@ -257,6 +280,7 @@ def run(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,
         "performance_first_authorized":True,"absolute_accuracy_gate_required_for_performance":False,
         "known_physical_control_status":"model_failure",
         "qualification_manifest_sha256":sha256_file(qualification),"mode":mode,"query_batch_size":query_batch_size,
+        "proposal_lookahead":proposal_lookahead,"proposal_buffer_policy":policy,"proposal_buffer":None,
         "engine_query_batch_cap":driver.execution_query_cap(mode,query_batch_size),"runner_version":driver.RUNNER_VERSION}
     write_json(root/"manifest.json",result)
     try:
@@ -266,7 +290,7 @@ def run(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,
         worker_engine={**execution_cache.execution_metadata(),
             "sampling_rng_policy":"independent_cpu_sampling_streams_model_rng_isolated",
             "query_batch_size":query_batch_size,"posterior_count":TOTAL_COUNT}
-        bindings.update(mode=mode,variant=WORKER_VARIANTS[mode],
+        bindings.update(mode=mode,variant=driver.execution_variant(mode,proposal_lookahead),proposal_lookahead=proposal_lookahead,proposal_buffer_policy=policy,
             reference_binding=reference_binding(banks=banks,reference=reference,reference_grid=reference_grid,case=case))
         result.update({key:value for key,value in bindings.items() if key!="variant"})
         result["worker_execution_variant"]=bindings["variant"]
@@ -283,7 +307,7 @@ def run(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,
                 runner_source_sha256=driver_source,visible_device_token=tokens[rank])
             if contract["seed_streams"]!=driver.worker_stream_seeds(context_seed,case,repetition,rank,workers):
                 raise RuntimeError("orchestrator and driver seed contracts disagree")
-            contract.update(mode=mode,query_batch_size=query_batch_size,omp_threads_per_worker=effective_threads)
+            contract.update(mode=mode,query_batch_size=query_batch_size,omp_threads_per_worker=effective_threads,proposal_lookahead=proposal_lookahead)
             path=root/"contracts"/f"worker-{rank}.json";write_json(path,contract)
             contracts.append(contract);contract_paths.append(path)
             command=[sys.executable,"-m","posteriorforge.performance_runner","--banks",str(Path(banks).resolve()),
@@ -291,7 +315,7 @@ def run(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,
                 "--reference",str(Path(reference).resolve()),"--reference-grid",str(Path(reference_grid).resolve()),
                 "--qualification",str(Path(qualification).resolve()),"--context-seed",str(context_seed),
                 "--case",str(case),"--repetition",str(repetition),"--query-batch-size",str(query_batch_size),
-                "--mode",mode,"--worker-contract",str(path)]
+                "--mode",mode,"--proposal-lookahead",str(proposal_lookahead),"--worker-contract",str(path)]
             commands.append(command)
             environment=os.environ.copy();environment["CUDA_VISIBLE_DEVICES"]=tokens[rank]
             environment["PF_EXECUTION_WORKER_RANK"]=str(rank);environment["PF_EXECUTION_WORKER_WORLD_SIZE"]=str(workers)
@@ -309,6 +333,19 @@ def run(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,
                         on_progress=progress,cwd=Path(__file__).resolve().parents[1])
         values,records=validate_worker_payloads(contracts,contract_paths,expected_bindings=bindings,
              driver_schema=driver_schema,qualification_sha256=result["qualification_manifest_sha256"])
+        if proposal_lookahead:
+            buffers=[record["proposal_buffer"] for record in records]
+            result["proposal_buffer"]={"schema":"posteriorforge.execution.proposal_buffer.aggregate.v1",**policy,
+                "world_size":workers,"worker_initial_lookahead":[row["worker_initial_lookahead"] for row in buffers],
+                "generated_count":sum(row["generated_count"] for row in buffers),
+                "original_checked_count":sum(row["original_sampler_counts"]["original_checked_count"] for row in buffers),
+                "accepted_before_trim":sum(row["original_sampler_counts"]["accepted_before_trim"] for row in buffers),
+                "returned_count":sum(row["original_sampler_counts"]["returned_count"] for row in buffers),
+                "remaining_unused_buffer_count":sum(row["remaining_unused_buffer_count"] for row in buffers),
+                "actual_generated_wave_count":sum(row["generated_wave_count"] for row in buffers),
+                "worker_records":buffers}
+            if result["proposal_buffer"]["generated_count"]!=result["proposal_buffer"]["original_checked_count"]+result["proposal_buffer"]["remaining_unused_buffer_count"] or result["proposal_buffer"]["returned_count"]!=TOTAL_COUNT:
+                raise RuntimeError("aggregate FIFO complete-vector conservation/count failed")
         if sha256_file(inspect.getfile(driver))!=driver_source or sha256_file(__file__)!=result["orchestrator_source_sha256"] or sha256_file(qualification)!=result["qualification_manifest_sha256"]:
             raise RuntimeError("runner/orchestrator/qualification source changed during aggregate execution")
         pending=root/"aggregate-samples.pending.npz"
@@ -338,5 +375,6 @@ if __name__=="__main__":
     parser.add_argument("--context-seed",type=int,default=20261111);parser.add_argument("--case",type=int,default=0)
     parser.add_argument("--repetition",type=int,default=0);parser.add_argument("--query-batch-size",type=int,default=1024)
     parser.add_argument("--mode",choices=list(WORKER_VARIANTS),default="component_mass")
+    parser.add_argument("--proposal-lookahead",type=int,choices=(0,1200),default=0)
     parser.add_argument("--timeout-seconds",type=int,default=3000);parser.add_argument("--threads-per-worker",type=int)
     print(json.dumps(run(**vars(parser.parse_args())),indent=2))

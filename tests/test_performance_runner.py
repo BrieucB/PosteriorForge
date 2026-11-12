@@ -348,3 +348,114 @@ def test_v3_query_chunk_domain_keeps_other_modes_at1024_and_rejects_float_or_boo
     for n in (True,4096.,2048,10001):assert not runner.valid_execution_chunk("component_gqa_hybrid",n)
     for mode in ("resident_full","component_mass","component_hybrid"):
         assert runner.valid_execution_chunk(mode,1024) and not runner.valid_execution_chunk(mode,4096)
+
+
+def test_v4_lookahead_is_opt_in_typed_and_only_for_gqa_hybrid():
+    assert runner.RUNNER_VERSION==4
+    for mode,variant in runner.BASE_VARIANTS.items():
+        assert runner.execution_variant(mode,0)==variant
+        if mode!="component_gqa_hybrid":
+            with pytest.raises(ValueError):runner.execution_variant(mode,1200)
+    assert runner.execution_variant("component_gqa_hybrid",1200)=="execution_gqa_hybrid_fifo_v1"
+    for bad in (True,1,1200.,-1,1201):
+        with pytest.raises(ValueError):runner.validate_proposal_lookahead("component_gqa_hybrid",bad)
+    assert runner.proposal_buffer_policy(0)=={"enabled":False,"global_lookahead":0,"policy_id":"none"}
+
+
+def fifo_record(world=1,rank=0):
+    fifo=runner.guarded_proposal_buffer();policy=fifo.worker_policy(world,rank)
+    bindings={"query":{"sha256":"query"},"context_theta":{"sha256":"theta"},"context_obs":{"sha256":"obs"},
+        "scientific_fingerprint":"science","checkpoint_sha256":"checkpoint"}
+    scope=runner.proposal_buffer_scope(bindings,context_seed=20261111,case=0,repetition=0,rank=rank,world_size=world,
+        seeds=runner.worker_stream_seeds(20261111,0,0,rank,world))
+    proposal=fifo.ProposalBuffer(lambda n:(np.zeros((n,21),dtype=np.float32),None),scope=scope,
+        concatenate=np.concatenate,world_size=world,rank=rank)
+    proposal(policy["worker_expected_return_count"]);proposal(200//world)
+    record=proposal.finalize(original_checked_count=policy["worker_expected_return_count"]+200//world,
+        accepted_before_trim=policy["worker_expected_return_count"]+10,returned_count=policy["worker_expected_return_count"],original_support_calls=2)
+    record.update(source_unchanged=True,enabled=True,policy_sha256=runner.proposal_buffer_policy(1200)["policy_sha256"])
+    return record,scope
+
+
+@pytest.mark.parametrize("world",[1,2,4])
+def test_actual_fifo_metadata_validates_global_partition_and_rejects_tampering(world):
+    for rank in range(world):
+        record,scope=fifo_record(world,rank)
+        assert runner.validate_proposal_buffer_record(record,world_size=world,rank=rank,scope=scope)
+        for mutate in (lambda r:r.update(remaining_unused_buffer_count=r["remaining_unused_buffer_count"]+1),
+                       lambda r:r.update(actual_generated_wave_sizes=[r["generated_count"]-1]),
+                       lambda r:r.update(module_sha256="wrong"),
+                       lambda r:r.update(policy_sha256="wrong"),
+                       lambda r:r.update(buffer_reset_count=1),
+                       lambda r:r.update(support_filtering_performed_by_buffer=True),
+                       lambda r:r["request_scope"].update(case=1),
+                       lambda r:r["original_sampler_counts"].update(returned_count=1),
+                       lambda r:r["original_sampler_counts"].update(original_support_calls=True)):
+            broken=deepcopy(record);mutate(broken)
+            with pytest.raises(ValueError):runner.validate_proposal_buffer_record(broken,world_size=world,rank=rank,scope=scope)
+
+
+def test_fifo_source_guard_and_cli_exact_count_contract(monkeypatch):
+    fifo=runner.guarded_proposal_buffer()
+    monkeypatch.setattr(fifo,"source_sha256",lambda:"tampered")
+    with pytest.raises(RuntimeError,match="buffer source"):runner.guarded_proposal_buffer()
+    result=subprocess.run([sys.executable,"-m","posteriorforge.performance_runner","--help"],check=True,capture_output=True,text=True)
+    assert "--proposal-lookahead {0,1200}" in result.stdout
+    assert "--count" not in result.stdout and "--num-samples" not in result.stdout
+
+
+@pytest.mark.parametrize("lookahead",[0,1200])
+def test_actual_v4_rejection_block_uses_unchanged_original_sampler_and_counts_50000(lookahead):
+    # Execute the actual production wiring block with CPU fake complete vectors;
+    # this is an engineering test, never a smaller posterior/GPU benchmark.
+    torch=pytest.importorskip("torch")
+    import ast,inspect,textwrap
+    from types import SimpleNamespace
+    from posteriorforge import execution_proposal_buffer
+    tree=ast.parse(textwrap.dedent(inspect.getsource(runner.run_execution)))
+    starts=[node for node in ast.walk(tree) if isinstance(node,ast.Assign)
+        and any(isinstance(target,ast.Name) and target.id=="selected_proposal" for target in node.targets)
+        and isinstance(node.value,ast.Name) and node.value.id=="proposal"]
+    assert len(starts)==1
+    start=starts[0].lineno
+    finishes=[node for node in ast.walk(tree) if isinstance(node,ast.Assign)
+        and any(isinstance(target,ast.Name) and target.id=="finished" for target in node.targets)]
+    assert len(finishes)==1
+    # All selected statements are direct siblings inside the CDF context.
+    bodies=[node.body for node in ast.walk(tree) if isinstance(node,ast.With)]
+    body=next(nodes for nodes in bodies if starts[0] in nodes)
+    selected=[node for node in body if start<=node.lineno<=finishes[0].lineno]
+    module=ast.Module(body=selected,type_ignores=[]);ast.fix_missing_locations(module)
+    path=Path(runner.__file__).parent/"upstream/npe_pfn/accept_reject_sampler.py"
+    spec=importlib.util.spec_from_file_location("_fifo_original_sampler_wiring",path)
+    original=importlib.util.module_from_spec(spec);spec.loader.exec_module(original)
+    class Support:
+        def __init__(self):self.calls=0;self.proposed=0;self.accepted=0
+        def check(self,rows):
+            mask=rows[:,0].to(torch.int64).remainder(137)!=0
+            self.calls+=1;self.proposed+=len(rows);self.accepted+=int(mask.sum())
+            return mask
+    support=Support();cursor=[0];waves=[]
+    def provider(n):
+        ids=torch.arange(cursor[0],cursor[0]+n,dtype=torch.float32);cursor[0]+=n;waves.append(n)
+        return ids[:,None]+torch.arange(21,dtype=torch.float32)[None,:],None
+    shim=SimpleNamespace(cat=torch.cat,no_grad=torch.no_grad,
+        cuda=SimpleNamespace(synchronize=lambda:None,reset_peak_memory_stats=lambda:None))
+    bindings={"query":"query","context_theta":"theta","context_obs":"obs","checkpoint_sha256":"checkpoint","scientific_fingerprint":"science"}
+    namespace={**vars(runner),"torch":shim,"proposal":provider,"proposal_lookahead":lookahead,
+        "partition":{"requested_count":50000,"rank":0,"world_size":1},"context_seed":20261111,"case":0,"repetition":0,
+        "seeds":runner.worker_stream_seeds(20261111,0,0),"bindings":bindings,
+        "prior":SimpleNamespace(support=support),"accept_reject":original.accept_reject_sample,"proposal_adapter":None,
+        "status":{"proposal_buffer_policy":runner.proposal_buffer_policy(lookahead)}}
+    exec(compile(module,"<actual-v4-rejection-block>","exec"),namespace)
+    samples=namespace["samples"]
+    ids=torch.arange(51000,dtype=torch.float32);expected=ids[ids.to(torch.int64).remainder(137)!=0][:50000]
+    assert len(samples)==50000 and torch.equal(samples[:,0],expected)
+    assert support.calls==2
+    if lookahead:
+        assert waves==[51200]
+        record=namespace["status"]["proposal_buffer"]
+        assert record["generated_wave_count"]==1 and record["original_sampler_counts"]["original_support_calls"]==2
+        assert record["generated_count"]==record["original_sampler_counts"]["original_checked_count"]+record["remaining_unused_buffer_count"]
+    else:
+        assert len(waves)==2 and waves[0]==50000 and namespace["proposal_adapter"] is None

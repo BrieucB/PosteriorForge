@@ -59,7 +59,7 @@ def actual_driver_execution_engine_header(mode,worker_count,query_batch_size=102
     return eval(compile(expression,"<actual-driver-metadata>","eval"),namespace)
 
 
-def _payloads(tmp_path,mode="component_mass",query_batch_size=1024):
+def _payloads(tmp_path,mode="component_mass",query_batch_size=1024,proposal_lookahead=0):
     contracts=[];paths=[]
     problem=build_problem();noise=[problem.parameter_order.index(name) for name in problem.prior.noise_names]
     for rank in range(2):
@@ -67,7 +67,7 @@ def _payloads(tmp_path,mode="component_mass",query_batch_size=1024):
         contract=workers.build_contract(rank=rank,workers=2,output=root,aggregate_output=tmp_path,
             budget={"job_id":"123","reservation_id":"reservation"},context_seed=20261111,case=0,repetition=0,
             runner_source_sha256="runner",visible_device_token=str(rank))
-        contract.update(mode=mode,query_batch_size=query_batch_size)
+        contract.update(mode=mode,query_batch_size=query_batch_size,proposal_lookahead=proposal_lookahead)
         path=tmp_path/f"contract-{rank}.json";write_json(path,contract);contracts.append(contract);paths.append(path)
         samples=np.zeros((25000,21),dtype=np.float64);samples[:,noise]=.2;samples[:,0]=rank*.01
         with (root/"samples.npz").open("wb") as stream:np.savez(stream,samples=samples)
@@ -80,7 +80,7 @@ def _payloads(tmp_path,mode="component_mass",query_batch_size=1024):
             "original_translator_code_sha256":"same","active_translator_code_sha256":"same",
             "sdk_source_sha256":dict(PINNED_SDK_SHA256),"sdk_source_sha256_after":dict(PINNED_SDK_SHA256)}
         manifest={"schema":"test.worker.v1","status":"complete","run_purpose":"performance_worker",
-            "mode":mode,"variant":workers.WORKER_VARIANTS[mode],
+            "mode":mode,"variant":workers.import_module("posteriorforge.performance_runner").execution_variant(mode,proposal_lookahead),
             "rank":rank,"world_size":2,"benchmark_total_count":50000,"requested_count":25000,
             "worker_contract_sha256":sha256_file(path),"end_to_end":False,
             "completed_stage_indices":list(range(21)),"qualification_manifest_sha256":"qualification",
@@ -98,6 +98,21 @@ def _payloads(tmp_path,mode="component_mass",query_batch_size=1024):
             "compatibility_adapter":descriptor,"sampling_policy":{"streams":{key:{"seed":value}
                 for key,value in contract["seed_streams"].items()}},
             "samples":array_descriptor(samples),"samples_sha256":sha256_file(root/"samples.npz")}
+        if proposal_lookahead:
+            from posteriorforge import performance_runner as driver
+            manifest.update(context_seed=20261111,case=0,repetition=0,query={"sha256":"query"},context_theta={"sha256":"theta"},
+                context_obs={"sha256":"obs"},scientific_fingerprint="science",checkpoint_sha256="checkpoint",proposal_lookahead=proposal_lookahead,
+                proposal_buffer_policy=driver.proposal_buffer_policy(proposal_lookahead))
+            scope=driver.proposal_buffer_scope(manifest,context_seed=20261111,case=0,repetition=0,rank=rank,world_size=2,seeds=contract["seed_streams"])
+            fifo=driver.guarded_proposal_buffer()
+            proposal=fifo.ProposalBuffer(lambda n:(np.zeros((n,21),dtype=np.float32),None),scope=scope,
+                concatenate=np.concatenate,world_size=2,rank=rank)
+            proposal(25000);proposal(200)
+            record=proposal.finalize(original_checked_count=25200,accepted_before_trim=25010,returned_count=25000,original_support_calls=2)
+            record.update(enabled=True,source_unchanged=True,policy_sha256=manifest["proposal_buffer_policy"]["policy_sha256"])
+            manifest.update(proposal_buffer=record,proposal_wave_sizes=[25600],expected_stage_prepare_count=21,generated_proposal_wave_count=1,
+                execution_counters={"prepare_count":21},
+                rejection={"support_calls":2,"proposed":25200,"accepted_before_final_trim":25010,"returned":25000})
         write_json(root/"manifest.json",manifest)
     return contracts,paths
 
@@ -217,3 +232,30 @@ def test_large_batch_workers_require_exact_portable_family_and_qualified_cap(tmp
     assert values.shape==(50000,21)
     path=Path(contracts[0]["expected_output"])/"manifest.json";manifest=json.loads(path.read_text());manifest["historical_install_ctime_replayed"]=True;write_json(path,manifest)
     with pytest.raises(ValueError,match="portable large-batch"):workers.validate_worker_payloads(contracts,paths,expected_bindings=bindings,driver_schema="test.worker.v1",qualification_sha256="qualification")
+
+
+def test_fifo_workers_require_policy_conservation_scope_and_actual_stage_coverage(tmp_path):
+    contracts,paths=_payloads(tmp_path,mode="component_gqa_hybrid",proposal_lookahead=1200)
+    bindings={"mode":"component_gqa_hybrid","variant":"execution_gqa_hybrid_fifo_v1","proposal_lookahead":1200}
+    values,records=workers.validate_worker_payloads(contracts,paths,expected_bindings=bindings,
+        driver_schema="test.worker.v1",qualification_sha256="qualification")
+    assert values.shape==(50000,21)
+    assert sum(row["proposal_buffer"]["generated_count"] for row in records)==51200
+    target=Path(contracts[0]["expected_output"])/"manifest.json";original=json.loads(target.read_text())
+    for mutate in (lambda m:m.update(proposal_lookahead=0),
+                   lambda m:m.update(variant="execution_gqa_hybrid_v1"),
+                   lambda m:m["proposal_buffer"].update(remaining_unused_buffer_count=0),
+                   lambda m:m["proposal_buffer"]["request_scope"].update(case=1),
+                   lambda m:m["execution_counters"].update(prepare_count=42),
+                   lambda m:m["rejection"].update(proposed=25000),
+                   lambda m:m["proposal_buffer_policy"].update(global_lookahead=1201)):
+        broken=json.loads(json.dumps(original));mutate(broken);write_json(target,broken)
+        with pytest.raises(ValueError):workers.validate_worker_payloads(contracts,paths,expected_bindings=bindings,
+            driver_schema="test.worker.v1",qualification_sha256="qualification")
+
+
+def test_orchestrator_lookahead_cli_stays_opt_in_and_never_exposes_output_count():
+    import subprocess
+    result=subprocess.run([sys.executable,str(Path(workers.__file__)),"--help"],capture_output=True,text=True,check=True)
+    assert "--proposal-lookahead {0,1200}" in result.stdout
+    assert "--count" not in result.stdout and "--num-samples" not in result.stdout
