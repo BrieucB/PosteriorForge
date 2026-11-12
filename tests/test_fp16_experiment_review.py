@@ -143,3 +143,36 @@ def test_actual_full50000_source_precision_FIFO_and_CDF_authentication(actual):
  assert result["strict_failed_stages_preserved"]==list(range(21))
  assert result["actual_physical_heads"]==result["corrected_CDF_calls"]==1141
  assert result["new_exact_FP32_or_joint_qualification"] is False
+ assert result["source_origin_commit"]==h.PRODUCER_COMMIT
+ assert result["recorded_execution_commit"]==m["git_revision"]
+ evidence=result["RNG_evidence"]
+ assert evidence["production_default_CPU_CUDA_state_hashes_recorded"] is False
+ assert evidence["production_default_CPU_CUDA_state_hash_equality_observed"] is False
+ assert evidence["characterization_default_CPU_CUDA_RNG_preserved"] is True
+ assert evidence["characterization_manifest_sha256"]==h.ALL21_SHA
+
+
+def test_later_commit_with_identical_producer_bytes_passes_but_changed_source_fails(tmp_path):
+ """Version-independent source identity uses real Git history, not fake hashes."""
+ repo=tmp_path/"checkout";repo.mkdir()
+ def git(*args):
+  return subprocess.run(["git","-C",str(repo),*args],check=True,capture_output=True,text=True).stdout.strip()
+ git("init","--quiet");git("config","user.email","test@example.invalid");git("config","user.name","CPU proof test")
+ source=repo/"src/posteriorforge/performance_fp16_experiment.py";source.parent.mkdir(parents=True)
+ source.write_bytes((ROOT/"src/posteriorforge/performance_fp16_experiment.py").read_bytes())
+ git("add",".");git("commit","-m","original reviewed producer","--quiet");first=git("rev-parse","HEAD")
+ (repo/"reviewer-note.txt").write_text("new independent reviewer; producer unchanged\n")
+ git("add",".");git("commit","-m","future source-identical execution","--quiet");future=git("rev-parse","HEAD")
+ assert future!=first and first!=h.PRODUCER_COMMIT
+ for revision in (first,future):
+  result=h.producer_revision(revision,repository=repo)
+  assert result["recorded_execution_commit"]==revision
+  assert result["source_origin_commit"]==h.PRODUCER_COMMIT
+  assert result["recorded_producer_blob_sha256"]==h.PRODUCER_SHA
+ tree=git("rev-parse",future+"^{tree}")
+ with pytest.raises(ValueError,match="not a Git commit"):h.producer_revision(tree,repository=repo)
+ source.write_bytes(source.read_bytes()+b"\n# different producer source\n")
+ git("add",".");git("commit","-m","modified producer","--quiet");changed=git("rev-parse","HEAD")
+ with pytest.raises(ValueError,match="different FP16 producer bytes"):h.producer_revision(changed,repository=repo)
+ for invalid in (None,False,"HEAD",future[:8],"0"*40,future+" --"):
+  with pytest.raises(ValueError):h.producer_revision(invalid,repository=repo)

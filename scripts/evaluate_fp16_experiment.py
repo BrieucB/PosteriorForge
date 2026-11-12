@@ -6,7 +6,7 @@ replayed without model calls. Physical failures and both same-case comparison
 flags remain visible; no exact-FP32 or joint-equivalence qualification is issued.
 """
 from __future__ import annotations
-import argparse,hashlib,importlib.util,json,subprocess
+import argparse,hashlib,importlib.util,json,re,subprocess
 from pathlib import Path
 import numpy as np
 from posteriorforge.artifacts import sha256_file,write_json
@@ -46,6 +46,23 @@ def sources():
  metrics=load("evaluate_execution_variant.py",METRICS_SHA)
  all21=load("characterize_fp16_all_stages.py",ALL21_SOURCE);base=load("characterize_precision_approximation.py",BASE_SHA)
  return producer,precision,metrics,all21,base
+
+def producer_revision(revision,*,repository=None):
+ """Bind executed source at its recorded commit, retaining the canonical origin."""
+ require(type(revision) is str and re.fullmatch(r"[0-9a-fA-F]{40}",revision) is not None,
+   "recorded execution revision must be a complete40hex Git commit")
+ root=Path(repository) if repository is not None else Path(__file__).resolve().parents[1]
+ try:
+  kind=subprocess.run(["git","-C",str(root),"cat-file","-t",revision],check=True,capture_output=True,text=True).stdout.strip()
+  require(kind=="commit","recorded execution revision is not a Git commit")
+  content=subprocess.run(["git","-C",str(root),"show",revision+":src/posteriorforge/performance_fp16_experiment.py"],
+    check=True,capture_output=True).stdout
+ except subprocess.CalledProcessError as error:
+  raise ValueError("recorded execution commit/producer Git blob is unavailable") from error
+ digest=hashlib.sha256(content).hexdigest()
+ require(digest==PRODUCER_SHA,"recorded execution commit contains different FP16 producer bytes")
+ return {"source_origin_commit":PRODUCER_COMMIT,"recorded_execution_commit":revision.lower(),
+   "recorded_producer_blob_sha256":digest}
 
 def probability(item):
  require(item.get("passed") is True,"saved hard probability self-check failed")
@@ -193,7 +210,8 @@ def authenticate(manifest_path,*,context,query,approximation,qualification,batch
    "known_physical_control_status":"model_failure","source_checkout_required":True,
    "relative_distribution_review_thresholds":{"CDF_change":0.01,"mean_change_refSD":0.05,"SD_relative_change":0.05}}
  for key,value in expected.items():require(type(m.get(key)) is type(value) and m.get(key)==value,"FP16 experimental manifest differs: "+key)
- require(m["git_revision"]==PRODUCER_COMMIT and type(m.get("repetition")) is int and m["repetition"]>=0,"explicit producer Git/repetition binding required")
+ revision=producer_revision(m.get("git_revision"))
+ require(type(m.get("repetition")) is int and m["repetition"]>=0,"explicit producer repetition binding required")
  from posteriorforge.inference_cdf import guard_baseline_source
  require(m["baseline_execution_source"]==guard_baseline_source(),"six upstream/default science source guard differs")
  problem=build_problem();bindings={"checkpoint_sha256":CHECKPOINT_SHA256,"scientific_fingerprint":problem.scientific_fingerprint,
@@ -245,7 +263,13 @@ def authenticate(manifest_path,*,context,query,approximation,qualification,batch
  require(descriptor["patched_call_count"]==physical==m["expected_patched_call_count"],"physical heads and corrected-CDF counter differ")
  values=metrics.bindings.load_samples(path,m)
  require(sample_integrity(values,expected_count=50000,dimension=21,support_mask=support_mask(values))["passed"],"invalid full50000 supported finite cohort")
- return m,values,{"source_commit":PRODUCER_COMMIT,"producer_sha256":PRODUCER_SHA,"all21_manifest_sha256":ALL21_SHA,
+ return m,values,{"source_commit":m["git_revision"],**revision,"producer_sha256":PRODUCER_SHA,
+   "RNG_evidence":{"production_stream_policy":"recorded roles, seeds, dtypes, CPU generators and source-bound fork_rng isolation policy",
+    "production_default_CPU_CUDA_state_hashes_recorded":False,
+    "production_default_CPU_CUDA_state_hash_equality_observed":False,
+    "characterization_default_CPU_CUDA_RNG_preserved":all(row["rng_preserved"] for row in q["stage_results"]),
+    "characterization_manifest_sha256":ALL21_SHA,
+    "scope":"observed RNG preservation belongs to immutable all21 characterization; full-production isolation is source-policy evidence"},"all21_manifest_sha256":ALL21_SHA,
    "all21_hard_predicates_replayed":True,"strict_failed_stages_preserved":q["strict_failed_stages"],"production_scope_reviews":reviewed,
    "actual_physical_heads":physical,"sampler_callbacks":callbacks,"corrected_CDF_calls":descriptor["patched_call_count"],
    "portable_FP32_ancestry":receipt,"all50000_integrity_passed":True,"new_exact_FP32_or_joint_qualification":False}
