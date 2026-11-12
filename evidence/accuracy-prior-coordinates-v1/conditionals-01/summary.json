@@ -1,0 +1,499 @@
+{
+  "CPU_inventory_receipts": {
+    "Float64_latent_byte_identity_claimed": false,
+    "combined_CPU_receipt_sha256": "d9facb9256a2c975d745ed6e9a6cb68e4346a875976ebd6e749509113d2650a0",
+    "helper_sha256": "ce68e237f15d239f99f091c2310cf15791d1cf7f7cf7442c2db029241834a636",
+    "manifest_sha256": "f3266ab6fd36887c95291020b2cdd2d2a5529f2e6c984b32de22a28b9d31da04",
+    "model_Float32_bytes_match_across_environments": true,
+    "original_case2_prefix_rows": 1024,
+    "original_training_rows": 12288,
+    "passed": true,
+    "reference_manifest_sha256": "93ddc495a3c57c2741608437ff566199fe0b052a297c9f5e9228fb5fb4c25387",
+    "scope": "codec/domain preflight only; no backend numeric or posterior pass"
+  },
+  "FP16": {
+    "comparison_only": true,
+    "hard_failed_stages": [],
+    "hard_validity_passed_all21": true,
+    "qualified_as_FP32": false,
+    "strict_failed_stages": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ]
+  },
+  "accounting": {
+    "GPU_count": 1,
+    "Slurm_state": "COMPLETED",
+    "allocated_GPU_seconds": 680,
+    "cap_GPU_hours": 200,
+    "global_actual_GPU_hours": 28.144166666666667,
+    "global_actual_GPU_seconds": 101319,
+    "global_reserved_GPU_seconds": 0,
+    "job_id": "5410894",
+    "ledger_reconciled": true,
+    "ledger_snapshot_sha256": "e2004f0fa5fcaeaea14ffd7a344c1f26c1cab075d59771afa3af4aee072daaa1",
+    "no_requeue_submitted": true,
+    "restarts": 0
+  },
+  "all_stage_recorded_predicates": [
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_mu_a",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 0
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_mu_b",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 1
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_mu_d0",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 2
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_sigma_m1",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 3
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_a_m1",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 4
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_b_m1",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 5
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_d0_m1",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": false,
+      "stage": 6
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_sigma_m2",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 7
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_a_m2",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 8
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_b_m2",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 9
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_d0_m2",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": false,
+      "stage": 10
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_sigma_m3",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 11
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_a_m3",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 12
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_b_m3",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 13
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_d0_m3",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 14
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_sigma_a1",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 15
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_a_a1",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 16
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_sigma_a2",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 17
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_a_a2",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 18
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_sigma_a3",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 19
+    },
+    {
+      "FP16_hard_validity_passed": true,
+      "FP16_strict_passed": false,
+      "common_guards_passed": true,
+      "control_hard_validity_passed": true,
+      "coordinate": "z_a_a3",
+      "corrected_CDF_calls": 72,
+      "matching_FP32_execution_passed": true,
+      "stage": 20
+    }
+  ],
+  "attribution": "Built with PriorLabs-TabPFN",
+  "common_and_control_hard_passed_all21": true,
+  "completed_original_grid": {
+    "manifest_sha256": "6136487ee78375a802c8a0cb0c225a7f1b207063b4083514614c0d97a35c2425",
+    "passed": true,
+    "physical_accuracy_gate_passed": false,
+    "points": 24
+  },
+  "completed_stages": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "corrected_CDF": {
+    "SDK_sources_unchanged": true,
+    "actual_calls": 1512,
+    "actual_contexts": 1,
+    "original_alias_restored": true
+  },
+  "elapsed_producer_seconds": 667.9012450287119,
+  "evidence_packaging_only_no_new_numerical_qualification": true,
+  "failed_member_records": [
+    {
+      "failed_predicate": "member_CDF_absolute",
+      "final_mixture_probability_metrics": {
+        "max_cdf_absolute_error": 6.2300063495834834e-06,
+        "max_normalization_error": 3.462590555058931e-06,
+        "max_probability_absolute_error": 1.2759119272232056e-07,
+        "max_row_total_variation": 6.7470417424929105e-06,
+        "minimum_probability": 0.0,
+        "passed": true
+      },
+      "final_mixture_recorded_passed": true,
+      "member_index_zero_based": 3,
+      "member_max_TV": 2.4944579081635776e-05,
+      "member_max_normalization_error": 1.0132789611816406e-06,
+      "observed_max_CDF_absolute": 2.2232532501220703e-05,
+      "other_member_recorded_probability_predicates_passed": true,
+      "query_rows": 1024,
+      "stage": 6,
+      "target_coordinate": {
+        "dataset_id": "mechanical_1",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_d0_m1",
+        "physical_name": "d0_m1",
+        "physical_slot": 5,
+        "stage": 6
+      },
+      "unchanged_limit": 2e-05
+    },
+    {
+      "failed_predicate": "member_CDF_absolute",
+      "final_mixture_probability_metrics": {
+        "max_cdf_absolute_error": 6.2300063495834834e-06,
+        "max_normalization_error": 3.462590555058931e-06,
+        "max_probability_absolute_error": 1.2759119272232056e-07,
+        "max_row_total_variation": 6.7470417424929105e-06,
+        "minimum_probability": 0.0,
+        "passed": true
+      },
+      "final_mixture_recorded_passed": true,
+      "member_index_zero_based": 6,
+      "member_max_TV": 2.5510787964963533e-05,
+      "member_max_normalization_error": 1.4901161193847656e-06,
+      "observed_max_CDF_absolute": 2.4199485778808594e-05,
+      "other_member_recorded_probability_predicates_passed": true,
+      "query_rows": 1024,
+      "stage": 6,
+      "target_coordinate": {
+        "dataset_id": "mechanical_1",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_d0_m1",
+        "physical_name": "d0_m1",
+        "physical_slot": 5,
+        "stage": 6
+      },
+      "unchanged_limit": 2e-05
+    },
+    {
+      "failed_predicate": "member_CDF_absolute",
+      "final_mixture_probability_metrics": {
+        "max_cdf_absolute_error": 5.881534440810299e-06,
+        "max_normalization_error": 2.1236600110663417e-06,
+        "max_probability_absolute_error": 1.2665973514458528e-07,
+        "max_row_total_variation": 6.499754155883501e-06,
+        "minimum_probability": 0.0,
+        "passed": true
+      },
+      "final_mixture_recorded_passed": true,
+      "member_index_zero_based": 5,
+      "member_max_TV": 2.2560366565269052e-05,
+      "member_max_normalization_error": 0.0,
+      "observed_max_CDF_absolute": 2.1696090698242188e-05,
+      "other_member_recorded_probability_predicates_passed": true,
+      "query_rows": 1024,
+      "stage": 10,
+      "target_coordinate": {
+        "dataset_id": "mechanical_2",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          7,
+          8,
+          9
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          7,
+          8,
+          9
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_d0_m2",
+        "physical_name": "d0_m2",
+        "physical_slot": 9,
+        "stage": 10
+      },
+      "unchanged_limit": 2e-05
+    }
+  ],
+  "failure_interpretation": "ONLY member CDF numerical tolerance failures; all common/control hard checks passed",
+  "final_mixture_pass_does_not_waive_member_limits": true,
+  "fixed_query_coverage": {
+    "all8_members": true,
+    "query_counts": [
+      1,
+      1024
+    ],
+    "scope": "fixed transformed prefixes only; no posterior law or accuracy claim",
+    "stress_rows": 8
+  },
+  "independent_closed_artifact_audit": {
+    "new_draws_models_reference_integrations_or_writes_by_audit": false,
+    "passed": true,
+    "scope": "independent second-agent read-only source/raw6/F32/FIRST1024/all21 masked bindings and predicate/dtype/state/RNG/alias audit",
+    "successful_screen_validator_rejects_raw_failed_status": true
+  },
+  "matching_FP32_failed_stages": [
+    6,
+    10
+  ],
+  "matching_FP32_passed_stages": 19,
+  "posterior_pilot_activated": false,
+  "posterior_vectors_generated": 0,
+  "qualification_passed": false,
+  "raw_manifest_bytes_exact_after_gzip": true,
+  "raw_manifest_sha256": "550b91af4a031a3393f59146e1aa5360c75b0e716362ee727aeb1397af149593",
+  "raw_sample_or_model_tensor_archives_included": false,
+  "raw_schema": "posteriorforge.prior_coordinates_conditional_screen.v1",
+  "raw_status_unmodified": "prior_coordinates_matching_FP32_structural_or_hard_failure",
+  "reference_integrations": 0,
+  "schema": "posteriorforge.prior_coordinates_failed_screen_publication.v1",
+  "sources": {
+    "SS15_representation": "46323c0b94301c2f7e678538881d5cbbdd8bc52c62a60021798176bffe81eb85",
+    "backend": "88f28c5a1f01c086661243c5d3bfb59631eb3c95fe3567b7f1ede325ddba0aea",
+    "codec": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "codec_inventory_helper": "ce68e237f15d239f99f091c2310cf15791d1cf7f7cf7442c2db029241834a636",
+    "numeric_comparison_helper": "0c3dd7274d6741bba2ba0ae2744542865f48b2f887a6831e1d2aa6bce47f78c0",
+    "numeric_hard_guards": "c55c00a1697f8d4341880af18676c29b4d99551e131c89ff79bea238c693f8bd",
+    "numeric_utility": "6c927a5c278c7fc54b556ac557ecef64f5e6338f5ae13bf466f3b1e6a4640f90",
+    "preregistration": "7c4aca04c4571960108c0296ec5d4770940ce0b51fa0a77cdd0c27182b4ed849",
+    "prior_and_order_sources": {
+      "execution_ss15_sigma_first.py": "d48d1638ef9e540bdd629d321fba657af4db757700b1092fc58fb9ded1f79ad2",
+      "science/analytical_benchmark_v2.py": "8d5f286f6d8512391dea2ae036313bec05782d28c7803f336490cbcdce3bd99f",
+      "science/hierarchical_exact.py": "db001593cc7307b1290b981622705961c5953001a6c1245fae5ec779938e9687",
+      "science/hierarchical_noise.py": "cbf0b8c956362a5eaa31923e9b94a3db3e3ede2072603add51e78105b8c0cbf0",
+      "science/hierarchical_problem.py": "03aa2d8a3d279783cf6c599f1400f253f3db2e1e7eb027aff5b7cd1b48fe12d0"
+    },
+    "qualifier": "3ae723d4748f23af40b89b9508713e270730985b6a8b5d4ccca1959e60ae17f9"
+  },
+  "stage_count": 21,
+  "unchanged_limits": {
+    "max_cdf_absolute": 2e-05,
+    "max_row_total_variation": 0.0001,
+    "normalization_absolute": 1e-05,
+    "quantile_coordinate_span_fraction": 2e-06
+  }
+}
