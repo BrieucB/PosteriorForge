@@ -1,0 +1,1 @@
+{"NumPy": "1.26.4", "Python": "3.11.13", "SciPy": "1.12.0", "Torch_imported": false, "committed_HEAD_exact": true, "current_checkout_exact": true, "inventory_sha256": "68812fb23efc4f9ccbe1a2bd2041c791a9649e32ea71af457139cb52e904dacb", "own_producer_commit_guard_pending": true, "source_count": 146}

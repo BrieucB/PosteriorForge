@@ -1,0 +1,132 @@
+{
+  "actual_CDF_context_and_deterministic_translations": true,
+  "actual_committed146_source_guards_qualification_inputs_codec_F64helper_original_support_finalization_save_success_footer": true,
+  "actual_run_codeobject_executed": "posteriorforge.performance_prior_physical_fifo_v1._RUN_BODY",
+  "actual_test_outputs_HPC_only": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/physical-fifo-archived-fixture-cpu-01/inference-pytest-temp",
+  "attribution": "Built with PriorLabs-TabPFN",
+  "expected_generated_checked_returned_unused": [
+    51200,
+    50000,
+    50000,
+    1200
+  ],
+  "expected_original_prefix_array_sha256": "6b6c36843d6c213d086c6712aacc68dc1cb11148163ebe24bc74119a102b54eb",
+  "fixture_boundaries": [
+    "neural engine and archived latent stage returns",
+    "CUDA API facade with lazy_init forbidden",
+    "budget authorization"
+  ],
+  "new_models_GPU_CUDA_initialization_neural_uniform_or_normal_draws": 0,
+  "not_recovered_c8101138_calls_or_missing_footers": true,
+  "public_package_contains_no_raw_arrays": true,
+  "reference_Torch_skip_explicit": true,
+  "runs": [
+    {
+      "command": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "cache_dir=/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/physical-fifo-archived-fixture-cpu-01/reference-pytest-cache",
+        "--basetemp=/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/physical-fifo-archived-fixture-cpu-01/reference-pytest-temp",
+        "tests/test_execution_physical_fifo_v1.py",
+        "tests/test_performance_prior_physical_fifo_v1.py",
+        "tests/test_performance_prior_physical_fifo_fixture_v1.py"
+      ],
+      "cwd": "/home/it4i-bbenvegnen/workspace/PosteriorForge",
+      "environment": "reference",
+      "environment_overrides": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "16",
+        "PYTHONPATH": "src"
+      },
+      "expected_passed_skipped": [
+        21,
+        4
+      ],
+      "log": "reference-pytest.log",
+      "log_sha256": "45e1a0628bd7f3620131eb2b1a7e308902856e66c9c8b972f04fbfec9f594139",
+      "matched_expected": true,
+      "passed": 21,
+      "process_wall_seconds": 3.3438616013154387,
+      "pytest_reported_seconds": 2.74,
+      "returncode": 0,
+      "skipped": 4,
+      "versions": {
+        "numpy": "2.2.6",
+        "pytest": "8.4.2",
+        "python": "3.11.13",
+        "scipy": "1.15.3",
+        "torch": null
+      }
+    },
+    {
+      "command": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "cache_dir=/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/physical-fifo-archived-fixture-cpu-01/inference-pytest-cache",
+        "--basetemp=/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/physical-fifo-archived-fixture-cpu-01/inference-pytest-temp",
+        "tests/test_execution_physical_fifo_v1.py",
+        "tests/test_performance_prior_physical_fifo_v1.py",
+        "tests/test_performance_prior_physical_fifo_fixture_v1.py"
+      ],
+      "cwd": "/home/it4i-bbenvegnen/workspace/PosteriorForge",
+      "environment": "inference",
+      "environment_overrides": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "16",
+        "PYTHONPATH": "src"
+      },
+      "expected_passed_skipped": [
+        25,
+        0
+      ],
+      "log": "inference-pytest.log",
+      "log_sha256": "71fdf9344f1079a1f2fc5ca2317918d6b3416062af0ea27e788f5b042cc93fe4",
+      "matched_expected": true,
+      "passed": 25,
+      "process_wall_seconds": 19.318877664394677,
+      "pytest_reported_seconds": 16.3,
+      "returncode": 0,
+      "skipped": 0,
+      "versions": {
+        "numpy": "1.26.4",
+        "pytest": "8.4.2",
+        "python": "3.11.13",
+        "scipy": "1.12.0",
+        "torch": "2.6.0"
+      }
+    }
+  ],
+  "schema": "posteriorforge.physical_fifo_archived_neural_fixture_CPU.v1",
+  "source_bytes_unchanged": true,
+  "source_sha256_after": {
+    "src/posteriorforge/execution_physical_fifo_v1.py": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+    "src/posteriorforge/execution_proposal_buffer.py": "8fb2ba1fb63cd917378ff9bc8b6f70be7410862c509cd22cb2fb6f454d3d35fa",
+    "src/posteriorforge/execution_ss15_sampling.py": "4037d48846ef3678ce7b647c1a326606ea967d396b3ce34bb1998241a131f6de",
+    "src/posteriorforge/performance_prior_coordinates_v1.py": "71e5e2906fd663534e56878de1fc4aff55093e3d950a13f348f57417ca7c01d3",
+    "src/posteriorforge/performance_prior_physical_fifo_v1.py": "a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "tests/test_execution_physical_fifo_v1.py": "81245d09a46a6d93615f8741fdda1894715a744070ab5cf07dbb6dc9c21f7d69",
+    "tests/test_performance_prior_physical_fifo_fixture_v1.py": "7386755b32d70cbe9c4eef8db231b756ee10861dec7554d3c3db3a922bc3b640",
+    "tests/test_performance_prior_physical_fifo_v1.py": "59ffd4821206c332ed003e7f99992b80f8a7a6dc531f86d990bd3a17389a430d"
+  },
+  "source_sha256_before": {
+    "src/posteriorforge/execution_physical_fifo_v1.py": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+    "src/posteriorforge/execution_proposal_buffer.py": "8fb2ba1fb63cd917378ff9bc8b6f70be7410862c509cd22cb2fb6f454d3d35fa",
+    "src/posteriorforge/execution_ss15_sampling.py": "4037d48846ef3678ce7b647c1a326606ea967d396b3ce34bb1998241a131f6de",
+    "src/posteriorforge/performance_prior_coordinates_v1.py": "71e5e2906fd663534e56878de1fc4aff55093e3d950a13f348f57417ca7c01d3",
+    "src/posteriorforge/performance_prior_physical_fifo_v1.py": "a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "tests/test_execution_physical_fifo_v1.py": "81245d09a46a6d93615f8741fdda1894715a744070ab5cf07dbb6dc9c21f7d69",
+    "tests/test_performance_prior_physical_fifo_fixture_v1.py": "7386755b32d70cbe9c4eef8db231b756ee10861dec7554d3c3db3a922bc3b640",
+    "tests/test_performance_prior_physical_fifo_v1.py": "59ffd4821206c332ed003e7f99992b80f8a7a6dc531f86d990bd3a17389a430d"
+  },
+  "status": "passed",
+  "synthetic_neural_callback_count": 28,
+  "total_parallel_workflow_seconds": 20.14475392177701
+}

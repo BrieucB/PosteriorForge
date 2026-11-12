@@ -1,0 +1,78 @@
+{
+  "environments": {
+    "inference": {
+      "preflight": {
+        "NumPy": "1.26.4",
+        "Python": "3.11.13",
+        "SciPy": "1.12.0",
+        "Torch_imported": false,
+        "committed_HEAD_exact": true,
+        "current_checkout_exact": true,
+        "inventory_sha256": "68812fb23efc4f9ccbe1a2bd2041c791a9649e32ea71af457139cb52e904dacb",
+        "own_producer_commit_guard_pending": true,
+        "source_count": 146
+      },
+      "preflight_log": "work/accuracy-prior-coordinates-v1/physical-fifo-production-guards-cpu-01/inference-preflight.log",
+      "preflight_log_sha256": "e097bec55380b850cd5d469ee24a20351158051d4a42a97c5652a1baf5d5dd6b",
+      "preflight_returncode": 0,
+      "python_executable": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+      "test_command": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_performance_prior_physical_fifo_v1.py"
+      ],
+      "test_log": "work/accuracy-prior-coordinates-v1/physical-fifo-production-guards-cpu-01/inference-tests.log",
+      "test_log_sha256": "d4c600de3dd6acb74b55b9cb4055c22c06a4123b33db24dd7453a00f1cd58eea",
+      "test_output": ".............                                                            [100%]\n13 passed in 1.07s\n",
+      "test_returncode": 0
+    },
+    "reference": {
+      "preflight": {
+        "NumPy": "2.2.6",
+        "Python": "3.11.13",
+        "SciPy": "1.15.3",
+        "Torch_imported": false,
+        "committed_HEAD_exact": true,
+        "current_checkout_exact": true,
+        "inventory_sha256": "68812fb23efc4f9ccbe1a2bd2041c791a9649e32ea71af457139cb52e904dacb",
+        "own_producer_commit_guard_pending": true,
+        "source_count": 146
+      },
+      "preflight_log": "work/accuracy-prior-coordinates-v1/physical-fifo-production-guards-cpu-01/reference-preflight.log",
+      "preflight_log_sha256": "f819503003efd3a61a4ed5191356923fc360f1efc84796616c65bf52d139716f",
+      "preflight_returncode": 0,
+      "python_executable": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python",
+      "test_command": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_performance_prior_physical_fifo_v1.py"
+      ],
+      "test_log": "work/accuracy-prior-coordinates-v1/physical-fifo-production-guards-cpu-01/reference-tests.log",
+      "test_log_sha256": "b265a84b56f72a3530173cebceb974376f4f89b6b6c66de9ec5ac4a6e3e6ad84",
+      "test_output": ".............                                                            [100%]\n13 passed in 1.14s\n",
+      "test_returncode": 0
+    }
+  },
+  "passed": true,
+  "schema": "posteriorforge.physical_fifo.production_guard_CPU.v1",
+  "scope": "Focused source/AST/exception-observer guards only; separate archived full-success fixture test is not included",
+  "sources_after": {
+    "src/posteriorforge/execution_physical_fifo_v1.py": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+    "src/posteriorforge/performance_prior_coordinates_v1.py": "71e5e2906fd663534e56878de1fc4aff55093e3d950a13f348f57417ca7c01d3",
+    "src/posteriorforge/performance_prior_physical_fifo_v1.py": "a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf",
+    "tests/test_execution_physical_fifo_v1.py": "81245d09a46a6d93615f8741fdda1894715a744070ab5cf07dbb6dc9c21f7d69",
+    "tests/test_performance_prior_physical_fifo_v1.py": "59ffd4821206c332ed003e7f99992b80f8a7a6dc531f86d990bd3a17389a430d"
+  },
+  "sources_before": {
+    "src/posteriorforge/execution_physical_fifo_v1.py": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+    "src/posteriorforge/performance_prior_coordinates_v1.py": "71e5e2906fd663534e56878de1fc4aff55093e3d950a13f348f57417ca7c01d3",
+    "src/posteriorforge/performance_prior_physical_fifo_v1.py": "a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf",
+    "tests/test_execution_physical_fifo_v1.py": "81245d09a46a6d93615f8741fdda1894715a744070ab5cf07dbb6dc9c21f7d69",
+    "tests/test_performance_prior_physical_fifo_v1.py": "59ffd4821206c332ed003e7f99992b80f8a7a6dc531f86d990bd3a17389a430d"
+  },
+  "sources_unchanged": true
+}
