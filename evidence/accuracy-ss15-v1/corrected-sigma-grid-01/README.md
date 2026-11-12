@@ -1,10 +1,9 @@
-# Corrected sigma-first grid: partial failure
+# Corrected sigma-first grid: completed failure
 
-Built with PriorLabs-TabPFN. **16/24 points assessed: 3 pass, 13 model failures,
-8 pending in this snapshot. The all-point candidate gate has failed.**
-All eight cases for each of context seeds 20261111 and 20261112 are assessed.
-The eight points for context seed 20261113 remain pending in this snapshot.
-The fixed grid continues without changing the method or omitting failures.
+Built with PriorLabs-TabPFN. **24/24 points assessed: 3 pass, 21 model failures,
+0 pending in this snapshot. The all-point candidate gate has failed.**
+All three context seeds and all eight cases are now assessed.
+The completed fixed grid retains every failure and unchanged method.
 
 The method is explicitly **hybrid NPE-PFN/Gibbs**, not pure TFM inference:
 SS15 observations, all-three-global block-local conditioning, the fixed
@@ -42,6 +41,14 @@ or establish posterior accuracy.
 | 20261112 | 5 | [model_failure](seed-20261112-case-5/README.md) | 0.133825 | 0.067457 | 0.324887 |
 | 20261112 | 6 | [model_failure](seed-20261112-case-6/README.md) | 0.150244 | 0.111484 | 0.365972 |
 | 20261112 | 7 | [model_failure](seed-20261112-case-7/README.md) | 0.138837 | 0.081981 | 0.324075 |
+| 20261113 | 0 | [model_failure](seed-20261113-case-0/README.md) | 0.112946 | 0.048301 | 0.240631 |
+| 20261113 | 1 | [model_failure](seed-20261113-case-1/README.md) | 0.146884 | 0.093887 | 0.300088 |
+| 20261113 | 2 | [model_failure](seed-20261113-case-2/README.md) | 0.142971 | 0.107238 | 0.354782 |
+| 20261113 | 3 | [model_failure](seed-20261113-case-3/README.md) | 0.274152 | 0.139421 | 0.715426 |
+| 20261113 | 4 | [model_failure](seed-20261113-case-4/README.md) | 0.168345 | 0.119730 | 0.432770 |
+| 20261113 | 5 | [model_failure](seed-20261113-case-5/README.md) | 0.191411 | 0.126485 | 0.425237 |
+| 20261113 | 6 | [model_failure](seed-20261113-case-6/README.md) | 0.156705 | 0.135999 | 0.356531 |
+| 20261113 | 7 | [model_failure](seed-20261113-case-7/README.md) | 0.213475 | 0.094837 | 0.507918 |
 
 Case 2 retains its qualified-reference model failure: a_m2 and b_m2 fail
 both marginal CDF and mean-bias limits. Its joint CDF and SD-ratio checks pass.
