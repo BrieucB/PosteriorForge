@@ -1,0 +1,648 @@
+{
+  "absolute_physical_gate_required_for_performance": false,
+  "absolute_physical_status": "model_failure",
+  "attribution": "Built with PriorLabs-TabPFN",
+  "cache_only_full21_qualified": false,
+  "candidate": {
+    "manifest_sha256": "5f234dbfaf73d94509f286b2138009c0447edb996569241cd90173deaac6a2a8",
+    "path": "results/performance-first-v1/hybrid-fp32-batch-1024/rep-0/seed-20261111-case-0",
+    "samples_sha256": "52c7e0a53e7dd95901ce68338d79cb1966d5d6ce43c4cf78f40998b3910c7683"
+  },
+  "candidate_request_seconds": 935.5202134829015,
+  "candidate_wrapper_seconds": 985.3874294739217,
+  "control_repetitions": 3,
+  "control_request_median_seconds": 2380.309143734048,
+  "control_wrapper_median_seconds": 2397.317791893147,
+  "controls": [
+    {
+      "binding": {
+        "manifest_sha256": "1d13af13123be5b57d5ce07cc4cf684932d5a5338a486770cfe60663efc031c0",
+        "path": "results/performance-first-v1/controls/rep-0/seed-20261111-case-0",
+        "samples_sha256": "27e51ad1b1ee615fc921ee4f5c237155139304da3e7c193f7781a389cee6d53e"
+      },
+      "request_seconds": 2364.5507467584684,
+      "wrapper_seconds": 2372.390916720964
+    },
+    {
+      "binding": {
+        "manifest_sha256": "54dd3171385218c8cb8bd9b9fd5c9ee66b3e0e587822d9e18293a2e96e3c248e",
+        "path": "results/performance-first-v1/controls/rep-1/seed-20261111-case-0",
+        "samples_sha256": "7db3e9dfcf876262b39696fa1cceb0ffadb823dd716ad8a0e12d329969157c60"
+      },
+      "request_seconds": 2383.4860378028825,
+      "wrapper_seconds": 2397.317791893147
+    },
+    {
+      "binding": {
+        "manifest_sha256": "090475d62ed2ef86a4e6607a87e7b8e16b98b2601971a0ad3525fe75035f7eeb",
+        "path": "results/performance-first-v1/controls/rep-2/seed-20261111-case-0",
+        "samples_sha256": "5bc538fe70b05fbda39e68f806b660f7e454e6257d93d0a2d6ec509fb1024ae4"
+      },
+      "request_seconds": 2380.309143734048,
+      "wrapper_seconds": 2399.943702231045
+    }
+  ],
+  "cost_scope": "One GPU wall-products; not scheduler allocation accounting.",
+  "count": 50000,
+  "family": [
+    {
+      "axis_index": 0,
+      "flag": false,
+      "ks": 0.00588,
+      "name": "mu_a",
+      "physical_projection_coordinate": -0.3447645306587219,
+      "signed_cdf_difference": -0.00588
+    },
+    {
+      "axis_index": 1,
+      "flag": false,
+      "ks": 0.00492,
+      "name": "mu_b",
+      "physical_projection_coordinate": -0.7863708036374246,
+      "signed_cdf_difference": 0.00492
+    },
+    {
+      "axis_index": 2,
+      "flag": false,
+      "ks": 0.00424,
+      "name": "mu_d0",
+      "physical_projection_coordinate": 1.5814315495202533,
+      "signed_cdf_difference": 0.00424
+    },
+    {
+      "axis_index": 3,
+      "flag": false,
+      "ks": 0.0043,
+      "name": "a_m1",
+      "physical_projection_coordinate": -0.6477106392218118,
+      "signed_cdf_difference": -0.0043
+    },
+    {
+      "axis_index": 4,
+      "flag": false,
+      "ks": 0.00518,
+      "name": "b_m1",
+      "physical_projection_coordinate": -0.8021926879882811,
+      "signed_cdf_difference": -0.00518
+    },
+    {
+      "axis_index": 5,
+      "flag": false,
+      "ks": 0.006,
+      "name": "d0_m1",
+      "physical_projection_coordinate": 1.2374072034309287,
+      "signed_cdf_difference": 0.006
+    },
+    {
+      "axis_index": 6,
+      "flag": false,
+      "ks": 0.0028,
+      "name": "sigma_m1",
+      "physical_projection_coordinate": 2.2680907854586008,
+      "signed_cdf_difference": -0.0028
+    },
+    {
+      "axis_index": 7,
+      "flag": false,
+      "ks": 0.00942,
+      "name": "a_m2",
+      "physical_projection_coordinate": -0.1921291877199387,
+      "signed_cdf_difference": -0.00942
+    },
+    {
+      "axis_index": 8,
+      "flag": false,
+      "ks": 0.00818,
+      "name": "b_m2",
+      "physical_projection_coordinate": -0.8419782381791334,
+      "signed_cdf_difference": 0.00818
+    },
+    {
+      "axis_index": 9,
+      "flag": false,
+      "ks": 0.00756,
+      "name": "d0_m2",
+      "physical_projection_coordinate": 1.3162868243437116,
+      "signed_cdf_difference": 0.00756
+    },
+    {
+      "axis_index": 10,
+      "flag": false,
+      "ks": 0.00868,
+      "name": "sigma_m2",
+      "physical_projection_coordinate": 1.3485799821010902,
+      "signed_cdf_difference": -0.00868
+    },
+    {
+      "axis_index": 11,
+      "flag": false,
+      "ks": 0.00448,
+      "name": "a_m3",
+      "physical_projection_coordinate": -0.006049070457383129,
+      "signed_cdf_difference": -0.00448
+    },
+    {
+      "axis_index": 12,
+      "flag": false,
+      "ks": 0.00422,
+      "name": "b_m3",
+      "physical_projection_coordinate": -0.8248186111450194,
+      "signed_cdf_difference": -0.00422
+    },
+    {
+      "axis_index": 13,
+      "flag": false,
+      "ks": 0.00408,
+      "name": "d0_m3",
+      "physical_projection_coordinate": 1.6278619229312112,
+      "signed_cdf_difference": 0.00408
+    },
+    {
+      "axis_index": 14,
+      "flag": false,
+      "ks": 0.00614,
+      "name": "sigma_m3",
+      "physical_projection_coordinate": 1.4092027658960409,
+      "signed_cdf_difference": -0.00614
+    },
+    {
+      "axis_index": 15,
+      "flag": false,
+      "ks": 0.00412,
+      "name": "a_a1",
+      "physical_projection_coordinate": -0.7484049471019504,
+      "signed_cdf_difference": 0.00412
+    },
+    {
+      "axis_index": 16,
+      "flag": false,
+      "ks": 0.00462,
+      "name": "sigma_a1",
+      "physical_projection_coordinate": 2.0696592029803966,
+      "signed_cdf_difference": -0.00462
+    },
+    {
+      "axis_index": 17,
+      "flag": false,
+      "ks": 0.00952,
+      "name": "a_a2",
+      "physical_projection_coordinate": -0.00111099531658147,
+      "signed_cdf_difference": -0.00952
+    },
+    {
+      "axis_index": 18,
+      "flag": false,
+      "ks": 0.00532,
+      "name": "sigma_a2",
+      "physical_projection_coordinate": 2.810345523601213,
+      "signed_cdf_difference": 0.00532
+    },
+    {
+      "axis_index": 19,
+      "flag": false,
+      "ks": 0.00964,
+      "name": "a_a3",
+      "physical_projection_coordinate": -0.364197420537601,
+      "signed_cdf_difference": 0.00964
+    },
+    {
+      "axis_index": 20,
+      "flag": false,
+      "ks": 0.0074,
+      "name": "sigma_a3",
+      "physical_projection_coordinate": 1.5670746015764025,
+      "signed_cdf_difference": 0.0074
+    },
+    {
+      "axis_index": 21,
+      "flag": true,
+      "ks": 0.01062,
+      "name": "joint0",
+      "physical_projection_coordinate": 1.0372065477741996,
+      "signed_cdf_difference": -0.01062
+    },
+    {
+      "axis_index": 22,
+      "flag": false,
+      "ks": 0.00698,
+      "name": "joint1",
+      "physical_projection_coordinate": -1.291615412505338,
+      "signed_cdf_difference": 0.00698
+    },
+    {
+      "axis_index": 23,
+      "flag": false,
+      "ks": 0.00434,
+      "name": "joint2",
+      "physical_projection_coordinate": 0.06076421958924051,
+      "signed_cdf_difference": -0.00434
+    },
+    {
+      "axis_index": 24,
+      "flag": false,
+      "ks": 0.00614,
+      "name": "joint3",
+      "physical_projection_coordinate": -0.6976439599650621,
+      "signed_cdf_difference": -0.00614
+    },
+    {
+      "axis_index": 25,
+      "flag": false,
+      "ks": 0.00768,
+      "name": "joint4",
+      "physical_projection_coordinate": 2.7937920828585323,
+      "signed_cdf_difference": -0.00768
+    },
+    {
+      "axis_index": 26,
+      "flag": false,
+      "ks": 0.00868,
+      "name": "joint5",
+      "physical_projection_coordinate": 1.1285623163300271,
+      "signed_cdf_difference": 0.00868
+    },
+    {
+      "axis_index": 27,
+      "flag": false,
+      "ks": 0.00464,
+      "name": "joint6",
+      "physical_projection_coordinate": 1.933147728760936,
+      "signed_cdf_difference": 0.00464
+    },
+    {
+      "axis_index": 28,
+      "flag": false,
+      "ks": 0.0085,
+      "name": "joint7",
+      "physical_projection_coordinate": 1.8744293420492266,
+      "signed_cdf_difference": -0.0085
+    },
+    {
+      "axis_index": 29,
+      "flag": false,
+      "ks": 0.00622,
+      "name": "joint8",
+      "physical_projection_coordinate": -0.5684740454423353,
+      "signed_cdf_difference": -0.00622
+    },
+    {
+      "axis_index": 30,
+      "flag": false,
+      "ks": 0.0039,
+      "name": "joint9",
+      "physical_projection_coordinate": 0.3987705280144819,
+      "signed_cdf_difference": 0.0039
+    },
+    {
+      "axis_index": 31,
+      "flag": false,
+      "ks": 0.00492,
+      "name": "joint10",
+      "physical_projection_coordinate": -2.3271235520324294,
+      "signed_cdf_difference": 0.00492
+    },
+    {
+      "axis_index": 32,
+      "flag": false,
+      "ks": 0.00568,
+      "name": "joint11",
+      "physical_projection_coordinate": 0.4705403366216665,
+      "signed_cdf_difference": 0.00568
+    },
+    {
+      "axis_index": 33,
+      "flag": false,
+      "ks": 0.00442,
+      "name": "joint12",
+      "physical_projection_coordinate": 0.05838918499998713,
+      "signed_cdf_difference": -0.00442
+    },
+    {
+      "axis_index": 34,
+      "flag": false,
+      "ks": 0.00446,
+      "name": "joint13",
+      "physical_projection_coordinate": -1.2470107355083264,
+      "signed_cdf_difference": 0.00446
+    },
+    {
+      "axis_index": 35,
+      "flag": false,
+      "ks": 0.00512,
+      "name": "joint14",
+      "physical_projection_coordinate": -0.11841416107563922,
+      "signed_cdf_difference": 0.00512
+    },
+    {
+      "axis_index": 36,
+      "flag": false,
+      "ks": 0.0046,
+      "name": "joint15",
+      "physical_projection_coordinate": -0.9574501676504312,
+      "signed_cdf_difference": 0.0046
+    },
+    {
+      "axis_index": 37,
+      "flag": false,
+      "ks": 0.00572,
+      "name": "joint16",
+      "physical_projection_coordinate": 0.03616378441560179,
+      "signed_cdf_difference": -0.00572
+    },
+    {
+      "axis_index": 38,
+      "flag": false,
+      "ks": 0.0033,
+      "name": "joint17",
+      "physical_projection_coordinate": 1.2909604672584523,
+      "signed_cdf_difference": 0.0033
+    },
+    {
+      "axis_index": 39,
+      "flag": false,
+      "ks": 0.00686,
+      "name": "joint18",
+      "physical_projection_coordinate": 0.9106730790808009,
+      "signed_cdf_difference": 0.00686
+    },
+    {
+      "axis_index": 40,
+      "flag": true,
+      "ks": 0.01036,
+      "name": "joint19",
+      "physical_projection_coordinate": 1.9048230575422003,
+      "signed_cdf_difference": -0.01036
+    },
+    {
+      "axis_index": 41,
+      "flag": false,
+      "ks": 0.00718,
+      "name": "joint20",
+      "physical_projection_coordinate": 0.7914068188062733,
+      "signed_cdf_difference": 0.00718
+    },
+    {
+      "axis_index": 42,
+      "flag": false,
+      "ks": 0.00278,
+      "name": "joint21",
+      "physical_projection_coordinate": -2.5009405816928245,
+      "signed_cdf_difference": 0.00278
+    },
+    {
+      "axis_index": 43,
+      "flag": false,
+      "ks": 0.00684,
+      "name": "joint22",
+      "physical_projection_coordinate": -0.21339203497997405,
+      "signed_cdf_difference": -0.00684
+    },
+    {
+      "axis_index": 44,
+      "flag": false,
+      "ks": 0.00598,
+      "name": "joint23",
+      "physical_projection_coordinate": 0.3622426654959903,
+      "signed_cdf_difference": 0.00598
+    },
+    {
+      "axis_index": 45,
+      "flag": false,
+      "ks": 0.00458,
+      "name": "joint24",
+      "physical_projection_coordinate": -2.2653080973455335,
+      "signed_cdf_difference": -0.00458
+    },
+    {
+      "axis_index": 46,
+      "flag": false,
+      "ks": 0.00526,
+      "name": "joint25",
+      "physical_projection_coordinate": -1.3472444022643009,
+      "signed_cdf_difference": -0.00526
+    },
+    {
+      "axis_index": 47,
+      "flag": false,
+      "ks": 0.00394,
+      "name": "joint26",
+      "physical_projection_coordinate": 0.4499375795627743,
+      "signed_cdf_difference": -0.00394
+    },
+    {
+      "axis_index": 48,
+      "flag": false,
+      "ks": 0.00402,
+      "name": "joint27",
+      "physical_projection_coordinate": -0.2697272563452331,
+      "signed_cdf_difference": -0.00402
+    },
+    {
+      "axis_index": 49,
+      "flag": false,
+      "ks": 0.0046,
+      "name": "joint28",
+      "physical_projection_coordinate": 0.04438315394599047,
+      "signed_cdf_difference": 0.0046
+    },
+    {
+      "axis_index": 50,
+      "flag": false,
+      "ks": 0.0059,
+      "name": "joint29",
+      "physical_projection_coordinate": -1.1126274197569705,
+      "signed_cdf_difference": 0.0059
+    },
+    {
+      "axis_index": 51,
+      "flag": false,
+      "ks": 0.00738,
+      "name": "joint30",
+      "physical_projection_coordinate": -1.7917553691592152,
+      "signed_cdf_difference": -0.00738
+    },
+    {
+      "axis_index": 52,
+      "flag": false,
+      "ks": 0.00568,
+      "name": "joint31",
+      "physical_projection_coordinate": -0.9242197387606703,
+      "signed_cdf_difference": 0.00568
+    }
+  ],
+  "figures": {
+    "actual-stage-costs.png": "228787740aa766ee69a888a41a955765ce6c147c717475498bf95dbeec4cf667",
+    "complete-cdf-family.png": "5b16f9bc67ab13f7a0deb8ab4f01b5f974bbae793a5127753afa77b702c757c6",
+    "signed-cdf-flags.png": "6effd4fd580cc142cfe8f63584b50149e0da38402f0f8787efa6dbedf6e8cf38"
+  },
+  "full21_hybrid_fixed_conditional_qualified": true,
+  "memory": {
+    "peak_allocated_bytes": 21292952064,
+    "peak_reserved_bytes": 41844473856
+  },
+  "no_equivalence_claim": true,
+  "nominal_request_gpu_hours": 0.2598667259674726,
+  "nominal_wrapper_gpu_hours": 0.2737187304094227,
+  "numeric_review_status": "distribution_investigation_required",
+  "one_optimized_repetition_only": true,
+  "other_request_seconds": 16.17005094885826,
+  "overall_runtime_phase_complete": false,
+  "permutation_sha256": "0c14d8ff4b97be5b652ed61130a06bf852bfdbb3df2e1254462900e6fee631f5",
+  "prediction_and_sampling_seconds": 522.8708116570488,
+  "preparation_seconds": 396.47935087699443,
+  "primary": {
+    "manifest_sha256": "a0114fd74721cf9bed31e9131045e841f262db123c8f849e5cb3f15814a14f4b",
+    "path": "results/cdf-arithmetic-v1/context-4096/seed-20261111-case-0",
+    "samples_sha256": "27e51ad1b1ee615fc921ee4f5c237155139304da3e7c193f7781a389cee6d53e"
+  },
+  "reference_manifest_sha256": "0cdfb135e5b95c1c2353979005fb16f234a9ec4ed6a12a25d512920ffcc1ec59",
+  "refill_preparation_seconds": 194.73161901813,
+  "refill_proposed_vectors": 452,
+  "relative_distribution_review": {
+    "absolute_gate_still_required": false,
+    "cdf_difference": [
+      0.005879999999999996,
+      0.0049200000000000355,
+      0.0042400000000000215,
+      0.004300000000000026,
+      0.0051800000000000734,
+      0.006000000000000005,
+      0.0028000000000000247,
+      0.009419999999999984,
+      0.00818000000000002,
+      0.007560000000000011,
+      0.008680000000000021,
+      0.0044800000000000395,
+      0.0042200000000000015,
+      0.0040799999999999725,
+      0.006140000000000034,
+      0.0041200000000000125,
+      0.004620000000000013,
+      0.009520000000000028,
+      0.005319999999999991,
+      0.009639999999999982,
+      0.00739999999999999,
+      0.010620000000000018,
+      0.006980000000000097,
+      0.0043400000000000105,
+      0.006140000000000034,
+      0.00768000000000002,
+      0.008680000000000021,
+      0.0046399999999999775,
+      0.008500000000000008,
+      0.006220000000000059,
+      0.0039000000000000146,
+      0.00491999999999998,
+      0.005679999999999907,
+      0.0044199999999999795,
+      0.0044600000000000195,
+      0.005120000000000013,
+      0.0046000000000000485,
+      0.005720000000000058,
+      0.0033000000000000806,
+      0.006859999999999977,
+      0.01035999999999998,
+      0.007179999999999964,
+      0.0027800000000000047,
+      0.006840000000000068,
+      0.005979999999999985,
+      0.0045800000000000285,
+      0.005259999999999931,
+      0.003940000000000055,
+      0.0040200000000000236,
+      0.004600000000000021,
+      0.005899999999999961,
+      0.007380000000000053,
+      0.005680000000000018
+    ],
+    "cdf_is_reference_grid_bound": false,
+    "cdf_statistic": "exact two-sample empirical CDF supremum at all pooled sample values, for the same 53 physical projections",
+    "flags": {
+      "joint_projection_cdf": [
+        0,
+        19
+      ],
+      "marginal_cdf": [],
+      "mean_reference_sd": [],
+      "sd_fraction": []
+    },
+    "investigation_required": true,
+    "investigation_thresholds": {
+      "cdf": 0.01,
+      "mean_reference_sd": 0.05,
+      "sd_fraction": 0.05
+    },
+    "max_cdf_difference": 0.010620000000000018,
+    "max_mean_difference_reference_sd": 0.017125744687071214,
+    "max_sd_fraction_difference": 0.013592683463034438,
+    "mean_difference_interpretation": "absolute change in signed bias, equivalently abs(candidate mean - control mean)/reference SD; not difference of absolute biases",
+    "mean_difference_reference_sd": [
+      0.00681279740605239,
+      0.0038948214328793284,
+      0.002474531527827093,
+      0.004121811126633033,
+      0.00035540007320903244,
+      0.006924319615331243,
+      0.0028272100203087917,
+      0.017125744687071214,
+      0.01380129592580366,
+      0.009658634495067448,
+      0.016497506674965072,
+      0.00411343488709198,
+      0.0011514163180423303,
+      0.01244642223838329,
+      0.01146134489033999,
+      0.001285598413990375,
+      0.0003792948576591958,
+      0.009608323577317928,
+      0.004552105632300031,
+      0.010483538809249942,
+      0.009588646034360328
+    ],
+    "original_api_absolute_gate_policy": true,
+    "policy_override": "Explicit human performance-first authorization; physical assessment is retained separately.",
+    "population_confidence_claim": false,
+    "schema": "posteriorforge.upstream_comparison.v1",
+    "sd_fraction_difference": [
+      0.0004556134631894526,
+      0.002263598649165699,
+      0.001184334185777569,
+      0.0027893832058172308,
+      0.0010170493108200285,
+      0.0029858172829888563,
+      0.004921909888426557,
+      0.002911205611230372,
+      0.0018943744682595742,
+      0.003561970681340565,
+      0.005127735123154009,
+      0.0074777384009678816,
+      0.006499087526370406,
+      0.005322158367575991,
+      0.0011447819051471075,
+      0.00765427573567512,
+      0.0011024593477535483,
+      0.00722261327473539,
+      0.0003521584643748632,
+      0.013592683463034438,
+      0.006534377860878626
+    ],
+    "thresholds_are_investigation_flags": true
+  },
+  "render_checks": {
+    "cdf_family_axes": 53,
+    "cdf_family_tick_labels_overlap": false,
+    "request_legend_overlaps_cost_bars": false,
+    "stage_events": 42
+  },
+  "request_speedup": 2.544369549079287,
+  "review_sha256": "ee081dbd320f2548edfa0ab99c5249852f5b28b357293315511a8be28c17c390",
+  "rows_or_flags_removed": false,
+  "schema": "posteriorforge.completed_hybrid_pilot_summary.v1",
+  "signed_curves_sha256": "51b296d3c401b87a9e330f8ef833c8db8dc069a3c64a93545d83ef8f287db87c",
+  "source_sha256": "6f662fda00e872b83872c3df1983977e977dc993beb8cd9614202d6d5f2a70f3",
+  "tables": {
+    "pilot-cdf-family.csv": "93029e124c48718655d8deaf081e96bb051a03f95d86863242c1ac834a1c0ba4",
+    "pilot-stage-events.csv": "5d1a12e8a5ee144716d26a8ed1232f7acce7f0c3ced93f01838977881864f000"
+  },
+  "wrapper_speedup": 2.43286825078845
+}

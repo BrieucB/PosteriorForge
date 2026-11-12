@@ -1,0 +1,27 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "README.md": "ecf9a73f8aa5873679ffba826e0a1ae0fcf6342cc57b473780fc0e68bbf4cf4c",
+    "actual-stage-costs.png": "228787740aa766ee69a888a41a955765ce6c147c717475498bf95dbeec4cf667",
+    "bounded-trace-kernels.png": "1e7fd8e19b4d181a7872ea1b9b2e800497855db42442daf67ad37272cb3f57cf",
+    "budget-hybrid-pilot-snapshot.json": "b1285aad11cb1d42bc0662ba071a12aaba8a34f1137b223b6ed5d7c446bb0cc1",
+    "complete-cdf-family.png": "5b16f9bc67ab13f7a0deb8ab4f01b5f974bbae793a5127753afa77b702c757c6",
+    "cuda-memory.png": "0d6b991e70d661d523c13aef646b11fe4f3baf00195017a9a01a16fc2583e756",
+    "execution-review-extract.json": "95ee7e0c5e8f6f7b7e9adb25e882da2f3a9d4a7a993ded2e23b1d5f60f6e0c9c",
+    "figure-data.json": "6ea61a9ba1b4320569bce4d1d99561ac4df5933a7575d6717c5a4f1c77c3e39a",
+    "maxks-permutation.json": "0c14d8ff4b97be5b652ed61130a06bf852bfdbb3df2e1254462900e6fee631f5",
+    "pilot-cdf-family.csv": "93029e124c48718655d8deaf081e96bb051a03f95d86863242c1ac834a1c0ba4",
+    "pilot-stage-events.csv": "5d1a12e8a5ee144716d26a8ed1232f7acce7f0c3ced93f01838977881864f000",
+    "pilot-summary.json": "c5068577d13b87d52a7dd332f912491d220a16e0b965b6d8c2b0844d68e8f400",
+    "posterior-all-21-cdfs.png": "53b30f11001f14107d8e5c571a0fa6aa5c4d1a37ba6784c8b7a82de0cef1db2c",
+    "posterior-worst-four-densities.png": "1cdddc03647cb5f0b347590f0ce5b6e4736bf7c696cd60ae594f56fa8b4e387e",
+    "qualification-stage-time-memory.png": "7e5a76203150f821c76d60109390082bd319033ba7add26221524b9fcbebf571",
+    "render-verification.json": "af6c4565ee3fc3dfadcb91c6923499acc49db49fa61f405e3c2638a36fbe1f1b",
+    "report.md": "d75578eccfe0a2f821e95419428d31b61efa2f1c285e929544f0737054d19be8",
+    "runtime-and-request-cost.png": "48bc0624adbc929b89e8547886ae181617b644f04811f1935f28f1d1ff659823",
+    "science-control-repeat-tails.json": "ee73f13057daac0f9cd990f7587fab905025d63fa50de1b6998641633983fae0",
+    "signed-cdf-flags.png": "6effd4fd580cc142cfe8f63584b50149e0da38402f0f8787efa6dbedf6e8cf38",
+    "timings.csv": "de7ec7b819f009bed8cbc6f3efe92f6dad4ca8e7c1147dbec38ea463c1dfb9fe"
+  },
+  "schema": "posteriorforge.evidence_checksums.v1"
+}

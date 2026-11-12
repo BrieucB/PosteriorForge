@@ -1,0 +1,91 @@
+{
+  "attribution": "Built with PriorLabs-TabPFN",
+  "cdf_family_axes": 53,
+  "cdf_family_review_match_absolute_tolerance": 1e-12,
+  "cdf_family_tick_labels_overlap": false,
+  "complete_stage_events": 42,
+  "environment": "verified reference Python 3.11 environment",
+  "exactly_one_details_section_after_rerun": true,
+  "figures": {
+    "actual-stage-costs.png": {
+      "pixels": [
+        1997,
+        1523
+      ],
+      "sha256": "228787740aa766ee69a888a41a955765ce6c147c717475498bf95dbeec4cf667"
+    },
+    "bounded-trace-kernels.png": {
+      "pixels": [
+        2154,
+        763
+      ],
+      "sha256": "1e7fd8e19b4d181a7872ea1b9b2e800497855db42442daf67ad37272cb3f57cf"
+    },
+    "complete-cdf-family.png": {
+      "pixels": [
+        1998,
+        678
+      ],
+      "sha256": "5b16f9bc67ab13f7a0deb8ab4f01b5f974bbae793a5127753afa77b702c757c6"
+    },
+    "cuda-memory.png": {
+      "pixels": [
+        1687,
+        756
+      ],
+      "sha256": "0d6b991e70d661d523c13aef646b11fe4f3baf00195017a9a01a16fc2583e756"
+    },
+    "posterior-all-21-cdfs.png": {
+      "pixels": [
+        2299,
+        3578
+      ],
+      "sha256": "53b30f11001f14107d8e5c571a0fa6aa5c4d1a37ba6784c8b7a82de0cef1db2c"
+    },
+    "posterior-worst-four-densities.png": {
+      "pixels": [
+        1997,
+        1311
+      ],
+      "sha256": "1cdddc03647cb5f0b347590f0ce5b6e4736bf7c696cd60ae594f56fa8b4e387e"
+    },
+    "qualification-stage-time-memory.png": {
+      "pixels": [
+        1997,
+        687
+      ],
+      "sha256": "7e5a76203150f821c76d60109390082bd319033ba7add26221524b9fcbebf571"
+    },
+    "runtime-and-request-cost.png": {
+      "pixels": [
+        2294,
+        765
+      ],
+      "sha256": "48bc0624adbc929b89e8547886ae181617b644f04811f1935f28f1d1ff659823"
+    },
+    "signed-cdf-flags.png": {
+      "pixels": [
+        1998,
+        733
+      ],
+      "sha256": "6effd4fd580cc142cfe8f63584b50149e0da38402f0f8787efa6dbedf6e8cf38"
+    }
+  },
+  "fresh_generic_report_then_details_render": true,
+  "legacy_work_script_section_replaced_without_duplicates": true,
+  "overall_runtime_phase_complete": false,
+  "posterior_rows_or_flags_removed": false,
+  "raw_posterior_npz_in_git_package": false,
+  "render_surface": "remote Karolina CPU, Agg; no GPU/model/reference calls",
+  "repeated_details_render_all_outputs_byte_stable": true,
+  "reporting_source_sha256": "6f662fda00e872b83872c3df1983977e977dc993beb8cd9614202d6d5f2a70f3",
+  "request_legend_overlaps_cost_bars": false,
+  "schema": "posteriorforge.hybrid_pilot_render_verification.v1",
+  "signed_cdf_curve_npz_in_git_package": false,
+  "visual_review": {
+    "correction": "Adjacent M20/J0 tick labels rotated vertically to remove overlap.",
+    "interpretation": "Physical-model failure, primary CDF investigation flags and supported control tail remain visible.",
+    "method": "remote image previews of all nine figures, including all 21 CDF panels and legends",
+    "result": "pass"
+  }
+}

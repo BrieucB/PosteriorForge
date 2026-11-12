@@ -54,12 +54,13 @@ under the hard 200-hour cap. The container recipe is provided but remains unbuil
 
 ## Follow-up failure investigation
 
-A separately authorized diagnostic investigation found an active SDK ensemble-CDF
-interpolation defect with measurable conditional-probability distortion. It has not
-been repaired or shown to explain the full gate failure. The original 50k request
+The initial separately authorized diagnostic investigation found an active SDK ensemble-CDF
+interpolation defect with measurable conditional-probability distortion. Its original
+snapshot preceded the later CDF-only repair described below; it did not establish
+that the defect explained the full gate failure. The original 50k request
 takes 38.9–40.2 minutes; a one-vector request took 149 seconds. A CPU/CUDA trace
-identifies repeated GPU attention as the dominant runtime cost. Statistical fixes
-and GPU/multi-GPU optimization remain proposals.
+identifies repeated GPU attention as the dominant runtime cost. At that historical snapshot, statistical fixes
+and GPU/multi-GPU optimization were proposals.
 
 See the [diagnostic report](evidence/diagnostics/report.md), ranked next experiments,
 [reproduction guide](evidence/diagnostics/reproduce.md), and
@@ -72,13 +73,13 @@ Original evidence and all 24 failure verdicts are unchanged.
 The explicit source-guarded CDF arithmetic adapter is implemented, but its fixed
 case-0 / seed 20261111 / 4096-world / 50k-vector pilot still **fails the unchanged gate**.
 Worst marginal CDF upper is 0.2183, bias upper 0.4299 reference SD, and SD-ratio upper 1.3977.
-All 50k rows are valid; all 1008 corrected-helper calls are verified. No further
-scientific or optimization GPU jobs were submitted. Original results/defaults remain
-unchanged. [Pilot report and posteriors](evidence/cdf-arithmetic-v1/report.md).
+All 50k rows are valid; all 1008 corrected-helper calls are verified. That isolated
+pilot stopped after its failed assessment; the separately authorized performance-first
+phase is described above. Original results/defaults remain unchanged. [Pilot report and posteriors](evidence/cdf-arithmetic-v1/report.md).
 
 The pilot used 0.677778 GPU-hours; cumulative actual cost is 17.4825/200 GPU-hours,
 zero reserved. Exact sufficient observations are the next separate proposal;
-GPU context reuse, precision/compilation and multi-GPU scaling remain gated.
+That pilot snapshot predates the current performance-first execution work.
 
 ## Reproduce
 
@@ -117,4 +118,4 @@ See `NOTICE`, the root MIT license, per-file provenance, and the separate Prior
 Labs license for upstream code and model terms. Uncorrected upstream log densities
 are not used as calibrated densities of support-truncated accepted samples.
 
-Current runtime contract and measured control figures: [performance-first execution](docs/performance-first-v1.md) and [control report](evidence/performance-first-v1/controls/report.md).
+Current runtime contract and measured evidence: [performance-first execution](docs/performance-first-v1.md), [control report](evidence/performance-first-v1/controls/report.md), and [first complete 50k hybrid pilot](evidence/performance-first-v1/hybrid-pilot-01/README.md). The single pilot measured a 2.544x request speedup; timing repetitions, further optimization and distribution investigations remain pending.
