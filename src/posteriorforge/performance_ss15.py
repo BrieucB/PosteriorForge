@@ -20,19 +20,69 @@ SCHEMA="posteriorforge.inference.ss15_fp16.v1"
 VARIANT="accuracy_ss15_fp16_fifo_v1"
 MODE=clean.MODE
 COUNT=50000
+FALLBACK_MAP={10:[5],20:[4]}
+CONTROL_MODE=witnesses.CONTROL_MODE
 PRECISION_SHA=clean.PRECISION_SHA
 ALL21_SOURCE_SHA=clean.ALL21_SOURCE_SHA # frozen raw-P stage0 assembler only, not a raw33 proof.
 BASE_SHA=clean.BASE_SHA
 REPRESENTATION_SHA256="46323c0b94301c2f7e678538881d5cbbdd8bc52c62a60021798176bffe81eb85"
 SS15_EXECUTION_SHA256="1732f7269286f1629f6e09b1b7ea14cfadbaea84cdae9ee4ab5221cf5b78fbbb"
-QUALIFIER_SHA256="0c3dd7274d6741bba2ba0ae2744542865f48b2f887a6831e1d2aa6bce47f78c0"
+QUALIFIER_SHA256="2ecadae34e5173bebb5127f578233964bfde6820ae38f9ed0baaac054d119816"
 CONDITIONAL_QUALIFICATION_SHA256=None
 WAVE_SHA256="4037d48846ef3678ce7b647c1a326606ea967d396b3ce34bb1998241a131f6de"
 require=clean.require
 load_script=clean.load_script
-query_witness_delta=clean.query_witness_delta
 
 def source_sha256():return sha256_file(__file__)
+
+def is_fallback(stage,member):return member in FALLBACK_MAP.get(stage,())
+
+# Validation-only copies of the frozen witness checks, with the explicitly
+# declared SS15 map replacing the old hardcoded10:5 predicate. No model math.
+def prefill_witness_passed(report,stage):
+    """Prove the approximate prefill really computed low projections, not a cast."""
+    mode=report["mode"]
+    expected="torch.bfloat16" if mode=="amp_bf16_prefill_query_v1" else "torch.float16"
+    rows=report["witnesses"];result=[]
+    for member in range(8):
+        selected=[r for r in rows if r["phase"]=="prefill" and r["stage"]==stage and r["member"]==member and r["cache_kv"]]
+        strict=is_fallback(stage,member)
+        if mode.startswith("amp_") and not strict:
+            passed=bool(selected) and any(expected in [r["projection_dtypes"][key] for key in ("k","v","kv","qkv")] and r["autocast_enabled"] for r in selected)
+        else:
+            passed=bool(selected) and all(not r["autocast_enabled"] and all(value in (None,"torch.float32") for value in r["projection_dtypes"].values()) for r in selected)
+        if mode=="tf32_high_forward_v1" and not strict:
+            passed=passed and all(r.get("allow_tf32") is True and r.get("matmul_precision")=="high" for r in selected)
+        elif strict or mode==CONTROL_MODE:
+            passed=passed and all(r.get("allow_tf32") is False and r.get("matmul_precision")=="highest" for r in selected)
+        if mode.startswith("amp_") and not strict:
+            passed=passed and all(r.get("autocast_dtype")==expected and r["autocast_enabled"] for r in selected)
+        storage={value for r in selected for value in r.get("supplied_cache_dtypes",[]) if value is not None}
+        allowed={"torch.float32"} if strict or not mode.startswith("amp_") else {"torch.float32",expected}
+        passed=passed and bool(storage) and storage.issubset(allowed)
+        result.append({"member":member,"passed":passed,"prefill_event_count":sum(r["count"] for r in selected),
+                       "actual_stored_cache_dtypes":sorted(storage)})
+    return {"passed":all(r["passed"] for r in result),"members":result,"storage_dtype_is_separate_observation":True}
+
+def query_witness_delta(before,after,*,stage,member):
+ rows=[]
+ for key,count in after.items():
+  delta=count-before.get(key,0)
+  if delta:
+   event=json.loads(key);require(delta>0 and event["phase"]=="query" and event["stage"]==stage and event["member"]==member,
+       "actual precision callback identity changed");rows.append(event)
+ strict=is_fallback(stage,member);expected="torch.float32" if strict else "torch.float16"
+ require(rows,"actual query projection not witnessed")
+ for event in rows:
+  values=[v for v in event["projection_dtypes"].values() if v is not None]
+  require(values and all(v in ("torch.float32",expected) for v in values),"query projection dtype outside policy")
+  require(event["autocast_enabled"] is (not strict) and event["allow_tf32"] is False
+       and event["matmul_precision"]=="highest","actual query AMP/TF32 flags differ")
+  if not strict:require("torch.float16" in values and event["autocast_dtype"]=="torch.float16","FP16 query activation absent")
+  else:require(all(v=="torch.float32" for v in values),"fallback query left FP32")
+ return {"phase":"query","stage":stage,"member":member,"event_types":len(rows),
+     "computed_projection_dtype":expected,"strict_FP32_fallback":strict,"passed":True}
+
 def ss15_source_sha():
  from . import execution_ss15
  return execution_ss15.source_sha256()
@@ -47,7 +97,7 @@ def execution_metadata():
  from . import execution_ss15
  require_sources()
  return {'schema':'posteriorforge.ss15_fp16_execution_policy.v1','module_sha256':source_sha256(),
-  'representation':representation.representation_metadata(),'SS15_execution':execution_ss15.execution_metadata(MODE),
+  'representation':representation.representation_metadata(),'SS15_execution':execution_ss15.execution_metadata(MODE,FALLBACK_MAP),
   'sampling_wave':wave.execution_metadata(),'canonical_component_sampling_source_sha256':clean.SAMPLING_SHA,
   'stage0_rawP_assembler_source_sha256':ALL21_SOURCE_SHA,'postprocessing_dtype':'torch.float32',
   'forward_precision':MODE,'approximate_experiment':True,'qualified_FP32':False,
@@ -68,12 +118,12 @@ class SS15StageAdapter:
   require(self.session is None,"previous precision stage not closed")
   from . import execution_ss15 as precision
   self.stage_index=stage;self.failure=False;self.stage_heads=0;self.members=set();self.prefill=None;self.model=None;self.entered=False
-  self.session=precision.SS15PrecisionSession(MODE)
+  self.session=precision.SS15PrecisionSession(MODE,fallback_map=FALLBACK_MAP)
   try:
    self.session.__enter__();self.entered=True
-   self.engine=precision.SS15StageExecutor(self.checkpoint,cdf_descriptor=self.cdf_descriptor,query_batch_size=1024)
+   self.engine=precision.SS15StageExecutor(self.checkpoint,cdf_descriptor=self.cdf_descriptor,query_batch_size=1024,fallback_map=FALLBACK_MAP)
    result=self.engine.prepare(theta,obs,stage);self.prepare_count+=1
-   self.prefill=witnesses.prefill_witness_passed(self.session.report(),stage)
+   self.prefill=prefill_witness_passed(self.session.report(),stage)
    require(self.prefill["passed"],"actual FP16 prefill/cache/fallback not witnessed")
    base=load_script("characterize_precision_approximation.py",BASE_SHA)
    self.model=base.model_summary(self.engine.regressor,load_script("qualify_execution_cache.py",base.UTILITY_SHA))
@@ -87,7 +137,7 @@ class SS15StageAdapter:
   try:
    prediction=self.engine.predict_component(member,query,capture_member=capture_member,with_log_prob=with_log_prob)
    witness=query_witness_delta(before,dict(self.session.hist),stage=self.stage_index,member=member)
-   expected_route="original_fit_preprocessors" if self.stage_index==10 and member==5 else "resident_cache"
+   expected_route="original_fit_preprocessors" if is_fallback(self.stage_index,member) else "resident_cache"
    require(prediction.get("hybrid_execution_path")==expected_route,"actual cached/FP32 fallback route differs")
    require(self.cdf_descriptor["patched_call_count"]-cdf_before==1,"one actual corrected CDF call per head required")
    require(self.cdf_descriptor.get("executed_corrected_cdf_code_sha256")==self.cdf_descriptor.get("corrected_cdf_code_sha256"),"corrected CDF not executed")
@@ -187,10 +237,10 @@ def qualification_receipt(path,*,raw_bindings,transformed_bindings):
  require(isinstance(CONDITIONAL_QUALIFICATION_SHA256,str) and sha256_file(path)==CONDITIONAL_QUALIFICATION_SHA256,
    'successful matching SS15 conditional qualification is not pinned')
  require(isinstance(QUALIFIER_SHA256,str),'matching conditional qualifier source is not pinned')
- qualifier=load_script('qualify_ss15_conditionals.py',QUALIFIER_SHA256)
+ qualifier=load_script('repair_ss15_conditionals.py',QUALIFIER_SHA256)
  document=json.loads(Path(path).read_text())
  return document,qualifier.validate_qualification(document,raw_bindings=raw_bindings,transformed_bindings=transformed_bindings,
-    representation_descriptor=representation.representation_metadata(),expected_sources=qualifier.source_pins(),fallback_map={"10":[5]})
+    representation_descriptor=representation.representation_metadata(),expected_sources=qualifier.source_pins(),fallback_map={str(k):list(v) for k,v in FALLBACK_MAP.items()},artifact_root=Path(path).parent)
 
 
 def rng_hashes(torch):

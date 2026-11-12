@@ -64,7 +64,7 @@ def test_prepare_failures_release_only_entered_precision_scope(monkeypatch,failu
  from posteriorforge import execution_ss15 as engine
  events=[]
  class Session:
-  def __init__(self,mode):pass
+  def __init__(self,mode,*,fallback_map=None):assert fallback_map==p.FALLBACK_MAP
   def __enter__(self):
    if failure=='enter':raise RuntimeError('injected enter')
    return self
@@ -108,3 +108,42 @@ def test_all_module_globals_used_by_run_are_resolved():
  for name in ('run','qualification_receipt'):
   scope=next(c for c in tree.get_children() if c.get_name()==name)
   assert not [s.get_name() for s in scope.get_symbols() if s.is_global() and s.is_referenced() and s.get_name() not in vars(p) and not hasattr(builtins,s.get_name())]
+
+
+def prefill_report(stage=20):
+ rows=[]
+ for member in range(8):
+  strict=p.is_fallback(stage,member)
+  dtype='torch.float32' if strict else 'torch.float16'
+  rows.append({'phase':'prefill','stage':stage,'member':member,'cache_kv':True,'count':1,
+    'projection_dtypes':{'q':None,'k':dtype,'v':dtype,'kv':None,'qkv':None},
+    'autocast_enabled':not strict,'autocast_dtype':'torch.float16','allow_tf32':False,
+    'matmul_precision':'highest','supplied_cache_dtypes':[dtype]})
+ return {'mode':p.MODE,'witnesses':rows}
+
+
+def test_new_fallback_is_observed_as_FP32_prefill_not_an_AMP_label():
+ r=prefill_report();result=p.prefill_witness_passed(r,20)
+ assert result['passed'] and result['members'][4]['actual_stored_cache_dtypes']==['torch.float32']
+ r['witnesses'][4]['autocast_enabled']=True
+ assert not p.prefill_witness_passed(r,20)['passed']
+ assert p.FALLBACK_MAP=={10:[5],20:[4]}
+
+
+def test_query_delta_checks_both_declared_fallbacks_and_other_AMP_heads():
+ for stage,member in ((10,5),(20,4),(20,3)):
+  strict=p.is_fallback(stage,member)
+  event={'phase':'query','stage':stage,'member':member,'projection_dtypes':{'q':'torch.float32' if strict else 'torch.float16'},
+   'autocast_enabled':not strict,'autocast_dtype':'torch.float16','allow_tf32':False,'matmul_precision':'highest'}
+  r=p.query_witness_delta({}, {json.dumps(event):1},stage=stage,member=member)
+  assert r['passed'] and r['strict_FP32_fallback'] is strict
+  if strict:
+   event['projection_dtypes']['q']='torch.float16'
+   with pytest.raises(RuntimeError):p.query_witness_delta({}, {json.dumps(event):1},stage=stage,member=member)
+
+
+def test_map_metadata_is_new_and_numerical_engine_source_unchanged():
+ m=p.execution_metadata()
+ assert m['SS15_execution']['module_sha256']=='1732f7269286f1629f6e09b1b7ea14cfadbaea84cdae9ee4ab5221cf5b78fbbb'
+ assert m['SS15_execution']['fallback_map']=={'10':[5],'20':[4]}
+ assert m['e71_inverse_unchanged'] if 'e71_inverse_unchanged' in m else m['sampling_wave']['e71_inverse_unchanged']
