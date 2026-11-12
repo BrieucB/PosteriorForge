@@ -1,0 +1,1660 @@
+{
+  "allocator_policy": {
+    "action": "gc.collect then sealed libc malloc_trim(0), once per rejected boundary",
+    "allocator_evidence_sha256": "0ab24c37e27467b20da531bfea91d1216e46501f925178592957eea9f494b75b",
+    "ineffective_action": "unchanged parent disables all retention; no bypass or LRU",
+    "parent_guard": "unchanged original measured-memory admission;100GiB inclusive of8GiB slack",
+    "policy_sha256": "0b5b29158f2b650b11cba72390a1a444cd3145e183c8ff95c4d351dc41b9c822",
+    "rss_bytes_subtracted": 0,
+    "rss_limit_bytes": 107374182400,
+    "safety_slack_bytes": 8589934592,
+    "trigger": "original RSS/cgroup plus incoming unique CUDA storage plus8GiB slack would reject"
+  },
+  "attribution": "Built with PriorLabs-TabPFN",
+  "cache_only_full21_qualified": false,
+  "counters": {
+    "actual_prepare_miss_count": 21,
+    "cache_hit_count": 42,
+    "logical_prepare_count": 63,
+    "offload_bytes": 271648985376,
+    "offload_count": 63,
+    "predict_component_count": 1176,
+    "reload_bytes": 181099323584,
+    "reload_count": 42
+  },
+  "final_global_cuda_allocated_bytes": 8519680,
+  "final_predicates": {
+    "all105_migration_hashes_aliases_layout": true,
+    "all21_final_cpu_no_extra_cuda": true,
+    "all21_initial_cpu_no_extra_cuda": true,
+    "all21_stage_passes": true,
+    "all_gqa_lifecycles_restored": true,
+    "all_trim_events_valid": true,
+    "allocator_source_and_evidence_unchanged": true,
+    "cdf_alias_restored": true,
+    "conditional_trim_exercised": true,
+    "memory_contract_passed": true,
+    "session_rng_preserved": true,
+    "sources_unchanged": true,
+    "two_full_warm_scans": true,
+    "zero_refits_42_warm_hits": true
+  },
+  "final_retention_enabled": true,
+  "full21_gqa_host_trim_qualified": true,
+  "initial_global_cuda_allocated_bytes": 8519680,
+  "memory_contract": {
+    "estimate_is_not_measured_fit_evidence": true,
+    "initial_all_state_estimate_bytes": 93415538688,
+    "maximum_measured_rss_before_slack_bytes": 98784247808,
+    "rss_limit_bytes": 107374182400,
+    "rss_limit_includes_slack": true,
+    "safety_slack_bytes": 8589934592
+  },
+  "migration_count": 105,
+  "migration_operations": {
+    "offload": 63,
+    "reload": 42
+  },
+  "migrations": [
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3425037120,
+      "inventory_file": "migration-000-offload-stage-0.json.gz",
+      "inventory_sha256": "99e6d4239ebf4a788f7948c499e224552408a4ef87bdd55d45b8dfc33f723a33",
+      "operation": "offload",
+      "seconds": 6.542777458904311,
+      "stage_index": 0
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3525706752,
+      "inventory_file": "migration-001-offload-stage-1.json.gz",
+      "inventory_sha256": "62708ba5376bb3e287f0b185041665a4b378742d6a0985021c11a62dda2eeff7",
+      "operation": "offload",
+      "seconds": 6.524422834976576,
+      "stage_index": 1
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3576041568,
+      "inventory_file": "migration-002-offload-stage-2.json.gz",
+      "inventory_sha256": "6413b9f16d927fc48e817ea262f2b13c2859207b84f5b64d83a1d90c72465fd6",
+      "operation": "offload",
+      "seconds": 6.284609862952493,
+      "stage_index": 2
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3727046016,
+      "inventory_file": "migration-003-offload-stage-3.json.gz",
+      "inventory_sha256": "2cd47acf87fb3ae792f577776723d57f7591a83d74bccb971ab0e52d47e1c00d",
+      "operation": "offload",
+      "seconds": 6.572980394004844,
+      "stage_index": 3
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3777380832,
+      "inventory_file": "migration-004-offload-stage-4.json.gz",
+      "inventory_sha256": "84339902131ec0f3429f8667dc5b88e45c4bd2a3e1dbac334588772dae8fc3e7",
+      "operation": "offload",
+      "seconds": 6.653047377010807,
+      "stage_index": 4
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3878050464,
+      "inventory_file": "migration-005-offload-stage-5.json.gz",
+      "inventory_sha256": "88c0275a07ae7c74e5d7811803f66fbe0e9dc08f82cef2c4dec936d37b4f085d",
+      "operation": "offload",
+      "seconds": 6.8498661840567365,
+      "stage_index": 5
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3928385280,
+      "inventory_file": "migration-006-offload-stage-6.json.gz",
+      "inventory_sha256": "6a402fc1d7c2b611723797dfaf5b52862622fbc21ebf4cbf84d1aaae3b96e878",
+      "operation": "offload",
+      "seconds": 7.0990731520578265,
+      "stage_index": 6
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4079389728,
+      "inventory_file": "migration-007-offload-stage-7.json.gz",
+      "inventory_sha256": "7f9e931717a301f2b7dd1997ec23d0d6ac63f844cf95acbc9e051acc600390f2",
+      "operation": "offload",
+      "seconds": 7.354193567996845,
+      "stage_index": 7
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4129724544,
+      "inventory_file": "migration-008-offload-stage-8.json.gz",
+      "inventory_sha256": "78077e52af51e601c0566209d319b87051487dc95c2a0ac4ad6f41d1a4e96384",
+      "operation": "offload",
+      "seconds": 7.672692139982246,
+      "stage_index": 8
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4230394176,
+      "inventory_file": "migration-009-offload-stage-9.json.gz",
+      "inventory_sha256": "b84a7229b7522f61192bd3af593a3a06a09ef74ef655721530da465fe6124c55",
+      "operation": "offload",
+      "seconds": 7.813212651992217,
+      "stage_index": 9
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4280729344,
+      "inventory_file": "migration-010-offload-stage-10.json.gz",
+      "inventory_sha256": "79f49723d7595f8a9de35b543ef77288aa5ac465f83d8f33488ded3964b4cb8c",
+      "operation": "offload",
+      "seconds": 8.036327028996311,
+      "stage_index": 10
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4431733440,
+      "inventory_file": "migration-011-offload-stage-11.json.gz",
+      "inventory_sha256": "a7e3252c552163c91888209d450d7c3a6b665101da8c7016b4b0a8ccc26ebb61",
+      "operation": "offload",
+      "seconds": 7.977397940005176,
+      "stage_index": 11
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4482068256,
+      "inventory_file": "migration-012-offload-stage-12.json.gz",
+      "inventory_sha256": "8bf097d0082c21055992b2a5ee4f5d78ff1ddb99cdcc4921a7bc268dc4e4196f",
+      "operation": "offload",
+      "seconds": 8.283863194985315,
+      "stage_index": 12
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4582737888,
+      "inventory_file": "migration-013-offload-stage-13.json.gz",
+      "inventory_sha256": "be0c2f56a67bec173c6f3cd4223dfadbbd80333a7e5cdc6ed8d07326b1117aa1",
+      "operation": "offload",
+      "seconds": 8.153031666064635,
+      "stage_index": 13
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4633072704,
+      "inventory_file": "migration-014-offload-stage-14.json.gz",
+      "inventory_sha256": "fa14c3f6a561cb65bcb8b93b8fa02a000e4b0f6b949f5338e33a40d4769474f9",
+      "operation": "offload",
+      "seconds": 8.683910747990012,
+      "stage_index": 14
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4784077152,
+      "inventory_file": "migration-015-offload-stage-15.json.gz",
+      "inventory_sha256": "9304548e60beefea55a6138a84ffef746633ab94ee9115e1f814916abbb1ebd4",
+      "operation": "offload",
+      "seconds": 8.932321712956764,
+      "stage_index": 15
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4834411968,
+      "inventory_file": "migration-016-offload-stage-16.json.gz",
+      "inventory_sha256": "fa969da3acf9d9ab818eba1b414c333f0418716cde5ac9b498f6791addf0aab7",
+      "operation": "offload",
+      "seconds": 9.369412064901553,
+      "stage_index": 16
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4935081600,
+      "inventory_file": "migration-017-offload-stage-17.json.gz",
+      "inventory_sha256": "e435eb706357e77b5be5f90f6e8d5d13f69610f180f933850166115b54f6c321",
+      "operation": "offload",
+      "seconds": 9.565055618993938,
+      "stage_index": 17
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4985416416,
+      "inventory_file": "migration-018-offload-stage-18.json.gz",
+      "inventory_sha256": "5e722a4752a495050c496a52b9f37f95453670fb9fefc5eb00cda14ad5282904",
+      "operation": "offload",
+      "seconds": 9.36338498396799,
+      "stage_index": 18
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 5136420864,
+      "inventory_file": "migration-019-offload-stage-19.json.gz",
+      "inventory_sha256": "8060251b2a42f219a791db70d0236ded83d677b6123155caf8ed4f78474d5941",
+      "operation": "offload",
+      "seconds": 9.596969961072318,
+      "stage_index": 19
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 5186755680,
+      "inventory_file": "migration-020-offload-stage-20.json.gz",
+      "inventory_sha256": "668c61a640f515dd3a97d20d021979336e6c29f4c66c7dfaf41e30a402129fa2",
+      "operation": "offload",
+      "seconds": 9.726215777918696,
+      "stage_index": 20
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3425037120,
+      "inventory_file": "migration-021-reload-stage-0.json.gz",
+      "inventory_sha256": "2ba56b30703d9aa4736d26da05c5482184370e498d0c8e3d96ca668b46329864",
+      "operation": "reload",
+      "seconds": 5.496279461076483,
+      "stage_index": 0
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3425037120,
+      "inventory_file": "migration-022-offload-stage-0.json.gz",
+      "inventory_sha256": "f472e6ec1ed68875bd5f84598fea5af88499776c44d8f3c852b8515a207ed371",
+      "operation": "offload",
+      "seconds": 6.24196120002307,
+      "stage_index": 0
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3525706752,
+      "inventory_file": "migration-023-reload-stage-1.json.gz",
+      "inventory_sha256": "97fe8ebbc7a02b85be41a450d64a4319c654c50f43028205edce560f24faf62e",
+      "operation": "reload",
+      "seconds": 6.13278866908513,
+      "stage_index": 1
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3525706752,
+      "inventory_file": "migration-024-offload-stage-1.json.gz",
+      "inventory_sha256": "2cced2edfa2f0443c6ea81bb6d0b3b92c49c2e6e9c722589daef026546e75579",
+      "operation": "offload",
+      "seconds": 6.8596160729648545,
+      "stage_index": 1
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3576041568,
+      "inventory_file": "migration-025-reload-stage-2.json.gz",
+      "inventory_sha256": "bfb7fbcec5f9c1cce8af3ed2929d35a38e0677d7a7d6549ddf3dc62ef5a8bf18",
+      "operation": "reload",
+      "seconds": 6.2039928620215505,
+      "stage_index": 2
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3576041568,
+      "inventory_file": "migration-026-offload-stage-2.json.gz",
+      "inventory_sha256": "080e67b1f5af17db0c3e115a32fe85cb52e8602c124b12319a3548804a6f771f",
+      "operation": "offload",
+      "seconds": 6.485561523004435,
+      "stage_index": 2
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3727046016,
+      "inventory_file": "migration-027-reload-stage-3.json.gz",
+      "inventory_sha256": "7f087b8a88c2152f0d4ff440b651f85cc04d29d9c6927633d070957ee032b342",
+      "operation": "reload",
+      "seconds": 6.517871591029689,
+      "stage_index": 3
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3727046016,
+      "inventory_file": "migration-028-offload-stage-3.json.gz",
+      "inventory_sha256": "ac80c5917021afdaf49a248ff85604697e161d2eea265274327b5b35642e7e64",
+      "operation": "offload",
+      "seconds": 6.747852859087288,
+      "stage_index": 3
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3777380832,
+      "inventory_file": "migration-029-reload-stage-4.json.gz",
+      "inventory_sha256": "9c56d7024a677f09e11c66d2e2cd1b7899dc824b389076d5ea68c40a30b11819",
+      "operation": "reload",
+      "seconds": 6.542326249065809,
+      "stage_index": 4
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3777380832,
+      "inventory_file": "migration-030-offload-stage-4.json.gz",
+      "inventory_sha256": "cc88b4849c37c815eb49feb2aeb52d5d0cd18ec209143b0d804be91e607a41e6",
+      "operation": "offload",
+      "seconds": 6.843028677045368,
+      "stage_index": 4
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3878050464,
+      "inventory_file": "migration-031-reload-stage-5.json.gz",
+      "inventory_sha256": "74a5e762bf3b6abd1c694e2605a45962b60eb5d0a7c3e1aa5d95285413cebaf0",
+      "operation": "reload",
+      "seconds": 6.705311495112255,
+      "stage_index": 5
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3878050464,
+      "inventory_file": "migration-032-offload-stage-5.json.gz",
+      "inventory_sha256": "8b7db589ac158090cf5e7fefbc496003fe043c99070e400c1fb309423e504812",
+      "operation": "offload",
+      "seconds": 7.067818143055774,
+      "stage_index": 5
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3928385280,
+      "inventory_file": "migration-033-reload-stage-6.json.gz",
+      "inventory_sha256": "7007ee6f8c222fdb55d02e3d51888adf6ef9161e2c45d5c0fb03f4ca0c9ac08d",
+      "operation": "reload",
+      "seconds": 6.805414143949747,
+      "stage_index": 6
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3928385280,
+      "inventory_file": "migration-034-offload-stage-6.json.gz",
+      "inventory_sha256": "a02187b9ee4a4145c4c307e65fa5ad763b92a1738e233ada0aff54542c0d25de",
+      "operation": "offload",
+      "seconds": 7.101629465003498,
+      "stage_index": 6
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4079389728,
+      "inventory_file": "migration-035-reload-stage-7.json.gz",
+      "inventory_sha256": "46bc4ef5b44b66fd50db9b889de6b83bf31128af94da56ad2daaaf94afe9054a",
+      "operation": "reload",
+      "seconds": 7.054823945974931,
+      "stage_index": 7
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4079389728,
+      "inventory_file": "migration-036-offload-stage-7.json.gz",
+      "inventory_sha256": "f3c5cb7a8ba186ba9a5919da04ac473b0cb3208873d120a17321aaead6271c08",
+      "operation": "offload",
+      "seconds": 7.399390238919295,
+      "stage_index": 7
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4129724544,
+      "inventory_file": "migration-037-reload-stage-8.json.gz",
+      "inventory_sha256": "6218e55118045de5ccbc7b3e0ec7b6717d3bcb908684ec1fe7a7c0d3883ed68a",
+      "operation": "reload",
+      "seconds": 7.119304560939781,
+      "stage_index": 8
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4129724544,
+      "inventory_file": "migration-038-offload-stage-8.json.gz",
+      "inventory_sha256": "87d1d64ff83c712835e95209e05efd4dfe8940e048093473b067a5bfc515ad0f",
+      "operation": "offload",
+      "seconds": 8.109428324038163,
+      "stage_index": 8
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4230394176,
+      "inventory_file": "migration-039-reload-stage-9.json.gz",
+      "inventory_sha256": "94cf21d3e8c5049d449949c64efeff339eb74ea8ddc1ef4dacfd02c6109bcb02",
+      "operation": "reload",
+      "seconds": 7.317376430961303,
+      "stage_index": 9
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4230394176,
+      "inventory_file": "migration-040-offload-stage-9.json.gz",
+      "inventory_sha256": "b6401f4a931dd275f57a9e774bcce675d57c3f971c2021873cf2056934383ca4",
+      "operation": "offload",
+      "seconds": 8.287280485965312,
+      "stage_index": 9
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4280729344,
+      "inventory_file": "migration-041-reload-stage-10.json.gz",
+      "inventory_sha256": "31f73625e2f5ca55fef0b2240de677e2c3687e81ee57e06762b08fc98c2b2843",
+      "operation": "reload",
+      "seconds": 7.532431325991638,
+      "stage_index": 10
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4280729344,
+      "inventory_file": "migration-042-offload-stage-10.json.gz",
+      "inventory_sha256": "656ab88d9d9453338ec21e5ce87d262ec273b715328365eb89ca322b0892a3b0",
+      "operation": "offload",
+      "seconds": 8.474470109096728,
+      "stage_index": 10
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4431733440,
+      "inventory_file": "migration-043-reload-stage-11.json.gz",
+      "inventory_sha256": "1b1948af22b802f6af291f277d58bcb7951203793b5f1a82e4a860d62c6a9163",
+      "operation": "reload",
+      "seconds": 7.648049139068462,
+      "stage_index": 11
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4431733440,
+      "inventory_file": "migration-044-offload-stage-11.json.gz",
+      "inventory_sha256": "34b7e2870c320cedaf5cb8511b9d52f8b81693220897016707df8c31f80a4062",
+      "operation": "offload",
+      "seconds": 8.743329321034253,
+      "stage_index": 11
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4482068256,
+      "inventory_file": "migration-045-reload-stage-12.json.gz",
+      "inventory_sha256": "dee64774633f0f014047fb3f7e7c410f0c7fbfb1ecfaeed934323f68738fc7fa",
+      "operation": "reload",
+      "seconds": 7.739222428062931,
+      "stage_index": 12
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4482068256,
+      "inventory_file": "migration-046-offload-stage-12.json.gz",
+      "inventory_sha256": "b20dfb8f026ff488814b47bd1e1b8f05963f7ee49d1b7c1ea3edbe876a53304f",
+      "operation": "offload",
+      "seconds": 8.836601544986479,
+      "stage_index": 12
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4582737888,
+      "inventory_file": "migration-047-reload-stage-13.json.gz",
+      "inventory_sha256": "7a6cc8472c2061d3f3afca75285ad6ee533d95d2cc2193b0a0f747e58c8e3f1b",
+      "operation": "reload",
+      "seconds": 8.311275733052753,
+      "stage_index": 13
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4582737888,
+      "inventory_file": "migration-048-offload-stage-13.json.gz",
+      "inventory_sha256": "85835e5a90517ff486131875f62908e10ef6d858434ad2d058daf2378a8cbf1c",
+      "operation": "offload",
+      "seconds": 8.335223607020453,
+      "stage_index": 13
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4633072704,
+      "inventory_file": "migration-049-reload-stage-14.json.gz",
+      "inventory_sha256": "6e4add46bdc9b332e14f9dccbf07a1b39657fe5ab0d01914a602ad2a9ffa5712",
+      "operation": "reload",
+      "seconds": 8.373612137977034,
+      "stage_index": 14
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4633072704,
+      "inventory_file": "migration-050-offload-stage-14.json.gz",
+      "inventory_sha256": "bb652472526aedf6a1aa5cc998c35cc3b618e6a3dc1054139fe533b1fa2026f6",
+      "operation": "offload",
+      "seconds": 9.1451456239447,
+      "stage_index": 14
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4784077152,
+      "inventory_file": "migration-051-reload-stage-15.json.gz",
+      "inventory_sha256": "66259c1e8ed74bb5169754751268da170d4703708acd68a80180ebd06f35bb47",
+      "operation": "reload",
+      "seconds": 8.664913270040415,
+      "stage_index": 15
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4784077152,
+      "inventory_file": "migration-052-offload-stage-15.json.gz",
+      "inventory_sha256": "43099c995679c477814ae7396883aaab787dd88b76a1c1e00a688d233d91e69a",
+      "operation": "offload",
+      "seconds": 9.479128107894212,
+      "stage_index": 15
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4834411968,
+      "inventory_file": "migration-053-reload-stage-16.json.gz",
+      "inventory_sha256": "d024d125555dea3b77a0fe1fc175836b2d48056d856ce3141a3ae8559ba36c95",
+      "operation": "reload",
+      "seconds": 8.774591820896603,
+      "stage_index": 16
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4834411968,
+      "inventory_file": "migration-054-offload-stage-16.json.gz",
+      "inventory_sha256": "519eb0b42bacd3ad4eaae8f803652a647b7280e54d40fde7865bd17c454d69aa",
+      "operation": "offload",
+      "seconds": 8.737154870061204,
+      "stage_index": 16
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4935081600,
+      "inventory_file": "migration-055-reload-stage-17.json.gz",
+      "inventory_sha256": "0654b1376d32806b8e8cc4df1c535ca8e8202124f7b5a0b3d8e1330016c335d9",
+      "operation": "reload",
+      "seconds": 8.897101746988483,
+      "stage_index": 17
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4935081600,
+      "inventory_file": "migration-056-offload-stage-17.json.gz",
+      "inventory_sha256": "d62c6b1ec729295442a469a73cbd522092e516900d0db170d7485e5e6c70aa56",
+      "operation": "offload",
+      "seconds": 9.243421631981619,
+      "stage_index": 17
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4985416416,
+      "inventory_file": "migration-057-reload-stage-18.json.gz",
+      "inventory_sha256": "6062bf2c552d5dc842061a47cd367e69a036b52f1bb2d99a90d2453e4a1bd3eb",
+      "operation": "reload",
+      "seconds": 9.014130522031337,
+      "stage_index": 18
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4985416416,
+      "inventory_file": "migration-058-offload-stage-18.json.gz",
+      "inventory_sha256": "4768b62df759281c3fef87fbf9cb5f5f711a1dc48396b726e7aaa258328c83df",
+      "operation": "offload",
+      "seconds": 9.887920391978696,
+      "stage_index": 18
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 5136420864,
+      "inventory_file": "migration-059-reload-stage-19.json.gz",
+      "inventory_sha256": "962167369956375e2e9cb245fd61954a9b4b8e73643753b1056695f4f572e029",
+      "operation": "reload",
+      "seconds": 9.536629076930694,
+      "stage_index": 19
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 5136420864,
+      "inventory_file": "migration-060-offload-stage-19.json.gz",
+      "inventory_sha256": "384c1e6f7666d97a502912a5471a9b6edddb5b2f7af63da3270843d60d3f0887",
+      "operation": "offload",
+      "seconds": 9.833534994046204,
+      "stage_index": 19
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 5186755680,
+      "inventory_file": "migration-061-reload-stage-20.json.gz",
+      "inventory_sha256": "b56bd6c9092a5627f36b9a10282d51f0c310128dcf0feffd3021b62ecab64a25",
+      "operation": "reload",
+      "seconds": 9.632704987074248,
+      "stage_index": 20
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 5186755680,
+      "inventory_file": "migration-062-offload-stage-20.json.gz",
+      "inventory_sha256": "8d714de8ad97cedd6909aa8fbc7089081422256b3bce331f107f2403bf06b2a1",
+      "operation": "offload",
+      "seconds": 9.991579558933154,
+      "stage_index": 20
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3425037120,
+      "inventory_file": "migration-063-reload-stage-0.json.gz",
+      "inventory_sha256": "8c83bc18c1e1ccf42c03c70a5878daa5c1a7799891269716dbe9d0d97b7bcb03",
+      "operation": "reload",
+      "seconds": 6.0727419189643115,
+      "stage_index": 0
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3425037120,
+      "inventory_file": "migration-064-offload-stage-0.json.gz",
+      "inventory_sha256": "2519b6636f18e8afe86644d75a6c2601c0a5ae928c7b8ac4e0d375930031c92f",
+      "operation": "offload",
+      "seconds": 6.697001292021014,
+      "stage_index": 0
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3525706752,
+      "inventory_file": "migration-065-reload-stage-1.json.gz",
+      "inventory_sha256": "50d2863ae360f8649f080fed67e2101bac07ad2d974496b0e9e9a3cbe5b6dfa7",
+      "operation": "reload",
+      "seconds": 6.124683519941755,
+      "stage_index": 1
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3525706752,
+      "inventory_file": "migration-066-offload-stage-1.json.gz",
+      "inventory_sha256": "f30a408ce289d22474710bab605b26b8a0a6c02086b40d9682a6053236cd05cb",
+      "operation": "offload",
+      "seconds": 7.027810974046588,
+      "stage_index": 1
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3576041568,
+      "inventory_file": "migration-067-reload-stage-2.json.gz",
+      "inventory_sha256": "fc39e571c53e90c32c72338178142681ea897d5b51f53711f879bb6e4158529e",
+      "operation": "reload",
+      "seconds": 6.253181772073731,
+      "stage_index": 2
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3576041568,
+      "inventory_file": "migration-068-offload-stage-2.json.gz",
+      "inventory_sha256": "ec744175e997bcfbffb1726a9a2067a6d3b56bc354cc4289fcd6652f86fafeb0",
+      "operation": "offload",
+      "seconds": 6.609023341094144,
+      "stage_index": 2
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3727046016,
+      "inventory_file": "migration-069-reload-stage-3.json.gz",
+      "inventory_sha256": "9617ef43ec5649286eaefa24090eb3fcd1b8c13af3411c7e0460e71a53e71a97",
+      "operation": "reload",
+      "seconds": 6.538636610028334,
+      "stage_index": 3
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3727046016,
+      "inventory_file": "migration-070-offload-stage-3.json.gz",
+      "inventory_sha256": "48c7d64de97be5bd37ee18b62b40b5b503dda012f65a6b4baa7063864a7419d7",
+      "operation": "offload",
+      "seconds": 6.889294955995865,
+      "stage_index": 3
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3777380832,
+      "inventory_file": "migration-071-reload-stage-4.json.gz",
+      "inventory_sha256": "d49e9e0c0e9153966d0ce419be2f0b95e6aed31ddfa9ba43c5535121b0f6ca72",
+      "operation": "reload",
+      "seconds": 6.565390761941671,
+      "stage_index": 4
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3777380832,
+      "inventory_file": "migration-072-offload-stage-4.json.gz",
+      "inventory_sha256": "b781084dc831459aaa94606a9879564d481fd20dbe127f198213c2577ceec7dd",
+      "operation": "offload",
+      "seconds": 7.014597335946746,
+      "stage_index": 4
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3878050464,
+      "inventory_file": "migration-073-reload-stage-5.json.gz",
+      "inventory_sha256": "8a7284f1def582a93e8166decb6fa99fa2787449f6a6bf343f8bde60d20065c9",
+      "operation": "reload",
+      "seconds": 6.840646837954409,
+      "stage_index": 5
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3878050464,
+      "inventory_file": "migration-074-offload-stage-5.json.gz",
+      "inventory_sha256": "77c30a89778ce55c301a9a8058749ccb1a4353c73cc5a895eff2040900163efd",
+      "operation": "offload",
+      "seconds": 7.134064917918295,
+      "stage_index": 5
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3928385280,
+      "inventory_file": "migration-075-reload-stage-6.json.gz",
+      "inventory_sha256": "8d1072dd388adf5e2acac08eaf16c40f29c6b8ecbb64fa00024589a08e4ff49c",
+      "operation": "reload",
+      "seconds": 6.822351734968834,
+      "stage_index": 6
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 3928385280,
+      "inventory_file": "migration-076-offload-stage-6.json.gz",
+      "inventory_sha256": "1827b8adc42c8de3d09c06daf1f37c63f89c647a2dba37d2587aab42f2a9a34b",
+      "operation": "offload",
+      "seconds": 7.187964766053483,
+      "stage_index": 6
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4079389728,
+      "inventory_file": "migration-077-reload-stage-7.json.gz",
+      "inventory_sha256": "c98ee0ba53d719e8382c338c47d82b5ddfa1145c51b5492c98a38c4a1b35422a",
+      "operation": "reload",
+      "seconds": 7.141099925967865,
+      "stage_index": 7
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4079389728,
+      "inventory_file": "migration-078-offload-stage-7.json.gz",
+      "inventory_sha256": "58cf1efef49d3007bb617b176f225aeb04c4206fb4cbef6fe7594db012309a4f",
+      "operation": "offload",
+      "seconds": 7.601128024980426,
+      "stage_index": 7
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4129724544,
+      "inventory_file": "migration-079-reload-stage-8.json.gz",
+      "inventory_sha256": "015e97a6f97acffd07a09c011d1e91dff98589a13460c9be4d6fb9990ab0729d",
+      "operation": "reload",
+      "seconds": 7.226144418003969,
+      "stage_index": 8
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4129724544,
+      "inventory_file": "migration-080-offload-stage-8.json.gz",
+      "inventory_sha256": "88d4df1d3939b3cb832a5d036313c6abd0b4a741929e4c742f1c3f8279b15337",
+      "operation": "offload",
+      "seconds": 8.216315757017583,
+      "stage_index": 8
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4230394176,
+      "inventory_file": "migration-081-reload-stage-9.json.gz",
+      "inventory_sha256": "ce3878d294f4b7c13680e3e51df1a4ef1ed0c384ac9290553e123cb01cb2cb93",
+      "operation": "reload",
+      "seconds": 7.371084871003404,
+      "stage_index": 9
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4230394176,
+      "inventory_file": "migration-082-offload-stage-9.json.gz",
+      "inventory_sha256": "038cec958083b1e0e88c6bdce92887a541680d474f8c51f0ff0379dfbc13c0b1",
+      "operation": "offload",
+      "seconds": 8.343690862995572,
+      "stage_index": 9
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4280729344,
+      "inventory_file": "migration-083-reload-stage-10.json.gz",
+      "inventory_sha256": "a6e955d0f62a40ed939acc2284410701aa054f58433db9c50f723ebf14fac3d3",
+      "operation": "reload",
+      "seconds": 7.522212591022253,
+      "stage_index": 10
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4280729344,
+      "inventory_file": "migration-084-offload-stage-10.json.gz",
+      "inventory_sha256": "5fd75bca9e896f018874ce5e1292ee766ec1a4dd483bbf71f7489d9c1ad76929",
+      "operation": "offload",
+      "seconds": 8.548506476916373,
+      "stage_index": 10
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4431733440,
+      "inventory_file": "migration-085-reload-stage-11.json.gz",
+      "inventory_sha256": "953e6970809e5f61912671efb03574f6396a8ff016ff7cbc6a96bc5d7984484a",
+      "operation": "reload",
+      "seconds": 7.797090585110709,
+      "stage_index": 11
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4431733440,
+      "inventory_file": "migration-086-offload-stage-11.json.gz",
+      "inventory_sha256": "35c023748b5098fd7f04237bf36ce1567f729cb922250cd5bf520fd8fadea29c",
+      "operation": "offload",
+      "seconds": 8.074888145900331,
+      "stage_index": 11
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4482068256,
+      "inventory_file": "migration-087-reload-stage-12.json.gz",
+      "inventory_sha256": "32d634142d40cc3d4e93ce09a63094c318bfb360c1e4b92723daf687aac3bf8c",
+      "operation": "reload",
+      "seconds": 7.837370561086573,
+      "stage_index": 12
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4482068256,
+      "inventory_file": "migration-088-offload-stage-12.json.gz",
+      "inventory_sha256": "9c6acfe89d21b0f7b096429616c144e74e85e2be20789d6b2d0f0027ab8ef39e",
+      "operation": "offload",
+      "seconds": 8.802635666099377,
+      "stage_index": 12
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4582737888,
+      "inventory_file": "migration-089-reload-stage-13.json.gz",
+      "inventory_sha256": "7b9e001101c3a9a5defc1b4640f3ac829ced5d800e9ab2137662b44381940af5",
+      "operation": "reload",
+      "seconds": 8.401139346999116,
+      "stage_index": 13
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4582737888,
+      "inventory_file": "migration-090-offload-stage-13.json.gz",
+      "inventory_sha256": "31fa9dce1710081dfe7a5484f94388314ca8fe1ca384b4fbd45cd24ee977b688",
+      "operation": "offload",
+      "seconds": 8.481626937049441,
+      "stage_index": 13
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4633072704,
+      "inventory_file": "migration-091-reload-stage-14.json.gz",
+      "inventory_sha256": "944046073b315d9578adb5c396c9ec6a53d0c20812e86e1672097acdb793a473",
+      "operation": "reload",
+      "seconds": 8.392384515958838,
+      "stage_index": 14
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4633072704,
+      "inventory_file": "migration-092-offload-stage-14.json.gz",
+      "inventory_sha256": "3627acff9951309ba9cdb30f6ca5cd0cdae3e5892f4d4864e1ebcceadd82824d",
+      "operation": "offload",
+      "seconds": 8.606755002052523,
+      "stage_index": 14
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4784077152,
+      "inventory_file": "migration-093-reload-stage-15.json.gz",
+      "inventory_sha256": "ea4f21ab3d4a32bb794afadf161f27bfd2827af44c4702ed2941701e77c68e7c",
+      "operation": "reload",
+      "seconds": 8.739437157986686,
+      "stage_index": 15
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4784077152,
+      "inventory_file": "migration-094-offload-stage-15.json.gz",
+      "inventory_sha256": "3a553a384cd0acf9749e6d17257c4511e857c6ef8d9273759f736c0e7f94d4dc",
+      "operation": "offload",
+      "seconds": 9.48421085299924,
+      "stage_index": 15
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4834411968,
+      "inventory_file": "migration-095-reload-stage-16.json.gz",
+      "inventory_sha256": "e5bb850eb5cede1d5661e8050ee76154f473dd4db8f58ed503154892d0fb0f23",
+      "operation": "reload",
+      "seconds": 8.858488049008884,
+      "stage_index": 16
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4834411968,
+      "inventory_file": "migration-096-offload-stage-16.json.gz",
+      "inventory_sha256": "1fdccb5ef922d432771f09b3cef2bd993f3deb15c33b40f3825b0484c21d10c9",
+      "operation": "offload",
+      "seconds": 9.60295742098242,
+      "stage_index": 16
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4935081600,
+      "inventory_file": "migration-097-reload-stage-17.json.gz",
+      "inventory_sha256": "21cdb72cfcf7c4013af4e3bf2d6c502c4f94c2ed9fc058a4fa4962a070514856",
+      "operation": "reload",
+      "seconds": 8.947911381954327,
+      "stage_index": 17
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4935081600,
+      "inventory_file": "migration-098-offload-stage-17.json.gz",
+      "inventory_sha256": "d6f2ab8cd55423ae70267df078c9f2229d9b6e2e3d13116262f05f918bf1e5c4",
+      "operation": "offload",
+      "seconds": 9.472247705096379,
+      "stage_index": 17
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4985416416,
+      "inventory_file": "migration-099-reload-stage-18.json.gz",
+      "inventory_sha256": "822550f809861bb098a0e1c348e8b3e4706b5a3e51fb9d97d85fb8ce3d1365bc",
+      "operation": "reload",
+      "seconds": 9.09853601094801,
+      "stage_index": 18
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 4985416416,
+      "inventory_file": "migration-100-offload-stage-18.json.gz",
+      "inventory_sha256": "0f82c72885b7dc79f4fff18f4e02d07f5269e2a94c06ffaf5662a22655189a97",
+      "operation": "offload",
+      "seconds": 9.88112672592979,
+      "stage_index": 18
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 5136420864,
+      "inventory_file": "migration-101-reload-stage-19.json.gz",
+      "inventory_sha256": "0c6e96fac5a5a1e15ee27b4e4f554b45515540940c05d267b2e23b64b83e0c11",
+      "operation": "reload",
+      "seconds": 9.518075997009873,
+      "stage_index": 19
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 5136420864,
+      "inventory_file": "migration-102-offload-stage-19.json.gz",
+      "inventory_sha256": "987c92f3336339065a00b9ce68db56c138430678125deb0625e9e32be01c8589",
+      "operation": "offload",
+      "seconds": 10.074919102014974,
+      "stage_index": 19
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 5186755680,
+      "inventory_file": "migration-103-reload-stage-20.json.gz",
+      "inventory_sha256": "cf18a0872509710b325356dad1ff460f8554918f8eeab75e65b4bf8a711cc4a7",
+      "operation": "reload",
+      "seconds": 9.661825117073022,
+      "stage_index": 20
+    },
+    {
+      "comparison": {
+        "full_storage_alias_graph_equal": true,
+        "full_storage_bytes_equal": true,
+        "passed": true,
+        "tensor_identity_layout_aliases_equal": true
+      },
+      "copied_bytes": 5186755680,
+      "inventory_file": "migration-104-offload-stage-20.json.gz",
+      "inventory_sha256": "c555c1fdddea93af252459309ff9efca67cb51b12c70055f97b3d039df097ba7",
+      "operation": "offload",
+      "seconds": 10.663787964964285,
+      "stage_index": 20
+    }
+  ],
+  "not_a_50000_vector_host_timing": true,
+  "peak_rss_bytes": 96571150336,
+  "posterior_vectors_generated": 0,
+  "raw_cache_storage_json_included": false,
+  "retained_stages": 21,
+  "schema": "posteriorforge.host_trim_proof_extract.v1",
+  "scope": "new conditional-trim policy over GQA one-fallback plus host residency; full21 same-state device roundtrip and query A-to-B-to-A; no posterior accuracy claim",
+  "source_manifest_sha256": "18179d2d2161c7713050be99c03d3b8c8a92d82cd1b310fb69134e112a3bf8ba",
+  "source_path": "results/performance-first-v1/gqa-host-trim-qualification-01/manifest.json",
+  "sources": {
+    "base_gqa_host_module_sha256": "e0f8031bef5085187096d7b30a42310fd8892cad87f6f5d9a443ee5249f506d9",
+    "baseline": {
+      "baseline_inference_sha256": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e",
+      "upstream_files": {
+        "__init__.py": "a32a437d7910cec8c251ceb6849fece6b61ece32c16e8a346e4afae82bf7bc08",
+        "accept_reject_sampler.py": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+        "npe_pfn.py": "29517328b3ff23e2e8040d19f33e79adef5fc7f91db2cffccf60234344399a85",
+        "restricted_prior.py": "13026cf8a4618aa4ca6406e0596a7ec97c0664de5b7c2b4dd7f31e4c32ece160",
+        "support_posterior.py": "022e5b22b9397e9faea08b73df76b5a0c5cf0c012b665decfe28c5b725c362ee",
+        "tsnpe_pfn.py": "f959662adf6ac6ed5aecefcebad907ef951c22bf05bbcf2c8e0e6312cb054034"
+      },
+      "upstream_provenance_sha256": "4caf84b49b04c79f28bcbe9f88f9da6b64ac0b99a2c60f53e01b2fc1c6833c8b"
+    },
+    "cache_module_sha256": "45cd3107c50dcf73d03167e2b6dd045cccdb798337e8d3c47b5210cc30dc1a03",
+    "gqa_hybrid_module_sha256": "ac22c67c23403723902805666d1239bd30a8af355554df58a8638a8fd1f21e82",
+    "gqa_module_sha256": "8b2cff752855e1b1966d2e374322602fa71368b1926da9d3b0261edd111aee6b",
+    "host_module_sha256": "1868d0e22906773fe62baeadbdb3124f9f2086ffdfd8cb918caca6aee3cb3e99",
+    "hybrid_module_sha256": "5dfdefa870489ded594de1db13a55a3da5948c720d7a9fd587ebe3a8f8be00a2",
+    "mixture_module_sha256": "e71f43b73ae8259c20b5d7b52feccc7c851e9a2fbb86d869bc0a5f7f3af792a1",
+    "qualifier_source_sha256": "9e4043f5ab06b1f5bdfb4d30a91992420f368170a40151bdc9556ae56b80d443"
+  },
+  "stage_coverage": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "status": "gqa_host_trim_screen_pass",
+  "trim_event": {
+    "active_state_comparison": {
+      "full_storage_alias_graph_equal": true,
+      "full_storage_bytes_equal": true,
+      "passed": true,
+      "tensor_identity_layout_aliases_equal": true
+    },
+    "allocator_evidence_sha256": "0ab24c37e27467b20da531bfea91d1216e46501f925178592957eea9f494b75b",
+    "gc_collected_objects": 6241,
+    "gc_seconds": 0.5430307649075985,
+    "incoming_unique_cuda_storage_bytes": 3425037120,
+    "live_cache_storage_after": {
+      "cpu_storage_bytes": 88101692388,
+      "cuda_storage_bytes": 3425037120,
+      "scope": "sum of per-stage unique storage inventories; no RSS subtraction",
+      "stage_count": 21
+    },
+    "live_cache_storage_before": {
+      "cpu_storage_bytes": 88101692388,
+      "cuda_storage_bytes": 3425037120,
+      "scope": "sum of per-stage unique storage inventories; no RSS subtraction",
+      "stage_count": 21
+    },
+    "malloc_trim_return": 1,
+    "malloc_trim_seconds": 0.03790868795476854,
+    "memory_before_gc": {
+      "cgroup_current_bytes": 96273420288,
+      "cgroup_limit_bytes": null,
+      "rss_bytes": 95609503744,
+      "rss_peak_bytes": 96571150336
+    },
+    "memory_immediately_after_trim": {
+      "cgroup_current_bytes": 92669636608,
+      "cgroup_limit_bytes": null,
+      "rss_bytes": 91528949760,
+      "rss_peak_bytes": 96571150336
+    },
+    "memory_immediately_before_trim": {
+      "cgroup_current_bytes": 96245059584,
+      "cgroup_limit_bytes": null,
+      "rss_bytes": 95581241344,
+      "rss_peak_bytes": 96571150336
+    },
+    "parent_projection_after_trim": {
+      "additional_bytes_not_in_current_rss": 3425037120,
+      "passed": true,
+      "projected_cgroup_with_slack_bytes": 104872287040,
+      "projected_rss_with_slack_bytes": 103734913856,
+      "rss_limit_bytes": 107374182400,
+      "safety_slack_bytes": 8589934592
+    },
+    "policy_sha256": "0b5b29158f2b650b11cba72390a1a444cd3145e183c8ff95c4d351dc41b9c822",
+    "retention_enabled_after_parent": true,
+    "rng_preserved": true,
+    "rss_reclaimed_by_trim_bytes": 4052291584,
+    "seconds": 8.885248067905195,
+    "stage_index": 0,
+    "trigger_projection": {
+      "additional_bytes_not_in_current_rss": 3425037120,
+      "passed": false,
+      "projected_cgroup_with_slack_bytes": 108256410432,
+      "projected_rss_with_slack_bytes": 107592579904,
+      "rss_limit_bytes": 107374182400,
+      "safety_slack_bytes": 8589934592
+    }
+  },
+  "warm_scans": {
+    "actual_prepare_miss_delta": 0,
+    "avoided_actual_first_prepare_seconds": 191.9076470687287,
+    "cache_hit_delta": 21,
+    "evictions": 0,
+    "passed": true,
+    "total_hits_after_cold_preload": 42,
+    "total_prepare_misses_after_cold_preload": 0
+  }
+}

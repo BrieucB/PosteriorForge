@@ -1,0 +1,14 @@
+{
+  "all_control_cdf_rows": 424,
+  "all_primary_ecdf_values_match_review_tolerance": 1e-12,
+  "host_trim_source_manifest_authenticated": true,
+  "moment_rows": 168,
+  "no_new_model_or_gpu_calls": true,
+  "parent_visual_review": "pending",
+  "posterior_curve_cohorts": 4,
+  "primary_cdf_axes_per_pilot": 53,
+  "schema": "posteriorforge.fifo_report_checks.v1",
+  "source_sha256": "a2abf10d7590b392c5a049597fadf08c7420ed074db530aec7686351b5f0edeb",
+  "timing_memory_cohorts": 7,
+  "total_fifo_stage_events": 42
+}

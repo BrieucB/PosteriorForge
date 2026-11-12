@@ -1,0 +1,22 @@
+{
+  "schema": "posteriorforge.report_visual_review.v1",
+  "reviewer": "root_agent",
+  "status": "reviewed",
+  "date": "2026-11-12",
+  "machine_render_base_checksums_sha256": "19caf8eb2c5ff85467965f02bba43249edd96ef187388cc99fd3517ee0d30bf3",
+  "machine_render_outputs_unchanged": true,
+  "review_not_part_of_deterministic_render_scope": true,
+  "figures_viewed_at_delivered_local_paths": {
+    "cuda-memory.png": "82801deb1e43b520d452f103792beb9a3026c50d76028b8c2f33487760e3f700",
+    "fifo-complete-cdf-family.png": "8b1fbe35c0d63510043ea71eee4be5da6f5f3331d5464b0d180279271ba8d036",
+    "fifo-flagged-marginal-densities.png": "0c17ac555e1c0c2b88cd8b045a477d4de5cdc217796a1d27e74d8c5238c12e42",
+    "fifo-request-wrapper-breakdown.png": "f9ce7d66c7e00eac43b42a0937565e45375109996ad3d93cd4fd4d8c520abc9d",
+    "fifo-signed-cdf-flags.png": "8b06d926a39c0794008e91355012b4c65a24be61fd599c1f2605f57e15ab2a35",
+    "fifo-stage-costs.png": "e465d2f9eda9ff58054cd3a36244c3051e9a9994e5db01a669d7ead4b683fc03",
+    "host-trim-proof-memory.png": "cae05edf73f2aaf5b841af0b2b969e146d51f12e838722f383cf624e402a0a81",
+    "posterior-all-21-cdfs.png": "e32d14754da0136929adb2c638bdf23ed8b047a64159d108f41c1f92921ce204",
+    "posterior-worst-four-densities.png": "2fd457640f724e75373b1a11279331569907662181170238f4f7a32f909007d7",
+    "runtime-and-request-cost.png": "c79f8f3044065ba8bce97e4e39e9b2609940e7f2c3d03f58bb7fe49084c90449"
+  },
+  "findings": "All ten figures viewed. Timing and wrapper scopes, retained flags, density normalizations, reference curves, legends and text are readable; no overlapping labels or cropped panels observed. Host proof explicitly generates zero posterior vectors. No scientific or equivalence approval inferred."
+}

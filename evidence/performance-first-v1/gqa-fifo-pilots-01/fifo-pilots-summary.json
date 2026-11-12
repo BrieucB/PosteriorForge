@@ -1,0 +1,692 @@
+{
+  "all53_primary_ecdf_review_match_tolerance": 1e-12,
+  "attribution": "Built with PriorLabs-TabPFN",
+  "control_request_median_seconds": 2380.309143734048,
+  "control_wrapper_median_seconds": 2397.317791893147,
+  "controls": [
+    {
+      "binding": {
+        "manifest_sha256": "1d13af13123be5b57d5ce07cc4cf684932d5a5338a486770cfe60663efc031c0",
+        "path": "results/performance-first-v1/controls/rep-0/seed-20261111-case-0",
+        "samples_sha256": "27e51ad1b1ee615fc921ee4f5c237155139304da3e7c193f7781a389cee6d53e"
+      },
+      "request_seconds": 2364.5507467584684,
+      "wrapper_seconds": 2372.390916720964
+    },
+    {
+      "binding": {
+        "manifest_sha256": "54dd3171385218c8cb8bd9b9fd5c9ee66b3e0e587822d9e18293a2e96e3c248e",
+        "path": "results/performance-first-v1/controls/rep-1/seed-20261111-case-0",
+        "samples_sha256": "7db3e9dfcf876262b39696fa1cceb0ffadb823dd716ad8a0e12d329969157c60"
+      },
+      "request_seconds": 2383.4860378028825,
+      "wrapper_seconds": 2397.317791893147
+    },
+    {
+      "binding": {
+        "manifest_sha256": "090475d62ed2ef86a4e6607a87e7b8e16b98b2601971a0ad3525fe75035f7eeb",
+        "path": "results/performance-first-v1/controls/rep-2/seed-20261111-case-0",
+        "samples_sha256": "5bc538fe70b05fbda39e68f806b660f7e454e6257d93d0a2d6ec509fb1024ae4"
+      },
+      "request_seconds": 2380.309143734048,
+      "wrapper_seconds": 2399.943702231045
+    }
+  ],
+  "density_display": [
+    {
+      "axis": 7,
+      "displayed_counts": {
+        "Earlier GQA": 49933,
+        "FIFO 1,024": 49919,
+        "FIFO 10,000": 49920,
+        "Primary": 49923
+      },
+      "normalization_count": 50000,
+      "window": [
+        -1.6106101146479401,
+        0.9637959462653897
+      ]
+    },
+    {
+      "axis": 8,
+      "displayed_counts": {
+        "Earlier GQA": 49922,
+        "FIFO 1,024": 49915,
+        "FIFO 10,000": 49914,
+        "Primary": 49901
+      },
+      "normalization_count": 50000,
+      "window": [
+        -2.422265625,
+        0.279296875
+      ]
+    },
+    {
+      "axis": 19,
+      "displayed_counts": {
+        "Earlier GQA": 49977,
+        "FIFO 1,024": 49977,
+        "FIFO 10,000": 49977,
+        "Primary": 49989
+      },
+      "normalization_count": 50000,
+      "window": [
+        -0.9359529522621673,
+        0.31698177788283927
+      ]
+    }
+  ],
+  "earlier_gqa": {
+    "manifest_sha256": "87a54e1627cf8d48e9a5bb00daaccdc32671838b9b9573f2f5a81da0e4506abc",
+    "path": "results/performance-first-v1/gqa-hybrid-fp32-batch-1024/rep-0/seed-20261111-case-0",
+    "samples_sha256": "6696dfd124f4f7ff1984589cbad6aed3faea2cdbd79e81de531e68695e120169"
+  },
+  "figures": {
+    "fifo-complete-cdf-family.png": "8b1fbe35c0d63510043ea71eee4be5da6f5f3331d5464b0d180279271ba8d036",
+    "fifo-flagged-marginal-densities.png": "0c17ac555e1c0c2b88cd8b045a477d4de5cdc217796a1d27e74d8c5238c12e42",
+    "fifo-request-wrapper-breakdown.png": "f9ce7d66c7e00eac43b42a0937565e45375109996ad3d93cd4fd4d8c520abc9d",
+    "fifo-signed-cdf-flags.png": "8b06d926a39c0794008e91355012b4c65a24be61fd599c1f2605f57e15ab2a35",
+    "fifo-stage-costs.png": "e465d2f9eda9ff58054cd3a36244c3051e9a9994e5db01a669d7ead4b683fc03",
+    "host-trim-proof-memory.png": "cae05edf73f2aaf5b841af0b2b969e146d51f12e838722f383cf624e402a0a81"
+  },
+  "generic_renderer_source_sha256": "6295641979f58f2b17ef1098fcbf6ea9d295cc694a8649eacc54b55ba8a19b09",
+  "host_trim_is_not_a_50000_vector_timing": true,
+  "host_trim_manifest_sha256": "18179d2d2161c7713050be99c03d3b8c8a92d82cd1b310fb69134e112a3bf8ba",
+  "no_permutation_diagnostic_transferred": true,
+  "no_population_equivalence_or_global_calibration_claim": true,
+  "no_rows_or_flags_removed": true,
+  "overall_runtime_phase_complete": false,
+  "pilots": [
+    {
+      "absolute_physical_status": "model_failure",
+      "accepted_before_trim": 50150,
+      "accepted_final_trim": 150,
+      "binding": {
+        "manifest_sha256": "c0937b4b08c23d78829695b1207775cefbd3d161b592cb0139d25241927f1e42",
+        "path": "results/performance-first-v1/gqa-fifo-fp32-batch-1024/rep-0/seed-20261111-case-0",
+        "samples_sha256": "1bc81c9b2ed04b15c74c1a63fd687aff1a0a86b08d8cd3f915b9f93cdc7cd362"
+      },
+      "generated_vectors": 51200,
+      "generated_waves": 1,
+      "git_revision_at_run": "36594f45debeaf1921b10b7bc12a1daa8539ee37",
+      "gqa_prediction_checks": {
+        "all_aliases_restored": true,
+        "all_sources_unchanged": true,
+        "attention_fingerprints": {
+          "active_attention_code_sha256": "14bc89f4f4e0dd3ffb2c5be1330f5ced82619762e07059d78e7f630c67f4216e",
+          "executed_original_attention_code_sha256": "2eed54d35763d600aa3a3594ebc7da41e0f5fbc2e5c61e9c88dd61f708e88de3",
+          "original_attention_code_sha256": "2eed54d35763d600aa3a3594ebc7da41e0f5fbc2e5c61e9c88dd61f708e88de3"
+        },
+        "uncached_fallback_calls": 7,
+        "verified_calls": 1134
+      },
+      "memory": {
+        "peak_allocated_bytes": 5784094720,
+        "peak_reserved_bytes": 32096911360
+      },
+      "nominal_request_gpu_hours": 0.11415650489222673,
+      "numeric_review_status": "distribution_investigation_required",
+      "one_timing_repetition_only": true,
+      "original_sampler_checked_vectors": 50457,
+      "other_request_seconds": 7.233001626096666,
+      "outer_wrapper_residual_seconds": 0.5110759809613228,
+      "posterior_request_seconds": 410.9634176120162,
+      "prediction_and_sampling_seconds": 214.08825699985027,
+      "preparation_seconds": 189.64215898606926,
+      "prepared_stages": 21,
+      "proposal_buffer": {
+        "actual_generated_wave_sizes": [
+          51200
+        ],
+        "all_rows_are_complete_vectors": true,
+        "api_requested_sizes": [
+          50000,
+          457
+        ],
+        "attribution": "Built with PriorLabs-TabPFN",
+        "benchmark_total_count": 50000,
+        "buffer_reset_count": 0,
+        "data_dtype": "CPU FP32; unchanged",
+        "enabled": true,
+        "failed": false,
+        "failure": null,
+        "finalized": true,
+        "generated_count": 51200,
+        "generated_wave_attempt_sizes": [
+          51200
+        ],
+        "generated_wave_count": 1,
+        "global_initial_lookahead": 1200,
+        "law_scope": "FIFO rechunking preserves an iid complete-vector proposal stream; provider batch law must be qualified separately",
+        "live_buffer_rows": 0,
+        "log_density": "not_used",
+        "module_sha256": "8fb2ba1fb63cd917378ff9bc8b6f70be7410862c509cd22cb2fb6f454d3d35fa",
+        "original_api_delivered_count": 50457,
+        "original_sampler_counts": {
+          "accepted_before_trim": 50150,
+          "original_checked_count": 50457,
+          "original_support_calls": 2,
+          "returned_count": 50000
+        },
+        "original_sampler_source_sha256": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+        "partial_vector_filtering": false,
+        "policy_id": "complete_vector_fifo_lookahead_v1",
+        "policy_sha256": "dbeca85d7107cd9a5d9cf9f967aa02807cc38d10b7493ecc42d2181a503391af",
+        "rank": 0,
+        "remaining_unused_buffer_count": 743,
+        "request_scope": {
+          "case": 0,
+          "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+          "context_obs": {
+            "dtype": "<f8",
+            "sha256": "aee2030d63158a3baf3b731e1231e17972ed80a19def10152b4e67d6d1e6ffb8",
+            "shape": [
+              4096,
+              33
+            ]
+          },
+          "context_seed": 20261111,
+          "context_theta": {
+            "dtype": "<f8",
+            "sha256": "73c4c282c136a1fd86459e7b1b736629b459075def9176956a90d232d4c30f4d",
+            "shape": [
+              4096,
+              21
+            ]
+          },
+          "query": {
+            "dtype": "<f8",
+            "sha256": "57fb7625b2521ff040f6d858961ca5876276708fbe2637242b48c69fdce7bdac",
+            "shape": [
+              1,
+              33
+            ]
+          },
+          "rank": 0,
+          "repetition": 0,
+          "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+          "scope": "one posterior request; no cross-query/case/context reuse",
+          "seed_streams": {
+            "component_uniform": 3175593578,
+            "head_acceptance": 179600625,
+            "head_proposal": 1681898578
+          },
+          "world_size": 1
+        },
+        "request_scope_sha256": "1ddb0b34ffca9992f45b716c53ebdce6cdc91f3ecb93139f80bdff65c8a3d3b3",
+        "required_stage_preparations_for_generated_waves": 21,
+        "rng_draws_by_buffer": 0,
+        "row_repair_or_reordering": false,
+        "schema": "posteriorforge.execution.proposal_buffer.v1",
+        "seed_coupling": "provider generates lookahead rows; role/seed definitions unchanged but seeded vectors need not be bitwise identical",
+        "source_unchanged": true,
+        "support_filtering_performed_by_buffer": false,
+        "unused_rows_discarded_only_after_original_sampler_completion": true,
+        "vector_width": 21,
+        "worker_expected_return_count": 50000,
+        "worker_initial_lookahead": 1200,
+        "world_size": 1
+      },
+      "proposal_buffer_policy": {
+        "delivery": "original requested count; FIFO complete vectors; unfiltered",
+        "enabled": true,
+        "first_wave": "original_requested_count plus worker lookahead",
+        "global_lookahead": 1200,
+        "later_wave": "exact FIFO deficit only",
+        "module_sha256": "8fb2ba1fb63cd917378ff9bc8b6f70be7410862c509cd22cb2fb6f454d3d35fa",
+        "original_sampler_source_sha256": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+        "policy_id": "complete_vector_fifo_lookahead_v1",
+        "policy_sha256": "dbeca85d7107cd9a5d9cf9f967aa02807cc38d10b7493ecc42d2181a503391af",
+        "rng_draws_by_buffer": 0,
+        "seed_coupling": "extra rowU/head-stream consumption changes seeded vector mapping; no rowwise equality claim",
+        "worker_lookahead": "1200/world_size"
+      },
+      "query_batch_size": 1024,
+      "relative_distribution_review": {
+        "absolute_gate_still_required": false,
+        "cdf_difference": [
+          0.005700000000000038,
+          0.004620000000000013,
+          0.005400000000000016,
+          0.007280000000000009,
+          0.0033600000000000296,
+          0.008199999999999985,
+          0.005619999999999958,
+          0.013680000000000025,
+          0.011600000000000055,
+          0.00603999999999999,
+          0.006280000000000008,
+          0.005700000000000038,
+          0.005900000000000016,
+          0.006280000000000008,
+          0.008120000000000016,
+          0.0049200000000000355,
+          0.00603999999999999,
+          0.007879999999999998,
+          0.0038399999999999823,
+          0.011120000000000019,
+          0.005860000000000004,
+          0.006719999999999948,
+          0.008179999999999965,
+          0.005120000000000013,
+          0.005959999999999965,
+          0.011220000000000008,
+          0.005760000000000015,
+          0.007020000000000026,
+          0.008940000000000003,
+          0.006459999999999966,
+          0.00546000000000002,
+          0.006379999999999997,
+          0.0044399999999999995,
+          0.0047000000000000375,
+          0.004740000000000022,
+          0.005360000000000004,
+          0.005019999999999997,
+          0.005400000000000071,
+          0.005780000000000007,
+          0.005680000000000018,
+          0.010700000000000043,
+          0.007580000000000031,
+          0.003920000000000035,
+          0.005780000000000007,
+          0.00802,
+          0.0028799999999999937,
+          0.0045400000000000995,
+          0.003620000000000012,
+          0.0038000000000000256,
+          0.0037600000000000133,
+          0.006759999999999988,
+          0.0038599999999999746,
+          0.0032599999999999296
+        ],
+        "cdf_is_reference_grid_bound": false,
+        "cdf_statistic": "exact two-sample empirical CDF supremum at all pooled sample values, for the same 53 physical projections",
+        "flags": {
+          "joint_projection_cdf": [
+            4,
+            19
+          ],
+          "marginal_cdf": [
+            7,
+            8,
+            19
+          ],
+          "mean_reference_sd": [],
+          "sd_fraction": []
+        },
+        "investigation_required": true,
+        "investigation_thresholds": {
+          "cdf": 0.01,
+          "mean_reference_sd": 0.05,
+          "sd_fraction": 0.05
+        },
+        "max_cdf_difference": 0.013680000000000025,
+        "max_mean_difference_reference_sd": 0.02204944357876309,
+        "max_sd_fraction_difference": 0.014694905005304904,
+        "mean_difference_interpretation": "absolute change in signed bias, equivalently abs(candidate mean - control mean)/reference SD; not difference of absolute biases",
+        "mean_difference_reference_sd": [
+          0.006747148325253013,
+          0.0031003777267418807,
+          0.004320648414738731,
+          0.0062682524136740405,
+          0.0017059798237991587,
+          0.007522139287263835,
+          0.003120329976869169,
+          0.02204944357876309,
+          0.019190211682590573,
+          0.010376492457697393,
+          0.012566250943634168,
+          0.004781738186914839,
+          0.0006470746622181516,
+          0.01561895745137328,
+          0.01818642670806955,
+          0.0013109548282476187,
+          0.005492396564167775,
+          0.00792967395409215,
+          0.001785384182914565,
+          0.01656840512739279,
+          0.003487546708663332
+        ],
+        "original_api_absolute_gate_policy": true,
+        "policy_override": "Explicit human performance-first authorization; physical assessment is retained separately.",
+        "population_confidence_claim": false,
+        "schema": "posteriorforge.upstream_comparison.v1",
+        "sd_fraction_difference": [
+          0.0007357595786217086,
+          0.0030369963987360027,
+          0.001140518595348361,
+          0.001363602614324444,
+          0.00108599772487461,
+          0.005502110644474145,
+          0.0008323814648670824,
+          0.00381087691777382,
+          0.005134196179390038,
+          0.00031664270360232116,
+          0.0033063217886197815,
+          0.011860362737577956,
+          0.011524895998528573,
+          0.0031008285827405224,
+          0.0015477875608804759,
+          0.005159944388965054,
+          0.0019216234576451274,
+          0.007996952961212278,
+          0.0002361394213479251,
+          0.014694905005304904,
+          0.006794382382210085
+        ],
+        "thresholds_are_investigation_flags": true
+      },
+      "request_speedup_vs_control_median": 5.792021970143481,
+      "request_speedup_vs_earlier_gqa": 1.4772154764932928,
+      "returned_vectors": 50000,
+      "review_sha256": "6d93b0243c8203455b0c66dbcdef7ea2832d8ac49019bc6c7ad3d8b1dfad0b84",
+      "runner_pre_request_unattributed_seconds": 10.491279510781169,
+      "runner_source_sha256": "23ccad8b5bbcdd7a48340b349d515ca870763359cfeb71333e02fc2b6a8aca3b",
+      "runner_total_seconds": 421.45469712279737,
+      "support_calls": 2,
+      "unexamined_fifo_remainder": 743,
+      "wrapper_seconds": 421.9657731037587,
+      "wrapper_speedup_vs_control_median": 5.681308638517612
+    },
+    {
+      "absolute_physical_status": "model_failure",
+      "accepted_before_trim": 50150,
+      "accepted_final_trim": 150,
+      "binding": {
+        "manifest_sha256": "bc8316e456bd4757ef6a2d01839a15cb316aadd8d526f0e7b369bdbbf2a6167d",
+        "path": "results/performance-first-v1/gqa-fifo-fp32-batch-10000/rep-0/seed-20261111-case-0",
+        "samples_sha256": "95c43d89a50030808f625c7a3269eeed302452f6d88823f1a250ebf87f258a6d"
+      },
+      "generated_vectors": 51200,
+      "generated_waves": 1,
+      "git_revision_at_run": "36594f45debeaf1921b10b7bc12a1daa8539ee37",
+      "gqa_prediction_checks": {
+        "all_aliases_restored": true,
+        "all_sources_unchanged": true,
+        "attention_fingerprints": {
+          "active_attention_code_sha256": "14bc89f4f4e0dd3ffb2c5be1330f5ced82619762e07059d78e7f630c67f4216e",
+          "executed_original_attention_code_sha256": "2eed54d35763d600aa3a3594ebc7da41e0f5fbc2e5c61e9c88dd61f708e88de3",
+          "original_attention_code_sha256": "2eed54d35763d600aa3a3594ebc7da41e0f5fbc2e5c61e9c88dd61f708e88de3"
+        },
+        "uncached_fallback_calls": 1,
+        "verified_calls": 174
+      },
+      "memory": {
+        "peak_allocated_bytes": 8935246848,
+        "peak_reserved_bytes": 41871736832
+      },
+      "nominal_request_gpu_hours": 0.1244791324920435,
+      "numeric_review_status": "distribution_investigation_required",
+      "one_timing_repetition_only": true,
+      "original_sampler_checked_vectors": 50458,
+      "other_request_seconds": 7.585024628788233,
+      "outer_wrapper_residual_seconds": 0.4537032088264823,
+      "posterior_request_seconds": 448.12487697135657,
+      "prediction_and_sampling_seconds": 215.05807142611593,
+      "preparation_seconds": 225.4817809164524,
+      "prepared_stages": 21,
+      "proposal_buffer": {
+        "actual_generated_wave_sizes": [
+          51200
+        ],
+        "all_rows_are_complete_vectors": true,
+        "api_requested_sizes": [
+          50000,
+          458
+        ],
+        "attribution": "Built with PriorLabs-TabPFN",
+        "benchmark_total_count": 50000,
+        "buffer_reset_count": 0,
+        "data_dtype": "CPU FP32; unchanged",
+        "enabled": true,
+        "failed": false,
+        "failure": null,
+        "finalized": true,
+        "generated_count": 51200,
+        "generated_wave_attempt_sizes": [
+          51200
+        ],
+        "generated_wave_count": 1,
+        "global_initial_lookahead": 1200,
+        "law_scope": "FIFO rechunking preserves an iid complete-vector proposal stream; provider batch law must be qualified separately",
+        "live_buffer_rows": 0,
+        "log_density": "not_used",
+        "module_sha256": "8fb2ba1fb63cd917378ff9bc8b6f70be7410862c509cd22cb2fb6f454d3d35fa",
+        "original_api_delivered_count": 50458,
+        "original_sampler_counts": {
+          "accepted_before_trim": 50150,
+          "original_checked_count": 50458,
+          "original_support_calls": 2,
+          "returned_count": 50000
+        },
+        "original_sampler_source_sha256": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+        "partial_vector_filtering": false,
+        "policy_id": "complete_vector_fifo_lookahead_v1",
+        "policy_sha256": "dbeca85d7107cd9a5d9cf9f967aa02807cc38d10b7493ecc42d2181a503391af",
+        "rank": 0,
+        "remaining_unused_buffer_count": 742,
+        "request_scope": {
+          "case": 0,
+          "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+          "context_obs": {
+            "dtype": "<f8",
+            "sha256": "aee2030d63158a3baf3b731e1231e17972ed80a19def10152b4e67d6d1e6ffb8",
+            "shape": [
+              4096,
+              33
+            ]
+          },
+          "context_seed": 20261111,
+          "context_theta": {
+            "dtype": "<f8",
+            "sha256": "73c4c282c136a1fd86459e7b1b736629b459075def9176956a90d232d4c30f4d",
+            "shape": [
+              4096,
+              21
+            ]
+          },
+          "query": {
+            "dtype": "<f8",
+            "sha256": "57fb7625b2521ff040f6d858961ca5876276708fbe2637242b48c69fdce7bdac",
+            "shape": [
+              1,
+              33
+            ]
+          },
+          "rank": 0,
+          "repetition": 0,
+          "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+          "scope": "one posterior request; no cross-query/case/context reuse",
+          "seed_streams": {
+            "component_uniform": 3175593578,
+            "head_acceptance": 179600625,
+            "head_proposal": 1681898578
+          },
+          "world_size": 1
+        },
+        "request_scope_sha256": "1ddb0b34ffca9992f45b716c53ebdce6cdc91f3ecb93139f80bdff65c8a3d3b3",
+        "required_stage_preparations_for_generated_waves": 21,
+        "rng_draws_by_buffer": 0,
+        "row_repair_or_reordering": false,
+        "schema": "posteriorforge.execution.proposal_buffer.v1",
+        "seed_coupling": "provider generates lookahead rows; role/seed definitions unchanged but seeded vectors need not be bitwise identical",
+        "source_unchanged": true,
+        "support_filtering_performed_by_buffer": false,
+        "unused_rows_discarded_only_after_original_sampler_completion": true,
+        "vector_width": 21,
+        "worker_expected_return_count": 50000,
+        "worker_initial_lookahead": 1200,
+        "world_size": 1
+      },
+      "proposal_buffer_policy": {
+        "delivery": "original requested count; FIFO complete vectors; unfiltered",
+        "enabled": true,
+        "first_wave": "original_requested_count plus worker lookahead",
+        "global_lookahead": 1200,
+        "later_wave": "exact FIFO deficit only",
+        "module_sha256": "8fb2ba1fb63cd917378ff9bc8b6f70be7410862c509cd22cb2fb6f454d3d35fa",
+        "original_sampler_source_sha256": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+        "policy_id": "complete_vector_fifo_lookahead_v1",
+        "policy_sha256": "dbeca85d7107cd9a5d9cf9f967aa02807cc38d10b7493ecc42d2181a503391af",
+        "rng_draws_by_buffer": 0,
+        "seed_coupling": "extra rowU/head-stream consumption changes seeded vector mapping; no rowwise equality claim",
+        "worker_lookahead": "1200/world_size"
+      },
+      "query_batch_size": 10000,
+      "relative_distribution_review": {
+        "absolute_gate_still_required": false,
+        "cdf_difference": [
+          0.005700000000000038,
+          0.004600000000000021,
+          0.005140000000000006,
+          0.007080000000000031,
+          0.0033800000000000496,
+          0.008419999999999983,
+          0.005500000000000005,
+          0.013700000000000045,
+          0.01162000000000002,
+          0.006059999999999982,
+          0.006400000000000017,
+          0.005720000000000058,
+          0.006020000000000025,
+          0.006200000000000039,
+          0.008740000000000026,
+          0.0049200000000000355,
+          0.006000000000000005,
+          0.007800000000000029,
+          0.0037800000000000056,
+          0.011199999999999988,
+          0.005839999999999984,
+          0.006759999999999988,
+          0.008240000000000025,
+          0.005139999999999978,
+          0.006120000000000014,
+          0.011179999999999968,
+          0.006099999999999994,
+          0.007179999999999964,
+          0.00928000000000001,
+          0.006179999999999963,
+          0.005519999999999969,
+          0.006220000000000003,
+          0.004360000000000003,
+          0.0046800000000000175,
+          0.0046800000000000175,
+          0.00544,
+          0.005159999999999998,
+          0.005640000000000089,
+          0.005700000000000038,
+          0.005900000000000016,
+          0.01097999999999999,
+          0.007640000000000091,
+          0.0036199999999999566,
+          0.005599999999999994,
+          0.008220000000000005,
+          0.002820000000000017,
+          0.0044399999999999995,
+          0.0035399999999999876,
+          0.0035800000000000276,
+          0.0038800000000000223,
+          0.006360000000000032,
+          0.0039000000000000146,
+          0.0028200000000000447
+        ],
+        "cdf_is_reference_grid_bound": false,
+        "cdf_statistic": "exact two-sample empirical CDF supremum at all pooled sample values, for the same 53 physical projections",
+        "flags": {
+          "joint_projection_cdf": [
+            4,
+            19
+          ],
+          "marginal_cdf": [
+            7,
+            8,
+            19
+          ],
+          "mean_reference_sd": [],
+          "sd_fraction": []
+        },
+        "investigation_required": true,
+        "investigation_thresholds": {
+          "cdf": 0.01,
+          "mean_reference_sd": 0.05,
+          "sd_fraction": 0.05
+        },
+        "max_cdf_difference": 0.013700000000000045,
+        "max_mean_difference_reference_sd": 0.021995183272322433,
+        "max_sd_fraction_difference": 0.014569726114366022,
+        "mean_difference_interpretation": "absolute change in signed bias, equivalently abs(candidate mean - control mean)/reference SD; not difference of absolute biases",
+        "mean_difference_reference_sd": [
+          0.006740562674584498,
+          0.00305920093635698,
+          0.004288566138596797,
+          0.0061906807205908175,
+          0.00163093230593893,
+          0.007532305703355393,
+          0.003129730483117686,
+          0.021995183272322433,
+          0.0191405035913853,
+          0.010266100033454057,
+          0.012491048391680979,
+          0.004761228593467143,
+          0.0006451890751972223,
+          0.015703234223284183,
+          0.01826976949810461,
+          0.0013049931193497477,
+          0.005427710342163187,
+          0.007921021414089669,
+          0.0017820018955387192,
+          0.016584062115132657,
+          0.003377047622946285
+        ],
+        "original_api_absolute_gate_policy": true,
+        "policy_override": "Explicit human performance-first authorization; physical assessment is retained separately.",
+        "population_confidence_claim": false,
+        "schema": "posteriorforge.upstream_comparison.v1",
+        "sd_fraction_difference": [
+          0.0007704756656395917,
+          0.0030341304858407803,
+          0.0010984160571236856,
+          0.0014050496603481566,
+          0.0010619947697707577,
+          0.005500744268193358,
+          0.0008859895289097253,
+          0.003741750563118984,
+          0.005046450558717108,
+          0.00028197743214086746,
+          0.0032758637549523684,
+          0.011862455263653038,
+          0.011518099341589982,
+          0.0030483932040417105,
+          0.00163440930089076,
+          0.004985078340016602,
+          0.001837633979264175,
+          0.007943158905024506,
+          0.00017416276600434877,
+          0.014569726114366022,
+          0.00670753637073096
+        ],
+        "thresholds_are_investigation_flags": true
+      },
+      "request_speedup_vs_control_median": 5.311709449877726,
+      "request_speedup_vs_earlier_gqa": 1.3547150626227125,
+      "returned_vectors": 50000,
+      "review_sha256": "6d33770b729662abceaeb3e39729101bec056fa5974bc8f4d3b9f44b95e80be1",
+      "runner_pre_request_unattributed_seconds": 109.46774938423187,
+      "runner_source_sha256": "23ccad8b5bbcdd7a48340b349d515ca870763359cfeb71333e02fc2b6a8aca3b",
+      "runner_total_seconds": 557.5926263555884,
+      "support_calls": 2,
+      "unexamined_fifo_remainder": 742,
+      "wrapper_seconds": 558.0463295644149,
+      "wrapper_speedup_vs_control_median": 4.295911763749762
+    }
+  ],
+  "primary": {
+    "manifest_sha256": "a0114fd74721cf9bed31e9131045e841f262db123c8f849e5cb3f15814a14f4b",
+    "path": "results/cdf-arithmetic-v1/context-4096/seed-20261111-case-0",
+    "samples_sha256": "27e51ad1b1ee615fc921ee4f5c237155139304da3e7c193f7781a389cee6d53e"
+  },
+  "reference_manifest_sha256": "0cdfb135e5b95c1c2353979005fb16f234a9ec4ed6a12a25d512920ffcc1ec59",
+  "report_source_sha256": "a2abf10d7590b392c5a049597fadf08c7420ed074db530aec7686351b5f0edeb",
+  "schema": "posteriorforge.gqa_fifo_pilots_report.v1",
+  "signed_curves_sha256": "1b0f41dae8cce864101fc9145e95ddc420e3b06ffd20956e09889c2a5312b31e"
+}
