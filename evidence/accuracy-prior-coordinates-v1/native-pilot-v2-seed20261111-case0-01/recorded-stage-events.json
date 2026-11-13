@@ -1,0 +1,1691 @@
+[
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 7.180477845482528,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 1,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 4.301683600060642,
+    "prepare_seconds": 8.491926576942205,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.21839197631925344,
+    "sampler": {
+      "component_distribution_dedup": false,
+      "density_scope": "proposal-wave-local; no cross-request/case reuse",
+      "head_assignment_counts_by_member": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "model_query_chunks": 1,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1": 1
+        },
+        "1": {
+          "1": 1
+        },
+        "2": {
+          "1": 1
+        },
+        "3": {
+          "1": 1
+        },
+        "4": {
+          "1": 1
+        },
+        "5": {
+          "1": 1
+        },
+        "6": {
+          "1": 1
+        },
+        "7": {
+          "1": 1
+        }
+      },
+      "stage0_full_mixture_shared": true,
+      "uniform_draws": 51200
+    },
+    "stage_index": 0,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 5.241686511784792,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 56,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 32.87267773039639,
+    "prepare_seconds": 6.532427432946861,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.2159793097525835,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6277,
+        6374,
+        6414,
+        6386,
+        6367,
+        6504,
+        6365,
+        6513
+      ],
+      "head_candidates": 51200,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "head_rejections": 0,
+      "model_query_chunks": 56,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "133": 1
+        },
+        "1": {
+          "1024": 6,
+          "230": 1
+        },
+        "2": {
+          "1024": 6,
+          "270": 1
+        },
+        "3": {
+          "1024": 6,
+          "242": 1
+        },
+        "4": {
+          "1024": 6,
+          "223": 1
+        },
+        "5": {
+          "1024": 6,
+          "360": 1
+        },
+        "6": {
+          "1024": 6,
+          "221": 1
+        },
+        "7": {
+          "1024": 6,
+          "369": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 1,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 4.8783532017841935,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 58,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 33.473306650295854,
+    "prepare_seconds": 6.160325509496033,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.2092050053179264,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6427,
+        6437,
+        6398,
+        6384,
+        6429,
+        6271,
+        6443,
+        6413
+      ],
+      "head_candidates": 51202,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "head_rejections": 2,
+      "model_query_chunks": 58,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "283": 1
+        },
+        "1": {
+          "1024": 6,
+          "293": 1
+        },
+        "2": {
+          "1024": 6,
+          "254": 1
+        },
+        "3": {
+          "1024": 6,
+          "240": 1
+        },
+        "4": {
+          "1": 1,
+          "1024": 6,
+          "284": 1
+        },
+        "5": {
+          "1024": 6,
+          "127": 1
+        },
+        "6": {
+          "1024": 6,
+          "299": 1
+        },
+        "7": {
+          "1": 1,
+          "1024": 6,
+          "268": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 2,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 4.833609921857715,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 57,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 31.57986813504249,
+    "prepare_seconds": 6.036300092935562,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.12497497536242008,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6463,
+        6360,
+        6321,
+        6362,
+        6451,
+        6420,
+        6401,
+        6423
+      ],
+      "head_candidates": 51201,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "head_rejections": 1,
+      "model_query_chunks": 57,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "319": 1
+        },
+        "1": {
+          "1024": 6,
+          "216": 1
+        },
+        "2": {
+          "1": 1,
+          "1024": 6,
+          "176": 1
+        },
+        "3": {
+          "1024": 6,
+          "218": 1
+        },
+        "4": {
+          "1024": 6,
+          "307": 1
+        },
+        "5": {
+          "1024": 6,
+          "276": 1
+        },
+        "6": {
+          "1024": 6,
+          "257": 1
+        },
+        "7": {
+          "1024": 6,
+          "279": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 3,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 5.632435100153089,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 56,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 31.0846003908664,
+    "prepare_seconds": 6.864171897992492,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.1371552124619484,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6281,
+        6371,
+        6344,
+        6590,
+        6383,
+        6363,
+        6391,
+        6477
+      ],
+      "head_candidates": 51200,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "head_rejections": 0,
+      "model_query_chunks": 56,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "137": 1
+        },
+        "1": {
+          "1024": 6,
+          "227": 1
+        },
+        "2": {
+          "1024": 6,
+          "200": 1
+        },
+        "3": {
+          "1024": 6,
+          "446": 1
+        },
+        "4": {
+          "1024": 6,
+          "239": 1
+        },
+        "5": {
+          "1024": 6,
+          "219": 1
+        },
+        "6": {
+          "1024": 6,
+          "247": 1
+        },
+        "7": {
+          "1024": 6,
+          "333": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 4,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 5.114849868230522,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 56,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 31.320732132531703,
+    "prepare_seconds": 6.349403926171362,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.14095207303762436,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6414,
+        6315,
+        6495,
+        6298,
+        6398,
+        6383,
+        6545,
+        6352
+      ],
+      "head_candidates": 51200,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "head_rejections": 0,
+      "model_query_chunks": 56,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "270": 1
+        },
+        "1": {
+          "1024": 6,
+          "171": 1
+        },
+        "2": {
+          "1024": 6,
+          "351": 1
+        },
+        "3": {
+          "1024": 6,
+          "154": 1
+        },
+        "4": {
+          "1024": 6,
+          "254": 1
+        },
+        "5": {
+          "1024": 6,
+          "239": 1
+        },
+        "6": {
+          "1024": 6,
+          "401": 1
+        },
+        "7": {
+          "1024": 6,
+          "208": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 5,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "original_fit_preprocessors_all8",
+    "fit_stock_cache_seconds": null,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 57,
+    "native_all8_members": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "native_neural_prefill_calls": 0,
+    "predict_and_sample_seconds": 41.720498899929225,
+    "prepare_seconds": 1.0662216944620013,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": null,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6373,
+        6400,
+        6312,
+        6344,
+        6443,
+        6580,
+        6434,
+        6315
+      ],
+      "head_candidates": 51201,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "head_rejections": 1,
+      "model_query_chunks": 57,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "229": 1
+        },
+        "1": {
+          "1024": 6,
+          "256": 1
+        },
+        "2": {
+          "1024": 6,
+          "168": 1
+        },
+        "3": {
+          "1024": 6,
+          "200": 1
+        },
+        "4": {
+          "1024": 6,
+          "299": 1
+        },
+        "5": {
+          "1024": 6,
+          "436": 1
+        },
+        "6": {
+          "1": 1,
+          "1024": 6,
+          "289": 1
+        },
+        "7": {
+          "1024": 6,
+          "171": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 6,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 5.340365792624652,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 58,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 31.74946579709649,
+    "prepare_seconds": 6.558311061933637,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.12459409423172474,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6369,
+        6418,
+        6341,
+        6527,
+        6370,
+        6356,
+        6418,
+        6403
+      ],
+      "head_candidates": 51202,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "head_rejections": 2,
+      "model_query_chunks": 58,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "225": 1
+        },
+        "1": {
+          "1024": 6,
+          "274": 1
+        },
+        "2": {
+          "1024": 6,
+          "197": 1
+        },
+        "3": {
+          "1024": 6,
+          "383": 1
+        },
+        "4": {
+          "1024": 6,
+          "226": 1
+        },
+        "5": {
+          "1024": 6,
+          "212": 1
+        },
+        "6": {
+          "1": 1,
+          "1024": 6,
+          "273": 1
+        },
+        "7": {
+          "1": 1,
+          "1024": 6,
+          "258": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 7,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 4.6780543103814125,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 56,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 31.275557227432728,
+    "prepare_seconds": 5.921619579195976,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.13649973645806313,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6533,
+        6333,
+        6328,
+        6381,
+        6523,
+        6399,
+        6345,
+        6358
+      ],
+      "head_candidates": 51200,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "head_rejections": 0,
+      "model_query_chunks": 56,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "389": 1
+        },
+        "1": {
+          "1024": 6,
+          "189": 1
+        },
+        "2": {
+          "1024": 6,
+          "184": 1
+        },
+        "3": {
+          "1024": 6,
+          "237": 1
+        },
+        "4": {
+          "1024": 6,
+          "379": 1
+        },
+        "5": {
+          "1024": 6,
+          "255": 1
+        },
+        "6": {
+          "1024": 6,
+          "201": 1
+        },
+        "7": {
+          "1024": 6,
+          "214": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 8,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 8.058768043294549,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 57,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 31.899599575437605,
+    "prepare_seconds": 9.300193310715258,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.14073292072862387,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6354,
+        6338,
+        6329,
+        6453,
+        6491,
+        6389,
+        6491,
+        6356
+      ],
+      "head_candidates": 51201,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "head_rejections": 1,
+      "model_query_chunks": 57,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "210": 1
+        },
+        "1": {
+          "1024": 6,
+          "194": 1
+        },
+        "2": {
+          "1024": 6,
+          "185": 1
+        },
+        "3": {
+          "1024": 6,
+          "309": 1
+        },
+        "4": {
+          "1": 1,
+          "1024": 6,
+          "346": 1
+        },
+        "5": {
+          "1024": 6,
+          "245": 1
+        },
+        "6": {
+          "1024": 6,
+          "347": 1
+        },
+        "7": {
+          "1024": 6,
+          "212": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 9,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "original_fit_preprocessors_all8",
+    "fit_stock_cache_seconds": null,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 56,
+    "native_all8_members": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "native_neural_prefill_calls": 0,
+    "predict_and_sample_seconds": 41.168708271346986,
+    "prepare_seconds": 1.0676944022998214,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": null,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6444,
+        6318,
+        6505,
+        6333,
+        6381,
+        6403,
+        6386,
+        6430
+      ],
+      "head_candidates": 51200,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "head_rejections": 0,
+      "model_query_chunks": 56,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "300": 1
+        },
+        "1": {
+          "1024": 6,
+          "174": 1
+        },
+        "2": {
+          "1024": 6,
+          "361": 1
+        },
+        "3": {
+          "1024": 6,
+          "189": 1
+        },
+        "4": {
+          "1024": 6,
+          "237": 1
+        },
+        "5": {
+          "1024": 6,
+          "259": 1
+        },
+        "6": {
+          "1024": 6,
+          "242": 1
+        },
+        "7": {
+          "1024": 6,
+          "286": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 10,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 1.8147828513756394,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 57,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 31.20125037804246,
+    "prepare_seconds": 3.046647178940475,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.12490443047136068,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6416,
+        6489,
+        6457,
+        6379,
+        6432,
+        6298,
+        6216,
+        6515
+      ],
+      "head_candidates": 51202,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "head_rejections": 2,
+      "model_query_chunks": 57,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "272": 1
+        },
+        "1": {
+          "1024": 6,
+          "345": 1
+        },
+        "2": {
+          "1024": 6,
+          "313": 1
+        },
+        "3": {
+          "1024": 6,
+          "235": 1
+        },
+        "4": {
+          "1024": 6,
+          "288": 1
+        },
+        "5": {
+          "1024": 6,
+          "154": 1
+        },
+        "6": {
+          "1024": 6,
+          "2": 1,
+          "70": 1
+        },
+        "7": {
+          "1024": 6,
+          "371": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 11,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 2.186151433736086,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 56,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 31.305932834744453,
+    "prepare_seconds": 3.4481892585754395,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.13675517309457064,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6373,
+        6357,
+        6383,
+        6393,
+        6268,
+        6445,
+        6511,
+        6470
+      ],
+      "head_candidates": 51200,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "head_rejections": 0,
+      "model_query_chunks": 56,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "229": 1
+        },
+        "1": {
+          "1024": 6,
+          "213": 1
+        },
+        "2": {
+          "1024": 6,
+          "239": 1
+        },
+        "3": {
+          "1024": 6,
+          "249": 1
+        },
+        "4": {
+          "1024": 6,
+          "124": 1
+        },
+        "5": {
+          "1024": 6,
+          "301": 1
+        },
+        "6": {
+          "1024": 6,
+          "367": 1
+        },
+        "7": {
+          "1024": 6,
+          "326": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 12,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 2.1608936870470643,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 56,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 31.387253979220986,
+    "prepare_seconds": 3.425759656354785,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.14117395598441362,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6404,
+        6436,
+        6347,
+        6366,
+        6367,
+        6331,
+        6441,
+        6508
+      ],
+      "head_candidates": 51200,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "head_rejections": 0,
+      "model_query_chunks": 56,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "260": 1
+        },
+        "1": {
+          "1024": 6,
+          "292": 1
+        },
+        "2": {
+          "1024": 6,
+          "203": 1
+        },
+        "3": {
+          "1024": 6,
+          "222": 1
+        },
+        "4": {
+          "1024": 6,
+          "223": 1
+        },
+        "5": {
+          "1024": 6,
+          "187": 1
+        },
+        "6": {
+          "1024": 6,
+          "297": 1
+        },
+        "7": {
+          "1024": 6,
+          "364": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 13,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "original_fit_preprocessors_all8",
+    "fit_stock_cache_seconds": null,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 56,
+    "native_all8_members": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "native_neural_prefill_calls": 0,
+    "predict_and_sample_seconds": 41.231355047784746,
+    "prepare_seconds": 1.1367184380069375,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": null,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6516,
+        6513,
+        6344,
+        6342,
+        6547,
+        6278,
+        6429,
+        6231
+      ],
+      "head_candidates": 51200,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "head_rejections": 0,
+      "model_query_chunks": 56,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "372": 1
+        },
+        "1": {
+          "1024": 6,
+          "369": 1
+        },
+        "2": {
+          "1024": 6,
+          "200": 1
+        },
+        "3": {
+          "1024": 6,
+          "198": 1
+        },
+        "4": {
+          "1024": 6,
+          "403": 1
+        },
+        "5": {
+          "1024": 6,
+          "134": 1
+        },
+        "6": {
+          "1024": 6,
+          "285": 1
+        },
+        "7": {
+          "1024": 6,
+          "87": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 14,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 1.4679994443431497,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 58,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 31.398615177720785,
+    "prepare_seconds": 2.6966538168489933,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.10927463322877884,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6411,
+        6454,
+        6306,
+        6333,
+        6476,
+        6465,
+        6417,
+        6341
+      ],
+      "head_candidates": 51203,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0
+      ],
+      "head_rejections": 3,
+      "model_query_chunks": 58,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "267": 1
+        },
+        "1": {
+          "1": 1,
+          "1024": 6,
+          "309": 1
+        },
+        "2": {
+          "1024": 6,
+          "162": 1
+        },
+        "3": {
+          "1024": 6,
+          "187": 1,
+          "2": 1
+        },
+        "4": {
+          "1024": 6,
+          "332": 1
+        },
+        "5": {
+          "1024": 6,
+          "321": 1
+        },
+        "6": {
+          "1024": 6,
+          "273": 1
+        },
+        "7": {
+          "1024": 6,
+          "197": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 15,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 1.5679233856499195,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 56,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 30.627140207216144,
+    "prepare_seconds": 2.8080637520179152,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.11328415106981993,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6416,
+        6506,
+        6323,
+        6430,
+        6377,
+        6279,
+        6494,
+        6375
+      ],
+      "head_candidates": 51200,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "head_rejections": 0,
+      "model_query_chunks": 56,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "272": 1
+        },
+        "1": {
+          "1024": 6,
+          "362": 1
+        },
+        "2": {
+          "1024": 6,
+          "179": 1
+        },
+        "3": {
+          "1024": 6,
+          "286": 1
+        },
+        "4": {
+          "1024": 6,
+          "233": 1
+        },
+        "5": {
+          "1024": 6,
+          "135": 1
+        },
+        "6": {
+          "1024": 6,
+          "350": 1
+        },
+        "7": {
+          "1024": 6,
+          "231": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 16,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 1.4964766781777143,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 57,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 30.906475675292313,
+    "prepare_seconds": 2.744888497516513,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.11060759052634239,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6463,
+        6475,
+        6437,
+        6343,
+        6410,
+        6291,
+        6389,
+        6393
+      ],
+      "head_candidates": 51201,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "head_rejections": 1,
+      "model_query_chunks": 57,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "319": 1
+        },
+        "1": {
+          "1024": 6,
+          "331": 1
+        },
+        "2": {
+          "1": 1,
+          "1024": 6,
+          "292": 1
+        },
+        "3": {
+          "1024": 6,
+          "199": 1
+        },
+        "4": {
+          "1024": 6,
+          "266": 1
+        },
+        "5": {
+          "1024": 6,
+          "147": 1
+        },
+        "6": {
+          "1024": 6,
+          "245": 1
+        },
+        "7": {
+          "1024": 6,
+          "249": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 17,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 1.5643151113763452,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 56,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 30.775382017716765,
+    "prepare_seconds": 2.8292766474187374,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.11393326241523027,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6326,
+        6275,
+        6454,
+        6404,
+        6367,
+        6492,
+        6453,
+        6429
+      ],
+      "head_candidates": 51200,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "head_rejections": 0,
+      "model_query_chunks": 56,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "182": 1
+        },
+        "1": {
+          "1024": 6,
+          "131": 1
+        },
+        "2": {
+          "1024": 6,
+          "310": 1
+        },
+        "3": {
+          "1024": 6,
+          "260": 1
+        },
+        "4": {
+          "1024": 6,
+          "223": 1
+        },
+        "5": {
+          "1024": 6,
+          "348": 1
+        },
+        "6": {
+          "1024": 6,
+          "309": 1
+        },
+        "7": {
+          "1024": 6,
+          "285": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 18,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 1.7026432119309902,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 57,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 31.10835883114487,
+    "prepare_seconds": 2.950695722363889,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.11091959197074175,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6356,
+        6460,
+        6444,
+        6351,
+        6412,
+        6522,
+        6411,
+        6245
+      ],
+      "head_candidates": 51201,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "head_rejections": 1,
+      "model_query_chunks": 57,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "212": 1
+        },
+        "1": {
+          "1": 1,
+          "1024": 6,
+          "315": 1
+        },
+        "2": {
+          "1024": 6,
+          "300": 1
+        },
+        "3": {
+          "1024": 6,
+          "207": 1
+        },
+        "4": {
+          "1024": 6,
+          "268": 1
+        },
+        "5": {
+          "1024": 6,
+          "378": 1
+        },
+        "6": {
+          "1024": 6,
+          "267": 1
+        },
+        "7": {
+          "101": 1,
+          "1024": 6
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 19,
+    "uncached_fit_seconds": 0.0
+  },
+  {
+    "actual_execution_route": "frozen88_resident_cache",
+    "fit_stock_cache_seconds": 1.8230518912896514,
+    "hybrid_fallback_members": [],
+    "model_query_chunks": 57,
+    "native_all8_members": [],
+    "native_neural_prefill_calls": null,
+    "predict_and_sample_seconds": 31.148382022045553,
+    "prepare_seconds": 3.086158262565732,
+    "proposal_round": 1,
+    "proposed_rows": 51200,
+    "query_batch_size": 1024,
+    "resident_move_seconds": 0.11426985077559948,
+    "sampler": {
+      "head_assignment_counts_by_member": [
+        6309,
+        6410,
+        6502,
+        6403,
+        6308,
+        6478,
+        6435,
+        6356
+      ],
+      "head_candidates": 51201,
+      "head_policy": "raw_mass_rejection_v1",
+      "head_rejection_counts_by_member": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "head_rejections": 1,
+      "model_query_chunks": 57,
+      "neural_query_batch_sizes_by_member": {
+        "0": {
+          "1024": 6,
+          "165": 1
+        },
+        "1": {
+          "1024": 6,
+          "266": 1
+        },
+        "2": {
+          "1": 1,
+          "1024": 6,
+          "357": 1
+        },
+        "3": {
+          "1024": 6,
+          "259": 1
+        },
+        "4": {
+          "1024": 6,
+          "164": 1
+        },
+        "5": {
+          "1024": 6,
+          "334": 1
+        },
+        "6": {
+          "1024": 6,
+          "291": 1
+        },
+        "7": {
+          "1024": 6,
+          "212": 1
+        }
+      },
+      "partial_vector_filtering": false,
+      "uniform_assignment": "preassigned per stage by physical row; retained across head retries",
+      "uniform_draws": 51200
+    },
+    "stage_index": 20,
+    "uncached_fit_seconds": 0.0
+  }
+]

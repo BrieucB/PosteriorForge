@@ -1,0 +1,80 @@
+{
+  "CI": {
+    "conclusion": "success",
+    "id": 43354323971,
+    "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43354323971"
+  },
+  "CPU_timing_scope": "walltime before reservation; source subset included in total; no optimization edits",
+  "CPU_wall_seconds": {
+    "explicit_committed_source_validation_including_inventory": 0.5596202770248055,
+    "total_pre_submission_validation_including_imports": 2.7991984598338604
+  },
+  "NPZ_or_arrays_included": false,
+  "authorization": "ONE50000 complete-vector v2 request; valid closed result permits ONE physical G3 and unchanged assessment; no other pair",
+  "cached_stage_count": 18,
+  "completed_cohort_or_physical_accuracy_claimed": false,
+  "curation_did_not_run_source_validation_models_GPU_ledger_registry_or_G3": true,
+  "exact_committed_sources": {
+    "docs/accuracy-prior-coordinate-native-control-v2.md": "8640a4e157698862823521d3fd14396ecc3ebf121dffffabc987cc937d3ad2fc",
+    "scripts/qualify_prior_coordinate_pair_v2.py": "a9f4d6818c030ac29587642fa744101c49b9f4a5fd192ab224c0f273f770e875",
+    "src/posteriorforge/execution_prior_native_v2.py": "0199b16e9cc34203fa0d5645d161742fe9ed244633d7beee047fbcbf2528661c",
+    "src/posteriorforge/performance_prior_pair_v2.py": "311f2cbfb3c3bd977ff9af348cd81a008c3c7711ec70f850fb25b3bc2d120a85"
+  },
+  "gpus": 1,
+  "job_id": "5411530",
+  "launch_bookkeeping_is_final_cost": false,
+  "native_all8_stages": [
+    6,
+    10,
+    14
+  ],
+  "no_requeue": true,
+  "pair": {
+    "case": 0,
+    "context_seed": 20261111,
+    "context_size": 4096,
+    "count": 50000,
+    "repetition": 0
+  },
+  "physical_G3_in_neural_request": false,
+  "project_active_or_uncertain_allocations_before": 0,
+  "raw_files": {
+    "preflight.json": {
+      "bytes": 23807,
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/native-pilot-v2-seed20261111-case0-launch-01/preflight.json",
+      "sha256": "213bbce411d7bdc7d2cdee7a9e6e90df3513021255eb2a3dd7e988feebf9c94f"
+    },
+    "submission.json": {
+      "bytes": 4130,
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/native-pilot-v2-seed20261111-case0-launch-01/submission.json",
+      "sha256": "fcc3e890fb49595339d64907ec95b6c09dd8874730d1a047209755d67d5888f4"
+    }
+  },
+  "recorded_launch_actual_gpu_seconds": 0,
+  "recorded_submission_state": "submitted",
+  "reservation_id": "34337f2890be48a0b069ed1efc0e3ff7",
+  "reserved_gpu_seconds": 1200,
+  "runtime_source_inventory_metadata": {
+    "committed_HEAD_exact": true,
+    "current_checkout_exact": true,
+    "external_libraries": "existing pinned SDK/PyTorch source and runtime version guards are retained; third-party binaries are not Git blobs",
+    "inventory_sha256": "edae96e0a5aa7f8a84b3d699636bf041f30fdf8dd4ff263c47fce2f68f6374ae",
+    "own_producer_source_sha256": "311f2cbfb3c3bd977ff9af348cd81a008c3c7711ec70f850fb25b3bc2d120a85",
+    "own_source_checked_separately_to_avoid_recursive_hash": true,
+    "schema": "posteriorforge.prior_coordinate_pair_runtime_sources.v2",
+    "source_count": 155
+  },
+  "same_pair_v2_screen_sha256": "aa8aff311d8f7fab6d774337510bb5f66abed309300c995267e98fa7f3e2a88e",
+  "schema": "posteriorforge.prior_coordinate_pair_v2_production_launch_evidence.v1",
+  "scope": "launch metadata only; no running result or final cost copied",
+  "source_commit": "ff1921e88a3c3436208861ae506bef44871906c9",
+  "torch_imported_during_preflight": false,
+  "untracked_paths_at_preflight": [
+    "scripts/diagnose_host_reuse.py",
+    "scripts/evaluate_ss15_campaign.py",
+    "src/posteriorforge/execution_tail_observer.py",
+    "tests/test_execution_tail_observer.py",
+    "tests/test_host_reuse_diagnostic.py"
+  ],
+  "untracked_scope": "read-only checkout names, not a live-process module inventory"
+}

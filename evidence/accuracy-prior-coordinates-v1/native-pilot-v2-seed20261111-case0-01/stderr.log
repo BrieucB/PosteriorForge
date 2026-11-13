@@ -1,0 +1,50 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/performance_prior_pair_v2.py", line 495, in <module>
+    main()
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/performance_prior_pair_v2.py", line 446, in main
+    result = run(**vars(parser.parse_args()))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/performance_prior_pair_v2.py", line 434, in run
+    return _bind_run(spec, proof_sha, pair_cpu_receipt)(**paths)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/performance_prior_physical_fifo_v1.py::guarded71_run_with_F64_boundary_and_failure_footer", line 2, in run
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/execution_physical_fifo_v1.py", line 173, in complete_request
+    samples,_,_=original_sampler(
+                ^^^^^^^^^^^^^^^^^
+  File "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/upstream/npe_pfn/accept_reject_sampler.py", line 51, in accept_reject_sample
+    candidates, log_probs = proposal(
+                            ^^^^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/execution_proposal_buffer.py", line 100, in __call__
+    self._first=False;values=self._generate(remaining+lookahead)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/execution_proposal_buffer.py", line 81, in _generate
+    values,log_prob=self._provider(count)
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/performance_prior_physical_fifo_v1.py::guarded71_run_with_F64_boundary_and_failure_footer", line 145, in proposal
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/performance_prior_coordinates_v1.py", line 167, in record_decode_wave
+    physical = decode_complete_wave(latent)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/performance_prior_coordinates_v1.py", line 149, in decode_complete_wave
+    physical = codec.decode_ordered(values)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/prior_coordinates_v1.py", line 244, in decode_ordered
+    return np.ascontiguousarray(decode_ordered_prefix(values)[:, INVERSE_ORDER])
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/prior_coordinates_v1.py", line 234, in decode_ordered_prefix
+    physical = _decode_prefix(latent, geo)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/prior_coordinates_v1.py", line 176, in _decode_prefix
+    physical[:, stage] = _noise_decode(latent[:, stage], geo["noise"][physical_index])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/prior_coordinates_v1.py", line 137, in _noise_decode
+    _strict_noise(output, spec, "decode")
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/prior_coordinates_v1.py", line 110, in _strict_noise
+    _require(np.all((values > spec["low"]) & (values < spec["high"])),
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/prior_coordinates_v1.py", line 43, in _require
+    raise CoordinateError(message)
+posteriorforge.prior_coordinates_v1.CoordinateError: decode: endpoint, out-of-support, or saturated noise; no clipping
