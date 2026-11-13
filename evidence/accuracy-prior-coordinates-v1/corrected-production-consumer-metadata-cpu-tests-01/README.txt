@@ -1,0 +1,2 @@
+Built with PriorLabs-TabPFN. 41 tests passed in each environment. Each invokes a NEW inference subprocess on actual closed62aa metadata, exact runtime versions and147 recorded Git sources, with no model/GPU/G3 calls. Exact single field/value/TYPE differences are saved, both fingerprints preserved.
+The old failed pre-G3 consumer log remains preserved and no actual G3 output existed at receipt creation. All other source/AST/inventory/routing/value/TYPE guards remain strict.

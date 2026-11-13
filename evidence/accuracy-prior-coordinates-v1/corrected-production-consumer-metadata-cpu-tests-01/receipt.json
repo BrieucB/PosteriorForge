@@ -1,0 +1,92 @@
+{
+  "CUDA_VISIBLE_DEVICES": "",
+  "actual_closed_production_manifest_sha256": "62aa8bf71ddbf922ab9543141c4ada5cb438e5af162ede76cffe60d1dd3819b5",
+  "actual_regression_fresh_subprocess_environment": "inference; Python3.11.13 NumPy1.26.4 SciPy1.12.0 (asserted equal to producer)",
+  "all_other_metadata_field_value_TYPE_comparisons_strict": true,
+  "attribution": "Built with PriorLabs-TabPFN",
+  "exact_original_failure_log_sha256": "409b306c521e0a3146eef161f7782149b2a2575533c7138840b6eb24ac8d9e60",
+  "executed_recorded_Git_source_count": 147,
+  "field_difference_scope": "only .derivation.run_code_sha256, both str; exact values retained in regression JSON",
+  "new_neural_or_GPU_or_actual_production_G3_calls": 0,
+  "prior_attempt_G3_output_path_absent": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/global-block-native-pilot-corrected-01",
+  "prior_attempt_actual_G3_draws": 0,
+  "runs": [
+    {
+      "actual_closed_regression": "reference-actual-fresh-process-regression.json",
+      "actual_fresh_subprocess_versions": {
+        "numpy": "1.26.4",
+        "python": "3.11.13",
+        "scipy": "1.12.0"
+      },
+      "command_argv": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-s",
+        "-o",
+        "cache_dir=/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/metadata-fix-tests-cache/reference",
+        "tests/test_prior_corrected_production_downstream_v1.py"
+      ],
+      "environment": "reference",
+      "exit_code": 0,
+      "log": "reference-pytest.log",
+      "log_sha256": "795c28ecb7a3c02231e1124ae303002759987f8f7feff8565896f584ba6b0679",
+      "passed_tests": 41,
+      "versions": {
+        "numpy": "2.2.6",
+        "python": "3.11.13",
+        "scipy": "1.15.3"
+      },
+      "wall_seconds": 4.168839194811881
+    },
+    {
+      "actual_closed_regression": "inference-actual-fresh-process-regression.json",
+      "actual_fresh_subprocess_versions": {
+        "numpy": "1.26.4",
+        "python": "3.11.13",
+        "scipy": "1.12.0"
+      },
+      "command_argv": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-s",
+        "-o",
+        "cache_dir=/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/metadata-fix-tests-cache/inference",
+        "tests/test_prior_corrected_production_downstream_v1.py"
+      ],
+      "environment": "inference",
+      "exit_code": 0,
+      "log": "inference-pytest.log",
+      "log_sha256": "3590654eb3a386140d0925c4c34724cf8dc3d69d290dfec3e9d9d9f1bf394b6a",
+      "passed_tests": 41,
+      "versions": {
+        "numpy": "1.26.4",
+        "python": "3.11.13",
+        "scipy": "1.12.0"
+      },
+      "wall_seconds": 4.059729349799454
+    }
+  ],
+  "schema": "posteriorforge.corrected_production_consumer_metadata_CPU_tests.v1",
+  "source_bytes_unchanged": true,
+  "source_hashes_after": {
+    "scripts/evaluate_prior_corrected_production_v1.py": "40d5f8b43081139745e6f7d06d4834aa88089e4b55903860456493314cca6e81",
+    "scripts/refresh_prior_corrected_production_v1.py": "4aa226e24ca381df8956d8c8238a9e17092b01f9771b020cae2166c72990d284",
+    "src/posteriorforge/conditional_globals.py": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+    "src/posteriorforge/execution_physical_fifo_v1.py": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+    "src/posteriorforge/performance_prior_physical_fifo_v1.py": "a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf",
+    "tests/test_prior_corrected_production_downstream_v1.py": "99a29482d1e5472d1bec8f4dc756b7010f2d3a9b5469a666d8ca57f7cc086b9f"
+  },
+  "source_hashes_before": {
+    "scripts/evaluate_prior_corrected_production_v1.py": "40d5f8b43081139745e6f7d06d4834aa88089e4b55903860456493314cca6e81",
+    "scripts/refresh_prior_corrected_production_v1.py": "4aa226e24ca381df8956d8c8238a9e17092b01f9771b020cae2166c72990d284",
+    "src/posteriorforge/conditional_globals.py": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+    "src/posteriorforge/execution_physical_fifo_v1.py": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+    "src/posteriorforge/performance_prior_physical_fifo_v1.py": "a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf",
+    "tests/test_prior_corrected_production_downstream_v1.py": "99a29482d1e5472d1bec8f4dc756b7010f2d3a9b5469a666d8ca57f7cc086b9f"
+  },
+  "status": "passed"
+}

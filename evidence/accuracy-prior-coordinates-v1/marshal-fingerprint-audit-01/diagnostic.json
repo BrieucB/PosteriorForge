@@ -1,0 +1,70 @@
+{
+  "all_other_saved_execution_policy_fields_exact": true,
+  "attribution": "Built with PriorLabs-TabPFN",
+  "exact_only_mismatched_field": "execution_policy.derivation.run_code_sha256",
+  "fresh_import_type": "str",
+  "fresh_import_value": "45b0ba56d1f83e14d04a4f4fd2eb0af535ac870db59a453664507d76deff015e",
+  "fresh_independent_processes": [
+    {
+      "producer_source_sha256": "a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf",
+      "run_code_sha256": "45b0ba56d1f83e14d04a4f4fd2eb0af535ac870db59a453664507d76deff015e",
+      "torch_imported": false
+    },
+    {
+      "producer_source_sha256": "a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf",
+      "run_code_sha256": "45b0ba56d1f83e14d04a4f4fd2eb0af535ac870db59a453664507d76deff015e",
+      "torch_imported": false
+    },
+    {
+      "producer_source_sha256": "a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf",
+      "run_code_sha256": "45b0ba56d1f83e14d04a4f4fd2eb0af535ac870db59a453664507d76deff015e",
+      "torch_imported": false
+    }
+  ],
+  "frozen_producer_source_sha256": "a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf",
+  "interpretation": "marshal output is sensitive to object-reference/interning context; a raw serialized-code hash is not a canonical cross-process source identity.",
+  "limitations": "The reversible witness demonstrates sensitivity without code mutation; it does not reconstruct every original active-frame reference count. Definition-only import and __main__ contexts previously both produced the fresh hash; module name alone is not established as the cause.",
+  "new_model_GPU_G3_uniform_normal_or_reference_calls": 0,
+  "original_failed_consumer_scope": {
+    "G3_calls_before_stop": 0,
+    "actual_log_bytes": 1306,
+    "actual_log_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/corrected-production-postprocessing-cpu-01/01-ONE-actual-production-G3.log",
+    "actual_log_sha256": "409b306c521e0a3146eef161f7782149b2a2575533c7138840b6eb24ac8d9e60",
+    "attempted_output_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/global-block-native-pilot-corrected-01",
+    "exception": "ValueError: actual corrected production metadata/source inventory differs",
+    "line": 138,
+    "new_G3_output_directory_created_before_stop": false,
+    "output_absence_observed_UTC": "2026-11-13T00:06:43.737686+00:00",
+    "output_absence_observed_before_new_consumer_activation": true,
+    "wrapper_sha256": "1d62028e28e93f1fe4f4e2abd98ccedd2a63e0379a86f908a05ac64787061e19",
+    "zero_G3_basis": "Saved traceback stops at load_parent metadata check before refresh call/output mkdir; coordinator/science explicitly confirmed no refresh/draw."
+  },
+  "production_manifest": {
+    "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/native-pilot-corrected-01/manifest.json",
+    "producer_source_sha256": "a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf",
+    "recorded_value": "8c8ffeb96a1167ec2a05272b77df007e4e63f39228b6067b54d73b7ad4caeaf5",
+    "sha256": "62aa8bf71ddbf922ab9543141c4ada5cb438e5af162ede76cffe60d1dd3819b5"
+  },
+  "proposed_narrow_consumer_scope": "Preserve both wellformed64 fingerprints separately; compare every other metadata field exactly and retain live closure/reverseAST/source-file+recorded147-Git checks. Never change62aa or waive numerical guards.",
+  "recorded_type": "str",
+  "recorded_value": "8c8ffeb96a1167ec2a05272b77df007e4e63f39228b6067b54d73b7ad4caeaf5",
+  "retained_CPU_engineering_fixture": {
+    "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/physical-fifo-archived-fixture-cpu-01/inference-pytest-temp/test_archived_neural_fixture_r0/EXPLICIT_CPU_ARCHIVED_NEURAL_TEST_FIXTURE/manifest.json",
+    "producer_source_sha256": "a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf",
+    "recorded_value": "8c8ffeb96a1167ec2a05272b77df007e4e63f39228b6067b54d73b7ad4caeaf5",
+    "scope": "Existing test uses exact same run codeobject; neural/CUDA/budget are explicit fixtures, not a production qualification.",
+    "sha256": "5238d0d9745d7d5ef4248483d0f3d518a50e5b57a116d3d95be7ceef8ef99bdd"
+  },
+  "same_live_codeobject_reference_retention_witness": {
+    "after_reference_deleted": "45b0ba56d1f83e14d04a4f4fd2eb0af535ac870db59a453664507d76deff015e",
+    "before": "45b0ba56d1f83e14d04a4f4fd2eb0af535ac870db59a453664507d76deff015e",
+    "codeobject_identity_unchanged": true,
+    "run_main_or_inference_invoked": false,
+    "source_mutated": false,
+    "while_only_co_consts_reference_retained": "65be2546b2be186a0056c1d5f347386f06e303bac9b9d32b78e7459f9556f69b"
+  },
+  "schema": "posteriorforge.serialized_code_fingerprint_context_audit.v1",
+  "source_guard_current147_basis_retained": true,
+  "status": "diagnosed",
+  "torch_imported": false
+}

@@ -6,7 +6,7 @@ normal production footer, actual archive, F64 FIFO and finite-screen binding
 must be present before any actual global draw. No neural/GPU calls occur here.
 """
 from __future__ import annotations
-import argparse,hashlib,importlib.util,io,json,re,subprocess,tarfile
+import argparse,copy,hashlib,importlib.util,io,json,re,subprocess,tarfile
 from pathlib import Path
 from types import SimpleNamespace
 import numpy as np
@@ -69,6 +69,49 @@ def source_guard():
   "draw_observer_function_source":DRAW_OBSERVER_SOURCE_SHA256,
   "draw_function_reuse_scope":"unchanged refresh_with_actual_draws numerical caller only; no forensic cohort/envelope inherited",
   "old_validation_ancestry":OLD_EVAL_SHA256,"git_revision":rev}
+
+def policy_differences(recorded,current):
+ """Exact field/value/TYPE differences; diagnostics only, no normalization."""
+ differences=[]
+ def visit(left,right,path):
+  if type(left) is not type(right):
+   differences.append({"path":path,"recorded_type":type(left).__name__,"current_type":type(right).__name__,
+    "recorded_value":left,"current_value":right});return
+  if isinstance(left,dict):
+   for key in sorted(set(left)|set(right)):
+    if key not in left or key not in right:
+     differences.append({"path":path+"."+key,"recorded_present":key in left,"current_present":key in right})
+    else:visit(left[key],right[key],path+"."+key)
+  elif isinstance(left,list):
+   if len(left)!=len(right):differences.append({"path":path,"recorded_length":len(left),"current_length":len(right)})
+   else:
+    for i,(a,b) in enumerate(zip(left,right)):visit(a,b,path+"["+str(i)+"]")
+  elif left!=right:
+   differences.append({"path":path,"recorded_type":type(left).__name__,"current_type":type(right).__name__,
+    "recorded_value":left,"current_value":right})
+ visit(recorded,current,"")
+ return differences
+
+def verify_execution_policy(recorded,current):
+ """One serialized-code telemetry field is process-local; all other facts exact."""
+ left=copy.deepcopy(recorded);right=copy.deepcopy(current)
+ old=left.get("derivation",{}).get("run_code_sha256")
+ new=right.get("derivation",{}).get("run_code_sha256")
+ for value in (old,new):
+  require(isinstance(value,str) and re.fullmatch("[0-9a-f]{64}",value) is not None,
+   "process-local serialized-code telemetry must be a wellformed SHA256")
+ left["derivation"].pop("run_code_sha256");right["derivation"].pop("run_code_sha256")
+ require(not policy_differences(left,right),"actual corrected production metadata/source/AST/inventory/routing differs")
+ require(left["derivation"]["reverse_AST_exact"] is True
+  and left["derivation"]["original_function_globals_unmodified"] is True
+  and left["derivation"]["original_neural_engine_codec_stage_draw_objects_used"] is True,
+  "source-bound exact AST/global/algorithm ancestry required")
+ return {"passed":True,"all_other_metadata_fields_exact":True,
+  "recorded_execution_serialized_code_SHA256":old,"current_verifier_serialized_code_SHA256":new,
+  "serialized_code_fingerprints_equal":old==new,
+  "fingerprint_scope":"process-local, reference-context-dependent serialized-code telemetry; not a cross-process source identity",
+  "source_identity_basis":"exact recorded147 Git source blobs/file hashes + reverse AST + original live code/global identity guards",
+  "original_producer_manifest_changed":False,"exact_original_metadata_field_value_TYPE_differences":policy_differences(recorded,current)}
 
 def validate_success_header(d,producer_sha=PRODUCER_SHA256):
  require(not d.get("test_fixture"),"CPU test fixture is not an actual production request")
@@ -135,7 +178,7 @@ def load_parent(path,expected_sha,*,scratch):
  for key in ("physical_theta_original_Float64","latent_physical_slot_model_Float32","ordered_latent_model_Float32","stage_to_physical_order","physical_to_stage_order"):
   require(encoding[key]==d["model_target_descriptors"][key],"actual causal target encoding differs: "+key)
  execution_policy=producer.execution_metadata()
- require(d["execution_policy"]==execution_policy,"actual corrected production metadata/source inventory differs")
+ policy_authentication=verify_execution_policy(d["execution_policy"],execution_policy)
  expected_files=dict(execution_policy["runtime_source_inventory"]["sources"])
  expected_files["src/posteriorforge/performance_prior_physical_fifo_v1.py"]=PRODUCER_SHA256
  recorded_sources=verify_git_sources(Path(__file__).resolve().parents[1],d["git_revision"],expected_files)
@@ -159,6 +202,7 @@ def load_parent(path,expected_sha,*,scratch):
   "actual_all51200_decode_replay":decoded,"actual_raw_model_mask_target_inputs_recomputed":True,
   "fresh_finite_screen_replay":screen_receipt,"actual_execution_checks":execution,
   "exact_replay_environment":environment,"source_pins":pins,"recorded_execution_source_inventory":recorded_sources,
+  "execution_policy_authentication":policy_authentication,
   "execution_validation_scope":"exact old6c validation function with explicit new corrected producer/F64 sampling-policy parameter namespace; original globals unchanged"}
 
 def refresh(*,root,parent_manifest,parent_manifest_sha256,output):

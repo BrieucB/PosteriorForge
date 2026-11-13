@@ -127,3 +127,70 @@ def test_recorded_git_revision_and_actual_source_bytes_when_available():
  assert w.verify_git_sources(root,rev,expected)["passed"]
  with pytest.raises(ValueError):w.verify_git_sources(root,"not-a-revision",expected)
  with pytest.raises(ValueError):w.verify_git_sources(root,rev,{next(iter(expected)):"0"*64})
+
+
+def execution_policy():
+ return {"module_sha256":"a"*64,"routing":{"native":[6,10],"cached_stages":19},
+  "runtime_source_inventory":{"inventory_sha256":"b"*64,"committed_HEAD_exact":True},
+  "derivation":{"run_code_sha256":"c"*64,"reverse_AST_exact":True,"original_function_globals_unmodified":True,
+   "original_neural_engine_codec_stage_draw_objects_used":True,"declared_AST_changes":["F64 completion","failure footer"]}}
+
+def test_process_local_serialized_fingerprint_difference_preserved_without_data_mutation():
+ left=execution_policy();right=deepcopy(left);right["derivation"]["run_code_sha256"]="d"*64
+ original=deepcopy(left);current=deepcopy(right)
+ result=w.verify_execution_policy(left,right)
+ assert result["passed"] and result["all_other_metadata_fields_exact"] and not result["serialized_code_fingerprints_equal"]
+ assert result["recorded_execution_serialized_code_SHA256"]=="c"*64
+ assert result["current_verifier_serialized_code_SHA256"]=="d"*64
+ assert left==original and right==current and not result["original_producer_manifest_changed"]
+
+@pytest.mark.parametrize("fault",["recorded_hash","current_hash","source","source_inventory","routing","AST","globals","type"])
+def test_only_wellformed_fingerprint_telemetry_may_differ(fault):
+ left=execution_policy();right=deepcopy(left);right["derivation"]["run_code_sha256"]="d"*64
+ if fault=="recorded_hash":left["derivation"]["run_code_sha256"]="invalid"
+ elif fault=="current_hash":right["derivation"]["run_code_sha256"]="x"*64
+ elif fault=="source":left["module_sha256"]="e"*64
+ elif fault=="source_inventory":left["runtime_source_inventory"]["inventory_sha256"]="e"*64
+ elif fault=="routing":left["routing"]["native"]=[14]
+ elif fault=="AST":left["derivation"]["reverse_AST_exact"]=False
+ elif fault=="type":left["routing"]["cached_stages"]=19.0
+ else:left["derivation"]["original_function_globals_unmodified"]=False
+ with pytest.raises(ValueError):w.verify_execution_policy(left,right)
+
+
+def test_actual_closed_GPU_manifest_and_fresh_process_policy_regression(tmp_path):
+ import os,subprocess,sys
+ parent=Path("/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/native-pilot-corrected-01/manifest.json")
+ interpreter=Path("/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python")
+ if not parent.is_file() or not interpreter.exists():pytest.skip("actual closed Karolina production metadata/interpreter unavailable")
+ code="""from pathlib import Path
+import hashlib,importlib.util,json,sys
+path=Path('/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/native-pilot-corrected-01/manifest.json')
+raw=path.read_bytes()
+assert hashlib.sha256(raw).hexdigest()=='62aa8bf71ddbf922ab9543141c4ada5cb438e5af162ede76cffe60d1dd3819b5'
+d=json.loads(raw)
+from posteriorforge.artifacts import versions
+actual_versions={k:versions()[k] for k in ('python','numpy','scipy')}
+assert actual_versions=={k:d['versions'][k] for k in actual_versions}
+spec=importlib.util.spec_from_file_location('fresh_consumer','scripts/refresh_prior_corrected_production_v1.py')
+w=importlib.util.module_from_spec(spec);spec.loader.exec_module(w)
+from posteriorforge import performance_prior_physical_fifo_v1 as p
+before=p._RUN_BODY.__code__
+fresh=p.execution_metadata()
+differences=w.policy_differences(d['execution_policy'],fresh)
+result=w.verify_execution_policy(d['execution_policy'],fresh)
+expected_sources=dict(fresh['runtime_source_inventory']['sources'])
+expected_sources['src/posteriorforge/performance_prior_physical_fifo_v1.py']=p.source_sha256()
+recorded_sources=w.verify_git_sources(Path.cwd(),d['git_revision'],expected_sources)
+p.require_sources()
+assert p._RUN_BODY.__code__ is before and 'torch' not in sys.modules
+assert all(x['path']=='.derivation.run_code_sha256' and x.get('recorded_type')==x.get('current_type')=='str' for x in differences)
+assert path.read_bytes()==raw
+print(json.dumps(dict(actual_closed_manifest_sha256=hashlib.sha256(raw).hexdigest(),actual_status=d['status'],actual_field_value_TYPE_differences=differences,policy_authentication=result,producer_source_sha256=p.source_sha256(),same_runtime_versions=actual_versions,recorded_executed_Git_source_inventory=recorded_sources,same_code_object_identity_preserved=True,Torch_imported=False,new_neural_G3_GPU_calls=0),sort_keys=True))
+"""
+ result=subprocess.run([str(interpreter),"-c",code],cwd=ROOT,env=dict(os.environ,PYTHONPATH="src",CUDA_VISIBLE_DEVICES=""),capture_output=True,text=True,check=True)
+ report=json.loads(result.stdout)
+ assert report["policy_authentication"]["passed"] and report["same_code_object_identity_preserved"]
+ assert report["new_neural_G3_GPU_calls"]==0 and not report["Torch_imported"]
+ (tmp_path/"actual-closed-fresh-process-metadata-regression.json").write_text(result.stdout)
+ print("ACTUAL_CLOSED_FRESH_PROCESS_REGRESSION="+result.stdout.strip())

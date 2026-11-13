@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/scripts/refresh_prior_corrected_production_v1.py", line 191, in <module>
+    if __name__=="__main__":main()
+                            ^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/scripts/refresh_prior_corrected_production_v1.py", line 190, in main
+    refresh(**vars(p.parse_args()))
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/scripts/refresh_prior_corrected_production_v1.py", line 165, in refresh
+    producer,observer,pins=source_guard();parent,values,auth=load_parent(parent_manifest,parent_manifest_sha256,scratch=root)
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/scripts/refresh_prior_corrected_production_v1.py", line 138, in load_parent
+    require(d["execution_policy"]==execution_policy,"actual corrected production metadata/source inventory differs")
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/scripts/refresh_prior_corrected_production_v1.py", line 34, in require
+    if not value:raise ValueError(message)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: actual corrected production metadata/source inventory differs

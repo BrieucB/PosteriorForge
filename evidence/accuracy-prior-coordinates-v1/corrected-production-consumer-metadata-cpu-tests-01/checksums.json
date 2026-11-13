@@ -1,0 +1,9 @@
+{
+  "README.txt": "db4d82d38a9aa8902312983c4981b5eac5d531510157b8313861be61b61e62d9",
+  "inference-actual-fresh-process-regression.json": "0474180ce4d82cf61af15aabe28664d8442400a2f872a56cf5abaae88af0fb85",
+  "inference-pytest.log": "3590654eb3a386140d0925c4c34724cf8dc3d69d290dfec3e9d9d9f1bf394b6a",
+  "preserved-failed-pre-G3-consumer-attempt.log": "409b306c521e0a3146eef161f7782149b2a2575533c7138840b6eb24ac8d9e60",
+  "receipt.json": "767365010bc714809d64dc179aaab12dabc40f15353e11422276dc26d914a60d",
+  "reference-actual-fresh-process-regression.json": "0474180ce4d82cf61af15aabe28664d8442400a2f872a56cf5abaae88af0fb85",
+  "reference-pytest.log": "795c28ecb7a3c02231e1124ae303002759987f8f7feff8565896f584ba6b0679"
+}

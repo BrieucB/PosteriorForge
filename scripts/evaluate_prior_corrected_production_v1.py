@@ -13,7 +13,7 @@ from posteriorforge.artifacts import sha256_file,write_json
 from posteriorforge.banks import derive_seed,load_heldout
 from posteriorforge.science.analytical_benchmark_v2 import array_descriptor
 
-WRAPPER_SHA256="1d62028e28e93f1fe4f4e2abd98ccedd2a63e0379a86f908a05ac64787061e19"
+WRAPPER_SHA256="4aa226e24ca381df8956d8c8238a9e17092b01f9771b020cae2166c72990d284"
 SCHEMA="posteriorforge.prior_corrected_production_assessment.v1"
 COUNT=50000
 FOCUS=(0,7,8,10)
