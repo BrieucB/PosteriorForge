@@ -1,0 +1,13 @@
+{
+  "README.txt": "6a729c6815f5c49696763ef2d0fe3452799877f5304c84b6ee7dc1557d62d5ab",
+  "inference-proof.log": "a54e622784d4482971ef439857abdde691a1ae1d189b0922d5a5ac9ab0102a71",
+  "inference-pytest.log": "ec1c292c2de7699625caecda6d46d1da3a39640f14da54e34e2c6af22d52cd76",
+  "inference-scalar-proof.json.gz": "1e030b920c920325e8c52656504b344ce813a3dbd1f53b6968c8efa76407d8f1",
+  "proof-receipt.json": "ffd60a376dfb07ae565cdaab60354650f7e8e6a92d35b44ca05062ad3d69487a",
+  "reference-proof.log": "81d1ec9315d1c40dda7d1930c30b56e7b44c9f6a7878f6cd49d27105397a5e5c",
+  "reference-pytest.log": "143b0faa1c65c61e4fb78bb532f258b6f7bf16ede0905ecbd8307d7b8100c52a",
+  "reference-scalar-proof.json.gz": "182434e53a9a0b253ef5f32a71d18e56e32204950d7c1f4df1849ba656d018d9",
+  "sources.json": "c22d9cf5075796507c33ea0cfb53de2d1a8c72df5fad920bc7cef5c22aadd939",
+  "summary.json": "2c1ecc3b34fd6a28a601d1dee8a31cf0988af40c6e8b8d707470b42d174df68f",
+  "tests-receipt.json": "e80a39c2af62c18aa6de287f6a9a29607702aa298eead97c2bf3aa62dff0ac2f"
+}

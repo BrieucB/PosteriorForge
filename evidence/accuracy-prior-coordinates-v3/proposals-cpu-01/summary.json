@@ -1,0 +1,37 @@
+{
+  "actual_proposals_clipped_replaced_nextafter_adjusted_filtered_or_redrawn": false,
+  "certified_interval_arithmetic": false,
+  "finite_endpoints_retained_for_original_closed_support": true,
+  "finite_slight_outside_retained_for_original_whole_row_support_rejection": true,
+  "highprecision_decimal_dps": [
+    100,
+    180
+  ],
+  "independent_scalar_cases_per_environment": 23,
+  "inference_tests_passed": 36,
+  "maximum_physical_error_ULPs": 44.363151211258845,
+  "maximum_physical_error_divided_by_unchanged_bound": 0.004597413040369496,
+  "nonfinite_latent_or_arithmetic_hard_fail": true,
+  "original_CDF_mean_SD_gate_changed": false,
+  "physical_F64_bound_passed_all": true,
+  "proof_receipt_sha256": "ffd60a376dfb07ae565cdaab60354650f7e8e6a92d35b44ca05062ad3d69487a",
+  "proof_report_sha256": {
+    "inference": "0f7334eef761f07c028b7380b25727199b5bb80630920bb95bc82441235e4425",
+    "reference": "961426e0e84617bc4750a1e54936cf91aab53cfa441ad6ade4ce90463ed4932f"
+  },
+  "qualified_neural_pairs": 0,
+  "reference_tests_passed": 36,
+  "schema": "posteriorforge.prior_proposals_CPU_evidence.v3",
+  "scope": "deterministic engineering/scalar CPU evidence, not neural qualification",
+  "skips": 0,
+  "source_sha256": {
+    "scripts/prove_prior_proposals_v3.py": "37bfd669daa0d002ea08bafaa9f27f0b87023b6df43878508f7dcda376b5a5b6",
+    "src/posteriorforge/inference.py": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "tests/test_prior_proposals_v3.py": "e58c24cac3cceaf11dc3a74407e3503a91450d12d691caffc9c218b167907a8d"
+  },
+  "tests_receipt_sha256": "e80a39c2af62c18aa6de287f6a9a29607702aa298eead97c2bf3aa62dff0ac2f",
+  "training_encoder_exact_frozen_d8_alias": true,
+  "universal_correct_rounding_claimed": false
+}

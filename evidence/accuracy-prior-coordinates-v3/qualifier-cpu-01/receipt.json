@@ -1,0 +1,86 @@
+{
+  "GPU_authorized_or_executed": false,
+  "actual_pair_F32_data_scope": "Existing authenticated6f35 input/prefix binding replay; no bank regeneration or neural qualification",
+  "registry_activation": false,
+  "runs": [
+    {
+      "argv": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_qualify_prior_coordinate_pair_v3.py"
+      ],
+      "cwd": "/home/it4i-bbenvegnen/workspace/PosteriorForge",
+      "environment": "inference",
+      "environment_overrides": {
+        "OMP_NUM_THREADS": "1",
+        "PYTHONPATH": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src"
+      },
+      "log": "inference.log",
+      "log_sha256": "380bdf3d83b63a1c6d2590aa413ad1ac6acce7ad46a0b5a780445a7463d79843",
+      "returncode": 0,
+      "started_UTC": "2026-11-13T06:18:12.050332+00:00",
+      "summary_line": "35 passed in 8.05s",
+      "versions": {
+        "numpy": "1.26.4",
+        "python": "3.11.13",
+        "scipy": "1.12.0",
+        "torch": "2.6.0"
+      },
+      "wall_seconds": 9.832591311074793
+    },
+    {
+      "argv": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_qualify_prior_coordinate_pair_v3.py"
+      ],
+      "cwd": "/home/it4i-bbenvegnen/workspace/PosteriorForge",
+      "environment": "reference",
+      "environment_overrides": {
+        "OMP_NUM_THREADS": "1",
+        "PYTHONPATH": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src"
+      },
+      "log": "reference.log",
+      "log_sha256": "b67b35ff5cda7c2ba9f818e3c8dbc33ad522ee26554d0d041a0d096b70ff6ce3",
+      "returncode": 0,
+      "started_UTC": "2026-11-13T06:18:12.050861+00:00",
+      "summary_line": "33 passed, 2 skipped in 1.87s",
+      "versions": {
+        "numpy": "2.2.6",
+        "python": "3.11.13",
+        "scipy": "1.15.3",
+        "torch": null
+      },
+      "wall_seconds": 2.2835970520973206
+    }
+  ],
+  "schema": "posteriorforge.prior_pair_v3_qualifier_cpu_tests.v1",
+  "scope": "Deterministic CPU-only source/numeric/pair-binding tests; actual Torch CPU constant-tensor primitives where installed. No neural model constructor/forward, GPU/CUDA initialization, world/posterior draw, G3 or reference integration.",
+  "source_hashes_after": {
+    "docs/accuracy-prior-coordinate-fp64-proposals-v3.md": "7ea6e5c57f8404eb761e07f4011b14966d5885fbbdb8620d463c5283916041d8",
+    "scripts/qualify_prior_coordinate_pair_v3.py": "5066e257cebaa84c7dbc66f87976818934c24941c2287a03e6582cf735baac8e",
+    "src/posteriorforge/execution_prior_native_v3.py": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+    "src/posteriorforge/execution_probability_v3.py": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "tests/test_qualify_prior_coordinate_pair_v3.py": "9d50e9d144cb6933a19c62c5e48d4b827eb87b5421c70ada35ae3d29b7d6f881"
+  },
+  "source_hashes_before": {
+    "docs/accuracy-prior-coordinate-fp64-proposals-v3.md": "7ea6e5c57f8404eb761e07f4011b14966d5885fbbdb8620d463c5283916041d8",
+    "scripts/qualify_prior_coordinate_pair_v3.py": "5066e257cebaa84c7dbc66f87976818934c24941c2287a03e6582cf735baac8e",
+    "src/posteriorforge/execution_prior_native_v3.py": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+    "src/posteriorforge/execution_probability_v3.py": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "tests/test_qualify_prior_coordinate_pair_v3.py": "9d50e9d144cb6933a19c62c5e48d4b827eb87b5421c70ada35ae3d29b7d6f881"
+  },
+  "sources_unchanged": true,
+  "status": "passed",
+  "v3_NN_qualified_pairs": 0
+}

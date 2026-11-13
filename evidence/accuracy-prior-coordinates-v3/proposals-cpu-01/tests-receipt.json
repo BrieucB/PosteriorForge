@@ -1,0 +1,70 @@
+{
+  "evidence_scope": "deterministic unit/scalar engineering fixtures only; no failed51200 wave recovery",
+  "inference_independent_scalar_proof": {
+    "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/decoder-proof-inference-01/report.json",
+    "scope": "separate prior observed execution; source/version/call counts are recorded by that proof, not a fabricated pre-run hash snapshot",
+    "sha256": "33dc7c4a2b909da903a865834727af8d15cd139c6815ac667fce65d591af103d"
+  },
+  "new_GPU_NN_world_posterior_G3_or_RNG_draw_calls": 0,
+  "results": [
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "command": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_prior_proposals_v3.py",
+        "-o",
+        "cache_dir=/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/decoder-cpu-tests-01/inference-cache"
+      ],
+      "cwd": "/home/it4i-bbenvegnen/workspace/PosteriorForge",
+      "environment": "inference",
+      "exit_code": 0,
+      "started_epoch": 1794548263.46646,
+      "stdout": "....................................                                     [100%]\n36 passed in 1.10s",
+      "stdout_file": "inference-pytest.log",
+      "stdout_sha256": "ec1c292c2de7699625caecda6d46d1da3a39640f14da54e34e2c6af22d52cd76",
+      "versions": "3.11.13 1.26.4 1.12.0",
+      "wall_seconds": 1.5841822074726224
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "command": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_prior_proposals_v3.py",
+        "-o",
+        "cache_dir=/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/decoder-cpu-tests-01/reference-cache"
+      ],
+      "cwd": "/home/it4i-bbenvegnen/workspace/PosteriorForge",
+      "environment": "reference",
+      "exit_code": 0,
+      "started_epoch": 1794548263.4670763,
+      "stdout": "....................................                                     [100%]\n36 passed in 1.85s",
+      "stdout_file": "reference-pytest.log",
+      "stdout_sha256": "143b0faa1c65c61e4fb78bb532f258b6f7bf16ede0905ecbd8307d7b8100c52a",
+      "versions": "3.11.13 2.2.6 1.15.3",
+      "wall_seconds": 2.308947612531483
+    }
+  ],
+  "schema": "posteriorforge.prior_proposals_CPU_tests.v3",
+  "sources_after": {
+    "scripts/prove_prior_proposals_v3.py": "a6e7439474c752fc87f2d05088091a92bf6696630151cffbbcf73df66308bc1d",
+    "src/posteriorforge/inference.py": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "tests/test_prior_proposals_v3.py": "e58c24cac3cceaf11dc3a74407e3503a91450d12d691caffc9c218b167907a8d"
+  },
+  "sources_before": {
+    "scripts/prove_prior_proposals_v3.py": "a6e7439474c752fc87f2d05088091a92bf6696630151cffbbcf73df66308bc1d",
+    "src/posteriorforge/inference.py": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "tests/test_prior_proposals_v3.py": "e58c24cac3cceaf11dc3a74407e3503a91450d12d691caffc9c218b167907a8d"
+  },
+  "sources_unchanged": true,
+  "status": "pass"
+}

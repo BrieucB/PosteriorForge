@@ -1,0 +1,73 @@
+{
+  "actual_C_not_A_backend_sampler_head_mass_path": true,
+  "all_tracked_sources_unchanged": true,
+  "new_GPU_NN_model_constructor_world_posterior_G3_or_RNG_draw_calls": 0,
+  "real_case0_model_F32_and_all21_mask_query_target_hashes_match_6f35_and_failed92755": true,
+  "results": [
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "command": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_prior_v3_production_boundary.py",
+        "tests/test_prior_v3_case0_bindings.py",
+        "-o",
+        "cache_dir=/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/production-boundary-cpu-01/inference-cache"
+      ],
+      "environment": "inference",
+      "exit_code": 0,
+      "stdout": "....                                                                     [100%]\n4 passed in 9.28s",
+      "stdout_file": "inference-pytest.log",
+      "stdout_sha256": "6ae01d2a04e2b8b95c0bcf12cc84ea5dd94eb385e8b8520677ed59d65632c219",
+      "versions": "3.11.13 1.26.4 1.12.0",
+      "wall_seconds": 11.472398382611573
+    },
+    {
+      "CUDA_VISIBLE_DEVICES": "",
+      "command": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_prior_v3_production_boundary.py",
+        "tests/test_prior_v3_case0_bindings.py",
+        "-o",
+        "cache_dir=/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/production-boundary-cpu-01/reference-cache"
+      ],
+      "environment": "reference",
+      "exit_code": 0,
+      "stdout": ".ss.                                                                     [100%]\n=========================== short test summary info ============================\nSKIPPED [1] tests/test_prior_v3_production_boundary.py:94: could not import 'torch': No module named 'torch'\nSKIPPED [1] tests/test_prior_v3_production_boundary.py:127: could not import 'torch': No module named 'torch'\n2 passed, 2 skipped in 5.35s",
+      "stdout_file": "reference-pytest.log",
+      "stdout_sha256": "ceba8a87b13d69348abb76a88cb4a8b9b4e0cfe95ac399e4b4e9f1c5ebc15d65",
+      "versions": "3.11.13 2.2.6 1.15.3",
+      "wall_seconds": 5.919540220871568
+    }
+  ],
+  "schema": "posteriorforge.prior_v3_production_boundary_CPU_tests.v1",
+  "scope": "tiny saved-NN-cutpoint/engineering fixtures and exact source/data regression; NOT a recovered physical cohort or neural qualification",
+  "source_after": {
+    "src/posteriorforge/execution_mixture.py": "e71f43b73ae8259c20b5d7b52feccc7c851e9a2fbb86d869bc0a5f7f3af792a1",
+    "src/posteriorforge/execution_physical_fifo_v1.py": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+    "src/posteriorforge/execution_prior_native_v3.py": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+    "src/posteriorforge/execution_probability_v3.py": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+    "src/posteriorforge/performance_prior_pair_v3.py": "0959191a83bfcf531841531006303a214259654d265b6d95dc86152256675e54",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "tests/test_prior_v3_case0_bindings.py": "db8cb5d05b019779ce72d3b727b28f2ea2c5533a671481ec00ff4717692993f3",
+    "tests/test_prior_v3_production_boundary.py": "9096e23e561aa61b6375f2cc33a0ed4fae04c8126b699a4f143012d21018572e"
+  },
+  "source_before": {
+    "src/posteriorforge/execution_mixture.py": "e71f43b73ae8259c20b5d7b52feccc7c851e9a2fbb86d869bc0a5f7f3af792a1",
+    "src/posteriorforge/execution_physical_fifo_v1.py": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+    "src/posteriorforge/execution_prior_native_v3.py": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+    "src/posteriorforge/execution_probability_v3.py": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+    "src/posteriorforge/performance_prior_pair_v3.py": "0959191a83bfcf531841531006303a214259654d265b6d95dc86152256675e54",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "tests/test_prior_v3_case0_bindings.py": "db8cb5d05b019779ce72d3b727b28f2ea2c5533a671481ec00ff4717692993f3",
+    "tests/test_prior_v3_production_boundary.py": "9096e23e561aa61b6375f2cc33a0ed4fae04c8126b699a4f143012d21018572e"
+  },
+  "status": "pass"
+}

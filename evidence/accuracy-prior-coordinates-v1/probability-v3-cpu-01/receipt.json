@@ -1,0 +1,5194 @@
+{
+  "attempts_preserved": [
+    "inference-attempt01.log",
+    "inference-attempt02.log",
+    "inference-attempt03.log",
+    "inference-final.log",
+    "reference-final.log"
+  ],
+  "candidate_source_hashes_at_receipt_creation": {
+    "src/posteriorforge/execution_prior_native_v3.py": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+    "src/posteriorforge/execution_probability_v3.py": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+    "tests/test_execution_prior_native_v3.py": "cfd178bcdd44727bf8a86194042e8d32475c62b023cbe824ede6f19e25830439",
+    "tests/test_execution_probability_v3.py": "2c16f3ba639a6a8b86b58983822ec60b5ddbe3c84465ab5a0ab36e442f5c0047"
+  },
+  "commands": {
+    "inference": "PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 /scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python -m pytest -q -s tests/test_execution_probability_v3.py tests/test_execution_prior_native_v3.py",
+    "reference": "PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 /scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python -m pytest -q -s tests/test_execution_probability_v3.py tests/test_execution_prior_native_v3.py"
+  },
+  "saved_density_checks": {
+    "conservative_4gamma_n_bound": 4.440892098505557e-12,
+    "focal_records": 48,
+    "inverse_values": 288,
+    "legacy_nonfinite_output_count": 6,
+    "maximum_exact_dyadic_API_weight_CDF_residual": 1.1102404128227224e-16,
+    "maximum_exact_dyadic_RAW_weight_CDF_residual": 1.1102331230065374e-16,
+    "maximum_finite_legacy_stock_vs_new_C_quantile_difference": 1814.2602485901311,
+    "new_neural_model_preprocessor_GPU_or_RNG_draw_calls": 0,
+    "provided_uniforms_per_record": 6,
+    "raw_PolicyC_weights_bit_equal_to_independent_saved_C": true,
+    "source_report_sha256": "cbc8e44e62780d48e594845bd63a9c72faa76eaf7a1459d9e4dbb2210e989a5a",
+    "stage19_candidate_member2_A_C": {
+      "captured_A_weights_new_normalized64_inverse": 49.26606652725877,
+      "captured_legacy_stock_output": 138.3976593017578,
+      "new_upstream_C": 8.12498828861072
+    }
+  },
+  "schema": "posteriorforge.execution.probability_v3_CPU_receipt.v1",
+  "scope": {
+    "CUDA_initialization_unchanged_asserted_by_tests": true,
+    "GPU_qualification_or_physical_accuracy_claimed": false,
+    "actual_Torch_CPU_probability_tests_run_in": "inference",
+    "legacy_bit_identity_or_perfect_CDF_mass_claimed": false,
+    "new_neural_forward_model_constructor_preprocessing_replay_GPU_posterior_world_G3_or_RNG_draw_calls": 0,
+    "reference_Torch_absent_skips": 14,
+    "reference_source_guard_tests_passed": 7,
+    "saved_48_density_evidence_is_not_new_neural_qualification": true
+  },
+  "source_commit_guard_scope": "new candidate files not yet committed at this receipt; Root owns final committed closure",
+  "source_hashes_rechecked_after_preflight": {
+    "src/posteriorforge/execution_prior_native_v3.py": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+    "src/posteriorforge/execution_probability_v3.py": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+    "tests/test_execution_prior_native_v3.py": "cfd178bcdd44727bf8a86194042e8d32475c62b023cbe824ede6f19e25830439",
+    "tests/test_execution_probability_v3.py": "2c16f3ba639a6a8b86b58983822ec60b5ddbe3c84465ab5a0ab36e442f5c0047"
+  },
+  "source_preflight_versions": {
+    "inference": {
+      "backend_policy": {
+        "NN_forward_order_mask_settings_changed": false,
+        "cached_stage_count": 18,
+        "module_sha256": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+        "native_all8_stages": [
+          6,
+          10,
+          14
+        ],
+        "neural_policy": {
+          "FP16_activated": false,
+          "cached_source_sha256": "88f28c5a1f01c086661243c5d3bfb59631eb3c95fe3567b7f1ede325ddba0aea",
+          "candidate_mode": "fp32_transparent_control_v1",
+          "coordinate_policy": {
+            "codec": {
+              "attribution": "Built with PriorLabs-TabPFN",
+              "conditional_blocks": [
+                {
+                  "conditional_covariance": [
+                    [
+                      0.2025,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.48999999999999994,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      0.0625
+                    ]
+                  ],
+                  "dataset_id": "mechanical_1",
+                  "lower_cholesky": [
+                    [
+                      0.45,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.7,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      0.25
+                    ]
+                  ],
+                  "mean_map": [
+                    [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  ],
+                  "mean_offset": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "physical_indices": [
+                    3,
+                    4,
+                    5
+                  ]
+                },
+                {
+                  "conditional_covariance": [
+                    [
+                      0.2025,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.48999999999999994,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      0.0625
+                    ]
+                  ],
+                  "dataset_id": "mechanical_2",
+                  "lower_cholesky": [
+                    [
+                      0.45,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.7,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      0.25
+                    ]
+                  ],
+                  "mean_map": [
+                    [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  ],
+                  "mean_offset": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "physical_indices": [
+                    7,
+                    8,
+                    9
+                  ]
+                },
+                {
+                  "conditional_covariance": [
+                    [
+                      0.2025,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.48999999999999994,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      0.0625
+                    ]
+                  ],
+                  "dataset_id": "mechanical_3",
+                  "lower_cholesky": [
+                    [
+                      0.45,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.7,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      0.25
+                    ]
+                  ],
+                  "mean_map": [
+                    [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  ],
+                  "mean_offset": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "physical_indices": [
+                    11,
+                    12,
+                    13
+                  ]
+                },
+                {
+                  "conditional_covariance": [
+                    [
+                      0.2025
+                    ]
+                  ],
+                  "dataset_id": "acoustic_1",
+                  "lower_cholesky": [
+                    [
+                      0.45
+                    ]
+                  ],
+                  "mean_map": [
+                    [
+                      1.0,
+                      0.0,
+                      0.0
+                    ]
+                  ],
+                  "mean_offset": [
+                    0.0
+                  ],
+                  "physical_indices": [
+                    15
+                  ]
+                },
+                {
+                  "conditional_covariance": [
+                    [
+                      0.2025
+                    ]
+                  ],
+                  "dataset_id": "acoustic_2",
+                  "lower_cholesky": [
+                    [
+                      0.45
+                    ]
+                  ],
+                  "mean_map": [
+                    [
+                      1.0,
+                      0.0,
+                      0.0
+                    ]
+                  ],
+                  "mean_offset": [
+                    0.0
+                  ],
+                  "physical_indices": [
+                    17
+                  ]
+                },
+                {
+                  "conditional_covariance": [
+                    [
+                      0.2025
+                    ]
+                  ],
+                  "dataset_id": "acoustic_3",
+                  "lower_cholesky": [
+                    [
+                      0.45
+                    ]
+                  ],
+                  "mean_map": [
+                    [
+                      1.0,
+                      0.0,
+                      0.0
+                    ]
+                  ],
+                  "mean_offset": [
+                    0.0
+                  ],
+                  "physical_indices": [
+                    19
+                  ]
+                }
+              ],
+              "coordinate_id": "causal_gaussian_hierarchy_truncnoise_normal_v1",
+              "coordinates": [
+                {
+                  "decode_latent_dependencies": [
+                    0
+                  ],
+                  "encode_physical_dependencies": [
+                    0
+                  ],
+                  "kind": "global_lower_cholesky_residual",
+                  "latent_name": "z_mu_a",
+                  "physical_name": "mu_a",
+                  "physical_slot": 0,
+                  "stage": 0
+                },
+                {
+                  "decode_latent_dependencies": [
+                    0,
+                    1
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1
+                  ],
+                  "kind": "global_lower_cholesky_residual",
+                  "latent_name": "z_mu_b",
+                  "physical_name": "mu_b",
+                  "physical_slot": 1,
+                  "stage": 1
+                },
+                {
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2
+                  ],
+                  "kind": "global_lower_cholesky_residual",
+                  "latent_name": "z_mu_d0",
+                  "physical_name": "mu_d0",
+                  "physical_slot": 2,
+                  "stage": 2
+                },
+                {
+                  "dataset_id": "mechanical_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_m1",
+                  "physical_name": "a_m1",
+                  "physical_slot": 3,
+                  "stage": 4
+                },
+                {
+                  "dataset_id": "mechanical_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_b_m1",
+                  "physical_name": "b_m1",
+                  "physical_slot": 4,
+                  "stage": 5
+                },
+                {
+                  "dataset_id": "mechanical_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_d0_m1",
+                  "physical_name": "d0_m1",
+                  "physical_slot": 5,
+                  "stage": 6
+                },
+                {
+                  "decode_latent_dependencies": [
+                    6
+                  ],
+                  "encode_physical_dependencies": [
+                    6
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_m1",
+                  "physical_name": "sigma_m1",
+                  "physical_slot": 6,
+                  "stage": 3
+                },
+                {
+                  "dataset_id": "mechanical_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_m2",
+                  "physical_name": "a_m2",
+                  "physical_slot": 7,
+                  "stage": 8
+                },
+                {
+                  "dataset_id": "mechanical_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_b_m2",
+                  "physical_name": "b_m2",
+                  "physical_slot": 8,
+                  "stage": 9
+                },
+                {
+                  "dataset_id": "mechanical_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8,
+                    9
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8,
+                    9
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_d0_m2",
+                  "physical_name": "d0_m2",
+                  "physical_slot": 9,
+                  "stage": 10
+                },
+                {
+                  "decode_latent_dependencies": [
+                    10
+                  ],
+                  "encode_physical_dependencies": [
+                    10
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_m2",
+                  "physical_name": "sigma_m2",
+                  "physical_slot": 10,
+                  "stage": 7
+                },
+                {
+                  "dataset_id": "mechanical_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_m3",
+                  "physical_name": "a_m3",
+                  "physical_slot": 11,
+                  "stage": 12
+                },
+                {
+                  "dataset_id": "mechanical_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_b_m3",
+                  "physical_name": "b_m3",
+                  "physical_slot": 12,
+                  "stage": 13
+                },
+                {
+                  "dataset_id": "mechanical_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12,
+                    13
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12,
+                    13
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_d0_m3",
+                  "physical_name": "d0_m3",
+                  "physical_slot": 13,
+                  "stage": 14
+                },
+                {
+                  "decode_latent_dependencies": [
+                    14
+                  ],
+                  "encode_physical_dependencies": [
+                    14
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_m3",
+                  "physical_name": "sigma_m3",
+                  "physical_slot": 14,
+                  "stage": 11
+                },
+                {
+                  "dataset_id": "acoustic_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    15
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    15
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_a1",
+                  "physical_name": "a_a1",
+                  "physical_slot": 15,
+                  "stage": 16
+                },
+                {
+                  "decode_latent_dependencies": [
+                    16
+                  ],
+                  "encode_physical_dependencies": [
+                    16
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_a1",
+                  "physical_name": "sigma_a1",
+                  "physical_slot": 16,
+                  "stage": 15
+                },
+                {
+                  "dataset_id": "acoustic_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    17
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    17
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_a2",
+                  "physical_name": "a_a2",
+                  "physical_slot": 17,
+                  "stage": 18
+                },
+                {
+                  "decode_latent_dependencies": [
+                    18
+                  ],
+                  "encode_physical_dependencies": [
+                    18
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_a2",
+                  "physical_name": "sigma_a2",
+                  "physical_slot": 18,
+                  "stage": 17
+                },
+                {
+                  "dataset_id": "acoustic_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    19
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    19
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_a3",
+                  "physical_name": "a_a3",
+                  "physical_slot": 19,
+                  "stage": 20
+                },
+                {
+                  "decode_latent_dependencies": [
+                    20
+                  ],
+                  "encode_physical_dependencies": [
+                    20
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_a3",
+                  "physical_name": "sigma_a3",
+                  "physical_slot": 20,
+                  "stage": 19
+                }
+              ],
+              "decoded_before_original_FIFO_and_support": true,
+              "endpoint_nonfinite_saturation_roundtrip_policy": "FAIL whole qualification/request; no clipping, discard, repair or atoms",
+              "first_global_affine_cancels_after_empirical_target_standardization": true,
+              "first_global_density_correction_claimed": false,
+              "global_lower_cholesky": [
+                [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.12,
+                  1.088852607105296,
+                  0.0
+                ],
+                [
+                  0.02,
+                  -0.029756093514011123,
+                  0.6314384965289853
+                ]
+              ],
+              "global_prior_covariance": [
+                [
+                  1.0,
+                  0.12,
+                  0.02
+                ],
+                [
+                  0.12,
+                  1.2,
+                  -0.03
+                ],
+                [
+                  0.02,
+                  -0.03,
+                  0.4
+                ]
+              ],
+              "global_prior_mean": [
+                0.3,
+                -0.2,
+                0.1
+              ],
+              "global_refresh_contract": "decode first; exact G3 replaces only physical0:3 and keeps physical3:21 byte-identical",
+              "input_dtype": "original saved Float64 physical; no implicit conversion",
+              "model_cast": "one final Float32 cast of Float64 latent coordinates",
+              "module_sha256": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+              "noise_priors": {
+                "10": {
+                  "a": -2.0,
+                  "b": 2.0,
+                  "high": 0.5,
+                  "location": 0.255,
+                  "log_mass": -0.04656791229239017,
+                  "low": 0.01,
+                  "scale": 0.1225
+                },
+                "14": {
+                  "a": -2.0,
+                  "b": 2.0,
+                  "high": 0.5,
+                  "location": 0.255,
+                  "log_mass": -0.04656791229239017,
+                  "low": 0.01,
+                  "scale": 0.1225
+                },
+                "16": {
+                  "a": -2.0,
+                  "b": 2.0,
+                  "high": 0.5,
+                  "location": 0.255,
+                  "log_mass": -0.04656791229239017,
+                  "low": 0.01,
+                  "scale": 0.1225
+                },
+                "18": {
+                  "a": -2.0,
+                  "b": 2.0,
+                  "high": 0.5,
+                  "location": 0.255,
+                  "log_mass": -0.04656791229239017,
+                  "low": 0.01,
+                  "scale": 0.1225
+                },
+                "20": {
+                  "a": -2.0,
+                  "b": 2.0,
+                  "high": 0.5,
+                  "location": 0.255,
+                  "log_mass": -0.04656791229239017,
+                  "low": 0.01,
+                  "scale": 0.1225
+                },
+                "6": {
+                  "a": -2.0,
+                  "b": 2.0,
+                  "high": 0.5,
+                  "location": 0.255,
+                  "log_mass": -0.04656791229239017,
+                  "low": 0.01,
+                  "scale": 0.1225
+                }
+              },
+              "normal_prior_scope": "ideal real-arithmetic prior only; no posterior normality or accuracy guarantee",
+              "old_native_fallback_policy_transferred": false,
+              "old_numerical_qualification_transferred": false,
+              "physical_parameter_order": [
+                "mu_a",
+                "mu_b",
+                "mu_d0",
+                "a_m1",
+                "b_m1",
+                "d0_m1",
+                "sigma_m1",
+                "a_m2",
+                "b_m2",
+                "d0_m2",
+                "sigma_m2",
+                "a_m3",
+                "b_m3",
+                "d0_m3",
+                "sigma_m3",
+                "a_a1",
+                "sigma_a1",
+                "a_a2",
+                "sigma_a2",
+                "a_a3",
+                "sigma_a3"
+              ],
+              "physical_roundtrip_centers": [
+                0.3,
+                -0.2,
+                0.1,
+                0.3,
+                -0.2,
+                0.1,
+                0.255,
+                0.3,
+                -0.2,
+                0.1,
+                0.255,
+                0.3,
+                -0.2,
+                0.1,
+                0.255,
+                0.3,
+                0.255,
+                0.3,
+                0.255,
+                0.3,
+                0.255
+              ],
+              "physical_roundtrip_prior_units": [
+                1.0,
+                1.0954451150103321,
+                0.6324555320336759,
+                0.45,
+                0.7,
+                0.25,
+                0.1225,
+                0.45,
+                0.7,
+                0.25,
+                0.1225,
+                0.45,
+                0.7,
+                0.25,
+                0.1225,
+                0.45,
+                0.1225,
+                0.45,
+                0.1225,
+                0.45,
+                0.1225
+              ],
+              "physical_to_stage_order": [
+                0,
+                1,
+                2,
+                4,
+                5,
+                6,
+                3,
+                8,
+                9,
+                10,
+                7,
+                12,
+                13,
+                14,
+                11,
+                16,
+                15,
+                18,
+                17,
+                20,
+                19
+              ],
+              "references_truth_or_fitted_constants": false,
+              "schema": "posteriorforge.prior_coordinates.v1",
+              "scientific_and_order_sources_sha256": {
+                "execution_ss15_sigma_first.py": "d48d1638ef9e540bdd629d321fba657af4db757700b1092fc58fb9ded1f79ad2",
+                "science/analytical_benchmark_v2.py": "8d5f286f6d8512391dea2ae036313bec05782d28c7803f336490cbcdce3bd99f",
+                "science/hierarchical_exact.py": "db001593cc7307b1290b981622705961c5953001a6c1245fae5ec779938e9687",
+                "science/hierarchical_noise.py": "cbf0b8c956362a5eaa31923e9b94a3db3e3ede2072603add51e78105b8c0cbf0",
+                "science/hierarchical_problem.py": "03aa2d8a3d279783cf6c599f1400f253f3db2e1e7eb027aff5b7cd1b48fe12d0"
+              },
+              "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+              "stage_to_physical_order": [
+                0,
+                1,
+                2,
+                6,
+                3,
+                4,
+                5,
+                10,
+                7,
+                8,
+                9,
+                14,
+                11,
+                12,
+                13,
+                16,
+                15,
+                18,
+                17,
+                20,
+                19
+              ],
+              "tolerances": {
+                "F32_model_cast_latent_admissibility": 3.814697265625e-06,
+                "F32_model_cast_physical_prior_units": 3.814697265625e-06,
+                "F64_latent_conditioning_admissibility": 1.1920928955078125e-07,
+                "F64_latent_scope": "declared conditioning/roundtrip admissibility; NOT an ulp-Float64 accuracy guarantee",
+                "F64_physical_prior_units": 5.684341886080802e-14,
+                "bound": "coefficient*(1+abs(expected standardized coordinate))",
+                "qualification_CDF_TV_quantile_thresholds_changed": false
+              }
+            },
+            "codec_sha256": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+            "fallback_map": {},
+            "module_sha256": "88f28c5a1f01c086661243c5d3bfb59631eb3c95fe3567b7f1ede325ddba0aea",
+            "native_stage_policy_inherited": false,
+            "policy_sha256": "52ee821b6126a1c1394d16b8e76c98686fb7a4d2dd2cade43b7b2eb3aa5f492f",
+            "stage_to_original_physical_slot": [
+              0,
+              1,
+              2,
+              6,
+              3,
+              4,
+              5,
+              10,
+              7,
+              8,
+              9,
+              14,
+              11,
+              12,
+              13,
+              16,
+              15,
+              18,
+              17,
+              20,
+              19
+            ],
+            "stages": [
+              {
+                "all_three_globals_condition_local_stages": false,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    0
+                  ],
+                  "encode_physical_dependencies": [
+                    0
+                  ],
+                  "kind": "global_lower_cholesky_residual",
+                  "latent_name": "z_mu_a",
+                  "physical_name": "mu_a",
+                  "physical_slot": 0,
+                  "stage": 0
+                },
+                "feature_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "feature_columns_zeroed": [],
+                "input_width": 15,
+                "observation_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "ordered_latent_prefix_indices_kept": [],
+                "stage_index": 0,
+                "target_coordinate": "prior_latent_mu_a",
+                "target_index_in_ordered_training": 0,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 0
+              },
+              {
+                "all_three_globals_condition_local_stages": false,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    0,
+                    1
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1
+                  ],
+                  "kind": "global_lower_cholesky_residual",
+                  "latent_name": "z_mu_b",
+                  "physical_name": "mu_b",
+                  "physical_slot": 1,
+                  "stage": 1
+                },
+                "feature_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  15
+                ],
+                "feature_columns_zeroed": [],
+                "input_width": 16,
+                "observation_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0
+                ],
+                "stage_index": 1,
+                "target_coordinate": "prior_latent_mu_b",
+                "target_index_in_ordered_training": 1,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 1
+              },
+              {
+                "all_three_globals_condition_local_stages": false,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2
+                  ],
+                  "kind": "global_lower_cholesky_residual",
+                  "latent_name": "z_mu_d0",
+                  "physical_name": "mu_d0",
+                  "physical_slot": 2,
+                  "stage": 2
+                },
+                "feature_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  15,
+                  16
+                ],
+                "feature_columns_zeroed": [],
+                "input_width": 17,
+                "observation_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1
+                ],
+                "stage_index": 2,
+                "target_coordinate": "prior_latent_mu_d0",
+                "target_index_in_ordered_training": 2,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 2
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    6
+                  ],
+                  "encode_physical_dependencies": [
+                    6
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_m1",
+                  "physical_name": "sigma_m1",
+                  "physical_slot": 6,
+                  "stage": 3
+                },
+                "feature_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  15,
+                  16,
+                  17
+                ],
+                "feature_columns_zeroed": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "input_width": 18,
+                "observation_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2
+                ],
+                "stage_index": 3,
+                "target_coordinate": "prior_latent_sigma_m1",
+                "target_index_in_ordered_training": 3,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 6
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_m1",
+                  "physical_name": "a_m1",
+                  "physical_slot": 3,
+                  "stage": 4
+                },
+                "feature_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  15,
+                  16,
+                  17,
+                  18
+                ],
+                "feature_columns_zeroed": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "input_width": 19,
+                "observation_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "stage_index": 4,
+                "target_coordinate": "prior_latent_a_m1",
+                "target_index_in_ordered_training": 4,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 3
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_b_m1",
+                  "physical_name": "b_m1",
+                  "physical_slot": 4,
+                  "stage": 5
+                },
+                "feature_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  15,
+                  16,
+                  17,
+                  18,
+                  19
+                ],
+                "feature_columns_zeroed": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "input_width": 20,
+                "observation_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4
+                ],
+                "stage_index": 5,
+                "target_coordinate": "prior_latent_b_m1",
+                "target_index_in_ordered_training": 5,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 4
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_d0_m1",
+                  "physical_name": "d0_m1",
+                  "physical_slot": 5,
+                  "stage": 6
+                },
+                "feature_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  15,
+                  16,
+                  17,
+                  18,
+                  19,
+                  20
+                ],
+                "feature_columns_zeroed": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "input_width": 21,
+                "observation_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ],
+                "stage_index": 6,
+                "target_coordinate": "prior_latent_d0_m1",
+                "target_index_in_ordered_training": 6,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 5
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    10
+                  ],
+                  "encode_physical_dependencies": [
+                    10
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_m2",
+                  "physical_name": "sigma_m2",
+                  "physical_slot": 10,
+                  "stage": 7
+                },
+                "feature_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  15,
+                  16,
+                  17
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21
+                ],
+                "input_width": 22,
+                "observation_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2
+                ],
+                "stage_index": 7,
+                "target_coordinate": "prior_latent_sigma_m2",
+                "target_index_in_ordered_training": 7,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 10
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_m2",
+                  "physical_name": "a_m2",
+                  "physical_slot": 7,
+                  "stage": 8
+                },
+                "feature_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  15,
+                  16,
+                  17,
+                  22
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21
+                ],
+                "input_width": 23,
+                "observation_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  7
+                ],
+                "stage_index": 8,
+                "target_coordinate": "prior_latent_a_m2",
+                "target_index_in_ordered_training": 8,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 7
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_b_m2",
+                  "physical_name": "b_m2",
+                  "physical_slot": 8,
+                  "stage": 9
+                },
+                "feature_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  15,
+                  16,
+                  17,
+                  22,
+                  23
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21
+                ],
+                "input_width": 24,
+                "observation_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  7,
+                  8
+                ],
+                "stage_index": 9,
+                "target_coordinate": "prior_latent_b_m2",
+                "target_index_in_ordered_training": 9,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 8
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8,
+                    9
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8,
+                    9
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_d0_m2",
+                  "physical_name": "d0_m2",
+                  "physical_slot": 9,
+                  "stage": 10
+                },
+                "feature_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  15,
+                  16,
+                  17,
+                  22,
+                  23,
+                  24
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21
+                ],
+                "input_width": 25,
+                "observation_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  7,
+                  8,
+                  9
+                ],
+                "stage_index": 10,
+                "target_coordinate": "prior_latent_d0_m2",
+                "target_index_in_ordered_training": 10,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 9
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    14
+                  ],
+                  "encode_physical_dependencies": [
+                    14
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_m3",
+                  "physical_name": "sigma_m3",
+                  "physical_slot": 14,
+                  "stage": 11
+                },
+                "feature_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11,
+                  15,
+                  16,
+                  17
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25
+                ],
+                "input_width": 26,
+                "observation_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2
+                ],
+                "stage_index": 11,
+                "target_coordinate": "prior_latent_sigma_m3",
+                "target_index_in_ordered_training": 11,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 14
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_m3",
+                  "physical_name": "a_m3",
+                  "physical_slot": 11,
+                  "stage": 12
+                },
+                "feature_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11,
+                  15,
+                  16,
+                  17,
+                  26
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25
+                ],
+                "input_width": 27,
+                "observation_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  11
+                ],
+                "stage_index": 12,
+                "target_coordinate": "prior_latent_a_m3",
+                "target_index_in_ordered_training": 12,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 11
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_b_m3",
+                  "physical_name": "b_m3",
+                  "physical_slot": 12,
+                  "stage": 13
+                },
+                "feature_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11,
+                  15,
+                  16,
+                  17,
+                  26,
+                  27
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25
+                ],
+                "input_width": 28,
+                "observation_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  11,
+                  12
+                ],
+                "stage_index": 13,
+                "target_coordinate": "prior_latent_b_m3",
+                "target_index_in_ordered_training": 13,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 12
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12,
+                    13
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12,
+                    13
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_d0_m3",
+                  "physical_name": "d0_m3",
+                  "physical_slot": 13,
+                  "stage": 14
+                },
+                "feature_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11,
+                  15,
+                  16,
+                  17,
+                  26,
+                  27,
+                  28
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25
+                ],
+                "input_width": 29,
+                "observation_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  11,
+                  12,
+                  13
+                ],
+                "stage_index": 14,
+                "target_coordinate": "prior_latent_d0_m3",
+                "target_index_in_ordered_training": 14,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 13
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    16
+                  ],
+                  "encode_physical_dependencies": [
+                    16
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_a1",
+                  "physical_name": "sigma_a1",
+                  "physical_slot": 16,
+                  "stage": 15
+                },
+                "feature_columns_kept": [
+                  12,
+                  15,
+                  16,
+                  17
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29
+                ],
+                "input_width": 30,
+                "observation_columns_kept": [
+                  12
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2
+                ],
+                "stage_index": 15,
+                "target_coordinate": "prior_latent_sigma_a1",
+                "target_index_in_ordered_training": 15,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 16
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "acoustic_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    15
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    15
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_a1",
+                  "physical_name": "a_a1",
+                  "physical_slot": 15,
+                  "stage": 16
+                },
+                "feature_columns_kept": [
+                  12,
+                  15,
+                  16,
+                  17,
+                  30
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29
+                ],
+                "input_width": 31,
+                "observation_columns_kept": [
+                  12
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  15
+                ],
+                "stage_index": 16,
+                "target_coordinate": "prior_latent_a_a1",
+                "target_index_in_ordered_training": 16,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 15
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    18
+                  ],
+                  "encode_physical_dependencies": [
+                    18
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_a2",
+                  "physical_name": "sigma_a2",
+                  "physical_slot": 18,
+                  "stage": 17
+                },
+                "feature_columns_kept": [
+                  13,
+                  15,
+                  16,
+                  17
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29,
+                  30,
+                  31
+                ],
+                "input_width": 32,
+                "observation_columns_kept": [
+                  13
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2
+                ],
+                "stage_index": 17,
+                "target_coordinate": "prior_latent_sigma_a2",
+                "target_index_in_ordered_training": 17,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 18
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "acoustic_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    17
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    17
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_a2",
+                  "physical_name": "a_a2",
+                  "physical_slot": 17,
+                  "stage": 18
+                },
+                "feature_columns_kept": [
+                  13,
+                  15,
+                  16,
+                  17,
+                  32
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29,
+                  30,
+                  31
+                ],
+                "input_width": 33,
+                "observation_columns_kept": [
+                  13
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  17
+                ],
+                "stage_index": 18,
+                "target_coordinate": "prior_latent_a_a2",
+                "target_index_in_ordered_training": 18,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 17
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    20
+                  ],
+                  "encode_physical_dependencies": [
+                    20
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_a3",
+                  "physical_name": "sigma_a3",
+                  "physical_slot": 20,
+                  "stage": 19
+                },
+                "feature_columns_kept": [
+                  14,
+                  15,
+                  16,
+                  17
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29,
+                  30,
+                  31,
+                  32,
+                  33
+                ],
+                "input_width": 34,
+                "observation_columns_kept": [
+                  14
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2
+                ],
+                "stage_index": 19,
+                "target_coordinate": "prior_latent_sigma_a3",
+                "target_index_in_ordered_training": 19,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 20
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "acoustic_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    19
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    19
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_a3",
+                  "physical_name": "a_a3",
+                  "physical_slot": 19,
+                  "stage": 20
+                },
+                "feature_columns_kept": [
+                  14,
+                  15,
+                  16,
+                  17,
+                  34
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29,
+                  30,
+                  31,
+                  32,
+                  33
+                ],
+                "input_width": 35,
+                "observation_columns_kept": [
+                  14
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  19
+                ],
+                "stage_index": 20,
+                "target_coordinate": "prior_latent_a_a3",
+                "target_index_in_ordered_training": 20,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 19
+              }
+            ],
+            "target_or_prefix_physical_label_identity_claimed": false
+          },
+          "empty_cache_screen_promoted_to_pass": false,
+          "execution_routing_changed_relative_to_v1": true,
+          "failed_empty_cache_screen_sha256": "550b91af4a031a3393f59146e1aa5360c75b0e716362ee727aeb1397af149593",
+          "members": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "module_sha256": "0199b16e9cc34203fa0d5645d161742fe9ed244633d7beee047fbcbf2528661c",
+          "native_stage_rule": "new explicit all8 originalFP32 ordered stages6/10/14 only",
+          "native_stages": [
+            6,
+            10,
+            14
+          ],
+          "old_sigma_native_policy_inherited": false,
+          "other_stages": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            7,
+            8,
+            9,
+            11,
+            12,
+            13,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ],
+          "policy_sha256": "b497b66a5dcf780fea0dcd10566284976b19321d56047f269aedbf02b0624116",
+          "same_execution_candidate_as_v1": false,
+          "selection_artifacts": {
+            "ancestral_failed_empty_cache": "550b91af4a031a3393f59146e1aa5360c75b0e716362ee727aeb1397af149593",
+            "v1_actual_case0_numerical_failure": "fbed99d9fb256bb72a49cb03bebb820d805ac2cbafaa4ebac4deb08bf3160734"
+          },
+          "selection_artifacts_are_v2_proof": false,
+          "stage_bindings": [
+            {
+              "dataset_id": "mechanical_1",
+              "decode_latent_dependencies": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "encode_physical_dependencies": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "kind": "local_conditional_gaussian_residual_given_all_globals",
+              "latent_name": "z_d0_m1",
+              "physical_name": "d0_m1",
+              "physical_slot": 5,
+              "stage": 6
+            },
+            {
+              "dataset_id": "mechanical_2",
+              "decode_latent_dependencies": [
+                0,
+                1,
+                2,
+                7,
+                8,
+                9
+              ],
+              "encode_physical_dependencies": [
+                0,
+                1,
+                2,
+                7,
+                8,
+                9
+              ],
+              "kind": "local_conditional_gaussian_residual_given_all_globals",
+              "latent_name": "z_d0_m2",
+              "physical_name": "d0_m2",
+              "physical_slot": 9,
+              "stage": 10
+            },
+            {
+              "dataset_id": "mechanical_3",
+              "decode_latent_dependencies": [
+                0,
+                1,
+                2,
+                11,
+                12,
+                13
+              ],
+              "encode_physical_dependencies": [
+                0,
+                1,
+                2,
+                11,
+                12,
+                13
+              ],
+              "kind": "local_conditional_gaussian_residual_given_all_globals",
+              "latent_name": "z_d0_m3",
+              "physical_name": "d0_m3",
+              "physical_slot": 13,
+              "stage": 14
+            }
+          ],
+          "v1_execution_source_sha256": "e5a2733e767b187e573315547ec9253267e43d1e3700596f61e97116c53f3256",
+          "v1_or_case2_pass_transferred": false,
+          "v2_preregistration_sha256": "8640a4e157698862823521d3fd14396ecc3ebf121dffffabc987cc937d3ad2fc"
+        },
+        "neural_source_sha256": "0199b16e9cc34203fa0d5645d161742fe9ed244633d7beee047fbcbf2528661c",
+        "new_numerical_probability_candidate": true,
+        "old_numerical_pass_inherited": false,
+        "probability_policy": {
+          "CDF_resolution": "positive raw weights can naturally collapse in F64 CDF differences; counts/masses reported, no threshold zeroing",
+          "RNG_calls": 0,
+          "borders": "promote original fitted FP32 bits; do not recompute target scaling in F64",
+          "device": "cpu",
+          "head_acceptance": "EXACT e71 function; raw translated F64 mass BEFORE normalization",
+          "inverse": "softmax64(log RAW weights); cumsum(apiP)/terminal; invert represented positive CDF intervals",
+          "legacy_bit_identity_claimed": false,
+          "module_sha256": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+          "neural_input": "actual translator-entry FP32 logits, already temperature/cancel adjusted; no second temperature",
+          "physical_parameter_clipping": false,
+          "policy": "adjusted_F32_logits_CPU_F64_source_CDF_v3",
+          "positive_uniform_ties": "left search; zero-width represented CDF intervals never selected",
+          "schema": "posteriorforge.execution.probability64.v3",
+          "softmax_CDF_translation_probability_dtype": "torch.float64",
+          "source_CDF_order": "softmax64; cumsum(p)-p; corrected share; source boundary/share/CDF clamps; diff; negative-source-diff clamp_min0",
+          "uniform_domain": "original CPU torch.float32 [0,1); promoted unchanged to F64; u=1 rejected",
+          "zero_uniform": "u=0 selects first represented positive interval left border; NEW finite-support extension, not legacy NaN"
+        },
+        "probability_source_sha256": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+        "schema": "posteriorforge.execution.prior_native_probability64.v3.policy"
+      },
+      "new_model_neural_preprocessor_GPU_or_RNG_draw_calls": 0,
+      "numpy": "1.26.4",
+      "probability_policy": {
+        "CDF_resolution": "positive raw weights can naturally collapse in F64 CDF differences; counts/masses reported, no threshold zeroing",
+        "RNG_calls": 0,
+        "borders": "promote original fitted FP32 bits; do not recompute target scaling in F64",
+        "device": "cpu",
+        "head_acceptance": "EXACT e71 function; raw translated F64 mass BEFORE normalization",
+        "inverse": "softmax64(log RAW weights); cumsum(apiP)/terminal; invert represented positive CDF intervals",
+        "legacy_bit_identity_claimed": false,
+        "module_sha256": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+        "neural_input": "actual translator-entry FP32 logits, already temperature/cancel adjusted; no second temperature",
+        "physical_parameter_clipping": false,
+        "policy": "adjusted_F32_logits_CPU_F64_source_CDF_v3",
+        "positive_uniform_ties": "left search; zero-width represented CDF intervals never selected",
+        "schema": "posteriorforge.execution.probability64.v3",
+        "softmax_CDF_translation_probability_dtype": "torch.float64",
+        "source_CDF_order": "softmax64; cumsum(p)-p; corrected share; source boundary/share/CDF clamps; diff; negative-source-diff clamp_min0",
+        "uniform_domain": "original CPU torch.float32 [0,1); promoted unchanged to F64; u=1 rejected",
+        "zero_uniform": "u=0 selects first represented positive interval left border; NEW finite-support extension, not legacy NaN"
+      },
+      "python": "3.11.13",
+      "scipy": "1.12.0",
+      "source_guards_passed": true,
+      "torch_imported_by_source_preflight": false,
+      "torch_package_metadata": "2.6.0"
+    },
+    "reference": {
+      "backend_policy": {
+        "NN_forward_order_mask_settings_changed": false,
+        "cached_stage_count": 18,
+        "module_sha256": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+        "native_all8_stages": [
+          6,
+          10,
+          14
+        ],
+        "neural_policy": {
+          "FP16_activated": false,
+          "cached_source_sha256": "88f28c5a1f01c086661243c5d3bfb59631eb3c95fe3567b7f1ede325ddba0aea",
+          "candidate_mode": "fp32_transparent_control_v1",
+          "coordinate_policy": {
+            "codec": {
+              "attribution": "Built with PriorLabs-TabPFN",
+              "conditional_blocks": [
+                {
+                  "conditional_covariance": [
+                    [
+                      0.2025,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.48999999999999994,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      0.0625
+                    ]
+                  ],
+                  "dataset_id": "mechanical_1",
+                  "lower_cholesky": [
+                    [
+                      0.45,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.7,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      0.25
+                    ]
+                  ],
+                  "mean_map": [
+                    [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  ],
+                  "mean_offset": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "physical_indices": [
+                    3,
+                    4,
+                    5
+                  ]
+                },
+                {
+                  "conditional_covariance": [
+                    [
+                      0.2025,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.48999999999999994,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      0.0625
+                    ]
+                  ],
+                  "dataset_id": "mechanical_2",
+                  "lower_cholesky": [
+                    [
+                      0.45,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.7,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      0.25
+                    ]
+                  ],
+                  "mean_map": [
+                    [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  ],
+                  "mean_offset": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "physical_indices": [
+                    7,
+                    8,
+                    9
+                  ]
+                },
+                {
+                  "conditional_covariance": [
+                    [
+                      0.2025,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.48999999999999994,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      0.0625
+                    ]
+                  ],
+                  "dataset_id": "mechanical_3",
+                  "lower_cholesky": [
+                    [
+                      0.45,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.7,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      0.25
+                    ]
+                  ],
+                  "mean_map": [
+                    [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  ],
+                  "mean_offset": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "physical_indices": [
+                    11,
+                    12,
+                    13
+                  ]
+                },
+                {
+                  "conditional_covariance": [
+                    [
+                      0.2025
+                    ]
+                  ],
+                  "dataset_id": "acoustic_1",
+                  "lower_cholesky": [
+                    [
+                      0.45
+                    ]
+                  ],
+                  "mean_map": [
+                    [
+                      1.0,
+                      0.0,
+                      0.0
+                    ]
+                  ],
+                  "mean_offset": [
+                    0.0
+                  ],
+                  "physical_indices": [
+                    15
+                  ]
+                },
+                {
+                  "conditional_covariance": [
+                    [
+                      0.2025
+                    ]
+                  ],
+                  "dataset_id": "acoustic_2",
+                  "lower_cholesky": [
+                    [
+                      0.45
+                    ]
+                  ],
+                  "mean_map": [
+                    [
+                      1.0,
+                      0.0,
+                      0.0
+                    ]
+                  ],
+                  "mean_offset": [
+                    0.0
+                  ],
+                  "physical_indices": [
+                    17
+                  ]
+                },
+                {
+                  "conditional_covariance": [
+                    [
+                      0.2025
+                    ]
+                  ],
+                  "dataset_id": "acoustic_3",
+                  "lower_cholesky": [
+                    [
+                      0.45
+                    ]
+                  ],
+                  "mean_map": [
+                    [
+                      1.0,
+                      0.0,
+                      0.0
+                    ]
+                  ],
+                  "mean_offset": [
+                    0.0
+                  ],
+                  "physical_indices": [
+                    19
+                  ]
+                }
+              ],
+              "coordinate_id": "causal_gaussian_hierarchy_truncnoise_normal_v1",
+              "coordinates": [
+                {
+                  "decode_latent_dependencies": [
+                    0
+                  ],
+                  "encode_physical_dependencies": [
+                    0
+                  ],
+                  "kind": "global_lower_cholesky_residual",
+                  "latent_name": "z_mu_a",
+                  "physical_name": "mu_a",
+                  "physical_slot": 0,
+                  "stage": 0
+                },
+                {
+                  "decode_latent_dependencies": [
+                    0,
+                    1
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1
+                  ],
+                  "kind": "global_lower_cholesky_residual",
+                  "latent_name": "z_mu_b",
+                  "physical_name": "mu_b",
+                  "physical_slot": 1,
+                  "stage": 1
+                },
+                {
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2
+                  ],
+                  "kind": "global_lower_cholesky_residual",
+                  "latent_name": "z_mu_d0",
+                  "physical_name": "mu_d0",
+                  "physical_slot": 2,
+                  "stage": 2
+                },
+                {
+                  "dataset_id": "mechanical_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_m1",
+                  "physical_name": "a_m1",
+                  "physical_slot": 3,
+                  "stage": 4
+                },
+                {
+                  "dataset_id": "mechanical_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_b_m1",
+                  "physical_name": "b_m1",
+                  "physical_slot": 4,
+                  "stage": 5
+                },
+                {
+                  "dataset_id": "mechanical_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_d0_m1",
+                  "physical_name": "d0_m1",
+                  "physical_slot": 5,
+                  "stage": 6
+                },
+                {
+                  "decode_latent_dependencies": [
+                    6
+                  ],
+                  "encode_physical_dependencies": [
+                    6
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_m1",
+                  "physical_name": "sigma_m1",
+                  "physical_slot": 6,
+                  "stage": 3
+                },
+                {
+                  "dataset_id": "mechanical_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_m2",
+                  "physical_name": "a_m2",
+                  "physical_slot": 7,
+                  "stage": 8
+                },
+                {
+                  "dataset_id": "mechanical_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_b_m2",
+                  "physical_name": "b_m2",
+                  "physical_slot": 8,
+                  "stage": 9
+                },
+                {
+                  "dataset_id": "mechanical_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8,
+                    9
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8,
+                    9
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_d0_m2",
+                  "physical_name": "d0_m2",
+                  "physical_slot": 9,
+                  "stage": 10
+                },
+                {
+                  "decode_latent_dependencies": [
+                    10
+                  ],
+                  "encode_physical_dependencies": [
+                    10
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_m2",
+                  "physical_name": "sigma_m2",
+                  "physical_slot": 10,
+                  "stage": 7
+                },
+                {
+                  "dataset_id": "mechanical_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_m3",
+                  "physical_name": "a_m3",
+                  "physical_slot": 11,
+                  "stage": 12
+                },
+                {
+                  "dataset_id": "mechanical_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_b_m3",
+                  "physical_name": "b_m3",
+                  "physical_slot": 12,
+                  "stage": 13
+                },
+                {
+                  "dataset_id": "mechanical_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12,
+                    13
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12,
+                    13
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_d0_m3",
+                  "physical_name": "d0_m3",
+                  "physical_slot": 13,
+                  "stage": 14
+                },
+                {
+                  "decode_latent_dependencies": [
+                    14
+                  ],
+                  "encode_physical_dependencies": [
+                    14
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_m3",
+                  "physical_name": "sigma_m3",
+                  "physical_slot": 14,
+                  "stage": 11
+                },
+                {
+                  "dataset_id": "acoustic_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    15
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    15
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_a1",
+                  "physical_name": "a_a1",
+                  "physical_slot": 15,
+                  "stage": 16
+                },
+                {
+                  "decode_latent_dependencies": [
+                    16
+                  ],
+                  "encode_physical_dependencies": [
+                    16
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_a1",
+                  "physical_name": "sigma_a1",
+                  "physical_slot": 16,
+                  "stage": 15
+                },
+                {
+                  "dataset_id": "acoustic_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    17
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    17
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_a2",
+                  "physical_name": "a_a2",
+                  "physical_slot": 17,
+                  "stage": 18
+                },
+                {
+                  "decode_latent_dependencies": [
+                    18
+                  ],
+                  "encode_physical_dependencies": [
+                    18
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_a2",
+                  "physical_name": "sigma_a2",
+                  "physical_slot": 18,
+                  "stage": 17
+                },
+                {
+                  "dataset_id": "acoustic_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    19
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    19
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_a3",
+                  "physical_name": "a_a3",
+                  "physical_slot": 19,
+                  "stage": 20
+                },
+                {
+                  "decode_latent_dependencies": [
+                    20
+                  ],
+                  "encode_physical_dependencies": [
+                    20
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_a3",
+                  "physical_name": "sigma_a3",
+                  "physical_slot": 20,
+                  "stage": 19
+                }
+              ],
+              "decoded_before_original_FIFO_and_support": true,
+              "endpoint_nonfinite_saturation_roundtrip_policy": "FAIL whole qualification/request; no clipping, discard, repair or atoms",
+              "first_global_affine_cancels_after_empirical_target_standardization": true,
+              "first_global_density_correction_claimed": false,
+              "global_lower_cholesky": [
+                [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.12,
+                  1.088852607105296,
+                  0.0
+                ],
+                [
+                  0.02,
+                  -0.029756093514011123,
+                  0.6314384965289853
+                ]
+              ],
+              "global_prior_covariance": [
+                [
+                  1.0,
+                  0.12,
+                  0.02
+                ],
+                [
+                  0.12,
+                  1.2,
+                  -0.03
+                ],
+                [
+                  0.02,
+                  -0.03,
+                  0.4
+                ]
+              ],
+              "global_prior_mean": [
+                0.3,
+                -0.2,
+                0.1
+              ],
+              "global_refresh_contract": "decode first; exact G3 replaces only physical0:3 and keeps physical3:21 byte-identical",
+              "input_dtype": "original saved Float64 physical; no implicit conversion",
+              "model_cast": "one final Float32 cast of Float64 latent coordinates",
+              "module_sha256": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+              "noise_priors": {
+                "10": {
+                  "a": -2.0,
+                  "b": 2.0,
+                  "high": 0.5,
+                  "location": 0.255,
+                  "log_mass": -0.04656791229239017,
+                  "low": 0.01,
+                  "scale": 0.1225
+                },
+                "14": {
+                  "a": -2.0,
+                  "b": 2.0,
+                  "high": 0.5,
+                  "location": 0.255,
+                  "log_mass": -0.04656791229239017,
+                  "low": 0.01,
+                  "scale": 0.1225
+                },
+                "16": {
+                  "a": -2.0,
+                  "b": 2.0,
+                  "high": 0.5,
+                  "location": 0.255,
+                  "log_mass": -0.04656791229239017,
+                  "low": 0.01,
+                  "scale": 0.1225
+                },
+                "18": {
+                  "a": -2.0,
+                  "b": 2.0,
+                  "high": 0.5,
+                  "location": 0.255,
+                  "log_mass": -0.04656791229239017,
+                  "low": 0.01,
+                  "scale": 0.1225
+                },
+                "20": {
+                  "a": -2.0,
+                  "b": 2.0,
+                  "high": 0.5,
+                  "location": 0.255,
+                  "log_mass": -0.04656791229239017,
+                  "low": 0.01,
+                  "scale": 0.1225
+                },
+                "6": {
+                  "a": -2.0,
+                  "b": 2.0,
+                  "high": 0.5,
+                  "location": 0.255,
+                  "log_mass": -0.04656791229239017,
+                  "low": 0.01,
+                  "scale": 0.1225
+                }
+              },
+              "normal_prior_scope": "ideal real-arithmetic prior only; no posterior normality or accuracy guarantee",
+              "old_native_fallback_policy_transferred": false,
+              "old_numerical_qualification_transferred": false,
+              "physical_parameter_order": [
+                "mu_a",
+                "mu_b",
+                "mu_d0",
+                "a_m1",
+                "b_m1",
+                "d0_m1",
+                "sigma_m1",
+                "a_m2",
+                "b_m2",
+                "d0_m2",
+                "sigma_m2",
+                "a_m3",
+                "b_m3",
+                "d0_m3",
+                "sigma_m3",
+                "a_a1",
+                "sigma_a1",
+                "a_a2",
+                "sigma_a2",
+                "a_a3",
+                "sigma_a3"
+              ],
+              "physical_roundtrip_centers": [
+                0.3,
+                -0.2,
+                0.1,
+                0.3,
+                -0.2,
+                0.1,
+                0.255,
+                0.3,
+                -0.2,
+                0.1,
+                0.255,
+                0.3,
+                -0.2,
+                0.1,
+                0.255,
+                0.3,
+                0.255,
+                0.3,
+                0.255,
+                0.3,
+                0.255
+              ],
+              "physical_roundtrip_prior_units": [
+                1.0,
+                1.0954451150103321,
+                0.6324555320336759,
+                0.45,
+                0.7,
+                0.25,
+                0.1225,
+                0.45,
+                0.7,
+                0.25,
+                0.1225,
+                0.45,
+                0.7,
+                0.25,
+                0.1225,
+                0.45,
+                0.1225,
+                0.45,
+                0.1225,
+                0.45,
+                0.1225
+              ],
+              "physical_to_stage_order": [
+                0,
+                1,
+                2,
+                4,
+                5,
+                6,
+                3,
+                8,
+                9,
+                10,
+                7,
+                12,
+                13,
+                14,
+                11,
+                16,
+                15,
+                18,
+                17,
+                20,
+                19
+              ],
+              "references_truth_or_fitted_constants": false,
+              "schema": "posteriorforge.prior_coordinates.v1",
+              "scientific_and_order_sources_sha256": {
+                "execution_ss15_sigma_first.py": "d48d1638ef9e540bdd629d321fba657af4db757700b1092fc58fb9ded1f79ad2",
+                "science/analytical_benchmark_v2.py": "8d5f286f6d8512391dea2ae036313bec05782d28c7803f336490cbcdce3bd99f",
+                "science/hierarchical_exact.py": "db001593cc7307b1290b981622705961c5953001a6c1245fae5ec779938e9687",
+                "science/hierarchical_noise.py": "cbf0b8c956362a5eaa31923e9b94a3db3e3ede2072603add51e78105b8c0cbf0",
+                "science/hierarchical_problem.py": "03aa2d8a3d279783cf6c599f1400f253f3db2e1e7eb027aff5b7cd1b48fe12d0"
+              },
+              "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+              "stage_to_physical_order": [
+                0,
+                1,
+                2,
+                6,
+                3,
+                4,
+                5,
+                10,
+                7,
+                8,
+                9,
+                14,
+                11,
+                12,
+                13,
+                16,
+                15,
+                18,
+                17,
+                20,
+                19
+              ],
+              "tolerances": {
+                "F32_model_cast_latent_admissibility": 3.814697265625e-06,
+                "F32_model_cast_physical_prior_units": 3.814697265625e-06,
+                "F64_latent_conditioning_admissibility": 1.1920928955078125e-07,
+                "F64_latent_scope": "declared conditioning/roundtrip admissibility; NOT an ulp-Float64 accuracy guarantee",
+                "F64_physical_prior_units": 5.684341886080802e-14,
+                "bound": "coefficient*(1+abs(expected standardized coordinate))",
+                "qualification_CDF_TV_quantile_thresholds_changed": false
+              }
+            },
+            "codec_sha256": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+            "fallback_map": {},
+            "module_sha256": "88f28c5a1f01c086661243c5d3bfb59631eb3c95fe3567b7f1ede325ddba0aea",
+            "native_stage_policy_inherited": false,
+            "policy_sha256": "52ee821b6126a1c1394d16b8e76c98686fb7a4d2dd2cade43b7b2eb3aa5f492f",
+            "stage_to_original_physical_slot": [
+              0,
+              1,
+              2,
+              6,
+              3,
+              4,
+              5,
+              10,
+              7,
+              8,
+              9,
+              14,
+              11,
+              12,
+              13,
+              16,
+              15,
+              18,
+              17,
+              20,
+              19
+            ],
+            "stages": [
+              {
+                "all_three_globals_condition_local_stages": false,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    0
+                  ],
+                  "encode_physical_dependencies": [
+                    0
+                  ],
+                  "kind": "global_lower_cholesky_residual",
+                  "latent_name": "z_mu_a",
+                  "physical_name": "mu_a",
+                  "physical_slot": 0,
+                  "stage": 0
+                },
+                "feature_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "feature_columns_zeroed": [],
+                "input_width": 15,
+                "observation_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "ordered_latent_prefix_indices_kept": [],
+                "stage_index": 0,
+                "target_coordinate": "prior_latent_mu_a",
+                "target_index_in_ordered_training": 0,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 0
+              },
+              {
+                "all_three_globals_condition_local_stages": false,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    0,
+                    1
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1
+                  ],
+                  "kind": "global_lower_cholesky_residual",
+                  "latent_name": "z_mu_b",
+                  "physical_name": "mu_b",
+                  "physical_slot": 1,
+                  "stage": 1
+                },
+                "feature_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  15
+                ],
+                "feature_columns_zeroed": [],
+                "input_width": 16,
+                "observation_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0
+                ],
+                "stage_index": 1,
+                "target_coordinate": "prior_latent_mu_b",
+                "target_index_in_ordered_training": 1,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 1
+              },
+              {
+                "all_three_globals_condition_local_stages": false,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2
+                  ],
+                  "kind": "global_lower_cholesky_residual",
+                  "latent_name": "z_mu_d0",
+                  "physical_name": "mu_d0",
+                  "physical_slot": 2,
+                  "stage": 2
+                },
+                "feature_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  15,
+                  16
+                ],
+                "feature_columns_zeroed": [],
+                "input_width": 17,
+                "observation_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1
+                ],
+                "stage_index": 2,
+                "target_coordinate": "prior_latent_mu_d0",
+                "target_index_in_ordered_training": 2,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 2
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    6
+                  ],
+                  "encode_physical_dependencies": [
+                    6
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_m1",
+                  "physical_name": "sigma_m1",
+                  "physical_slot": 6,
+                  "stage": 3
+                },
+                "feature_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  15,
+                  16,
+                  17
+                ],
+                "feature_columns_zeroed": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "input_width": 18,
+                "observation_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2
+                ],
+                "stage_index": 3,
+                "target_coordinate": "prior_latent_sigma_m1",
+                "target_index_in_ordered_training": 3,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 6
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_m1",
+                  "physical_name": "a_m1",
+                  "physical_slot": 3,
+                  "stage": 4
+                },
+                "feature_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  15,
+                  16,
+                  17,
+                  18
+                ],
+                "feature_columns_zeroed": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "input_width": 19,
+                "observation_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "stage_index": 4,
+                "target_coordinate": "prior_latent_a_m1",
+                "target_index_in_ordered_training": 4,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 3
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_b_m1",
+                  "physical_name": "b_m1",
+                  "physical_slot": 4,
+                  "stage": 5
+                },
+                "feature_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  15,
+                  16,
+                  17,
+                  18,
+                  19
+                ],
+                "feature_columns_zeroed": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "input_width": 20,
+                "observation_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4
+                ],
+                "stage_index": 5,
+                "target_coordinate": "prior_latent_b_m1",
+                "target_index_in_ordered_training": 5,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 4
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_d0_m1",
+                  "physical_name": "d0_m1",
+                  "physical_slot": 5,
+                  "stage": 6
+                },
+                "feature_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  15,
+                  16,
+                  17,
+                  18,
+                  19,
+                  20
+                ],
+                "feature_columns_zeroed": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14
+                ],
+                "input_width": 21,
+                "observation_columns_kept": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ],
+                "stage_index": 6,
+                "target_coordinate": "prior_latent_d0_m1",
+                "target_index_in_ordered_training": 6,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 5
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    10
+                  ],
+                  "encode_physical_dependencies": [
+                    10
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_m2",
+                  "physical_name": "sigma_m2",
+                  "physical_slot": 10,
+                  "stage": 7
+                },
+                "feature_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  15,
+                  16,
+                  17
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21
+                ],
+                "input_width": 22,
+                "observation_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2
+                ],
+                "stage_index": 7,
+                "target_coordinate": "prior_latent_sigma_m2",
+                "target_index_in_ordered_training": 7,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 10
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_m2",
+                  "physical_name": "a_m2",
+                  "physical_slot": 7,
+                  "stage": 8
+                },
+                "feature_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  15,
+                  16,
+                  17,
+                  22
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21
+                ],
+                "input_width": 23,
+                "observation_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  7
+                ],
+                "stage_index": 8,
+                "target_coordinate": "prior_latent_a_m2",
+                "target_index_in_ordered_training": 8,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 7
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_b_m2",
+                  "physical_name": "b_m2",
+                  "physical_slot": 8,
+                  "stage": 9
+                },
+                "feature_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  15,
+                  16,
+                  17,
+                  22,
+                  23
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21
+                ],
+                "input_width": 24,
+                "observation_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  7,
+                  8
+                ],
+                "stage_index": 9,
+                "target_coordinate": "prior_latent_b_m2",
+                "target_index_in_ordered_training": 9,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 8
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8,
+                    9
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    7,
+                    8,
+                    9
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_d0_m2",
+                  "physical_name": "d0_m2",
+                  "physical_slot": 9,
+                  "stage": 10
+                },
+                "feature_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7,
+                  15,
+                  16,
+                  17,
+                  22,
+                  23,
+                  24
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21
+                ],
+                "input_width": 25,
+                "observation_columns_kept": [
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  7,
+                  8,
+                  9
+                ],
+                "stage_index": 10,
+                "target_coordinate": "prior_latent_d0_m2",
+                "target_index_in_ordered_training": 10,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 9
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    14
+                  ],
+                  "encode_physical_dependencies": [
+                    14
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_m3",
+                  "physical_name": "sigma_m3",
+                  "physical_slot": 14,
+                  "stage": 11
+                },
+                "feature_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11,
+                  15,
+                  16,
+                  17
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25
+                ],
+                "input_width": 26,
+                "observation_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2
+                ],
+                "stage_index": 11,
+                "target_coordinate": "prior_latent_sigma_m3",
+                "target_index_in_ordered_training": 11,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 14
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_m3",
+                  "physical_name": "a_m3",
+                  "physical_slot": 11,
+                  "stage": 12
+                },
+                "feature_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11,
+                  15,
+                  16,
+                  17,
+                  26
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25
+                ],
+                "input_width": 27,
+                "observation_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  11
+                ],
+                "stage_index": 12,
+                "target_coordinate": "prior_latent_a_m3",
+                "target_index_in_ordered_training": 12,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 11
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_b_m3",
+                  "physical_name": "b_m3",
+                  "physical_slot": 12,
+                  "stage": 13
+                },
+                "feature_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11,
+                  15,
+                  16,
+                  17,
+                  26,
+                  27
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25
+                ],
+                "input_width": 28,
+                "observation_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  11,
+                  12
+                ],
+                "stage_index": 13,
+                "target_coordinate": "prior_latent_b_m3",
+                "target_index_in_ordered_training": 13,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 12
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "mechanical_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12,
+                    13
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    12,
+                    13
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_d0_m3",
+                  "physical_name": "d0_m3",
+                  "physical_slot": 13,
+                  "stage": 14
+                },
+                "feature_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11,
+                  15,
+                  16,
+                  17,
+                  26,
+                  27,
+                  28
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  12,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25
+                ],
+                "input_width": 29,
+                "observation_columns_kept": [
+                  8,
+                  9,
+                  10,
+                  11
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  11,
+                  12,
+                  13
+                ],
+                "stage_index": 14,
+                "target_coordinate": "prior_latent_d0_m3",
+                "target_index_in_ordered_training": 14,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 13
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    16
+                  ],
+                  "encode_physical_dependencies": [
+                    16
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_a1",
+                  "physical_name": "sigma_a1",
+                  "physical_slot": 16,
+                  "stage": 15
+                },
+                "feature_columns_kept": [
+                  12,
+                  15,
+                  16,
+                  17
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29
+                ],
+                "input_width": 30,
+                "observation_columns_kept": [
+                  12
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2
+                ],
+                "stage_index": 15,
+                "target_coordinate": "prior_latent_sigma_a1",
+                "target_index_in_ordered_training": 15,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 16
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "acoustic_1",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    15
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    15
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_a1",
+                  "physical_name": "a_a1",
+                  "physical_slot": 15,
+                  "stage": 16
+                },
+                "feature_columns_kept": [
+                  12,
+                  15,
+                  16,
+                  17,
+                  30
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  13,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29
+                ],
+                "input_width": 31,
+                "observation_columns_kept": [
+                  12
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  15
+                ],
+                "stage_index": 16,
+                "target_coordinate": "prior_latent_a_a1",
+                "target_index_in_ordered_training": 16,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 15
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    18
+                  ],
+                  "encode_physical_dependencies": [
+                    18
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_a2",
+                  "physical_name": "sigma_a2",
+                  "physical_slot": 18,
+                  "stage": 17
+                },
+                "feature_columns_kept": [
+                  13,
+                  15,
+                  16,
+                  17
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29,
+                  30,
+                  31
+                ],
+                "input_width": 32,
+                "observation_columns_kept": [
+                  13
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2
+                ],
+                "stage_index": 17,
+                "target_coordinate": "prior_latent_sigma_a2",
+                "target_index_in_ordered_training": 17,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 18
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "acoustic_2",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    17
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    17
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_a2",
+                  "physical_name": "a_a2",
+                  "physical_slot": 17,
+                  "stage": 18
+                },
+                "feature_columns_kept": [
+                  13,
+                  15,
+                  16,
+                  17,
+                  32
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  14,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29,
+                  30,
+                  31
+                ],
+                "input_width": 33,
+                "observation_columns_kept": [
+                  13
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  17
+                ],
+                "stage_index": 18,
+                "target_coordinate": "prior_latent_a_a2",
+                "target_index_in_ordered_training": 18,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 17
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "decode_latent_dependencies": [
+                    20
+                  ],
+                  "encode_physical_dependencies": [
+                    20
+                  ],
+                  "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+                  "latent_name": "z_sigma_a3",
+                  "physical_name": "sigma_a3",
+                  "physical_slot": 20,
+                  "stage": 19
+                },
+                "feature_columns_kept": [
+                  14,
+                  15,
+                  16,
+                  17
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29,
+                  30,
+                  31,
+                  32,
+                  33
+                ],
+                "input_width": 34,
+                "observation_columns_kept": [
+                  14
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2
+                ],
+                "stage_index": 19,
+                "target_coordinate": "prior_latent_sigma_a3",
+                "target_index_in_ordered_training": 19,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 20
+              },
+              {
+                "all_three_globals_condition_local_stages": true,
+                "codec_coordinate": {
+                  "dataset_id": "acoustic_3",
+                  "decode_latent_dependencies": [
+                    0,
+                    1,
+                    2,
+                    19
+                  ],
+                  "encode_physical_dependencies": [
+                    0,
+                    1,
+                    2,
+                    19
+                  ],
+                  "kind": "local_conditional_gaussian_residual_given_all_globals",
+                  "latent_name": "z_a_a3",
+                  "physical_name": "a_a3",
+                  "physical_slot": 19,
+                  "stage": 20
+                },
+                "feature_columns_kept": [
+                  14,
+                  15,
+                  16,
+                  17,
+                  34
+                ],
+                "feature_columns_zeroed": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29,
+                  30,
+                  31,
+                  32,
+                  33
+                ],
+                "input_width": 35,
+                "observation_columns_kept": [
+                  14
+                ],
+                "ordered_latent_prefix_indices_kept": [
+                  0,
+                  1,
+                  2,
+                  19
+                ],
+                "stage_index": 20,
+                "target_coordinate": "prior_latent_a_a3",
+                "target_index_in_ordered_training": 20,
+                "target_is_original_physical_value": false,
+                "target_original_physical_slot": 19
+              }
+            ],
+            "target_or_prefix_physical_label_identity_claimed": false
+          },
+          "empty_cache_screen_promoted_to_pass": false,
+          "execution_routing_changed_relative_to_v1": true,
+          "failed_empty_cache_screen_sha256": "550b91af4a031a3393f59146e1aa5360c75b0e716362ee727aeb1397af149593",
+          "members": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "module_sha256": "0199b16e9cc34203fa0d5645d161742fe9ed244633d7beee047fbcbf2528661c",
+          "native_stage_rule": "new explicit all8 originalFP32 ordered stages6/10/14 only",
+          "native_stages": [
+            6,
+            10,
+            14
+          ],
+          "old_sigma_native_policy_inherited": false,
+          "other_stages": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            7,
+            8,
+            9,
+            11,
+            12,
+            13,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ],
+          "policy_sha256": "b497b66a5dcf780fea0dcd10566284976b19321d56047f269aedbf02b0624116",
+          "same_execution_candidate_as_v1": false,
+          "selection_artifacts": {
+            "ancestral_failed_empty_cache": "550b91af4a031a3393f59146e1aa5360c75b0e716362ee727aeb1397af149593",
+            "v1_actual_case0_numerical_failure": "fbed99d9fb256bb72a49cb03bebb820d805ac2cbafaa4ebac4deb08bf3160734"
+          },
+          "selection_artifacts_are_v2_proof": false,
+          "stage_bindings": [
+            {
+              "dataset_id": "mechanical_1",
+              "decode_latent_dependencies": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "encode_physical_dependencies": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "kind": "local_conditional_gaussian_residual_given_all_globals",
+              "latent_name": "z_d0_m1",
+              "physical_name": "d0_m1",
+              "physical_slot": 5,
+              "stage": 6
+            },
+            {
+              "dataset_id": "mechanical_2",
+              "decode_latent_dependencies": [
+                0,
+                1,
+                2,
+                7,
+                8,
+                9
+              ],
+              "encode_physical_dependencies": [
+                0,
+                1,
+                2,
+                7,
+                8,
+                9
+              ],
+              "kind": "local_conditional_gaussian_residual_given_all_globals",
+              "latent_name": "z_d0_m2",
+              "physical_name": "d0_m2",
+              "physical_slot": 9,
+              "stage": 10
+            },
+            {
+              "dataset_id": "mechanical_3",
+              "decode_latent_dependencies": [
+                0,
+                1,
+                2,
+                11,
+                12,
+                13
+              ],
+              "encode_physical_dependencies": [
+                0,
+                1,
+                2,
+                11,
+                12,
+                13
+              ],
+              "kind": "local_conditional_gaussian_residual_given_all_globals",
+              "latent_name": "z_d0_m3",
+              "physical_name": "d0_m3",
+              "physical_slot": 13,
+              "stage": 14
+            }
+          ],
+          "v1_execution_source_sha256": "e5a2733e767b187e573315547ec9253267e43d1e3700596f61e97116c53f3256",
+          "v1_or_case2_pass_transferred": false,
+          "v2_preregistration_sha256": "8640a4e157698862823521d3fd14396ecc3ebf121dffffabc987cc937d3ad2fc"
+        },
+        "neural_source_sha256": "0199b16e9cc34203fa0d5645d161742fe9ed244633d7beee047fbcbf2528661c",
+        "new_numerical_probability_candidate": true,
+        "old_numerical_pass_inherited": false,
+        "probability_policy": {
+          "CDF_resolution": "positive raw weights can naturally collapse in F64 CDF differences; counts/masses reported, no threshold zeroing",
+          "RNG_calls": 0,
+          "borders": "promote original fitted FP32 bits; do not recompute target scaling in F64",
+          "device": "cpu",
+          "head_acceptance": "EXACT e71 function; raw translated F64 mass BEFORE normalization",
+          "inverse": "softmax64(log RAW weights); cumsum(apiP)/terminal; invert represented positive CDF intervals",
+          "legacy_bit_identity_claimed": false,
+          "module_sha256": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+          "neural_input": "actual translator-entry FP32 logits, already temperature/cancel adjusted; no second temperature",
+          "physical_parameter_clipping": false,
+          "policy": "adjusted_F32_logits_CPU_F64_source_CDF_v3",
+          "positive_uniform_ties": "left search; zero-width represented CDF intervals never selected",
+          "schema": "posteriorforge.execution.probability64.v3",
+          "softmax_CDF_translation_probability_dtype": "torch.float64",
+          "source_CDF_order": "softmax64; cumsum(p)-p; corrected share; source boundary/share/CDF clamps; diff; negative-source-diff clamp_min0",
+          "uniform_domain": "original CPU torch.float32 [0,1); promoted unchanged to F64; u=1 rejected",
+          "zero_uniform": "u=0 selects first represented positive interval left border; NEW finite-support extension, not legacy NaN"
+        },
+        "probability_source_sha256": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+        "schema": "posteriorforge.execution.prior_native_probability64.v3.policy"
+      },
+      "new_model_neural_preprocessor_GPU_or_RNG_draw_calls": 0,
+      "numpy": "2.2.6",
+      "probability_policy": {
+        "CDF_resolution": "positive raw weights can naturally collapse in F64 CDF differences; counts/masses reported, no threshold zeroing",
+        "RNG_calls": 0,
+        "borders": "promote original fitted FP32 bits; do not recompute target scaling in F64",
+        "device": "cpu",
+        "head_acceptance": "EXACT e71 function; raw translated F64 mass BEFORE normalization",
+        "inverse": "softmax64(log RAW weights); cumsum(apiP)/terminal; invert represented positive CDF intervals",
+        "legacy_bit_identity_claimed": false,
+        "module_sha256": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+        "neural_input": "actual translator-entry FP32 logits, already temperature/cancel adjusted; no second temperature",
+        "physical_parameter_clipping": false,
+        "policy": "adjusted_F32_logits_CPU_F64_source_CDF_v3",
+        "positive_uniform_ties": "left search; zero-width represented CDF intervals never selected",
+        "schema": "posteriorforge.execution.probability64.v3",
+        "softmax_CDF_translation_probability_dtype": "torch.float64",
+        "source_CDF_order": "softmax64; cumsum(p)-p; corrected share; source boundary/share/CDF clamps; diff; negative-source-diff clamp_min0",
+        "uniform_domain": "original CPU torch.float32 [0,1); promoted unchanged to F64; u=1 rejected",
+        "zero_uniform": "u=0 selects first represented positive interval left border; NEW finite-support extension, not legacy NaN"
+      },
+      "python": "3.11.13",
+      "scipy": "1.15.3",
+      "source_guards_passed": true,
+      "torch_imported_by_source_preflight": false,
+      "torch_package_metadata": null
+    }
+  },
+  "status": "focused_CPU_checks_passed",
+  "tests": {
+    "inference": {
+      "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/probability-v3-cpu-01/inference-frozen.log",
+      "result": "21 passed in 11.16s",
+      "sha256": "56134e5cc1b65834d7ccab93587d7948f0503c45d21b5e03829b1f99c6ff0407",
+      "source_preflight_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/probability-v3-cpu-01/inference-source-preflight.json",
+      "source_preflight_sha256": "adce0c7703c455c5f6989050cc85d92548f654282ad61671dc66af85257837b5"
+    },
+    "reference": {
+      "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/probability-v3-cpu-01/reference-frozen.log",
+      "result": "7 passed, 14 skipped in 1.15s",
+      "sha256": "f8619887ff77225f58f5d809e16dc94497ed84ddc5ef6e844e506b505f9fa430",
+      "source_preflight_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/probability-v3-cpu-01/reference-source-preflight.json",
+      "source_preflight_sha256": "b08c666a201e586c2d69867b4d3d2c11596c71d0fe6ee5d856922ccf38fb983e"
+    }
+  }
+}

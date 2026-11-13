@@ -1,0 +1,7 @@
+{
+  "scripts/prove_prior_proposals_v3.py": "37bfd669daa0d002ea08bafaa9f27f0b87023b6df43878508f7dcda376b5a5b6",
+  "src/posteriorforge/inference.py": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e",
+  "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+  "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+  "tests/test_prior_proposals_v3.py": "e58c24cac3cceaf11dc3a74407e3503a91450d12d691caffc9c218b167907a8d"
+}

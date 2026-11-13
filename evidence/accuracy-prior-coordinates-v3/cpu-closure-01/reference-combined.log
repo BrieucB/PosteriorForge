@@ -1,0 +1,22 @@
+..ssssssssssss.....ss..........................................ss....... [ 71%]
+.........................ss..                                            [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_execution_probability_v3.py:125: Torch is absent in locked reference environment
+SKIPPED [1] tests/test_execution_probability_v3.py:86: Torch is absent in locked reference environment
+SKIPPED [1] tests/test_execution_probability_v3.py:112: Torch is absent in locked reference environment
+SKIPPED [1] tests/test_execution_probability_v3.py:57: Torch is absent in locked reference environment
+SKIPPED [1] tests/test_execution_probability_v3.py:81: Torch is absent in locked reference environment
+SKIPPED [1] tests/test_execution_probability_v3.py:64: Torch is absent in locked reference environment
+SKIPPED [1] tests/test_execution_probability_v3.py:104: Torch is absent in locked reference environment
+SKIPPED [1] tests/test_execution_probability_v3.py:45: Torch is absent in locked reference environment
+SKIPPED [1] tests/test_execution_probability_v3.py:96: Torch is absent in locked reference environment
+SKIPPED [1] tests/test_execution_probability_v3.py:48: Torch is absent in locked reference environment
+SKIPPED [1] tests/test_execution_probability_v3.py:40: Torch is absent in locked reference environment
+SKIPPED [1] tests/test_execution_probability_v3.py:32: Torch is absent in locked reference environment
+SKIPPED [1] tests/test_execution_prior_native_v3.py:41: Torch absent in reference environment
+SKIPPED [1] tests/test_execution_prior_native_v3.py:65: Torch absent in reference environment
+SKIPPED [1] tests/test_prior_v3_production_boundary.py:94: could not import 'torch': No module named 'torch'
+SKIPPED [1] tests/test_prior_v3_production_boundary.py:127: could not import 'torch': No module named 'torch'
+SKIPPED [1] tests/test_qualify_prior_coordinate_pair_v3.py:149: actual Torch CPU probability primitives unavailable in reference environment
+SKIPPED [1] tests/test_qualify_prior_coordinate_pair_v3.py:172: actual Torch CPU probability primitives unavailable in reference environment
+83 passed, 18 skipped in 10.55s

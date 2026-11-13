@@ -1,0 +1,8 @@
+{
+  "files": {
+    "inference.log": "380bdf3d83b63a1c6d2590aa413ad1ac6acce7ad46a0b5a780445a7463d79843",
+    "receipt.json": "f890865991e413bd2695405df14db3ba593ff77be62a85cd3ac7c4b56b01ad5a",
+    "reference.log": "b67b35ff5cda7c2ba9f818e3c8dbc33ad522ee26554d0d041a0d096b70ff6ce3"
+  },
+  "schema": "posteriorforge.public_evidence_checksums.v1"
+}

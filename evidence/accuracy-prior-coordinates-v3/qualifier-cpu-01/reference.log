@@ -1,0 +1,5 @@
+...............................ss..                                      [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_qualify_prior_coordinate_pair_v3.py:149: actual Torch CPU probability primitives unavailable in reference environment
+SKIPPED [1] tests/test_qualify_prior_coordinate_pair_v3.py:172: actual Torch CPU probability primitives unavailable in reference environment
+33 passed, 2 skipped in 1.87s

@@ -1,0 +1,30 @@
+{
+  "inference": {
+    "command": "CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src OMP_NUM_THREADS=1 /scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python -m pytest -q -p no:cacheprovider tests/test_execution_probability_v3.py tests/test_execution_prior_native_v3.py tests/test_prior_proposals_v3.py tests/test_performance_prior_pair_v3.py tests/test_prior_v3_production_boundary.py tests/test_prior_v3_case0_bindings.py tests/test_qualify_prior_coordinate_pair_v3.py",
+    "exit_code": 0,
+    "expected_skip_reason": null,
+    "log_sha256": "4bb5832a5719c62ccda54095f9b7fff12ed0f22545cf1e359d0af23baf216340",
+    "passed": 101,
+    "skipped": 0,
+    "versions": {
+      "numpy": "1.26.4",
+      "python": "3.11.13 (main, Apr 28 2026, 13:06:52) [GCC 8.5.0 20210514 (Red Hat 8.5.0-28)]",
+      "scipy": "1.12.0",
+      "torch": "2.6.0"
+    }
+  },
+  "reference": {
+    "command": "CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src OMP_NUM_THREADS=1 /scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python -m pytest -q -p no:cacheprovider tests/test_execution_probability_v3.py tests/test_execution_prior_native_v3.py tests/test_prior_proposals_v3.py tests/test_performance_prior_pair_v3.py tests/test_prior_v3_production_boundary.py tests/test_prior_v3_case0_bindings.py tests/test_qualify_prior_coordinate_pair_v3.py",
+    "exit_code": 0,
+    "expected_skip_reason": "Torch absent in reference",
+    "log_sha256": "ba74dbc20e8c65cc7b875547b7b51107874bca060a3b629ad15a63a3137bb6c1",
+    "passed": 83,
+    "skipped": 18,
+    "versions": {
+      "numpy": "2.2.6",
+      "python": "3.11.13 (main, Apr 28 2026, 13:06:52) [GCC 8.5.0 20210514 (Red Hat 8.5.0-28)]",
+      "scipy": "1.15.3",
+      "torch": null
+    }
+  }
+}

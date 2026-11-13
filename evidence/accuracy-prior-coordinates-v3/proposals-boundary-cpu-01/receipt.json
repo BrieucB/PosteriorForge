@@ -1,0 +1,248 @@
+{
+  "exact_part": "Fraction physical-inequality roots and inward-rounded validation coordinates only",
+  "new_GPU_NN_posterior_G3_or_RNG_draw_calls": 0,
+  "numerical_CDF_evaluation": "ordinary SciPy Float64 logcdf/logsf and log_ndtr, NOT certified directed probability enclosures",
+  "production_qualification_claimed": false,
+  "results": [
+    {
+      "boundary_cases": [
+        {
+          "direction": -1,
+          "exact_ideal_center_physical_budget_pass": false,
+          "reason": "noise inverse exceeds unchanged physical-error probability interval: physical6",
+          "step": -2,
+          "validator_pass": false,
+          "value": 0.25499999999999295,
+          "value_hex": "0x1.051eb851eb7d3p-2"
+        },
+        {
+          "direction": -1,
+          "exact_ideal_center_physical_budget_pass": false,
+          "reason": "noise inverse exceeds unchanged physical-error probability interval: physical6",
+          "step": -1,
+          "validator_pass": false,
+          "value": 0.254999999999993,
+          "value_hex": "0x1.051eb851eb7d4p-2"
+        },
+        {
+          "direction": -1,
+          "exact_ideal_center_physical_budget_pass": true,
+          "reason": "noise inverse exceeds unchanged physical-error probability interval: physical6",
+          "step": 0,
+          "validator_pass": false,
+          "value": 0.25499999999999307,
+          "value_hex": "0x1.051eb851eb7d5p-2"
+        },
+        {
+          "direction": -1,
+          "exact_ideal_center_physical_budget_pass": true,
+          "reason": null,
+          "step": 1,
+          "validator_pass": true,
+          "value": 0.2549999999999931,
+          "value_hex": "0x1.051eb851eb7d6p-2"
+        },
+        {
+          "direction": -1,
+          "exact_ideal_center_physical_budget_pass": true,
+          "reason": null,
+          "step": 2,
+          "validator_pass": true,
+          "value": 0.2549999999999932,
+          "value_hex": "0x1.051eb851eb7d7p-2"
+        },
+        {
+          "direction": 1,
+          "exact_ideal_center_physical_budget_pass": true,
+          "reason": null,
+          "step": -2,
+          "validator_pass": true,
+          "value": 0.25500000000000683,
+          "value_hex": "0x1.051eb851eb8cdp-2"
+        },
+        {
+          "direction": 1,
+          "exact_ideal_center_physical_budget_pass": true,
+          "reason": null,
+          "step": -1,
+          "validator_pass": true,
+          "value": 0.2550000000000069,
+          "value_hex": "0x1.051eb851eb8cep-2"
+        },
+        {
+          "direction": 1,
+          "exact_ideal_center_physical_budget_pass": true,
+          "reason": null,
+          "step": 0,
+          "validator_pass": true,
+          "value": 0.25500000000000694,
+          "value_hex": "0x1.051eb851eb8cfp-2"
+        },
+        {
+          "direction": 1,
+          "exact_ideal_center_physical_budget_pass": false,
+          "reason": "noise inverse exceeds unchanged physical-error probability interval: physical6",
+          "step": 1,
+          "validator_pass": false,
+          "value": 0.255000000000007,
+          "value_hex": "0x1.051eb851eb8d0p-2"
+        },
+        {
+          "direction": 1,
+          "exact_ideal_center_physical_budget_pass": false,
+          "reason": "noise inverse exceeds unchanged physical-error probability interval: physical6",
+          "step": 2,
+          "validator_pass": false,
+          "value": 0.25500000000000705,
+          "value_hex": "0x1.051eb851eb8d1p-2"
+        }
+      ],
+      "boundary_exit_code": 0,
+      "boundary_probe_source": "import math,json,numpy as np\nfrom fractions import Fraction\nfrom posteriorforge import prior_proposals_v3 as p\nfrom posteriorforge import prior_coordinates_v1 as c\nz=np.zeros((1,21),np.float64);base=p.decode_ordered_proposals(z);spec=c._geometry()[\"noise\"][6]\nmu=Fraction.from_float(spec[\"location\"]);s=Fraction.from_float(spec[\"scale\"]);budget=Fraction.from_float(c.F64_PHYSICAL_UNITS)*s\nrows=[]\nfor d in (-1,1):\n center=float(mu+d*budget)\n for step in (-2,-1,0,1,2):\n  y=center\n  for _ in range(abs(step)):y=math.nextafter(y,math.inf if step>0 else -math.inf)\n  x=base.copy();x[0,6]=y;r=p.precision_report(z,x)\n  rows.append(dict(direction=d,step=step,value=y,value_hex=y.hex(),exact_ideal_center_physical_budget_pass=abs(Fraction.from_float(y)-mu)<=budget,validator_pass=r[\"hard_passed\"],reason=r.get(\"reason\")))\nprint(json.dumps(rows,sort_keys=True))",
+      "boundary_sha256": "0056370a5d13cada07b32694dc8275ca1a053c96090332520739061b6bc6d08e",
+      "conservative_rejection_count": 1,
+      "environment": "inference",
+      "false_acceptance_count": 0,
+      "pytest_command": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_prior_proposals_v3.py",
+        "-o",
+        "cache_dir=/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/decoder-boundary-cpu-01/inference-cache"
+      ],
+      "pytest_exit_code": 0,
+      "pytest_stdout": ".....................................                                    [100%]\n37 passed in 1.08s",
+      "pytest_stdout_sha256": "d3d3ba33307ede69579694eea64302b27166bcdee8585a503349fff5fda11449",
+      "wall_seconds": 2.383704787120223
+    },
+    {
+      "boundary_cases": [
+        {
+          "direction": -1,
+          "exact_ideal_center_physical_budget_pass": false,
+          "reason": "noise inverse exceeds unchanged physical-error probability interval: physical6",
+          "step": -2,
+          "validator_pass": false,
+          "value": 0.25499999999999295,
+          "value_hex": "0x1.051eb851eb7d3p-2"
+        },
+        {
+          "direction": -1,
+          "exact_ideal_center_physical_budget_pass": false,
+          "reason": "noise inverse exceeds unchanged physical-error probability interval: physical6",
+          "step": -1,
+          "validator_pass": false,
+          "value": 0.254999999999993,
+          "value_hex": "0x1.051eb851eb7d4p-2"
+        },
+        {
+          "direction": -1,
+          "exact_ideal_center_physical_budget_pass": true,
+          "reason": "noise inverse exceeds unchanged physical-error probability interval: physical6",
+          "step": 0,
+          "validator_pass": false,
+          "value": 0.25499999999999307,
+          "value_hex": "0x1.051eb851eb7d5p-2"
+        },
+        {
+          "direction": -1,
+          "exact_ideal_center_physical_budget_pass": true,
+          "reason": null,
+          "step": 1,
+          "validator_pass": true,
+          "value": 0.2549999999999931,
+          "value_hex": "0x1.051eb851eb7d6p-2"
+        },
+        {
+          "direction": -1,
+          "exact_ideal_center_physical_budget_pass": true,
+          "reason": null,
+          "step": 2,
+          "validator_pass": true,
+          "value": 0.2549999999999932,
+          "value_hex": "0x1.051eb851eb7d7p-2"
+        },
+        {
+          "direction": 1,
+          "exact_ideal_center_physical_budget_pass": true,
+          "reason": null,
+          "step": -2,
+          "validator_pass": true,
+          "value": 0.25500000000000683,
+          "value_hex": "0x1.051eb851eb8cdp-2"
+        },
+        {
+          "direction": 1,
+          "exact_ideal_center_physical_budget_pass": true,
+          "reason": null,
+          "step": -1,
+          "validator_pass": true,
+          "value": 0.2550000000000069,
+          "value_hex": "0x1.051eb851eb8cep-2"
+        },
+        {
+          "direction": 1,
+          "exact_ideal_center_physical_budget_pass": true,
+          "reason": null,
+          "step": 0,
+          "validator_pass": true,
+          "value": 0.25500000000000694,
+          "value_hex": "0x1.051eb851eb8cfp-2"
+        },
+        {
+          "direction": 1,
+          "exact_ideal_center_physical_budget_pass": false,
+          "reason": "noise inverse exceeds unchanged physical-error probability interval: physical6",
+          "step": 1,
+          "validator_pass": false,
+          "value": 0.255000000000007,
+          "value_hex": "0x1.051eb851eb8d0p-2"
+        },
+        {
+          "direction": 1,
+          "exact_ideal_center_physical_budget_pass": false,
+          "reason": "noise inverse exceeds unchanged physical-error probability interval: physical6",
+          "step": 2,
+          "validator_pass": false,
+          "value": 0.25500000000000705,
+          "value_hex": "0x1.051eb851eb8d1p-2"
+        }
+      ],
+      "boundary_exit_code": 0,
+      "boundary_probe_source": "import math,json,numpy as np\nfrom fractions import Fraction\nfrom posteriorforge import prior_proposals_v3 as p\nfrom posteriorforge import prior_coordinates_v1 as c\nz=np.zeros((1,21),np.float64);base=p.decode_ordered_proposals(z);spec=c._geometry()[\"noise\"][6]\nmu=Fraction.from_float(spec[\"location\"]);s=Fraction.from_float(spec[\"scale\"]);budget=Fraction.from_float(c.F64_PHYSICAL_UNITS)*s\nrows=[]\nfor d in (-1,1):\n center=float(mu+d*budget)\n for step in (-2,-1,0,1,2):\n  y=center\n  for _ in range(abs(step)):y=math.nextafter(y,math.inf if step>0 else -math.inf)\n  x=base.copy();x[0,6]=y;r=p.precision_report(z,x)\n  rows.append(dict(direction=d,step=step,value=y,value_hex=y.hex(),exact_ideal_center_physical_budget_pass=abs(Fraction.from_float(y)-mu)<=budget,validator_pass=r[\"hard_passed\"],reason=r.get(\"reason\")))\nprint(json.dumps(rows,sort_keys=True))",
+      "boundary_sha256": "0056370a5d13cada07b32694dc8275ca1a053c96090332520739061b6bc6d08e",
+      "conservative_rejection_count": 1,
+      "environment": "reference",
+      "false_acceptance_count": 0,
+      "pytest_command": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_prior_proposals_v3.py",
+        "-o",
+        "cache_dir=/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/decoder-boundary-cpu-01/reference-cache"
+      ],
+      "pytest_exit_code": 0,
+      "pytest_stdout": ".....................................                                    [100%]\n37 passed in 1.21s",
+      "pytest_stdout_sha256": "405ac465259cf0aa508038603f446962fa9d05b3080b0c9034f753287e5687b0",
+      "wall_seconds": 2.390822964720428
+    }
+  ],
+  "schema": "posteriorforge.proposal_decoder_boundary_CPU_evidence.v3",
+  "scope": "deterministic central scalar cells around original physical budget; not a universal directed CDF certificate",
+  "source_math_changed": false,
+  "sources_after": {
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "tests/test_prior_proposals_v3.py": "586849316413646702b9140c6f3c81fa8c1b06f0b77f609a045840b44fb2b9e1"
+  },
+  "sources_before": {
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "tests/test_prior_proposals_v3.py": "586849316413646702b9140c6f3c81fa8c1b06f0b77f609a045840b44fb2b9e1"
+  },
+  "status": "pass"
+}

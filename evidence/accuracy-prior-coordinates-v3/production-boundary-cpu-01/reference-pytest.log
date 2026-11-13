@@ -1,0 +1,5 @@
+.ss.                                                                     [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_prior_v3_production_boundary.py:94: could not import 'torch': No module named 'torch'
+SKIPPED [1] tests/test_prior_v3_production_boundary.py:127: could not import 'torch': No module named 'torch'
+2 passed, 2 skipped in 5.35s

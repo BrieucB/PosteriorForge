@@ -1,0 +1,61 @@
+{
+  "new_GPU_NN_model_constructor_world_posterior_G3_or_RNG_draw_calls": 0,
+  "only_proof_change": "use inward boundary spacing in diagnostic nearest-F64 test; decoder/test sources unchanged",
+  "previous_01_reports_preserved": true,
+  "results": [
+    {
+      "command": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "scripts/prove_prior_proposals_v3.py",
+        "--math-report",
+        "evidence/accuracy-prior-coordinates-v1/noise-inverse-math-diagnostic-01/reproducible-scalars.json",
+        "--postprocessing-report",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/tail-postprocessing-offline-01/report.json",
+        "--output",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/decoder-proof-inference-02"
+      ],
+      "environment": "inference",
+      "exit_code": 0,
+      "report": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/decoder-proof-inference-02/report.json",
+      "report_sha256": "0f7334eef761f07c028b7380b25727199b5bb80630920bb95bc82441235e4425",
+      "stdout": "{\"count\": 23, \"decoder_sha256\": \"9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7\", \"maximum_error_ULPs\": 44.363151211258845, \"maximum_physical_bound_ratio\": 0.004597413040369496, \"physical_bound_passed_all\": true, \"report\": \"/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/decoder-proof-inference-02/report.json\", \"sha256\": \"0f7334eef761f07c028b7380b25727199b5bb80630920bb95bc82441235e4425\", \"wall_seconds\": 3.540295200422406}",
+      "stdout_sha256": "a54e622784d4482971ef439857abdde691a1ae1d189b0922d5a5ac9ab0102a71",
+      "wall_seconds": 4.287929412908852
+    },
+    {
+      "command": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python",
+        "scripts/prove_prior_proposals_v3.py",
+        "--math-report",
+        "evidence/accuracy-prior-coordinates-v1/noise-inverse-math-diagnostic-01/reproducible-scalars.json",
+        "--postprocessing-report",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/tail-postprocessing-offline-01/report.json",
+        "--output",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/decoder-proof-reference-02",
+        "--mpmath-package",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/mpmath"
+      ],
+      "environment": "reference",
+      "exit_code": 0,
+      "report": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/decoder-proof-reference-02/report.json",
+      "report_sha256": "961426e0e84617bc4750a1e54936cf91aab53cfa441ad6ade4ce90463ed4932f",
+      "stdout": "{\"count\": 23, \"decoder_sha256\": \"9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7\", \"maximum_error_ULPs\": 44.363151211258845, \"maximum_physical_bound_ratio\": 0.004597413040369496, \"physical_bound_passed_all\": true, \"report\": \"/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/decoder-proof-reference-02/report.json\", \"sha256\": \"961426e0e84617bc4750a1e54936cf91aab53cfa441ad6ade4ce90463ed4932f\", \"wall_seconds\": 3.5933260014280677}",
+      "stdout_sha256": "81d1ec9315d1c40dda7d1930c30b56e7b44c9f6a7878f6cd49d27105397a5e5c",
+      "wall_seconds": 4.41477339155972
+    }
+  ],
+  "schema": "posteriorforge.prior_proposals_final_scalar_proof_CPU.v3",
+  "sources_after": {
+    "scripts/prove_prior_proposals_v3.py": "37bfd669daa0d002ea08bafaa9f27f0b87023b6df43878508f7dcda376b5a5b6",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "tests/test_prior_proposals_v3.py": "e58c24cac3cceaf11dc3a74407e3503a91450d12d691caffc9c218b167907a8d"
+  },
+  "sources_before": {
+    "scripts/prove_prior_proposals_v3.py": "37bfd669daa0d002ea08bafaa9f27f0b87023b6df43878508f7dcda376b5a5b6",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "tests/test_prior_proposals_v3.py": "e58c24cac3cceaf11dc3a74407e3503a91450d12d691caffc9c218b167907a8d"
+  },
+  "status": "pass"
+}
