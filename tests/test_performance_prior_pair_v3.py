@@ -15,11 +15,26 @@ def bound_fixture():
     return bind(p.pairs.PairSpec(20261111,0),'a'*64,'fixture-only')
 
 
-def test_empty_registry_never_inherits_old_case0_pass():
-    assert p.QUALIFICATION_SHA256_BY_PAIR=={}
-    assert p.v2.QUALIFICATION_SHA256_BY_PAIR
+def test_own_pair_registry_authenticates_only_fresh_all21_v3_screen():
+    import gzip,hashlib,json
+    from pathlib import Path
+    proof='56ec6cdc81eeab4c755d24fa8ddae47c21f75bce4c624c43908a59f5da21ffd1'
+    assert p.QUALIFICATION_SHA256_BY_PAIR=={(20261111,0):proof}
+    assert p.qualification_sha256(p.pairs.PairSpec(20261111,0))==proof
+    assert proof not in p.v2.QUALIFICATION_SHA256_BY_PAIR.values()
+    path=Path(p.__file__).resolve().parents[2]/'evidence/accuracy-prior-coordinates-v3/screen-pass-5411689/manifest.json.gz'
+    raw=gzip.decompress(path.read_bytes());assert hashlib.sha256(raw).hexdigest()==proof
+    document=json.loads(raw)
+    assert document['schema']==p.QUALIFICATION_SCHEMA and document['status']==p.QUALIFICATION_STATUS
+    assert document['matching_v3_execution_passed_all21'] is True and document['v3_failed_stages']==[]
+    assert document['replay']['passed'] is True and document['replay']['posterior_equivalence_claimed'] is False
+    assert [r['stage_index'] for r in document['stage_results']]==list(range(21))
+    assert all(r['hard_validity_passed'] and r['matching_v3_execution_passed'] for r in document['stage_results'])
+    assert document['pair']==p.pairs.PairSpec(20261111,0).as_dict()
+    assert document['sources']['qualifier']==p.DEPENDENCY_SHA256['scripts/'+p.QUALIFIER_FILENAME]
+    assert document['sources']['pair_CPU_receipt']==p.PAIR_CPU_RECEIPT_SHA256
     with pytest.raises(RuntimeError,match='fresh own-pair v3 all21 qualification'):
-        p.qualification_sha256(p.pairs.PairSpec(20261111,0))
+        p.qualification_sha256(p.pairs.PairSpec(20261111,1))
 
 
 def test_exact_training_aliases_and_declared_source_transforms():

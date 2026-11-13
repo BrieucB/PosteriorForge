@@ -1,0 +1,16 @@
+{
+  "README.txt": "b8082981dfb0c8b2e4f5421091e2942c08732bcbcbc2084f0e34ad24834bf535",
+  "accounting.json": "2f614882c4fda3b5f7ad5421fea67498a4e634b1349c073638e2f51a4ce7b55a",
+  "budget-after-reconciliation.json": "529b5a024b6a8783dc134fdc509262998bd298a4679c6f91b406fff8332b5803",
+  "inference-CPU-proof-replay.json": "cc15ae7cc5eb2e9ddcb1487f11c7c6ee906be87e7a97a75d4ea0b51bbb5bdcf6",
+  "manifest.json.gz": "b725e0bcaac158760bc9ec08abce22ee49825864aa4cbec2d149d34bd02ab40c",
+  "plan.json": "8416d150c50e5789f7000872ace5b84aa68e9828a695ffe69d664af622aa383a",
+  "reference-CPU-proof-replay.json": "cc15ae7cc5eb2e9ddcb1487f11c7c6ee906be87e7a97a75d4ea0b51bbb5bdcf6",
+  "replay-proof.py": "bdd043acb7e866fd80c1c79ae897c4866e272c0f2e30a6955cb1ef809ee72a92",
+  "sacct-main-allocation.txt": "47c35c19c4db66557cd75147fa757def2b6a4993846342b78e4ecfc2b798e3c0",
+  "source-post-run.json": "45fa6d6f4c8566d05c63c285273e2310b35abec16e38ccde01e3061f0434d0a5",
+  "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout.txt": "59fff6662c49168bf451a1947e7263c0dbeab4b36e91b030d0da0dc867d7866c",
+  "submission.json": "0d20f3b9792c5e34a04c58619d76d9bf5ee01731415f0ec68c52297270e95693",
+  "summary.json": "ec42020ad633181051d4a824e82b460f409aff1f58a0b04b9d1daeae0ff5860d"
+}

@@ -1,0 +1,46 @@
+{
+  "CPU_tests": {
+    "inference": {
+      "command": "CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src OMP_NUM_THREADS=1 /scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python -m pytest -q -p no:cacheprovider tests/test_performance_prior_pair_v3.py tests/test_qualify_prior_coordinate_pair_v3.py tests/test_prior_v3_production_boundary.py tests/test_prior_v3_case0_bindings.py",
+      "exit_code": 0,
+      "log_SHA256": "0388f91a217adf7b293f0d00196e99481a4aad3cdffd9dc19bc524f1e1f205d1",
+      "passed": 52,
+      "skipped": 0
+    },
+    "reference": {
+      "command": "CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src OMP_NUM_THREADS=1 /scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python -m pytest -q -p no:cacheprovider tests/test_performance_prior_pair_v3.py tests/test_qualify_prior_coordinate_pair_v3.py tests/test_prior_v3_production_boundary.py tests/test_prior_v3_case0_bindings.py",
+      "exit_code": 0,
+      "log_SHA256": "915c365d32801fa922abc8daf145365b7bc61fc030d85379019d90f13c1acfd1",
+      "passed": 48,
+      "skipped": 4
+    }
+  },
+  "both_CPU_formal_replay_SHA256": "cc15ae7cc5eb2e9ddcb1487f11c7c6ee906be87e7a97a75d4ea0b51bbb5bdcf6",
+  "budget": {
+    "actual_gpu_hours": 29.397777777777776,
+    "actual_gpu_seconds": 105832,
+    "cap_exceeded": false,
+    "cap_gpu_hours": 200,
+    "ledger_SHA256": "bf40ac81ac94582ee157774e14f6a8ce476dd55d9558367c277f007e573b3bf6",
+    "remaining_gpu_hours": 170.60222222222222,
+    "remaining_gpu_seconds": 614168,
+    "reservation_count": 130,
+    "reserved_gpu_hours": 0.0,
+    "reserved_gpu_seconds": 0
+  },
+  "executed_commit": "213afa0b3e38811c5fb1ffdcd3160789ca4dedac",
+  "new_GPU_posterior_G3_world_or_reference_execution_during_binding": false,
+  "next_action": "Complete authorized downstream CPU interfaces/tests/CI and parent review; no50000posterior/G3 oradditionalGPU authorization",
+  "parent_independent_ordinary_technical_audit_SHA256": "2b05765970e81830e5f2a8e72cd861e283c7c4fd42eb95f623ca28183e18a9b7",
+  "producer_SHA256": "28e5c5f6a613b5563a0db7368b30713ee8f7ec251350c99f3112e46a5e462651",
+  "producer_change": "ONLY own-pair proof-registry data entry; all numerical functions/streams/sources unchanged",
+  "producer_tests_SHA256": "df082e6826b747eea7bb4f7365fd76efebf8ecc8089abf1f095c11b310288492",
+  "proof_SHA256": "56ec6cdc81eeab4c755d24fa8ddae47c21f75bce4c624c43908a59f5da21ffd1",
+  "qualified_finite_prefix_pairs": 1,
+  "registry": {
+    "20261111,0": "56ec6cdc81eeab4c755d24fa8ddae47c21f75bce4c624c43908a59f5da21ffd1"
+  },
+  "schema": "posteriorforge.v3_own_pair_proof_binding_CPU.v1",
+  "screen_evidence_checksums_SHA256": "190bbdb85a4392309cf20f6aaed207ea666c752632a48ab821a9db3b3a38ace3",
+  "status": "fresh_finite_prefix_own_pair_bound_zero_posterior_credit"
+}

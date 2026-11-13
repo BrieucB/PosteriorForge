@@ -47,7 +47,7 @@ DEPENDENCY_SHA256={
  'scripts/qualify_prior_coordinate_pair_v3.py':'534b48c789bf1168a33b2953d85d747e27c244063dc9fc7cc4b4cb09c4d8324a',
  PREREGISTRATION_PATH:'7ea6e5c57f8404eb761e07f4011b14966d5885fbbdb8620d463c5283916041d8',
 }
-QUALIFICATION_SHA256_BY_PAIR={}  # no v3 neural or scientific qualification yet.
+QUALIFICATION_SHA256_BY_PAIR={(20261111,0):'56ec6cdc81eeab4c755d24fa8ddae47c21f75bce4c624c43908a59f5da21ffd1'}  # own-pair all21 finite-prefix screen only; zero posterior credit.
 
 def source_sha256():return hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
 def _sha(value,label):
