@@ -1,0 +1,144 @@
+{
+  "derivation": {
+    "CDF_limit": 0.1,
+    "SD_ratio_limits": [
+      0.8,
+      1.2
+    ],
+    "assessment_RNG_scope": "NEW G3 uses saved actual Z only; matched OLD baseline verification replays already-recorded private PCG64 stream, no new posterior/G3",
+    "expected_complete_count": 50000,
+    "joint_projections": 32,
+    "marginals": 21,
+    "mean_bias_reference_SD_limit": 0.2,
+    "metric_G3_seed_or_reference_math_changed": false,
+    "old_module_globals_unmodified": true,
+    "original_reference_and_baseline_codeobjects_identical": true,
+    "recorded_Git_source_dictionary_additions": [
+      [
+        "src/posteriorforge/execution_prior_native_v3.py",
+        "NATIVE_BACKEND_SHA256"
+      ],
+      [
+        "src/posteriorforge/execution_probability_v3.py",
+        "PROBABILITY_SHA256"
+      ],
+      [
+        "src/posteriorforge/prior_proposals_v3.py",
+        "PROPOSAL_SHA256"
+      ],
+      [
+        "src/posteriorforge/execution_prior_native_v2.py",
+        "NEURAL_SOURCE_SHA256"
+      ],
+      [
+        "src/posteriorforge/prior_coordinates_v1.py",
+        "CODEC_SHA256"
+      ],
+      [
+        "docs/accuracy-prior-coordinate-fp64-proposals-v3.md",
+        "PROTOCOL_SHA256"
+      ],
+      [
+        "scripts/refresh_prior_pair_global_block_v1.py",
+        "V1_WRAPPER_SHA256"
+      ]
+    ],
+    "reference_precision_limit": 0.005,
+    "run_controlflow_bytecode_equal": true,
+    "run_metadata_key_only_reversible": true,
+    "run_names_varnames_freevars_equal": true,
+    "schema": "posteriorforge.prior_pair_v3_assessment_derivation.v1",
+    "scientific_metric_sources": {
+      "scripts/evaluate_cdf_pilot.py": "284d3b061696d4d823666e12d3f79c720f87692b40f45743296cfb8e93865424",
+      "scripts/evaluate_prior_coordinates_pilot_v1.py": "6c49e59ccee9bebeecd53990556a6e00a9f41b2fc53a2e8ecf9827014efc2d56",
+      "scripts/evaluate_ss15_pilot.py": "3156d54b7d29f7aec29c2846782729a8c73da3bfcda16bb2e03cec3084899552",
+      "scripts/evaluate_ss15_sigma_first_global_block.py": "80337f6e9b0014a5c4b0086548871b917dc4bec36fb373dc3a016b911bf02386",
+      "scripts/evaluate_ss15_sigma_native_campaign.py": "146c2ca35e15b54b7f68134d383574485ed1cc228f38e6fc611624f00b411924",
+      "src/posteriorforge/validation.py": "92ddfd79a1c42cdbc56dfc9ad0f2c987fa70ee69387b0c5decff53c20b9aa694"
+    },
+    "source_display_AST_deltas_reverse_exact": true,
+    "v1_evaluator_sha256": "f16e13bb251ff195ed1c7f23a2045c806f7c1bc027665671d2d58e6a98246f1d",
+    "v2_evaluator_sha256": "61eb7b6c1546a0401cc25518adaba0a444ae2a09a83dd5a23745b8c337ceb1d7"
+  },
+  "engineering_fixture": {
+    "closed_noise_F64_endpoints_retained": [
+      0.01,
+      0.5
+    ],
+    "global_values_changed_by_fixed_Z_algebra": true,
+    "kernel_refresh_called": false,
+    "normal_RNG_method_calls": 0,
+    "other18_physical_columns_byte_identical": true,
+    "outside_support_failed_rows_and_legacy_partial_schemas_rejected": true,
+    "physical_rows": 7,
+    "production_COUNT_50000_unchanged": true,
+    "provided_fixed_Z": true
+  },
+  "new_wrapper_source_commit_closure": "Root owns final committed closure and CI; this receipt is explicitly checkout-only",
+  "no_real_parent_refresh_posterior_production_G3_new_world_reference_integration_NN_GPU_or_RNG_draw_calls": true,
+  "old_files_and_globals_unchanged": true,
+  "schema": "posteriorforge.prior_pair_v3_assessment_CPU_receipt.v1",
+  "scientific_gate_contract": {
+    "CDF_limit": 0.1,
+    "SD_ratio_limits": [
+      0.8,
+      1.2
+    ],
+    "complete_count": 50000,
+    "fixed_joint_projections": 32,
+    "math_or_thresholds_changed": false,
+    "mean_bias_reference_SD_limit": 0.2,
+    "physical_marginals": 21,
+    "reference_precision_limit": 0.005
+  },
+  "source_preflights": {
+    "inference": {
+      "environment": {
+        "numpy": "1.26.4",
+        "python": "3.11.13",
+        "scipy": "1.12.0"
+      },
+      "sha256": "6a8cd76109587ef65eb3ed73898371eed3021d76c9550384ae926f59f7159ef7"
+    },
+    "reference": {
+      "environment": {
+        "numpy": "2.2.6",
+        "python": "3.11.13",
+        "scipy": "1.15.3"
+      },
+      "sha256": "4b7788db7b4d60144a37ebff771e8ce7653860736b7d3180090e015e0a034288"
+    }
+  },
+  "source_sha256": {
+    "scripts/evaluate_prior_pair_v1.py": "f16e13bb251ff195ed1c7f23a2045c806f7c1bc027665671d2d58e6a98246f1d",
+    "scripts/evaluate_prior_pair_v2.py": "61eb7b6c1546a0401cc25518adaba0a444ae2a09a83dd5a23745b8c337ceb1d7",
+    "scripts/evaluate_prior_pair_v3.py": "7479aaf33925993fd34341cb8fd8858ec5e150bcd7b5390ce2fe037287ad6d8a",
+    "scripts/refresh_prior_pair_v3_global_block.py": "0720eb75a10550f2486fd1d77f3a5ba4e20496c3812194c878bec5633fc60ff3",
+    "src/posteriorforge/conditional_globals.py": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+    "src/posteriorforge/execution_prior_native_v3.py": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+    "src/posteriorforge/execution_probability_v3.py": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+    "src/posteriorforge/performance_prior_pair_v3.py": "28e5c5f6a613b5563a0db7368b30713ee8f7ec251350c99f3112e46a5e462651",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "src/posteriorforge/validation.py": "92ddfd79a1c42cdbc56dfc9ad0f2c987fa70ee69387b0c5decff53c20b9aa694",
+    "tests/test_prior_pair_assessment_v3.py": "5c00472f7ce660bff603185078f34422b2036460b5be7a8fdc64e062f5718964"
+  },
+  "status": "CPU_prepared_not_production_assessment",
+  "tests": {
+    "inference": {
+      "command": "CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src OMP_NUM_THREADS=1 /scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python -m pytest -q -p no:cacheprovider tests/test_prior_pair_assessment_v3.py",
+      "exit_code": 0,
+      "log_sha256": "8a7db7be8db579a636b708eec434b726d9bd54b3d3c2a3e515b32b4ed3b99de7",
+      "passed": 41,
+      "skipped": 0
+    },
+    "reference": {
+      "command": "CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src OMP_NUM_THREADS=1 /scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python -m pytest -q -p no:cacheprovider tests/test_prior_pair_assessment_v3.py",
+      "exit_code": 0,
+      "log_sha256": "17c20cb47762c4c21f21db4df7aa11c2addb2ea51ecd440179d38b42658b5574",
+      "passed": 41,
+      "skipped": 0
+    }
+  },
+  "unchanged_numeric_function_ancestry": "evaluate_prior_pair_v1.py source f16e13bb; declared paths/display literals and recorded Git dictionary additions reverse exactly; run metadata key only, same bytecode"
+}

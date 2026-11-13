@@ -1,0 +1,4 @@
+V3 assessment CPU preparation only: no realparent assessment, posterior, productionG3, NN/GPU, newworld/reference integration or normaldraw.
+41 focused tests pass in each locked environment; no skips. Original50000 complete rows, physical support,21marginal/32joint/CDF/mean/SD/referenceprecision gates retain exact original math.
+Saved-Z engineeringfixture has7 deterministic physical rows with closednoise endpoints. No kernel.refresh or randomnormal call occurs; only original conditionalparameters and supplied Z algebra are checked. Globals change, other18 physical bytes stay identical; no latentlocals are decoded after refresh.
+The evaluator reuses original assessment run/controlflow and referencecustody code, with reversible display/source paths and extra recorded-Git leaves for v3 numerical dependencies. Strict newsource guards are checkout-only here; Root owns committed closure and CI.

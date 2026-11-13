@@ -1,0 +1,11 @@
+{
+  "CLI-help.txt": "044a8158d84338107167f4924df0abc85fa1862421aa9ddcc1f6ef264d810616",
+  "README.txt": "e83f006c2df5d7dadea4358750f40f9c8997d6c4650b2a7b7788e8df6a9579bb",
+  "inference-source-preflight.json": "6a8cd76109587ef65eb3ed73898371eed3021d76c9550384ae926f59f7159ef7",
+  "inference.log": "8a7db7be8db579a636b708eec434b726d9bd54b3d3c2a3e515b32b4ed3b99de7",
+  "receipt.json": "e5988fd5e9bfecf2eea05a0d4b61d60cf189f6fa0ae213d48fee5281a6d35189",
+  "reference-source-preflight.json": "4b7788db7b4d60144a37ebff771e8ce7653860736b7d3180090e015e0a034288",
+  "reference.log": "17c20cb47762c4c21f21db4df7aa11c2addb2ea51ecd440179d38b42658b5574",
+  "sources-after.json": "45ad2d1637dc538838b0c54be08d1be79cdd0ee6b88afedbcd48d453f89eee68",
+  "sources-before.json": "45ad2d1637dc538838b0c54be08d1be79cdd0ee6b88afedbcd48d453f89eee68"
+}

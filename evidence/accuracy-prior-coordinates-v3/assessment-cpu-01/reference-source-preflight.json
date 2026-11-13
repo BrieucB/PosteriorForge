@@ -1,0 +1,182 @@
+{
+  "TabPFN_imported": false,
+  "Torch_imported": false,
+  "checkout_source_guards_passed": true,
+  "committed_new_wrapper_source_credit_claimed": false,
+  "derivation": {
+    "CDF_limit": 0.1,
+    "SD_ratio_limits": [
+      0.8,
+      1.2
+    ],
+    "assessment_RNG_scope": "NEW G3 uses saved actual Z only; matched OLD baseline verification replays already-recorded private PCG64 stream, no new posterior/G3",
+    "expected_complete_count": 50000,
+    "joint_projections": 32,
+    "marginals": 21,
+    "mean_bias_reference_SD_limit": 0.2,
+    "metric_G3_seed_or_reference_math_changed": false,
+    "old_module_globals_unmodified": true,
+    "original_reference_and_baseline_codeobjects_identical": true,
+    "recorded_Git_source_dictionary_additions": [
+      [
+        "src/posteriorforge/execution_prior_native_v3.py",
+        "NATIVE_BACKEND_SHA256"
+      ],
+      [
+        "src/posteriorforge/execution_probability_v3.py",
+        "PROBABILITY_SHA256"
+      ],
+      [
+        "src/posteriorforge/prior_proposals_v3.py",
+        "PROPOSAL_SHA256"
+      ],
+      [
+        "src/posteriorforge/execution_prior_native_v2.py",
+        "NEURAL_SOURCE_SHA256"
+      ],
+      [
+        "src/posteriorforge/prior_coordinates_v1.py",
+        "CODEC_SHA256"
+      ],
+      [
+        "docs/accuracy-prior-coordinate-fp64-proposals-v3.md",
+        "PROTOCOL_SHA256"
+      ],
+      [
+        "scripts/refresh_prior_pair_global_block_v1.py",
+        "V1_WRAPPER_SHA256"
+      ]
+    ],
+    "reference_precision_limit": 0.005,
+    "run_controlflow_bytecode_equal": true,
+    "run_metadata_key_only_reversible": true,
+    "run_names_varnames_freevars_equal": true,
+    "schema": "posteriorforge.prior_pair_v3_assessment_derivation.v1",
+    "scientific_metric_sources": {
+      "scripts/evaluate_cdf_pilot.py": "284d3b061696d4d823666e12d3f79c720f87692b40f45743296cfb8e93865424",
+      "scripts/evaluate_prior_coordinates_pilot_v1.py": "6c49e59ccee9bebeecd53990556a6e00a9f41b2fc53a2e8ecf9827014efc2d56",
+      "scripts/evaluate_ss15_pilot.py": "3156d54b7d29f7aec29c2846782729a8c73da3bfcda16bb2e03cec3084899552",
+      "scripts/evaluate_ss15_sigma_first_global_block.py": "80337f6e9b0014a5c4b0086548871b917dc4bec36fb373dc3a016b911bf02386",
+      "scripts/evaluate_ss15_sigma_native_campaign.py": "146c2ca35e15b54b7f68134d383574485ed1cc228f38e6fc611624f00b411924",
+      "src/posteriorforge/validation.py": "92ddfd79a1c42cdbc56dfc9ad0f2c987fa70ee69387b0c5decff53c20b9aa694"
+    },
+    "source_display_AST_deltas_reverse_exact": true,
+    "v1_evaluator_sha256": "f16e13bb251ff195ed1c7f23a2045c806f7c1bc027665671d2d58e6a98246f1d",
+    "v2_evaluator_sha256": "61eb7b6c1546a0401cc25518adaba0a444ae2a09a83dd5a23745b8c337ceb1d7"
+  },
+  "environment": {
+    "numpy": "2.2.6",
+    "python": "3.11.13",
+    "scipy": "1.15.3"
+  },
+  "production_assessment_executed": false,
+  "real_parent_or_G3_posterior_reference_world_NN_GPU_or_RNG_draw_calls": 0,
+  "refresh_wrapper_sha256": "0720eb75a10550f2486fd1d77f3a5ba4e20496c3812194c878bec5633fc60ff3",
+  "schema": "posteriorforge.prior_pair_v3_assessment_CPU_source_preflight.v1",
+  "source_pins": {
+    "F64_helper": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+    "actual_draw_observer_source": "c73c4e489946e018399885c981afafc5c47e3eab6e27f6561b377f836f703f8c",
+    "assessment_RNG_scope": "NEW G3 uses saved actual Z only; matched OLD baseline verification replays already-recorded PCG64 stream, no new posterior/G3",
+    "assessment_derivation": {
+      "CDF_limit": 0.1,
+      "SD_ratio_limits": [
+        0.8,
+        1.2
+      ],
+      "assessment_RNG_scope": "NEW G3 uses saved actual Z only; matched OLD baseline verification replays already-recorded private PCG64 stream, no new posterior/G3",
+      "expected_complete_count": 50000,
+      "joint_projections": 32,
+      "marginals": 21,
+      "mean_bias_reference_SD_limit": 0.2,
+      "metric_G3_seed_or_reference_math_changed": false,
+      "old_module_globals_unmodified": true,
+      "original_reference_and_baseline_codeobjects_identical": true,
+      "recorded_Git_source_dictionary_additions": [
+        [
+          "src/posteriorforge/execution_prior_native_v3.py",
+          "NATIVE_BACKEND_SHA256"
+        ],
+        [
+          "src/posteriorforge/execution_probability_v3.py",
+          "PROBABILITY_SHA256"
+        ],
+        [
+          "src/posteriorforge/prior_proposals_v3.py",
+          "PROPOSAL_SHA256"
+        ],
+        [
+          "src/posteriorforge/execution_prior_native_v2.py",
+          "NEURAL_SOURCE_SHA256"
+        ],
+        [
+          "src/posteriorforge/prior_coordinates_v1.py",
+          "CODEC_SHA256"
+        ],
+        [
+          "docs/accuracy-prior-coordinate-fp64-proposals-v3.md",
+          "PROTOCOL_SHA256"
+        ],
+        [
+          "scripts/refresh_prior_pair_global_block_v1.py",
+          "V1_WRAPPER_SHA256"
+        ]
+      ],
+      "reference_precision_limit": 0.005,
+      "run_controlflow_bytecode_equal": true,
+      "run_metadata_key_only_reversible": true,
+      "run_names_varnames_freevars_equal": true,
+      "schema": "posteriorforge.prior_pair_v3_assessment_derivation.v1",
+      "scientific_metric_sources": {
+        "scripts/evaluate_cdf_pilot.py": "284d3b061696d4d823666e12d3f79c720f87692b40f45743296cfb8e93865424",
+        "scripts/evaluate_prior_coordinates_pilot_v1.py": "6c49e59ccee9bebeecd53990556a6e00a9f41b2fc53a2e8ecf9827014efc2d56",
+        "scripts/evaluate_ss15_pilot.py": "3156d54b7d29f7aec29c2846782729a8c73da3bfcda16bb2e03cec3084899552",
+        "scripts/evaluate_ss15_sigma_first_global_block.py": "80337f6e9b0014a5c4b0086548871b917dc4bec36fb373dc3a016b911bf02386",
+        "scripts/evaluate_ss15_sigma_native_campaign.py": "146c2ca35e15b54b7f68134d383574485ed1cc228f38e6fc611624f00b411924",
+        "src/posteriorforge/validation.py": "92ddfd79a1c42cdbc56dfc9ad0f2c987fa70ee69387b0c5decff53c20b9aa694"
+      },
+      "source_display_AST_deltas_reverse_exact": true,
+      "v1_evaluator_sha256": "f16e13bb251ff195ed1c7f23a2045c806f7c1bc027665671d2d58e6a98246f1d",
+      "v2_evaluator_sha256": "61eb7b6c1546a0401cc25518adaba0a444ae2a09a83dd5a23745b8c337ceb1d7"
+    },
+    "assessment_metric_sources": {
+      "scripts/evaluate_cdf_pilot.py": "284d3b061696d4d823666e12d3f79c720f87692b40f45743296cfb8e93865424",
+      "scripts/evaluate_prior_coordinates_pilot_v1.py": "6c49e59ccee9bebeecd53990556a6e00a9f41b2fc53a2e8ecf9827014efc2d56",
+      "scripts/evaluate_ss15_pilot.py": "3156d54b7d29f7aec29c2846782729a8c73da3bfcda16bb2e03cec3084899552",
+      "scripts/evaluate_ss15_sigma_first_global_block.py": "80337f6e9b0014a5c4b0086548871b917dc4bec36fb373dc3a016b911bf02386",
+      "scripts/evaluate_ss15_sigma_native_campaign.py": "146c2ca35e15b54b7f68134d383574485ed1cc228f38e6fc611624f00b411924",
+      "src/posteriorforge/validation.py": "92ddfd79a1c42cdbc56dfc9ad0f2c987fa70ee69387b0c5decff53c20b9aa694"
+    },
+    "codec": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "derivation": {
+      "coordinate_decode_after_global_refresh": false,
+      "numerical_G3_seed_or_metric_math_changed": false,
+      "old_failed_wave_recovery": false,
+      "old_globals_unmodified": true,
+      "parent_validation_contract": "v3 finite F64 proposals; original whole-vector support/FIFO; strict training encoder remains d8",
+      "schema": "posteriorforge.prior_pair_v3_downstream_derivation.v1",
+      "unchanged_functions_same_code_objects": true,
+      "v1_wrapper_sha256": "22e57084351631f36c6989cc01fe8bf4f2827095e587c496cda2e7f368d3cdb9"
+    },
+    "git_revision": "06fec2b8bdea5322b081d1116e293c0ca5cf4b31",
+    "guard_primitive_source": "4aa226e24ca381df8956d8c8238a9e17092b01f9771b020cae2166c72990d284",
+    "kernel": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+    "metric_or_G3_math_changed": false,
+    "native_backend": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+    "neural_source": "0199b16e9cc34203fa0d5645d161742fe9ed244633d7beee047fbcbf2528661c",
+    "pair_CPU_receipt": "6f35d9d090a955604186c5fbf3312b82465eff6fdae7e4cd24a23b646dbdf193",
+    "pair_data": "402117cad65af190352cb0b14977fbbdc896f196d069749b0be28608fdef400e",
+    "pair_producer": "28e5c5f6a613b5563a0db7368b30713ee8f7ec251350c99f3112e46a5e462651",
+    "pair_qualifier": "534b48c789bf1168a33b2953d85d747e27c244063dc9fc7cc4b4cb09c4d8324a",
+    "pair_v3_G3_wrapper": "0720eb75a10550f2486fd1d77f3a5ba4e20496c3812194c878bec5633fc60ff3",
+    "pair_v3_evaluator": "7479aaf33925993fd34341cb8fd8858ec5e150bcd7b5390ce2fe037287ad6d8a",
+    "probability": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+    "proposal": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "protocol": "7ea6e5c57f8404eb761e07f4011b14966d5885fbbdb8620d463c5283916041d8",
+    "sources_committed": false,
+    "v1_metric_plot_ancestry": "f16e13bb251ff195ed1c7f23a2045c806f7c1bc027665671d2d58e6a98246f1d",
+    "v1_validation_ancestry": "22e57084351631f36c6989cc01fe8bf4f2827095e587c496cda2e7f368d3cdb9",
+    "v2_source_display_ancestry": "61eb7b6c1546a0401cc25518adaba0a444ae2a09a83dd5a23745b8c337ceb1d7",
+    "wrapper": "0720eb75a10550f2486fd1d77f3a5ba4e20496c3812194c878bec5633fc60ff3"
+  },
+  "source_sha256": "7479aaf33925993fd34341cb8fd8858ec5e150bcd7b5390ce2fe037287ad6d8a"
+}
