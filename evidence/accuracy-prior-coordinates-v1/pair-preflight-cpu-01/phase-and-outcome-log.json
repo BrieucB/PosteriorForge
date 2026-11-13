@@ -1,0 +1,837 @@
+{
+  "environments": {
+    "inference": [
+      {
+        "elapsed_seconds": 4.547010028734803,
+        "pair": {
+          "case": 0,
+          "context_seed": 20261111,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5222741840407252,
+          "actual_parent_prefix_authentication": 0.26272150315344334,
+          "actual_reference_and_grid_authentication": 0.10711828898638487,
+          "all21_actual_masks_targets_and_stress_validity": 3.158803123049438,
+          "strict_prefix_codec_causal_roundtrips": 0.4952967772260308
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.316492701880634,
+        "pair": {
+          "case": 1,
+          "context_seed": 20261111,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.45738842245191336,
+          "actual_parent_prefix_authentication": 0.20073777716606855,
+          "actual_reference_and_grid_authentication": 0.06746632233262062,
+          "all21_actual_masks_targets_and_stress_validity": 3.1027715047821403,
+          "strict_prefix_codec_causal_roundtrips": 0.48700118996202946
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.551085727289319,
+        "pair": {
+          "case": 3,
+          "context_seed": 20261111,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.4694559033960104,
+          "actual_parent_prefix_authentication": 0.43768306635320187,
+          "actual_reference_and_grid_authentication": 0.10934958979487419,
+          "all21_actual_masks_targets_and_stress_validity": 3.0393141387030482,
+          "strict_prefix_codec_causal_roundtrips": 0.49422615580260754
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.258759008720517,
+        "pair": {
+          "case": 4,
+          "context_seed": 20261111,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.4462860347703099,
+          "actual_parent_prefix_authentication": 0.21569387055933475,
+          "actual_reference_and_grid_authentication": 0.06400347221642733,
+          "all21_actual_masks_targets_and_stress_validity": 3.040502588264644,
+          "strict_prefix_codec_causal_roundtrips": 0.4910534666851163
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.3033977607265115,
+        "pair": {
+          "case": 5,
+          "context_seed": 20261111,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.45705475099384785,
+          "actual_parent_prefix_authentication": 0.20905291941016912,
+          "actual_reference_and_grid_authentication": 0.0716131329536438,
+          "all21_actual_masks_targets_and_stress_validity": 3.0016851415857673,
+          "strict_prefix_codec_causal_roundtrips": 0.5625640088692307
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.325090732425451,
+        "pair": {
+          "case": 6,
+          "context_seed": 20261111,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.4186957674100995,
+          "actual_parent_prefix_authentication": 0.2244262984022498,
+          "actual_reference_and_grid_authentication": 0.10447936318814754,
+          "all21_actual_masks_targets_and_stress_validity": 3.0400661267340183,
+          "strict_prefix_codec_causal_roundtrips": 0.53612120449543
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.21111947670579,
+        "pair": {
+          "case": 7,
+          "context_seed": 20261111,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.44660797342658043,
+          "actual_parent_prefix_authentication": 0.20952017977833748,
+          "actual_reference_and_grid_authentication": 0.07333180960267782,
+          "all21_actual_masks_targets_and_stress_validity": 2.9919346189126372,
+          "strict_prefix_codec_causal_roundtrips": 0.48836454562842846
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.299367066472769,
+        "pair": {
+          "case": 0,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.44727220851927996,
+          "actual_parent_prefix_authentication": 0.21262372005730867,
+          "actual_reference_and_grid_authentication": 0.10147384274750948,
+          "all21_actual_masks_targets_and_stress_validity": 3.00641758274287,
+          "strict_prefix_codec_causal_roundtrips": 0.5301857683807611
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.280107950791717,
+        "pair": {
+          "case": 1,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.4453272419050336,
+          "actual_parent_prefix_authentication": 0.2200169088318944,
+          "actual_reference_and_grid_authentication": 0.06959199532866478,
+          "all21_actual_masks_targets_and_stress_validity": 3.0181760685518384,
+          "strict_prefix_codec_causal_roundtrips": 0.5256812395527959
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.272702960297465,
+        "pair": {
+          "case": 2,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.4550803303718567,
+          "actual_parent_prefix_authentication": 0.22156905476003885,
+          "actual_reference_and_grid_authentication": 0.1001582071185112,
+          "all21_actual_masks_targets_and_stress_validity": 3.017520871013403,
+          "strict_prefix_codec_causal_roundtrips": 0.47704124823212624
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.257873402908444,
+        "pair": {
+          "case": 3,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.45362004451453686,
+          "actual_parent_prefix_authentication": 0.21969916857779026,
+          "actual_reference_and_grid_authentication": 0.0690043130889535,
+          "all21_actual_masks_targets_and_stress_validity": 3.002766191959381,
+          "strict_prefix_codec_causal_roundtrips": 0.5113798649981618
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.2818227196112275,
+        "pair": {
+          "case": 4,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.45435791462659836,
+          "actual_parent_prefix_authentication": 0.22696474846452475,
+          "actual_reference_and_grid_authentication": 0.09835033491253853,
+          "all21_actual_masks_targets_and_stress_validity": 2.9971299720928073,
+          "strict_prefix_codec_causal_roundtrips": 0.5033926526084542
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.309672322124243,
+        "pair": {
+          "case": 5,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.4518667636439204,
+          "actual_parent_prefix_authentication": 0.22929535433650017,
+          "actual_reference_and_grid_authentication": 0.0710748927667737,
+          "all21_actual_masks_targets_and_stress_validity": 3.0301306638866663,
+          "strict_prefix_codec_causal_roundtrips": 0.5258674575015903
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.211223277263343,
+        "pair": {
+          "case": 6,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.44715744722634554,
+          "actual_parent_prefix_authentication": 0.18693909421563148,
+          "actual_reference_and_grid_authentication": 0.09774777293205261,
+          "all21_actual_masks_targets_and_stress_validity": 2.9880545726045966,
+          "strict_prefix_codec_causal_roundtrips": 0.48991632368415594
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.244995661079884,
+        "pair": {
+          "case": 7,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.4459591694176197,
+          "actual_parent_prefix_authentication": 0.21344100777059793,
+          "actual_reference_and_grid_authentication": 0.07114991080015898,
+          "all21_actual_masks_targets_and_stress_validity": 3.0253213038668036,
+          "strict_prefix_codec_causal_roundtrips": 0.4873201446607709
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.548332188278437,
+        "pair": {
+          "case": 0,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5240906942635775,
+          "actual_parent_prefix_authentication": 0.35804463271051645,
+          "actual_reference_and_grid_authentication": 0.07511402200907469,
+          "all21_actual_masks_targets_and_stress_validity": 3.0451356107369065,
+          "strict_prefix_codec_causal_roundtrips": 0.5445024613291025
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.484493171796203,
+        "pair": {
+          "case": 1,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5481909709051251,
+          "actual_parent_prefix_authentication": 0.26222417410463095,
+          "actual_reference_and_grid_authentication": 0.10579096898436546,
+          "all21_actual_masks_targets_and_stress_validity": 3.0283225243911147,
+          "strict_prefix_codec_causal_roundtrips": 0.5387841667979956
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.406405920162797,
+        "pair": {
+          "case": 2,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5374135784804821,
+          "actual_parent_prefix_authentication": 0.25457756500691175,
+          "actual_reference_and_grid_authentication": 0.07375290151685476,
+          "all21_actual_masks_targets_and_stress_validity": 3.020142823457718,
+          "strict_prefix_codec_causal_roundtrips": 0.5193090019747615
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.409293420612812,
+        "pair": {
+          "case": 3,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5019632549956441,
+          "actual_parent_prefix_authentication": 0.2534529631957412,
+          "actual_reference_and_grid_authentication": 0.10644249059259892,
+          "all21_actual_masks_targets_and_stress_validity": 3.027251764200628,
+          "strict_prefix_codec_causal_roundtrips": 0.5190070811659098
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.358942517079413,
+        "pair": {
+          "case": 4,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5060045504942536,
+          "actual_parent_prefix_authentication": 0.2634175131097436,
+          "actual_reference_and_grid_authentication": 0.07533677760511637,
+          "all21_actual_masks_targets_and_stress_validity": 3.0231389459222555,
+          "strict_prefix_codec_causal_roundtrips": 0.48985994793474674
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.385391221381724,
+        "pair": {
+          "case": 5,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.499230083078146,
+          "actual_parent_prefix_authentication": 0.2511572139337659,
+          "actual_reference_and_grid_authentication": 0.10360420309007168,
+          "all21_actual_masks_targets_and_stress_validity": 3.0329554500058293,
+          "strict_prefix_codec_causal_roundtrips": 0.497255670838058
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.352416390553117,
+        "pair": {
+          "case": 6,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5039390400052071,
+          "actual_parent_prefix_authentication": 0.2560476176440716,
+          "actual_reference_and_grid_authentication": 0.07295305468142033,
+          "all21_actual_masks_targets_and_stress_validity": 3.0273951897397637,
+          "strict_prefix_codec_causal_roundtrips": 0.49089909065514803
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.366179305128753,
+        "pair": {
+          "case": 7,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5047343382611871,
+          "actual_parent_prefix_authentication": 0.24663432408124208,
+          "actual_reference_and_grid_authentication": 0.10912466887384653,
+          "all21_actual_masks_targets_and_stress_validity": 3.02027231361717,
+          "strict_prefix_codec_causal_roundtrips": 0.48407111316919327
+        },
+        "status": "pair_codec_preflight_pass"
+      }
+    ],
+    "reference": [
+      {
+        "elapsed_seconds": 4.4504122426733375,
+        "pair": {
+          "case": 0,
+          "context_seed": 20261111,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.503989270888269,
+          "actual_parent_prefix_authentication": 0.26452938560396433,
+          "actual_reference_and_grid_authentication": 0.08044738229364157,
+          "all21_actual_masks_targets_and_stress_validity": 2.8792215045541525,
+          "strict_prefix_codec_causal_roundtrips": 0.7213115701451898
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.415171729400754,
+        "pair": {
+          "case": 1,
+          "context_seed": 20261111,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5760279968380928,
+          "actual_parent_prefix_authentication": 0.2618452338501811,
+          "actual_reference_and_grid_authentication": 0.07250536326318979,
+          "all21_actual_masks_targets_and_stress_validity": 2.8930156473070383,
+          "strict_prefix_codec_causal_roundtrips": 0.6106952158734202
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.568364799953997,
+        "pair": {
+          "case": 3,
+          "context_seed": 20261111,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.7355954330414534,
+          "actual_parent_prefix_authentication": 0.2461139801889658,
+          "actual_reference_and_grid_authentication": 0.07366631273180246,
+          "all21_actual_masks_targets_and_stress_validity": 2.878687782213092,
+          "strict_prefix_codec_causal_roundtrips": 0.6331611424684525
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 5.401596720330417,
+        "pair": {
+          "case": 4,
+          "context_seed": 20261111,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 1.5656868433579803,
+          "actual_parent_prefix_authentication": 0.23866207245737314,
+          "actual_reference_and_grid_authentication": 0.09941016603261232,
+          "all21_actual_masks_targets_and_stress_validity": 2.8826827723532915,
+          "strict_prefix_codec_causal_roundtrips": 0.6140800891444087
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.31037553679198,
+        "pair": {
+          "case": 5,
+          "context_seed": 20261111,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5680315662175417,
+          "actual_parent_prefix_authentication": 0.1862355088815093,
+          "actual_reference_and_grid_authentication": 0.06269630137830973,
+          "all21_actual_masks_targets_and_stress_validity": 2.856442525051534,
+          "strict_prefix_codec_causal_roundtrips": 0.635868227109313
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.303653687238693,
+        "pair": {
+          "case": 6,
+          "context_seed": 20261111,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5535177765414119,
+          "actual_parent_prefix_authentication": 0.1995898224413395,
+          "actual_reference_and_grid_authentication": 0.0846225656569004,
+          "all21_actual_masks_targets_and_stress_validity": 2.858164898119867,
+          "strict_prefix_codec_causal_roundtrips": 0.6066175112500787
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.209721197374165,
+        "pair": {
+          "case": 7,
+          "context_seed": 20261111,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.47872375696897507,
+          "actual_parent_prefix_authentication": 0.19152654614299536,
+          "actual_reference_and_grid_authentication": 0.06119083147495985,
+          "all21_actual_masks_targets_and_stress_validity": 2.8553673261776567,
+          "strict_prefix_codec_causal_roundtrips": 0.6217690883204341
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.271418981254101,
+        "pair": {
+          "case": 0,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5361061478033662,
+          "actual_parent_prefix_authentication": 0.1858389312401414,
+          "actual_reference_and_grid_authentication": 0.08375585544854403,
+          "all21_actual_masks_targets_and_stress_validity": 2.849289372563362,
+          "strict_prefix_codec_causal_roundtrips": 0.6153141744434834
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.28768343757838,
+        "pair": {
+          "case": 1,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.4915381371974945,
+          "actual_parent_prefix_authentication": 0.19130111765116453,
+          "actual_reference_and_grid_authentication": 0.06256150081753731,
+          "all21_actual_masks_targets_and_stress_validity": 2.927907021716237,
+          "strict_prefix_codec_causal_roundtrips": 0.6132186278700829
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.233493824489415,
+        "pair": {
+          "case": 2,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.4651939170435071,
+          "actual_parent_prefix_authentication": 0.19616486318409443,
+          "actual_reference_and_grid_authentication": 0.06198353599756956,
+          "all21_actual_masks_targets_and_stress_validity": 2.9077102346345782,
+          "strict_prefix_codec_causal_roundtrips": 0.6012814193964005
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.346960350871086,
+        "pair": {
+          "case": 3,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5358897540718317,
+          "actual_parent_prefix_authentication": 0.18909462541341782,
+          "actual_reference_and_grid_authentication": 0.06251498498022556,
+          "all21_actual_masks_targets_and_stress_validity": 2.9454581923782825,
+          "strict_prefix_codec_causal_roundtrips": 0.6128229824826121
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.2520930441096425,
+        "pair": {
+          "case": 4,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5137822031974792,
+          "actual_parent_prefix_authentication": 0.19112117309123278,
+          "actual_reference_and_grid_authentication": 0.06225149519741535,
+          "all21_actual_masks_targets_and_stress_validity": 2.8602825570851564,
+          "strict_prefix_codec_causal_roundtrips": 0.6234569866210222
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.307722269557416,
+        "pair": {
+          "case": 5,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5399495447054505,
+          "actual_parent_prefix_authentication": 0.2044293424114585,
+          "actual_reference_and_grid_authentication": 0.08835782203823328,
+          "all21_actual_masks_targets_and_stress_validity": 2.8514638626948,
+          "strict_prefix_codec_causal_roundtrips": 0.6223221262916923
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.199517519213259,
+        "pair": {
+          "case": 6,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.473517207428813,
+          "actual_parent_prefix_authentication": 0.1894254870712757,
+          "actual_reference_and_grid_authentication": 0.061445264145731926,
+          "all21_actual_masks_targets_and_stress_validity": 2.8492634957656264,
+          "strict_prefix_codec_causal_roundtrips": 0.6247107768431306
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.264124151319265,
+        "pair": {
+          "case": 7,
+          "context_seed": 20261112,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.4793452247977257,
+          "actual_parent_prefix_authentication": 0.19315387029200792,
+          "actual_reference_and_grid_authentication": 0.09054218325763941,
+          "all21_actual_masks_targets_and_stress_validity": 2.8883207961916924,
+          "strict_prefix_codec_causal_roundtrips": 0.6115794377401471
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.57048618607223,
+        "pair": {
+          "case": 0,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.7433735243976116,
+          "actual_parent_prefix_authentication": 0.25627398025244474,
+          "actual_reference_and_grid_authentication": 0.0673895375803113,
+          "all21_actual_masks_targets_and_stress_validity": 2.891328187659383,
+          "strict_prefix_codec_causal_roundtrips": 0.6108751194551587
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.506954832933843,
+        "pair": {
+          "case": 1,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5781077845022082,
+          "actual_parent_prefix_authentication": 0.2971342634409666,
+          "actual_reference_and_grid_authentication": 0.11718537844717503,
+          "all21_actual_masks_targets_and_stress_validity": 2.90675934497267,
+          "strict_prefix_codec_causal_roundtrips": 0.6062699751928449
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.589789762161672,
+        "pair": {
+          "case": 2,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.618817669339478,
+          "actual_parent_prefix_authentication": 0.33207373693585396,
+          "actual_reference_and_grid_authentication": 0.06970907188951969,
+          "all21_actual_masks_targets_and_stress_validity": 2.970576929859817,
+          "strict_prefix_codec_causal_roundtrips": 0.5970812570303679
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.536049727350473,
+        "pair": {
+          "case": 3,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5280336253345013,
+          "actual_parent_prefix_authentication": 0.295658809132874,
+          "actual_reference_and_grid_authentication": 0.10737946350127459,
+          "all21_actual_masks_targets_and_stress_validity": 2.9791299561038613,
+          "strict_prefix_codec_causal_roundtrips": 0.6241576680913568
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.449090086854994,
+        "pair": {
+          "case": 4,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5125979213044047,
+          "actual_parent_prefix_authentication": 0.2421992663294077,
+          "actual_reference_and_grid_authentication": 0.06721744779497385,
+          "all21_actual_masks_targets_and_stress_validity": 3.022755823098123,
+          "strict_prefix_codec_causal_roundtrips": 0.6028307089582086
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.491231643594801,
+        "pair": {
+          "case": 5,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.5891995597630739,
+          "actual_parent_prefix_authentication": 0.2353425147011876,
+          "actual_reference_and_grid_authentication": 0.0644839946180582,
+          "all21_actual_masks_targets_and_stress_validity": 2.9861984914168715,
+          "strict_prefix_codec_causal_roundtrips": 0.61452725995332
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.399820865131915,
+        "pair": {
+          "case": 6,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.4500099318102002,
+          "actual_parent_prefix_authentication": 0.21239764709025621,
+          "actual_reference_and_grid_authentication": 0.09659057017415762,
+          "all21_actual_masks_targets_and_stress_validity": 3.022367280907929,
+          "strict_prefix_codec_causal_roundtrips": 0.6172376610338688
+        },
+        "status": "pair_codec_preflight_pass"
+      },
+      {
+        "elapsed_seconds": 4.348965043202043,
+        "pair": {
+          "case": 7,
+          "context_seed": 20261113,
+          "context_size": 4096,
+          "count": 50000,
+          "repetition": 0
+        },
+        "phases_seconds": {
+          "actual_input_codec_and_SS15_bindings": 0.471412411890924,
+          "actual_parent_prefix_authentication": 0.208515047095716,
+          "actual_reference_and_grid_authentication": 0.06337967049330473,
+          "all21_actual_masks_targets_and_stress_validity": 2.995769940316677,
+          "strict_prefix_codec_causal_roundtrips": 0.6086571738123894
+        },
+        "status": "pair_codec_preflight_pass"
+      }
+    ]
+  },
+  "scope": "derived from exact closed per-pair manifest records, not a captured stdout transcript"
+}

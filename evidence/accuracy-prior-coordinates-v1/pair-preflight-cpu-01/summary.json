@@ -1,0 +1,117 @@
+{
+  "CPU_driver_sha256": "b69a92b59fa504bce22e34dc31895f9162870425118764293f959c46390110e4",
+  "CPU_focused_test_source_sha256": "e9c53e6b03bf08b7ddd7616c1276eb8ebe88ef83c102346509dd05e86da21d89",
+  "F64_prefix_latent_bytes_differ_pair_count": 23,
+  "Float64_cross_environment_byte_identity_claimed": false,
+  "GPU_submissions_or_ledger_writes": 0,
+  "actual_reference_bindings_checked": true,
+  "all21_mask_target_query_bytes_match_all23": true,
+  "all23_processed": true,
+  "archives": {
+    "combined-receipt": {
+      "gzip_file": "combined-receipt.json.gz",
+      "gzip_sha256": "e335e5b3a4a486410799c41b3d064e8755f49aeb12da5dd519e4391ecb38333a",
+      "original_bytes": 6505150,
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/pair-preflight-combined-01/receipt.json",
+      "original_sha256": "6f35d9d090a955604186c5fbf3312b82465eff6fdae7e4cd24a23b646dbdf193"
+    },
+    "inference-manifest": {
+      "gzip_file": "inference-manifest.json.gz",
+      "gzip_sha256": "045dc23e9b4b38242837c1f006bf15fcac6d56195de1f18365e4ea87151c885f",
+      "original_bytes": 3028674,
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/pair-preflight-inference-01/manifest.json",
+      "original_sha256": "407e94cea341ecec3bde562bb0a9cbea1b151c97d55b08d1dfd599eb0e0eb558"
+    },
+    "reference-manifest": {
+      "gzip_file": "reference-manifest.json.gz",
+      "gzip_sha256": "f1c3a613a3240284c9dbe44c8bfb40819d11ed4ab0cdbc0c50788d2039d6ae94",
+      "original_bytes": 3028613,
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/pair-preflight-reference-01/manifest.json",
+      "original_sha256": "39f34f8127f2b40e5a6eadec7e4444154b378726e5404f5f8ec68e0c0db205c6"
+    }
+  },
+  "case2_original5ec_data_seed_all21_mask_target_regression_passed_both": true,
+  "common_model_Float32_all23": true,
+  "environments": {
+    "inference": {
+      "Torch_imported": false,
+      "case2_regression": {
+        "new_model_calls": 0,
+        "original_seed": 1456471714,
+        "passed": true,
+        "proof_sha256": "5ec69eb7aadbd74c7d96ee534b71d0d8bee2b6dd6f6e3d2f44e74607452f682b",
+        "raw_model_Float32_all21_mask_target_query_bytes_identical": true
+      },
+      "common_phase_seconds": {
+        "three_bank_dual_CPU_inventory_validation": 0.03811176400631666
+      },
+      "default_RNG_preserved": true,
+      "per_pair_phase_wall_sums_seconds": {
+        "actual_input_codec_and_SS15_bindings": 10.9439706671983,
+        "actual_parent_prefix_authentication": 5.635940675623715,
+        "actual_reference_and_grid_authentication": 1.9980323361232877,
+        "all21_actual_masks_targets_and_stress_validity": 69.68520909082144,
+        "strict_prefix_codec_causal_roundtrips": 11.689100582152605
+      },
+      "sources_unchanged": true,
+      "total_wall_seconds": 106.08364372886717,
+      "versions": {
+        "numpy": "1.26.4",
+        "python": "3.11.13",
+        "scipy": "1.12.0"
+      }
+    },
+    "reference": {
+      "Torch_imported": false,
+      "case2_regression": {
+        "new_model_calls": 0,
+        "original_seed": 1456471714,
+        "passed": true,
+        "proof_sha256": "5ec69eb7aadbd74c7d96ee534b71d0d8bee2b6dd6f6e3d2f44e74607452f682b",
+        "raw_model_Float32_all21_mask_target_query_bytes_identical": true
+      },
+      "common_phase_seconds": {
+        "three_bank_dual_CPU_inventory_validation": 0.03569333627820015
+      },
+      "default_RNG_preserved": true,
+      "per_pair_phase_wall_sums_seconds": {
+        "actual_input_codec_and_SS15_bindings": 13.508447208441794,
+        "actual_parent_prefix_authentication": 5.208627224899828,
+        "actual_reference_and_grid_authentication": 1.7612866992130876,
+        "all21_actual_masks_targets_and_stress_validity": 66.9581639431417,
+        "strict_prefix_codec_causal_roundtrips": 14.249846199527383
+      },
+      "sources_unchanged": true,
+      "total_wall_seconds": 107.71812564693391,
+      "versions": {
+        "numpy": "2.2.6",
+        "python": "3.11.13",
+        "scipy": "1.15.3"
+      }
+    }
+  },
+  "failed_pairs": [],
+  "new_model_world_posterior_or_reference_integration_executions": 0,
+  "original_pure_pre_G3_parent_required": true,
+  "population_calibration_or_posterior_pass_claimed": false,
+  "prefix_rule": "actual_pair_original_pure_FIRST1024_saved_order_v1",
+  "prefix_selection_replaced_or_filtered": false,
+  "progress_log_scope": "derived from exact closed per-pair manifest records, not a captured stdout transcript",
+  "raw_NPZ_arrays_in_Git": false,
+  "raw_stdout_capture_available": false,
+  "root_committed_source_revision": "7833bca600d05eb2a80fe709e13e4055555b7cfd",
+  "schema": "posteriorforge.prior_coordinate_pair_CPU_evidence.v1",
+  "scope": "CPU codec/input/reference custody ONLY; not numerical PFN or posterior qualification",
+  "source_pins": {
+    "codec": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "completion": "6136487ee78375a802c8a0cb0c225a7f1b207063b4083514614c0d97a35c2425",
+    "execution": "e5a2733e767b187e573315547ec9253267e43d1e3700596f61e97116c53f3256",
+    "input_numeric_ancestry": "3ae723d4748f23af40b89b9508713e270730985b6a8b5d4ccca1959e60ae17f9",
+    "inventory_helper": "ce68e237f15d239f99f091c2310cf15791d1cf7f7cf7442c2db029241834a636",
+    "pair_module": "402117cad65af190352cb0b14977fbbdc896f196d069749b0be28608fdef400e",
+    "preregistration": "9fc6a91568864cc996dafbcfaa41e77280e4825c63f61d455bdadf3703cd0a66",
+    "representation": "46323c0b94301c2f7e678538881d5cbbdd8bc52c62a60021798176bffe81eb85",
+    "training_inventory": "f3266ab6fd36887c95291020b2cdd2d2a5529f2e6c984b32de22a28b9d31da04"
+  },
+  "status": "all23_dual_CPU_preflight_pass_ONLY"
+}
