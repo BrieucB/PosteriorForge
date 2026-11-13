@@ -1,0 +1,448 @@
+{
+  "CUDA_initialized_both_runs": false,
+  "Float32_cast_receipt_sha256": "76e1ec13252563ff4e81d5bdd2e0de9cad1c7da24bbf541b7b17cb07d3325942",
+  "Float32_count72_support_vs_finite_log_prob_mismatches": 24,
+  "Float64_count36_support_vs_finite_log_prob_mismatches": 0,
+  "Float64_raw_prior_only_density_vs_contains_mismatches": 6,
+  "Float64_receipt_sha256": "5107b08b474b76f5438cb49e21ac84c3e33be6df5c82c5c7ff5732d197bcfbf5",
+  "actual_Float64_bounds": {
+    "bounds_dtype": "Python float (binary64)",
+    "high": {
+      "dtype": "<f8",
+      "hex_float": "0x1.0000000000000p-1",
+      "little_endian_bytes_hex": "000000000000e03f",
+      "value": 0.5
+    },
+    "low": {
+      "dtype": "<f8",
+      "hex_float": "0x1.47ae147ae147bp-7",
+      "little_endian_bytes_hex": "7b14ae47e17a843f",
+      "value": 0.01
+    },
+    "support_closure_high_type": "float",
+    "support_closure_low_type": "float"
+  },
+  "context_seed": 20261111,
+  "context_size": 4096,
+  "default_RNG_preserved_both_runs": true,
+  "explicit_Float32_bound_casts": {
+    "high": {
+      "dtype": "<f4",
+      "hex_float": "0x1.0000000000000p-1",
+      "little_endian_bytes_hex": "0000003f",
+      "value": 0.5
+    },
+    "low": {
+      "dtype": "<f4",
+      "hex_float": "0x1.47ae140000000p-7",
+      "little_endian_bytes_hex": "0ad7233c",
+      "value": 0.009999999776482582
+    }
+  },
+  "findings": [
+    "Original Float64 physical support is closed: exact0.01 and0.5 plus adjacent-inside F64 values are support=True/log_prob finite for all6 noise parameters. Adjacent-outside F64 values are support=False/log_prob\u2212inf.",
+    "Raw scientific prior.log_prob alone returns finite at the single F64 predecessor below0.01 in all6 coordinates because standardized SciPy density arithmetic rounds onto its boundary. problem.log_prior and physical support_mask correctly reject that outside point; raw prior density is not the authoritative wrapper support.",
+    "Actual Float32 representation of0.01 is0.009999999776482582, below the declared physical F64 lower bound. Original tensor-dtype Support.check accepts it, whereas original log_prob converts via scientific F64 path and returns\u2212inf, and gate support_mask=False. This is observed dtype-dependent behavior, not a reason to relax support.",
+    "Float32 successor of that lower cast is valid in both paths; Float32 predecessor is invalid in both. Float32 upper0.5 is exact and closed. Casting neighbouring F64 upper points toF32 changes them all into exactly0.5; it does not prove acceptance of their original distinct F64 values.",
+    "The strict-open noise domain and declared roundtrip admissibility of codec d8 are additional coordinate-domain conditions. This endpoint receipt does not change those conditions or authorize clipping, rounding repair, boundary atoms, filtering, or sampler changes."
+  ],
+  "first_noise_Float32_cases": [
+    {
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147ap-7",
+        "little_endian_bytes_hex": "7a14ae47e17a843f",
+        "value": 0.009999999999999998
+      }
+    },
+    {
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147bp-7",
+        "little_endian_bytes_hex": "7b14ae47e17a843f",
+        "value": 0.01
+      }
+    },
+    {
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147cp-7",
+        "little_endian_bytes_hex": "7c14ae47e17a843f",
+        "value": 0.010000000000000002
+      }
+    },
+    {
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "original_log_prob": -12.332504272460938,
+      "original_support_check": true,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.fffffffffffffp-2",
+        "little_endian_bytes_hex": "ffffffffffffdf3f",
+        "value": 0.49999999999999994
+      }
+    },
+    {
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "original_log_prob": -12.332504272460938,
+      "original_support_check": true,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      }
+    },
+    {
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "original_log_prob": -12.332504272460938,
+      "original_support_check": true,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000001p-1",
+        "little_endian_bytes_hex": "010000000000e03f",
+        "value": 0.5000000000000001
+      }
+    },
+    {
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "09d7233c",
+        "value": 0.009999998845160007
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "native_Float32_bound_and_neighbours",
+      "original_log_prob": "-inf",
+      "original_support_check": false,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "09d7233c",
+        "value": 0.009999998845160007
+      }
+    },
+    {
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      }
+    },
+    {
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "0bd7233c",
+        "value": 0.010000000707805157
+      },
+      "actual_gate_support_mask": true,
+      "case": "lower_adjacent_inside",
+      "family": "native_Float32_bound_and_neighbours",
+      "original_log_prob": -12.332504272460938,
+      "original_support_check": true,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "0bd7233c",
+        "value": 0.010000000707805157
+      }
+    },
+    {
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "ffffff3e",
+        "value": 0.4999999701976776
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_inside",
+      "family": "native_Float32_bound_and_neighbours",
+      "original_log_prob": -12.332503318786621,
+      "original_support_check": true,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "ffffff3e",
+        "value": 0.4999999701976776
+      }
+    },
+    {
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "original_log_prob": -12.332504272460938,
+      "original_support_check": true,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      }
+    },
+    {
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "0100003f",
+        "value": 0.5000000596046448
+      },
+      "actual_gate_support_mask": false,
+      "case": "upper_adjacent_outside",
+      "family": "native_Float32_bound_and_neighbours",
+      "original_log_prob": "-inf",
+      "original_support_check": false,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "0100003f",
+        "value": 0.5000000596046448
+      }
+    }
+  ],
+  "first_noise_Float64_cases": [
+    {
+      "case": "lower_adjacent_outside",
+      "original_inference_prior_log_prob": "-inf",
+      "original_inference_prior_support_check": false,
+      "scientific_problem_contains": false,
+      "scientific_raw_noise_log_prob": -0.7727263719149273,
+      "scientific_raw_prior_log_prob": -12.332503688284152,
+      "value": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147ap-7",
+        "little_endian_bytes_hex": "7a14ae47e17a843f",
+        "value": 0.009999999999999998
+      }
+    },
+    {
+      "case": "lower_exact",
+      "original_inference_prior_log_prob": -12.332503688284152,
+      "original_inference_prior_support_check": true,
+      "scientific_problem_contains": true,
+      "scientific_raw_noise_log_prob": -0.7727263719149273,
+      "scientific_raw_prior_log_prob": -12.332503688284152,
+      "value": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147bp-7",
+        "little_endian_bytes_hex": "7b14ae47e17a843f",
+        "value": 0.01
+      }
+    },
+    {
+      "case": "lower_adjacent_inside",
+      "original_inference_prior_log_prob": -12.332503688284152,
+      "original_inference_prior_support_check": true,
+      "scientific_problem_contains": true,
+      "scientific_raw_noise_log_prob": -0.7727263719149273,
+      "scientific_raw_prior_log_prob": -12.332503688284152,
+      "value": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147cp-7",
+        "little_endian_bytes_hex": "7c14ae47e17a843f",
+        "value": 0.010000000000000002
+      }
+    },
+    {
+      "case": "upper_adjacent_inside",
+      "original_inference_prior_log_prob": -12.332503688284152,
+      "original_inference_prior_support_check": true,
+      "scientific_problem_contains": true,
+      "scientific_raw_noise_log_prob": -0.7727263719149264,
+      "scientific_raw_prior_log_prob": -12.332503688284152,
+      "value": {
+        "dtype": "<f8",
+        "hex_float": "0x1.fffffffffffffp-2",
+        "little_endian_bytes_hex": "ffffffffffffdf3f",
+        "value": 0.49999999999999994
+      }
+    },
+    {
+      "case": "upper_exact",
+      "original_inference_prior_log_prob": -12.332503688284152,
+      "original_inference_prior_support_check": true,
+      "scientific_problem_contains": true,
+      "scientific_raw_noise_log_prob": -0.7727263719149273,
+      "scientific_raw_prior_log_prob": -12.332503688284152,
+      "value": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      }
+    },
+    {
+      "case": "upper_adjacent_outside",
+      "original_inference_prior_log_prob": "-inf",
+      "original_inference_prior_support_check": false,
+      "scientific_problem_contains": false,
+      "scientific_raw_noise_log_prob": "-inf",
+      "scientific_raw_prior_log_prob": "-inf",
+      "value": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000001p-1",
+        "little_endian_bytes_hex": "010000000000e03f",
+        "value": 0.5000000000000001
+      }
+    }
+  ],
+  "lower_Float32_cast_minus_original_Float64_bound": -2.2351741811588166e-10,
+  "mismatch_count_scope": "The Float32 count includes duplicate representable points under two explicitly labelled test families, not independent samples or an empirical probability.",
+  "neural_constructor_forward_random_world_posterior_G3_reference_calls": 0,
+  "no_existing_package_or_source_modified": true,
+  "noise_names": [
+    "sigma_m1",
+    "sigma_m2",
+    "sigma_m3",
+    "sigma_a1",
+    "sigma_a2",
+    "sigma_a3"
+  ],
+  "other20_columns_byte_identical_in_each_trial": true,
+  "prior_distribution_constructors": 2,
+  "same_original_Float64_saved_bank_row_bound_across_both_receipts": true,
+  "saved_row_descriptor": {
+    "dtype": "<f8",
+    "sha256": "188f21853c27dc433c6ae171479a6bf836f121375df539a78d33cb819d9115e8",
+    "shape": [
+      1,
+      21
+    ]
+  },
+  "schema": "posteriorforge.original_prior_endpoint_contract_summary.v1",
+  "source_bank_row_zero_based": 0,
+  "source_hashes": {
+    "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/inference.py": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e",
+    "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/science/analytical_benchmark_v2.py": "8d5f286f6d8512391dea2ae036313bec05782d28c7803f336490cbcdce3bd99f",
+    "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/science/hierarchical_exact.py": "db001593cc7307b1290b981622705961c5953001a6c1245fae5ec779938e9687",
+    "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/science/hierarchical_noise.py": "cbf0b8c956362a5eaa31923e9b94a3db3e3ede2072603add51e78105b8c0cbf0",
+    "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/science/hierarchical_problem.py": "03aa2d8a3d279783cf6c599f1400f253f3db2e1e7eb027aff5b7cd1b48fe12d0",
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/scipy/stats/_continuous_distns.py": "b8a486329b7d67861c36a559b010ba3932b61100306135ceb366c6398c157f95",
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/scipy/stats/_distn_infrastructure.py": "239de89c0c04a0d85f49c31d1a6a5076d1f45745b2b46377c9828e92862972a1"
+  },
+  "source_line_evidence": {
+    "analytical_benchmark_v2.py": {
+      "frozen_exact_priors": [
+        50,
+        65
+      ]
+    },
+    "hierarchical_noise.py": {
+      "full_prior_log_prob": [
+        149,
+        155
+      ],
+      "noise_logpdf": [
+        132,
+        142
+      ]
+    },
+    "hierarchical_problem.py": {
+      "coordinate_contains_inclusive": [
+        96,
+        101
+      ],
+      "log_prior_contains_mask": [
+        476,
+        481
+      ],
+      "problem_contains": [
+        396,
+        403
+      ]
+    },
+    "inference.py": {
+      "custom_support_and_counters": [
+        49,
+        63
+      ],
+      "log_prob_delegation": [
+        64,
+        72
+      ]
+    }
+  },
+  "status": "deterministic_endpoint_and_dtype_evaluation_complete_no_policy_change",
+  "versions": {
+    "numpy": "1.26.4",
+    "python": "3.11.13",
+    "scipy": "1.12.0",
+    "torch": "2.6.0+cu124"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "best_exact_latent_error_to_RT32_ratio_range": [
+    19.42908924294547,
+    206.56244176453492
+  ],
+  "best_exact_latent_error_to_RT64_ratio_range": [
+    621.730855774255,
+    6609.998136465118
+  ],
+  "count": 16,
+  "frozen_inverse_ULP_distance_range": [
+    0,
+    2
+  ],
+  "frozen_inverse_physical64_ratio_range": [
+    0.0003137361764529209,
+    0.004524291999580128
+  ],
+  "highprecision_numerical_envelope": "1e-80 absolute physical; stability/sign-residual diagnostic, NOT certified interval arithmetic",
+  "input_C_z_range": [
+    7.876539762950072,
+    8.215596689438383
+  ],
+  "inverse_100_180_dps_disagreement_max": 4.503717641079913e-101,
+  "minimum_achievable_exact_latent_error_range": [
+    0.0006578944519916953,
+    0.007231659518008543
+  ],
+  "new_models_draws_cohorts_GPU_or_G3": 0,
+  "no_accuracy_gate_tolerance_or_codec_domain_change": true,
+  "no_exact_prior_F64_for_RT32": 16,
+  "no_exact_prior_F64_for_RT64": 16,
+  "no_frozen_encoder_F64_within_physical_bound_RT32": 16,
+  "no_frozen_encoder_F64_within_physical_bound_RT64": 16,
+  "physical_F64_bound_approximately": 2.08899564313469e-14,
+  "report_sha256": "440b5f6b050caa4a436975dbbc59c1ddb6d44f138e3c1eaa6beb685f779269ee",
+  "source_or_production_mutation": false,
+  "source_sha256": "0248fccbd6e9fbd09d5427023c9d12494f4694088a92f7fc9a747cc8f4bae233",
+  "source_vs_rounded_geometry_inverse_difference_max": 1.4596477052467353e-32,
+  "wall_seconds": 1.083755698055029
+}

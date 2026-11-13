@@ -1,0 +1,2182 @@
+{
+  "actual_gate_limits_unchanged": {
+    "CDF": 0.1,
+    "SD_ratio": [
+      0.8,
+      1.2
+    ],
+    "absolute_bias_reference_SD": 0.2,
+    "count": 50000,
+    "reference_precision": 0.005
+  },
+  "dtype_contracts": {
+    "Prior_log_prob": "value.detach().cpu().numpy(); problem.log_prior internally coerces to np.float64 and masks closed contains; returned tensor uses original input dtype/device",
+    "Torch_support_check": "no explicit cast of value; Python float low/high participate in comparison at supplied tensor dtype semantics",
+    "baseline_output": "Torch returned candidate values ->CPU.numpy().astype(np.float64), no clipping",
+    "d8_decode": "F32/F64 latent accepted ->F64 computation ->strict physical open interval ->latent and physical roundtrip checks ->F64 physical output",
+    "physical_F64_FIFO": "validates original support callable/closure and supplies alreadydecoded physical Float64 rows, preserving candidate dtype; does not alter endpoint comparisons",
+    "sample_integrity": "np.asarray(samples) no initial cast; separate finite and inclusive optional bounds/exact support mask; valid metric calculations later coerce Float64",
+    "scientific_contains": "_parameters coerces to Float64 before finite and coordinate >= <= checks",
+    "support_mask": "preserves incoming ndarray dtype for finite check, then problem.contains casts selected finite rows to Float64"
+  },
+  "endpoint_numeric_tests": "owned by independent Model endpoint receipt; not executed in this source trace",
+  "finite_precision_mismatch_scope": "original Torch support comparison preserves tensor dtype while scientific/log_prior support evaluates F64; any actual F32 boundary discrepancy is measured separately, not inferred as a new numerical fact here",
+  "log_density_distinction": {
+    "default_NPE_support_fallback_used": false,
+    "default_fallback_basis": "provided support.check exists and returns full-row mask",
+    "problem_log_prior": "raw prior density plus explicit closed contains mask, outside ->-inf",
+    "raw_noise_prior": "SciPy truncnorm.logpdf for the actual Gaussian noise prior; raw prior alone is not the gate-facing support predicate"
+  },
+  "noise_coordinates": [
+    {
+      "codec_finite_latent_contract": "strict open plus round-trip admissibility",
+      "lower_source_literal": ".01",
+      "name": "sigma_m1",
+      "original_physical_support": "closed <= endpoints included",
+      "physical_slot": 6,
+      "upper_source_literal": ".5"
+    },
+    {
+      "codec_finite_latent_contract": "strict open plus round-trip admissibility",
+      "lower_source_literal": ".01",
+      "name": "sigma_m2",
+      "original_physical_support": "closed <= endpoints included",
+      "physical_slot": 10,
+      "upper_source_literal": ".5"
+    },
+    {
+      "codec_finite_latent_contract": "strict open plus round-trip admissibility",
+      "lower_source_literal": ".01",
+      "name": "sigma_m3",
+      "original_physical_support": "closed <= endpoints included",
+      "physical_slot": 14,
+      "upper_source_literal": ".5"
+    },
+    {
+      "codec_finite_latent_contract": "strict open plus round-trip admissibility",
+      "lower_source_literal": ".01",
+      "name": "sigma_a1",
+      "original_physical_support": "closed <= endpoints included",
+      "physical_slot": 16,
+      "upper_source_literal": ".5"
+    },
+    {
+      "codec_finite_latent_contract": "strict open plus round-trip admissibility",
+      "lower_source_literal": ".01",
+      "name": "sigma_a2",
+      "original_physical_support": "closed <= endpoints included",
+      "physical_slot": 18,
+      "upper_source_literal": ".5"
+    },
+    {
+      "codec_finite_latent_contract": "strict open plus round-trip admissibility",
+      "lower_source_literal": ".01",
+      "name": "sigma_a3",
+      "original_physical_support": "closed <= endpoints included",
+      "physical_slot": 20,
+      "upper_source_literal": ".5"
+    }
+  ],
+  "original_route": [
+    "NPE.sample calls original accept_reject_sample with _within_support",
+    "_within_support uses prior.support.check; only NotImplementedError/AttributeError falls back to isfinite(prior.log_prob)",
+    "inference._prior.Support.check checks all21finite and all6noise >=low <=high, with no dtype cast",
+    "original accept_reject indexes complete rows by that mask, concatenates and trims to count; does not cast candidate dtype",
+    "baseline writer converts returned CPU samples to Float64, then rechecks support_mask",
+    "gate supplies physical samples and support_mask to unchanged assess_samples; metrics remain physical means/SD and 21 marginal+32 linear-projection CDFs"
+  ],
+  "schema": "posteriorforge.original_support_gate_source_contract.v1",
+  "scope": "source-only independent trace; no array evaluation, prior/model construction, sampling, numerical endpoint tests, RNG, GPU or policy change",
+  "source_excerpts": [
+    {
+      "line_end": 37,
+      "line_start": 29,
+      "lines": [
+        {
+          "line": 29,
+          "text": "def support_mask(theta):"
+        },
+        {
+          "line": 30,
+          "text": "    value = np.asarray(theta)"
+        },
+        {
+          "line": 31,
+          "text": "    if value.ndim != 2 or value.shape[1] != 21:"
+        },
+        {
+          "line": 32,
+          "text": "        raise ValueError(\"complete theta[n,21] required\")"
+        },
+        {
+          "line": 33,
+          "text": "    finite = np.isfinite(value).all(axis=1)"
+        },
+        {
+          "line": 34,
+          "text": "    result = np.zeros(len(value), dtype=bool)"
+        },
+        {
+          "line": 35,
+          "text": "    if finite.any():"
+        },
+        {
+          "line": 36,
+          "text": "        result[finite] = build_problem().contains(value[finite])"
+        },
+        {
+          "line": 37,
+          "text": "    return result"
+        }
+      ],
+      "path": "src/posteriorforge/inference.py",
+      "sha256": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e"
+    },
+    {
+      "line_end": 72,
+      "line_start": 49,
+      "lines": [
+        {
+          "line": 49,
+          "text": "def _prior(torch):"
+        },
+        {
+          "line": 50,
+          "text": "    problem = build_problem()"
+        },
+        {
+          "line": 51,
+          "text": "    indices = [problem.parameter_order.index(name) for name in problem.prior.noise_names]"
+        },
+        {
+          "line": 52,
+          "text": "    low, high = problem.prior.bounds"
+        },
+        {
+          "line": 53,
+          "text": "    class Support(torch.distributions.constraints.Constraint):"
+        },
+        {
+          "line": 54,
+          "text": "        event_dim = 1"
+        },
+        {
+          "line": 55,
+          "text": "        def __init__(self):"
+        },
+        {
+          "line": 56,
+          "text": "            self.proposed, self.accepted, self.calls = 0, 0, 0"
+        },
+        {
+          "line": 57,
+          "text": "        def check(self, value):"
+        },
+        {
+          "line": 58,
+          "text": "            mask = (torch.isfinite(value).all(dim=-1)"
+        },
+        {
+          "line": 59,
+          "text": "                    & ((value[..., indices] >= low) & (value[..., indices] <= high)).all(dim=-1))"
+        },
+        {
+          "line": 60,
+          "text": "            self.calls += 1"
+        },
+        {
+          "line": 61,
+          "text": "            self.proposed += len(value)"
+        },
+        {
+          "line": 62,
+          "text": "            self.accepted += int(mask.sum().item())"
+        },
+        {
+          "line": 63,
+          "text": "            return mask"
+        },
+        {
+          "line": 64,
+          "text": "    class Prior(torch.distributions.Distribution):"
+        },
+        {
+          "line": 65,
+          "text": "        arg_constraints = {}"
+        },
+        {
+          "line": 66,
+          "text": "        support = Support()"
+        },
+        {
+          "line": 67,
+          "text": "        def __init__(self):"
+        },
+        {
+          "line": 68,
+          "text": "            super().__init__(event_shape=torch.Size([21]), validate_args=False)"
+        },
+        {
+          "line": 69,
+          "text": "        def log_prob(self, value):"
+        },
+        {
+          "line": 70,
+          "text": "            result = problem.log_prior(value.detach().cpu().numpy())"
+        },
+        {
+          "line": 71,
+          "text": "            return torch.as_tensor(result, dtype=value.dtype, device=value.device)"
+        },
+        {
+          "line": 72,
+          "text": "    return Prior()"
+        }
+      ],
+      "path": "src/posteriorforge/inference.py",
+      "sha256": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e"
+    },
+    {
+      "line_end": 141,
+      "line_start": 114,
+      "lines": [
+        {
+          "line": 114,
+          "text": "        seed = derive_seed(context_seed, \"posterior\", case=case, repetition=repetition)"
+        },
+        {
+          "line": 115,
+          "text": "        np.random.seed(seed)"
+        },
+        {
+          "line": 116,
+          "text": "        torch.manual_seed(seed)"
+        },
+        {
+          "line": 117,
+          "text": "        torch.cuda.manual_seed_all(seed)"
+        },
+        {
+          "line": 118,
+          "text": "        torch.set_num_threads(int(os.getenv(\"OMP_NUM_THREADS\", \"8\")))"
+        },
+        {
+          "line": 119,
+          "text": "        torch.cuda.reset_peak_memory_stats()"
+        },
+        {
+          "line": 120,
+          "text": "        status.update(seed=seed, gpu=torch.cuda.get_device_name(), torch_cuda=torch.version.cuda,"
+        },
+        {
+          "line": 121,
+          "text": "                      regressor_settings=frozen_regressor_settings(checkpoint, device))"
+        },
+        {
+          "line": 122,
+          "text": "        kwargs = frozen_regressor_settings(checkpoint, device)"
+        },
+        {
+          "line": 123,
+          "text": "        kwargs[\"inference_precision\"] = torch.float32"
+        },
+        {
+          "line": 124,
+          "text": "        prior = _prior(torch)"
+        },
+        {
+          "line": 125,
+          "text": "        posterior = baseline_class("
+        },
+        {
+          "line": 126,
+          "text": "            prior=prior, filter_type=\"no_filtering\", show_progress_bars=False,"
+        },
+        {
+          "line": 127,
+          "text": "            regressor_init_kwargs=kwargs)"
+        },
+        {
+          "line": 128,
+          "text": "        torch.cuda.synchronize()"
+        },
+        {
+          "line": 129,
+          "text": "        initialized = time.perf_counter()"
+        },
+        {
+          "line": 130,
+          "text": "        posterior.append_simulations(torch.from_numpy(context.theta.copy()).float(),"
+        },
+        {
+          "line": 131,
+          "text": "                                     torch.from_numpy(context.obs.copy()).float())"
+        },
+        {
+          "line": 132,
+          "text": "        torch.cuda.synchronize()"
+        },
+        {
+          "line": 133,
+          "text": "        prepared = time.perf_counter()"
+        },
+        {
+          "line": 134,
+          "text": "        with torch.no_grad():"
+        },
+        {
+          "line": 135,
+          "text": "            samples = posterior.sample((count,), x=torch.from_numpy(query).float(),"
+        },
+        {
+          "line": 136,
+          "text": "                                       max_sampling_batch_size=microbatch,"
+        },
+        {
+          "line": 137,
+          "text": "                                       max_iter_rejection=None, with_log_prob=False)"
+        },
+        {
+          "line": 138,
+          "text": "        torch.cuda.synchronize()"
+        },
+        {
+          "line": 139,
+          "text": "        finished = time.perf_counter()"
+        },
+        {
+          "line": 140,
+          "text": "        values = samples.detach().cpu().numpy().astype(np.float64)"
+        },
+        {
+          "line": 141,
+          "text": "        if values.shape != (count, 21) or not support_mask(values).all():"
+        }
+      ],
+      "path": "src/posteriorforge/inference.py",
+      "sha256": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e"
+    },
+    {
+      "line_end": 226,
+      "line_start": 202,
+      "lines": [
+        {
+          "line": 202,
+          "text": "        def proposal_fn(max_sampling_batch_size, **kwargs):"
+        },
+        {
+          "line": 203,
+          "text": "            \"\"\"Generate proposal samples using the original sampling method\"\"\""
+        },
+        {
+          "line": 204,
+          "text": "            return self._sample("
+        },
+        {
+          "line": 205,
+          "text": "                sampling_batch_size=max_sampling_batch_size,"
+        },
+        {
+          "line": 206,
+          "text": "                x=x,"
+        },
+        {
+          "line": 207,
+          "text": "                repeat_x=True,"
+        },
+        {
+          "line": 208,
+          "text": "                with_log_prob=with_log_prob,"
+        },
+        {
+          "line": 209,
+          "text": "                eps=eps,"
+        },
+        {
+          "line": 210,
+          "text": "            )"
+        },
+        {
+          "line": 211,
+          "text": ""
+        },
+        {
+          "line": 212,
+          "text": "        # handles rejection and batching"
+        },
+        {
+          "line": 213,
+          "text": "        samples, log_probs, _ar = accept_reject_sample("
+        },
+        {
+          "line": 214,
+          "text": "            proposal=proposal_fn,"
+        },
+        {
+          "line": 215,
+          "text": "            accept_reject_fn=self._within_support,"
+        },
+        {
+          "line": 216,
+          "text": "            num_samples=torch.Size(sample_shape).numel(),"
+        },
+        {
+          "line": 217,
+          "text": "            show_progress_bars=self.show_progress_bars,"
+        },
+        {
+          "line": 218,
+          "text": "            max_sampling_batch_size=max_sampling_batch_size,"
+        },
+        {
+          "line": 219,
+          "text": "            proposal_sampling_kwargs={},"
+        },
+        {
+          "line": 220,
+          "text": "            max_iter_rejection=max_iter_rejection,"
+        },
+        {
+          "line": 221,
+          "text": "        )"
+        },
+        {
+          "line": 222,
+          "text": ""
+        },
+        {
+          "line": 223,
+          "text": "        if with_log_prob:"
+        },
+        {
+          "line": 224,
+          "text": "            return samples, log_probs"
+        },
+        {
+          "line": 225,
+          "text": "        else:"
+        },
+        {
+          "line": 226,
+          "text": "            return samples"
+        }
+      ],
+      "path": "src/posteriorforge/upstream/npe_pfn/npe_pfn.py",
+      "sha256": "29517328b3ff23e2e8040d19f33e79adef5fc7f91db2cffccf60234344399a85"
+    },
+    {
+      "line_end": 431,
+      "line_start": 412,
+      "lines": [
+        {
+          "line": 412,
+          "text": "    def _within_support(self, theta: Tensor) -> Tensor:"
+        },
+        {
+          "line": 413,
+          "text": "        \"\"\"Check if samples are within prior support."
+        },
+        {
+          "line": 414,
+          "text": ""
+        },
+        {
+          "line": 415,
+          "text": "        First attempts to use the support property of the prior distribution."
+        },
+        {
+          "line": 416,
+          "text": "        Falls back to checking if log probability is finite if support check"
+        },
+        {
+          "line": 417,
+          "text": "        is not available."
+        },
+        {
+          "line": 418,
+          "text": ""
+        },
+        {
+          "line": 419,
+          "text": "        Args:"
+        },
+        {
+          "line": 420,
+          "text": "            theta: Parameter samples to check"
+        },
+        {
+          "line": 421,
+          "text": ""
+        },
+        {
+          "line": 422,
+          "text": "        Returns:"
+        },
+        {
+          "line": 423,
+          "text": "            Tensor of bools indicating whether each sample is within support"
+        },
+        {
+          "line": 424,
+          "text": "        \"\"\""
+        },
+        {
+          "line": 425,
+          "text": "        try:"
+        },
+        {
+          "line": 426,
+          "text": "            sample_check = self.prior.support.check(theta)"
+        },
+        {
+          "line": 427,
+          "text": "            if sample_check.shape == theta.shape:"
+        },
+        {
+          "line": 428,
+          "text": "                sample_check = torch.all(sample_check, dim=-1)"
+        },
+        {
+          "line": 429,
+          "text": "            return sample_check"
+        },
+        {
+          "line": 430,
+          "text": "        except (NotImplementedError, AttributeError):"
+        },
+        {
+          "line": 431,
+          "text": "            return torch.isfinite(self.prior.log_prob(theta))"
+        }
+      ],
+      "path": "src/posteriorforge/upstream/npe_pfn/npe_pfn.py",
+      "sha256": "29517328b3ff23e2e8040d19f33e79adef5fc7f91db2cffccf60234344399a85"
+    },
+    {
+      "line_end": 91,
+      "line_start": 48,
+      "lines": [
+        {
+          "line": 48,
+          "text": "    while num_remaining > 0:"
+        },
+        {
+          "line": 49,
+          "text": "        i += 1"
+        },
+        {
+          "line": 50,
+          "text": "        # Sample and reject"
+        },
+        {
+          "line": 51,
+          "text": "        candidates, log_probs = proposal("
+        },
+        {
+          "line": 52,
+          "text": "            sampling_batch_size, **proposal_sampling_kwargs"
+        },
+        {
+          "line": 53,
+          "text": "        )"
+        },
+        {
+          "line": 54,
+          "text": "        are_accepted = accept_reject_fn(candidates)"
+        },
+        {
+          "line": 55,
+          "text": ""
+        },
+        {
+          "line": 56,
+          "text": "        # Store accepted samples"
+        },
+        {
+          "line": 57,
+          "text": "        accepted.append(candidates[are_accepted])"
+        },
+        {
+          "line": 58,
+          "text": "        if log_probs is not None:"
+        },
+        {
+          "line": 59,
+          "text": "            accepted_log_probs.append(log_probs[are_accepted])"
+        },
+        {
+          "line": 60,
+          "text": ""
+        },
+        {
+          "line": 61,
+          "text": "        # Update counters"
+        },
+        {
+          "line": 62,
+          "text": "        num_accepted = are_accepted.sum().item()"
+        },
+        {
+          "line": 63,
+          "text": "        num_sampled_total += sampling_batch_size"
+        },
+        {
+          "line": 64,
+          "text": "        num_remaining -= num_accepted"
+        },
+        {
+          "line": 65,
+          "text": "        pbar.update(num_accepted)"
+        },
+        {
+          "line": 66,
+          "text": ""
+        },
+        {
+          "line": 67,
+          "text": "        # Adjust batch size based on acceptance rate"
+        },
+        {
+          "line": 68,
+          "text": "        acceptance_rate = sum(len(x) for x in accepted) / num_sampled_total"
+        },
+        {
+          "line": 69,
+          "text": "        sampling_batch_size = min("
+        },
+        {
+          "line": 70,
+          "text": "            max_sampling_batch_size,"
+        },
+        {
+          "line": 71,
+          "text": "            max(int(1.5 * num_remaining / max(acceptance_rate, 1e-12)), 100),"
+        },
+        {
+          "line": 72,
+          "text": "        )"
+        },
+        {
+          "line": 73,
+          "text": ""
+        },
+        {
+          "line": 74,
+          "text": "        if max_iter_rejection is not None and i > max_iter_rejection:"
+        },
+        {
+          "line": 75,
+          "text": "            accepted.append(candidates)"
+        },
+        {
+          "line": 76,
+          "text": "            accepted_log_probs.append(log_probs)"
+        },
+        {
+          "line": 77,
+          "text": "            break"
+        },
+        {
+          "line": 78,
+          "text": ""
+        },
+        {
+          "line": 79,
+          "text": "    pbar.close()"
+        },
+        {
+          "line": 80,
+          "text": ""
+        },
+        {
+          "line": 81,
+          "text": "    # Concatenate and trim to exact number of samples"
+        },
+        {
+          "line": 82,
+          "text": "    samples = torch.cat(accepted, dim=0)[:num_samples]"
+        },
+        {
+          "line": 83,
+          "text": "    log_probs = ("
+        },
+        {
+          "line": 84,
+          "text": "        torch.cat(accepted_log_probs, dim=0)[:num_samples]"
+        },
+        {
+          "line": 85,
+          "text": "        if accepted_log_probs  # if list is not empty"
+        },
+        {
+          "line": 86,
+          "text": "        else None"
+        },
+        {
+          "line": 87,
+          "text": "    )"
+        },
+        {
+          "line": 88,
+          "text": ""
+        },
+        {
+          "line": 89,
+          "text": "    final_acceptance_rate = len(samples) / num_sampled_total"
+        },
+        {
+          "line": 90,
+          "text": ""
+        },
+        {
+          "line": 91,
+          "text": "    return samples, log_probs, final_acceptance_rate"
+        }
+      ],
+      "path": "src/posteriorforge/upstream/npe_pfn/accept_reject_sampler.py",
+      "sha256": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512"
+    },
+    {
+      "line_end": 101,
+      "line_start": 96,
+      "lines": [
+        {
+          "line": 96,
+          "text": "    def contains(self, value: np.ndarray) -> np.ndarray:"
+        },
+        {
+          "line": 97,
+          "text": "        result = np.isfinite(value)"
+        },
+        {
+          "line": 98,
+          "text": "        if self.lower is not None:"
+        },
+        {
+          "line": 99,
+          "text": "            result &= value >= self.lower"
+        },
+        {
+          "line": 100,
+          "text": "            result &= value <= self.upper"
+        },
+        {
+          "line": 101,
+          "text": "        return result"
+        }
+      ],
+      "path": "src/posteriorforge/science/hierarchical_problem.py",
+      "sha256": "03aa2d8a3d279783cf6c599f1400f253f3db2e1e7eb027aff5b7cd1b48fe12d0"
+    },
+    {
+      "line_end": 419,
+      "line_start": 388,
+      "lines": [
+        {
+          "line": 388,
+          "text": "    def _parameters(self, values: Any) -> np.ndarray:"
+        },
+        {
+          "line": 389,
+          "text": "        result = np.asarray(values, dtype=np.float64)"
+        },
+        {
+          "line": 390,
+          "text": "        if result.ndim == 1:"
+        },
+        {
+          "line": 391,
+          "text": "            result = result[None, :]"
+        },
+        {
+          "line": 392,
+          "text": "        if result.ndim != 2 or result.shape[1] != self.dimension:"
+        },
+        {
+          "line": 393,
+          "text": "            raise ValueError(f\"parameters must have shape [N,{self.dimension}]\")"
+        },
+        {
+          "line": 394,
+          "text": "        if not np.isfinite(result).all():"
+        },
+        {
+          "line": 395,
+          "text": "            raise ValueError(\"parameters must be finite\")"
+        },
+        {
+          "line": 396,
+          "text": "        return result"
+        },
+        {
+          "line": 397,
+          "text": ""
+        },
+        {
+          "line": 398,
+          "text": "    def contains(self, values: Any) -> np.ndarray:"
+        },
+        {
+          "line": 399,
+          "text": "        parameters = self._parameters(values)"
+        },
+        {
+          "line": 400,
+          "text": "        result = np.ones(len(parameters), dtype=np.bool_)"
+        },
+        {
+          "line": 401,
+          "text": "        for index, coordinate in enumerate(self.coordinates):"
+        },
+        {
+          "line": 402,
+          "text": "            result &= coordinate.contains(parameters[:, index])"
+        },
+        {
+          "line": 403,
+          "text": "        return result"
+        },
+        {
+          "line": 404,
+          "text": ""
+        },
+        {
+          "line": 405,
+          "text": "    def to_unconstrained(self, parameters: Any) -> np.ndarray:"
+        },
+        {
+          "line": 406,
+          "text": "        \"\"\"Map physical coordinates to identity/logit density coordinates."
+        },
+        {
+          "line": 407,
+          "text": ""
+        },
+        {
+          "line": 408,
+          "text": "        Bounds are not clipped: a point on a finite boundary has no finite"
+        },
+        {
+          "line": 409,
+          "text": "        logit, and accepting it by clipping would change the density target."
+        },
+        {
+          "line": 410,
+          "text": "        \"\"\""
+        },
+        {
+          "line": 411,
+          "text": ""
+        },
+        {
+          "line": 412,
+          "text": "        values = self._parameters(parameters).copy()"
+        },
+        {
+          "line": 413,
+          "text": "        for index, coordinate in enumerate(self.coordinates):"
+        },
+        {
+          "line": 414,
+          "text": "            if coordinate.lower is not None:"
+        },
+        {
+          "line": 415,
+          "text": "                point = values[:, index]"
+        },
+        {
+          "line": 416,
+          "text": "                if np.any((point <= coordinate.lower) | (point >= coordinate.upper)):"
+        },
+        {
+          "line": 417,
+          "text": "                    raise ValueError(f\"{coordinate.name} must be strictly inside its bounds\")"
+        },
+        {
+          "line": 418,
+          "text": "                values[:, index] = np.log(point - coordinate.lower) - np.log(coordinate.upper - point)"
+        },
+        {
+          "line": 419,
+          "text": "        return values"
+        }
+      ],
+      "path": "src/posteriorforge/science/hierarchical_problem.py",
+      "sha256": "03aa2d8a3d279783cf6c599f1400f253f3db2e1e7eb027aff5b7cd1b48fe12d0"
+    },
+    {
+      "line_end": 481,
+      "line_start": 476,
+      "lines": [
+        {
+          "line": 476,
+          "text": "    def log_prior(self, parameters: Any) -> np.ndarray:"
+        },
+        {
+          "line": 477,
+          "text": "        values = self._parameters(parameters)"
+        },
+        {
+          "line": 478,
+          "text": "        result = np.asarray(self.prior.log_prob(values), dtype=np.float64)"
+        },
+        {
+          "line": 479,
+          "text": "        if result.shape != (len(values),) or np.any(np.isnan(result) | np.isposinf(result)):"
+        },
+        {
+          "line": 480,
+          "text": "            raise ValueError(\"prior returned an invalid log-density vector\")"
+        },
+        {
+          "line": 481,
+          "text": "        return np.where(self.contains(values), result, -np.inf)"
+        }
+      ],
+      "path": "src/posteriorforge/science/hierarchical_problem.py",
+      "sha256": "03aa2d8a3d279783cf6c599f1400f253f3db2e1e7eb027aff5b7cd1b48fe12d0"
+    },
+    {
+      "line_end": 155,
+      "line_start": 132,
+      "lines": [
+        {
+          "line": 132,
+          "text": "    def _noise_log_prob(self, values, index=0):"
+        },
+        {
+          "line": 133,
+          "text": "        if self.noise_gaussian_priors is not None and self.noise_gaussian_priors[index] is not None:"
+        },
+        {
+          "line": 134,
+          "text": "            mean, sd = self.noise_gaussian_priors[index]"
+        },
+        {
+          "line": 135,
+          "text": "            return truncnorm.logpdf(values, (self.bounds[0] - mean) / sd,"
+        },
+        {
+          "line": 136,
+          "text": "                                    (self.bounds[1] - mean) / sd, loc=mean, scale=sd)"
+        },
+        {
+          "line": 137,
+          "text": "        return np.where((values >= self.bounds[0]) & (values <= self.bounds[1]),"
+        },
+        {
+          "line": 138,
+          "text": "                        -math.log(self.bounds[1] - self.bounds[0]), -np.inf)"
+        },
+        {
+          "line": 139,
+          "text": ""
+        },
+        {
+          "line": 140,
+          "text": "    def noise_log_prob(self, dataset_id, values):"
+        },
+        {
+          "line": 141,
+          "text": "        \"\"\"Normalized physical noise-SD log density for the named dataset.\"\"\""
+        },
+        {
+          "line": 142,
+          "text": "        return self._noise_log_prob(np.asarray(values, dtype=float), self.noise_names.index(self.noise_name(dataset_id)))"
+        },
+        {
+          "line": 143,
+          "text": ""
+        },
+        {
+          "line": 144,
+          "text": "    def conditional_log_prob(self, dataset_id, global_values, local_values):"
+        },
+        {
+          "line": 145,
+          "text": "        local = _rows(local_values, len(self.conditional_parameter_order(dataset_id)))"
+        },
+        {
+          "line": 146,
+          "text": "        return (self.base.conditional_log_prob(dataset_id, global_values, local[:, :-1])"
+        },
+        {
+          "line": 147,
+          "text": "                + self.noise_log_prob(dataset_id, local[:, -1]))"
+        },
+        {
+          "line": 148,
+          "text": ""
+        },
+        {
+          "line": 149,
+          "text": "    def log_prob(self, values):"
+        },
+        {
+          "line": 150,
+          "text": "        values = _rows(values, len(self.parameter_order))"
+        },
+        {
+          "line": 151,
+          "text": "        physics = values[:, [self.parameter_order.index(name) for name in self.base.parameter_order]]"
+        },
+        {
+          "line": 152,
+          "text": "        result = self.base.log_prob(physics)"
+        },
+        {
+          "line": 153,
+          "text": "        for index, name in enumerate(self.noise_names):"
+        },
+        {
+          "line": 154,
+          "text": "            result += self._noise_log_prob(values[:, self.parameter_order.index(name)], index)"
+        },
+        {
+          "line": 155,
+          "text": "        return result"
+        }
+      ],
+      "path": "src/posteriorforge/science/hierarchical_noise.py",
+      "sha256": "cbf0b8c956362a5eaa31923e9b94a3db3e3ede2072603add51e78105b8c0cbf0"
+    },
+    {
+      "line_end": 253,
+      "line_start": 230,
+      "lines": [
+        {
+          "line": 230,
+          "text": "def build_inferred_noise_problem(*, acoustic_repeats=1, noise_bounds=(.01, .50), noise_gaussian_priors=None):"
+        },
+        {
+          "line": 231,
+          "text": "    if type(acoustic_repeats) is not int or acoustic_repeats < 1:"
+        },
+        {
+          "line": 232,
+          "text": "        raise ValueError(\"acoustic repeats must be a positive integer\")"
+        },
+        {
+          "line": 233,
+          "text": "    base = build_exact_heterogeneous_problem()"
+        },
+        {
+          "line": 234,
+          "text": "    names = tuple(f\"sigma_m{i}\" for i in range(1, 4)) + tuple(f\"sigma_a{i}\" for i in range(1, 4))"
+        },
+        {
+          "line": 235,
+          "text": "    prior = IndependentNoiseHierarchyPrior(base.prior, names, noise_bounds, noise_gaussian_priors)"
+        },
+        {
+          "line": 236,
+          "text": "    coordinates, datasets, blocks = list(base.coordinates[:3]), [], []"
+        },
+        {
+          "line": 237,
+          "text": "    for index, (dataset, block, noise) in enumerate(zip(base.datasets, base.observation_model.blocks, names)):"
+        },
+        {
+          "line": 238,
+          "text": "        coordinates.extend(coordinate for coordinate in base.coordinates if coordinate.dataset_id == dataset.dataset_id)"
+        },
+        {
+          "line": 239,
+          "text": "        coordinates.append(HierarchicalCoordinate(noise, \"synthetic_response\", \"local\", dataset.dataset_id,"
+        },
+        {
+          "line": 240,
+          "text": "                                                   lower=noise_bounds[0], upper=noise_bounds[1]))"
+        },
+        {
+          "line": 241,
+          "text": "        repeats = acoustic_repeats if index >= 3 else 1"
+        },
+        {
+          "line": 242,
+          "text": "        points = block.observation_size * repeats"
+        },
+        {
+          "line": 243,
+          "text": "        datasets.append(replace(dataset, local_coordinates=(*dataset.local_coordinates, noise), observation_size=points,"
+        },
+        {
+          "line": 244,
+          "text": "                                controls=tuple(np.repeat(dataset.controls, repeats)),"
+        },
+        {
+          "line": 245,
+          "text": "                                kind=\"curve\" if repeats > 1 else dataset.kind))"
+        },
+        {
+          "line": 246,
+          "text": "        blocks.append(GaussianObservationBlock(block.dataset_id, block.local_names,"
+        },
+        {
+          "line": 247,
+          "text": "                      np.repeat(block.design, repeats, axis=0), np.repeat(block.offset, repeats),"
+        },
+        {
+          "line": 248,
+          "text": "                      np.eye(points) * block.covariance[0, 0]))"
+        },
+        {
+          "line": 249,
+          "text": "    model = InferredGaussianNoiseModel(prior.parameter_order,"
+        },
+        {
+          "line": 250,
+          "text": "              LinearGaussianObservationModel(base.prior.parameter_order, tuple(blocks)), names)"
+        },
+        {
+          "line": 251,
+          "text": "    return HierarchicalProblemSpec(name=f\"absolute_noise_hierarchy_acoustic_repeats_{acoustic_repeats}\","
+        },
+        {
+          "line": 252,
+          "text": "             version=SCHEMA, coordinates=tuple(coordinates), families=base.families,"
+        },
+        {
+          "line": 253,
+          "text": "             datasets=tuple(datasets), prior=prior, observation_model=model)"
+        }
+      ],
+      "path": "src/posteriorforge/science/hierarchical_noise.py",
+      "sha256": "cbf0b8c956362a5eaa31923e9b94a3db3e3ede2072603add51e78105b8c0cbf0"
+    },
+    {
+      "line_end": 58,
+      "line_start": 30,
+      "lines": [
+        {
+          "line": 30,
+          "text": "def build_problem():"
+        },
+        {
+          "line": 31,
+          "text": "    \"\"\"Return the unchanged 21D prior with quadratic mechanics and scalar acoustics.\"\"\""
+        },
+        {
+          "line": 32,
+          "text": "    old = build_inferred_noise_problem(noise_gaussian_priors=((.255, .1225),) * 6)"
+        },
+        {
+          "line": 33,
+          "text": "    x = np.linspace(0., 1., 10)"
+        },
+        {
+          "line": 34,
+          "text": "    design = np.column_stack((x, x * x, np.ones_like(x)))"
+        },
+        {
+          "line": 35,
+          "text": "    datasets, blocks = [], []"
+        },
+        {
+          "line": 36,
+          "text": "    for index, (dataset, block) in enumerate(zip(old.datasets, old.observation_model.blocks)):"
+        },
+        {
+          "line": 37,
+          "text": "        if index < 3:"
+        },
+        {
+          "line": 38,
+          "text": "            dataset = replace(dataset, observation_size=10, controls=tuple(x))"
+        },
+        {
+          "line": 39,
+          "text": "            block = replace(block, design=design, offset=np.zeros(10), covariance=np.eye(10))"
+        },
+        {
+          "line": 40,
+          "text": "        datasets.append(dataset)"
+        },
+        {
+          "line": 41,
+          "text": "        blocks.append(block)"
+        },
+        {
+          "line": 42,
+          "text": "    forward = replace(old.observation_model.base, blocks=tuple(blocks))"
+        },
+        {
+          "line": 43,
+          "text": "    problem = replace(old, name=\"quadratic_scalar_gaussian_hierarchy_v2\", version=SCHEMA,"
+        },
+        {
+          "line": 44,
+          "text": "                      datasets=tuple(datasets),"
+        },
+        {
+          "line": 45,
+          "text": "                      observation_model=replace(old.observation_model, base=forward))"
+        },
+        {
+          "line": 46,
+          "text": "    _verify_prior(problem)"
+        },
+        {
+          "line": 47,
+          "text": "    return problem"
+        },
+        {
+          "line": 48,
+          "text": ""
+        },
+        {
+          "line": 49,
+          "text": ""
+        },
+        {
+          "line": 50,
+          "text": "def _verify_prior(problem):"
+        },
+        {
+          "line": 51,
+          "text": "    \"\"\"Fail on drift of the approved numerical Gaussian hierarchy or SD priors.\"\"\""
+        },
+        {
+          "line": 52,
+          "text": "    base = problem.prior.base"
+        },
+        {
+          "line": 53,
+          "text": "    expected_covariance = np.asarray([[1., .12, .02], [.12, 1.2, -.03], [.02, -.03, .4]])"
+        },
+        {
+          "line": 54,
+          "text": "    if (base.global_names != (\"mu_a\", \"mu_b\", \"mu_d0\")"
+        },
+        {
+          "line": 55,
+          "text": "            or not np.array_equal(base.global_mean, [.3, -.2, .1])"
+        },
+        {
+          "line": 56,
+          "text": "            or not np.array_equal(base.global_covariance, expected_covariance)"
+        },
+        {
+          "line": 57,
+          "text": "            or problem.prior.bounds != (.01, .5)"
+        },
+        {
+          "line": 58,
+          "text": "            or problem.prior.noise_gaussian_priors != ((.255, .1225),) * 6):"
+        }
+      ],
+      "path": "src/posteriorforge/science/analytical_benchmark_v2.py",
+      "sha256": "8d5f286f6d8512391dea2ae036313bec05782d28c7803f336490cbcdce3bd99f"
+    },
+    {
+      "line_end": 15,
+      "line_start": 12,
+      "lines": [
+        {
+          "line": 12,
+          "text": "CDF_LIMIT = .10"
+        },
+        {
+          "line": 13,
+          "text": "BIAS_SD_LIMIT = .20"
+        },
+        {
+          "line": 14,
+          "text": "SD_RATIO_LIMITS = (.8, 1.2)"
+        },
+        {
+          "line": 15,
+          "text": "REFERENCE_PRECISION_LIMIT = .005"
+        }
+      ],
+      "path": "src/posteriorforge/validation.py",
+      "sha256": "92ddfd79a1c42cdbc56dfc9ad0f2c987fa70ee69387b0c5decff53c20b9aa694"
+    },
+    {
+      "line_end": 57,
+      "line_start": 18,
+      "lines": [
+        {
+          "line": 18,
+          "text": "def sample_integrity(samples, *, expected_count=50000, dimension=21,"
+        },
+        {
+          "line": 19,
+          "text": "                     lower_bounds=None, upper_bounds=None, support_mask=None):"
+        },
+        {
+          "line": 20,
+          "text": "    \"\"\"Validate complete vectors; caller may supply an exact joint-prior mask.\"\"\""
+        },
+        {
+          "line": 21,
+          "text": "    values = np.asarray(samples)"
+        },
+        {
+          "line": 22,
+          "text": "    if type(expected_count) is not int or expected_count < 1:"
+        },
+        {
+          "line": 23,
+          "text": "        raise ValueError(\"positive expected_count required\")"
+        },
+        {
+          "line": 24,
+          "text": "    shape_ok = values.ndim == 2 and values.shape == (expected_count, dimension)"
+        },
+        {
+          "line": 25,
+          "text": "    result = {\"passed\": False, \"expected_count\": expected_count, \"expected_dimension\": dimension,"
+        },
+        {
+          "line": 26,
+          "text": "              \"shape\": list(values.shape), \"complete_shape\": bool(shape_ok),"
+        },
+        {
+          "line": 27,
+          "text": "              \"finite\": False, \"in_prior_support\": False,"
+        },
+        {
+          "line": 28,
+          "text": "              \"clipping_or_repair_performed\": False}"
+        },
+        {
+          "line": 29,
+          "text": "    if not shape_ok:"
+        },
+        {
+          "line": 30,
+          "text": "        return result"
+        },
+        {
+          "line": 31,
+          "text": "    if values.dtype.kind not in \"fiu\":"
+        },
+        {
+          "line": 32,
+          "text": "        raise ValueError(\"numeric posterior array required\")"
+        },
+        {
+          "line": 33,
+          "text": "    finite = np.isfinite(values).all(axis=1)"
+        },
+        {
+          "line": 34,
+          "text": "    supported = np.ones(len(values), dtype=bool)"
+        },
+        {
+          "line": 35,
+          "text": "    for bounds, lower in ((lower_bounds, True), (upper_bounds, False)):"
+        },
+        {
+          "line": 36,
+          "text": "        if bounds is None:"
+        },
+        {
+          "line": 37,
+          "text": "            continue"
+        },
+        {
+          "line": 38,
+          "text": "        bounds = np.asarray(bounds, dtype=np.float64)"
+        },
+        {
+          "line": 39,
+          "text": "        if bounds.shape != (dimension,) or np.isnan(bounds).any():"
+        },
+        {
+          "line": 40,
+          "text": "            raise ValueError(\"prior bounds must have one value per parameter\")"
+        },
+        {
+          "line": 41,
+          "text": "        supported &= ((values >= bounds) if lower else (values <= bounds)).all(axis=1)"
+        },
+        {
+          "line": 42,
+          "text": "    if lower_bounds is not None and upper_bounds is not None:"
+        },
+        {
+          "line": 43,
+          "text": "        if np.any(np.asarray(lower_bounds) >= np.asarray(upper_bounds)):"
+        },
+        {
+          "line": 44,
+          "text": "            raise ValueError(\"prior lower bounds must be below upper bounds\")"
+        },
+        {
+          "line": 45,
+          "text": "    if support_mask is not None:"
+        },
+        {
+          "line": 46,
+          "text": "        mask = np.asarray(support_mask)"
+        },
+        {
+          "line": 47,
+          "text": "        if mask.dtype != np.bool_ or mask.shape != (expected_count,):"
+        },
+        {
+          "line": 48,
+          "text": "            raise ValueError(\"exact prior support mask must be boolean[n]\")"
+        },
+        {
+          "line": 49,
+          "text": "        supported &= mask"
+        },
+        {
+          "line": 50,
+          "text": "    # A caller must actually describe support; finite alone is insufficient."
+        },
+        {
+          "line": 51,
+          "text": "    support_defined = support_mask is not None or (lower_bounds is not None and upper_bounds is not None)"
+        },
+        {
+          "line": 52,
+          "text": "    result.update(finite=bool(finite.all()), in_prior_support=bool(support_defined and supported.all()),"
+        },
+        {
+          "line": 53,
+          "text": "                  nonfinite_row_count=int((~finite).sum()),"
+        },
+        {
+          "line": 54,
+          "text": "                  out_of_support_row_count=int((~supported).sum()),"
+        },
+        {
+          "line": 55,
+          "text": "                  prior_support_defined=bool(support_defined))"
+        },
+        {
+          "line": 56,
+          "text": "    result[\"passed\"] = result[\"finite\"] and result[\"in_prior_support\"]"
+        },
+        {
+          "line": 57,
+          "text": "    return result"
+        }
+      ],
+      "path": "src/posteriorforge/validation.py",
+      "sha256": "92ddfd79a1c42cdbc56dfc9ad0f2c987fa70ee69387b0c5decff53c20b9aa694"
+    },
+    {
+      "line_end": 175,
+      "line_start": 147,
+      "lines": [
+        {
+          "line": 147,
+          "text": "def assess_samples(samples, reference, *, lower_bounds=None, upper_bounds=None,"
+        },
+        {
+          "line": 148,
+          "text": "                   support_mask=None, expected_count=50000):"
+        },
+        {
+          "line": 149,
+          "text": "    \"\"\"Apply the same absolute gate to upstream and any optimized variant."
+        },
+        {
+          "line": 150,
+          "text": ""
+        },
+        {
+          "line": 151,
+          "text": "    ``reference`` combines arrays from load_reference_distribution with its"
+        },
+        {
+          "line": 152,
+          "text": "    manifest qualification. Qualified reference uncertainty is included in CDF"
+        },
+        {
+          "line": 153,
+          "text": "    bounds. If reference precision or independent checks are incomplete, status"
+        },
+        {
+          "line": 154,
+          "text": "    is reference_inconclusive and pass is impossible."
+        },
+        {
+          "line": 155,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 156,
+          "text": "    if type(expected_count) is not int or expected_count < 2:"
+        },
+        {
+          "line": 157,
+          "text": "        raise ValueError(\"at least two complete samples required for posterior SD\")"
+        },
+        {
+          "line": 158,
+          "text": "    directions, reference_mean, reference_sd, qualification, qualified = _reference_arrays(reference)"
+        },
+        {
+          "line": 159,
+          "text": "    integrity = sample_integrity(samples, expected_count=expected_count, lower_bounds=lower_bounds,"
+        },
+        {
+          "line": 160,
+          "text": "                                 upper_bounds=upper_bounds, support_mask=support_mask)"
+        },
+        {
+          "line": 161,
+          "text": "    result = {\"schema\": \"posteriorforge.posterior_gate.v1\", \"passed\": False,"
+        },
+        {
+          "line": 162,
+          "text": "              \"status\": \"reference_inconclusive\", \"reference_qualified\": qualified,"
+        },
+        {
+          "line": 163,
+          "text": "              \"reference_qualification\": qualification, \"integrity\": integrity,"
+        },
+        {
+          "line": 164,
+          "text": "              \"limits\": {\"cdf\": CDF_LIMIT, \"absolute_bias_reference_sd\": BIAS_SD_LIMIT,"
+        },
+        {
+          "line": 165,
+          "text": "                         \"sd_ratio\": list(SD_RATIO_LIMITS), \"reference_precision\": REFERENCE_PRECISION_LIMIT},"
+        },
+        {
+          "line": 166,
+          "text": "              \"scope\": \"eight_case_diagnostic_screen_not_global_calibration_or_SBC\"}"
+        },
+        {
+          "line": 167,
+          "text": "    if not integrity[\"passed\"]:"
+        },
+        {
+          "line": 168,
+          "text": "        result[\"status\"] = \"invalid_samples\""
+        },
+        {
+          "line": 169,
+          "text": "        return result"
+        },
+        {
+          "line": 170,
+          "text": "    values = np.asarray(samples, dtype=np.float64)"
+        },
+        {
+          "line": 171,
+          "text": "    sample_mean, sample_sd = values.mean(axis=0), values.std(axis=0, ddof=1)"
+        },
+        {
+          "line": 172,
+          "text": "    bias = np.abs(sample_mean - reference_mean) / reference_sd"
+        },
+        {
+          "line": 173,
+          "text": "    ratio = sample_sd / reference_sd"
+        },
+        {
+          "line": 174,
+          "text": "    raw_moment_passed = bool(np.max(bias) <= BIAS_SD_LIMIT and np.min(ratio) >= SD_RATIO_LIMITS[0]"
+        },
+        {
+          "line": 175,
+          "text": "                             and np.max(ratio) <= SD_RATIO_LIMITS[1])"
+        }
+      ],
+      "path": "src/posteriorforge/validation.py",
+      "sha256": "92ddfd79a1c42cdbc56dfc9ad0f2c987fa70ee69387b0c5decff53c20b9aa694"
+    },
+    {
+      "line_end": 227,
+      "line_start": 207,
+      "lines": [
+        {
+          "line": 207,
+          "text": "    bounds = cdf_distance_bounds(values @ directions.T, reference[\"queries\"], reference[\"cdfs\"], precision=precision)"
+        },
+        {
+          "line": 208,
+          "text": "    for label, positions in ((\"marginal_cdf\", slice(0, 21)), (\"joint_projection_cdf\", slice(21, 53))):"
+        },
+        {
+          "line": 209,
+          "text": "        lower = np.asarray(bounds[\"lower\"])[positions]"
+        },
+        {
+          "line": 210,
+          "text": "        upper = np.asarray(bounds[\"upper\"])[positions]"
+        },
+        {
+          "line": 211,
+          "text": "        witnessed = np.asarray(bounds[\"grid_witness_error\"])[positions]"
+        },
+        {
+          "line": 212,
+          "text": "        result[label] = {\"lower\": lower.tolist(), \"upper\": upper.tolist(),"
+        },
+        {
+          "line": 213,
+          "text": "                         \"max_lower\": float(lower.max()), \"max_upper\": float(upper.max()),"
+        },
+        {
+          "line": 214,
+          "text": "                         \"max_grid_witness_error\": float(witnessed.max()),"
+        },
+        {
+          "line": 215,
+          "text": "                         \"passed\": bool(upper.max() <= CDF_LIMIT)}"
+        },
+        {
+          "line": 216,
+          "text": "    result[\"cdf_bound_method\"] = bounds[\"bound_method\"]"
+        },
+        {
+          "line": 217,
+          "text": "    result[\"cdf_grid_point_count\"] = bounds[\"grid_point_count\"]"
+        },
+        {
+          "line": 218,
+          "text": "    if not qualified:"
+        },
+        {
+          "line": 219,
+          "text": "        return result"
+        },
+        {
+          "line": 220,
+          "text": "    if moment_failed or result[\"marginal_cdf\"][\"max_lower\"] > CDF_LIMIT or result[\"joint_projection_cdf\"][\"max_lower\"] > CDF_LIMIT:"
+        },
+        {
+          "line": 221,
+          "text": "        result[\"status\"] = \"model_failure\""
+        },
+        {
+          "line": 222,
+          "text": "    elif not moment_passed:"
+        },
+        {
+          "line": 223,
+          "text": "        result[\"status\"] = \"moment_inconclusive\""
+        },
+        {
+          "line": 224,
+          "text": "    elif result[\"marginal_cdf\"][\"passed\"] and result[\"joint_projection_cdf\"][\"passed\"]:"
+        },
+        {
+          "line": 225,
+          "text": "        result.update(status=\"pass\", passed=True)"
+        },
+        {
+          "line": 226,
+          "text": "    else:"
+        },
+        {
+          "line": 227,
+          "text": "        result[\"status\"] = \"cdf_inconclusive\""
+        }
+      ],
+      "path": "src/posteriorforge/validation.py",
+      "sha256": "92ddfd79a1c42cdbc56dfc9ad0f2c987fa70ee69387b0c5decff53c20b9aa694"
+    },
+    {
+      "line_end": 174,
+      "line_start": 161,
+      "lines": [
+        {
+          "line": 161,
+          "text": "                    query = load_heldout(banks, case).obs"
+        },
+        {
+          "line": 162,
+          "text": "                    context = load_context(banks, seed, 4096)"
+        },
+        {
+          "line": 163,
+          "text": "                    verify_run_binding(manifest, context, query, seed, case)"
+        },
+        {
+          "line": 164,
+          "text": "                    if manifest[\"query\"] != array_descriptor(query):"
+        },
+        {
+          "line": 165,
+          "text": "                        raise ValueError(\"inference query differs from held-out observation\")"
+        },
+        {
+          "line": 166,
+          "text": "                    payload = path.parent / \"samples.npz\""
+        },
+        {
+          "line": 167,
+          "text": "                    if sha256_file(payload) != manifest[\"samples_sha256\"]:"
+        },
+        {
+          "line": 168,
+          "text": "                        raise ValueError(\"inference sample payload hash mismatch\")"
+        },
+        {
+          "line": 169,
+          "text": "                    with np.load(payload, allow_pickle=False) as data:"
+        },
+        {
+          "line": 170,
+          "text": "                        values = data[\"samples\"].copy()"
+        },
+        {
+          "line": 171,
+          "text": "                    if array_descriptor(values) != manifest[\"samples\"]:"
+        },
+        {
+          "line": 172,
+          "text": "                        raise ValueError(\"inference sample array hash mismatch\")"
+        },
+        {
+          "line": 173,
+          "text": "                    entry[\"assessment\"] = assess_samples(values, refs[case], support_mask=support_mask(values))"
+        },
+        {
+          "line": 174,
+          "text": "                    entry.update(status=entry[\"assessment\"][\"status\"], passed=entry[\"assessment\"][\"passed\"])"
+        }
+      ],
+      "path": "src/posteriorforge/gate.py",
+      "sha256": "32568b5cebc83f4adbd426891ba8d948655e93817598dc531fe85b79de8a75c5"
+    },
+    {
+      "line_end": 29,
+      "line_start": 18,
+      "lines": [
+        {
+          "line": 18,
+          "text": "ORDER = (0,1,2,6,3,4,5,10,7,8,9,14,11,12,13,16,15,18,17,20,19)"
+        },
+        {
+          "line": 19,
+          "text": "INVERSE_ORDER = tuple(int(i) for i in np.argsort(ORDER))"
+        },
+        {
+          "line": 20,
+          "text": "PHYSICAL_ORDER = (\"mu_a\",\"mu_b\",\"mu_d0\",\"a_m1\",\"b_m1\",\"d0_m1\",\"sigma_m1\","
+        },
+        {
+          "line": 21,
+          "text": "                  \"a_m2\",\"b_m2\",\"d0_m2\",\"sigma_m2\",\"a_m3\",\"b_m3\",\"d0_m3\",\"sigma_m3\","
+        },
+        {
+          "line": 22,
+          "text": "                  \"a_a1\",\"sigma_a1\",\"a_a2\",\"sigma_a2\",\"a_a3\",\"sigma_a3\")"
+        },
+        {
+          "line": 23,
+          "text": "NOISE_INDICES = (6,10,14,16,18,20)"
+        },
+        {
+          "line": 24,
+          "text": "EPS64 = np.finfo(np.float64).eps"
+        },
+        {
+          "line": 25,
+          "text": "EPS32 = np.finfo(np.float32).eps"
+        },
+        {
+          "line": 26,
+          "text": "F64_PHYSICAL_UNITS = float(256 * EPS64)"
+        },
+        {
+          "line": 27,
+          "text": "F64_LATENT_ADMISSIBILITY = float(8 * np.sqrt(EPS64))"
+        },
+        {
+          "line": 28,
+          "text": "F32_PHYSICAL_UNITS = float(32 * EPS32)"
+        },
+        {
+          "line": 29,
+          "text": "F32_LATENT_ADMISSIBILITY = float(32 * EPS32)"
+        }
+      ],
+      "path": "src/posteriorforge/prior_coordinates_v1.py",
+      "sha256": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5"
+    },
+    {
+      "line_end": 138,
+      "line_start": 109,
+      "lines": [
+        {
+          "line": 109,
+          "text": "def _strict_noise(values, spec, label):"
+        },
+        {
+          "line": 110,
+          "text": "    _require(np.all((values > spec[\"low\"]) & (values < spec[\"high\"])),"
+        },
+        {
+          "line": 111,
+          "text": "             label + \": endpoint, out-of-support, or saturated noise; no clipping\")"
+        },
+        {
+          "line": 112,
+          "text": ""
+        },
+        {
+          "line": 113,
+          "text": "def _noise_encode(values, spec):"
+        },
+        {
+          "line": 114,
+          "text": "    _strict_noise(values, spec, \"encode\")"
+        },
+        {
+          "line": 115,
+          "text": "    lower = truncnorm.logcdf(values, spec[\"a\"], spec[\"b\"], loc=spec[\"location\"], scale=spec[\"scale\"])"
+        },
+        {
+          "line": 116,
+          "text": "    upper = truncnorm.logsf(values, spec[\"a\"], spec[\"b\"], loc=spec[\"location\"], scale=spec[\"scale\"])"
+        },
+        {
+          "line": 117,
+          "text": "    _require(np.isfinite(lower).all() and np.isfinite(upper).all()"
+        },
+        {
+          "line": 118,
+          "text": "             and np.all(lower < 0) and np.all(upper < 0),"
+        },
+        {
+          "line": 119,
+          "text": "             \"prior CDF/log-survival saturation; no inward move\")"
+        },
+        {
+          "line": 120,
+          "text": "    output = np.empty_like(values, dtype=np.float64)"
+        },
+        {
+          "line": 121,
+          "text": "    left = lower <= -np.log(2.)"
+        },
+        {
+          "line": 122,
+          "text": "    output[left] = ndtri_exp(lower[left])"
+        },
+        {
+          "line": 123,
+          "text": "    output[~left] = -ndtri_exp(upper[~left])"
+        },
+        {
+          "line": 124,
+          "text": "    _require(np.isfinite(output).all(), \"nonfinite noise normal coordinate\")"
+        },
+        {
+          "line": 125,
+          "text": "    return output"
+        },
+        {
+          "line": 126,
+          "text": ""
+        },
+        {
+          "line": 127,
+          "text": "def _noise_decode(values, spec):"
+        },
+        {
+          "line": 128,
+          "text": "    _require(np.isfinite(values).all(), \"nonfinite noise latent before CDF\")"
+        },
+        {
+          "line": 129,
+          "text": "    output = np.empty_like(values, dtype=np.float64)"
+        },
+        {
+          "line": 130,
+          "text": "    left = values <= 0"
+        },
+        {
+          "line": 131,
+          "text": "    # Retain lower/upper tail logs instead of forming a rounded Phi(z)==1."
+        },
+        {
+          "line": 132,
+          "text": "    lower = np.logaddexp(log_ndtr(spec[\"a\"]), log_ndtr(values[left]) + spec[\"log_mass\"])"
+        },
+        {
+          "line": 133,
+          "text": "    upper = np.logaddexp(log_ndtr(-spec[\"b\"]), log_ndtr(-values[~left]) + spec[\"log_mass\"])"
+        },
+        {
+          "line": 134,
+          "text": "    output[left] = spec[\"location\"] + spec[\"scale\"] * ndtri_exp(lower)"
+        },
+        {
+          "line": 135,
+          "text": "    output[~left] = spec[\"location\"] - spec[\"scale\"] * ndtri_exp(upper)"
+        },
+        {
+          "line": 136,
+          "text": "    _require(np.isfinite(output).all(), \"nonfinite decoded noise\")"
+        },
+        {
+          "line": 137,
+          "text": "    _strict_noise(output, spec, \"decode\")"
+        },
+        {
+          "line": 138,
+          "text": "    return output"
+        }
+      ],
+      "path": "src/posteriorforge/prior_coordinates_v1.py",
+      "sha256": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5"
+    },
+    {
+      "line_end": 244,
+      "line_start": 224,
+      "lines": [
+        {
+          "line": 224,
+          "text": "def decode_ordered_prefix(values):"
+        },
+        {
+          "line": 225,
+          "text": "    \"\"\"Decode only the available causal prefix; returns physical stage-order columns."
+        },
+        {
+          "line": 226,
+          "text": ""
+        },
+        {
+          "line": 227,
+          "text": "    Invalid or saturated model output fails the entire request. It is not clipped,"
+        },
+        {
+          "line": 228,
+          "text": "    converted into accepted finite bounds, filtered, or independently redrawn."
+        },
+        {
+          "line": 229,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 230,
+          "text": "    require_sources()"
+        },
+        {
+          "line": 231,
+          "text": "    rows = _rows(values, tuple(range(1,22)), (np.float64,np.float32), \"decode_ordered_prefix\")"
+        },
+        {
+          "line": 232,
+          "text": "    geo = _geometry()"
+        },
+        {
+          "line": 233,
+          "text": "    latent = np.ascontiguousarray(rows, dtype=np.float64)"
+        },
+        {
+          "line": 234,
+          "text": "    physical = _decode_prefix(latent, geo)"
+        },
+        {
+          "line": 235,
+          "text": "    coefficient = F32_LATENT_ADMISSIBILITY if rows.dtype == np.dtype(\"float32\") else F64_LATENT_ADMISSIBILITY"
+        },
+        {
+          "line": 236,
+          "text": "    replay = _encode_prefix(physical, geo)"
+        },
+        {
+          "line": 237,
+          "text": "    _latent_check(replay, latent, coefficient)"
+        },
+        {
+          "line": 238,
+          "text": "    _physical_check(_decode_prefix(replay,geo), physical, ORDER[:rows.shape[1]], F64_PHYSICAL_UNITS, geo)"
+        },
+        {
+          "line": 239,
+          "text": "    return physical"
+        },
+        {
+          "line": 240,
+          "text": ""
+        },
+        {
+          "line": 241,
+          "text": "def decode_ordered(values):"
+        },
+        {
+          "line": 242,
+          "text": "    \"\"\"Complete ordered latent vector to original physical Float64[n,21].\"\"\""
+        },
+        {
+          "line": 243,
+          "text": "    _rows(values, (21,), (np.float64,np.float32), \"decode_ordered\")"
+        },
+        {
+          "line": 244,
+          "text": "    return np.ascontiguousarray(decode_ordered_prefix(values)[:, INVERSE_ORDER])"
+        }
+      ],
+      "path": "src/posteriorforge/prior_coordinates_v1.py",
+      "sha256": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5"
+    },
+    {
+      "line_end": 185,
+      "line_start": 150,
+      "lines": [
+        {
+          "line": 150,
+          "text": "def complete_request(provider,*,scope,prior=None,buffer=None,accept_reject_fn=None):"
+        },
+        {
+          "line": 151,
+          "text": "    \"\"\"Exactly the original50k support selection; physical Float64 throughout."
+        },
+        {
+          "line": 152,
+          "text": ""
+        },
+        {
+          "line": 153,
+          "text": "    Returns (CPU torch.float64 samples[50000,21], finalized accounting). The"
+        },
+        {
+          "line": 154,
+          "text": "    provider supplies complete already-decoded rows; no codec/model is called."
+        },
+        {
+          "line": 155,
+          "text": "    Existing production buffer/prior may be supplied for honest failure capture."
+        },
+        {
+          "line": 156,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 157,
+          "text": "    require_sources()"
+        },
+        {
+          "line": 158,
+          "text": "    import torch"
+        },
+        {
+          "line": 159,
+          "text": "    from . import inference"
+        },
+        {
+          "line": 160,
+          "text": "    if _sha(inference.__file__)!=ORIGINAL_INFERENCE_SHA256:"
+        },
+        {
+          "line": 161,
+          "text": "        raise RuntimeError(\"original physical support source changed\")"
+        },
+        {
+          "line": 162,
+          "text": "    original_sampler=_original_sampler()"
+        },
+        {
+          "line": 163,
+          "text": "    if accept_reject_fn is not None and accept_reject_fn is not original_sampler:"
+        },
+        {
+          "line": 164,
+          "text": "        raise RuntimeError(\"actual original accept/reject callable required\")"
+        },
+        {
+          "line": 165,
+          "text": "    reference_prior=inference._prior(torch)"
+        },
+        {
+          "line": 166,
+          "text": "    if prior is None:prior=reference_prior"
+        },
+        {
+          "line": 167,
+          "text": "    _verify_support(prior,reference_prior)"
+        },
+        {
+          "line": 168,
+          "text": "    if buffer is None:"
+        },
+        {
+          "line": 169,
+          "text": "        buffer=ProposalBuffer(provider,scope=scope,concatenate=lambda parts:torch.cat(parts,dim=0),world_size=1,rank=0)"
+        },
+        {
+          "line": 170,
+          "text": "    if type(buffer) is not ProposalBuffer or buffer._provider is not provider or buffer.metadata()[\"request_scope\"]!=scope:"
+        },
+        {
+          "line": 171,
+          "text": "        raise ValueError(\"same request-local physical-Float64 FIFO/provider/scope required\")"
+        },
+        {
+          "line": 172,
+          "text": "    with torch.no_grad():"
+        },
+        {
+          "line": 173,
+          "text": "        samples,_,_=original_sampler("
+        },
+        {
+          "line": 174,
+          "text": "            proposal=buffer,accept_reject_fn=prior.support.check,num_samples=BENCHMARK_TOTAL_COUNT,"
+        },
+        {
+          "line": 175,
+          "text": "            max_sampling_batch_size=BENCHMARK_TOTAL_COUNT,max_iter_rejection=None,"
+        },
+        {
+          "line": 176,
+          "text": "            show_progress_bars=False,proposal_sampling_kwargs={})"
+        },
+        {
+          "line": 177,
+          "text": "    record=buffer.finalize("
+        },
+        {
+          "line": 178,
+          "text": "        original_checked_count=prior.support.proposed,accepted_before_trim=prior.support.accepted,"
+        },
+        {
+          "line": 179,
+          "text": "        returned_count=len(samples),original_support_calls=prior.support.calls)"
+        },
+        {
+          "line": 180,
+          "text": "    record.update(enabled=True,source_unchanged=True,policy_sha256=proposal_buffer_policy(1200)[\"policy_sha256\"],"
+        },
+        {
+          "line": 181,
+          "text": "        original_support_check_code_and_closure_verified=True,original_support_source_sha256=ORIGINAL_INFERENCE_SHA256)"
+        },
+        {
+          "line": 182,
+          "text": "    validate_proposal_buffer_record(record,world_size=1,rank=0,scope=scope)"
+        },
+        {
+          "line": 183,
+          "text": "    if samples.dtype!=torch.float64 or samples.device.type!=\"cpu\" or tuple(samples.shape)!=(50000,21):"
+        },
+        {
+          "line": 184,
+          "text": "        raise RuntimeError(\"original selection did not retain exact physical Float64[50000,21]\")"
+        },
+        {
+          "line": 185,
+          "text": "    return samples,record"
+        }
+      ],
+      "path": "src/posteriorforge/execution_physical_fifo_v1.py",
+      "sha256": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0"
+    }
+  ],
+  "strict_helpers_not_gate_support": {
+    "d8": "new finite prior-coordinate domain and numerical RT admissibility; endpoints can be original prior/gate supported while invalid for finite codec coordinates",
+    "generic_to_unconstrained": "strict-open logit coordinate helper; no call in the actual gate/validation/inference path",
+    "no_support_relaxation_or_conversion_authorized_by_report": true,
+    "static_call_string_presence": {
+      "src/posteriorforge/gate.py": false,
+      "src/posteriorforge/inference.py": false,
+      "src/posteriorforge/validation.py": false
+    }
+  }
+}

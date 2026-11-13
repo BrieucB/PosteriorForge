@@ -1,0 +1,12 @@
+{
+  "files": {
+    "float32-cast-receipt.json": "76e1ec13252563ff4e81d5bdd2e0de9cad1c7da24bbf541b7b17cb07d3325942",
+    "float32-inspection.log": "14ed90b31267ed13e4502e61e3affead7c434fd0aa99da8ab3a6b5a8c6a4b784",
+    "inspect_endpoints.py": "a51342ebe0417c95ae1887e730ad95e1b4a17feb4c2eb37c9e4ebe767a799ef6",
+    "inspect_float32_cast.py": "c334642671d7fdae1580f3ae60fe524e0702834c8c76380b2551bf0bbdaaf1bc",
+    "inspection.log": "8d2ed0ccc52bce2485d4d35c874815d5bc87051ebddf94d383cf6dfad4e2a133",
+    "receipt.json": "5107b08b474b76f5438cb49e21ac84c3e33be6df5c82c5c7ff5732d197bcfbf5",
+    "summary.json": "5ec1f608b7eed20054eae75f7479b4f64354ac3f0ea62fe0bc62c41a5ddd0a29"
+  },
+  "schema": "posteriorforge.readonly_diagnostic_checksums.v1"
+}

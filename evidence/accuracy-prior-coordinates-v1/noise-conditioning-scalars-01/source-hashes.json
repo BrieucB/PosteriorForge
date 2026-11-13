@@ -1,0 +1,15 @@
+{
+  "codec_sha256": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+  "input_math_report_sha256": "d5a22a8a617023ced6d1b043ecca6185bf384a5dcd33bb2ff862050f430028e5",
+  "input_postprocessing_report_sha256": "cbc8e44e62780d48e594845bd63a9c72faa76eaf7a1459d9e4dbb2210e989a5a",
+  "report_decompressed_sha256": "440b5f6b050caa4a436975dbbc59c1ddb6d44f138e3c1eaa6beb685f779269ee",
+  "script_sha256": "0248fccbd6e9fbd09d5427023c9d12494f4694088a92f7fc9a747cc8f4bae233",
+  "unchanged_latent_tolerances": {
+    "F32": 3.814697265625e-06,
+    "F64": 1.1920928955078125e-07
+  },
+  "unchanged_physical_tolerances": {
+    "F32": 3.814697265625e-06,
+    "F64": 5.684341886080802e-14
+  }
+}

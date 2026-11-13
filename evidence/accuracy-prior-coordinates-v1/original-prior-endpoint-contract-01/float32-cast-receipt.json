@@ -1,0 +1,3163 @@
+{
+  "CUDA_initialized": false,
+  "Float32_lower_bound_minus_original_Float64_bound": -2.2351741811588166e-10,
+  "Float64_receipt_sha256": "5107b08b474b76f5438cb49e21ac84c3e33be6df5c82c5c7ff5732d197bcfbf5",
+  "actual_original_prior_constructor_calls": 1,
+  "code_sha256": "c334642671d7fdae1580f3ae60fe524e0702834c8c76380b2551bf0bbdaaf1bc",
+  "default_RNG_after": {
+    "numpy": "3842925358df0ef892802cceda2147b6831d44d91f6023dc5bd605d94bbfd485",
+    "python": "f75610cbb39d43c69eef9a24ed6ba4869c1714bc7c27927ef1892dc075e35d79",
+    "torchCPU": "8c090217852c301366beb4038d44f33a7b51a36db370b77914061bee863b4e31"
+  },
+  "default_RNG_before": {
+    "numpy": "3842925358df0ef892802cceda2147b6831d44d91f6023dc5bd605d94bbfd485",
+    "python": "f75610cbb39d43c69eef9a24ed6ba4869c1714bc7c27927ef1892dc075e35d79",
+    "torchCPU": "8c090217852c301366beb4038d44f33a7b51a36db370b77914061bee863b4e31"
+  },
+  "default_RNG_preserved": true,
+  "evaluation_rows": [
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147ap-7",
+        "little_endian_bytes_hex": "7a14ae47e17a843f",
+        "value": 0.009999999999999998
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147bp-7",
+        "little_endian_bytes_hex": "7b14ae47e17a843f",
+        "value": 0.01
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147cp-7",
+        "little_endian_bytes_hex": "7c14ae47e17a843f",
+        "value": 0.010000000000000002
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m1",
+      "original_log_prob": -12.332504272460938,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.fffffffffffffp-2",
+        "little_endian_bytes_hex": "ffffffffffffdf3f",
+        "value": 0.49999999999999994
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m1",
+      "original_log_prob": -12.332504272460938,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m1",
+      "original_log_prob": -12.332504272460938,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000001p-1",
+        "little_endian_bytes_hex": "010000000000e03f",
+        "value": 0.5000000000000001
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "00000020e17a843f",
+        "value": 0.009999998845160007
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "09d7233c",
+        "value": 0.009999998845160007
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m1",
+      "original_log_prob": "-inf",
+      "original_support_check": false,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "09d7233c",
+        "value": 0.009999998845160007
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "00000060e17a843f",
+        "value": 0.010000000707805157
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "0bd7233c",
+        "value": 0.010000000707805157
+      },
+      "actual_gate_support_mask": true,
+      "case": "lower_adjacent_inside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m1",
+      "original_log_prob": -12.332504272460938,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "0bd7233c",
+        "value": 0.010000000707805157
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "000000e0ffffdf3f",
+        "value": 0.4999999701976776
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "ffffff3e",
+        "value": 0.4999999701976776
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_inside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m1",
+      "original_log_prob": -12.332503318786621,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "ffffff3e",
+        "value": 0.4999999701976776
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m1",
+      "original_log_prob": -12.332504272460938,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "000000200000e03f",
+        "value": 0.5000000596046448
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "0100003f",
+        "value": 0.5000000596046448
+      },
+      "actual_gate_support_mask": false,
+      "case": "upper_adjacent_outside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m1",
+      "original_log_prob": "-inf",
+      "original_support_check": false,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "0100003f",
+        "value": 0.5000000596046448
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147ap-7",
+        "little_endian_bytes_hex": "7a14ae47e17a843f",
+        "value": 0.009999999999999998
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147bp-7",
+        "little_endian_bytes_hex": "7b14ae47e17a843f",
+        "value": 0.01
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147cp-7",
+        "little_endian_bytes_hex": "7c14ae47e17a843f",
+        "value": 0.010000000000000002
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m2",
+      "original_log_prob": -13.314577102661133,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.fffffffffffffp-2",
+        "little_endian_bytes_hex": "ffffffffffffdf3f",
+        "value": 0.49999999999999994
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m2",
+      "original_log_prob": -13.314577102661133,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m2",
+      "original_log_prob": -13.314577102661133,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000001p-1",
+        "little_endian_bytes_hex": "010000000000e03f",
+        "value": 0.5000000000000001
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "00000020e17a843f",
+        "value": 0.009999998845160007
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "09d7233c",
+        "value": 0.009999998845160007
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m2",
+      "original_log_prob": "-inf",
+      "original_support_check": false,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "09d7233c",
+        "value": 0.009999998845160007
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "00000060e17a843f",
+        "value": 0.010000000707805157
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "0bd7233c",
+        "value": 0.010000000707805157
+      },
+      "actual_gate_support_mask": true,
+      "case": "lower_adjacent_inside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m2",
+      "original_log_prob": -13.314577102661133,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "0bd7233c",
+        "value": 0.010000000707805157
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "000000e0ffffdf3f",
+        "value": 0.4999999701976776
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "ffffff3e",
+        "value": 0.4999999701976776
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_inside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m2",
+      "original_log_prob": -13.314577102661133,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "ffffff3e",
+        "value": 0.4999999701976776
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m2",
+      "original_log_prob": -13.314577102661133,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "000000200000e03f",
+        "value": 0.5000000596046448
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "0100003f",
+        "value": 0.5000000596046448
+      },
+      "actual_gate_support_mask": false,
+      "case": "upper_adjacent_outside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m2",
+      "original_log_prob": "-inf",
+      "original_support_check": false,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "0100003f",
+        "value": 0.5000000596046448
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147ap-7",
+        "little_endian_bytes_hex": "7a14ae47e17a843f",
+        "value": 0.009999999999999998
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147bp-7",
+        "little_endian_bytes_hex": "7b14ae47e17a843f",
+        "value": 0.01
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147cp-7",
+        "little_endian_bytes_hex": "7c14ae47e17a843f",
+        "value": 0.010000000000000002
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m3",
+      "original_log_prob": -13.233631134033203,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.fffffffffffffp-2",
+        "little_endian_bytes_hex": "ffffffffffffdf3f",
+        "value": 0.49999999999999994
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m3",
+      "original_log_prob": -13.233631134033203,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m3",
+      "original_log_prob": -13.233631134033203,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000001p-1",
+        "little_endian_bytes_hex": "010000000000e03f",
+        "value": 0.5000000000000001
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "00000020e17a843f",
+        "value": 0.009999998845160007
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "09d7233c",
+        "value": 0.009999998845160007
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m3",
+      "original_log_prob": "-inf",
+      "original_support_check": false,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "09d7233c",
+        "value": 0.009999998845160007
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "00000060e17a843f",
+        "value": 0.010000000707805157
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "0bd7233c",
+        "value": 0.010000000707805157
+      },
+      "actual_gate_support_mask": true,
+      "case": "lower_adjacent_inside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m3",
+      "original_log_prob": -13.233631134033203,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "0bd7233c",
+        "value": 0.010000000707805157
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "000000e0ffffdf3f",
+        "value": 0.4999999701976776
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "ffffff3e",
+        "value": 0.4999999701976776
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_inside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m3",
+      "original_log_prob": -13.233630180358887,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "ffffff3e",
+        "value": 0.4999999701976776
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m3",
+      "original_log_prob": -13.233631134033203,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "000000200000e03f",
+        "value": 0.5000000596046448
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "0100003f",
+        "value": 0.5000000596046448
+      },
+      "actual_gate_support_mask": false,
+      "case": "upper_adjacent_outside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m3",
+      "original_log_prob": "-inf",
+      "original_support_check": false,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "0100003f",
+        "value": 0.5000000596046448
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147ap-7",
+        "little_endian_bytes_hex": "7a14ae47e17a843f",
+        "value": 0.009999999999999998
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147bp-7",
+        "little_endian_bytes_hex": "7b14ae47e17a843f",
+        "value": 0.01
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147cp-7",
+        "little_endian_bytes_hex": "7c14ae47e17a843f",
+        "value": 0.010000000000000002
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a1",
+      "original_log_prob": -12.974613189697266,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.fffffffffffffp-2",
+        "little_endian_bytes_hex": "ffffffffffffdf3f",
+        "value": 0.49999999999999994
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a1",
+      "original_log_prob": -12.974613189697266,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a1",
+      "original_log_prob": -12.974613189697266,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000001p-1",
+        "little_endian_bytes_hex": "010000000000e03f",
+        "value": 0.5000000000000001
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "00000020e17a843f",
+        "value": 0.009999998845160007
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "09d7233c",
+        "value": 0.009999998845160007
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a1",
+      "original_log_prob": "-inf",
+      "original_support_check": false,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "09d7233c",
+        "value": 0.009999998845160007
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "00000060e17a843f",
+        "value": 0.010000000707805157
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "0bd7233c",
+        "value": 0.010000000707805157
+      },
+      "actual_gate_support_mask": true,
+      "case": "lower_adjacent_inside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a1",
+      "original_log_prob": -12.974613189697266,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "0bd7233c",
+        "value": 0.010000000707805157
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "000000e0ffffdf3f",
+        "value": 0.4999999701976776
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "ffffff3e",
+        "value": 0.4999999701976776
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_inside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a1",
+      "original_log_prob": -12.97461223602295,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "ffffff3e",
+        "value": 0.4999999701976776
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a1",
+      "original_log_prob": -12.974613189697266,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "000000200000e03f",
+        "value": 0.5000000596046448
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "0100003f",
+        "value": 0.5000000596046448
+      },
+      "actual_gate_support_mask": false,
+      "case": "upper_adjacent_outside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a1",
+      "original_log_prob": "-inf",
+      "original_support_check": false,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "0100003f",
+        "value": 0.5000000596046448
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147ap-7",
+        "little_endian_bytes_hex": "7a14ae47e17a843f",
+        "value": 0.009999999999999998
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147bp-7",
+        "little_endian_bytes_hex": "7b14ae47e17a843f",
+        "value": 0.01
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147cp-7",
+        "little_endian_bytes_hex": "7c14ae47e17a843f",
+        "value": 0.010000000000000002
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a2",
+      "original_log_prob": -11.376432418823242,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.fffffffffffffp-2",
+        "little_endian_bytes_hex": "ffffffffffffdf3f",
+        "value": 0.49999999999999994
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a2",
+      "original_log_prob": -11.376432418823242,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a2",
+      "original_log_prob": -11.376432418823242,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000001p-1",
+        "little_endian_bytes_hex": "010000000000e03f",
+        "value": 0.5000000000000001
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "00000020e17a843f",
+        "value": 0.009999998845160007
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "09d7233c",
+        "value": 0.009999998845160007
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a2",
+      "original_log_prob": "-inf",
+      "original_support_check": false,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "09d7233c",
+        "value": 0.009999998845160007
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "00000060e17a843f",
+        "value": 0.010000000707805157
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "0bd7233c",
+        "value": 0.010000000707805157
+      },
+      "actual_gate_support_mask": true,
+      "case": "lower_adjacent_inside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a2",
+      "original_log_prob": -11.376432418823242,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "0bd7233c",
+        "value": 0.010000000707805157
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "000000e0ffffdf3f",
+        "value": 0.4999999701976776
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "ffffff3e",
+        "value": 0.4999999701976776
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_inside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a2",
+      "original_log_prob": -11.376431465148926,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "ffffff3e",
+        "value": 0.4999999701976776
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a2",
+      "original_log_prob": -11.376432418823242,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "000000200000e03f",
+        "value": 0.5000000596046448
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "0100003f",
+        "value": 0.5000000596046448
+      },
+      "actual_gate_support_mask": false,
+      "case": "upper_adjacent_outside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a2",
+      "original_log_prob": "-inf",
+      "original_support_check": false,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "0100003f",
+        "value": 0.5000000596046448
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147ap-7",
+        "little_endian_bytes_hex": "7a14ae47e17a843f",
+        "value": 0.009999999999999998
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147bp-7",
+        "little_endian_bytes_hex": "7b14ae47e17a843f",
+        "value": 0.01
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147cp-7",
+        "little_endian_bytes_hex": "7c14ae47e17a843f",
+        "value": 0.010000000000000002
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a3",
+      "original_log_prob": -12.734349250793457,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.fffffffffffffp-2",
+        "little_endian_bytes_hex": "ffffffffffffdf3f",
+        "value": 0.49999999999999994
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a3",
+      "original_log_prob": -12.734349250793457,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a3",
+      "original_log_prob": -12.734349250793457,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000001p-1",
+        "little_endian_bytes_hex": "010000000000e03f",
+        "value": 0.5000000000000001
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "00000020e17a843f",
+        "value": 0.009999998845160007
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "09d7233c",
+        "value": 0.009999998845160007
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a3",
+      "original_log_prob": "-inf",
+      "original_support_check": false,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae120000000p-7",
+        "little_endian_bytes_hex": "09d7233c",
+        "value": 0.009999998845160007
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "00000060e17a843f",
+        "value": 0.010000000707805157
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "0bd7233c",
+        "value": 0.010000000707805157
+      },
+      "actual_gate_support_mask": true,
+      "case": "lower_adjacent_inside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a3",
+      "original_log_prob": -12.734349250793457,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae160000000p-7",
+        "little_endian_bytes_hex": "0bd7233c",
+        "value": 0.010000000707805157
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "000000e0ffffdf3f",
+        "value": 0.4999999701976776
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "ffffff3e",
+        "value": 0.4999999701976776
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_adjacent_inside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a3",
+      "original_log_prob": -12.734349250793457,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.fffffe0000000p-2",
+        "little_endian_bytes_hex": "ffffff3e",
+        "value": 0.4999999701976776
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "000000000000e03f",
+        "value": 0.5
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "actual_gate_support_mask": true,
+      "case": "upper_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a3",
+      "original_log_prob": -12.734349250793457,
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000000000000p-1",
+        "little_endian_bytes_hex": "0000003f",
+        "value": 0.5
+      },
+      "scientific_problem_contains": true,
+      "support_vs_finite_log_prob_mismatch": false
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "000000200000e03f",
+        "value": 0.5000000596046448
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "0100003f",
+        "value": 0.5000000596046448
+      },
+      "actual_gate_support_mask": false,
+      "case": "upper_adjacent_outside",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a3",
+      "original_log_prob": "-inf",
+      "original_support_check": false,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.0000020000000p-1",
+        "little_endian_bytes_hex": "0100003f",
+        "value": 0.5000000596046448
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": false
+    }
+  ],
+  "explicit_Float32_bound_casts": {
+    "high": {
+      "dtype": "<f4",
+      "hex_float": "0x1.0000000000000p-1",
+      "little_endian_bytes_hex": "0000003f",
+      "value": 0.5
+    },
+    "low": {
+      "dtype": "<f4",
+      "hex_float": "0x1.47ae140000000p-7",
+      "little_endian_bytes_hex": "0ad7233c",
+      "value": 0.009999999776482582
+    }
+  },
+  "interpretation": "Original custom Support.check compares Python scalar bounds in the input tensor's Float32 arithmetic. Its log_prob delegates through NumPy to problem._parameters Float64 and closed physical contains. The stored Float32 representation of0.01 is below the original Float64 physical lower bound; it can pass Support.check while log_prob/gate reject. This is a dtype seam, not an authorization to alter support.",
+  "neural_constructor_forward_or_random_draw_calls": 0,
+  "no_source_policy_change": true,
+  "original_Python_Float64_bounds": {
+    "high": {
+      "dtype": "<f8",
+      "hex_float": "0x1.0000000000000p-1",
+      "little_endian_bytes_hex": "000000000000e03f",
+      "value": 0.5
+    },
+    "low": {
+      "dtype": "<f8",
+      "hex_float": "0x1.47ae147ae147bp-7",
+      "little_endian_bytes_hex": "7b14ae47e17a843f",
+      "value": 0.01
+    }
+  },
+  "row_count": 72,
+  "schema": "posteriorforge.original_prior_Float32_cast_contract.v1",
+  "source_bank": {
+    "Float32_cast_row_descriptor": {
+      "dtype": "<f4",
+      "sha256": "2254cd91f7cf3ae0db2328294f97b696ea4e4b51131a527a3747207ac5c590fb",
+      "shape": [
+        1,
+        21
+      ]
+    },
+    "baseline_support_and_log_prob_valid": true,
+    "original_Float64_row_descriptor": {
+      "dtype": "<f8",
+      "sha256": "188f21853c27dc433c6ae171479a6bf836f121375df539a78d33cb819d9115e8",
+      "shape": [
+        1,
+        21
+      ]
+    },
+    "saved_row_zero_based": 0,
+    "seed": 20261111,
+    "size": 4096
+  },
+  "source_hashes": {
+    "src/posteriorforge/inference.py": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e",
+    "src/posteriorforge/science/analytical_benchmark_v2.py": "8d5f286f6d8512391dea2ae036313bec05782d28c7803f336490cbcdce3bd99f",
+    "src/posteriorforge/science/hierarchical_exact.py": "db001593cc7307b1290b981622705961c5953001a6c1245fae5ec779938e9687",
+    "src/posteriorforge/science/hierarchical_noise.py": "cbf0b8c956362a5eaa31923e9b94a3db3e3ede2072603add51e78105b8c0cbf0",
+    "src/posteriorforge/science/hierarchical_problem.py": "03aa2d8a3d279783cf6c599f1400f253f3db2e1e7eb027aff5b7cd1b48fe12d0"
+  },
+  "status": "Float32_scalar_cast_seam_observed",
+  "support_vs_finite_log_prob_mismatches": [
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147ap-7",
+        "little_endian_bytes_hex": "7a14ae47e17a843f",
+        "value": 0.009999999999999998
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147bp-7",
+        "little_endian_bytes_hex": "7b14ae47e17a843f",
+        "value": 0.01
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147cp-7",
+        "little_endian_bytes_hex": "7c14ae47e17a843f",
+        "value": 0.010000000000000002
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 6,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147ap-7",
+        "little_endian_bytes_hex": "7a14ae47e17a843f",
+        "value": 0.009999999999999998
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147bp-7",
+        "little_endian_bytes_hex": "7b14ae47e17a843f",
+        "value": 0.01
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147cp-7",
+        "little_endian_bytes_hex": "7c14ae47e17a843f",
+        "value": 0.010000000000000002
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 10,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147ap-7",
+        "little_endian_bytes_hex": "7a14ae47e17a843f",
+        "value": 0.009999999999999998
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147bp-7",
+        "little_endian_bytes_hex": "7b14ae47e17a843f",
+        "value": 0.01
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_m3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147cp-7",
+        "little_endian_bytes_hex": "7c14ae47e17a843f",
+        "value": 0.010000000000000002
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_m3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 14,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147ap-7",
+        "little_endian_bytes_hex": "7a14ae47e17a843f",
+        "value": 0.009999999999999998
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147bp-7",
+        "little_endian_bytes_hex": "7b14ae47e17a843f",
+        "value": 0.01
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147cp-7",
+        "little_endian_bytes_hex": "7c14ae47e17a843f",
+        "value": 0.010000000000000002
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a1",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 16,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147ap-7",
+        "little_endian_bytes_hex": "7a14ae47e17a843f",
+        "value": 0.009999999999999998
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147bp-7",
+        "little_endian_bytes_hex": "7b14ae47e17a843f",
+        "value": 0.01
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147cp-7",
+        "little_endian_bytes_hex": "7c14ae47e17a843f",
+        "value": 0.010000000000000002
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a2",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 18,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_outside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147ap-7",
+        "little_endian_bytes_hex": "7a14ae47e17a843f",
+        "value": 0.009999999999999998
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147bp-7",
+        "little_endian_bytes_hex": "7b14ae47e17a843f",
+        "value": 0.01
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_adjacent_inside",
+      "family": "requested_Float64_endpoint_neighbours_then_whole_row_Float32_cast",
+      "noise_name": "sigma_a3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae147ae147cp-7",
+        "little_endian_bytes_hex": "7c14ae47e17a843f",
+        "value": 0.010000000000000002
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    },
+    {
+      "Torch_input_dtype": "torch.float32",
+      "Torch_log_prob_output_dtype": "torch.float32",
+      "actual_Float32_scalar_widened_to_Float64": {
+        "dtype": "<f8",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "00000040e17a843f",
+        "value": 0.009999999776482582
+      },
+      "actual_Torch_Float32_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "actual_gate_support_mask": false,
+      "case": "lower_exact",
+      "family": "native_Float32_bound_and_neighbours",
+      "noise_name": "sigma_a3",
+      "original_log_prob": "-inf",
+      "original_support_check": true,
+      "other20_columns_match_Float32_cast_saved_row": true,
+      "physical_slot": 20,
+      "requested_scalar": {
+        "dtype": "<f4",
+        "hex_float": "0x1.47ae140000000p-7",
+        "little_endian_bytes_hex": "0ad7233c",
+        "value": 0.009999999776482582
+      },
+      "scientific_problem_contains": false,
+      "support_vs_finite_log_prob_mismatch": true
+    }
+  ],
+  "versions": {
+    "numpy": "1.26.4",
+    "python": "3.11.13",
+    "scipy": "1.12.0",
+    "torch": "2.6.0+cu124"
+  }
+}
