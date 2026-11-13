@@ -1,0 +1,13 @@
+{
+  "README.txt": "b587661c0539597759dd87f796a655a2fed3532111feeffc4c332d8d4d2f48e5",
+  "inference-all21-isolated-all21.json": "2a184cae646f6b5dc1461b5d0f278dce19f5d487f6fc837e4665f4c58e3672fd",
+  "inference-all21-isolated.log": "50dc80cec020c61b926b275a5b305b2f040cee18a8e6329b8933c7636f328d77",
+  "inference-full-all21.json": "2a184cae646f6b5dc1461b5d0f278dce19f5d487f6fc837e4665f4c58e3672fd",
+  "inference-full.log": "886622500ce617ed7ab7fa686fffead70d5af13d73bc2bdd31164afa24f5a73d",
+  "minimal-qualifier-test.patch": "6d668d5a87f4c46ac87c1c9a405f4a8aed701e1efddb72bf7f5496eb18395322",
+  "receipt.json": "a955e9978f66d24fec0c5f331e1efd57f2b5491ff509dfc9c8b28e707ae53858",
+  "reference-all21-isolated-all21.json": "2a184cae646f6b5dc1461b5d0f278dce19f5d487f6fc837e4665f4c58e3672fd",
+  "reference-all21-isolated.log": "460932f0fa17f9f703c5e19cc820b56aa1612321af3fd94fdb21ca203ece60a5",
+  "reference-full-all21.json": "2a184cae646f6b5dc1461b5d0f278dce19f5d487f6fc837e4665f4c58e3672fd",
+  "reference-full.log": "88d23b3ad42fd8c7d1f01e4ad68509bfcc0062191833143e3f2808b552ad289c"
+}

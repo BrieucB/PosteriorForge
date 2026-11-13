@@ -195,3 +195,74 @@ def test_explicit_checkout_only_source_receipt_has_no_activation_credit():
 def test_malformed_recorded_revision_rejected_before_Git():
  with pytest.raises(ValueError,match="valid recorded Git revision"):
   q.committed_source_receipt(revision="not-a-recorded-commit")
+
+
+@pytest.mark.skipif(not (HPC/"results/accuracy-prior-coordinates-v1/pair-preflight-combined-01/receipt.json").exists(),reason="authenticated saved HPC data not installed")
+def test_actual_qualifier_query_builder_all21_exact_6f35_constructor_free():
+ """Use the ACTUAL run helper and real v3 backend, including failed stage1 seam."""
+ import hashlib,pickle,random
+ from posteriorforge import execution_prior_native_v3 as backend
+ from posteriorforge.science.analytical_benchmark_v2 import array_descriptor
+ assert "build_stage_inputs" in q.run.__code__.co_names
+ phase=HPC/"results/accuracy-prior-coordinates-v1";prior=HPC/"results/accuracy-ss15-v1"
+ cpu_path=phase/"pair-preflight-combined-01/receipt.json"
+ assert hashlib.sha256(cpu_path.read_bytes()).hexdigest()==q.PAIR_CPU_RECEIPT_SHA256
+ before=pickle.dumps((np.random.get_state(),random.getstate()),protocol=5)
+ modules_before=set(sys.modules)
+ torch_before=sys.modules.get("torch")
+ torch_rng_before=torch_before.get_rng_state().numpy().tobytes() if torch_before is not None else None
+ cuda_before=torch_before.cuda.is_initialized() if torch_before is not None else False
+ original_sources={name:hashlib.sha256(Path(module.__file__).read_bytes()).hexdigest() for name,module in
+  (("backend",backend),("neural",backend.neural),("codec",backend.neural.codec_module()))}
+ assert original_sources=={"backend":q.V3_BACKEND_SHA256,"neural":backend.NEURAL_SHA,"codec":"d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5"}
+ bound=q.bound_inputs(q.pairs.FIRST_PAIR,banks=HPC/"results/banks-v1",
+  completion_receipt=prior/"sigma-native-grid-completion-01/completion.json",
+  training_inventory=phase/"codec-inventory-inference-01/manifest.json",pair_cpu_receipt=cpu_path,
+  prefix_run=prior/"sigma-native-pilot-01")
+ source_bytes=tuple(a.tobytes() for a in (bound.theta,bound.stats,bound.query,bound.prefixes))
+ data=q.data_helper();fixed=data.fixed_queries;masked=data.masked_inputs
+ helper_identity=(fixed.__code__,id(fixed.__globals__),masked.__code__,id(masked.__globals__))
+ assert backend.stage_policy is backend.neural.stage_policy
+ assert backend.neural.codec_module() is backend.codec
+ assert not hasattr(backend,"codec_module")  # The production seam is genuinely exercised.
+ records=[]
+ for stage in q.STAGES:
+  main,stress,noise,mt,ms,mq,sq,binding=q.build_stage_inputs(bound,stage,backend,data)
+  old_main,old_stress,old_noise=fixed(bound.query,bound.prefixes,bound.theta,stage,backend.neural)
+  old_mt,old_ms,old_mq,old_sq,old_binding=masked(bound.theta,bound.stats,old_main,old_stress,stage,backend.neural)
+  assert main.tobytes()==old_main.tobytes() and stress.tobytes()==old_stress.tobytes() and noise==old_noise
+  assert all(a.dtype==np.float32 and a.flags.c_contiguous for a in (main,stress,mt,ms,mq,sq))
+  assert main.shape==(1024,15+stage) and stress.shape==(8,15+stage)
+  assert all(a.tobytes()==b.tobytes() for a,b in ((mt,old_mt),(ms,old_ms),(mq,old_mq),(sq,old_sq)))
+  assert binding==old_binding==bound.cpu_row["inference"]["all21_mask_target_query_bindings"][stage]
+  assert binding["actual_latent_target"]==array_descriptor(bound.theta[:,stage])
+  assert binding["actual_latent_target"]==binding["training"]["prepared_latent_target"]==binding["training"]["original_latent_target"]
+  assert mt[:,stage:].tobytes()==bound.theta[:,stage:].tobytes()
+  records.append({"stage":stage,"raw_main":array_descriptor(main),"raw_stress":array_descriptor(stress),
+   "model_training":binding["actual_training"],"masked_main":binding["main"],"masked_stress":binding["stress"],
+   "target":binding["actual_latent_target"],"exact_6f35_binding":True})
+ assert [r["stage"] for r in records]==list(range(21))
+ assert source_bytes==tuple(a.tobytes() for a in (bound.theta,bound.stats,bound.query,bound.prefixes))
+ assert helper_identity==(fixed.__code__,id(fixed.__globals__),masked.__code__,id(masked.__globals__))
+ assert original_sources=={name:hashlib.sha256(Path(module.__file__).read_bytes()).hexdigest() for name,module in
+  (("backend",backend),("neural",backend.neural),("codec",backend.neural.codec_module()))}
+ assert pickle.dumps((np.random.get_state(),random.getstate()),protocol=5)==before
+ assert not ({"torch","tabpfn"} & (set(sys.modules)-modules_before))
+ if torch_before is not None:
+  assert torch_before.get_rng_state().numpy().tobytes()==torch_rng_before
+  assert torch_before.cuda.is_initialized()==cuda_before
+ print("ALL21_ACTUAL_QUERY_BUILDER="+json.dumps({"stages":records,"source_sha256":original_sources,
+  "default_RNG_unchanged":True,"NN_constructor_or_forward_GPU_or_draw_calls":0},sort_keys=True))
+
+
+@pytest.mark.parametrize("value",[60,1050,1650])
+def test_actual_run_deadline_guard_accepts_bounded_integer(value):
+ import inspect
+ assert "validate_max_seconds" in q.run.__code__.co_names
+ assert inspect.signature(q.run).parameters["max_seconds"].default==1050
+ assert q.validate_max_seconds(value) is value
+
+@pytest.mark.parametrize("value",[59,1651,True,False,1050.0])
+def test_actual_run_deadline_guard_rejects_outside_or_noninteger(value):
+ with pytest.raises(ValueError,match="bounded helper deadline60..1650"):
+  q.validate_max_seconds(value)

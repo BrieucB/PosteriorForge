@@ -1,0 +1,12 @@
+{
+  "README.txt": "0e2d4ebf4c4105d21531aa9677c18757d5ea9e3be323bad2a19bc997c54e0b62",
+  "allocation-receipt.json": "1ab882a153bba7a59097d7d7ce425c9ac6fb0a25f0315d701cbc03b7f2e810d1",
+  "allocation-sacct.psv": "7d7500f8f9b61805bacc61286a1cadee5d97d78922ad41050cdf3a8c8e33c413",
+  "budget-after-reconciliation.json": "f40c4350de8a31ebcd12c876d073c99755454ab567ee06c36eaebe3d370828a8",
+  "manifest.json.gz": "e50d64498d1a09196219ac8464ce5bbcdbfa6070d7ffa1ff4267fc82d03d5ded",
+  "source-pins.json": "887e86df49c772040d2e554bb04a53414582037e802e3a04d2623364bbfea88d",
+  "source-post-run.json": "e78f05bfc43d8174c5600833587031042575e573799d4a56bd569c37a0b43112",
+  "stderr.txt": "5805440cabaf5294076f3892d88be523cebc1048bb762ded6f5a523f0ff96f2e",
+  "stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "summary.json": "dcd961cda56d4cf83d6537911a59b6df53c36c97f979292dc5f00cbc2a1ec950"
+}

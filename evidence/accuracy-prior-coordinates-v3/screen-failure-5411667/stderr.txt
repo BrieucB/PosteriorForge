@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/scripts/qualify_prior_coordinate_pair_v3.py", line 573, in <module>
+    if __name__=="__main__":main()
+                            ^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/scripts/qualify_prior_coordinate_pair_v3.py", line 571, in main
+    spec=pairs.PairSpec(args.pop("context_seed"),args.pop("case"));report=run(spec=spec,**args)
+                                                                          ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/scripts/qualify_prior_coordinate_pair_v3.py", line 455, in run
+    main,stress,noise=data.fixed_queries(bound.query,bound.prefixes,bound.theta,stage,backend)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/it4i-bbenvegnen/workspace/PosteriorForge/scripts/qualify_prior_conditionals_v1.py", line 163, in fixed_queries
+    backend.codec_module().decode_ordered_prefix(stress[:,15:])
+    ^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'posteriorforge.execution_prior_native_v3' has no attribute 'codec_module'

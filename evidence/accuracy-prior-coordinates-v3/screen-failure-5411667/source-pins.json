@@ -1,0 +1,56 @@
+{
+  "executed_committed_source_closure": {
+    "checkout_bytes_verified": true,
+    "committed_bytes_verified": true,
+    "git_revision": "b193955a31f9ae55e7c0d73031fa6fe7ecdf9fc4",
+    "scope": "new v3 executed/protocol closure; original dependencies have separate frozen guards",
+    "sources": {
+      "docs/accuracy-prior-coordinate-fp64-proposals-v3.md": "7ea6e5c57f8404eb761e07f4011b14966d5885fbbdb8620d463c5283916041d8",
+      "scripts/qualify_prior_coordinate_pair_v3.py": "5066e257cebaa84c7dbc66f87976818934c24941c2287a03e6582cf735baac8e",
+      "src/posteriorforge/execution_prior_native_v3.py": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+      "src/posteriorforge/execution_probability_v3.py": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+      "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7"
+    }
+  },
+  "executed_git_revision": "b193955a31f9ae55e7c0d73031fa6fe7ecdf9fc4",
+  "executed_source_pins": {
+    "execution_v3": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+    "old_numerical_qualification_transferred": false,
+    "pair_CPU_helper": "b69a92b59fa504bce22e34dc31895f9162870425118764293f959c46390110e4",
+    "pair_CPU_receipt": "6f35d9d090a955604186c5fbf3312b82465eff6fdae7e4cd24a23b646dbdf193",
+    "pair_data": "402117cad65af190352cb0b14977fbbdc896f196d069749b0be28608fdef400e",
+    "probability_v3": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+    "proposal_v3": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "protocol_v3": "7ea6e5c57f8404eb761e07f4011b14966d5885fbbdb8620d463c5283916041d8",
+    "qualifier": "5066e257cebaa84c7dbc66f87976818934c24941c2287a03e6582cf735baac8e",
+    "unchanged_numerical_limits_math": "6c927a5c278c7fc54b556ac557ecef64f5e6338f5ae13bf466f3b1e6a4640f90",
+    "v2_input_ancestry_only": "a9f4d6818c030ac29587642fa744101c49b9f4a5fd192ab224c0f273f770e875"
+  },
+  "plan_commit": "b193955a31f9ae55e7c0d73031fa6fe7ecdf9fc4",
+  "plan_committed_source_closure": {
+    "checkout_bytes_verified": true,
+    "committed_bytes_verified": true,
+    "git_revision": "b193955a31f9ae55e7c0d73031fa6fe7ecdf9fc4",
+    "scope": "new v3 executed/protocol closure; original dependencies have separate frozen guards",
+    "sources": {
+      "docs/accuracy-prior-coordinate-fp64-proposals-v3.md": "7ea6e5c57f8404eb761e07f4011b14966d5885fbbdb8620d463c5283916041d8",
+      "scripts/qualify_prior_coordinate_pair_v3.py": "5066e257cebaa84c7dbc66f87976818934c24941c2287a03e6582cf735baac8e",
+      "src/posteriorforge/execution_prior_native_v3.py": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+      "src/posteriorforge/execution_probability_v3.py": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+      "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7"
+    }
+  },
+  "plan_source_pins": {
+    "execution_v3": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+    "old_numerical_qualification_transferred": false,
+    "pair_CPU_helper": "b69a92b59fa504bce22e34dc31895f9162870425118764293f959c46390110e4",
+    "pair_CPU_receipt": "6f35d9d090a955604186c5fbf3312b82465eff6fdae7e4cd24a23b646dbdf193",
+    "pair_data": "402117cad65af190352cb0b14977fbbdc896f196d069749b0be28608fdef400e",
+    "probability_v3": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+    "proposal_v3": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "protocol_v3": "7ea6e5c57f8404eb761e07f4011b14966d5885fbbdb8620d463c5283916041d8",
+    "qualifier": "5066e257cebaa84c7dbc66f87976818934c24941c2287a03e6582cf735baac8e",
+    "unchanged_numerical_limits_math": "6c927a5c278c7fc54b556ac557ecef64f5e6338f5ae13bf466f3b1e6a4640f90",
+    "v2_input_ancestry_only": "a9f4d6818c030ac29587642fa744101c49b9f4a5fd192ab224c0f273f770e875"
+  }
+}

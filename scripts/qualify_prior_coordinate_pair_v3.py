@@ -105,6 +105,12 @@ def bound_inputs(spec,*,banks,completion_receipt,training_inventory,pair_cpu_rec
  require(custody==row["inference"]["prefix_custody"],"actual pair prefix custody differs")
  return SimpleNamespace(theta=theta,stats=stats,query=query,prefixes=prefixes,raw=raw,
   transformed=transformed,custody=custody,cpu=cpu,cpu_row=row)
+def build_stage_inputs(bound,stage,backend,data):
+ """Original data queries use frozen0199's strict codec interface; no NN call."""
+ main,stress,noise=data.fixed_queries(bound.query,bound.prefixes,bound.theta,stage,backend.neural)
+ mt,ms,mq,sq,binding=data.masked_inputs(bound.theta,bound.stats,main,stress,stage,backend)
+ require(binding==bound.cpu_row["inference"]["all21_mask_target_query_bindings"][stage],"actual model fixture differs from frozen6f35")
+ return main,stress,noise,mt,ms,mq,sq,binding
 def _numeric(record,limit):
  return type(record) in (int,float) and np.isfinite(record) and 0<=record<=limit
 def strict_probability(record):
@@ -402,6 +408,10 @@ def _neural_witness(report,stage,backend,original=False):
  if original or stage in NATIVE_STAGES:
   require(not any(x.get("phase")=="prefill" and x.get("stage")==stage for x in witness),"original preparation cannot claim cached prefill")
  return True
+def validate_max_seconds(max_seconds):
+ """Deadline control only; no execution or scientific tolerance is selected here."""
+ require(type(max_seconds) is int and 60<=max_seconds<=1650,"bounded helper deadline60..1650 required")
+ return max_seconds
 def run(*,spec,banks,prefix_run,checkpoint,codec_inventory,codec_reference_inventory,
  codec_cpu_receipt,completed_grid_audit,pair_cpu_receipt,output,ledger,max_seconds=1050):
  """Future Root-authorized budgeted screen only; current None pins fail before Torch."""
@@ -412,7 +422,7 @@ def run(*,spec,banks,prefix_run,checkpoint,codec_inventory,codec_reference_inven
  from posteriorforge.reference_grid import _require_budgeted_gpu
  require(type(spec) is pairs.PairSpec and spec==pairs.FIRST_PAIR,"only first seed11/case0 screen may run")
  pins=source_pins();committed=committed_source_receipt();backend,probability,proposal=_modules()
- require(type(max_seconds) is int and 60<=max_seconds<=1050,"bounded helper deadline required")
+ validate_max_seconds(max_seconds)
  budget=_require_budgeted_gpu(ledger);require(budget["gpus"]==1,"one budgeted GPU required")
  output=Path(output);require(not output.exists(),"fresh v3 output required")
  require(pairs.sha(checkpoint)==CHECKPOINT_SHA256,"immutable checkpoint differs")
@@ -452,9 +462,7 @@ def run(*,spec,banks,prefix_run,checkpoint,codec_inventory,codec_reference_inven
   with probability.production_scope() as descriptor:
    for stage in STAGES:
     require(time.perf_counter()+25<deadline,"bounded deadline; partial screen cannot qualify")
-    main,stress,noise=data.fixed_queries(bound.query,bound.prefixes,bound.theta,stage,backend)
-    mt,ms,mq,sq,binding=data.masked_inputs(bound.theta,bound.stats,main,stress,stage,backend)
-    require(binding==bound.cpu_row["inference"]["all21_mask_target_query_bindings"][stage],"actual model fixture differs from frozen6f35")
+    main,stress,noise,mt,ms,mq,sq,binding=build_stage_inputs(bound,stage,backend,data)
     queries={"1":(mq[:1],main[:1]),"1024":(mq,main),"stress":(sq,stress)}
     actual_inputs=input_fingerprint(mt,ms,mq,sq)
     row={"stage_index":stage,"route":backend.route(stage),"mask_inputs":binding,

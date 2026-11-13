@@ -1,0 +1,4 @@
+CPU-only v3 data-helper caller repair. No new GPU run or qualification. Failed job5411667 remains failed/incomplete.
+The actual qualifier run and new regression share build_stage_inputs. Only fixed_queries receives frozen0199 backend.neural for strict d8 codec validation; masking and all numeric policies are unchanged.
+All21 stages, includingstage1, match original rawF32 queries/stress bytes and saved6f35 mask/target/model bindings in both environments. Full qualifier tests and isolated all21 runs are logged separately.
+The actual run deadline guard now accepts only Python integers60..1650 and keeps default1050; this changes deadline control only. No new GPU run is authorized. No new worlds, draws, model construction, neural calls, posterior or G3. The standalone all21 test also asserts no Torch/TabPFN import is added by query construction.

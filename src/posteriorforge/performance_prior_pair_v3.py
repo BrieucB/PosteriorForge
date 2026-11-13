@@ -44,7 +44,7 @@ DEPENDENCY_SHA256={
  'src/posteriorforge/execution_probability_v3.py':'7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494',
  'src/posteriorforge/execution_prior_native_v3.py':'7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c',
  'src/posteriorforge/prior_proposals_v3.py':'9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7',
- 'scripts/qualify_prior_coordinate_pair_v3.py':'5066e257cebaa84c7dbc66f87976818934c24941c2287a03e6582cf735baac8e',
+ 'scripts/qualify_prior_coordinate_pair_v3.py':'534b48c789bf1168a33b2953d85d747e27c244063dc9fc7cc4b4cb09c4d8324a',
  PREREGISTRATION_PATH:'7ea6e5c57f8404eb761e07f4011b14966d5885fbbdb8620d463c5283916041d8',
 }
 QUALIFICATION_SHA256_BY_PAIR={}  # no v3 neural or scientific qualification yet.

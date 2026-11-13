@@ -1,0 +1,213 @@
+{
+  "NN_model_constructor_or_forward_GPU_posterior_G3_new_world_or_RNG_draw_calls": 0,
+  "all21_mask_target_training_bindings_exact_6f35": true,
+  "all21_raw_F32_main_stress_exact_original0199_bytes": true,
+  "all21_records_bit_identical_in_both_locked_environments": true,
+  "change": "Actual run and regression share build_stage_inputs; ONLY frozen data.fixed_queries uses backend.neural strict codec interface; original masked_inputs uses unchanged v3 aliases; helper deadline strict integer maximum is1650 with default1050 retained",
+  "deadline_control": {
+    "acceptance_tests": [
+      60,
+      1050,
+      1650
+    ],
+    "actual_run_validation_function": "validate_max_seconds",
+    "default": 1050,
+    "integer_maximum": 1650,
+    "integer_minimum": 60,
+    "new_GPU_run_authorized_or_executed": false,
+    "rejection_tests": [
+      59,
+      1651,
+      true,
+      false,
+      1050.0
+    ],
+    "scientific_or_numeric_tolerance_change": false
+  },
+  "failure_retained": {
+    "all21_credit": false,
+    "allocation_GPU_seconds": 52,
+    "failure": "stage1 stress query required codec_module missing from v3backend",
+    "job_id": "5411667",
+    "old_executed_qualifier_sha256": "5066e257cebaa84c7dbc66f87976818934c24941c2287a03e6582cf735baac8e",
+    "stages_completed": [
+      0
+    ]
+  },
+  "intermediate_CPU_package01_preserved": {
+    "path": "evidence/accuracy-prior-coordinates-v3/query-builder-fix-cpu-01",
+    "receipt_sha256": "b5195ac630a0091c5d67962b7b9c72816044d315fa7b2723e0cb2c6b32f796da"
+  },
+  "numeric_modules_protocol_and_scientific_limits_changed": false,
+  "original_b193955_source_and_failed_manifest_preserved_by_Root": true,
+  "pair": {
+    "case": 0,
+    "context_seed": 20261111,
+    "context_size": 4096,
+    "repetition": 0
+  },
+  "pair_CPU_receipt_sha256": "6f35d9d090a955604186c5fbf3312b82465eff6fdae7e4cd24a23b646dbdf193",
+  "production_registry_modified": false,
+  "publication_commit_and_CI": "Root owns final source pins/commit/CI after this CPU checkout receipt",
+  "qualification_count": 0,
+  "runs": [
+    {
+      "argv": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-s",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_qualify_prior_coordinate_pair_v3.py"
+      ],
+      "environment": "inference",
+      "environment_overrides": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src"
+      },
+      "log": "inference-full.log",
+      "log_sha256": "886622500ce617ed7ab7fa686fffead70d5af13d73bc2bdd31164afa24f5a73d",
+      "returncode": 0,
+      "scope": "full",
+      "started_UTC": "2026-11-13T06:54:14.306106+00:00",
+      "summary_line": "44 passed in 16.13s",
+      "versions": {
+        "numpy": "1.26.4",
+        "python": "3.11.13 (main, Apr 28 2026, 13:06:52) [GCC 8.5.0 20210514 (Red Hat 8.5.0-28)]",
+        "scipy": "1.12.0",
+        "torch": "2.6.0"
+      },
+      "wall_seconds": 18.445038374513388
+    },
+    {
+      "argv": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-s",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_qualify_prior_coordinate_pair_v3.py",
+        "-k",
+        "actual_qualifier_query_builder_all21"
+      ],
+      "environment": "inference",
+      "environment_overrides": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src"
+      },
+      "log": "inference-all21-isolated.log",
+      "log_sha256": "50dc80cec020c61b926b275a5b305b2f040cee18a8e6329b8933c7636f328d77",
+      "returncode": 0,
+      "scope": "all21-isolated",
+      "started_UTC": "2026-11-13T06:54:14.306444+00:00",
+      "summary_line": "1 passed, 43 deselected in 8.24s",
+      "versions": {
+        "numpy": "1.26.4",
+        "python": "3.11.13 (main, Apr 28 2026, 13:06:52) [GCC 8.5.0 20210514 (Red Hat 8.5.0-28)]",
+        "scipy": "1.12.0",
+        "torch": "2.6.0"
+      },
+      "wall_seconds": 8.826266838237643
+    },
+    {
+      "argv": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-s",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_qualify_prior_coordinate_pair_v3.py"
+      ],
+      "environment": "reference",
+      "environment_overrides": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src"
+      },
+      "log": "reference-full.log",
+      "log_sha256": "88d23b3ad42fd8c7d1f01e4ad68509bfcc0062191833143e3f2808b552ad289c",
+      "returncode": 0,
+      "scope": "full",
+      "started_UTC": "2026-11-13T06:54:14.307944+00:00",
+      "summary_line": "42 passed, 2 skipped in 9.36s",
+      "versions": {
+        "numpy": "2.2.6",
+        "python": "3.11.13 (main, Apr 28 2026, 13:06:52) [GCC 8.5.0 20210514 (Red Hat 8.5.0-28)]",
+        "scipy": "1.15.3",
+        "torch": null
+      },
+      "wall_seconds": 9.841811095364392
+    },
+    {
+      "argv": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-s",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_qualify_prior_coordinate_pair_v3.py",
+        "-k",
+        "actual_qualifier_query_builder_all21"
+      ],
+      "environment": "reference",
+      "environment_overrides": {
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src"
+      },
+      "log": "reference-all21-isolated.log",
+      "log_sha256": "460932f0fa17f9f703c5e19cc820b56aa1612321af3fd94fdb21ca203ece60a5",
+      "returncode": 0,
+      "scope": "all21-isolated",
+      "started_UTC": "2026-11-13T06:54:14.308647+00:00",
+      "summary_line": "1 passed, 43 deselected in 8.22s",
+      "versions": {
+        "numpy": "2.2.6",
+        "python": "3.11.13 (main, Apr 28 2026, 13:06:52) [GCC 8.5.0 20210514 (Red Hat 8.5.0-28)]",
+        "scipy": "1.15.3",
+        "torch": null
+      },
+      "wall_seconds": 8.757243877276778
+    }
+  ],
+  "schema": "posteriorforge.v3_query_builder_CPU_repair.v1",
+  "source_sha256_after": {
+    "docs/accuracy-prior-coordinate-fp64-proposals-v3.md": "7ea6e5c57f8404eb761e07f4011b14966d5885fbbdb8620d463c5283916041d8",
+    "scripts/qualify_prior_conditionals_v1.py": "3ae723d4748f23af40b89b9508713e270730985b6a8b5d4ccca1959e60ae17f9",
+    "scripts/qualify_prior_coordinate_pair_v2.py": "a9f4d6818c030ac29587642fa744101c49b9f4a5fd192ab224c0f273f770e875",
+    "scripts/qualify_prior_coordinate_pair_v3.py": "534b48c789bf1168a33b2953d85d747e27c244063dc9fc7cc4b4cb09c4d8324a",
+    "src/posteriorforge/execution_prior_native_v2.py": "0199b16e9cc34203fa0d5645d161742fe9ed244633d7beee047fbcbf2528661c",
+    "src/posteriorforge/execution_prior_native_v3.py": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+    "src/posteriorforge/execution_probability_v3.py": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "tests/test_qualify_prior_coordinate_pair_v3.py": "35f9ee15d890db22fbdc0c29eb4330f505988d2237d825677a5e629f23186db8"
+  },
+  "source_sha256_before": {
+    "docs/accuracy-prior-coordinate-fp64-proposals-v3.md": "7ea6e5c57f8404eb761e07f4011b14966d5885fbbdb8620d463c5283916041d8",
+    "scripts/qualify_prior_conditionals_v1.py": "3ae723d4748f23af40b89b9508713e270730985b6a8b5d4ccca1959e60ae17f9",
+    "scripts/qualify_prior_coordinate_pair_v2.py": "a9f4d6818c030ac29587642fa744101c49b9f4a5fd192ab224c0f273f770e875",
+    "scripts/qualify_prior_coordinate_pair_v3.py": "534b48c789bf1168a33b2953d85d747e27c244063dc9fc7cc4b4cb09c4d8324a",
+    "src/posteriorforge/execution_prior_native_v2.py": "0199b16e9cc34203fa0d5645d161742fe9ed244633d7beee047fbcbf2528661c",
+    "src/posteriorforge/execution_prior_native_v3.py": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+    "src/posteriorforge/execution_probability_v3.py": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "tests/test_qualify_prior_coordinate_pair_v3.py": "35f9ee15d890db22fbdc0c29eb4330f505988d2237d825677a5e629f23186db8"
+  },
+  "status": "CPU_only_repair_zero_qualified_pairs"
+}
