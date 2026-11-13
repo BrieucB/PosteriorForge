@@ -1,0 +1,30 @@
+{
+  "actual_masked_dtype": "<f4",
+  "actual_route": "original_fit_preprocessors_all8",
+  "actual_unmasked_dtype": "<f4",
+  "checks": {
+    "mask": true,
+    "masked_dtype": true,
+    "probability_source": true,
+    "route": true,
+    "shape": true,
+    "stage": true,
+    "unmasked_dtype": true,
+    "width": true,
+    "witness_mode": false,
+    "witness_passed": true
+  },
+  "expected_mode": "fp32_transparent_control_v1",
+  "expected_route": "original_fit_preprocessors_all8",
+  "member": 0,
+  "stage": 6,
+  "witness": {
+    "attention_calls": 36,
+    "member": 0,
+    "original_query_views_disabled": true,
+    "passed": true,
+    "qkv_calls": 36,
+    "route": "original_fit_preprocessors_all8",
+    "stage": 6
+  }
+}

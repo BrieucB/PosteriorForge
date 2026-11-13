@@ -1,0 +1,18 @@
+{
+  "all_F32_query_and_adjusted_prefix_and_F64_probability": true,
+  "all_saved_query_witnesses_passed_actual_source_schema": true,
+  "cached_calls": 972,
+  "cached_mode_explicitly_required": true,
+  "default_numpy_python_RNG_preserved": true,
+  "full_load_parent_executed_in_this_check": false,
+  "mode_default_used": false,
+  "native_by_stage": {
+    "10": 56,
+    "14": 56,
+    "6": 57
+  },
+  "native_calls": 169,
+  "native_mode_field_present": false,
+  "raw_bytes_unchanged": true,
+  "raw_manifest_sha256": "cbe866875983cc3271a22a5862a16fa7e4e3f79e1c28502dad1563c11b96ff32"
+}

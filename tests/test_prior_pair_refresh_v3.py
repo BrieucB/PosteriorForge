@@ -167,6 +167,14 @@ def test_original_sources_globals_code_objects_and_production_COUNT_unchanged():
  with patch.object(w,'refresh_with_timing',lambda *a:None):
   with pytest.raises(ValueError):w.source_guard(require_committed=False)
 
+def query_witness(stage,member,backend):
+ result={'passed':True,'stage':stage,'member':member,'qkv_calls':36,'attention_calls':36}
+ if stage in backend.NATIVE_STAGES:
+  result.update(route=backend.route(stage),original_query_views_disabled=True)
+ else:result.update(mode=backend.CONTROL_MODE,fallback_map={},scope='same active session; aliases restored only on later context exit')
+ return result
+
+
 def execution_fixture():
  """Synthetic source-bound journal only, not a parent or numerical qualification."""
  from types import SimpleNamespace
@@ -179,7 +187,7 @@ def execution_fixture():
   raw=np.ones((1,15+stage),np.float32);masked=backend.mask_query(raw,stage)
   for member in range(8):
    calls.append({'stage':stage,'member':member,'query_unmasked':array_descriptor(raw),'query_masked':array_descriptor(masked),
-    'mask':backend.stage_policy(stage),'execution_route':backend.route(stage),'witness':{'passed':True,'mode':producer.MODE},
+    'mask':backend.stage_policy(stage),'execution_route':backend.route(stage),'witness':query_witness(stage,member,backend),
     'probability_policy_source_sha256':w.PROBABILITY_SHA256,'neural_prefix':{
      'module_sha256':w.NATIVE_BACKEND_SHA256,'neural_source_sha256':w.NEURAL_SOURCE_SHA256,'stage':stage,'member':member,
      'actual_adjusted_dtype':'torch.float32','actual_probability_dtype':'torch.float64','model_rng_isolation_scope_delta':1,'selected_member_lists_restored':True}})
@@ -223,3 +231,50 @@ def test_execution_journal_changed_v3_geometry_route_source_count_or_support_rej
  elif fault=='support':d['proposal_buffer']['original_support_check_code_and_closure_verified']=False
  else:d['expected_probability_translation_count']=167
  with pytest.raises(ValueError):w.execution_checks(d,p,a,h,SPEC)
+
+@pytest.mark.parametrize('stage',[0,6,10,14,20])
+def test_actual_native_and_cached_witness_schemas_do_not_share_mode_defaults(stage):
+ from posteriorforge import execution_prior_native_v3 as backend
+ witness=query_witness(stage,0,backend)
+ assert w.validate_query_witness(witness,stage,0,backend,backend.CONTROL_MODE)
+ assert ('mode' in witness)==(stage not in backend.NATIVE_STAGES)
+
+@pytest.mark.parametrize('fault',['cached_missing_mode','cached_wrong_mode','cached_fallback','native_route','native_view','native_mode_schema','native_missing_schema','stage','member','boolcount','unequalcount','zerocount'])
+def test_native_and_cached_witness_schema_route_view_and_counts_are_strict(fault):
+ from posteriorforge import execution_prior_native_v3 as backend
+ stage=0 if fault.startswith('cached') else 6;witness=query_witness(stage,0,backend)
+ if fault=='cached_missing_mode':witness.pop('mode')
+ elif fault=='cached_wrong_mode':witness['mode']='fp16'
+ elif fault=='cached_fallback':witness['fallback_map']={'6':[0]}
+ elif fault=='native_route':witness['route']='frozen88_resident_cache'
+ elif fault=='native_view':witness['original_query_views_disabled']=False
+ elif fault=='native_mode_schema':witness['mode']=backend.CONTROL_MODE
+ elif fault=='native_missing_schema':witness.pop('original_query_views_disabled')
+ elif fault=='stage':witness['stage']=5
+ elif fault=='member':witness['member']=1
+ elif fault=='boolcount':witness['qkv_calls']=True
+ elif fault=='unequalcount':witness['attention_calls']-=1
+ else:witness.update(qkv_calls=0,attention_calls=0)
+ with pytest.raises(ValueError):w.validate_query_witness(witness,stage,0,backend,backend.CONTROL_MODE)
+
+def test_actual_successful_parent_query_journal_native_schema_readonly():
+ """Actual saved witness fields only; no parent refresh, samples or RNG call."""
+ from posteriorforge import execution_prior_native_v3 as backend
+ path=Path('/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/neural-posterior-seed20261111-case0-01/manifest.json')
+ if not path.exists():pytest.skip('authenticated genuine v3 saved journal unavailable')
+ assert hashlib.sha256(path.read_bytes()).hexdigest()=='cbe866875983cc3271a22a5862a16fa7e4e3f79e1c28502dad1563c11b96ff32'
+ d=json.loads(path.read_bytes());before=state();native=[];cached=[]
+ for call in d['execution_counters']['actual_latent_query_calls']:
+  stage=call['stage'];assert w.validate_query_witness(call['witness'],stage,call['member'],backend,backend.CONTROL_MODE)
+  assert call['query_unmasked']['dtype']==call['query_masked']['dtype']=='<f4'
+  assert call['neural_prefix']['actual_adjusted_dtype']=='torch.float32' and call['neural_prefix']['actual_probability_dtype']=='torch.float64'
+  if stage in backend.NATIVE_STAGES:
+   assert 'mode' not in call['witness'];native.append(stage)
+  else:
+   assert call['witness']['mode']==backend.CONTROL_MODE;cached.append(stage)
+ assert {stage:native.count(stage) for stage in backend.NATIVE_STAGES}=={6:57,10:56,14:56}
+ assert len(native)==169 and cached and state()==before
+ first=next(c for c in d['execution_counters']['actual_latent_query_calls'] if c['stage']==6)
+ corrupted=deepcopy(first['witness']);corrupted['route']='frozen88_resident_cache'
+ with pytest.raises(ValueError):w.validate_query_witness(corrupted,6,first['member'],backend,backend.CONTROL_MODE)
+ print('ACTUAL_JOURNAL_WITNESS_SCHEMA='+json.dumps({'native_calls':len(native),'cached_calls':len(cached),'native_by_stage':{str(s):native.count(s) for s in backend.NATIVE_STAGES},'all_F32_prefix_and_F64_probability':True,'no_mode_default':True},sort_keys=True))

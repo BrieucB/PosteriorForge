@@ -1,0 +1,9 @@
+{
+  "README.txt": "88f247fd20aa6bf2669c82329969d055da664b088d7c597f8c45872dfb1de8cc",
+  "actual-query-witness-schema.json": "cb27f856001c96ca283f9262be960630d3001100be0b6d8a97a8b435543fb750",
+  "inference.log": "a311fe1691d0ed574160e84083145ff8ca9f2f3ae27fdeef85afabd5327f40fc",
+  "receipt.json": "4517ca77f737da18a580897014bbf28637a64d056fc0262e9a321eed818de175",
+  "reference.log": "3728e7230b24b734f0a7ef4eed546dc848c3e58fa0f31274a141c5afce8bc73a",
+  "sources-after.json": "b3781677ea936e7fde3fee26370f059dbee1de72e45855e64080090c90c219a4",
+  "sources-before.json": "b3781677ea936e7fde3fee26370f059dbee1de72e45855e64080090c90c219a4"
+}

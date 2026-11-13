@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/posterior-launch-01/parent-validation-01/run-readonly.py", line 23, in <module>
+    document,values,auth=w.load_parent(parent,expected['manifest.json'],scratch=s,spec=w.pair_spec(20261111,0),execution_screen=phase/'pair-conditionals-seed20261111-case0-02/manifest.json',pair_cpu_receipt=s/'results/accuracy-prior-coordinates-v1/pair-preflight-combined-01/receipt.json')
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project/eu-26-17/eubrieucb/posteriorforge/work/v3-downstream-cpu-01/scripts/refresh_prior_pair_v3_global_block.py", line 260, in load_parent
+    execution=execution_checks(d,producer,{'theta':theta,'obs':obs,'raw':raw},helper,spec)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project/eu-26-17/eubrieucb/posteriorforge/work/v3-downstream-cpu-01/scripts/refresh_prior_pair_v3_global_block.py", line 191, in execution_checks
+    require(call['stage']==stage and call['execution_route']==backend.route(stage) and call['mask']==backend.stage_policy(stage)
+  File "/scratch/project/eu-26-17/eubrieucb/posteriorforge/work/v3-downstream-cpu-01/scripts/refresh_prior_pair_global_block_v1.py", line 37, in require
+    if not value:raise ValueError(message)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: actual query F32 geometry/mask/route/witness differs
+Traceback (most recent call last):
+  File "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v3/posterior-launch-01/parent-validation-01/run-readonly.py", line 23, in <module>
+    document,values,auth=w.load_parent(parent,expected['manifest.json'],scratch=s,spec=w.pair_spec(20261111,0),execution_screen=phase/'pair-conditionals-seed20261111-case0-02/manifest.json',pair_cpu_receipt=s/'results/accuracy-prior-coordinates-v1/pair-preflight-combined-01/receipt.json')
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project/eu-26-17/eubrieucb/posteriorforge/work/v3-downstream-cpu-01/scripts/refresh_prior_pair_v3_global_block.py", line 260, in load_parent
+    execution=execution_checks(d,producer,{'theta':theta,'obs':obs,'raw':raw},helper,spec)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/project/eu-26-17/eubrieucb/posteriorforge/work/v3-downstream-cpu-01/scripts/refresh_prior_pair_v3_global_block.py", line 191, in execution_checks
+    require(call['stage']==stage and call['execution_route']==backend.route(stage) and call['mask']==backend.stage_policy(stage)
+  File "/scratch/project/eu-26-17/eubrieucb/posteriorforge/work/v3-downstream-cpu-01/scripts/refresh_prior_pair_global_block_v1.py", line 37, in require
+    if not value:raise ValueError(message)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: actual query F32 geometry/mask/route/witness differs

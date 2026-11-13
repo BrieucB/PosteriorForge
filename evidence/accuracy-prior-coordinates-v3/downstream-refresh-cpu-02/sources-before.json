@@ -1,0 +1,13 @@
+{
+  "docs/accuracy-prior-coordinate-fp64-proposals-v3.md": "7ea6e5c57f8404eb761e07f4011b14966d5885fbbdb8620d463c5283916041d8",
+  "scripts/refresh_prior_pair_global_block_v1.py": "22e57084351631f36c6989cc01fe8bf4f2827095e587c496cda2e7f368d3cdb9",
+  "scripts/refresh_prior_pair_v2_global_block.py": "16524299f46166bab135be91ef7d31ceb780126508ca48ea33ca84a030010b74",
+  "scripts/refresh_prior_pair_v3_global_block.py": "9d7f20d78466e9fae12187b7451b95127606dc701bb9a692f5f43730d5d92dc6",
+  "src/posteriorforge/conditional_globals.py": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+  "src/posteriorforge/execution_prior_native_v3.py": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+  "src/posteriorforge/execution_probability_v3.py": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+  "src/posteriorforge/performance_prior_pair_v3.py": "28e5c5f6a613b5563a0db7368b30713ee8f7ec251350c99f3112e46a5e462651",
+  "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+  "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+  "tests/test_prior_pair_refresh_v3.py": "2fa06c4e44e88df2782afb59b7ca9ec9c8b3e0d50b133e6a5acf0dd08a3696e6"
+}

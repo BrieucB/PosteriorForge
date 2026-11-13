@@ -1,0 +1,29 @@
+usage: evaluate_prior_pair_v3.py [-h] --root ROOT --parent-manifest
+                                 PARENT_MANIFEST --parent-manifest-sha256
+                                 PARENT_MANIFEST_SHA256 --hybrid-manifest
+                                 HYBRID_MANIFEST --hybrid-manifest-sha256
+                                 HYBRID_MANIFEST_SHA256 --execution-screen
+                                 EXECUTION_SCREEN --pair-cpu-receipt
+                                 PAIR_CPU_RECEIPT --output OUTPUT
+                                 --context-seed CONTEXT_SEED --case CASE
+
+V3 same-pair original physical assessment; Built with PriorLabs-TabPFN. The
+original50000-row/21marginal/32joint/CDF/mean/SD/reference gates are
+unchanged. Only complete v3 physical parents and one separately authenticated
+physical G3 are eligible. No model, GPU, new posterior or reference
+integration runs here. NEW G3 validation uses its actual saved Z; OLD baseline
+custody replays its already-recorded private stream, without another
+posterior/G3.
+
+options:
+  -h, --help            show this help message and exit
+  --root ROOT
+  --parent-manifest PARENT_MANIFEST
+  --parent-manifest-sha256 PARENT_MANIFEST_SHA256
+  --hybrid-manifest HYBRID_MANIFEST
+  --hybrid-manifest-sha256 HYBRID_MANIFEST_SHA256
+  --execution-screen EXECUTION_SCREEN
+  --pair-cpu-receipt PAIR_CPU_RECEIPT
+  --output OUTPUT
+  --context-seed CONTEXT_SEED
+  --case CASE

@@ -1,0 +1,28 @@
+{
+  "CUDA_VISIBLE_DEVICES": "",
+  "Torch_imported": false,
+  "default_numpy_python_RNG_preserved": true,
+  "elapsed_seconds": 55.69630648754537,
+  "error": "actual query F32 geometry/mask/route/witness differs",
+  "error_type": "ValueError",
+  "expected_raw_sha256": {
+    "manifest.json": "cbe866875983cc3271a22a5862a16fa7e4e3f79e1c28502dad1563c11b96ff32",
+    "samples.npz": "b80a51c250a9155a81df54240b8c6e75bbd3a69dd9f1d750dd6625a227ebe3c0"
+  },
+  "forbidden_refresh_calls": [],
+  "posterior_or_world_or_reference_or_NN_or_GPU_calls": 0,
+  "production_G3_calls": 0,
+  "raw_after_sha256": {
+    "manifest.json": "cbe866875983cc3271a22a5862a16fa7e4e3f79e1c28502dad1563c11b96ff32",
+    "samples.npz": "b80a51c250a9155a81df54240b8c6e75bbd3a69dd9f1d750dd6625a227ebe3c0"
+  },
+  "raw_before_sha256": {
+    "manifest.json": "cbe866875983cc3271a22a5862a16fa7e4e3f79e1c28502dad1563c11b96ff32",
+    "samples.npz": "b80a51c250a9155a81df54240b8c6e75bbd3a69dd9f1d750dd6625a227ebe3c0"
+  },
+  "raw_manifest_and_samples_unchanged": true,
+  "schema": "posteriorforge.v3_genuine_parent_readonly_validation.v1",
+  "status": "failed",
+  "worktree_revision": "a0d889067b92a2c51d3386f7a9e0a02a41d9ee3d",
+  "wrapper_sha256": "0720eb75a10550f2486fd1d77f3a5ba4e20496c3812194c878bec5633fc60ff3"
+}

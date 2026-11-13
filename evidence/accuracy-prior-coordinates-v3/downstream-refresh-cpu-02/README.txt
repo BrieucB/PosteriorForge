@@ -1,0 +1,5 @@
+CPU-only native/cached witness reader repair. No producer, numerical backend, probability, decoder, kernel, seed, scientific gate or saved NN-result change.
+Native frozen0199 query witnesses intentionally omit mode and contain real route/stage/member/query-view/count fields. Cached witnesses still require explicit mode and empty fallback; no silent defaults.
+Actual saved cbe866 parent journal:169 native calls, including57/56/56 at stages6/10/14, and every cached witness validate under its own actual schema. F32 query/prefix and F64 probability metadata remain checked.
+72 focused tests pass in each locked CPU environment, including real saved journal and positive/negative native/cached schemas. Old source/package01 and failed read-only validation01 remain preserved.
+The corrected committed full load_parent rerun is still pending Root branch commit; no actual full-validation success is inferred from unit tests. No real G3, stochastic draws, new worlds/references, posterior/NN/GPU or sample changes.

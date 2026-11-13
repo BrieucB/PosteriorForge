@@ -1,0 +1,14 @@
+{
+  "scripts/evaluate_prior_pair_v1.py": "f16e13bb251ff195ed1c7f23a2045c806f7c1bc027665671d2d58e6a98246f1d",
+  "scripts/evaluate_prior_pair_v2.py": "61eb7b6c1546a0401cc25518adaba0a444ae2a09a83dd5a23745b8c337ceb1d7",
+  "scripts/evaluate_prior_pair_v3.py": "f5d7833754ec802e87f2cbd9a262b47474848e2415049c2d134fa88142f4b528",
+  "scripts/refresh_prior_pair_v3_global_block.py": "9d7f20d78466e9fae12187b7451b95127606dc701bb9a692f5f43730d5d92dc6",
+  "src/posteriorforge/conditional_globals.py": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+  "src/posteriorforge/execution_prior_native_v3.py": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+  "src/posteriorforge/execution_probability_v3.py": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+  "src/posteriorforge/performance_prior_pair_v3.py": "28e5c5f6a613b5563a0db7368b30713ee8f7ec251350c99f3112e46a5e462651",
+  "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+  "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+  "src/posteriorforge/validation.py": "92ddfd79a1c42cdbc56dfc9ad0f2c987fa70ee69387b0c5decff53c20b9aa694",
+  "tests/test_prior_pair_assessment_v3.py": "5c00472f7ce660bff603185078f34422b2036460b5be7a8fdc64e062f5718964"
+}

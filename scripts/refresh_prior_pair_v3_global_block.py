@@ -170,6 +170,26 @@ def replay_generated_decode(document,latent_waves,physical_values,decoded_waves)
   'd8_strict_open_or_noise_latent_roundtrip_reimposed':False,'support_selection_owner':'unchanged original whole-vector support'}
 
 
+def validate_query_witness(witness,stage,member,backend,mode):
+ """Validate the two actual frozen0199 witness schemas, without mode defaults."""
+ require(type(witness) is dict and witness.get('passed') is True
+  and type(witness.get('stage')) is int and witness['stage']==stage
+  and type(witness.get('member')) is int and witness['member']==member,
+  'actual query witness stage/member/status differs')
+ qkv=witness.get('qkv_calls');attention=witness.get('attention_calls')
+ require(type(qkv) is int and qkv>0 and type(attention) is int and attention==qkv,
+  'actual query witness QKV/attention counts differ')
+ if stage in backend.NATIVE_STAGES:
+  require(set(witness)=={'passed','stage','member','route','qkv_calls','attention_calls','original_query_views_disabled'},
+   'native query witness schema differs')
+  require(witness['route']==backend.route(stage)=='original_fit_preprocessors_all8'
+   and witness['original_query_views_disabled'] is True,'native query witness route/query-view differs')
+ else:
+  require('mode' in witness and witness['mode']==mode==backend.CONTROL_MODE
+   and witness.get('fallback_map')=={},'cached query witness explicit mode/fallback differs')
+ return True
+
+
 def execution_checks(parent,producer,actual,helper,spec):
  from collections import Counter
  backend=producer.backend;theta,obs=actual['theta'],actual['obs'];execution=parent['execution_counters'];waves=parent['generated_proposal_wave_count']
@@ -190,8 +210,9 @@ def execution_checks(parent,producer,actual,helper,spec):
    shape=call['query_unmasked']['shape'];masked=call['query_masked'];prefix=call['neural_prefix']
    require(call['stage']==stage and call['execution_route']==backend.route(stage) and call['mask']==backend.stage_policy(stage)
     and shape==masked['shape'] and shape[1]==15+stage and call['query_unmasked']['dtype']==masked['dtype']=='<f4'
-    and call['witness'].get('passed') is True and call['witness'].get('mode')==producer.MODE
+    and call['witness'].get('passed') is True
     and call['probability_policy_source_sha256']==PROBABILITY_SHA256,'actual query F32 geometry/mask/route/witness differs')
+   validate_query_witness(call['witness'],stage,call['member'],backend,producer.MODE)
    require(prefix.get('module_sha256')==NATIVE_BACKEND_SHA256 and prefix.get('neural_source_sha256')==NEURAL_SOURCE_SHA256
     and prefix.get('stage')==stage and prefix.get('member')==call['member'] and prefix.get('actual_adjusted_dtype')=='torch.float32'
     and prefix.get('actual_probability_dtype')=='torch.float64' and prefix.get('model_rng_isolation_scope_delta')==1
@@ -266,6 +287,6 @@ def load_parent(path,expected_sha,*,scratch,spec,execution_screen,pair_cpu_recei
   'canonical_execution_policy_authentication':policy,'CPU_wall_seconds':{'explicit_initial_source_validation':source_seconds,'total_parent_validation':time.perf_counter()-started},
   'CPU_timing_scope':'wall time; total includes source/proof/data/finite-decode checks; source subset is not additive','new_model_GPU_or_reference_integrations':0,'new_global_draws_during_validation':0}
 
-_PUBLIC_SEALS=tuple((name,globals()[name],globals()[name].__code__) for name in ('source_sha256','source_guard','validate_header','verify_canonical_policy','replay_generated_decode','execution_checks','load_parent','refresh_with_timing','refresh','_safe_sibling','derivation_descriptor'))
+_PUBLIC_SEALS=tuple((name,globals()[name],globals()[name].__code__) for name in ('source_sha256','source_guard','validate_header','verify_canonical_policy','replay_generated_decode','validate_query_witness','execution_checks','load_parent','refresh_with_timing','refresh','_safe_sibling','derivation_descriptor'))
 _CONFIG_SEALS={name:globals()[name] for name in ('SCHEMA','PRODUCER_SCHEMA','PRODUCER_VARIANT','PRODUCER_SHA256','PAIR_SOURCE_SHA256','PAIR_CPU_RECEIPT_SHA256','PAIR_QUALIFIER_SHA256','NATIVE_BACKEND_SHA256','NEURAL_SOURCE_SHA256','PROBABILITY_SHA256','PROPOSAL_SHA256','PROTOCOL_SHA256','PROTOCOL_PATH','PROOF_SHA256','INELIGIBLE_PARENT_SHA256','V1_WRAPPER_SHA256','BASE_WRAPPER_SHA256','DRAW_SOURCE_SHA256','COUNT','ROLE','kernel','codec','DRAW','BASE','_KERNEL_REFRESH','_RECORDING_GENERATOR')}
 if __name__=='__main__':main()

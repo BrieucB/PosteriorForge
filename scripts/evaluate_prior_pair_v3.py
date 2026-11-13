@@ -28,7 +28,7 @@ for _key,_value in vars(_ANCESTOR).items():
   _clone.__kwdefaults__=_value.__kwdefaults__;globals()[_key]=_clone
 
 SCHEMA="posteriorforge.prior_coordinate_pair_assessment.v3"
-WRAPPER_SHA256='0720eb75a10550f2486fd1d77f3a5ba4e20496c3812194c878bec5633fc60ff3'  # New v3 physical-parent wrapper frozen after CPU review.
+WRAPPER_SHA256='9d7f20d78466e9fae12187b7451b95127606dc701bb9a692f5f43730d5d92dc6'  # New v3 physical-parent wrapper frozen after CPU review.
 LABELS=("OLD matched physical-target neural mixed FP16/FP32 + physical G3",
  "NEW v3 F32 forward / Policy C F64 probability\n18 cached; all8 original at6/10/14; physical F64",
  "NEW same v3 physical parent + ONE SEPARATE physical G3","qualified same-case reference")

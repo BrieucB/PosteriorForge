@@ -1,0 +1,166 @@
+{
+  "Torch_imported_in_source_preflight": false,
+  "actual_new_stochastic_draws": 0,
+  "actual_query_journal_receipt_sha256": "cb27f856001c96ca283f9262be960630d3001100be0b6d8a97a8b435543fb750",
+  "actual_saved_query_journal": {
+    "all_F32_query_and_adjusted_prefix_and_F64_probability": true,
+    "all_saved_query_witnesses_passed_actual_source_schema": true,
+    "cached_calls": 972,
+    "cached_mode_explicitly_required": true,
+    "default_numpy_python_RNG_preserved": true,
+    "full_load_parent_executed_in_this_check": false,
+    "mode_default_used": false,
+    "native_by_stage": {
+      "10": 56,
+      "14": 56,
+      "6": 57
+    },
+    "native_calls": 169,
+    "native_mode_field_present": false,
+    "raw_bytes_unchanged": true,
+    "raw_manifest_sha256": "cbe866875983cc3271a22a5862a16fa7e4e3f79e1c28502dad1563c11b96ff32"
+  },
+  "all_scientific_criteria_change": false,
+  "checkout_source_guard": {
+    "F64_helper": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+    "actual_draw_observer_source": "c73c4e489946e018399885c981afafc5c47e3eab6e27f6561b377f836f703f8c",
+    "codec": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "derivation": {
+      "coordinate_decode_after_global_refresh": false,
+      "numerical_G3_seed_or_metric_math_changed": false,
+      "old_failed_wave_recovery": false,
+      "old_globals_unmodified": true,
+      "parent_validation_contract": "v3 finite F64 proposals; original whole-vector support/FIFO; strict training encoder remains d8",
+      "schema": "posteriorforge.prior_pair_v3_downstream_derivation.v1",
+      "unchanged_functions_same_code_objects": true,
+      "v1_wrapper_sha256": "22e57084351631f36c6989cc01fe8bf4f2827095e587c496cda2e7f368d3cdb9"
+    },
+    "git_revision": "06fec2b8bdea5322b081d1116e293c0ca5cf4b31",
+    "guard_primitive_source": "4aa226e24ca381df8956d8c8238a9e17092b01f9771b020cae2166c72990d284",
+    "kernel": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+    "native_backend": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+    "neural_source": "0199b16e9cc34203fa0d5645d161742fe9ed244633d7beee047fbcbf2528661c",
+    "pair_CPU_receipt": "6f35d9d090a955604186c5fbf3312b82465eff6fdae7e4cd24a23b646dbdf193",
+    "pair_data": "402117cad65af190352cb0b14977fbbdc896f196d069749b0be28608fdef400e",
+    "pair_producer": "28e5c5f6a613b5563a0db7368b30713ee8f7ec251350c99f3112e46a5e462651",
+    "pair_qualifier": "534b48c789bf1168a33b2953d85d747e27c244063dc9fc7cc4b4cb09c4d8324a",
+    "probability": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+    "proposal": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "protocol": "7ea6e5c57f8404eb761e07f4011b14966d5885fbbdb8620d463c5283916041d8",
+    "sources_committed": false,
+    "v1_validation_ancestry": "22e57084351631f36c6989cc01fe8bf4f2827095e587c496cda2e7f368d3cdb9",
+    "wrapper": "9d7f20d78466e9fae12187b7451b95127606dc701bb9a692f5f43730d5d92dc6"
+  },
+  "commands": {
+    "inference": {
+      "command": "CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src OMP_NUM_THREADS=1 /scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python -m pytest -q -p no:cacheprovider tests/test_prior_pair_refresh_v3.py",
+      "exit_code": 0,
+      "log_sha256": "a311fe1691d0ed574160e84083145ff8ca9f2f3ae27fdeef85afabd5327f40fc",
+      "passed": 72,
+      "skipped": 0,
+      "versions": {
+        "numpy": "1.26.4",
+        "python": "3.11.13 (main, Apr 28 2026, 13:06:52) [GCC 8.5.0 20210514 (Red Hat 8.5.0-28)]",
+        "scipy": "1.12.0"
+      }
+    },
+    "reference": {
+      "command": "CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src OMP_NUM_THREADS=1 /scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/reference/bin/python -m pytest -q -p no:cacheprovider tests/test_prior_pair_refresh_v3.py",
+      "exit_code": 0,
+      "log_sha256": "3728e7230b24b734f0a7ef4eed546dc848c3e58fa0f31274a141c5afce8bc73a",
+      "passed": 72,
+      "skipped": 0,
+      "versions": {
+        "numpy": "2.2.6",
+        "python": "3.11.13 (main, Apr 28 2026, 13:06:52) [GCC 8.5.0 20210514 (Red Hat 8.5.0-28)]",
+        "scipy": "1.15.3"
+      }
+    }
+  },
+  "corrected_committed_full_parent_validation": "pending Root branch commit and separately retained read-only validation02; no success synthesized",
+  "engineering_fixtures": {
+    "G3": "4 deterministic physical rows with declared fixed linspace Z; exact original refresh_with_timing and e346 kernel code; no stochastic generator draw",
+    "G3_globals_only_and_other18_columns_byte_identical": true,
+    "computed_physical_endpoint_retained": true,
+    "finite_decode_support_replay": "6 deterministic rows; one and two waves; count4 selected in a private test-instance namespace only",
+    "finite_outside_proposal_rejected_only_by_original_support": true,
+    "no_d8_strict_open_or_universal_noise_latent_roundtrip_reimposed": true,
+    "synthetic_execution_journal": "all21 actual v3 field/API paths with deterministic F32 arrays, observer/FIFO cutpoints explicit; not a production parent or numerical qualification"
+  },
+  "kernel_source_sha256": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+  "new_posterior_or_world_or_reference_or_NN_or_GPU_calls": 0,
+  "new_wrapper_committed_during_this_test": false,
+  "next_step": "Root source review and commit/CI; production G3 remains separately unauthorized",
+  "no_parent_recovery_or_scientific_accuracy_claim": true,
+  "original_random_role": "ss15_global_block_gibbs_once_v1",
+  "original_reader_validation_01": {
+    "error": "actual query F32 geometry/mask/route/witness differs at native stage6; only nonexistent native mode predicate failed",
+    "raw_manifest_and_samples_unchanged": true,
+    "receipt_sha256": "7b0556d9e1c53302063bd4d5dd95ba63e7bfff0ce044f8841c3ebe376b52c190",
+    "status": "failed",
+    "wrapper_sha256": "0720eb75a10550f2486fd1d77f3a5ba4e20496c3812194c878bec5633fc60ff3"
+  },
+  "original_source_package_01_preserved": true,
+  "parent_validation": [
+    "successful_v3_only",
+    "failed92755_and25e5_rejected_before_payload",
+    "partial_oldschema_wrongpair_rejected",
+    "exact_source_and_Git_and_own_pair_proof_replay",
+    "strict_d8_training_bytes_recomputed",
+    "all_finite_F64_generated_proposals_replayed_before_original_whole_vector_support_selection",
+    "complete_original_FIFO_counts_and_closure_source",
+    "all21_per_wave_F32_neural_PolicyC_query_geometry_counts_restoration"
+  ],
+  "production_G3_calls": 0,
+  "production_count": 50000,
+  "reader_only_change": "native frozen0199 seven-field schema validates actual route/stage/member/query-view/QKV-attention counts; cached explicit mode and empty fallback remain required; no defaults",
+  "registered_pair": {
+    "case": 0,
+    "context_seed": 20261111,
+    "context_size": 4096,
+    "count": 50000,
+    "repetition": 0
+  },
+  "registered_proof_sha256": "56ec6cdc81eeab4c755d24fa8ddae47c21f75bce4c624c43908a59f5da21ffd1",
+  "schema": "posteriorforge.v3_downstream_refresh_CPU_receipt.v1",
+  "source_guard_committed_required_for_production": true,
+  "sources_after_sha256": {
+    "docs/accuracy-prior-coordinate-fp64-proposals-v3.md": "7ea6e5c57f8404eb761e07f4011b14966d5885fbbdb8620d463c5283916041d8",
+    "scripts/refresh_prior_pair_global_block_v1.py": "22e57084351631f36c6989cc01fe8bf4f2827095e587c496cda2e7f368d3cdb9",
+    "scripts/refresh_prior_pair_v2_global_block.py": "16524299f46166bab135be91ef7d31ceb780126508ca48ea33ca84a030010b74",
+    "scripts/refresh_prior_pair_v3_global_block.py": "9d7f20d78466e9fae12187b7451b95127606dc701bb9a692f5f43730d5d92dc6",
+    "src/posteriorforge/conditional_globals.py": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+    "src/posteriorforge/execution_prior_native_v3.py": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+    "src/posteriorforge/execution_probability_v3.py": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+    "src/posteriorforge/performance_prior_pair_v3.py": "28e5c5f6a613b5563a0db7368b30713ee8f7ec251350c99f3112e46a5e462651",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "tests/test_prior_pair_refresh_v3.py": "2fa06c4e44e88df2782afb59b7ca9ec9c8b3e0d50b133e6a5acf0dd08a3696e6"
+  },
+  "sources_before_sha256": {
+    "docs/accuracy-prior-coordinate-fp64-proposals-v3.md": "7ea6e5c57f8404eb761e07f4011b14966d5885fbbdb8620d463c5283916041d8",
+    "scripts/refresh_prior_pair_global_block_v1.py": "22e57084351631f36c6989cc01fe8bf4f2827095e587c496cda2e7f368d3cdb9",
+    "scripts/refresh_prior_pair_v2_global_block.py": "16524299f46166bab135be91ef7d31ceb780126508ca48ea33ca84a030010b74",
+    "scripts/refresh_prior_pair_v3_global_block.py": "9d7f20d78466e9fae12187b7451b95127606dc701bb9a692f5f43730d5d92dc6",
+    "src/posteriorforge/conditional_globals.py": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+    "src/posteriorforge/execution_prior_native_v3.py": "7c7180e3f161f9fc34684fc492f9ab558660b3b41092b70feea17edbbbf3f19c",
+    "src/posteriorforge/execution_probability_v3.py": "7fea13270c38c51eed0eb65cd5026de94e3f7e24cc4734e8906e882fb0bc0494",
+    "src/posteriorforge/performance_prior_pair_v3.py": "28e5c5f6a613b5563a0db7368b30713ee8f7ec251350c99f3112e46a5e462651",
+    "src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "src/posteriorforge/prior_proposals_v3.py": "9216e76ce335ee52ffb1a5e8fbdd33c72f8c0aa84c4f1803dd90ff06b3e3a6d7",
+    "tests/test_prior_pair_refresh_v3.py": "2fa06c4e44e88df2782afb59b7ca9ec9c8b3e0d50b133e6a5acf0dd08a3696e6"
+  },
+  "status": "CPU_reader_schema_repair_only_no_G3",
+  "strict_parent_schema": "posteriorforge.inference.prior_coordinate_pair.v3",
+  "unchanged_old_refresh_functions_exact_codeobjects": {
+    "coordinate_decode_after_global_refresh": false,
+    "numerical_G3_seed_or_metric_math_changed": false,
+    "old_failed_wave_recovery": false,
+    "old_globals_unmodified": true,
+    "parent_validation_contract": "v3 finite F64 proposals; original whole-vector support/FIFO; strict training encoder remains d8",
+    "schema": "posteriorforge.prior_pair_v3_downstream_derivation.v1",
+    "unchanged_functions_same_code_objects": true,
+    "v1_wrapper_sha256": "22e57084351631f36c6989cc01fe8bf4f2827095e587c496cda2e7f368d3cdb9"
+  },
+  "unchanged_session_prefix_dtype_geometry_and_scientific_predicates": true
+}
