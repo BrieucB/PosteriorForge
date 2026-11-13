@@ -1,0 +1,34 @@
+{
+  "command": [
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/test_prior_tail_icdf_reference_v1.py"
+  ],
+  "cwd": "/home/it4i-bbenvegnen/workspace/PosteriorForge",
+  "environment": "inference",
+  "exit_code": 0,
+  "explicit_environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "PYTHONPATH": "src"
+  },
+  "log": "inference-pytest.txt",
+  "log_sha256": "825b6727fceaedd7feedac51e0d0c095b7ccde29fe9cf165ccb025cb0b6672ac",
+  "scope": "deterministic synthetic captured-weight finite-bar reference checks; no RNG, softmax, neural, posterior or G3 calls",
+  "source_after": {
+    "scripts/prior_tail_icdf_reference_v1.py": "8c35b5e10e5b15383b8a2112f25fa555e8d11016a30fef0abcc4167c527e87c1",
+    "tests/test_prior_tail_icdf_reference_v1.py": "4ac87f662a36a40c135817daa1511af0dc0f8e19d26a2d81033a5cc6c670f6ef"
+  },
+  "source_before": {
+    "scripts/prior_tail_icdf_reference_v1.py": "8c35b5e10e5b15383b8a2112f25fa555e8d11016a30fef0abcc4167c527e87c1",
+    "tests/test_prior_tail_icdf_reference_v1.py": "4ac87f662a36a40c135817daa1511af0dc0f8e19d26a2d81033a5cc6c670f6ef"
+  },
+  "source_unchanged": true,
+  "started_UTC": "2026-11-13T04:25:10.384555+00:00",
+  "versions": {
+    "numpy": "1.26.4",
+    "python": "3.11.13"
+  },
+  "wall_seconds": 0.6438326872885227
+}

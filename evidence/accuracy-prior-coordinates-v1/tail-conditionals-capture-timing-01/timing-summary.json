@@ -1,0 +1,1675 @@
+{
+  "GPU_range_duplicates_not_host_boundaries": true,
+  "capture_elapsed_seconds": 48.31360623938963,
+  "capture_manifest_sha256": "cf11be3c542eb11c7ed9423845eb1f80fb046df59a2b85254cb9f20d25663461",
+  "cautions": [
+    "Host neural wall includes waits/copies; it is not CPU compute.",
+    "CUDA event spans are not exclusive kernel time.",
+    "Kernel/copy/sync unions and per-kind unions may overlap; do not add them.",
+    "Unmatched/conflicting correlations are retained, not silently attributed.",
+    "SDPA generic/nested operator counts are not exclusive backend-call totals; flags alone do not prove Flash.",
+    "Copy bytes missing in args are unknown, not proof of zero bytes."
+  ],
+  "host_neural_annotation_union_seconds": 16.602075525559485,
+  "launch_correlation_attribution": {
+    "caution": "Kernel sums can overlap. Per-kind unions can overlap one another; host synchronization waits are not independent GPU compute.",
+    "copy_names_and_bytes": {
+      "Memcpy DtoD (Device -> Device)": {
+        "bytes": 4816631488,
+        "count": 672,
+        "sum_seconds": 0.006017846191406234
+      },
+      "Memcpy DtoH (Device -> Pageable)": {
+        "bytes": 6268224032,
+        "count": 6932,
+        "sum_seconds": 0.4160077539062524
+      },
+      "Memcpy DtoH (Device -> Pinned)": {
+        "bytes": 1152,
+        "count": 384,
+        "sum_seconds": 0.0008261337890624984
+      },
+      "Memcpy HtoD (Pageable -> Device)": {
+        "bytes": 3598505512,
+        "count": 5132,
+        "sum_seconds": 0.22463639160156343
+      }
+    },
+    "correlation_conflicts": 0,
+    "flash_attention_inferred_from_flags": false,
+    "groups": {
+      "stage15_candidate_N1": {
+        "copy_bytes": 1846736,
+        "copy_count": 256,
+        "copy_interval_union_seconds": 0.0006553656421601772,
+        "copy_sum_seconds": 0.0006553613281250013,
+        "kernel_count": 2776,
+        "kernel_interval_union_seconds": 0.07501506200060248,
+        "kernel_sum_seconds": 0.0750150634765626
+      },
+      "stage15_candidate_N1024": {
+        "copy_bytes": 1071892016,
+        "copy_count": 248,
+        "copy_interval_union_seconds": 0.0397074818611145,
+        "copy_sum_seconds": 0.039707482421875,
+        "kernel_count": 2904,
+        "kernel_interval_union_seconds": 0.298501368612051,
+        "kernel_sum_seconds": 0.29850136328125
+      },
+      "stage15_candidate_prepare": {
+        "copy_bytes": 3834591632,
+        "copy_count": 2376,
+        "copy_interval_union_seconds": 0.13985365629196167,
+        "copy_sum_seconds": 0.13985365185546833,
+        "kernel_count": 3368,
+        "kernel_interval_union_seconds": 0.8688440253026783,
+        "kernel_sum_seconds": 0.8688440307617158
+      },
+      "stage15_original_N1": {
+        "copy_bytes": 713172144,
+        "copy_count": 1528,
+        "copy_interval_union_seconds": 0.04098442103713751,
+        "copy_sum_seconds": 0.0409844189453125,
+        "kernel_count": 4624,
+        "kernel_interval_union_seconds": 0.9189906362444162,
+        "kernel_sum_seconds": 0.9189906347656291
+      },
+      "stage15_original_N1024": {
+        "copy_bytes": 1368386804,
+        "copy_count": 1518,
+        "copy_interval_union_seconds": 0.08574646851047873,
+        "copy_sum_seconds": 0.08574645703125003,
+        "kernel_count": 4736,
+        "kernel_interval_union_seconds": 1.127608401235193,
+        "kernel_sum_seconds": 1.1276084111328066
+      },
+      "stage19_candidate_N1024": {
+        "copy_bytes": 1071892016,
+        "copy_count": 248,
+        "copy_interval_union_seconds": 0.039746614173054695,
+        "copy_sum_seconds": 0.03974661572265624,
+        "kernel_count": 2904,
+        "kernel_interval_union_seconds": 0.2982646110467613,
+        "kernel_sum_seconds": 0.29826462451171826
+      },
+      "stage19_candidate_prepare": {
+        "copy_bytes": 3834591632,
+        "copy_count": 2376,
+        "copy_interval_union_seconds": 0.13890260504558682,
+        "copy_sum_seconds": 0.13890260791015563,
+        "kernel_count": 3368,
+        "kernel_interval_union_seconds": 0.8347154310904443,
+        "kernel_sum_seconds": 0.8347154257812492
+      },
+      "stage19_original_N1024": {
+        "copy_bytes": 1368386804,
+        "copy_count": 1518,
+        "copy_interval_union_seconds": 0.07934288820251822,
+        "copy_sum_seconds": 0.07934287988281247,
+        "kernel_count": 4736,
+        "kernel_interval_union_seconds": 1.0838317791931331,
+        "kernel_sum_seconds": 1.0838317685546863
+      },
+      "unmatched": {
+        "copy_bytes": 1418602400,
+        "copy_count": 3052,
+        "copy_interval_union_seconds": 0.08254865137860179,
+        "copy_sum_seconds": 0.08254865039062517,
+        "kernel_count": 0,
+        "kernel_interval_union_seconds": 0.0,
+        "kernel_sum_seconds": 0.0
+      }
+    },
+    "method": "CUDA runtime launch correlation to most-specific observed owner-thread range; GPU durations clipped to host request boundary",
+    "observed_SDPA_operator_counts": {
+      "aten::_scaled_dot_product_efficient_attention": 1824,
+      "aten::_scaled_dot_product_flash_attention_for_cpu": 1824,
+      "aten::scaled_dot_product_attention": 3648
+    },
+    "observed_attention_kernel_names": [
+      {
+        "count": 1824,
+        "name": "fmha_cutlassF_f32_aligned_64x64_rf_sm80(PyTorchMemEffAttention::AttentionKernel<float, cutlass::arch::Sm80, true, 64, 64, 64, true, true>::Params)",
+        "sum_seconds": 4.07679493945312
+      }
+    ],
+    "unmatched_work_is_retained": true
+  },
+  "no_Torch_imported": true,
+  "no_clean_request_speed_or_50k_extrapolation": true,
+  "offline_script_sha256": "ab41523929e14690d25ee3c81e98b201d148730af0de23d35a1fe3c311a2438b",
+  "offline_wall_seconds": 16.84746124688536,
+  "overall_GPU_sync_summary": {
+    "annotated_host_spans": [
+      {
+        "duration_seconds": 0.501047268,
+        "name": "pfdiagnostic/profile/stage15_original_fit",
+        "start_us": 3686985741209.378
+      },
+      {
+        "duration_seconds": 2.2968341150000002,
+        "name": "pfdiagnostic/profile/stage15_original_N1024",
+        "start_us": 3686986302175.827
+      },
+      {
+        "duration_seconds": 0.22008351199999998,
+        "name": "pfdiagnostic/profile/stage15_original_N1024",
+        "start_us": 3686989611364.123
+      },
+      {
+        "duration_seconds": 0.232293739,
+        "name": "pfdiagnostic/profile/stage15_original_N1024",
+        "start_us": 3686990253782.127
+      },
+      {
+        "duration_seconds": 0.225592292,
+        "name": "pfdiagnostic/profile/stage15_original_N1024",
+        "start_us": 3686990906521.944
+      },
+      {
+        "duration_seconds": 0.159236498,
+        "name": "pfdiagnostic/profile/stage15_original_N1024",
+        "start_us": 3686991553131.1
+      },
+      {
+        "duration_seconds": 0.158307905,
+        "name": "pfdiagnostic/profile/stage15_original_N1024",
+        "start_us": 3686992141695.392
+      },
+      {
+        "duration_seconds": 0.16665297899999998,
+        "name": "pfdiagnostic/profile/stage15_original_N1024",
+        "start_us": 3686992732571.368
+      },
+      {
+        "duration_seconds": 0.16553342999999998,
+        "name": "pfdiagnostic/profile/stage15_original_N1024",
+        "start_us": 3686993315774.575
+      },
+      {
+        "duration_seconds": 2.524293792,
+        "name": "pfdiagnostic/profile/stage15_candidate_prepare",
+        "start_us": 3686994041767.277
+      },
+      {
+        "duration_seconds": 0.199987779,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1024",
+        "start_us": 3686996919893.823
+      },
+      {
+        "duration_seconds": 0.202774318,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1024",
+        "start_us": 3686997661324.686
+      },
+      {
+        "duration_seconds": 0.22168881599999998,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1024",
+        "start_us": 3686998413035.243
+      },
+      {
+        "duration_seconds": 0.22165733799999998,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1024",
+        "start_us": 3686999184882.318
+      },
+      {
+        "duration_seconds": 0.197131258,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1024",
+        "start_us": 3686999948715.708
+      },
+      {
+        "duration_seconds": 0.19011341099999998,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1024",
+        "start_us": 3687000689269.874
+      },
+      {
+        "duration_seconds": 0.20377464499999998,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1024",
+        "start_us": 3687001433874.079
+      },
+      {
+        "duration_seconds": 0.204511411,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1024",
+        "start_us": 3687002184500.502
+      },
+      {
+        "duration_seconds": 0.16928179399999999,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1",
+        "start_us": 3687002962914.173
+      },
+      {
+        "duration_seconds": 0.156309356,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1",
+        "start_us": 3687003196290.721
+      },
+      {
+        "duration_seconds": 0.16602510699999998,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1",
+        "start_us": 3687003416780.851
+      },
+      {
+        "duration_seconds": 0.164354119,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1",
+        "start_us": 3687003648261.652
+      },
+      {
+        "duration_seconds": 0.15463509099999997,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1",
+        "start_us": 3687003878963.94
+      },
+      {
+        "duration_seconds": 0.154570391,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1",
+        "start_us": 3687004100237.882
+      },
+      {
+        "duration_seconds": 0.162914282,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1",
+        "start_us": 3687004321226.032
+      },
+      {
+        "duration_seconds": 0.162975415,
+        "name": "pfdiagnostic/profile/stage15_candidate_N1",
+        "start_us": 3687004551654.389
+      },
+      {
+        "duration_seconds": 0.193904145,
+        "name": "pfdiagnostic/profile/stage15_original_N1",
+        "start_us": 3687005330688.817
+      },
+      {
+        "duration_seconds": 0.167663885,
+        "name": "pfdiagnostic/profile/stage15_original_N1",
+        "start_us": 3687005604038.504
+      },
+      {
+        "duration_seconds": 0.174297936,
+        "name": "pfdiagnostic/profile/stage15_original_N1",
+        "start_us": 3687005850880.492
+      },
+      {
+        "duration_seconds": 0.174738237,
+        "name": "pfdiagnostic/profile/stage15_original_N1",
+        "start_us": 3687006105270.546
+      },
+      {
+        "duration_seconds": 0.119619945,
+        "name": "pfdiagnostic/profile/stage15_original_N1",
+        "start_us": 3687006361287.256
+      },
+      {
+        "duration_seconds": 0.119377082,
+        "name": "pfdiagnostic/profile/stage15_original_N1",
+        "start_us": 3687006562001.921
+      },
+      {
+        "duration_seconds": 0.12710633699999999,
+        "name": "pfdiagnostic/profile/stage15_original_N1",
+        "start_us": 3687006763636.773
+      },
+      {
+        "duration_seconds": 0.12730450599999998,
+        "name": "pfdiagnostic/profile/stage15_original_N1",
+        "start_us": 3687006972930.047
+      },
+      {
+        "duration_seconds": 0.362756147,
+        "name": "pfdiagnostic/profile/stage19_original_fit",
+        "start_us": 3687007406506.791
+      },
+      {
+        "duration_seconds": 0.21805090700000002,
+        "name": "pfdiagnostic/profile/stage19_original_N1024",
+        "start_us": 3687007824153.606
+      },
+      {
+        "duration_seconds": 0.21746204800000002,
+        "name": "pfdiagnostic/profile/stage19_original_N1024",
+        "start_us": 3687008530459.568
+      },
+      {
+        "duration_seconds": 0.22547936100000002,
+        "name": "pfdiagnostic/profile/stage19_original_N1024",
+        "start_us": 3687009232936.524
+      },
+      {
+        "duration_seconds": 0.22335342300000002,
+        "name": "pfdiagnostic/profile/stage19_original_N1024",
+        "start_us": 3687009933423.357
+      },
+      {
+        "duration_seconds": 0.15706029600000002,
+        "name": "pfdiagnostic/profile/stage19_original_N1024",
+        "start_us": 3687010622763.628
+      },
+      {
+        "duration_seconds": 0.156534766,
+        "name": "pfdiagnostic/profile/stage19_original_N1024",
+        "start_us": 3687011246382.248
+      },
+      {
+        "duration_seconds": 0.16424050599999998,
+        "name": "pfdiagnostic/profile/stage19_original_N1024",
+        "start_us": 3687011863588.262
+      },
+      {
+        "duration_seconds": 0.164398351,
+        "name": "pfdiagnostic/profile/stage19_original_N1024",
+        "start_us": 3687012498691.475
+      },
+      {
+        "duration_seconds": 2.268639208,
+        "name": "pfdiagnostic/profile/stage19_candidate_prepare",
+        "start_us": 3687013275043.367
+      },
+      {
+        "duration_seconds": 0.204673934,
+        "name": "pfdiagnostic/profile/stage19_candidate_N1024",
+        "start_us": 3687015897784.692
+      },
+      {
+        "duration_seconds": 0.205793904,
+        "name": "pfdiagnostic/profile/stage19_candidate_N1024",
+        "start_us": 3687016724860.926
+      },
+      {
+        "duration_seconds": 0.221886225,
+        "name": "pfdiagnostic/profile/stage19_candidate_N1024",
+        "start_us": 3687017538570.326
+      },
+      {
+        "duration_seconds": 0.223388379,
+        "name": "pfdiagnostic/profile/stage19_candidate_N1024",
+        "start_us": 3687018368356.898
+      },
+      {
+        "duration_seconds": 0.197354413,
+        "name": "pfdiagnostic/profile/stage19_candidate_N1024",
+        "start_us": 3687019215703.281
+      },
+      {
+        "duration_seconds": 0.191052093,
+        "name": "pfdiagnostic/profile/stage19_candidate_N1024",
+        "start_us": 3687020024326.738
+      },
+      {
+        "duration_seconds": 0.206429119,
+        "name": "pfdiagnostic/profile/stage19_candidate_N1024",
+        "start_us": 3687020851776.199
+      },
+      {
+        "duration_seconds": 0.206930315,
+        "name": "pfdiagnostic/profile/stage19_candidate_N1024",
+        "start_us": 3687021694855.849
+      },
+      {
+        "duration_seconds": 40.230329280761715,
+        "name": "pfdiagnostic/profile/request",
+        "start_us": 3686983149644.209
+      }
+    ],
+    "attribution": "Built with PriorLabs-TabPFN",
+    "cautions": [
+      "Kernel sums can overlap; interval union avoids that double count.",
+      "Prediction host wall includes CPU work, GPU waits and transfers; it is not CPU compute time.",
+      "Host sync can overlap active kernels; never add it to GPU time as independent cost.",
+      "This profiled diagnostic differs in query count and overhead from the original 50000-vector requests; no exact original decomposition is established."
+    ],
+    "copies": [
+      {
+        "bytes": 6268224032,
+        "count": 6932,
+        "events_with_byte_count": 6932,
+        "name": "Memcpy DtoH (Device -> Pageable)",
+        "summed_duration_seconds": 0.41600774000000107
+      },
+      {
+        "bytes": 3598505512,
+        "count": 5132,
+        "events_with_byte_count": 5132,
+        "name": "Memcpy HtoD (Pageable -> Device)",
+        "summed_duration_seconds": 0.22463631299999887
+      },
+      {
+        "bytes": 4816631488,
+        "count": 672,
+        "events_with_byte_count": 672,
+        "name": "Memcpy DtoD (Device -> Device)",
+        "summed_duration_seconds": 0.006017847000000008
+      },
+      {
+        "bytes": 1152,
+        "count": 384,
+        "events_with_byte_count": 384,
+        "name": "Memcpy DtoH (Device -> Pinned)",
+        "summed_duration_seconds": 0.0008261340000000009
+      }
+    ],
+    "counts_and_summed_times_scope": "entire profiler session; interval unions clipped to annotated request",
+    "cuda_activity_status": "recorded",
+    "cuda_copy_event_count": 13120,
+    "cuda_copy_interval_union_seconds": 0.6474881254882813,
+    "cuda_copy_summed_seconds": 0.647488034000001,
+    "cuda_kernel_and_copy_interval_union_seconds": 6.156533650390625,
+    "cuda_kernel_event_count": 29416,
+    "cuda_kernel_interval_union_seconds": 5.505771322265625,
+    "cuda_kernel_summed_seconds": 5.505771269999774,
+    "cuda_runtime_sync_event_count": 12561,
+    "cuda_runtime_sync_host_seconds": 0.6035097060000038,
+    "cuda_runtime_sync_interval_union_seconds": 0.6035097109375,
+    "diagnostic_only": true,
+    "elapsed_summary_seconds": 6.627942596562207,
+    "kernel_busy_fraction_of_profile_span": 0.13685623311312303,
+    "maxrss_kib": 217108,
+    "memset": [
+      {
+        "bytes": 2304832,
+        "count": 1552,
+        "events_with_byte_count": 1552,
+        "name": "Memset (Device)",
+        "summed_duration_seconds": 0.003274191999999992
+      }
+    ],
+    "method": "Two passes with stdlib JSONDecoder; bounded buffer, only compact GPU/sync intervals retained.",
+    "profiled_request_trace_span_seconds": 40.230329280761715,
+    "runtime_calls": [
+      {
+        "bytes": null,
+        "count": 13120,
+        "events_with_byte_count": 0,
+        "name": "cudaMemcpyAsync",
+        "summed_duration_seconds": 4.767457980999995
+      },
+      {
+        "bytes": null,
+        "count": 29416,
+        "events_with_byte_count": 0,
+        "name": "cudaLaunchKernel",
+        "summed_duration_seconds": 0.4875795089999983
+      },
+      {
+        "bytes": null,
+        "count": 12448,
+        "events_with_byte_count": 0,
+        "name": "cudaStreamSynchronize",
+        "summed_duration_seconds": 0.4238810370000003
+      },
+      {
+        "bytes": null,
+        "count": 61,
+        "events_with_byte_count": 0,
+        "name": "cudaDeviceSynchronize",
+        "summed_duration_seconds": 0.17901150100000005
+      },
+      {
+        "bytes": null,
+        "count": 150,
+        "events_with_byte_count": 0,
+        "name": "cudaMalloc",
+        "summed_duration_seconds": 0.024587603000000006
+      },
+      {
+        "bytes": null,
+        "count": 1,
+        "events_with_byte_count": 0,
+        "name": "cudaGetSymbolAddress",
+        "summed_duration_seconds": 0.023356769
+      },
+      {
+        "bytes": null,
+        "count": 1,
+        "events_with_byte_count": 0,
+        "name": "cudaFuncGetAttributes",
+        "summed_duration_seconds": 0.01824036
+      },
+      {
+        "bytes": null,
+        "count": 353,
+        "events_with_byte_count": 0,
+        "name": "cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags",
+        "summed_duration_seconds": 0.016767945999999985
+      },
+      {
+        "bytes": null,
+        "count": 1552,
+        "events_with_byte_count": 0,
+        "name": "cudaMemsetAsync",
+        "summed_duration_seconds": 0.009312124000000014
+      },
+      {
+        "bytes": null,
+        "count": 1679,
+        "events_with_byte_count": 0,
+        "name": "cudaOccupancyMaxActiveBlocksPerMultiprocessor",
+        "summed_duration_seconds": 0.005873954000000005
+      },
+      {
+        "bytes": null,
+        "count": 1,
+        "events_with_byte_count": 0,
+        "name": "cudaFree",
+        "summed_duration_seconds": 0.0036875320000000003
+      },
+      {
+        "bytes": null,
+        "count": 2369,
+        "events_with_byte_count": 0,
+        "name": "cudaStreamIsCapturing",
+        "summed_duration_seconds": 0.0033943609999999885
+      },
+      {
+        "bytes": null,
+        "count": 104,
+        "events_with_byte_count": 0,
+        "name": "cudaEventRecord",
+        "summed_duration_seconds": 0.0011010609999999997
+      },
+      {
+        "bytes": null,
+        "count": 2,
+        "events_with_byte_count": 0,
+        "name": "cudaHostAlloc",
+        "summed_duration_seconds": 0.0008294079999999999
+      },
+      {
+        "bytes": null,
+        "count": 52,
+        "events_with_byte_count": 0,
+        "name": "cudaEventSynchronize",
+        "summed_duration_seconds": 0.0006171680000000001
+      },
+      {
+        "bytes": null,
+        "count": 610,
+        "events_with_byte_count": 0,
+        "name": "cudaDeviceGetAttribute",
+        "summed_duration_seconds": 0.00033379200000000045
+      },
+      {
+        "bytes": null,
+        "count": 52,
+        "events_with_byte_count": 0,
+        "name": "cudaEventElapsedTime",
+        "summed_duration_seconds": 0.00027486800000000005
+      },
+      {
+        "bytes": null,
+        "count": 1920,
+        "events_with_byte_count": 0,
+        "name": "cudaPeekAtLastError",
+        "summed_duration_seconds": 0.00014179999999999984
+      },
+      {
+        "bytes": null,
+        "count": 1,
+        "events_with_byte_count": 0,
+        "name": "cudaDeviceGetStreamPriorityRange",
+        "summed_duration_seconds": 2.004e-06
+      },
+      {
+        "bytes": null,
+        "count": 2,
+        "events_with_byte_count": 0,
+        "name": "cudaGetDriverEntryPoint",
+        "summed_duration_seconds": 9.52e-07
+      }
+    ],
+    "schema": "posteriorforge.failure_runtime_diagnostic.v1.streaming_trace",
+    "sync_calls": [
+      {
+        "bytes": null,
+        "count": 12448,
+        "events_with_byte_count": 0,
+        "name": "cudaStreamSynchronize",
+        "summed_duration_seconds": 0.4238810370000003
+      },
+      {
+        "bytes": null,
+        "count": 61,
+        "events_with_byte_count": 0,
+        "name": "cudaDeviceSynchronize",
+        "summed_duration_seconds": 0.17901150100000005
+      },
+      {
+        "bytes": null,
+        "count": 52,
+        "events_with_byte_count": 0,
+        "name": "cudaEventSynchronize",
+        "summed_duration_seconds": 0.0006171680000000001
+      }
+    ],
+    "top_kernels": [
+      {
+        "bytes": null,
+        "count": 1824,
+        "events_with_byte_count": 0,
+        "name": "fmha_cutlassF_f32_aligned_64x64_rf_sm80(PyTorchMemEffAttention::AttentionKernel<float, cutlass::arch::Sm80, true, 64, 64, 64, true, true>::Params)",
+        "summed_duration_seconds": 4.076794932000002
+      },
+      {
+        "bytes": null,
+        "count": 2008,
+        "events_with_byte_count": 0,
+        "name": "ampere_sgemm_32x128_tn",
+        "summed_duration_seconds": 0.36485989199999935
+      },
+      {
+        "bytes": null,
+        "count": 488,
+        "events_with_byte_count": 0,
+        "name": "ampere_sgemm_64x64_tn",
+        "summed_duration_seconds": 0.23134836899999994
+      },
+      {
+        "bytes": null,
+        "count": 464,
+        "events_with_byte_count": 0,
+        "name": "ampere_sgemm_128x64_tn",
+        "summed_duration_seconds": 0.18890505000000016
+      },
+      {
+        "bytes": null,
+        "count": 1728,
+        "events_with_byte_count": 0,
+        "name": "ampere_sgemm_32x128_nn",
+        "summed_duration_seconds": 0.13207887499999998
+      },
+      {
+        "bytes": null,
+        "count": 2304,
+        "events_with_byte_count": 0,
+        "name": "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<float, float>(int, float, float const*, float const*, float const*, float*, float*, float*)",
+        "summed_duration_seconds": 0.12024672399999961
+      },
+      {
+        "bytes": null,
+        "count": 5904,
+        "events_with_byte_count": 0,
+        "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
+        "summed_duration_seconds": 0.08867753700000044
+      },
+      {
+        "bytes": null,
+        "count": 816,
+        "events_with_byte_count": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::GeluCUDAKernelImpl(at::TensorIteratorBase&, at::native::GeluType)::{lambda()#2}::operator()() const::{lambda()#2}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::GeluCUDAKernelImpl(at::TensorIteratorBase&, at::native::GeluType)::{lambda()#2}::operator()() const::{lambda()#2}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>)",
+        "summed_duration_seconds": 0.059022605000000054
+      },
+      {
+        "bytes": null,
+        "count": 2184,
+        "events_with_byte_count": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul> >(int, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul>)",
+        "summed_duration_seconds": 0.04673306399999981
+      },
+      {
+        "bytes": null,
+        "count": 192,
+        "events_with_byte_count": 0,
+        "name": "ampere_sgemm_128x128_tn",
+        "summed_duration_seconds": 0.042255085000000005
+      },
+      {
+        "bytes": null,
+        "count": 1080,
+        "events_with_byte_count": 0,
+        "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})",
+        "summed_duration_seconds": 0.02708820499999999
+      },
+      {
+        "bytes": null,
+        "count": 192,
+        "events_with_byte_count": 0,
+        "name": "ampere_sgemm_128x32_tn",
+        "summed_duration_seconds": 0.022349810000000008
+      },
+      {
+        "bytes": null,
+        "count": 96,
+        "events_with_byte_count": 0,
+        "name": "ampere_sgemm_64x64_nn",
+        "summed_duration_seconds": 0.015619362999999989
+      },
+      {
+        "bytes": null,
+        "count": 352,
+        "events_with_byte_count": 0,
+        "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy_aligned16_contig<at::native::(anonymous namespace)::OpaqueType<4u>, unsigned int, 4, 128, 1>(at::native::(anonymous namespace)::OpaqueType<4u>*, at::native::(anonymous namespace)::CatArrInputTensorMetadata<at::native::(anonymous namespace)::OpaqueType<4u>, unsigned int, 128, 1>, at::native::(anonymous namespace)::TensorSizeStride<unsigned int, 4u>, int, unsigned int)",
+        "summed_duration_seconds": 0.009219592000000004
+      },
+      {
+        "bytes": null,
+        "count": 192,
+        "events_with_byte_count": 0,
+        "name": "ampere_sgemm_64x32_sliced1x4_tn",
+        "summed_duration_seconds": 0.006791697999999997
+      },
+      {
+        "bytes": null,
+        "count": 96,
+        "events_with_byte_count": 0,
+        "name": "void at::native::_scatter_gather_elementwise_kernel<128, 4, at::native::_cuda_scatter_gather_internal_kernel<false, at::native::OpaqueType<4> >::operator()<at::native::TensorAssign>(at::TensorIterator&, long, long, long, at::native::TensorAssign const&)::{lambda(int)#1}>(int, at::native::_cuda_scatter_gather_internal_kernel<false, at::native::OpaqueType<4> >::operator()<at::native::TensorAssign>(at::TensorIterator&, long, long, long, at::native::TensorAssign const&)::{lambda(int)#1})",
+        "summed_duration_seconds": 0.004977942000000002
+      },
+      {
+        "bytes": null,
+        "count": 48,
+        "events_with_byte_count": 0,
+        "name": "void at::native::(anonymous namespace)::searchsorted_cuda_kernel<float, long>(long*, float const*, float const*, long const*, long, long, long, bool, bool)",
+        "summed_duration_seconds": 0.004312788999999999
+      },
+      {
+        "bytes": null,
+        "count": 144,
+        "events_with_byte_count": 0,
+        "name": "void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<4> >(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_kernel_impl<at::native::OpaqueType<4> >(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&)::{lambda(int)#1}>(long, at::native::gpu_index_kernel<at::native::index_kernel_impl<at::native::OpaqueType<4> >(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1}>(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>, at::native::index_kernel_impl<at::native::OpaqueType<4> >(at::TensorIteratorBase&, c10::ArrayRef<long>, c10::ArrayRef<long>)::{lambda(char*, char const*, long)#1} const&)::{lambda(int)#1})",
+        "summed_duration_seconds": 0.004209974
+      },
+      {
+        "bytes": null,
+        "count": 96,
+        "events_with_byte_count": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::masked_fill_kernel(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#4}::operator()() const::{lambda(long, bool)#1}, std::array<char*, 3ul> >(int, at::native::(anonymous namespace)::masked_fill_kernel(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#4}::operator()() const::{lambda(long, bool)#1}, std::array<char*, 3ul>)",
+        "summed_duration_seconds": 0.0038867169999999983
+      },
+      {
+        "bytes": null,
+        "count": 32,
+        "events_with_byte_count": 0,
+        "name": "void at::native::tensor_kernel_scan_innermost_dim<float, std::plus<float> >(float*, float const*, unsigned int, unsigned int, unsigned int, float, std::plus<float>)",
+        "summed_duration_seconds": 0.003151576
+      },
+      {
+        "bytes": null,
+        "count": 368,
+        "events_with_byte_count": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>)",
+        "summed_duration_seconds": 0.0028645389999999993
+      },
+      {
+        "bytes": null,
+        "count": 240,
+        "events_with_byte_count": 0,
+        "name": "void gemmSN_TN_kernel<float, 128, 16, 2, 4, 8, 9, false, cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float> >(cublasGemmSmallNParams<cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float const>, cublasGemvTensorStridedBatched<float>, float>)",
+        "summed_duration_seconds": 0.0027942679999999995
+      },
+      {
+        "bytes": null,
+        "count": 176,
+        "events_with_byte_count": 0,
+        "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float, float, bool, at::native::(anonymous namespace)::CompareEqFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, bool, at::native::(anonymous namespace)::CompareEqFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float, float, bool, at::native::(anonymous namespace)::CompareEqFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, bool, at::native::(anonymous namespace)::CompareEqFunctor<float> > const&)::{lambda(int)#1})",
+        "summed_duration_seconds": 0.002551385000000002
+      },
+      {
+        "bytes": null,
+        "count": 128,
+        "events_with_byte_count": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}, std::array<char*, 2ul> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#4}::operator()() const::{lambda(long)#1}, std::array<char*, 2ul>)",
+        "summed_duration_seconds": 0.002268540999999999
+      },
+      {
+        "bytes": null,
+        "count": 96,
+        "events_with_byte_count": 0,
+        "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::(anonymous namespace)::CompareFunctor<float> >(at::TensorIteratorBase&, at::native::(anonymous namespace)::CompareFunctor<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::(anonymous namespace)::CompareFunctor<float> >(at::TensorIteratorBase&, at::native::(anonymous namespace)::CompareFunctor<float> const&)::{lambda(int)#1})",
+        "summed_duration_seconds": 0.002173410000000001
+      }
+    ],
+    "trace_bytes": 192909213,
+    "trace_event_count": 772668,
+    "trace_file": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/tail-conditionals-capture-01/cuda-trace.json"
+  },
+  "owner_host_annotations": [
+    {
+      "end_us": 3686986242256.646,
+      "host_seconds": 0.501047268,
+      "operation": "stage15_original_fit",
+      "original_name": "pf-tail/15/original/fit",
+      "start_us": 3686985741209.378
+    },
+    {
+      "end_us": 3686988599009.9424,
+      "host_seconds": 2.2968341150000002,
+      "operation": "stage15_original_N1024",
+      "original_name": "pf-tail/15/original/0/N1024",
+      "start_us": 3686986302175.827
+    },
+    {
+      "end_us": 3686989831447.6353,
+      "host_seconds": 0.22008351199999998,
+      "operation": "stage15_original_N1024",
+      "original_name": "pf-tail/15/original/1/N1024",
+      "start_us": 3686989611364.123
+    },
+    {
+      "end_us": 3686990486075.8657,
+      "host_seconds": 0.232293739,
+      "operation": "stage15_original_N1024",
+      "original_name": "pf-tail/15/original/2/N1024",
+      "start_us": 3686990253782.127
+    },
+    {
+      "end_us": 3686991132114.236,
+      "host_seconds": 0.225592292,
+      "operation": "stage15_original_N1024",
+      "original_name": "pf-tail/15/original/3/N1024",
+      "start_us": 3686990906521.944
+    },
+    {
+      "end_us": 3686991712367.598,
+      "host_seconds": 0.159236498,
+      "operation": "stage15_original_N1024",
+      "original_name": "pf-tail/15/original/4/N1024",
+      "start_us": 3686991553131.1
+    },
+    {
+      "end_us": 3686992300003.297,
+      "host_seconds": 0.158307905,
+      "operation": "stage15_original_N1024",
+      "original_name": "pf-tail/15/original/5/N1024",
+      "start_us": 3686992141695.392
+    },
+    {
+      "end_us": 3686992899224.347,
+      "host_seconds": 0.16665297899999998,
+      "operation": "stage15_original_N1024",
+      "original_name": "pf-tail/15/original/6/N1024",
+      "start_us": 3686992732571.368
+    },
+    {
+      "end_us": 3686993481308.0054,
+      "host_seconds": 0.16553342999999998,
+      "operation": "stage15_original_N1024",
+      "original_name": "pf-tail/15/original/7/N1024",
+      "start_us": 3686993315774.575
+    },
+    {
+      "end_us": 3686996566061.069,
+      "host_seconds": 2.524293792,
+      "operation": "stage15_candidate_prepare",
+      "original_name": "pf-tail/15/candidate/prepare",
+      "start_us": 3686994041767.277
+    },
+    {
+      "end_us": 3686997119881.602,
+      "host_seconds": 0.199987779,
+      "operation": "stage15_candidate_N1024",
+      "original_name": "pf-tail/15/candidate/0/N1024",
+      "start_us": 3686996919893.823
+    },
+    {
+      "end_us": 3686997864099.004,
+      "host_seconds": 0.202774318,
+      "operation": "stage15_candidate_N1024",
+      "original_name": "pf-tail/15/candidate/1/N1024",
+      "start_us": 3686997661324.686
+    },
+    {
+      "end_us": 3686998634724.059,
+      "host_seconds": 0.22168881599999998,
+      "operation": "stage15_candidate_N1024",
+      "original_name": "pf-tail/15/candidate/2/N1024",
+      "start_us": 3686998413035.243
+    },
+    {
+      "end_us": 3686999406539.656,
+      "host_seconds": 0.22165733799999998,
+      "operation": "stage15_candidate_N1024",
+      "original_name": "pf-tail/15/candidate/3/N1024",
+      "start_us": 3686999184882.318
+    },
+    {
+      "end_us": 3687000145846.966,
+      "host_seconds": 0.197131258,
+      "operation": "stage15_candidate_N1024",
+      "original_name": "pf-tail/15/candidate/4/N1024",
+      "start_us": 3686999948715.708
+    },
+    {
+      "end_us": 3687000879383.285,
+      "host_seconds": 0.19011341099999998,
+      "operation": "stage15_candidate_N1024",
+      "original_name": "pf-tail/15/candidate/5/N1024",
+      "start_us": 3687000689269.874
+    },
+    {
+      "end_us": 3687001637648.724,
+      "host_seconds": 0.20377464499999998,
+      "operation": "stage15_candidate_N1024",
+      "original_name": "pf-tail/15/candidate/6/N1024",
+      "start_us": 3687001433874.079
+    },
+    {
+      "end_us": 3687002389011.913,
+      "host_seconds": 0.204511411,
+      "operation": "stage15_candidate_N1024",
+      "original_name": "pf-tail/15/candidate/7/N1024",
+      "start_us": 3687002184500.502
+    },
+    {
+      "end_us": 3687003132195.967,
+      "host_seconds": 0.16928179399999999,
+      "operation": "stage15_candidate_N1",
+      "original_name": "pf-tail/15/candidate/0/N1",
+      "start_us": 3687002962914.173
+    },
+    {
+      "end_us": 3687003352600.077,
+      "host_seconds": 0.156309356,
+      "operation": "stage15_candidate_N1",
+      "original_name": "pf-tail/15/candidate/1/N1",
+      "start_us": 3687003196290.721
+    },
+    {
+      "end_us": 3687003582805.958,
+      "host_seconds": 0.16602510699999998,
+      "operation": "stage15_candidate_N1",
+      "original_name": "pf-tail/15/candidate/2/N1",
+      "start_us": 3687003416780.851
+    },
+    {
+      "end_us": 3687003812615.771,
+      "host_seconds": 0.164354119,
+      "operation": "stage15_candidate_N1",
+      "original_name": "pf-tail/15/candidate/3/N1",
+      "start_us": 3687003648261.652
+    },
+    {
+      "end_us": 3687004033599.031,
+      "host_seconds": 0.15463509099999997,
+      "operation": "stage15_candidate_N1",
+      "original_name": "pf-tail/15/candidate/4/N1",
+      "start_us": 3687003878963.94
+    },
+    {
+      "end_us": 3687004254808.273,
+      "host_seconds": 0.154570391,
+      "operation": "stage15_candidate_N1",
+      "original_name": "pf-tail/15/candidate/5/N1",
+      "start_us": 3687004100237.882
+    },
+    {
+      "end_us": 3687004484140.3145,
+      "host_seconds": 0.162914282,
+      "operation": "stage15_candidate_N1",
+      "original_name": "pf-tail/15/candidate/6/N1",
+      "start_us": 3687004321226.032
+    },
+    {
+      "end_us": 3687004714629.804,
+      "host_seconds": 0.162975415,
+      "operation": "stage15_candidate_N1",
+      "original_name": "pf-tail/15/candidate/7/N1",
+      "start_us": 3687004551654.389
+    },
+    {
+      "end_us": 3687005524592.962,
+      "host_seconds": 0.193904145,
+      "operation": "stage15_original_N1",
+      "original_name": "pf-tail/15/original/0/N1",
+      "start_us": 3687005330688.817
+    },
+    {
+      "end_us": 3687005771702.3887,
+      "host_seconds": 0.167663885,
+      "operation": "stage15_original_N1",
+      "original_name": "pf-tail/15/original/1/N1",
+      "start_us": 3687005604038.504
+    },
+    {
+      "end_us": 3687006025178.428,
+      "host_seconds": 0.174297936,
+      "operation": "stage15_original_N1",
+      "original_name": "pf-tail/15/original/2/N1",
+      "start_us": 3687005850880.492
+    },
+    {
+      "end_us": 3687006280008.7827,
+      "host_seconds": 0.174738237,
+      "operation": "stage15_original_N1",
+      "original_name": "pf-tail/15/original/3/N1",
+      "start_us": 3687006105270.546
+    },
+    {
+      "end_us": 3687006480907.2007,
+      "host_seconds": 0.119619945,
+      "operation": "stage15_original_N1",
+      "original_name": "pf-tail/15/original/4/N1",
+      "start_us": 3687006361287.256
+    },
+    {
+      "end_us": 3687006681379.003,
+      "host_seconds": 0.119377082,
+      "operation": "stage15_original_N1",
+      "original_name": "pf-tail/15/original/5/N1",
+      "start_us": 3687006562001.921
+    },
+    {
+      "end_us": 3687006890743.11,
+      "host_seconds": 0.12710633699999999,
+      "operation": "stage15_original_N1",
+      "original_name": "pf-tail/15/original/6/N1",
+      "start_us": 3687006763636.773
+    },
+    {
+      "end_us": 3687007100234.5527,
+      "host_seconds": 0.12730450599999998,
+      "operation": "stage15_original_N1",
+      "original_name": "pf-tail/15/original/7/N1",
+      "start_us": 3687006972930.047
+    },
+    {
+      "end_us": 3687007769262.938,
+      "host_seconds": 0.362756147,
+      "operation": "stage19_original_fit",
+      "original_name": "pf-tail/19/original/fit",
+      "start_us": 3687007406506.791
+    },
+    {
+      "end_us": 3687008042204.513,
+      "host_seconds": 0.21805090700000002,
+      "operation": "stage19_original_N1024",
+      "original_name": "pf-tail/19/original/0/N1024",
+      "start_us": 3687007824153.606
+    },
+    {
+      "end_us": 3687008747921.6157,
+      "host_seconds": 0.21746204800000002,
+      "operation": "stage19_original_N1024",
+      "original_name": "pf-tail/19/original/1/N1024",
+      "start_us": 3687008530459.568
+    },
+    {
+      "end_us": 3687009458415.885,
+      "host_seconds": 0.22547936100000002,
+      "operation": "stage19_original_N1024",
+      "original_name": "pf-tail/19/original/2/N1024",
+      "start_us": 3687009232936.524
+    },
+    {
+      "end_us": 3687010156776.78,
+      "host_seconds": 0.22335342300000002,
+      "operation": "stage19_original_N1024",
+      "original_name": "pf-tail/19/original/3/N1024",
+      "start_us": 3687009933423.357
+    },
+    {
+      "end_us": 3687010779823.924,
+      "host_seconds": 0.15706029600000002,
+      "operation": "stage19_original_N1024",
+      "original_name": "pf-tail/19/original/4/N1024",
+      "start_us": 3687010622763.628
+    },
+    {
+      "end_us": 3687011402917.014,
+      "host_seconds": 0.156534766,
+      "operation": "stage19_original_N1024",
+      "original_name": "pf-tail/19/original/5/N1024",
+      "start_us": 3687011246382.248
+    },
+    {
+      "end_us": 3687012027828.768,
+      "host_seconds": 0.16424050599999998,
+      "operation": "stage19_original_N1024",
+      "original_name": "pf-tail/19/original/6/N1024",
+      "start_us": 3687011863588.262
+    },
+    {
+      "end_us": 3687012663089.826,
+      "host_seconds": 0.164398351,
+      "operation": "stage19_original_N1024",
+      "original_name": "pf-tail/19/original/7/N1024",
+      "start_us": 3687012498691.475
+    },
+    {
+      "end_us": 3687015543682.575,
+      "host_seconds": 2.268639208,
+      "operation": "stage19_candidate_prepare",
+      "original_name": "pf-tail/19/candidate/prepare",
+      "start_us": 3687013275043.367
+    },
+    {
+      "end_us": 3687016102458.626,
+      "host_seconds": 0.204673934,
+      "operation": "stage19_candidate_N1024",
+      "original_name": "pf-tail/19/candidate/0/N1024",
+      "start_us": 3687015897784.692
+    },
+    {
+      "end_us": 3687016930654.8296,
+      "host_seconds": 0.205793904,
+      "operation": "stage19_candidate_N1024",
+      "original_name": "pf-tail/19/candidate/1/N1024",
+      "start_us": 3687016724860.926
+    },
+    {
+      "end_us": 3687017760456.5513,
+      "host_seconds": 0.221886225,
+      "operation": "stage19_candidate_N1024",
+      "original_name": "pf-tail/19/candidate/2/N1024",
+      "start_us": 3687017538570.326
+    },
+    {
+      "end_us": 3687018591745.277,
+      "host_seconds": 0.223388379,
+      "operation": "stage19_candidate_N1024",
+      "original_name": "pf-tail/19/candidate/3/N1024",
+      "start_us": 3687018368356.898
+    },
+    {
+      "end_us": 3687019413057.694,
+      "host_seconds": 0.197354413,
+      "operation": "stage19_candidate_N1024",
+      "original_name": "pf-tail/19/candidate/4/N1024",
+      "start_us": 3687019215703.281
+    },
+    {
+      "end_us": 3687020215378.8306,
+      "host_seconds": 0.191052093,
+      "operation": "stage19_candidate_N1024",
+      "original_name": "pf-tail/19/candidate/5/N1024",
+      "start_us": 3687020024326.738
+    },
+    {
+      "end_us": 3687021058205.3184,
+      "host_seconds": 0.206429119,
+      "operation": "stage19_candidate_N1024",
+      "original_name": "pf-tail/19/candidate/6/N1024",
+      "start_us": 3687020851776.199
+    },
+    {
+      "end_us": 3687021901786.164,
+      "host_seconds": 0.206930315,
+      "operation": "stage19_candidate_N1024",
+      "original_name": "pf-tail/19/candidate/7/N1024",
+      "start_us": 3687021694855.849
+    }
+  ],
+  "profile_extent_seconds": 40.230329280761715,
+  "raw_trace_modified": false,
+  "recorded_host_timings": [
+    {
+      "CUDA_elapsed_span_ms": 497.939208984375,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.5036196080036461,
+      "kind": "fit",
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 2524.187744140625,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 2.5243623591959476,
+      "kind": "prepare",
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 199.76821899414062,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.20006111497059464,
+      "kind": "N1024",
+      "member": 0,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 202.64451599121094,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.2028706381097436,
+      "kind": "N1024",
+      "member": 1,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 221.55746459960938,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.22178610926494002,
+      "kind": "N1024",
+      "member": 2,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 221.5226593017578,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.22175270598381758,
+      "kind": "N1024",
+      "member": 3,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 197.0055389404297,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.19723498076200485,
+      "kind": "N1024",
+      "member": 4,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 189.98439025878906,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.19021065160632133,
+      "kind": "N1024",
+      "member": 5,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 203.64303588867188,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.20387084409594536,
+      "kind": "N1024",
+      "member": 6,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 204.37522888183594,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.20462424075230956,
+      "kind": "N1024",
+      "member": 7,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 169.1558074951172,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.16936527006328106,
+      "kind": "N1",
+      "member": 0,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 156.23922729492188,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.156352867372334,
+      "kind": "N1",
+      "member": 1,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 165.95773315429688,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.16606747591868043,
+      "kind": "N1",
+      "member": 2,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 164.28848266601562,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.16439382312819362,
+      "kind": "N1",
+      "member": 3,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 154.56898498535156,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.15467434376478195,
+      "kind": "N1",
+      "member": 4,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 154.50306701660156,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.15460960427299142,
+      "kind": "N1",
+      "member": 5,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 162.85049438476562,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.16295536933466792,
+      "kind": "N1",
+      "member": 6,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 162.9086456298828,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.16301503870636225,
+      "kind": "N1",
+      "member": 7,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 2296.726318359375,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 2.296895149163902,
+      "kind": "N1024",
+      "member": 0,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 219.94703674316406,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.22023836011067033,
+      "kind": "N1024",
+      "member": 1,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 232.17376708984375,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.23237294610589743,
+      "kind": "N1024",
+      "member": 2,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 225.47894287109375,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.22566812299191952,
+      "kind": "N1024",
+      "member": 3,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 159.11888122558594,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.1593083320185542,
+      "kind": "N1024",
+      "member": 4,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 158.19091796875,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.15838159201666713,
+      "kind": "N1024",
+      "member": 5,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 166.5305938720703,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.16673113498836756,
+      "kind": "N1024",
+      "member": 6,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 165.4220428466797,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.16560888988897204,
+      "kind": "N1024",
+      "member": 7,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 193.79420471191406,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.19397002831101418,
+      "kind": "N1",
+      "member": 0,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 167.58233642578125,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.1677076267078519,
+      "kind": "N1",
+      "member": 1,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 174.22457885742188,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.174339281860739,
+      "kind": "N1",
+      "member": 2,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 174.6612548828125,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.1747809168882668,
+      "kind": "N1",
+      "member": 3,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 119.54742431640625,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.11966141173616052,
+      "kind": "N1",
+      "member": 4,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 119.30652618408203,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.11941786808893085,
+      "kind": "N1",
+      "member": 5,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 127.03238677978516,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.12714791484177113,
+      "kind": "N1",
+      "member": 6,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 127.23197174072266,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.12734575290232897,
+      "kind": "N1",
+      "member": 7,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 362.6449890136719,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.3628349546343088,
+      "kind": "fit",
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 2268.533203125,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 2.2687018141150475,
+      "kind": "prepare",
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 204.4455108642578,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.20474453503265977,
+      "kind": "N1024",
+      "member": 0,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 205.66233825683594,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.20589120592921972,
+      "kind": "N1024",
+      "member": 1,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 221.73922729492188,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.22198327584192157,
+      "kind": "N1024",
+      "member": 2,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 223.26214599609375,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.22348746424540877,
+      "kind": "N1024",
+      "member": 3,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 197.2184295654297,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.1974515556357801,
+      "kind": "N1024",
+      "member": 4,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 190.9251251220703,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.19114724034443498,
+      "kind": "N1024",
+      "member": 5,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 206.29791259765625,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.2065256591886282,
+      "kind": "N1024",
+      "member": 6,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 206.79586791992188,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.20702791586518288,
+      "kind": "N1024",
+      "member": 7,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 217.94528198242188,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.21811456605792046,
+      "kind": "N1024",
+      "member": 0,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 217.34307861328125,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.21754149673506618,
+      "kind": "N1024",
+      "member": 1,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 225.36329650878906,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.2255618148483336,
+      "kind": "N1024",
+      "member": 2,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 223.23289489746094,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.22342333383858204,
+      "kind": "N1024",
+      "member": 3,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 156.94793701171875,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.15712966630235314,
+      "kind": "N1024",
+      "member": 4,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 156.41357421875,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.15660305321216583,
+      "kind": "N1024",
+      "member": 5,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 164.12637329101562,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.1643079831264913,
+      "kind": "N1024",
+      "member": 6,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 164.28399658203125,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.1644678101874888,
+      "kind": "N1024",
+      "member": 7,
+      "stage": 19
+    }
+  ],
+  "recorded_host_timings_summed_by_kind": {
+    "candidate_N1": 1.2914337925612926,
+    "candidate_N1024": 3.300670137628913,
+    "candidate_prepare": 4.793064173310995,
+    "original_N1": 1.2043708013370633,
+    "original_N1024": 5.152354251593351,
+    "original_fit": 0.866454562637955
+  },
+  "schema": "posteriorforge.prior_tail_saved_trace_timing.v1",
+  "source_pins": {
+    "diagnose_prefill_allocator.py": "4707b75c3866d31688031da704eeeffe5ab8fed9a2dd85195626028a0c08b021",
+    "diagnose_runtime.py": "1852980b507649ecf960d0f84b58d15e24073639c7482cb7a433e4e17b51139b",
+    "profile_fp16_posterior.py": "328def203b34c72d64c21a8a54bb77d734aaf7b0e8786408e1d79232046d0dfb"
+  },
+  "trace_bytes": 192909213,
+  "trace_export_seconds": 1.5191079978831112,
+  "trace_sha256": "21869db939e39d81326679fd1ac7addd9867a6bd1718acaa087ca3561c0b7629",
+  "unbracketed_host_extent_seconds": 23.62825375520223,
+  "unbracketed_scope": "combined ICDF/observer, weight/normalizer/target guards, serialization/I-O, Python waits and cleanup; individual ICDF versus capture split is unavailable",
+  "virtual_boundary_scope": "min/max complete-event extent of entire saved profiler session, including guard/ICDF/capture work; not an actual timed request or invented raw event"
+}

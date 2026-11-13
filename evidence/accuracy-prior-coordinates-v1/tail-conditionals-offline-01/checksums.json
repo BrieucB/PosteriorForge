@@ -1,0 +1,10 @@
+{
+  "README.txt": "9d7ae7db3abe1da2f68e730fb710a7ca8b1a44d89856afd4f918f9cdaaeb723e",
+  "compact-summary.json": "c2fbe23158e1077dac1ab49563826df2e8d76ca97d723f1758d9b18f31e90a6a",
+  "exact-analysis.json.gz": "c2666f7d318969c1092b461f97eb234c545ec7ec4790d84a7ed8a0b919077ce6",
+  "exact-reference-details.json.gz": "f65bbe0a4631ebcf9018be7ddd265292086c4f470a9ddb0563dc67379973d6dc",
+  "focal-density-index.json": "ae328a934c615b63026998305bdff94f14290f87695f979bb773945c75c0b68f",
+  "outside-Git-delivery-checksums.json": "81359f574a1f3974bf69f875b773f608586156ec579f9af1a3d4f2b0a5486c20",
+  "source-hashes.json": "3448c17a6027b68dd5c45a742c4b9bdf8af9a845817cd0c1cdd239408e38f298",
+  "tail-density-cdf-diagnostic.png": "77d72fae7bd887bad0e192fb8562284c5f5e25529e2d834b5c81d57c58930890"
+}

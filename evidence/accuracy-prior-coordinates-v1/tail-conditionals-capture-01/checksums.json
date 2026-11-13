@@ -1,0 +1,19 @@
+{
+  "files": {
+    "README.txt": "ef31b9e5d44b5393edba7d3d7855d4a25fb20f9205cf9bfaac0183acffdd161f",
+    "allocation-receipt.json": "f2779102404a8110599ac5f988d93899268250a7ce5e87344adfe60bd6b24716",
+    "allocation-sacct.psv": "0165e6026d4387d49c25a668f6bcdc71d43caee5a8f12f876fead2d12539dd1a",
+    "capture-manifest-description.json": "ceeae25ffda413cce89a052d88b81f1b5436c8d99ca2e8783e4f1f32f889cfd7",
+    "capture-manifest.json.gz": "fc52d147ced7b7a03e545b52f444f4c29d4d911e5f05381397a449a389edd73b",
+    "capture-manifest.raw.sha256": "2d7c4f7cfec3c221174f191114aaeb59772f3af9f85b0069cebd7708328e727c",
+    "curate_metadata.py": "cedb8e4da70d260a9a61d56acb247337144efa9f0cdb794bb33df78600c1d83d",
+    "input-preflight.json": "def6902c0bb03d473587984a304540fde3ff914e5335982cf4f8c82fd511fed9",
+    "raw-artifact-descriptors.json": "67aa5841713ccb02601184646be68c0af80a078182ccc38536d422c604fefb8b",
+    "root-launch-preflight.json": "2b8e21f4d6242aa53875b7e621c57fb487485c022c5c4cab714d8623e84aee99",
+    "slurm-5411602.err": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "slurm-5411602.out": "c53cdbbbc5ae148398d8edaa57e122b3a8a21d79282d2d575da3a89a9f808d1e",
+    "submission.json": "8ddba3b9767ef0f33dc9b6f6b816d5ce6b16b6bb2f1f85a485bc039f197cab60",
+    "summary.json": "1647443f1b0a292363fa2d4af4be62a9feda12d7fd41a18f3caf8cd52ed2aec4"
+  },
+  "schema": "posteriorforge.public_evidence_checksums.v1"
+}

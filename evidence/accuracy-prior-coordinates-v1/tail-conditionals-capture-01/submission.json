@@ -1,0 +1,75 @@
+{
+  "actual_gpu_seconds": 0,
+  "created_at": "2026-11-13T04:26:40.317600+00:00",
+  "gpus": 1,
+  "job_id": "5411602",
+  "metadata": {
+    "backend_sha256": "0199b16e9cc34203fa0d5645d161742fe9ed244633d7beee047fbcbf2528661c",
+    "candidate_commit": "375426be0041974405d454b14fc4860447d8ccd8",
+    "codec_sha256": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "counterfactual_reevaluation": true,
+    "diagnostic_sha256": "883fb5840cf3460fa5162b34d0fc24a43b43d70bb3bcff3585d0cfd3e483cc38",
+    "historical_member_or_batch_recreated": false,
+    "input_failure_manifest_sha256": "92755b788fc894d4ca16157e573bd1b5c9d8a4468b71cf184fa16303bced7bce",
+    "output": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/tail-conditionals-capture-01",
+    "phase": "accuracy-prior-coordinates-v1",
+    "preflight_sha256": "def6902c0bb03d473587984a304540fde3ff914e5335982cf4f8c82fd511fed9",
+    "root_only_single_submission": true,
+    "rows": [
+      4355,
+      41765
+    ],
+    "stages": [
+      15,
+      19
+    ],
+    "uniform_reconstruction_sha256": "b6c3e08ce2897d5fead7d129dbbf3e2cae8cd37fa7986903899fb68471d8ac24",
+    "windows": [
+      [
+        4096,
+        5120
+      ],
+      [
+        40960,
+        41984
+      ]
+    ]
+  },
+  "purpose": "ONE fixed-window counterfactual stage15/19 case0 FP32 all8 conditional/ICDF diagnostic; no posterior/G3/policy repair",
+  "reservation_id": "2a5960fc11bb4057ba5c5b7554040fc6",
+  "reserved_gpu_seconds": 300,
+  "state": "submitted",
+  "submission_returncode": 0,
+  "submission_started_at": "2026-11-13T04:26:40.347236+00:00",
+  "submission_stderr": "",
+  "submission_stdout": "5411602",
+  "submitted_argv": [
+    "sbatch",
+    "--parsable",
+    "--no-requeue",
+    "--account=eu-26-17",
+    "--partition=qgpu",
+    "--nodes=1",
+    "--ntasks=1",
+    "--gpus-per-node=1",
+    "--cpus-per-task=16",
+    "--time=00:05:00",
+    "--job-name=pf-tail-cond-pair0",
+    "--output=/scratch/project/eu-26-17/eubrieucb/posteriorforge/logs/%x-%j.out",
+    "--error=/scratch/project/eu-26-17/eubrieucb/posteriorforge/logs/%x-%j.err",
+    "/home/it4i-bbenvegnen/workspace/PosteriorForge/slurm/run-command.sh",
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+    "/home/it4i-bbenvegnen/workspace/PosteriorForge/scripts/diagnose_prior_tail_conditionals_v1.py",
+    "capture",
+    "--preflight-manifest",
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/tail-conditionals-preflight-01/manifest.json",
+    "--output",
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/tail-conditionals-capture-01",
+    "--ledger",
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/budget/ledger.json",
+    "--max-seconds",
+    "240"
+  ],
+  "submitted_at": "2026-11-13T04:26:40.379922+00:00",
+  "walltime_seconds": 300
+}

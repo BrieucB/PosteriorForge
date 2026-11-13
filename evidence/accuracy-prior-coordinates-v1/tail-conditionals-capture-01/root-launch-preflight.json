@@ -1,0 +1,28 @@
+{
+  "CPU_preflight_sha256": "def6902c0bb03d473587984a304540fde3ff914e5335982cf4f8c82fd511fed9",
+  "authorization": "one1GPU300GPU-second no-requeue counterfactual conditional/ICDF diagnostic; no posterior/G3/repair/otherpair",
+  "budget_before": {
+    "actual_gpu_hours": 29.14472222222222,
+    "actual_gpu_seconds": 104921,
+    "cap_exceeded": false,
+    "cap_gpu_hours": 200,
+    "remaining_gpu_hours": 170.8552777777778,
+    "remaining_gpu_seconds": 615079,
+    "reservation_count": 127,
+    "reserved_gpu_hours": 0.0,
+    "reserved_gpu_seconds": 0
+  },
+  "candidate_commit": "375426be0041974405d454b14fc4860447d8ccd8",
+  "scheduler_rows": [],
+  "schema": "posteriorforge.tail_conditional_root_launch.v1",
+  "sources": {
+    "backend": "0199b16e9cc34203fa0d5645d161742fe9ed244633d7beee047fbcbf2528661c",
+    "codec": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "diagnostic": "883fb5840cf3460fa5162b34d0fc24a43b43d70bb3bcff3585d0cfd3e483cc38",
+    "mixture": "e71f43b73ae8259c20b5d7b52feccc7c851e9a2fbb86d869bc0a5f7f3af792a1",
+    "producer": "311f2cbfb3c3bd977ff9af348cd81a008c3c7711ec70f850fb25b3bc2d120a85",
+    "runtime_inventory": true
+  },
+  "torch_imported": false,
+  "wall_seconds": 1.1629504300653934
+}

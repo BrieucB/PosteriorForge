@@ -1,0 +1,27 @@
+{
+  "GPU_execution_authority": "Root only; one <=300-second allocation after source commit; not executed by this receipt",
+  "GPU_or_model_call_performed": false,
+  "actual_data_scope": "input authentication only, exact two fixed windows; no arrays copied to Git",
+  "actual_input_preflight_sha256": "def6902c0bb03d473587984a304540fde3ff914e5335982cf4f8c82fd511fed9",
+  "actual_preflight_Torch_imported": false,
+  "actual_preflight_seconds": 0.9481471329927444,
+  "all_existing_sources_unchanged": true,
+  "compile_and_whitespace_checks_passed": true,
+  "logs": {
+    "inference": {
+      "file": "inference.log",
+      "result": "13 passed in 6.29s",
+      "sha256": "f6639be51056176a647357757ff4ad68a78e4b8de4689ddaa02b5e35dbe09578"
+    },
+    "reference": {
+      "file": "reference.log",
+      "result": "11 passed, 2 skipped in 1.88s",
+      "sha256": "2fab3c86fc3e2efd19b2a1d27fee6b7f3c9baca94b2f8f67a2c955d49d76b037"
+    }
+  },
+  "schema": "posteriorforge.prior_tail_capture_CPU_evidence.v1",
+  "script_sha256": "883fb5840cf3460fa5162b34d0fc24a43b43d70bb3bcff3585d0cfd3e483cc38",
+  "source_hash_scope": "exact final source/test hashes recorded after focused tests; no independent pre-run source snapshot claimed",
+  "test_math_scope": "deterministic CPU-only tiny supplied-logit ICDF/observer contract; no model, random posterior, world, reference or G3",
+  "test_sha256": "db838c9208ece74294573e2e11af58ba9b0aeb251975f6b6f90e57ffdfd08179"
+}

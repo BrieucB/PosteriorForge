@@ -1,0 +1,471 @@
+{
+  "elapsed_capture_seconds": 48.31360623938963,
+  "records": [
+    {
+      "CUDA_elapsed_span_ms": 497.939208984375,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.5036196080036461,
+      "kind": "fit",
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 2524.187744140625,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 2.5243623591959476,
+      "kind": "prepare",
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 199.76821899414062,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.20006111497059464,
+      "kind": "N1024",
+      "member": 0,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 202.64451599121094,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.2028706381097436,
+      "kind": "N1024",
+      "member": 1,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 221.55746459960938,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.22178610926494002,
+      "kind": "N1024",
+      "member": 2,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 221.5226593017578,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.22175270598381758,
+      "kind": "N1024",
+      "member": 3,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 197.0055389404297,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.19723498076200485,
+      "kind": "N1024",
+      "member": 4,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 189.98439025878906,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.19021065160632133,
+      "kind": "N1024",
+      "member": 5,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 203.64303588867188,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.20387084409594536,
+      "kind": "N1024",
+      "member": 6,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 204.37522888183594,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.20462424075230956,
+      "kind": "N1024",
+      "member": 7,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 169.1558074951172,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.16936527006328106,
+      "kind": "N1",
+      "member": 0,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 156.23922729492188,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.156352867372334,
+      "kind": "N1",
+      "member": 1,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 165.95773315429688,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.16606747591868043,
+      "kind": "N1",
+      "member": 2,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 164.28848266601562,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.16439382312819362,
+      "kind": "N1",
+      "member": 3,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 154.56898498535156,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.15467434376478195,
+      "kind": "N1",
+      "member": 4,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 154.50306701660156,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.15460960427299142,
+      "kind": "N1",
+      "member": 5,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 162.85049438476562,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.16295536933466792,
+      "kind": "N1",
+      "member": 6,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 162.9086456298828,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.16301503870636225,
+      "kind": "N1",
+      "member": 7,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 2296.726318359375,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 2.296895149163902,
+      "kind": "N1024",
+      "member": 0,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 219.94703674316406,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.22023836011067033,
+      "kind": "N1024",
+      "member": 1,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 232.17376708984375,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.23237294610589743,
+      "kind": "N1024",
+      "member": 2,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 225.47894287109375,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.22566812299191952,
+      "kind": "N1024",
+      "member": 3,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 159.11888122558594,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.1593083320185542,
+      "kind": "N1024",
+      "member": 4,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 158.19091796875,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.15838159201666713,
+      "kind": "N1024",
+      "member": 5,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 166.5305938720703,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.16673113498836756,
+      "kind": "N1024",
+      "member": 6,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 165.4220428466797,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.16560888988897204,
+      "kind": "N1024",
+      "member": 7,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 193.79420471191406,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.19397002831101418,
+      "kind": "N1",
+      "member": 0,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 167.58233642578125,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.1677076267078519,
+      "kind": "N1",
+      "member": 1,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 174.22457885742188,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.174339281860739,
+      "kind": "N1",
+      "member": 2,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 174.6612548828125,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.1747809168882668,
+      "kind": "N1",
+      "member": 3,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 119.54742431640625,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.11966141173616052,
+      "kind": "N1",
+      "member": 4,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 119.30652618408203,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.11941786808893085,
+      "kind": "N1",
+      "member": 5,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 127.03238677978516,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.12714791484177113,
+      "kind": "N1",
+      "member": 6,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 127.23197174072266,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.12734575290232897,
+      "kind": "N1",
+      "member": 7,
+      "stage": 15
+    },
+    {
+      "CUDA_elapsed_span_ms": 362.6449890136719,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.3628349546343088,
+      "kind": "fit",
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 2268.533203125,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 2.2687018141150475,
+      "kind": "prepare",
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 204.4455108642578,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.20474453503265977,
+      "kind": "N1024",
+      "member": 0,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 205.66233825683594,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.20589120592921972,
+      "kind": "N1024",
+      "member": 1,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 221.73922729492188,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.22198327584192157,
+      "kind": "N1024",
+      "member": 2,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 223.26214599609375,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.22348746424540877,
+      "kind": "N1024",
+      "member": 3,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 197.2184295654297,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.1974515556357801,
+      "kind": "N1024",
+      "member": 4,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 190.9251251220703,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.19114724034443498,
+      "kind": "N1024",
+      "member": 5,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 206.29791259765625,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.2065256591886282,
+      "kind": "N1024",
+      "member": 6,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 206.79586791992188,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "candidate",
+      "host_wall_seconds": 0.20702791586518288,
+      "kind": "N1024",
+      "member": 7,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 217.94528198242188,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.21811456605792046,
+      "kind": "N1024",
+      "member": 0,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 217.34307861328125,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.21754149673506618,
+      "kind": "N1024",
+      "member": 1,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 225.36329650878906,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.2255618148483336,
+      "kind": "N1024",
+      "member": 2,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 223.23289489746094,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.22342333383858204,
+      "kind": "N1024",
+      "member": 3,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 156.94793701171875,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.15712966630235314,
+      "kind": "N1024",
+      "member": 4,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 156.41357421875,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.15660305321216583,
+      "kind": "N1024",
+      "member": 5,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 164.12637329101562,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.1643079831264913,
+      "kind": "N1024",
+      "member": 6,
+      "stage": 19
+    },
+    {
+      "CUDA_elapsed_span_ms": 164.28399658203125,
+      "CUDA_span_is_not_kernel_union": true,
+      "arm": "original",
+      "host_wall_seconds": 0.1644678101874888,
+      "kind": "N1024",
+      "member": 7,
+      "stage": 19
+    }
+  ],
+  "scope": "direct recorded per-call timing fields selected from exact capture manifest; no clean request decomposition",
+  "trace_export_seconds": 1.5191079978831112
+}

@@ -1,0 +1,40 @@
+{
+  "attribution": "Built with PriorLabs-TabPFN",
+  "both_environments_passed": true,
+  "checks": [
+    "manual unequal-bin quantiles",
+    "zero weights and plateau ties",
+    "5000bin nearone providedF32lattice",
+    "subnormal weights",
+    "normalization scale invariance",
+    "tiny weight survives exact normalization",
+    "support vs CDF residual independent, includingu1stress",
+    "invalid inputs rejected without clipping",
+    "RNG/np.exp forbidden and all inputs unchanged"
+  ],
+  "new_neural_sampler_RNG_posterior_G3_or_reference_integration_calls": 0,
+  "no_production_module_change": true,
+  "runs": {
+    "inference": {
+      "exit_code": 0,
+      "receipt_file": "inference-receipt.json",
+      "receipt_sha256": "e7351d2b9b04419eda17eea7681227ca6a31aea34c097c9d3d69ddd4542fd5cc",
+      "wall_seconds": 0.6438326872885227
+    },
+    "reference": {
+      "exit_code": 0,
+      "receipt_file": "reference-receipt.json",
+      "receipt_sha256": "d4734cbe518e58f72c16ef0bfc65bce19d046b202d11773102d4066e0e3f360d",
+      "wall_seconds": 0.48301492258906364
+    }
+  },
+  "schema": "posteriorforge.tail_icdf_reference_CPU_tests.v1",
+  "semantics": "exact dyadic/Fraction normalization of EXISTING captured Float32 weights; NOT softmax recomputed64 and NOT frozen cumsum32 arithmetic",
+  "source_hashes": {
+    "scripts/prior_tail_icdf_reference_v1.py": "8c35b5e10e5b15383b8a2112f25fa555e8d11016a30fef0abcc4167c527e87c1",
+    "tests/test_prior_tail_icdf_reference_v1.py": "4ac87f662a36a40c135817daa1511af0dc0f8e19d26a2d81033a5cc6c670f6ef"
+  },
+  "source_unchanged": true,
+  "status": "passed",
+  "tests_per_environment": 19
+}

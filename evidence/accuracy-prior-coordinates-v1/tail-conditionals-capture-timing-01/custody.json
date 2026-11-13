@@ -1,0 +1,142 @@
+{
+  "CDF_calls_and_restoration": {
+    "original_alias_restored": true,
+    "patched_call_count": 48,
+    "sdk_sources_unchanged": true
+  },
+  "actual_capture_status": "two_stage_conditional_capture_complete",
+  "actual_stages": [
+    {
+      "N1_decision": {
+        "budget_allowed": true,
+        "candidate_focal_finite_endpoint_failures": [
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "declared_rule": "any N1024 member matching-limit failure; differing focal finite-endpoint failure masks across arms; or no N1024 focal finite-endpoint reproduction in either arm",
+        "original_focal_finite_endpoint_failures": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "skipped_to_prioritize_mandatory_N1024": false,
+        "triggered": true
+      },
+      "entries_by_arm": {
+        "candidate": 16,
+        "original": 16
+      },
+      "focal_offset": 259,
+      "focal_row": 4355,
+      "stage": 15,
+      "window": [
+        4096,
+        5120
+      ]
+    },
+    {
+      "N1_decision": {
+        "budget_allowed": true,
+        "candidate_focal_finite_endpoint_failures": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true,
+          true
+        ],
+        "declared_rule": "any N1024 member matching-limit failure; differing focal finite-endpoint failure masks across arms; or no N1024 focal finite-endpoint reproduction in either arm",
+        "original_focal_finite_endpoint_failures": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true,
+          true
+        ],
+        "skipped_to_prioritize_mandatory_N1024": false,
+        "triggered": false
+      },
+      "entries_by_arm": {
+        "candidate": 8,
+        "original": 8
+      },
+      "focal_offset": 805,
+      "focal_row": 41765,
+      "stage": 19,
+      "window": [
+        40960,
+        41984
+      ]
+    }
+  ],
+  "capture_gzip_sha256": "fc52d147ced7b7a03e545b52f444f4c29d4d911e5f05381397a449a389edd73b",
+  "capture_manifest_bytes": 2915254,
+  "capture_manifest_sha256": "cf11be3c542eb11c7ed9423845eb1f80fb046df59a2b85254cb9f20d25663461",
+  "capture_source_sha256": "883fb5840cf3460fa5162b34d0fc24a43b43d70bb3bcff3585d0cfd3e483cc38",
+  "complete_posterior_world_reference_G3": false,
+  "counterfactual_reevaluation": true,
+  "default_RNG_preserved": true,
+  "density_NPZ_arrays_copied_to_Git": false,
+  "historical_member_grouping_recreated": false,
+  "logs": [
+    {
+      "bytes": 3516,
+      "file": "offline-stdout.log",
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/diagnostics/summarize_prior_tail_trace_v1.stdout.log",
+      "sha256": "01f440501b48bee237e6ad0ceb01a08e418ede7357265c87ebaa8d33cd120725"
+    },
+    {
+      "bytes": 0,
+      "file": "offline-stderr.log",
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/diagnostics/summarize_prior_tail_trace_v1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 115,
+      "file": "capture-stdout.log",
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/logs/pf-tail-cond-pair0-5411602.out",
+      "sha256": "c53cdbbbc5ae148398d8edaa57e122b3a8a21d79282d2d575da3a89a9f808d1e"
+    },
+    {
+      "bytes": 0,
+      "file": "capture-stderr.log",
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/logs/pf-tail-cond-pair0-5411602.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "offline_source_sha256": "ab41523929e14690d25ee3c81e98b201d148730af0de23d35a1fe3c311a2438b",
+  "offline_summary_sha256": "ec3ef0d3834ccf329ab8781d1e6e36ec7fed0e00c1761ba3cf98bafab0cbf83b",
+  "raw_trace": {
+    "bytes": 192909213,
+    "copied_to_Git": false,
+    "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/tail-conditionals-capture-01/cuda-trace.json",
+    "raw_trace_modified": false,
+    "sha256": "21869db939e39d81326679fd1ac7addd9867a6bd1718acaa087ca3561c0b7629"
+  },
+  "schema": "posteriorforge.prior_tail_capture_timing_custody.v1",
+  "source_commit": "375426be0041974405d454b14fc4860447d8ccd8",
+  "source_reported_preprocessing_RNG_scope": "fixed SDK random_state; original/candidate Torch fork isolation. Internal preprocessing RNG call counts not instrumented; not claimed zero.",
+  "sources_unchanged": true,
+  "timing_scope_notes": {
+    "cost": "Root reconciles allocation separately; this timing package does not treat its300-second launch reservation as actual cost",
+    "legacy_active_union_field": "cuda_kernel_and_copy_interval_union_seconds ALSO includes memset by frozen reader source; label kernel/copy/memset active union",
+    "unbracketed_host": "combined ICDF/guard/capture/I-O/Python/wait/cleanup; no separate ICDF versus serialization measurement",
+    "virtual_boundary": "entire saved profiler complete-event extent, not a recorded request annotation; wrapper iterator only, raw trace unchanged"
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "FP16_activated": false,
+  "G3_updates": 0,
+  "RNG_scope": "fixed SDK random_state; original/candidate Torch fork isolation. Internal preprocessing RNG call counts not instrumented; not claimed zero.",
+  "actual_footer": {
+    "CDF_alias_restored": true,
+    "CDF_calls": 48,
+    "SDK_sources_unchanged": true,
+    "candidate_precision_sessions_restored": [
+      true,
+      true
+    ],
+    "default_RNG_after": {
+      "numpy": "4b67ad2893b55cf3936c41af0c2005a6c6c8447aced893c8d7f0034fc6ab3b35",
+      "python": "ff1ec093d0be53ffb910565f92cfcf9d32640942c9b08de0d26cf1e70ac7f120",
+      "torch_cpu": "8c742301c5e72545adb9f8c0a71932c2331cd897e5acaa28e9f6323e0a47b0b8",
+      "torch_cuda": "daeb36a364b206cd94c947836de4d982c03402fec00d0bab2d6f34574dd2a47e"
+    },
+    "default_RNG_before": {
+      "numpy": "4b67ad2893b55cf3936c41af0c2005a6c6c8447aced893c8d7f0034fc6ab3b35",
+      "python": "ff1ec093d0be53ffb910565f92cfcf9d32640942c9b08de0d26cf1e70ac7f120",
+      "torch_cpu": "8c742301c5e72545adb9f8c0a71932c2331cd897e5acaa28e9f6323e0a47b0b8",
+      "torch_cuda": "daeb36a364b206cd94c947836de4d982c03402fec00d0bab2d6f34574dd2a47e"
+    },
+    "default_RNG_preserved": true,
+    "post_exit_observation_statuses": {
+      "CDF_after_exit": "observed",
+      "default_RNG_matches_before": "observed",
+      "precision_session_after_exit": "observed",
+      "sources": "observed"
+    },
+    "sources_unchanged": true
+  },
+  "allocation": {
+    "actual_GPU_seconds": 53,
+    "allocation_receipt_sha256": "f2779102404a8110599ac5f988d93899268250a7ce5e87344adfe60bd6b24716",
+    "elapsed_allocated_seconds": 53,
+    "gpus": 1,
+    "job_name": "pf-tail-cond-pair0",
+    "no_requeue": true,
+    "project_actual_GPU_seconds_after": 104974,
+    "project_reserved_GPU_seconds_after": 0,
+    "reserved_GPU_seconds_at_submission": 300,
+    "restarts": 0,
+    "state": "COMPLETED"
+  },
+  "attribution": "Built with PriorLabs-TabPFN",
+  "candidate_arm": "Frozen0199 backend, stages15/19 normal cached FP32 route, all8.",
+  "capture_elapsed_seconds": 48.31360623938963,
+  "fixtures": [
+    {
+      "focal_offset": 259,
+      "row": 4355,
+      "stage": 15,
+      "target_coordinate": {
+        "decode_latent_dependencies": [
+          16
+        ],
+        "encode_physical_dependencies": [
+          16
+        ],
+        "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+        "latent_name": "z_sigma_a1",
+        "physical_name": "sigma_a1",
+        "physical_slot": 16,
+        "stage": 15
+      },
+      "window": [
+        4096,
+        5120
+      ]
+    },
+    {
+      "focal_offset": 805,
+      "row": 41765,
+      "stage": 19,
+      "target_coordinate": {
+        "decode_latent_dependencies": [
+          20
+        ],
+        "encode_physical_dependencies": [
+          20
+        ],
+        "kind": "independent_truncated_gaussian_prior_CDF_to_normal",
+        "latent_name": "z_sigma_a3",
+        "physical_name": "sigma_a3",
+        "physical_slot": 20,
+        "stage": 19
+      },
+      "window": [
+        40960,
+        41984
+      ]
+    }
+  ],
+  "head_prediction_capture_counts": {
+    "15": {
+      "candidate": {
+        "N1": 8,
+        "N1024": 8
+      },
+      "original": {
+        "N1": 8,
+        "N1024": 8
+      }
+    },
+    "19": {
+      "candidate": {
+        "N1024": 8
+      },
+      "original": {
+        "N1024": 8
+      }
+    }
+  },
+  "input_failure_manifest_sha256": "92755b788fc894d4ca16157e573bd1b5c9d8a4468b71cf184fa16303bced7bce",
+  "input_latent_wave_sha256": "1ba89c1a4e53c5895ad1623b5a396e4086154c3dc830f8036da388f234d90349",
+  "input_preflight_sha256": "def6902c0bb03d473587984a304540fde3ff914e5335982cf4f8c82fd511fed9",
+  "job_id": "5411602",
+  "normalized_reference_analysis": "Separate subsequent offline report; no reference integration was performed by this capture or metadata packaging.",
+  "numerical_interpretation_in_this_summary": false,
+  "original_arm": "Fresh original TabPFN fit_preprocessors FP32 all8 selected-member controls; outside precision Session.",
+  "posterior_vectors_generated": 0,
+  "profile": {
+    "bytes": 192909213,
+    "export_seconds": 1.5191079978831112,
+    "file": "cuda-trace.json",
+    "scope": "counterfactual capture, not clean performance; actual kernel/copy unions require offline correlation analysis; CUDA elapsed spans are not exclusive kernels",
+    "sha256": "21869db939e39d81326679fd1ac7addd9867a6bd1718acaa087ca3561c0b7629",
+    "shapes_memory_stacks": false
+  },
+  "provided_uniform_bits": [
+    1065185444,
+    1065336439,
+    1065351538,
+    1065353184,
+    1065353206,
+    1065353215
+  ],
+  "provided_uniform_values": [
+    0.9900000095367432,
+    0.9990000128746033,
+    0.9998999834060669,
+    0.9999980926513672,
+    0.9999994039535522,
+    0.9999999403953552
+  ],
+  "raw_NPZ_descriptors_sha256": "67aa5841713ccb02601184646be68c0af80a078182ccc38536d422c604fefb8b",
+  "raw_capture_manifest_sha256": "cf11be3c542eb11c7ed9423845eb1f80fb046df59a2b85254cb9f20d25663461",
+  "raw_dense_arrays_pickles_trace_included_in_Git": false,
+  "raw_manifest_retains_numeric_comparisons_and_N1_decisions_without_relabeling": true,
+  "reconstructed_U_scope": "Provided component uniforms are independently reconstructed from historical private-stream states; current head/bin/probability/ICDF observations are counterfactual new observations.",
+  "reference_integrations": 0,
+  "schema": "posteriorforge.tail_conditional_capture_public_scope.v1",
+  "scope": "Counterfactual FP32 conditional re-evaluation of two saved-prefix windows; no historical member/grouped-batch/ICDF reconstruction claim.",
+  "source_commit": "375426be0041974405d454b14fc4860447d8ccd8",
+  "source_pins": {
+    "backend": "0199b16e9cc34203fa0d5645d161742fe9ed244633d7beee047fbcbf2528661c",
+    "codec": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "diagnostic": "883fb5840cf3460fa5162b34d0fc24a43b43d70bb3bcff3585d0cfd3e483cc38",
+    "mixture": "e71f43b73ae8259c20b5d7b52feccc7c851e9a2fbb86d869bc0a5f7f3af792a1",
+    "producer": "311f2cbfb3c3bd977ff9af348cd81a008c3c7711ec70f850fb25b3bc2d120a85",
+    "runtime_inventory": true
+  },
+  "source_policy_changes_or_repairs": false,
+  "status": "two_stage_conditional_capture_complete",
+  "timing_scope": "Counterfactual capture including tracing/serialization; not a posterior latency or clean performance measurement.",
+  "total_selected_head_query_captures": 48,
+  "uniform_generation_calls": 0,
+  "uniform_reconstruction_sha256": "b6c3e08ce2897d5fead7d129dbbf3e2cae8cd37fa7986903899fb68471d8ac24"
+}

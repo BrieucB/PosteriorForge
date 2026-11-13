@@ -1,0 +1,8 @@
+{
+  "exact_original_bytes_after_decompression": true,
+  "gzip_file": "capture-manifest.json.gz",
+  "gzip_sha256": "fc52d147ced7b7a03e545b52f444f4c29d4d911e5f05381397a449a389edd73b",
+  "raw_basename": "manifest.json",
+  "raw_bytes": 2915254,
+  "raw_sha256": "cf11be3c542eb11c7ed9423845eb1f80fb046df59a2b85254cb9f20d25663461"
+}
