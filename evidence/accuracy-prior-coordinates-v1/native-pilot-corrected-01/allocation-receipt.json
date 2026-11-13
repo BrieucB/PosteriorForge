@@ -1,0 +1,43 @@
+{
+  "GPUs": 1,
+  "Slurm": {
+    "Account": "eu-26-17",
+    "AllocTRES": "billing=1,cpu=16,gres/gpu=1,mem=124160M,node=1",
+    "ElapsedRaw": "769",
+    "JobIDRaw": "5411248",
+    "JobName": "pf-prior-corrected-01",
+    "Partition": "qgpu",
+    "Restarts": "0",
+    "State": "COMPLETED"
+  },
+  "Slurm_raw_file": "Slurm-accounting.psv",
+  "Slurm_raw_sha256": "35b9f37f564061c24d473d78d4fee8bab7863eaf114010d8cd916b02deaaf46f",
+  "allocated_GPU_hours": 0.2136111111111111,
+  "allocated_GPU_seconds": 769,
+  "completed_posterior_cohort_count": 50000,
+  "created_UTC": "2026-11-12T23:57:37.939926+00:00",
+  "job_id": "5411248",
+  "ledger_fully_reconciled": true,
+  "no_requeue_verified_from_submitted_argv": true,
+  "normal_success_posterior_timing_recorded": true,
+  "observed_wrapper_total_seconds": 765.2874687369913,
+  "project_ledger_sha256": "fc1a2bd98fa180e0bc084a935b67113fd1909402b89ddc652314ee872f3cca15",
+  "project_ledger_summary_at_packaging": {
+    "actual_gpu_hours": 28.685,
+    "actual_gpu_seconds": 103266,
+    "cap_exceeded": false,
+    "cap_gpu_hours": 200,
+    "remaining_gpu_hours": 171.315,
+    "remaining_gpu_seconds": 616734,
+    "reservation_count": 124,
+    "reserved_gpu_hours": 0.0,
+    "reserved_gpu_seconds": 0
+  },
+  "raw_manifest_sha256": "62aa8bf71ddbf922ab9543141c4ada5cb438e5af162ede76cffe60d1dd3819b5",
+  "request_status": "complete",
+  "reservation_id": "8c0c001c098349beaf57e02f77b02af4",
+  "reserved_before_submission_GPU_seconds": 1200,
+  "restarts": 0,
+  "schema": "posteriorforge.corrected_pilot_allocation_reconciliation.v1",
+  "scope": "Main one-GPU allocation only; child rows not double counted; all allocated elapsed seconds charged, including any failure/idle/CPU work."
+}

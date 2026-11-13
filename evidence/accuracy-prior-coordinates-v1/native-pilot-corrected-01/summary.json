@@ -1,0 +1,338 @@
+{
+  "actual_prediction_checks": {
+    "actual_head_contexts": 1138,
+    "sampler_callback_calls": 1131,
+    "shared_densities": 1
+  },
+  "array_custody_scope": "manifest descriptors only; no independent NPZ/array replay in this curator",
+  "case": 2,
+  "compatibility_adapter": {
+    "activation": "explicit",
+    "active_translator_code_sha256": "8a13551c263346388cee3326e17daabcae89274dd7fa9dcf0f07aded35498367",
+    "adapter_id": "tabpfn-2.0.9-finite-cdf-parentheses-v1",
+    "adapter_sha256": "7a86fbbefdb0fa7e850a394bea8af710c2e5f0139c10cdce1fd272fb9709eec0",
+    "adapter_version": 1,
+    "corrected_cdf_code_sha256": "ae3c7d841ba63f2fd27f7a317848834bdf4bcf5330c780e5dad6dd678b4ba140",
+    "correction": "finite_cdf_parentheses_only",
+    "exact_patch_target": "tabpfn.regressor.translate_probs_across_borders.__globals__['_cdf']",
+    "executed_corrected_cdf_code_sha256": "ae3c7d841ba63f2fd27f7a317848834bdf4bcf5330c780e5dad6dd678b4ba140",
+    "execution_optimized": false,
+    "original_alias_identity_verified": true,
+    "original_alias_restored": true,
+    "original_cdf_code_sha256": "5e7eebe9521dba64daa2148b35d0ff4f8d88f618a1193cb2b6ea3404249c4945",
+    "original_translator_code_sha256": "8a13551c263346388cee3326e17daabcae89274dd7fa9dcf0f07aded35498367",
+    "patched_call_count": 1138,
+    "schema": "posteriorforge.compat.finite_cdf.v1",
+    "scope": "finite_ensemble_cdf_parentheses_only",
+    "sdk_aliases_unchanged": true,
+    "sdk_files_modified": false,
+    "sdk_source_sha256": {
+      "tabpfn/regressor.py": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "tabpfn/utils.py": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1"
+    },
+    "sdk_source_sha256_after": {
+      "tabpfn/regressor.py": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "tabpfn/utils.py": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1"
+    },
+    "sdk_sources_unchanged": true,
+    "source_guard_passed": true,
+    "tabpfn_version": "2.0.9",
+    "tail_family_changed": false,
+    "translator_code_unchanged": true,
+    "variant": "cdf_arithmetic_v1"
+  },
+  "completed_stage_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "context_seed": 20261111,
+  "context_size": 4096,
+  "curator_source_sha256": "b899783f3b8681950dc2c80fdd4035e5bd5a768051c904358b97fe9f660ce9aa",
+  "decoded_wave_archive": {
+    "all_rows_including_unused_FIFO_tail": true,
+    "file": "decoded-physical-proposal-waves.npz",
+    "generated_valid_row_count": 51200,
+    "keys": [
+      "wave_0000"
+    ],
+    "only_valid_decoded_complete_waves": true,
+    "sha256": "bd43889ede987d055a3d810887e94ac9824d2bffb524b2d1bb9a114794a4e84a",
+    "wave_indices": [
+      0
+    ]
+  },
+  "default_rng_after": {
+    "numpy": "e2f141f4cb309721ebf439d5fb652adc515fc878ff98480f12bcf1dbfff7586e",
+    "python": "372f82ab891a01dcb61a2e2ea6a6b748088e221b4c87fad7050e411ff4084756",
+    "torch_CPU": "eea5ef51760a82f0750837cbb99f93d84395e5461d2003f85b36889c956ae8c6",
+    "torch_CUDA": "5784ff17fb78e758b62ccd72fec6f33f1c1855174d4224c537077c98ff2e792c"
+  },
+  "default_rng_before": {
+    "numpy": "e2f141f4cb309721ebf439d5fb652adc515fc878ff98480f12bcf1dbfff7586e",
+    "python": "372f82ab891a01dcb61a2e2ea6a6b748088e221b4c87fad7050e411ff4084756",
+    "torch_CPU": "eea5ef51760a82f0750837cbb99f93d84395e5461d2003f85b36889c956ae8c6",
+    "torch_CUDA": "5784ff17fb78e758b62ccd72fec6f33f1c1855174d4224c537077c98ff2e792c"
+  },
+  "default_rng_preserved": true,
+  "latent_wave_archive": {
+    "all_actual_complete_generated_waves_preserved": true,
+    "all_generated_rows_including_unused_tail": true,
+    "complete_generated_wave_count": 1,
+    "file": "latent-proposal-waves.npz",
+    "generated_row_count": 51200,
+    "keys": [
+      "wave_0000"
+    ],
+    "sha256": "83c0047df699fad399e04372f8e4cbbb5a60634eb77d8005f9091d281bc4a229"
+  },
+  "memory": {
+    "peak_allocated_bytes": 2250070016,
+    "peak_reserved_bytes": 3116367872
+  },
+  "missing_normal_success_fields": [],
+  "old_c810_failure_reclassified": false,
+  "original_manifest_bytes": 14438078,
+  "original_manifest_sha256": "62aa8bf71ddbf922ab9543141c4ada5cb438e5af162ede76cffe60d1dd3819b5",
+  "physical_G3_in_this_neural_request": false,
+  "posterior_accuracy_claimed": false,
+  "proposal_buffer": {
+    "actual_generated_wave_sizes": [
+      51200
+    ],
+    "all_rows_are_complete_vectors": true,
+    "api_requested_sizes": [
+      50000
+    ],
+    "attribution": "Built with PriorLabs-TabPFN",
+    "benchmark_total_count": 50000,
+    "buffer_reset_count": 0,
+    "data_dtype": "CPU FP64; decoded physical values; unchanged",
+    "dtype_validator_only_change": "Float32 complete vectors -> decoded physical Float64 complete vectors",
+    "enabled": true,
+    "failed": false,
+    "failure": null,
+    "finalized": true,
+    "generated_count": 51200,
+    "generated_wave_attempt_sizes": [
+      51200
+    ],
+    "generated_wave_count": 1,
+    "global_initial_lookahead": 1200,
+    "implicit_casting_performed": false,
+    "law_scope": "FIFO rechunking preserves an iid complete-vector proposal stream; provider batch law must be qualified separately",
+    "live_buffer_rows": 0,
+    "log_density": "not_used",
+    "module_sha256": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+    "original_api_delivered_count": 50000,
+    "original_fifo_algorithm_code_objects_unchanged": true,
+    "original_fifo_algorithm_sha256": "8fb2ba1fb63cd917378ff9bc8b6f70be7410862c509cd22cb2fb6f454d3d35fa",
+    "original_sampler_counts": {
+      "accepted_before_trim": 50000,
+      "original_checked_count": 50000,
+      "original_support_calls": 1,
+      "returned_count": 50000
+    },
+    "original_sampler_source_sha256": "e6f862a176eae4cf0269c49655cf2edefc854428461445c74aa2b02f3b144512",
+    "original_support_check_code_and_closure_verified": true,
+    "original_support_source_sha256": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e",
+    "partial_vector_filtering": false,
+    "policy_id": "complete_physical_float64_fifo_lookahead_v1",
+    "policy_sha256": "0a582e35b72d0b949a6291cc13456f4ad6b808523d32c867c1f8ae1f868f9a2f",
+    "rank": 0,
+    "remaining_unused_buffer_count": 1200,
+    "request_scope": {
+      "backend_sha256": "e5a2733e767b187e573315547ec9253267e43d1e3700596f61e97116c53f3256",
+      "case": 2,
+      "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+      "codec_sha256": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+      "context_obs": {
+        "dtype": "<f8",
+        "sha256": "aee2030d63158a3baf3b731e1231e17972ed80a19def10152b4e67d6d1e6ffb8",
+        "shape": [
+          4096,
+          33
+        ]
+      },
+      "context_seed": 20261111,
+      "context_theta": {
+        "dtype": "<f8",
+        "sha256": "73c4c282c136a1fd86459e7b1b736629b459075def9176956a90d232d4c30f4d",
+        "shape": [
+          4096,
+          21
+        ]
+      },
+      "coordinate_policy_sha256": "52ee821b6126a1c1394d16b8e76c98686fb7a4d2dd2cade43b7b2eb3aa5f492f",
+      "model_inputs": {
+        "context_obs": {
+          "dtype": "<f4",
+          "sha256": "8d00c23f46feaa06c22ae4c92206db28aa4bb3e222f4bdb750fa324b4abec883",
+          "shape": [
+            4096,
+            15
+          ]
+        },
+        "context_theta": {
+          "dtype": "<f4",
+          "sha256": "ac4ee26bb3ebe8ecebf6286e370758db7e1fcc34b6cd473037ca09b7f2d64137",
+          "shape": [
+            4096,
+            21
+          ]
+        },
+        "query": {
+          "dtype": "<f4",
+          "sha256": "9da8e2bd869ace157b2c3e23cb0333dae92413a36726f3d524836393ddacb235",
+          "shape": [
+            1,
+            15
+          ]
+        }
+      },
+      "native_execution_policy_sha256": "f30a51a084783e3475f38f8a564fa475330a6e643b60fc8c33eec44111b06980",
+      "neural_adapter_source_sha256": "71e5e2906fd663534e56878de1fc4aff55093e3d950a13f348f57417ca7c01d3",
+      "physical_fifo_source_sha256": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+      "physical_to_stage_order": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        3,
+        8,
+        9,
+        10,
+        7,
+        12,
+        13,
+        14,
+        11,
+        16,
+        15,
+        18,
+        17,
+        20,
+        19
+      ],
+      "post_decode_fifo_dtype": "Float64 physical; no cast",
+      "prior_coordinate_producer_sha256": "a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf",
+      "query": {
+        "dtype": "<f8",
+        "sha256": "580116278ff2e30fedcde7580ff1df059886d843361a289877954bdec75e5646",
+        "shape": [
+          1,
+          33
+        ]
+      },
+      "rank": 0,
+      "repetition": 0,
+      "scientific_fingerprint": "216a240a9fb347348f433804b78eeebb6e040332db6d2fd40b164a7ed74b7966",
+      "scope": "one posterior request; no cross-query/case/context reuse",
+      "seed_streams": {
+        "component_uniform": 3762239940,
+        "head_acceptance": 2668860503,
+        "head_proposal": 3262276822
+      },
+      "stage_to_physical_order": [
+        0,
+        1,
+        2,
+        6,
+        3,
+        4,
+        5,
+        10,
+        7,
+        8,
+        9,
+        14,
+        11,
+        12,
+        13,
+        16,
+        15,
+        18,
+        17,
+        20,
+        19
+      ],
+      "strict_full_wave_decode_before_FIFO_and_support": true,
+      "world_size": 1
+    },
+    "request_scope_sha256": "0d2d4879a4301796475c9cc92e3ea864254c0a96b5d88e92ab05351a176c9677",
+    "required_stage_preparations_for_generated_waves": 21,
+    "rng_draws_by_buffer": 0,
+    "row_repair_or_reordering": false,
+    "schema": "posteriorforge.execution.physical_float64_fifo.v1",
+    "seed_coupling": "provider generates lookahead rows; role/seed definitions unchanged but seeded vectors need not be bitwise identical",
+    "source_unchanged": true,
+    "support_filtering_performed_by_buffer": false,
+    "unused_rows_discarded_only_after_original_sampler_completion": true,
+    "vector_width": 21,
+    "worker_expected_return_count": 50000,
+    "worker_initial_lookahead": 1200,
+    "world_size": 1
+  },
+  "proposal_wave_sizes": [
+    51200
+  ],
+  "public_raw_NPZ_or_sample_arrays_included": false,
+  "rejection": {
+    "accepted_before_final_trim": 50000,
+    "proposed": 50000,
+    "returned": 50000,
+    "support_calls": 1
+  },
+  "requested_count": 50000,
+  "samples": {
+    "dtype": "<f8",
+    "sha256": "6b6c36843d6c213d086c6712aacc68dc1cb11148163ebe24bc74119a102b54eb",
+    "shape": [
+      50000,
+      21
+    ]
+  },
+  "samples_file": "samples.npz",
+  "samples_sha256": "fade6a4f343b0f239383f2af8b24427a742c4bd1704a3d0135cd0f7b19831d27",
+  "sampling_counters": {
+    "component_predictions": 1130,
+    "head_candidates": 1024010,
+    "head_rejections": 10,
+    "stage0_shared_predictions": 1
+  },
+  "schema": "posteriorforge.inference.prior_physical_fifo.v1",
+  "separate_closed_scientific_assessment_required": true,
+  "sources_unchanged": true,
+  "status": "complete",
+  "timings": {
+    "accepted_samples_per_second": 66.23277404192622,
+    "includes_CPU_sampling": true,
+    "includes_stage_preparation": true,
+    "includes_strict_all_generated_wave_decode": true,
+    "latent_and_physical_archive_seconds": 0.061870889738202095,
+    "posterior_request_seconds": 754.9132694993168,
+    "total_seconds": 765.2871589567512
+  },
+  "variant": "accuracy_prior_coordinates_native_fp32_physical_f64_fifo_v1",
+  "wrapper_total_seconds": 765.2874687369913
+}
