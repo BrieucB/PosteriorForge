@@ -1,0 +1,89 @@
+{
+  "attribution": "Built with PriorLabs-TabPFN",
+  "closest_strict_interior_Float64": 0.49999999999999994,
+  "codec_source_sha256": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+  "conclusion": "Both real inverse quantiles are strictly inside real support, but correctly round to upper endpoint0.5 in Float64. Other interior floats exist; none is the correctly rounded result for THESE inverse values.",
+  "correct_rounding_endpoint_threshold_z": "8.46492203682618134957790181135516531008366610470784008821548207306315",
+  "coverage": "Only two predeclared scalar failures; other-row scans and latent-tail causality are separate diagnostics.",
+  "d8_already_uses_log_survival": true,
+  "exact_prior_encode_of_predecessor": "8.383756429425644546160341405702415473296197715274926602631437326291324",
+  "failed_manifest_sha256": "92755b788fc894d4ca16157e573bd1b5c9d8a4468b71cf184fa16303bced7bce",
+  "failed_request_preserved": true,
+  "frozen_encode_of_predecessor": 8.405128466519939,
+  "latent_archive_sha256": "1ba89c1a4e53c5895ad1623b5a396e4086154c3dc830f8036da388f234d90349",
+  "logaddexp_collapse_not_a_decoder_only_solution": "The ideal real quantile still lies vastly closer to0.5 than the Float64 rounding midpoint.",
+  "method_error_scope": {
+    "180_digits_is_not_certified_interval_arithmetic": true,
+    "equation": "sigma=U-s*t; integral_0^t exp(bu-u^2/2)du=M*Q(z)/phi(b)",
+    "gap_evaluated_without_subtracting_from_boundary": true,
+    "independent_bound": "Q(z)<phi(z)/z and integral>=t imply gap < s*exp((b^2-z^2)/2)/z; this bound is also far below half a Float64 predecessor gap",
+    "latent_tail_cause_not_identified": "no actual logits/u/bin/interpolation inputs used or reconstructed",
+    "source_prior_vs_cached_geometry": "binary physical constants imply a slightly below -2; stored geometry a=-2. Original raw report also preserves both masses/gaps. Upper b is exactly2 for both; conclusion unchanged",
+    "ultra_small_gap": "stored as arbitrary-precision distance/log distance, not as .5 minus an invisible Float64 delta"
+  },
+  "not_authorized_or_performed": [
+    "endpoint/predecessor substitution",
+    "clipping",
+    "tolerance loosening",
+    "row filtering",
+    "new posterior/G3",
+    "new models/sampler draws/reference integration",
+    "codec/source/policy edit",
+    "recovered cohort"
+  ],
+  "observed_failure_is_strict_decoded_noise_predicate": true,
+  "original_report_sha256": "d56e2a006a92a3e377b9f80ecb43e6e42afb809f1081c0a365903cb3bc3f5eb2",
+  "ranked_next_decisions_not_implemented": [
+    {
+      "decision": "No semantics-preserving logCDF-only or decoder-only repair under the current strict Float64 inverse-and-roundtrip contract.",
+      "limit": "More accurate ndtri/intermediate log-sum alone still rounds both ideal physical quantiles to0.5.",
+      "rank": 1
+    },
+    {
+      "decision": "Localize why the learned/sampled latent tail reaches these values before choosing a sampler or representation change.",
+      "limit": "Selected actual logits, uniforms, bins and interpolation fractions are not available here. Wide bars and FP32 interpolation extrapolation remain distinct possibilities; no cause attribution or new neural call is authorized.",
+      "rank": 2
+    },
+    {
+      "decision": "If authorized, consider a noise-coordinate representation with a representable output contract, or an explicit whole-vector domain/quantization policy.",
+      "limit": "Separately named scientific/sampling candidates require source, law, numerical and physical-gate review. Rejection conditions q; per-stage truncation changes conditional laws; endpoint quantization creates atoms. None is an inverse bug fix or accuracy waiver.",
+      "rank": 3
+    },
+    {
+      "decision": "Higher-precision physical or auxiliary log-gap state only as an interface redesign.",
+      "limit": "Local separation needs141 and30394 significand bits, not sufficient by itself for all roundtrip bounds. Float128113 is insufficient even for the first. Final Float64-only output still rounds to the boundary.",
+      "rank": 4
+    }
+  ],
+  "reproduced_scalar_report_sha256": "d5a22a8a617023ced6d1b043ecca6185bf384a5dcd33bb2ff862050f430028e5",
+  "reproduction_script_sha256": "0836c594c75c253927f3244cf2ac1d3fd8efe139ccfd3ef0517753454eee7974",
+  "rounding_midpoint_gap": "0.0000000000000000277555756156289135105907917022705078125",
+  "rows": [
+    {
+      "actual_z": 13.876729011535645,
+      "analytic_upper_gap": "9.994975808909684514545499711241812274399246040458330714977078254882865e-44",
+      "current_latent_roundtrip_bound": 5.675021748174913e-05,
+      "frozen_latent_error_if_predecessor_substituted": 5.471600545015706,
+      "minimum_local_significand_bits": 141,
+      "name": "sigma_a1",
+      "row": 4355,
+      "slot": 16,
+      "stage": 15,
+      "upper_gap": "9.491411153357986325537664243580262452867450771167473692792796139440429e-44"
+    },
+    {
+      "actual_z": 205.2462615966797,
+      "analytic_upper_gap": "1.240849723624225932430606311206111981849104350070874688118334382096106e-9150",
+      "current_latent_roundtrip_bound": 0.0007867670501582325,
+      "frozen_latent_error_if_predecessor_substituted": 196.84113313015976,
+      "minimum_local_significand_bits": 30394,
+      "name": "sigma_a3",
+      "row": 41765,
+      "slot": 20,
+      "stage": 19,
+      "upper_gap": "1.184362620331143289548834878906813243170455294642934997578318799706058e-9150"
+    }
+  ],
+  "schema": "posteriorforge.noise_inverse_math_diagnostic_summary.v1",
+  "status": "diagnostic_only"
+}

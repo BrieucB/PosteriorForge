@@ -1,0 +1,873 @@
+{
+  "all_border_named_fields": [
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[0].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[0].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[0].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[0].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[0].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[0].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[1].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[1].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[1].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[1].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[1].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[1].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[2].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[2].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[2].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[2].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[2].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[2].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[3].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[3].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[3].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[3].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[3].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[3].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[4].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[4].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[4].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[4].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[4].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[4].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[5].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[5].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[5].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[5].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[5].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[5].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "descriptor": {
+        "dtype": "<f4",
+        "sha256": "f915afa3c6ecd50ac3f1e2d2eb16ef94756da1284d538fbc75218101fbf52c6c",
+        "shape": [
+          5001
+        ]
+      },
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[6].immutable_native_after.criterion_borders",
+      "type": "dict"
+    },
+    {
+      "descriptor": {
+        "dtype": "<f4",
+        "sha256": "f915afa3c6ecd50ac3f1e2d2eb16ef94756da1284d538fbc75218101fbf52c6c",
+        "shape": [
+          5001
+        ]
+      },
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[6].immutable_native_before.criterion_borders",
+      "type": "dict"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[6].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[6].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[6].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[6].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[6].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[7].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[7].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[7].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[7].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[7].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[7].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[8].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[8].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[8].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[8].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[8].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[8].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[9].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[9].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[9].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[9].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[9].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[9].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "descriptor": {
+        "dtype": "<f4",
+        "sha256": "126a49e72360774ea6b517add2d22764e4d94cbf02ca71e06b9fd466433e0459",
+        "shape": [
+          5001
+        ]
+      },
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[10].immutable_native_after.criterion_borders",
+      "type": "dict"
+    },
+    {
+      "descriptor": {
+        "dtype": "<f4",
+        "sha256": "126a49e72360774ea6b517add2d22764e4d94cbf02ca71e06b9fd466433e0459",
+        "shape": [
+          5001
+        ]
+      },
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[10].immutable_native_before.criterion_borders",
+      "type": "dict"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[10].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[10].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[10].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[10].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[10].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[11].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[11].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[11].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[11].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[11].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[11].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[12].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[12].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[12].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[12].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[12].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[12].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[13].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[13].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[13].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[13].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[13].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[13].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "descriptor": {
+        "dtype": "<f4",
+        "sha256": "2d89b41e34923342dfb3bf9e54706f1179f8468ff025f49a5f9c80d562299ef8",
+        "shape": [
+          5001
+        ]
+      },
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[14].immutable_native_after.criterion_borders",
+      "type": "dict"
+    },
+    {
+      "descriptor": {
+        "dtype": "<f4",
+        "sha256": "2d89b41e34923342dfb3bf9e54706f1179f8468ff025f49a5f9c80d562299ef8",
+        "shape": [
+          5001
+        ]
+      },
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[14].immutable_native_before.criterion_borders",
+      "type": "dict"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[14].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[14].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[14].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[14].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[14].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[15].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[15].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[15].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[15].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[15].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[15].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[16].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[16].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[16].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[16].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[16].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[16].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[17].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[17].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[17].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[17].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[17].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[17].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[18].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[18].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[18].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[18].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[18].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[18].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[19].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[19].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[19].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[19].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[19].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[19].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[20].model.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[20].model.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[20].model_at_prepare.canonical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[20].model_at_prepare.physical_borders_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[20].precision_session.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".observed_failure_footer.observations.actual_engine_journal.value.completed_stage_scopes[20].route_counters.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[0].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[0].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[1].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[1].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[2].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[2].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[3].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[3].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[4].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[4].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[5].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[5].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[7].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[7].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[8].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[8].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[9].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[9].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[11].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[11].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[12].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[12].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[13].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[13].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[15].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[15].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[16].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[16].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[17].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[17].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[18].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[18].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[19].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[19].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[20].cache_after.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    },
+    {
+      "path": ".stage_events[20].cache_before.prior_coordinate_execution.weights_normalizers_borders_postprocessing_dtype",
+      "type": "str",
+      "value": "torch.float32"
+    }
+  ],
+  "border_named_fields": 165,
+  "failing_stages_15_19_record_only_border_dtypes": true,
+  "native_stages_6_10_14_criterion_borders_have_only_dtype_shape_hash_descriptors": true,
+  "numeric_border_arrays_or_numeric_border_minmax_recorded": false,
+  "schema": "posteriorforge.readonly_saved_border_metadata_inventory.v1",
+  "scope": "Full existing manifest key scan only; no prediction, array decoding, or source modification.",
+  "selected_head_uniform_logits_bin_cdf_fraction_available": false,
+  "source_manifest_sha256": "92755b788fc894d4ca16157e573bd1b5c9d8a4468b71cf184fa16303bced7bce"
+}

@@ -1,0 +1,10 @@
+{
+  "files": {
+    "README.txt": "608abd7e9e0845eb3651a048ce15da96dd400dea129c258f80420a2f3eaf5510",
+    "inspect_support.py": "17d2b5fb867d3b74bf946cf1717ae98cd9b1fceba5b05f7f4b49140c0bead38e",
+    "inspection-attempt01-syntax-only.log": "33d600016928b60fa5ac75d78a1db8b523d27ad041e1ff4644c76b499f3b879b",
+    "inspection.log": "585d496004fffbb36b86de8609a7b9e9064c0af6099fae73679d013851858545",
+    "receipt.json": "4cacb6c6cad33a973594e5af31efa91d1bfb9dc6c251284bffe6f5a8c1d6737b"
+  },
+  "schema": "posteriorforge.public_evidence_checksums.v1"
+}

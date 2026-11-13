@@ -1,0 +1,285 @@
+{
+  "actual_stage_return_count": 21,
+  "all_21_stage_return_Float32_vectors_match_ordered_wave_without_extra_cast": true,
+  "all_6_noise_coordinates_examined_for_all_51200_rows": true,
+  "comparison_scope": "Generated values are conditional on heldoutcase0 and generated prefixes; training4096 are unconditional prior values; FIRST1024 is old pure-model prefix fixture, not a new cohort or qualified reference posterior. Range/quantile differences alone do not establish a cause or calibration failure.",
+  "counts": {
+    "first50000_offending_rows": 2,
+    "noise_coordinates": 307200,
+    "nominal_lookahead1200_offending_rows": 0,
+    "offending_noise_coordinates": 2,
+    "offending_rows": 2,
+    "raw_rows": 51200
+  },
+  "diagnostic_code_sha256": "7ef6e2e5d56876ea3ece0fe8e4c28e35a5d41afc7ba11ad3b92a2bc5ab35c6f3",
+  "diagnostic_sha256": "c08076c86e7d329f65ddb417224c2430ceb4b3dfdb0e24e00ae8f6000e691f93",
+  "failed_wrapper_total_seconds": 777.6754412082955,
+  "failure_guard_scope": {
+    "CDF_alias_restored": true,
+    "CDF_calls": 1141,
+    "FIFO_delivered": 0,
+    "FIFO_finalized": false,
+    "all21_returned": true,
+    "all_stage_aliases_restored": true,
+    "original_support_counters": {
+      "accepted": 0,
+      "calls": 0,
+      "proposed": 0
+    },
+    "postexception_default_RNG_observed_equal": true,
+    "source": "existing observed_failure_footer, not new model/RNG capture",
+    "source_closure_observed_passed": true
+  },
+  "git_dirty": true,
+  "historical_prediction_witnesses_missing": [
+    "actual_selected_member",
+    "actual_uniform",
+    "actual_logits_or_probabilities",
+    "actual_prediction_canonical_or_physical_border_values",
+    "actual_selected_bin",
+    "actual_CDF",
+    "actual_interpolation_fraction"
+  ],
+  "independent_math_evidence": {
+    "original_report_sha256": "d56e2a006a92a3e377b9f80ecb43e6e42afb809f1081c0a365903cb3bc3f5eb2",
+    "relative_public_folder": "../noise-inverse-math-diagnostic-01",
+    "reproducible_scalar_report_sha256": "d5a22a8a617023ced6d1b043ecca6185bf384a5dcd33bb2ff862050f430028e5",
+    "scope": "Separate scalar mathematical analysis, not a recovered physical cohort or a causal explanation of the generated latent values."
+  },
+  "latent_archive_sha256": "1ba89c1a4e53c5895ad1623b5a396e4086154c3dc830f8036da388f234d90349",
+  "literal_completed_stage_indices": [],
+  "new_generated_full21D_physical_matrix_assembled_or_saved": false,
+  "next_evidence_ranking_only": [
+    "If separately authorized, a sharply capped conditional/ICDF observation at saved offending prefixes is the most direct way to distinguish wide current border support from rounded-CDF extrapolation. Record all8 current head borders/probability normalization plus selected u/head/bin/fraction. Such a new observation cannot recreate unavailable historical witnesses.",
+    "Consider a numerical-policy or coordinate intervention only after that mechanism evidence; current archives do not choose between them.",
+    "An additional full posterior request is not needed to obtain that missing conditional/ICDF evidence."
+  ],
+  "no_clipping_filtering_repair_reordering_or_recovery": true,
+  "no_completed_50000_cohort": true,
+  "no_new_model_sampler_world_reference_G3_or_RNG_state_capture": true,
+  "normal_success_fields_missing": [
+    "execution_counters",
+    "sampling_counters",
+    "actual_prediction_checks",
+    "expected_patched_call_count",
+    "expected_stage_prepare_count",
+    "generated_proposal_wave_count",
+    "default_rng_after",
+    "default_rng_preserved",
+    "sources_unchanged",
+    "rejection",
+    "timings",
+    "memory",
+    "samples",
+    "samples_file",
+    "samples_sha256",
+    "decoded_wave_archive"
+  ],
+  "offending_noise_cells": [
+    {
+      "actual_model_Float32_latent": 13.876729011535645,
+      "actual_model_scalar_bytes_hex": "15075e41",
+      "exception_type": "CoordinateError",
+      "frozen_codec_trace": [
+        {
+          "function": "_noise_decode",
+          "line": 137
+        },
+        {
+          "function": "_strict_noise",
+          "line": 110
+        },
+        {
+          "function": "_require",
+          "line": 43
+        }
+      ],
+      "frozen_scalar_output_before_rejection": 0.5,
+      "latent_name": "z_sigma_a1",
+      "message": "decode: endpoint, out-of-support, or saturated noise; no clipping",
+      "ordered_stage": 15,
+      "physical_parameter": "sigma_a1",
+      "physical_slot": 16,
+      "row_index_zero_based": 4355,
+      "row_partition": "first50000"
+    },
+    {
+      "actual_model_Float32_latent": 205.2462615966797,
+      "actual_model_scalar_bytes_hex": "0b3f4d43",
+      "exception_type": "CoordinateError",
+      "frozen_codec_trace": [
+        {
+          "function": "_noise_decode",
+          "line": 137
+        },
+        {
+          "function": "_strict_noise",
+          "line": 110
+        },
+        {
+          "function": "_require",
+          "line": 43
+        }
+      ],
+      "frozen_scalar_output_before_rejection": 0.5,
+      "latent_name": "z_sigma_a3",
+      "message": "decode: endpoint, out-of-support, or saturated noise; no clipping",
+      "ordered_stage": 19,
+      "physical_parameter": "sigma_a3",
+      "physical_slot": 20,
+      "row_index_zero_based": 41765,
+      "row_partition": "first50000"
+    }
+  ],
+  "ordinary_noise_summary": [
+    {
+      "generated_maximum": 3.086864709854126,
+      "generated_minimum": -1.7793519496917725,
+      "generated_q99": 1.1759913015365617,
+      "generated_q999": 1.8635289813280072,
+      "latent_name": "z_sigma_m1",
+      "ordered_stage": 3,
+      "original_fixture_maximum": 1.4901745319366455,
+      "original_fixture_minimum": -1.462902307510376,
+      "training_maximum": 3.539043664932251,
+      "training_minimum": -3.502140998840332
+    },
+    {
+      "generated_maximum": 2.594987392425537,
+      "generated_minimum": -2.114267110824585,
+      "generated_q99": 0.6589334112405781,
+      "generated_q999": 1.3915138207674018,
+      "latent_name": "z_sigma_m2",
+      "ordered_stage": 7,
+      "original_fixture_maximum": 1.480789303779602,
+      "original_fixture_minimum": -1.5301179885864258,
+      "training_maximum": 3.2779579162597656,
+      "training_minimum": -3.5624828338623047
+    },
+    {
+      "generated_maximum": 1.9506487846374512,
+      "generated_minimum": -2.279618978500366,
+      "generated_q99": 0.1993863455951215,
+      "generated_q999": 0.7177635780572891,
+      "latent_name": "z_sigma_m3",
+      "ordered_stage": 11,
+      "original_fixture_maximum": 0.5477460026741028,
+      "original_fixture_minimum": -1.846048355102539,
+      "training_maximum": 4.056666851043701,
+      "training_minimum": -3.7159032821655273
+    },
+    {
+      "generated_maximum": 13.876729011535645,
+      "generated_minimum": -3.7433278560638428,
+      "generated_q99": 2.1975296950340275,
+      "generated_q999": 2.8760911407470684,
+      "latent_name": "z_sigma_a1",
+      "ordered_stage": 15,
+      "original_fixture_maximum": 3.284794807434082,
+      "original_fixture_minimum": -2.7165064811706543,
+      "training_maximum": 3.4476122856140137,
+      "training_minimum": -3.7183115482330322
+    },
+    {
+      "generated_maximum": 5.980215549468994,
+      "generated_minimum": -4.412653923034668,
+      "generated_q99": 2.1975413060188296,
+      "generated_q999": 2.8437655417919143,
+      "latent_name": "z_sigma_a2",
+      "ordered_stage": 17,
+      "original_fixture_maximum": 2.8305094242095947,
+      "original_fixture_minimum": -2.8150923252105713,
+      "training_maximum": 3.4174416065216064,
+      "training_minimum": -3.607132911682129
+    },
+    {
+      "generated_maximum": 205.2462615966797,
+      "generated_minimum": -5.781543731689453,
+      "generated_q99": 2.1930006241798403,
+      "generated_q999": 2.966021458148953,
+      "latent_name": "z_sigma_a3",
+      "ordered_stage": 19,
+      "original_fixture_maximum": 3.3136203289031982,
+      "original_fixture_minimum": -3.224071502685547,
+      "training_maximum": 3.8216936588287354,
+      "training_minimum": -4.026134490966797
+    }
+  ],
+  "ordinary_quantile_method": "NumPy linear, fixed grid [0,.001,.01,.05,.5,.95,.99,.999,1]; complete table in diagnostic.json",
+  "partition_semantics": "The diagnostic raw label unused1200tail denotes only raw-provider row positions [50000,51200). No physical wave reached FIFO, so no actual buffer tail was finalized or accepted.",
+  "partitions": {
+    "all51200": {
+      "failing_noise_coordinates": 2,
+      "failing_rows": 2,
+      "noise_coordinate_failure_fraction": 6.510416666666667e-06,
+      "noise_scalar_coordinates": 307200,
+      "proposal_rows": 51200,
+      "row_failure_fraction": 3.90625e-05,
+      "row_failure_percent": 0.00390625
+    },
+    "first50000": {
+      "failing_noise_coordinates": 2,
+      "failing_rows": 2,
+      "noise_coordinate_failure_fraction": 6.666666666666667e-06,
+      "noise_scalar_coordinates": 300000,
+      "proposal_rows": 50000,
+      "row_failure_fraction": 4e-05,
+      "row_failure_percent": 0.004
+    },
+    "unused1200tail": {
+      "failing_noise_coordinates": 0,
+      "failing_rows": 0,
+      "noise_coordinate_failure_fraction": 0.0,
+      "noise_scalar_coordinates": 7200,
+      "proposal_rows": 1200,
+      "row_failure_fraction": 0.0,
+      "row_failure_percent": 0.0
+    }
+  },
+  "raw_latent_array_descriptor": {
+    "dtype": "<f4",
+    "sha256": "e51e00f9e8ec686a09b2280a9f59c417d4f98c306843a20785ed7579c6a1ef7e",
+    "shape": [
+      51200,
+      21
+    ]
+  },
+  "request_manifest_sha256": "92755b788fc894d4ca16157e573bd1b5c9d8a4468b71cf184fa16303bced7bce",
+  "runtime_versions": {
+    "numpy": "1.26.4",
+    "python": "3.11.13",
+    "scipy": "1.12.0"
+  },
+  "saved_border_metadata_sha256": "dce10ec1ef21cf889c1142c51668a16ad0b56f6c7d8b3696817e7ebefc8dfaaf",
+  "saved_first_failure_records_match_actual_npz": true,
+  "scalar_codec_pre_rejection_outputs": [
+    0.5,
+    0.5
+  ],
+  "schema": "posteriorforge.noise_latent_failure_diagnostic_summary.v1",
+  "source_hashes_verified_before_and_after": {
+    "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/execution_ss15_sampling.py": "4037d48846ef3678ce7b647c1a326606ea967d396b3ce34bb1998241a131f6de",
+    "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/performance_runner.py": "23ccad8b5bbcdd7a48340b349d515ca870763359cfeb71333e02fc2b6a8aca3b",
+    "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/prior_coordinate_pair_v1.py": "402117cad65af190352cb0b14977fbbdc896f196d069749b0be28608fdef400e",
+    "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/prior_coordinates_v1.py": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5"
+  },
+  "stage_return_archive_sha256": "6989b4930fcb8dda2a144811c7988530dec120b8e6c1bfd62b269f47261a14af",
+  "status": "diagnosis_complete_request_remains_failed",
+  "strict_failure_source": {
+    "causal_decode_calls_noise_line": 176,
+    "codec_path": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/prior_coordinates_v1.py",
+    "codec_sha256": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "full_prefix_decode_line": 234,
+    "latent_roundtrip_check_line": 237,
+    "noise_decode_calls_strict_line": 137,
+    "require_raise_line": 43,
+    "strict_noise_condition_lines": [
+      109,
+      111
+    ]
+  },
+  "unique_offending_rows": [
+    4355,
+    41765
+  ]
+}

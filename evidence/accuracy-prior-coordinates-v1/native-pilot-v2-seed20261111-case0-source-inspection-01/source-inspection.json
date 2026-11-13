@@ -1,0 +1,1090 @@
+{
+  "cause_attributed": false,
+  "failed_manifest_sha256": "92755b788fc894d4ca16157e573bd1b5c9d8a4468b71cf184fa16303bced7bce",
+  "possible_mechanisms_not_attributed": [
+    "Ordinary interpolation inside a sufficiently wide finite edge bar can produce a large finite latent; source alone does not establish the actual border interval for either failing draw.",
+    "If rounded terminal CDF is below u, searchsorted index clamping selects the final bar. With positive small p_last, t=(u-CDF_before)/p_last can exceed one, yielding a finite value outside its last border; zero denominator can instead yield a nonfinite value. No actual u/p/CDF/bin is available to test this for the failed rows.",
+    "Even an otherwise correctly generated finite tail value may map to an exact floating-point physical endpoint under strict truncated-normal inversion. The recorded CoordinateError identifies that open-support check; precise arithmetic diagnosis belongs to the separate high-precision investigation."
+  ],
+  "recorded_finite_failures": [
+    {
+      "causal_stage": 15,
+      "diagnostic_recomputation_not_original_sampling_witness": true,
+      "latent_value": 13.876729011535645,
+      "physical_parameter": "sigma_a1",
+      "physical_slot": 16,
+      "row": 4355
+    },
+    {
+      "causal_stage": 19,
+      "diagnostic_recomputation_not_original_sampling_witness": true,
+      "latent_value": 205.2462615966797,
+      "physical_parameter": "sigma_a3",
+      "physical_slot": 20,
+      "row": 41765
+    }
+  ],
+  "recovered_cohort_or_G3_performed": false,
+  "schema": "posteriorforge.prior_coordinate_pair_v2_failed_tail_source_inspection.v1",
+  "scope": "read-only source and saved scalar-record inspection; no sampler/model/codec replay, RNG draws, policy change, recovery or scientific metric calculation",
+  "sources": [
+    {
+      "line_end": 252,
+      "line_start": 224,
+      "lines": [
+        {
+          "line": 224,
+          "text": "def finite_bar_icdf(logits,borders,uniforms):"
+        },
+        {
+          "line": 225,
+          "text": "    \"\"\"Vectorized inherited finite-uniform-bar ICDF with caller-owned FP32 u."
+        },
+        {
+          "line": 226,
+          "text": ""
+        },
+        {
+          "line": 227,
+          "text": "    No clipping or repair, including u=0 with leading zero probability: the"
+        },
+        {
+          "line": 228,
+          "text": "    original 0/0 NaN is retained for complete-vector support rejection. A single"
+        },
+        {
+          "line": 229,
+          "text": "    shared distribution uses one CDF and never expands an N-by-bin matrix."
+        },
+        {
+          "line": 230,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 231,
+          "text": "    torch=import_module(\"torch\")"
+        },
+        {
+          "line": 232,
+          "text": "    if logits.ndim!=2 or borders.ndim!=1 or uniforms.ndim!=1 or logits.shape[-1]+1!=len(borders):"
+        },
+        {
+          "line": 233,
+          "text": "        raise ValueError(\"logits[row,bin], borders[bin+1], uniforms[row] required\")"
+        },
+        {
+          "line": 234,
+          "text": "    if len(logits) not in (1,len(uniforms)) or uniforms.dtype!=torch.float32:"
+        },
+        {
+          "line": 235,
+          "text": "        raise ValueError(\"one shared or oneperrow distribution; caller-owned FP32 uniforms required\")"
+        },
+        {
+          "line": 236,
+          "text": "    if not bool(torch.isfinite(uniforms).all()) or bool((uniforms<0).any()) or bool((uniforms>=1).any()):"
+        },
+        {
+          "line": 237,
+          "text": "        raise ValueError(\"uniforms must be finite in[0,1)\")"
+        },
+        {
+          "line": 238,
+          "text": "    if logits.device!=borders.device or logits.device!=uniforms.device:"
+        },
+        {
+          "line": 239,
+          "text": "        raise ValueError(\"logits, borders and uniforms must share a device\")"
+        },
+        {
+          "line": 240,
+          "text": "    probabilities=logits.softmax(-1);cdf=torch.cumsum(probabilities,-1)"
+        },
+        {
+          "line": 241,
+          "text": "    if len(logits)==1:"
+        },
+        {
+          "line": 242,
+          "text": "        index=torch.searchsorted(cdf[0],uniforms).clamp(0,probabilities.shape[-1]-1)"
+        },
+        {
+          "line": 243,
+          "text": "        before=torch.cat((torch.zeros(1,dtype=cdf.dtype,device=cdf.device),cdf[0]),dim=0)"
+        },
+        {
+          "line": 244,
+          "text": "        rest=uniforms-before[index]"
+        },
+        {
+          "line": 245,
+          "text": "        probability=probabilities[0,index]"
+        },
+        {
+          "line": 246,
+          "text": "    else:"
+        },
+        {
+          "line": 247,
+          "text": "        index=torch.searchsorted(cdf,uniforms[:,None].contiguous()).squeeze(-1).clamp(0,probabilities.shape[-1]-1)"
+        },
+        {
+          "line": 248,
+          "text": "        before=torch.cat((torch.zeros((*cdf.shape[:-1],1),dtype=cdf.dtype,device=cdf.device),cdf),dim=-1)"
+        },
+        {
+          "line": 249,
+          "text": "        rest=uniforms-before.gather(-1,index[:,None]).squeeze(-1)"
+        },
+        {
+          "line": 250,
+          "text": "        probability=probabilities.gather(-1,index[:,None]).squeeze(-1)"
+        },
+        {
+          "line": 251,
+          "text": "    left=borders[index];right=borders[index+1]"
+        },
+        {
+          "line": 252,
+          "text": "    return left+(right-left)*rest/probability"
+        }
+      ],
+      "path": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/execution_mixture.py",
+      "sha256": "e71f43b73ae8259c20b5d7b52feccc7c851e9a2fbb86d869bc0a5f7f3af792a1"
+    },
+    {
+      "line_end": 526,
+      "line_start": 486,
+      "lines": [
+        {
+          "line": 486,
+          "text": "def component_stage_sampler(component,torch,generators,counters,*,prediction_check=None):"
+        },
+        {
+          "line": 487,
+          "text": "    from .execution_mixture import finite_bar_icdf,head_acceptance"
+        },
+        {
+          "line": 488,
+          "text": "    def sample_stage(engine,stage,query_for,count,chunk_size):"
+        },
+        {
+          "line": 489,
+          "text": "        chunks=0;head_candidates=0;head_rejected=0;draws=np.empty(count,dtype=np.float32)"
+        },
+        {
+          "line": 490,
+          "text": "        neural_sizes={str(i):{} for i in range(8)};assignment_counts=[0]*8;rejection_counts=[0]*8"
+        },
+        {
+          "line": 491,
+          "text": "        def note_size(member,rows):"
+        },
+        {
+          "line": 492,
+          "text": "            key=str(rows);neural_sizes[str(member)][key]=neural_sizes[str(member)].get(key,0)+1"
+        },
+        {
+          "line": 493,
+          "text": "        stage_uniforms=torch.rand(count,generator=generators[\"component_uniform\"],dtype=torch.float32,device=\"cpu\")"
+        },
+        {
+          "line": 494,
+          "text": "        if stage==0:"
+        },
+        {
+          "line": 495,
+          "text": "            prediction=engine.predict(query_for([0]),output_type=\"full\",capture_members=False)"
+        },
+        {
+          "line": 496,
+          "text": "            if prediction_check:prediction_check(prediction,stage,None)"
+        },
+        {
+          "line": 497,
+          "text": "            draws[:]=finite_bar_icdf(prediction[\"logits\"],prediction[\"criterion\"].borders,stage_uniforms).numpy()"
+        },
+        {
+          "line": 498,
+          "text": "            for member in range(8):note_size(member,1)"
+        },
+        {
+          "line": 499,
+          "text": "            counters[\"stage0_shared_predictions\"]+=1"
+        },
+        {
+          "line": 500,
+          "text": "            return draws,{\"model_query_chunks\":1,\"stage0_full_mixture_shared\":True,\"density_scope\":\"proposal-wave-local; no cross-request/case reuse\",\"component_distribution_dedup\":False,\"uniform_draws\":count,\"neural_query_batch_sizes_by_member\":neural_sizes,\"head_assignment_counts_by_member\":assignment_counts,\"head_rejection_counts_by_member\":rejection_counts}"
+        },
+        {
+          "line": 501,
+          "text": "        pending=np.arange(count)"
+        },
+        {
+          "line": 502,
+          "text": "        while len(pending):"
+        },
+        {
+          "line": 503,
+          "text": "            assignments=torch.randint(0,8,(len(pending),),generator=generators[\"head_proposal\"],device=\"cpu\").numpy()"
+        },
+        {
+          "line": 504,
+          "text": "            acceptance=torch.rand(len(pending),generator=generators[\"head_acceptance\"],dtype=torch.float64,device=\"cpu\").numpy()"
+        },
+        {
+          "line": 505,
+          "text": "            retry=[];head_candidates+=len(pending)"
+        },
+        {
+          "line": 506,
+          "text": "            for member in range(8):"
+        },
+        {
+          "line": 507,
+          "text": "                locations=np.flatnonzero(assignments==member);assignment_counts[member]+=len(locations)"
+        },
+        {
+          "line": 508,
+          "text": "                for first in range(0,len(locations),chunk_size):"
+        },
+        {
+          "line": 509,
+          "text": "                    selected=locations[first:first+chunk_size];rows=pending[selected]"
+        },
+        {
+          "line": 510,
+          "text": "                    prediction=component.predict_component(member,query_for(rows),capture_member=False);note_size(member,len(rows))"
+        },
+        {
+          "line": 511,
+          "text": "                    if prediction_check:prediction_check(prediction,stage,member)"
+        },
+        {
+          "line": 512,
+          "text": "                    mass=prediction[\"component_raw_mass\"].numpy();accepted=head_acceptance(mass,acceptance[selected])"
+        },
+        {
+          "line": 513,
+          "text": "                    chunks+=1;counters[\"component_predictions\"]+=1"
+        },
+        {
+          "line": 514,
+          "text": "                    if np.any(accepted):"
+        },
+        {
+          "line": 515,
+          "text": "                        uniforms=stage_uniforms[torch.from_numpy(rows[accepted])]"
+        },
+        {
+          "line": 516,
+          "text": "                        values=finite_bar_icdf(prediction[\"logits\"][torch.from_numpy(accepted)],prediction[\"criterion\"].borders,uniforms)"
+        },
+        {
+          "line": 517,
+          "text": "                        draws[rows[accepted]]=values.numpy()"
+        },
+        {
+          "line": 518,
+          "text": "                    if np.any(~accepted):retry.append(rows[~accepted]);head_rejected+=int((~accepted).sum());rejection_counts[member]+=int((~accepted).sum())"
+        },
+        {
+          "line": 519,
+          "text": "            pending=np.concatenate(retry) if retry else np.empty(0,dtype=np.int64)"
+        },
+        {
+          "line": 520,
+          "text": "        counters[\"head_candidates\"]+=head_candidates;counters[\"head_rejections\"]+=head_rejected"
+        },
+        {
+          "line": 521,
+          "text": "        return draws,{\"model_query_chunks\":chunks,\"head_candidates\":head_candidates,\"head_rejections\":head_rejected,"
+        },
+        {
+          "line": 522,
+          "text": "                      \"head_policy\":\"raw_mass_rejection_v1\",\"uniform_draws\":count,\"neural_query_batch_sizes_by_member\":neural_sizes,\"head_assignment_counts_by_member\":assignment_counts,\"head_rejection_counts_by_member\":rejection_counts,\"partial_vector_filtering\":False,\"uniform_assignment\":\"preassigned per stage by physical row; retained across head retries\"}"
+        },
+        {
+          "line": 523,
+          "text": "    return sample_stage"
+        },
+        {
+          "line": 524,
+          "text": ""
+        },
+        {
+          "line": 525,
+          "text": ""
+        },
+        {
+          "line": 526,
+          "text": "def run_execution(*,banks,output,checkpoint,ledger,reference,reference_grid,qualification,context_seed=20261111,case=0,repetition=0,query_batch_size=1024,mode=\"resident_full\",worker_contract=None,proposal_lookahead=0):"
+        }
+      ],
+      "path": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/performance_runner.py",
+      "sha256": "23ccad8b5bbcdd7a48340b349d515ca870763359cfeb71333e02fc2b6a8aca3b"
+    },
+    {
+      "line_end": 356,
+      "line_start": 298,
+      "lines": [
+        {
+          "line": 298,
+          "text": "    def predict_component(self, member, query, *, capture_member=False, with_log_prob=False):"
+        },
+        {
+          "line": 299,
+          "text": "        from .science.analytical_benchmark_v2 import array_descriptor"
+        },
+        {
+          "line": 300,
+          "text": "        import torch"
+        },
+        {
+          "line": 301,
+          "text": "        require(self.engine is not None and self.session is not None, \"prepared latent stage required\")"
+        },
+        {
+          "line": 302,
+          "text": "        masked = backend.mask_query(query, self.stage_index)"
+        },
+        {
+          "line": 303,
+          "text": "        before = self.session.report()"
+        },
+        {
+          "line": 304,
+          "text": "        cdf_before = self.cdf_descriptor[\"patched_call_count\"]"
+        },
+        {
+          "line": 305,
+          "text": "        try:"
+        },
+        {
+          "line": 306,
+          "text": "            prediction = self.engine.predict_component("
+        },
+        {
+          "line": 307,
+          "text": "                member, masked, capture_member=capture_member, with_log_prob=with_log_prob)"
+        },
+        {
+          "line": 308,
+          "text": "            witness = backend.query_witness_delta(before, self.session.report(),"
+        },
+        {
+          "line": 309,
+          "text": "                stage=self.stage_index, member=member)"
+        },
+        {
+          "line": 310,
+          "text": "            native_stage = self.stage_index in backend.NATIVE_STAGES"
+        },
+        {
+          "line": 311,
+          "text": "            expected_sdk_route = \"original_fit_preprocessors\" if native_stage else \"resident_cache\""
+        },
+        {
+          "line": 312,
+          "text": "            execution_route = backend.route(self.stage_index)"
+        },
+        {
+          "line": 313,
+          "text": "            require(prediction.get(\"hybrid_execution_path\") == expected_sdk_route,"
+        },
+        {
+          "line": 314,
+          "text": "                    \"actual cached/native FP32 SDK route differs\")"
+        },
+        {
+          "line": 315,
+          "text": "            native_proof = prediction.get(\"prior_native_execution\", {})"
+        },
+        {
+          "line": 316,
+          "text": "            require(native_proof.get(\"module_sha256\") == BACKEND_SHA256"
+        },
+        {
+          "line": 317,
+          "text": "                    and native_proof.get(\"policy_sha256\") == backend.policy_metadata()[\"policy_sha256\"]"
+        },
+        {
+          "line": 318,
+          "text": "                    and native_proof.get(\"route\") == execution_route"
+        },
+        {
+          "line": 319,
+          "text": "                    and native_proof.get(\"stage\") == self.stage_index"
+        },
+        {
+          "line": 320,
+          "text": "                    and native_proof.get(\"member\") == member,"
+        },
+        {
+          "line": 321,
+          "text": "                    \"actual cached/native source policy witness differs\")"
+        },
+        {
+          "line": 322,
+          "text": "            if native_stage:"
+        },
+        {
+          "line": 323,
+          "text": "                require(native_proof.get(\"original_query_views_disabled\") is True"
+        },
+        {
+          "line": 324,
+          "text": "                        and native_proof.get(\"query_view_setting_restored\") is True"
+        },
+        {
+          "line": 325,
+          "text": "                        and native_proof.get(\"native_KV_cache_used\") is False,"
+        },
+        {
+          "line": 326,
+          "text": "                        \"native original attention or query-view restoration differs\")"
+        },
+        {
+          "line": 327,
+          "text": "            witness = {**witness, \"mode\": self.session.report()[\"mode\"]}"
+        },
+        {
+          "line": 328,
+          "text": "            require(self.cdf_descriptor[\"patched_call_count\"] - cdf_before == 1,"
+        },
+        {
+          "line": 329,
+          "text": "                    \"one actual corrected CDF call per head required\")"
+        },
+        {
+          "line": 330,
+          "text": "            require(self.cdf_descriptor.get(\"executed_corrected_cdf_code_sha256\")"
+        },
+        {
+          "line": 331,
+          "text": "                    == self.cdf_descriptor.get(\"corrected_cdf_code_sha256\"),"
+        },
+        {
+          "line": 332,
+          "text": "                    \"corrected CDF helper was not executed\")"
+        },
+        {
+          "line": 333,
+          "text": "            logits, mass = prediction[\"logits\"], prediction[\"component_raw_mass\"]"
+        },
+        {
+          "line": 334,
+          "text": "            require(logits.dtype == torch.float32 and logits.device.type == \"cpu\""
+        },
+        {
+          "line": 335,
+          "text": "                    and bool((torch.isfinite(logits) | torch.isneginf(logits)).all())"
+        },
+        {
+          "line": 336,
+          "text": "                    and bool(torch.isfinite(logits).any(-1).all()), \"invalid FP32 latent logits\")"
+        },
+        {
+          "line": 337,
+          "text": "            require(mass.dtype == torch.float64 and bool(torch.isfinite(mass).all())"
+        },
+        {
+          "line": 338,
+          "text": "                    and bool((mass > 0).all()) and bool((mass <= 1.00001).all())"
+        },
+        {
+          "line": 339,
+          "text": "                    and prediction[\"head_mass_envelope\"] == 1.00001, \"raw component mass guard failed\")"
+        },
+        {
+          "line": 340,
+          "text": "            require(prediction[\"criterion\"].borders.dtype == torch.float32"
+        },
+        {
+          "line": 341,
+          "text": "                    and bool(torch.isfinite(prediction[\"criterion\"].borders).all()),"
+        },
+        {
+          "line": 342,
+          "text": "                    \"invalid latent criterion borders\")"
+        },
+        {
+          "line": 343,
+          "text": "            self.actual_heads += 1"
+        },
+        {
+          "line": 344,
+          "text": "            self.stage_heads += 1"
+        },
+        {
+          "line": 345,
+          "text": "            self.members.add(member)"
+        },
+        {
+          "line": 346,
+          "text": "            rule = backend.stage_policy(self.stage_index)"
+        },
+        {
+          "line": 347,
+          "text": "            self.query_calls.append({"
+        },
+        {
+          "line": 348,
+          "text": "                \"stage\": self.stage_index, \"member\": member,"
+        },
+        {
+          "line": 349,
+          "text": "                \"query_unmasked\": array_descriptor(np.asarray(query)),"
+        },
+        {
+          "line": 350,
+          "text": "                \"query_masked\": array_descriptor(masked),"
+        },
+        {
+          "line": 351,
+          "text": "                \"mask\": rule, \"policy_sha256\": backend.cached.policy_metadata()[\"policy_sha256\"],"
+        },
+        {
+          "line": 352,
+          "text": "                \"native_execution_policy_sha256\": backend.policy_metadata()[\"policy_sha256\"],"
+        },
+        {
+          "line": 353,
+          "text": "                \"actual_target_coordinate\": rule[\"target_coordinate\"],"
+        },
+        {
+          "line": 354,
+          "text": "                \"execution_route\": execution_route, \"actual_SDK_route\": expected_sdk_route,"
+        },
+        {
+          "line": 355,
+          "text": "                \"native_execution_proof\": native_proof, \"witness\": witness,"
+        },
+        {
+          "line": 356,
+          "text": "            })"
+        }
+      ],
+      "path": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/performance_prior_coordinates_v1.py",
+      "sha256": "71e5e2906fd663534e56878de1fc4aff55093e3d950a13f348f57417ca7c01d3"
+    },
+    {
+      "line_end": 138,
+      "line_start": 109,
+      "lines": [
+        {
+          "line": 109,
+          "text": "def _strict_noise(values, spec, label):"
+        },
+        {
+          "line": 110,
+          "text": "    _require(np.all((values > spec[\"low\"]) & (values < spec[\"high\"])),"
+        },
+        {
+          "line": 111,
+          "text": "             label + \": endpoint, out-of-support, or saturated noise; no clipping\")"
+        },
+        {
+          "line": 112,
+          "text": ""
+        },
+        {
+          "line": 113,
+          "text": "def _noise_encode(values, spec):"
+        },
+        {
+          "line": 114,
+          "text": "    _strict_noise(values, spec, \"encode\")"
+        },
+        {
+          "line": 115,
+          "text": "    lower = truncnorm.logcdf(values, spec[\"a\"], spec[\"b\"], loc=spec[\"location\"], scale=spec[\"scale\"])"
+        },
+        {
+          "line": 116,
+          "text": "    upper = truncnorm.logsf(values, spec[\"a\"], spec[\"b\"], loc=spec[\"location\"], scale=spec[\"scale\"])"
+        },
+        {
+          "line": 117,
+          "text": "    _require(np.isfinite(lower).all() and np.isfinite(upper).all()"
+        },
+        {
+          "line": 118,
+          "text": "             and np.all(lower < 0) and np.all(upper < 0),"
+        },
+        {
+          "line": 119,
+          "text": "             \"prior CDF/log-survival saturation; no inward move\")"
+        },
+        {
+          "line": 120,
+          "text": "    output = np.empty_like(values, dtype=np.float64)"
+        },
+        {
+          "line": 121,
+          "text": "    left = lower <= -np.log(2.)"
+        },
+        {
+          "line": 122,
+          "text": "    output[left] = ndtri_exp(lower[left])"
+        },
+        {
+          "line": 123,
+          "text": "    output[~left] = -ndtri_exp(upper[~left])"
+        },
+        {
+          "line": 124,
+          "text": "    _require(np.isfinite(output).all(), \"nonfinite noise normal coordinate\")"
+        },
+        {
+          "line": 125,
+          "text": "    return output"
+        },
+        {
+          "line": 126,
+          "text": ""
+        },
+        {
+          "line": 127,
+          "text": "def _noise_decode(values, spec):"
+        },
+        {
+          "line": 128,
+          "text": "    _require(np.isfinite(values).all(), \"nonfinite noise latent before CDF\")"
+        },
+        {
+          "line": 129,
+          "text": "    output = np.empty_like(values, dtype=np.float64)"
+        },
+        {
+          "line": 130,
+          "text": "    left = values <= 0"
+        },
+        {
+          "line": 131,
+          "text": "    # Retain lower/upper tail logs instead of forming a rounded Phi(z)==1."
+        },
+        {
+          "line": 132,
+          "text": "    lower = np.logaddexp(log_ndtr(spec[\"a\"]), log_ndtr(values[left]) + spec[\"log_mass\"])"
+        },
+        {
+          "line": 133,
+          "text": "    upper = np.logaddexp(log_ndtr(-spec[\"b\"]), log_ndtr(-values[~left]) + spec[\"log_mass\"])"
+        },
+        {
+          "line": 134,
+          "text": "    output[left] = spec[\"location\"] + spec[\"scale\"] * ndtri_exp(lower)"
+        },
+        {
+          "line": 135,
+          "text": "    output[~left] = spec[\"location\"] - spec[\"scale\"] * ndtri_exp(upper)"
+        },
+        {
+          "line": 136,
+          "text": "    _require(np.isfinite(output).all(), \"nonfinite decoded noise\")"
+        },
+        {
+          "line": 137,
+          "text": "    _strict_noise(output, spec, \"decode\")"
+        },
+        {
+          "line": 138,
+          "text": "    return output"
+        }
+      ],
+      "path": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/prior_coordinates_v1.py",
+      "sha256": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5"
+    },
+    {
+      "line_end": 283,
+      "line_start": 256,
+      "lines": [
+        {
+          "line": 256,
+          "text": "    def icdf(self, logits: torch.Tensor, left_prob: float) -> torch.Tensor:"
+        },
+        {
+          "line": 257,
+          "text": "        \"\"\"Implementation of the quantile function"
+        },
+        {
+          "line": 258,
+          "text": "        :param logits: Tensor of any shape, with the last dimension being logits"
+        },
+        {
+          "line": 259,
+          "text": "        :param left_prob: float: The probability mass to the left of the result."
+        },
+        {
+          "line": 260,
+          "text": "        :return: Position with `left_prob` probability weight to the left."
+        },
+        {
+          "line": 261,
+          "text": "        \"\"\""
+        },
+        {
+          "line": 262,
+          "text": "        probs = logits.softmax(-1)"
+        },
+        {
+          "line": 263,
+          "text": "        cumprobs = torch.cumsum(probs, -1)"
+        },
+        {
+          "line": 264,
+          "text": "        idx = ("
+        },
+        {
+          "line": 265,
+          "text": "            torch.searchsorted("
+        },
+        {
+          "line": 266,
+          "text": "                cumprobs,"
+        },
+        {
+          "line": 267,
+          "text": "                left_prob * torch.ones(*cumprobs.shape[:-1], 1, device=logits.device),"
+        },
+        {
+          "line": 268,
+          "text": "            )"
+        },
+        {
+          "line": 269,
+          "text": "            .squeeze(-1)"
+        },
+        {
+          "line": 270,
+          "text": "            .clamp(0, cumprobs.shape[-1] - 1)"
+        },
+        {
+          "line": 271,
+          "text": "        )  # this might not do the right for outliers"
+        },
+        {
+          "line": 272,
+          "text": "        cumprobs = torch.cat("
+        },
+        {
+          "line": 273,
+          "text": "            [torch.zeros(*cumprobs.shape[:-1], 1, device=logits.device), cumprobs],"
+        },
+        {
+          "line": 274,
+          "text": "            -1,"
+        },
+        {
+          "line": 275,
+          "text": "        )"
+        },
+        {
+          "line": 276,
+          "text": ""
+        },
+        {
+          "line": 277,
+          "text": "        rest_prob = left_prob - cumprobs.gather(-1, idx[..., None]).squeeze(-1)"
+        },
+        {
+          "line": 278,
+          "text": "        left_border = self.borders[idx]"
+        },
+        {
+          "line": 279,
+          "text": "        right_border = self.borders[idx + 1]"
+        },
+        {
+          "line": 280,
+          "text": "        return left_border + (right_border - left_border) * rest_prob / probs.gather("
+        },
+        {
+          "line": 281,
+          "text": "            -1,"
+        },
+        {
+          "line": 282,
+          "text": "            idx[..., None],"
+        },
+        {
+          "line": 283,
+          "text": "        ).squeeze(-1)"
+        }
+      ],
+      "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/model/bar_distribution.py",
+      "sha256": "3e753389dcb8f3970452e82ff832d40857cf3def29b60f6d4f95c0e1b52937bf"
+    },
+    {
+      "line_end": 484,
+      "line_start": 448,
+      "lines": [
+        {
+          "line": 448,
+          "text": "class FullSupportBarDistribution(BarDistribution):"
+        },
+        {
+          "line": 449,
+          "text": "    def __init__("
+        },
+        {
+          "line": 450,
+          "text": "        self,"
+        },
+        {
+          "line": 451,
+          "text": "        borders: torch.Tensor,"
+        },
+        {
+          "line": 452,
+          "text": "        **kwargs: Any,"
+        },
+        {
+          "line": 453,
+          "text": "    ):"
+        },
+        {
+          "line": 454,
+          "text": "        # here borders should start with min and end with max, where all values"
+        },
+        {
+          "line": 455,
+          "text": "        # lie in (min,max) and are sorted"
+        },
+        {
+          "line": 456,
+          "text": "        \"\"\":param borders:\"\"\""
+        },
+        {
+          "line": 457,
+          "text": "        super().__init__(borders, **kwargs)"
+        },
+        {
+          "line": 458,
+          "text": "        self.assert_support(allow_zero_bucket_left=False)"
+        },
+        {
+          "line": 459,
+          "text": ""
+        },
+        {
+          "line": 460,
+          "text": "        losses_per_bucket = torch.zeros_like(self.bucket_widths)"
+        },
+        {
+          "line": 461,
+          "text": "        self.register_buffer(\"losses_per_bucket\", losses_per_bucket)"
+        },
+        {
+          "line": 462,
+          "text": ""
+        },
+        {
+          "line": 463,
+          "text": "    def assert_support(self, *, allow_zero_bucket_left: bool = False) -> None:"
+        },
+        {
+          "line": 464,
+          "text": "        if allow_zero_bucket_left:"
+        },
+        {
+          "line": 465,
+          "text": "            assert ("
+        },
+        {
+          "line": 466,
+          "text": "                self.bucket_widths[-1] > 0"
+        },
+        {
+          "line": 467,
+          "text": "            ), f\"Half Normal weight must be > 0 (got -1:{self.bucket_widths[-1]}).\""
+        },
+        {
+          "line": 468,
+          "text": "            # This fixes the distribution if the half normal at zero is width zero"
+        },
+        {
+          "line": 469,
+          "text": "            if self.bucket_widths[0] == 0:"
+        },
+        {
+          "line": 470,
+          "text": "                self.borders[0] = self.borders[0] - 1"
+        },
+        {
+          "line": 471,
+          "text": "                self.bucket_widths[0] = 1.0"
+        },
+        {
+          "line": 472,
+          "text": "        else:"
+        },
+        {
+          "line": 473,
+          "text": "            assert self.bucket_widths[0] > 0"
+        },
+        {
+          "line": 474,
+          "text": "            assert self.bucket_widths[-1] > 0"
+        },
+        {
+          "line": 475,
+          "text": ""
+        },
+        {
+          "line": 476,
+          "text": "    @staticmethod"
+        },
+        {
+          "line": 477,
+          "text": "    def halfnormal_with_p_weight_before("
+        },
+        {
+          "line": 478,
+          "text": "        range_max: float,"
+        },
+        {
+          "line": 479,
+          "text": "        p: float = 0.5,"
+        },
+        {
+          "line": 480,
+          "text": "    ) -> torch.distributions.HalfNormal:"
+        },
+        {
+          "line": 481,
+          "text": "        s = range_max / torch.distributions.HalfNormal(torch.tensor(1.0)).icdf("
+        },
+        {
+          "line": 482,
+          "text": "            torch.tensor(p),"
+        },
+        {
+          "line": 483,
+          "text": "        )"
+        },
+        {
+          "line": 484,
+          "text": "        return torch.distributions.HalfNormal(s)"
+        }
+      ],
+      "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/model/bar_distribution.py",
+      "sha256": "3e753389dcb8f3970452e82ff832d40857cf3def29b60f6d4f95c0e1b52937bf"
+    },
+    {
+      "line_end": 585,
+      "line_start": 577,
+      "lines": [
+        {
+          "line": 577,
+          "text": "    def sample(self, logits: torch.Tensor, t: float = 1.0) -> torch.Tensor:"
+        },
+        {
+          "line": 578,
+          "text": "        \"\"\"Samples values from the distribution."
+        },
+        {
+          "line": 579,
+          "text": ""
+        },
+        {
+          "line": 580,
+          "text": "        Temperature t."
+        },
+        {
+          "line": 581,
+          "text": "        \"\"\""
+        },
+        {
+          "line": 582,
+          "text": "        p_cdf = torch.rand(*logits.shape[:-1])"
+        },
+        {
+          "line": 583,
+          "text": "        return torch.tensor("
+        },
+        {
+          "line": 584,
+          "text": "            [self.icdf(logits[i, :] / t, p) for i, p in enumerate(p_cdf.tolist())],"
+        },
+        {
+          "line": 585,
+          "text": "        )"
+        }
+      ],
+      "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/model/bar_distribution.py",
+      "sha256": "3e753389dcb8f3970452e82ff832d40857cf3def29b60f6d4f95c0e1b52937bf"
+    },
+    {
+      "line_end": 529,
+      "line_start": 521,
+      "lines": [
+        {
+          "line": 521,
+          "text": "        # Standardize y"
+        },
+        {
+          "line": 522,
+          "text": "        mean = np.mean(y)"
+        },
+        {
+          "line": 523,
+          "text": "        std = np.std(y)"
+        },
+        {
+          "line": 524,
+          "text": "        self.y_train_std_ = std.item() + 1e-20"
+        },
+        {
+          "line": 525,
+          "text": "        self.y_train_mean_ = mean.item()"
+        },
+        {
+          "line": 526,
+          "text": "        y = (y - self.y_train_mean_) / self.y_train_std_"
+        },
+        {
+          "line": 527,
+          "text": "        self.renormalized_criterion_ = FullSupportBarDistribution("
+        },
+        {
+          "line": 528,
+          "text": "            self.bardist_.borders * self.y_train_std_ + self.y_train_mean_,"
+        },
+        {
+          "line": 529,
+          "text": "        ).float()"
+        }
+      ],
+      "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/regressor.py",
+      "sha256": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e"
+    }
+  ],
+  "unrecorded_or_unavailable": [
+    "accepted member index for each failing physical row",
+    "component uniform scalar used for each failing row/stage",
+    "accepted component logits/probabilities for those rows",
+    "selected bar/bin index",
+    "per-bin or terminal cumulative probability for those rows",
+    "CDF-before and selected-bin probability at sampling time",
+    "interpolation fraction at sampling time",
+    "a complete decoded physical proposal wave (strict decode aborted)",
+    "normal successful request/footer and final physical support/counts"
+  ],
+  "verified_source_facts": [
+    "The active e71 inverse computes FP32 softmax, cumulative sum, searchsorted and a clamped bin index, then linear bar interpolation; it does not force terminal CDF=1 or clamp the interpolation fraction.",
+    "The frozen SDK BarDistribution.icdf uses the same structure; FullSupportBarDistribution.sample calls inherited icdf. Half-normal formulas used by the class density do not imply half-normal sampling here.",
+    "FP32 component uniforms are preassigned once per stage by row and retained across raw-mass head retries; accepted logits subsets and their original row uniforms enter the inverse.",
+    "The raw canonical mass envelope is checked in FP64 before sampling, while the final logit softmax and inverse cumulative sum occur separately in FP32. A mass envelope does not prove a particular final cumulative endpoint or interpolation fraction.",
+    "Canonical criterion borders are standard model borders scaled by training target standard deviation and mean; production validates finite FP32 borders, not a strict inverse-noise representability range.",
+    "Strict noise decode uses log-tail formulas and a final open-interval test. A finite latent is therefore not a guarantee of representable interior physical output."
+  ],
+  "what_is_recorded": [
+    "all complete latent wave bytes and all21 actual stage-return vectors",
+    "private-generator state hashes before/after stages, not the consumed per-row variates",
+    "per-stage/head aggregate assignment/rejection and neural-batch histograms",
+    "runtime source/mass/dtype/route journals and actual post-exception guards",
+    "bounded post-failure codec-only row/stage diagnostics with full coverage reported"
+  ]
+}

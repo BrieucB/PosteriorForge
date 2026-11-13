@@ -1,0 +1,182 @@
+{
+  "actual_frozen_ndtri_of_rounded_log_tail_input": -2.0000000000000004,
+  "attribution": "Built with PriorLabs-TabPFN",
+  "codec_source_sha256": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+  "correctly_rounded_ndtri_of_rounded_log_tail_input": -1.9999999999999998,
+  "exact_prior_z_above_which_nearest_Float64_is_endpoint": "8.46492203682618134957790181135516531008366610470784008821548207306315",
+  "exact_prior_z_at_predecessor": "8.383756429425644546160341405702415473296197715274926602631437326291324",
+  "frozen_z_at_predecessor": 8.405128466519939,
+  "ideal_binary_source_a": "-2.000000000000000070805039835788045953293007162009279923554780177193967",
+  "ideal_binary_source_b": "2.0",
+  "ideal_ndtri_of_rounded_log_tail_input": "-1.999999999999999879840175889045196248654736650313365114441621845413009",
+  "latent_archive_sha256": "1ba89c1a4e53c5895ad1623b5a396e4086154c3dc830f8036da388f234d90349",
+  "manifest_sha256": "92755b788fc894d4ca16157e573bd1b5c9d8a4468b71cf184fa16303bced7bce",
+  "method_and_error_scope": {
+    "180_digits_is_not_certified_interval_arithmetic": true,
+    "equation": "sigma=U-s*t; integral_0^t exp(bu-u^2/2)du=M*Q(z)/phi(b)",
+    "gap_evaluated_without_subtracting_from_boundary": true,
+    "independent_bound": "Q(z)<phi(z)/z and integral>=t imply gap < s*exp((b^2-z^2)/2)/z; this bound is also far below half a Float64 predecessor gap",
+    "latent_tail_cause_not_identified": "no actual logits/u/bin/interpolation inputs used or reconstructed",
+    "source_prior_vs_cached_geometry": "binary physical constants imply a slightly below -2; stored geometry a=-2. Original raw report also preserves both masses/gaps. Upper b is exactly2 for both; conclusion unchanged",
+    "ultra_small_gap": "stored as arbitrary-precision distance/log distance, not as .5 minus an invisible Float64 delta"
+  },
+  "new_model_sampler_RNG_G3_or_reference_calls": 0,
+  "repaired_physical_values_or_cohort_saved": false,
+  "rounded_log_tail_input": -3.7831843336820317,
+  "rounding_midpoint_gap": "0.0000000000000000277555756156289135105907917022705078125",
+  "rows": [
+    {
+      "actual_finite_latent": 13.876729011535645,
+      "actual_latent_hex": "0x1.bc0e2a0000000p+3",
+      "correct_rounding_to_nearest_Float64": "0.5 endpoint; no correctly rounded STRICT interior value for THIS inverse",
+      "current_Float32_latent_roundtrip_bound": 5.675021748174913e-05,
+      "exact_prior_roundtrip_error_if_interior_predecessor_substituted": "5.492972582109999985089658594297584526703802284725073397368562673708676",
+      "exact_upper_gap": "9.491411153357986325537664243580262452867450771167473692792796139440429e-44",
+      "frozen_roundtrip_error_if_interior_predecessor_substituted": 5.471600545015706,
+      "frozen_scalar_intermediates": {
+        "base_log_tail": -3.7831843336820317,
+        "base_log_ulp": 4.440892098500626e-16,
+        "log_mass_plus_log_survival": -99.88265107539412,
+        "log_survival_z": -99.83608316310173,
+        "logaddexp": -3.7831843336820317,
+        "logaddexp_equals_base_bits": true,
+        "lost_logaddexp_increment_from_actual_rounded_inputs": "1.838788928780145974122483344369066922379213921372016707098045621147647e-42",
+        "ndtri_exp": -2.0000000000000004,
+        "ndtri_exp_hex": "-0x1.0000000000001p+1",
+        "physical_scalar": 0.5,
+        "physical_scalar_hex": "0x1.0000000000000p-1",
+        "strict_noise_predicate": false
+      },
+      "gap_to_half_predecessor_gap": "3.419641258678655750386963661080456766310837543296662073464673089212473e-27",
+      "inside_first50000": true,
+      "log10_exact_upper_gap": "-43.02266921322545039505301509744139686841221806583707345212174626380243",
+      "method": {
+        "analytic_upper_gap": "9.994975808909684514545499711241812274399246040458330714977078254882865e-44",
+        "exact_binary_a": "-2.000000000000000070805039835788045953293007162009279923554780177193967",
+        "exact_binary_b": "2.0",
+        "linearized_bound_scope": "t is between rhs*exp(-b*rhs) and rhs; log10(b*rhs) bounds 1-exp(-b*rhs) from above",
+        "linearized_gap_relative_error_upper_log10": "-41.80977530626202046296416997899778511825936025250921767433637322400842",
+        "log10_normal_survival": "-43.35826001256922318178661515268900702596892633122409715450629790857411",
+        "log_analytic_upper_gap": "-99.01166154410776683202996434534837378855589565843335445949995395766805",
+        "normal_survival": "4.382682275572443977777147323435544552130781226317008012009061180945746e-44",
+        "normalization_mass": "0.9544997361036415894222672604059112882614814110019573561611372472787645",
+        "rescaled_t": "7.748090737435091018432521563499746565650170579906668016732683074643754e-43",
+        "rhs": "7.748090737435091018432521563499746565650176583197675569477937927357491e-43"
+      },
+      "minimum_local_significand_bits_for_correct_rounding_to_interior": 141,
+      "naive_diagnostics_NOT_used_by_frozen_codec": {
+        "Phi_z": 1.0,
+        "exp_log_survival": 4.382682275572373e-44
+      },
+      "ordered_stage": 15,
+      "other_interior_Float64_values_exist": true,
+      "physical_name": "sigma_a1",
+      "physical_slot": 16,
+      "precision_bits_scope": "only enough to separate this real quantile from endpoint after rounding; not sufficient by itself for all roundtrip bounds",
+      "row_zero_based": 4355
+    },
+    {
+      "actual_finite_latent": 205.2462615966797,
+      "actual_latent_hex": "0x1.9a7e160000000p+7",
+      "correct_rounding_to_nearest_Float64": "0.5 endpoint; no correctly rounded STRICT interior value for THIS inverse",
+      "current_Float32_latent_roundtrip_bound": 0.0007867670501582325,
+      "exact_prior_roundtrip_error_if_interior_predecessor_substituted": "196.8625051672540429538396585942975845267038022847250733973685626737087",
+      "exact_upper_gap": "1.184362620331143289548834878906813243170455294642934997578318799706058e-9150",
+      "frozen_roundtrip_error_if_interior_predecessor_substituted": 196.84113313015976,
+      "frozen_scalar_intermediates": {
+        "base_log_tail": -3.7831843336820317,
+        "base_log_ulp": 4.440892098500626e-16,
+        "log_mass_plus_log_survival": -21069.303690422985,
+        "log_survival_z": -21069.25712251069,
+        "logaddexp": -3.7831843336820317,
+        "logaddexp_equals_base_bits": true,
+        "lost_logaddexp_increment_from_actual_rounded_inputs": "2.294487973107912915548854798711542697650781027313034328193807704410148e-9149",
+        "ndtri_exp": -2.0000000000000004,
+        "ndtri_exp_hex": "-0x1.0000000000001p+1",
+        "physical_scalar": 0.5,
+        "physical_scalar_hex": "0x1.0000000000000p-1",
+        "strict_noise_predicate": false
+      },
+      "gap_to_half_predecessor_gap": "4.267116044475904918942314418507199533597265153372622526498393035604853e-9134",
+      "inside_first50000": true,
+      "log10_exact_upper_gap": "-9149.926515307834658714804492270729745292343670177930855236185862983744",
+      "method": {
+        "analytic_upper_gap": "1.240849723624225932430606311206111981849104350070874688118334382096106e-9150",
+        "exact_binary_a": "-2.000000000000000070805039835788045953293007162009279923554780177193967",
+        "exact_binary_b": "2.0",
+        "linearized_bound_scope": "t is between rhs*exp(-b*rhs) and rhs; log10(b*rhs) bounds 1-exp(-b*rhs) from above",
+        "linearized_gap_relative_error_upper_log10": "-9148.713621400871228782715647152286133542190812701098304713776214387245",
+        "log10_normal_survival": "-9150.26210610717843150153809232597735544990037877981318419394613907181",
+        "log_analytic_upper_gap": "-21068.4378044895978875134092138144095612055667958950970672362854594003",
+        "normal_survival": "5.468823318373911326258040892446054199094026287289994551094960867257918e-9151",
+        "normalization_mass": "0.9544997361036415894222672604059112882614814110019573561611372472787645",
+        "rescaled_t": "9.668266288417496416462845405089233834143333340261244096536150519457011e-9150",
+        "rhs": "9.668266288417496416462845405089233834143333340261244096536150519457011e-9150"
+      },
+      "minimum_local_significand_bits_for_correct_rounding_to_interior": 30394,
+      "naive_diagnostics_NOT_used_by_frozen_codec": {
+        "Phi_z": 1.0,
+        "exp_log_survival": 0.0
+      },
+      "ordered_stage": 19,
+      "other_interior_Float64_values_exist": true,
+      "physical_name": "sigma_a3",
+      "physical_slot": 20,
+      "precision_bits_scope": "only enough to separate this real quantile from endpoint after rounding; not sufficient by itself for all roundtrip bounds",
+      "row_zero_based": 41765
+    }
+  ],
+  "schema": "posteriorforge.scalar_noise_inverse_math_reproduction.v1",
+  "source_constants_binary_rational": {
+    "high": [
+      1,
+      2
+    ],
+    "location": [
+      2296835809958953,
+      9007199254740992
+    ],
+    "low": [
+      5764607523034235,
+      576460752303423488
+    ],
+    "scale": [
+      2206763817411543,
+      18014398509481984
+    ]
+  },
+  "source_constants_float": {
+    "a": -2.0,
+    "b": 2.0,
+    "high": 0.5,
+    "location": 0.255,
+    "log_mass": -0.04656791229239017,
+    "low": 0.01,
+    "scale": 0.1225
+  },
+  "source_constants_hex": {
+    "a": "-0x1.0000000000000p+1",
+    "b": "0x1.0000000000000p+1",
+    "high": "0x1.0000000000000p-1",
+    "location": "0x1.051eb851eb852p-2",
+    "log_mass": "-0x1.7d7bfd8ad78cap-5",
+    "low": "0x1.47ae147ae147bp-7",
+    "scale": "0x1.f5c28f5c28f5cp-4"
+  },
+  "source_geometry_rounded_a_b": [
+    -2.0,
+    2.0
+  ],
+  "source_or_policy_modified": false,
+  "status": "diagnostic_only",
+  "upper_predecessor": 0.49999999999999994,
+  "upper_predecessor_gap": "0.000000000000000055511151231257827021181583404541015625",
+  "upper_predecessor_hex": "0x1.fffffffffffffp-2",
+  "versions": {
+    "mpmath": "1.3.0",
+    "numpy": "1.26.4",
+    "python": "3.11.13",
+    "scipy": "1.12.0"
+  },
+  "working_decimal_precision": 180
+}

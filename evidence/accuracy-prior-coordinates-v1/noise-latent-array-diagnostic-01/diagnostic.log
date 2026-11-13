@@ -1,0 +1,91 @@
+{
+  "diagnostic_sha256": "c08076c86e7d329f65ddb417224c2430ceb4b3dfdb0e24e00ae8f6000e691f93",
+  "offenders": [
+    {
+      "row_index_zero_based": 4355,
+      "ordered_stage": 15,
+      "physical_slot": 16,
+      "physical_parameter": "sigma_a1",
+      "latent_name": "z_sigma_a1",
+      "actual_model_Float32_latent": 13.876729011535645,
+      "actual_model_scalar_bytes_hex": "15075e41",
+      "exception_type": "CoordinateError",
+      "message": "decode: endpoint, out-of-support, or saturated noise; no clipping",
+      "frozen_codec_trace": [
+        {
+          "function": "_noise_decode",
+          "line": 137
+        },
+        {
+          "function": "_strict_noise",
+          "line": 110
+        },
+        {
+          "function": "_require",
+          "line": 43
+        }
+      ],
+      "frozen_scalar_output_before_rejection": 0.5,
+      "row_partition": "first50000"
+    },
+    {
+      "row_index_zero_based": 41765,
+      "ordered_stage": 19,
+      "physical_slot": 20,
+      "physical_parameter": "sigma_a3",
+      "latent_name": "z_sigma_a3",
+      "actual_model_Float32_latent": 205.2462615966797,
+      "actual_model_scalar_bytes_hex": "0b3f4d43",
+      "exception_type": "CoordinateError",
+      "message": "decode: endpoint, out-of-support, or saturated noise; no clipping",
+      "frozen_codec_trace": [
+        {
+          "function": "_noise_decode",
+          "line": 137
+        },
+        {
+          "function": "_strict_noise",
+          "line": 110
+        },
+        {
+          "function": "_require",
+          "line": 43
+        }
+      ],
+      "frozen_scalar_output_before_rejection": 0.5,
+      "row_partition": "first50000"
+    }
+  ],
+  "partitions": {
+    "all51200": {
+      "proposal_rows": 51200,
+      "failing_rows": 2,
+      "row_failure_fraction": 3.90625e-05,
+      "row_failure_percent": 0.00390625,
+      "noise_scalar_coordinates": 307200,
+      "failing_noise_coordinates": 2,
+      "noise_coordinate_failure_fraction": 6.510416666666667e-06
+    },
+    "first50000": {
+      "proposal_rows": 50000,
+      "failing_rows": 2,
+      "row_failure_fraction": 4e-05,
+      "row_failure_percent": 0.004,
+      "noise_scalar_coordinates": 300000,
+      "failing_noise_coordinates": 2,
+      "noise_coordinate_failure_fraction": 6.666666666666667e-06
+    },
+    "unused1200tail": {
+      "proposal_rows": 1200,
+      "failing_rows": 0,
+      "row_failure_fraction": 0.0,
+      "row_failure_percent": 0.0,
+      "noise_scalar_coordinates": 7200,
+      "failing_noise_coordinates": 0,
+      "noise_coordinate_failure_fraction": 0.0
+    }
+  },
+  "all_noise_cells": 307200,
+  "helper_calls": 68,
+  "Torch_imported": false
+}

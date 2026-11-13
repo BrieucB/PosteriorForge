@@ -1,0 +1,169 @@
+{
+  "CUDA_initialized_after": false,
+  "CUDA_initialized_before": false,
+  "RNG_replay_or_new_draw_calls": 0,
+  "all8_support_scope": "All8 returned head distributions are translated to checkpoint canonical bardist bins and sampled using the single target-mean/SD-renormalized criterion. Per-head SafePower/inverse-target fitted parameters are not needed to bound this common output envelope; actual nonzero support within it is not known.",
+  "checkpoint_inspection": {
+    "criterion_border_key": "state_dict.criterion.borders",
+    "dtype": "torch.float32",
+    "loaded_keys": [
+      "state_dict",
+      "config"
+    ],
+    "maximum": 86.94256591796875,
+    "minimum": -93.08673095703125,
+    "sha256": "4e9e53f00186e68f15628f55647b44d4b790039c2d155da14606cd493eda4a83",
+    "shape": [
+      5001
+    ]
+  },
+  "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+  "checkpoint_tensor_loading_only": true,
+  "code_sha256": "17d2b5fb867d3b74bf946cf1717ae98cd9b1fceba5b05f7f4b49140c0bead38e",
+  "default_RNG_hashes_after": {
+    "numpy": "361be2d513f1b4af19669500e06c63e03759741fd456bacda006bb733c44da48",
+    "python": "acde22a7ea2d3446ca8119b565f9dbdadb2549843382442acec0a92a2dece96d",
+    "torchCPU": "f028da94c9c95e3f3a0c23a9f53c87f5f6a0bddd88af11169fe1f5a08dad4bcd"
+  },
+  "default_RNG_hashes_before": {
+    "numpy": "361be2d513f1b4af19669500e06c63e03759741fd456bacda006bb733c44da48",
+    "python": "acde22a7ea2d3446ca8119b565f9dbdadb2549843382442acec0a92a2dece96d",
+    "torchCPU": "f028da94c9c95e3f3a0c23a9f53c87f5f6a0bddd88af11169fe1f5a08dad4bcd"
+  },
+  "default_RNG_preservation_scope": "Snapshots after imports and before/after checkpoint state-dict loading plus CPU Float32 border arithmetic; no initial-import RNG claim.",
+  "default_RNG_preserved": true,
+  "full_support_classname_caveat": "This conclusion concerns the source-bound finite_bar_icdf used by this sampler, not an arbitrary tail-sampling method on the FullSupportBarDistribution class.",
+  "historical_authentication_verdict": "Component U can be independently reconstructed because it is preassigned by raw row and retained across retries. Saved query journals identify member/order/shape/SHA but omit raw row indices and row-specific assignment/acceptance decisions. Counts with3/1 rejections at stages15/19 do not identify which row retried or its final member/chunk. No assignment/acceptance stream replay, row-subset brute force, or historical bin/probability inference was performed. New fixed contiguous1024 windows are not authenticated historical member-grouped batches.",
+  "manifest_sha256": "92755b788fc894d4ca16157e573bd1b5c9d8a4468b71cf184fa16303bced7bce",
+  "model_constructor_or_forward_calls": 0,
+  "no_posterior_G3_decode_cohort_repair_or_source_edit": true,
+  "per_stage_verdicts": [
+    {
+      "above_common_maximum_by": -73.73280620574951,
+      "all8_common_returned_criterion_maximum": 87.60953521728516,
+      "all8_common_returned_criterion_minimum": -93.85807037353516,
+      "common_returned_borders_sha256": "334a462a1c4bc889ceae61a265b1e80296cbe528911ebe69cba667aee0b7b24f",
+      "exact_historical_member_grouped_batch_identified": false,
+      "historical_head_rejection_counts_by_member": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0
+      ],
+      "historical_head_rejections": 3,
+      "new_contiguous_probe_window": [
+        4096,
+        5120
+      ],
+      "observed_ordered_latent": 13.876729011535645,
+      "outside_common_finite_bar_envelope": false,
+      "query_journal_entries": 58,
+      "query_journal_has_only_shape_dtype_sha_not_row_indices": true,
+      "row_index_zero_based": 4355,
+      "row_offset_in_new_contiguous_probe_window": 259,
+      "saved_cold_and_final_target_normalization_equal": true,
+      "saved_target_mean": -0.027640938758850098,
+      "saved_target_sd": 1.0079892873764038,
+      "stage": 15,
+      "verdict": "INSUFFICIENT: inside common envelope, actual positive-mass head support and interpolation details unavailable"
+    },
+    {
+      "above_common_maximum_by": 118.84210968017578,
+      "all8_common_returned_criterion_maximum": 86.4041519165039,
+      "all8_common_returned_criterion_minimum": -92.5218505859375,
+      "common_returned_borders_sha256": "ba39708a489978d821ab6e6d82b3f57af2af89c0d78e0502a48567349920310c",
+      "exact_historical_member_grouped_batch_identified": false,
+      "historical_head_rejection_counts_by_member": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "historical_head_rejections": 1,
+      "new_contiguous_probe_window": [
+        40960,
+        41984
+      ],
+      "observed_ordered_latent": 205.2462615966797,
+      "outside_common_finite_bar_envelope": true,
+      "query_journal_entries": 57,
+      "query_journal_has_only_shape_dtype_sha_not_row_indices": true,
+      "row_index_zero_based": 41765,
+      "row_offset_in_new_contiguous_probe_window": 805,
+      "saved_cold_and_final_target_normalization_equal": true,
+      "saved_target_mean": -0.0055904993787407875,
+      "saved_target_sd": 0.9938715696334839,
+      "stage": 19,
+      "verdict": "OUTSIDE all8 common finite-bar envelope; ordinary within-bin interpolation cannot explain the value"
+    }
+  ],
+  "pinned_SDK_source_hashes_verified": {
+    "tabpfn/base.py": "b80fbf83b8f8a7eb69ae77c0a7f0b397a43e32c1c29b8392a0ff9ee525218837",
+    "tabpfn/inference.py": "62470bbfdd4879dd52db86ea7a6e53ae41fbcc22379bfb2866ad906adc71a0bd",
+    "tabpfn/model/encoders.py": "e16e03c320c69dcd2e9823925d59fa20a0c52008d8cc77ca961c919c7221213e",
+    "tabpfn/model/layer.py": "b7c230f917b3e346e1d9cc83eb9e06fd939dbbd3fe3b2c5f7a8e4b7505142754",
+    "tabpfn/model/multi_head_attention.py": "512220bbf253fb856003f7084976a478753644c9963d563ee678eb3be2c28f35",
+    "tabpfn/model/transformer.py": "53471f33e5adff20af64a4730b9caba49cf6490f4e2119397b81ef6b3c0f9751",
+    "tabpfn/preprocessing.py": "fba9df553f3f7d190972a531c5627f09b88e8b8f537d298df7083f7dd972843d",
+    "tabpfn/regressor.py": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+    "tabpfn/utils.py": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1"
+  },
+  "preprocessing_replay_calls": 0,
+  "prior_array_diagnostic_unchanged": "c08076c86e7d329f65ddb417224c2430ceb4b3dfdb0e24e00ae8f6000e691f93",
+  "schema": "posteriorforge.checkpoint_common_finite_bar_support_cpu.v1",
+  "source_hashes": {
+    "src/posteriorforge/execution_mixture.py": "e71f43b73ae8259c20b5d7b52feccc7c851e9a2fbb86d869bc0a5f7f3af792a1",
+    "src/posteriorforge/performance_prior_pair_v2.py": "311f2cbfb3c3bd977ff9af348cd81a008c3c7711ec70f850fb25b3bc2d120a85",
+    "src/posteriorforge/performance_runner.py": "23ccad8b5bbcdd7a48340b349d515ca870763359cfeb71333e02fc2b6a8aca3b"
+  },
+  "source_line_evidence": {
+    "src/posteriorforge/execution_mixture.py": {
+      "finite_bar_icdf": [
+        224,
+        252
+      ],
+      "single_member_filtering": [
+        148,
+        161
+      ]
+    },
+    "src/posteriorforge/performance_runner.py": {
+      "head_rejection_grouping": [
+        501,
+        523
+      ],
+      "preassigned_component_uniforms": [
+        486,
+        493
+      ]
+    },
+    "tabpfn/regressor.py": {
+      "all_members_translate_back_to_common_bardist": [
+        695,
+        701
+      ],
+      "member_target_inverse_borders": [
+        672,
+        685
+      ],
+      "returned_common_criterion": [
+        747,
+        753
+      ],
+      "standardize_and_renormalized_criterion": [
+        521,
+        529
+      ]
+    }
+  },
+  "status": "split_supported_and_insufficient_verdict",
+  "target_transform_replay_calls": 0
+}

@@ -1,0 +1,116 @@
+{
+  "CUDA_initialized_after": false,
+  "CUDA_initialized_before": false,
+  "GPU_or_CUDA_used": false,
+  "actual_reconstruction_counts": {
+    "private_Generator_constructions": 1,
+    "private_get_state_hash_reads": 42,
+    "private_manual_seed_calls": 1,
+    "replayed_torch_rand_calls": 21,
+    "replayed_uniform_values": 1075200
+  },
+  "all_uniform_vectors_saved": false,
+  "attempt01_raw_sha256": "8f9af60f78d8d242a302f2d4ee0b6dc2a5733c2166f990b68bb18aceeb8c24cc",
+  "attempt02_raw_sha256": "b6c3e08ce2897d5fead7d129dbbf3e2cae8cd37fa7986903899fb68471d8ac24",
+  "authenticated_all21_before_after_states": true,
+  "captured_ICDF_input_witness_claimed": false,
+  "default_RNG_preserved": true,
+  "failed_manifest_sha256": "92755b788fc894d4ca16157e573bd1b5c9d8a4468b71cf184fa16303bced7bce",
+  "final_state_matches_actual_failure_footer": true,
+  "historical_uniforms": [
+    {
+      "dtype": "<f4",
+      "float32_bytes_hex": "e0ff7f3f",
+      "label": "authenticated historical component-uniform reconstruction; not directly captured ICDF-input witness",
+      "row": 4355,
+      "stage": 15,
+      "value": 0.9999980926513672
+    },
+    {
+      "dtype": "<f4",
+      "float32_bytes_hex": "f6ff7f3f",
+      "label": "authenticated historical component-uniform reconstruction; not directly captured ICDF-input witness",
+      "row": 41765,
+      "stage": 19,
+      "value": 0.9999994039535522
+    }
+  ],
+  "member_bin_logits_probabilities_CDF_fraction_reconstructed": false,
+  "new_posterior_world_reference_or_G3_generated": false,
+  "only_requested_two_uniforms_extracted": true,
+  "preflight_attempt01": {
+    "error": "actual producer Python/NumPy/Torch versions differ",
+    "replayed_rand_calls": 0,
+    "replayed_uniform_values": 0,
+    "status": "failed_historical_uniforms_unknown",
+    "version_format_seam": "producer uses importlib.metadata torch=2.6.0, not torch.__version__=2.6.0+cu124; original failed manifest/source unchanged"
+  },
+  "raw_scripts_logs": [
+    {
+      "bytes": 12913,
+      "file": "attempt-01-script.py",
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/diagnostics/reconstruct_historical_component_uniform_v1.py",
+      "sha256": "2c66a9d9eff124847e308a896e269828fb735452374b606c8ad775cdc7f0d8af"
+    },
+    {
+      "bytes": 614,
+      "file": "attempt-01-stdout.log",
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/diagnostics/reconstruct_historical_component_uniform_v1.stdout.log",
+      "sha256": "d5efe532ea219df8bbc8f8fa9828a6ae2d9740c5d542852edf269b44ce586f2a"
+    },
+    {
+      "bytes": 0,
+      "file": "attempt-01-stderr.log",
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/diagnostics/reconstruct_historical_component_uniform_v1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 13290,
+      "file": "attempt-02-script.py",
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/diagnostics/reconstruct_historical_component_uniform_v2.py",
+      "sha256": "76e2d5d34bbff15d229eeebea646b774f025d75fe3986e72f93925440d1a2ec8"
+    },
+    {
+      "bytes": 986,
+      "file": "attempt-02-stdout.log",
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/diagnostics/reconstruct_historical_component_uniform_v2.stdout.log",
+      "sha256": "2ca05e3be6f51d24775680ed3f05aaf799cdd575d642d2b88110c5fc617b8318"
+    },
+    {
+      "bytes": 0,
+      "file": "attempt-02-stderr.log",
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/diagnostics/reconstruct_historical_component_uniform_v2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "runtime_versions": {
+    "numpy": "1.26.4",
+    "python": "3.11.13",
+    "torch_metadata": "2.6.0",
+    "torch_module": "2.6.0+cu124"
+  },
+  "schema": "posteriorforge.historical_component_uniform_reconstruction_evidence.v1",
+  "source_chain": {
+    "bound_factory_is_canonical_factory": true,
+    "bound_wave_is_4037": true,
+    "canonical_sampling_Git_commit": "36594f45debeaf1921b10b7bc12a1daa8539ee37",
+    "canonical_sampling_source_sha256": "23ccad8b5bbcdd7a48340b349d515ca870763359cfeb71333e02fc2b6a8aca3b",
+    "component_factory_source_sha256": "bb4d016ed3b7b0cb24dc77032150e55bca9e78ae6d55405c1629e7a1788f4715",
+    "component_generator_access_count_in_factory": 1,
+    "no_original_stage_sampler_invoked": true,
+    "one_CPU_FP32_count_vector_before_stage_branch_and_retries": true,
+    "raw_source_chain_guard_passed": true,
+    "wave_reverse_AST_exact": true
+  },
+  "status": "authenticated",
+  "stream": {
+    "device": "cpu",
+    "dtype": "torch.float32",
+    "name": "component_uniform",
+    "role": "execution-component-uniform",
+    "seed": 3175593578,
+    "stage_count": 21,
+    "values_per_stage": 51200
+  },
+  "wall_seconds": 3.261182771064341
+}

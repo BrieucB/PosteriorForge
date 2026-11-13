@@ -1,0 +1,47 @@
+{
+  "CUDA_initialized_after": false,
+  "CUDA_initialized_before": false,
+  "CUDA_never_initialized_observed_at_boundaries": true,
+  "counts": {
+    "private_Generator_constructions": 0,
+    "private_get_state_hash_reads": 0,
+    "private_manual_seed_calls": 0,
+    "replayed_torch_rand_calls": 0,
+    "replayed_uniform_values": 0
+  },
+  "default_RNG_scope": {
+    "global_manual_seed_calls": 0,
+    "numpy_python": "before Torch and source-chain imports through end",
+    "restoration_performed": false,
+    "torch_CPU": "immediately after Torch import, before source-chain imports, through end"
+  },
+  "default_numpy_python_TorchCPU_RNG_preserved": true,
+  "default_rng_after": {
+    "numpy": "cd8588d2009141c0621a7cd1c6a21ff2376d4927ac88af0de33efb58d3aef94c",
+    "python": "7c2550697de23aca6f4488e82b69a9b14f9b75cf2fc16fe00438fce63f0c75e5",
+    "torch_CPU": "5e8481bb409221508135fe6e1dbd7f31b3caa7dd35ed77bf37d19e2133f973b6"
+  },
+  "default_rng_before": {
+    "numpy": "cd8588d2009141c0621a7cd1c6a21ff2376d4927ac88af0de33efb58d3aef94c",
+    "python": "7c2550697de23aca6f4488e82b69a9b14f9b75cf2fc16fe00438fce63f0c75e5",
+    "torch_CPU": "5e8481bb409221508135fe6e1dbd7f31b3caa7dd35ed77bf37d19e2133f973b6"
+  },
+  "error": "actual producer Python/NumPy/Torch versions differ",
+  "error_type": "RuntimeError",
+  "expected_manifest_sha256": "92755b788fc894d4ca16157e573bd1b5c9d8a4468b71cf184fa16303bced7bce",
+  "historical_uniforms": null,
+  "manifest_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/native-pilot-v2-seed20261111-case0-01/manifest.json",
+  "no_model_sampler_ICDF_codec_world_reference_posterior_or_G3_execution": true,
+  "schema": "posteriorforge.historical_component_uniform_reconstruction.v1",
+  "scope": "private CPU RNG reconstruction authenticated against historical state hashes, not captured ICDF inputs or historical member/bin/probability reconstruction",
+  "script_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/diagnostics/reconstruct_historical_component_uniform_v1.py",
+  "script_sha256": "2c66a9d9eff124847e308a896e269828fb735452374b606c8ad775cdc7f0d8af",
+  "stage_state_checks": [],
+  "status": "failed_historical_uniforms_unknown",
+  "versions": {
+    "numpy": "1.26.4",
+    "python": "3.11.13",
+    "torch": "2.6.0+cu124"
+  },
+  "wall_seconds": 4.2291650315746665
+}

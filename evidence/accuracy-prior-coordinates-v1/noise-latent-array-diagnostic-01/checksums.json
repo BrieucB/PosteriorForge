@@ -1,0 +1,12 @@
+{
+  "files": {
+    "README.txt": "caf14341e998ec627640775053f06260627cbe3ee3f8e74937dc3f2fee4cd0bc",
+    "border-metadata-inventory.json": "dce10ec1ef21cf889c1142c51668a16ad0b56f6c7d8b3696817e7ebefc8dfaaf",
+    "close_metadata.py": "7e3edcf567ea269dda862c512d2c2659b1bae0b7f105d3bd79284188045668d5",
+    "diagnose.py": "7ef6e2e5d56876ea3ece0fe8e4c28e35a5d41afc7ba11ad3b92a2bc5ab35c6f3",
+    "diagnostic.json": "c08076c86e7d329f65ddb417224c2430ceb4b3dfdb0e24e00ae8f6000e691f93",
+    "diagnostic.log": "fd45617207ed360b77f069ae6194fb72eade79c01be5b46bcb9694f0e9adcc1e",
+    "summary.json": "1aa7c5921f76c519721bd09ae8d7f261ba4c7b3626ad630eaca91ce57510fc00"
+  },
+  "schema": "posteriorforge.public_evidence_checksums.v1"
+}
