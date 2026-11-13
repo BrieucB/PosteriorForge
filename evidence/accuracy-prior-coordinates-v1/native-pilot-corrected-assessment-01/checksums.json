@@ -1,0 +1,62 @@
+{
+  "external_receipts": {
+    "../corrected-production-consumer-metadata-cpu-tests-01/receipt.json": "767365010bc714809d64dc179aaab12dabc40f15353e11422276dc26d914a60d",
+    "../marshal-fingerprint-audit-01/diagnostic.json": "bd386f0694afbad5a6e85edb43c2e7236f79f8d0c653508b5e6f21f355fd31d8",
+    "../native-pilot-corrected-01/allocation-receipt.json": "eb8f8f037c008c602b9852e82b9ee4760f3ec71a0cd9057aee6f0b2d22e11a7f"
+  },
+  "files": {
+    "01-ONE-actual-production-G3.log": {
+      "bytes": 335,
+      "sha256": "942bb7495463ce47af4d0f8f353ad04de147d6cb5a9273b3bfd5d3d8b250393a"
+    },
+    "02-original-assessment-and-plots.log": {
+      "bytes": 1656,
+      "sha256": "ac762e6bf27c54a8ee026ddd3f174b57ed12f6af8560bbfbe4fcf8749546b5a3"
+    },
+    "RAW-METADATA-SHA256.txt": {
+      "bytes": 187,
+      "sha256": "3f216e487378c57aaf1736d56cff3c6e59c2291123269fffbc15479e6c28ed47"
+    },
+    "README.md": {
+      "bytes": 5130,
+      "sha256": "0a98d0567486d11ea3a385816a9af65868c413f6b1a7ab17194f02c1cf5a84f8"
+    },
+    "execution-receipt.json": {
+      "bytes": 2420,
+      "sha256": "db5b78a8448e8d7114aeb3263692278882cdc07956b26f5bd0ea26126569d5f2"
+    },
+    "production-G3-manifest.json.gz": {
+      "bytes": 14158,
+      "sha256": "fe901cb2e0fe6f358ad277c57a5f639ca93aa6341a087126f96766129322b787"
+    },
+    "production-assessment.json.gz": {
+      "bytes": 20703,
+      "sha256": "b8a2a798490360cc5192804278a98a08a415300e90e0d24aa250f329ab5fa63e"
+    },
+    "production-density-focus.png": {
+      "bytes": 195634,
+      "sha256": "aa12549647723f08f5161343eee7fa9aa1dba58a30b7d72544c1afc3b096e3df"
+    },
+    "production-density.png": {
+      "bytes": 504492,
+      "sha256": "20c88aa39a69cc9ceddfa73d4b721ac59a746579ce076963da45d973190ec79b"
+    },
+    "production-joint-cdf.png": {
+      "bytes": 780881,
+      "sha256": "b79b56f7adf062b1bdc1f787e0b91ce9bfb92e657938564bf826f6dfb68afc0e"
+    },
+    "production-marginal-cdf.png": {
+      "bytes": 606864,
+      "sha256": "7bd62be6a395c84ea52ff9a3d66cc32b33f4cfd2bf243cbe4d2e91f8ffd288d1"
+    },
+    "summary.json": {
+      "bytes": 112438,
+      "sha256": "8f98f3257036b16cf3a4beb27ffb22ae35944ce395a29bba99946ca12c699d87"
+    }
+  },
+  "raw_metadata_sha256": {
+    "production-G3-manifest.json": "12540cbb85b0c9c0bd7c6bcce3097a319f73478d632ad808a6ba0a1881ce632d",
+    "production-assessment.json": "1254623a14fc21c84e5fe796a8afe1b2bd353ca93b10503fa915b712656d6805"
+  },
+  "schema": "posteriorforge.corrected_production_results_checksums.v1"
+}

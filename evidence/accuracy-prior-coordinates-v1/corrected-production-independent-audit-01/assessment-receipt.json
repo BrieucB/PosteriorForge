@@ -1,0 +1,103 @@
+{
+  "G3_independent_receipt_sha256": "8579dbd9c04fd6e09b26cda2d058c831a90a0125ba2302f766190d1dc7811ea1",
+  "G3_manifest_sha256": "12540cbb85b0c9c0bd7c6bcce3097a319f73478d632ad808a6ba0a1881ce632d",
+  "Torch_imported": false,
+  "actual_executed_source_git_verification": {
+    "passed": true,
+    "recorded_revision": "723c39afce5620ef511b3796f8f0ddf0e4e2f6c6",
+    "verified_source_count": 6
+  },
+  "actual_source_pins": {
+    "F64_postdecode_helper": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+    "codec": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+    "corrected_producer": "a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf",
+    "draw_function_reuse_scope": "unchanged refresh_with_actual_draws numerical caller only; no forensic cohort/envelope inherited",
+    "draw_observer_function_source": "c73c4e489946e018399885c981afafc5c47e3eab6e27f6561b377f836f703f8c",
+    "git_revision": "723c39afce5620ef511b3796f8f0ddf0e4e2f6c6",
+    "kernel": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+    "old_validation_ancestry": "6c49e59ccee9bebeecd53990556a6e00a9f41b2fc53a2e8ecf9827014efc2d56",
+    "production_G3_wrapper": "4aa226e24ca381df8956d8c8238a9e17092b01f9771b020cae2166c72990d284",
+    "production_evaluator": "40d5f8b43081139745e6f7d06d4834aa88089e4b55903860456493314cca6e81",
+    "wrapper": "4aa226e24ca381df8956d8c8238a9e17092b01f9771b020cae2166c72990d284"
+  },
+  "all18_local_noise_stored_marginal_moment_intervals_unchanged": true,
+  "assessment_sha256": "1254623a14fc21c84e5fe796a8afe1b2bd353ca93b10503fa915b712656d6805",
+  "attribution": "Built with PriorLabs-TabPFN",
+  "figures": {
+    "density": {
+      "file": "production-density.png",
+      "sha256": "20c88aa39a69cc9ceddfa73d4b721ac59a746579ce076963da45d973190ec79b"
+    },
+    "focus_density": {
+      "file": "production-density-focus.png",
+      "sha256": "aa12549647723f08f5161343eee7fa9aa1dba58a30b7d72544c1afc3b096e3df"
+    },
+    "joint_cdf": {
+      "file": "production-joint-cdf.png",
+      "sha256": "b79b56f7adf062b1bdc1f787e0b91ce9bfb92e657938564bf826f6dfb68afc0e"
+    },
+    "marginal_cdf": {
+      "file": "production-marginal-cdf.png",
+      "sha256": "7bd62be6a395c84ea52ff9a3d66cc32b33f4cfd2bf243cbe4d2e91f8ffd288d1"
+    }
+  },
+  "full50000_F64_physical_payload_and18byte_identity_basis": "Separate independent parent and G3 receipts authenticated actual new raw payloads; no forensic inference.",
+  "new_metrics_model_G3_normal_uniform_GPU_or_reference_calls": 0,
+  "original_reference_case2_gate_binding_and_file_hashes_verified": true,
+  "original_stored_gate_predicates_replayed_not_reestimated": {
+    "after": {
+      "SD_ratio_interval_max": 1.046114000566443,
+      "SD_ratio_interval_min": 0.928652698872537,
+      "count": 50000,
+      "failed_indices": {
+        "SD": [],
+        "bias": [],
+        "joint": [],
+        "marginal": []
+      },
+      "joint_count": 32,
+      "marginal_count": 21,
+      "max_joint_CDF_upper": 0.06539508137810879,
+      "max_marginal_CDF_upper": 0.07724466096293947,
+      "max_mean_bias_upper_referenceSD": 0.1771522179983187,
+      "passed": true
+    },
+    "before": {
+      "SD_ratio_interval_max": 1.046114000566443,
+      "SD_ratio_interval_min": 0.928652698872537,
+      "count": 50000,
+      "failed_indices": {
+        "SD": [],
+        "bias": [
+          0
+        ],
+        "joint": [],
+        "marginal": []
+      },
+      "joint_count": 32,
+      "marginal_count": 21,
+      "max_joint_CDF_upper": 0.07273086734393086,
+      "max_marginal_CDF_upper": 0.09111844269660907,
+      "max_mean_bias_upper_referenceSD": 0.22210086096455223,
+      "passed": false
+    }
+  },
+  "parent_independent_receipt_sha256": "b42ec00386abb244bf702a00c23e84140fdef76529ec53488df863d77373d42c",
+  "parent_manifest_sha256": "62aa8bf71ddbf922ab9543141c4ada5cb438e5af162ede76cffe60d1dd3819b5",
+  "reference_precision": 0.0007370232201646676,
+  "schema": "posteriorforge.independent_corrected_production_assessment_QA.v1",
+  "scope": "One predeclared case2 production parent and one physical G3. No general calibration, multi-case success or joint-equivalence inference.",
+  "status": "passed",
+  "visual_QA": {
+    "figure_hashes": {
+      "production-density-focus.png": "aa12549647723f08f5161343eee7fa9aa1dba58a30b7d72544c1afc3b096e3df",
+      "production-density.png": "20c88aa39a69cc9ceddfa73d4b721ac59a746579ce076963da45d973190ec79b",
+      "production-joint-cdf.png": "b79b56f7adf062b1bdc1f787e0b91ce9bfb92e657938564bf826f6dfb68afc0e",
+      "production-marginal-cdf.png": "7bd62be6a395c84ea52ff9a3d66cc32b33f4cfd2bf243cbe4d2e91f8ffd288d1"
+    },
+    "four_actual_saved_figures_inspected": true,
+    "local_delivered_figure_SHA256s_match_authenticated_saved_figures": true,
+    "passed": true,
+    "scope": "Inspected the four matching delivered PNGs: focus/full density, all21 marginal CDFs, and all32 joint projections. Labels distinguish neural FP32 execution from the separate physical G3; no missing panels, overlap, or clipped labels observed."
+  }
+}

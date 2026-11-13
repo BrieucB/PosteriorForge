@@ -1,0 +1,37 @@
+{
+  "G3_manifest_sha256": "12540cbb85b0c9c0bd7c6bcce3097a319f73478d632ad808a6ba0a1881ce632d",
+  "G3_samples_sha256": "a031567ed497c78aa011fe054df845c8a615f39a67b4c9c6f83dd5b870138e41",
+  "ROLE": "ss15_global_block_gibbs_once_v1",
+  "actual_Z_archive_sha256": "b9bc494fc697e618016329ef059fffd1911bb3a55123d7cdd38cca327c5131bc",
+  "actual_Z_descriptor": {
+    "dtype": "<f8",
+    "sha256": "d00bd02e50fe6df95f340fb0a6eaaa8eb324e7ed6ee2a1f3af3ef3ed104c0368",
+    "shape": [
+      50000,
+      3
+    ]
+  },
+  "actual_recorded_default_NumPy_Python_RNG_equality_verified": true,
+  "actual_seed": 2551793397,
+  "all18_local_noise_physical_columns_byte_identical": true,
+  "attribution": "Built with PriorLabs-TabPFN",
+  "before_after_finite_in_original_prior_support": true,
+  "evaluator_source_sha256": "40d5f8b43081139745e6f7d06d4834aa88089e4b55903860456493314cca6e81",
+  "forensic_parent_accepted": false,
+  "kernel_source_sha256": "e346e25bc9825abf016c2bd75addaf2b025d3e3d94e1a0ea6f6e31dd02997a43",
+  "new_CPU_audit_default_NumPy_Python_RNG_after": "2896e55c7d21492d6c77dcd56117e91ea25bf2588cd27056919097be7b34a4a2",
+  "new_CPU_audit_default_NumPy_Python_RNG_before": "2896e55c7d21492d6c77dcd56117e91ea25bf2588cd27056919097be7b34a4a2",
+  "new_G3_normal_uniform_model_GPU_or_reference_calls_by_audit": 0,
+  "parent_independent_audit_receipt_sha256": "b42ec00386abb244bf702a00c23e84140fdef76529ec53488df863d77373d42c",
+  "parent_manifest_sha256": "62aa8bf71ddbf922ab9543141c4ada5cb438e5af162ede76cffe60d1dd3819b5",
+  "postG3_coordinate_decode_performed": false,
+  "private_initial_seed_state_and_state_hashes_verified": true,
+  "recorded_actual_G3_standard_normal_calls": 1,
+  "same_original_F64_50000_by21_shape": true,
+  "saved_actual_Z_exactly_reconstructs_original_kernel_output": true,
+  "schema": "posteriorforge.independent_corrected_production_G3_QA.v1",
+  "scope": "Reuses independently closed parent receipt; reads new actual production payload/actualZ/source and reproduces deterministic algebra only. Does not repeat a G3 draw or infer qualification from forensic matching.",
+  "source_and_recorded_G3_Git_blob_authentication_passed": true,
+  "status": "passed",
+  "torch_imported": false
+}

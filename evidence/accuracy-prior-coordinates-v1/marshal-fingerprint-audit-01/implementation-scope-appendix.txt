@@ -1,0 +1,41 @@
+Exact hash implementation and validation scope
+Built with PriorLabs-TabPFN.
+
+Frozen producer:
+src/posteriorforge/performance_prior_physical_fifo_v1.py
+SHA256 a30e0c15513eb0c1a6ed3c68f0781327edef4714a244a119a3a4d4c68f8780bf
+derivation_descriptor(), line415:
+    hashlib.sha256(marshal.dumps(_RUN_BODY.__code__)).hexdigest()
+The dictionary field is execution_policy.derivation.run_code_sha256.
+It serializes a live Python code object; it is not the file SHA256.
+
+Both recorded production62aa and existing CPU fixture5238 contain the str
+8c8ffeb96a1167ec2a05272b77df007e4e63f39228b6067b54d73b7ad4caeaf5.
+Fresh import returns the str
+45b0ba56d1f83e14d04a4f4fd2eb0af535ac870db59a453664507d76deff015e.
+The reversible same-code reference-retention witness is documented in exact
+diagnostic.json bytes. The original strict consumer failure log shows the
+field mismatch and pre-G3 stop; neither raw file is rewritten.
+
+The source identity evidence remains separate:
+- a30e lines216–245 check frozen71/helper source hashes, shared completion
+  callable/code identity, original sampler/RNG-reader identity, own source,
+  private run code/global identity, and pinned source inventory.
+- a30e lines345–405 construct a private original71 run AST, allow only shared
+  Float64 completion and safe failure observation, reverse those changes,
+  and require exact equality with the original AST.
+- a30e's pinned runtime inventory has146 first-party source entries.
+  Consumer4aa verifies those146 plus the own a30e source at the actual
+  production's recorded Git revision:147 exact Git blobs, not current-head
+  coincidence alone.
+- Live _RUN_BODY.__code__ identity and private global/function seals remain
+  required. The observed marshal mismatch does not authorize changing code,
+  globals, checkpoint, labels, math, numerical thresholds or source hashes.
+
+The consumer-only correction requires both telemetry values to remain
+well-formed64-character lowercase hexadecimal str values and preserves them
+separately. It compares every other metadata field, value AND TYPE exactly,
+then retains the recorded147-Git/current-file/AST/live-identity checks.
+No original producer manifest, code fingerprint, raw diagnostic or failed
+consumer log is overwritten. This addresses the serialization field's scope;
+it does not waive a scientific or numerical condition.

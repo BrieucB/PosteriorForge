@@ -1,5 +1,6 @@
 {
   "README.txt": "f5adf1f4aa479f2c5448be061b49812ea0eeaf88333cdfdbd871f1ef9756c5f0",
   "diagnostic.json": "bd386f0694afbad5a6e85edb43c2e7236f79f8d0c653508b5e6f21f355fd31d8",
-  "failed-consumer-before-G3.log": "409b306c521e0a3146eef161f7782149b2a2575533c7138840b6eb24ac8d9e60"
+  "failed-consumer-before-G3.log": "409b306c521e0a3146eef161f7782149b2a2575533c7138840b6eb24ac8d9e60",
+  "implementation-scope-appendix.txt": "abb892dbf33f29673403e07ff8ba6a0af6b900e40996c6b22457ccf4faf8e8ae"
 }

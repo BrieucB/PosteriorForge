@@ -1,0 +1,20 @@
+{
+  "actual_corrected_posterior_allocated_GPU_seconds": 769,
+  "allocation_receipt_sha256": "eb8f8f037c008c602b9852e82b9ee4760f3ec71a0cd9057aee6f0b2d22e11a7f",
+  "closed_manifest_sha256": "62aa8bf71ddbf922ab9543141c4ada5cb438e5af162ede76cffe60d1dd3819b5",
+  "corrected_job_id": "5411248",
+  "measured_screen_allocated_GPU_seconds": 426,
+  "original_plan_files_unchanged": true,
+  "proxy_is_not_a_guarantee": true,
+  "proxy_remaining_GPU_hours": 7.634722222222222,
+  "proxy_remaining_GPU_seconds": 27485,
+  "remaining_pair_count": 23,
+  "root_reported_project_actual_GPU_hours": 28.685,
+  "root_reported_project_actual_GPU_seconds": 103266,
+  "root_reported_reserved_GPU_seconds": 0,
+  "schema": "posteriorforge.fixed_panel_post_pilot_cost_addendum.v1",
+  "scope": "Metadata-only planning update, not panel authorization or a new reservation",
+  "separate_scientific_assessment_or_panel_decision_inferred": false,
+  "unchanged_reservation_plan_GPU_hours": 15.333333333333334,
+  "unchanged_reservation_plan_GPU_seconds": 55200
+}

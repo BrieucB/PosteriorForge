@@ -1,0 +1,71 @@
+{
+  "all_current_committed_runtime_source_guards_passed": true,
+  "all_eight_outside_pinned_neural_runtime_paths": true,
+  "created_UTC": "2026-11-12T23:50:57.577850+00:00",
+  "current_git_revision": "2061f990a4de0517e26190f228d3f3f8ae9816a3",
+  "dynamic_live_process_module_inventory_observed": false,
+  "job_id": "5411248",
+  "launch_preflight_sha256": "473a6187a735a09e833d701284c9403a063633bb2277f3392f28801802ef05c7",
+  "launch_untracked_files": [
+    {
+      "file": "scripts/diagnose_host_reuse.py",
+      "in_declared_runtime_inventory": false,
+      "launch_sha256": "d6202524b74f1281421b0d1bff42ee23328b121ee6b741ef880561f93046ef87",
+      "launch_status": "??",
+      "references_in_pinned_sources": []
+    },
+    {
+      "file": "scripts/evaluate_prior_corrected_production_v1.py",
+      "in_declared_runtime_inventory": false,
+      "launch_sha256": "7ad72fcb8ddbdc6683979031999a9c63037e6c519ab27f6738edfea9cac92334",
+      "launch_status": "??",
+      "references_in_pinned_sources": []
+    },
+    {
+      "file": "scripts/evaluate_ss15_campaign.py",
+      "in_declared_runtime_inventory": false,
+      "launch_sha256": "b6c8eac74dc2f9c85210cb80c61761d85f859cfb3139b34b6ad61244148b25bb",
+      "launch_status": "??",
+      "references_in_pinned_sources": []
+    },
+    {
+      "file": "scripts/refresh_prior_corrected_production_v1.py",
+      "in_declared_runtime_inventory": false,
+      "launch_sha256": "3eed10417db9764ee5390ee17883786b97f526510baea7f32266ec2639fe9336",
+      "launch_status": "??",
+      "references_in_pinned_sources": []
+    },
+    {
+      "file": "src/posteriorforge/execution_tail_observer.py",
+      "in_declared_runtime_inventory": false,
+      "launch_sha256": "a03955e7e34f2503730bfc9a74b918a05049af785ea9e7d63f712d720b1e7c58",
+      "launch_status": "??",
+      "references_in_pinned_sources": []
+    },
+    {
+      "file": "tests/test_execution_tail_observer.py",
+      "in_declared_runtime_inventory": false,
+      "launch_sha256": "474af491f2e33e4148672dcfdabf17bf0c95f255316c9ce278a96c3c043d3037",
+      "launch_status": "??",
+      "references_in_pinned_sources": []
+    },
+    {
+      "file": "tests/test_host_reuse_diagnostic.py",
+      "in_declared_runtime_inventory": false,
+      "launch_sha256": "b825e05a2f2eb37a122088a7ac6e8e03a9ea8260a3b37b3b71a56b55db908a3c",
+      "launch_status": "??",
+      "references_in_pinned_sources": []
+    },
+    {
+      "file": "tests/test_prior_corrected_production_downstream_v1.py",
+      "in_declared_runtime_inventory": false,
+      "launch_sha256": "85d31da391e6babd02f626567249d23c7b415d8aa5d288c178e1c206a60a5fb0",
+      "launch_status": "??",
+      "references_in_pinned_sources": []
+    }
+  ],
+  "schema": "posteriorforge.corrected_launch_untracked_source_path_audit.v1",
+  "scope": "Read-only source-path confirmation over exact pinned runtime sources; no live-process instrumentation, model/CUDA call, code edit, ledger mutation or request restart.",
+  "source_count": 146,
+  "source_inventory_sha256": "68812fb23efc4f9ccbe1a2bd2041c791a9649e32ea71af457139cb52e904dacb"
+}

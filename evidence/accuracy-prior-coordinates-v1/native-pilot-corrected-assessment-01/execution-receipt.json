@@ -1,0 +1,49 @@
+{
+  "CUDA_VISIBLE_DEVICES": "",
+  "attribution": "Built with PriorLabs-TabPFN",
+  "commands": [
+    {
+      "argv": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "scripts/refresh_prior_corrected_production_v1.py",
+        "--root",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge",
+        "--parent-manifest",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/native-pilot-corrected-01/manifest.json",
+        "--parent-manifest-sha256",
+        "62aa8bf71ddbf922ab9543141c4ada5cb438e5af162ede76cffe60d1dd3819b5",
+        "--output",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/global-block-native-pilot-corrected-01"
+      ],
+      "exit_code": 0,
+      "log_file": "01-ONE-actual-production-G3.log",
+      "log_sha256": "942bb7495463ce47af4d0f8f353ad04de147d6cb5a9273b3bfd5d3d8b250393a",
+      "name": "01-ONE-actual-production-G3"
+    },
+    {
+      "argv": [
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+        "scripts/evaluate_prior_corrected_production_v1.py",
+        "--root",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge",
+        "--parent-manifest",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/native-pilot-corrected-01/manifest.json",
+        "--parent-manifest-sha256",
+        "62aa8bf71ddbf922ab9543141c4ada5cb438e5af162ede76cffe60d1dd3819b5",
+        "--hybrid-manifest",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/global-block-native-pilot-corrected-01/manifest.json",
+        "--hybrid-manifest-sha256",
+        "12540cbb85b0c9c0bd7c6bcce3097a319f73478d632ad808a6ba0a1881ce632d",
+        "--output",
+        "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/native-pilot-corrected-assessment-01"
+      ],
+      "exit_code": 0,
+      "log_file": "02-original-assessment-and-plots.log",
+      "log_sha256": "ac762e6bf27c54a8ee026ddd3f174b57ed12f6af8560bbfbe4fcf8749546b5a3",
+      "name": "02-original-assessment-and-plots"
+    }
+  ],
+  "earlier_consumer_attempt": "cpu-01 failed before any actual G3; originallogpreserved409b306c",
+  "new_GPU_runs": 0,
+  "schema": "posteriorforge.corrected_production_postprocessing_CPU.v1"
+}
