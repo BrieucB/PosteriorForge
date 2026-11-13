@@ -1,0 +1,9 @@
+{
+  "files": {
+    "inspect_focal_custody.py": "75093a76791c25e34ad980f0e52df5273ccae791adefe4e7578229adcf59455e",
+    "inspection.log": "1f3aa1ccb9a867b487f17ae5d1a346a17051389a35eba1ebd7a0a89a98edae40",
+    "receipt.json": "9438c969cd0a58664c83f9340c5b4093d8dbd285d2b0818af9cd8be9183bc7bf",
+    "summary.json": "05425a572c51691c751474dba20a4194d56f510497ceed2738bfb0cbd6df93b1"
+  },
+  "schema": "posteriorforge.readonly_diagnostic_checksums.v1"
+}

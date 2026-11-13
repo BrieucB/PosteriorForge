@@ -1,0 +1,1930 @@
+{
+  "N1_shown": false,
+  "image": "abc-postprocessing.png",
+  "image_sha256": "363d677ee6bb7b1cb15024b0ec129f30fc31f404d7efc196fdf65a7baac275c1",
+  "matplotlib": "3.10.7",
+  "new_model_codec_sampling_world_reference_RNG_GPU_G3_calls": 0,
+  "plotted_rows": [
+    {
+      "arm": "original",
+      "member": 0,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.813195322305313e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.791235382204103e-07,
+            "RT64_pass": true,
+            "RT_error": 4.9333815255181435e-08,
+            "decode_accepted": true,
+            "input": 6.374622745704039,
+            "physical": 0.49999999980139376,
+            "reencode": 6.374622795037855,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.374622745704039,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.5959825201676102e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.112445375523782e-07,
+            "RT64_pass": true,
+            "RT_error": 9.903038389325047e-10,
+            "decode_accepted": true,
+            "input": 5.80521241766818,
+            "physical": 0.4999999930390786,
+            "reencode": 5.805212418658484,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.80521241766818,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7991117812406075e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.747224316376898e-07,
+            "RT64_pass": true,
+            "RT_error": 1.0375211800806028e-08,
+            "decode_accepted": true,
+            "input": 6.337703587815378,
+            "physical": 0.49999999974746756,
+            "reencode": 6.33770359819059,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.337703587815378,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "original",
+      "member": 1,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.6603977184379542e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.313742870118607e-07,
+            "RT64_pass": true,
+            "RT_error": 5.95461457919555e-10,
+            "decode_accepted": true,
+            "input": 5.974072995021991,
+            "physical": 0.49999999749430474,
+            "reencode": 5.974072994426529,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.974072995021991,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.5255144066086797e-05,
+            "RT32_pass": true,
+            "RT64_bound": 7.892232520652124e-07,
+            "RT64_pass": true,
+            "RT_error": 5.840927741473934e-11,
+            "decode_accepted": true,
+            "input": 5.620484486060257,
+            "physical": 0.4999999793804382,
+            "reencode": 5.620484486001848,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.620484486060257,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.720225141976006e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.500703568675019e-07,
+            "RT64_pass": true,
+            "RT_error": 6.340847846786346e-10,
+            "decode_accepted": true,
+            "input": 6.130906996181581,
+            "physical": 0.49999999905382764,
+            "reencode": 6.130906995547496,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.130906996181581,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "original",
+      "member": 2,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.9018153939559256e-05,
+            "RT32_pass": true,
+            "RT64_bound": 9.068173106112268e-07,
+            "RT64_pass": true,
+            "RT_error": 1.6703588912037048e-07,
+            "decode_accepted": true,
+            "input": 6.606934946331822,
+            "physical": 0.4999999999575142,
+            "reencode": 6.606935113367711,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.606934946331822,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.5559044701355692e-05,
+            "RT32_pass": true,
+            "RT64_bound": 7.987201469173654e-07,
+            "RT64_pass": true,
+            "RT_error": 1.201543753381884e-09,
+            "decode_accepted": true,
+            "input": 5.7001502141921865,
+            "physical": 0.4999999870383045,
+            "reencode": 5.70015021539373,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.7001502141921865,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7950672059492294e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.734585018591342e-07,
+            "RT64_pass": true,
+            "RT_error": 5.797776481131223e-09,
+            "decode_accepted": true,
+            "input": 6.327100976363548,
+            "physical": 0.499999999729498,
+            "reencode": 6.327100982161324,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.327100976363548,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "original",
+      "member": 3,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.877479865783486e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.992124580573394e-07,
+            "RT64_pass": true,
+            "RT_error": 4.987933621691809e-08,
+            "decode_accepted": true,
+            "input": 6.543140819359461,
+            "physical": 0.4999999999347702,
+            "reencode": 6.543140869238798,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.543140819359461,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.5089645610520102e-05,
+            "RT32_pass": true,
+            "RT64_bound": 7.840514253287532e-07,
+            "RT64_pass": true,
+            "RT_error": 5.29948529504054e-10,
+            "decode_accepted": true,
+            "input": 5.577100058924182,
+            "physical": 0.49999997351815184,
+            "reencode": 5.577100058394233,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.577100058924182,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.762175077506644e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.631797117208262e-07,
+            "RT64_pass": true,
+            "RT_error": 6.85720191739847e-09,
+            "decode_accepted": true,
+            "input": 6.240876235179017,
+            "physical": 0.49999999952883145,
+            "reencode": 6.240876242036219,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.240876235179017,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "original",
+      "member": 4,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.889674219365642e-05,
+            "RT32_pass": true,
+            "RT64_bound": 9.030231935517631e-07,
+            "RT64_pass": true,
+            "RT_error": 6.947486319575091e-08,
+            "decode_accepted": true,
+            "input": 6.5751075856138685,
+            "physical": 0.4999999999473549,
+            "reencode": 6.575107655088732,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.5751075856138685,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.633959375345544e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.231123047954825e-07,
+            "RT64_pass": true,
+            "RT_error": 6.77347067323808e-10,
+            "decode_accepted": true,
+            "input": 5.904766464905823,
+            "physical": 0.49999999617601765,
+            "reencode": 5.904766464228476,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.904766464905823,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.8367606171677572e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.864876928649241e-07,
+            "RT64_pass": true,
+            "RT_error": 9.723518612503312e-08,
+            "decode_accepted": true,
+            "input": 6.436397752268245,
+            "physical": 0.49999999986752397,
+            "reencode": 6.436397655033059,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.436397752268245,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "original",
+      "member": 5,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7818701412884944e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.693344191526545e-07,
+            "RT64_pass": true,
+            "RT_error": 1.7703048804662558e-08,
+            "decode_accepted": true,
+            "input": 6.292505663179311,
+            "physical": 0.499999999661743,
+            "reencode": 6.292505645476262,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.292505663179311,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.5474435789311742e-05,
+            "RT32_pass": true,
+            "RT64_bound": 7.960761184159919e-07,
+            "RT64_pass": true,
+            "RT_error": 3.5985436852570274e-10,
+            "decode_accepted": true,
+            "input": 5.677970495553337,
+            "physical": 0.49999998524077094,
+            "reencode": 5.677970495193483,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.677970495553337,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.780610314076312e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.689407231488475e-07,
+            "RT64_pass": true,
+            "RT_error": 3.568932793740487e-08,
+            "decode_accepted": true,
+            "input": 6.289203101732207,
+            "physical": 0.49999999965446873,
+            "reencode": 6.289203066042879,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.289203101732207,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "original",
+      "member": 6,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.8060920007774826e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.769037502429633e-07,
+            "RT64_pass": true,
+            "RT_error": 2.270907017987156e-08,
+            "decode_accepted": true,
+            "input": 6.356001814518124,
+            "physical": 0.4999999997757753,
+            "reencode": 6.356001837227194,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.356001814518124,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.5516797576910723e-05,
+            "RT32_pass": true,
+            "RT64_bound": 7.973999242784601e-07,
+            "RT64_pass": true,
+            "RT_error": 1.7280310515843667e-10,
+            "decode_accepted": true,
+            "input": 5.6890753840016846,
+            "physical": 0.4999999861690972,
+            "reencode": 5.689075384174488,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.6890753840016846,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.8185173865454676e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.807866832954586e-07,
+            "RT64_pass": true,
+            "RT_error": 5.484384768550399e-08,
+            "decode_accepted": true,
+            "input": 6.3885742177857505,
+            "physical": 0.49999999981869125,
+            "reencode": 6.388574272629598,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.3885742177857505,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "original",
+      "member": 7,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.839644360227416e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.873888625710675e-07,
+            "RT64_pass": true,
+            "RT_error": 2.2313205505497535e-08,
+            "decode_accepted": true,
+            "input": 6.443957311674557,
+            "physical": 0.4999999998739607,
+            "reencode": 6.443957289361352,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.443957311674557,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.5612530267461032e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.003915708581573e-07,
+            "RT64_pass": true,
+            "RT_error": 3.348716859363776e-10,
+            "decode_accepted": true,
+            "input": 5.714171134433305,
+            "physical": 0.49999998806286705,
+            "reencode": 5.7141711347681765,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.714171134433305,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.779040446432911e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.684501395102847e-07,
+            "RT64_pass": true,
+            "RT_error": 1.3266255649568848e-08,
+            "decode_accepted": true,
+            "input": 6.2850877878970905,
+            "physical": 0.49999999964519026,
+            "reencode": 6.285087774630835,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.2850877878970905,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "candidate",
+      "member": 0,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.8113674499071823e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.785523280959945e-07,
+            "RT64_pass": true,
+            "RT_error": 5.1943931822506784e-08,
+            "decode_accepted": true,
+            "input": 6.369831087884684,
+            "physical": 0.4999999997950887,
+            "reencode": 6.369831035940752,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.369831087884684,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.5827339392677375e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.07104356021168e-07,
+            "RT64_pass": true,
+            "RT_error": 8.308598253847777e-10,
+            "decode_accepted": true,
+            "input": 5.770482057754018,
+            "physical": 0.4999999914407517,
+            "reencode": 5.770482058584878,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.770482057754018,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7991133147993414e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.747229108747942e-07,
+            "RT64_pass": true,
+            "RT_error": 1.934357563015965e-08,
+            "decode_accepted": true,
+            "input": 6.337707607947586,
+            "physical": 0.49999999974747417,
+            "reencode": 6.337707627291161,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.337707607947586,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "candidate",
+      "member": 1,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.686764329078125e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.39613852836914e-07,
+            "RT64_pass": true,
+            "RT_error": 3.957465466442045e-09,
+            "decode_accepted": true,
+            "input": 6.04319148281856,
+            "physical": 0.4999999983638944,
+            "reencode": 6.043191486776025,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.04319148281856,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.529181178556753e-05,
+            "RT32_pass": true,
+            "RT64_bound": 7.903691182989854e-07,
+            "RT64_pass": true,
+            "RT_error": 5.091393973088998e-10,
+            "decode_accepted": true,
+            "input": 5.630096708715815,
+            "physical": 0.4999999804972795,
+            "reencode": 5.630096709224954,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.630096708715815,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.720225399890146e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.500704374656706e-07,
+            "RT64_pass": true,
+            "RT_error": 6.1562239750401204e-09,
+            "decode_accepted": true,
+            "input": 6.130907672288024,
+            "physical": 0.49999999905383163,
+            "reencode": 6.1309076661318,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.130907672288024,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "candidate",
+      "member": 2,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.8396443318778745e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.873888537118358e-07,
+            "RT64_pass": true,
+            "RT_error": 5.200341668398778e-08,
+            "decode_accepted": true,
+            "input": 6.443957237357935,
+            "physical": 0.4999999998739607,
+            "reencode": 6.443957289361352,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.443957237357935,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.5837697808151323e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.074280565047288e-07,
+            "RT64_pass": true,
+            "RT_error": 6.799760754461204e-10,
+            "decode_accepted": true,
+            "input": 5.77319745422002,
+            "physical": 0.4999999915776084,
+            "reencode": 5.7731974548999965,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.77319745422002,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7950653483734958e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.734579213667174e-07,
+            "RT64_pass": true,
+            "RT_error": 9.145410651001384e-09,
+            "decode_accepted": true,
+            "input": 6.327096106840217,
+            "physical": 0.4999999997294895,
+            "reencode": 6.327096115985627,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.327096106840217,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "candidate",
+      "member": 3,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.9035503521469717e-05,
+            "RT32_pass": true,
+            "RT64_bound": 9.073594850459286e-07,
+            "RT64_pass": true,
+            "RT_error": 2.786163557644272e-07,
+            "decode_accepted": true,
+            "input": 6.611483035132157,
+            "physical": 0.4999999999587995,
+            "reencode": 6.611483313748513,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.611483035132157,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.533484454193589e-05,
+            "RT32_pass": true,
+            "RT64_bound": 7.917138919354966e-07,
+            "RT64_pass": true,
+            "RT_error": 4.776889994673184e-10,
+            "decode_accepted": true,
+            "input": 5.641377487601242,
+            "physical": 0.49999998173317417,
+            "reencode": 5.641377488078931,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.641377487601242,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7621746250364155e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.631795703238798e-07,
+            "RT64_pass": true,
+            "RT_error": 5.959627458196337e-09,
+            "decode_accepted": true,
+            "input": 6.240875049055461,
+            "physical": 0.4999999995288279,
+            "reencode": 6.240875055015088,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.240875049055461,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "candidate",
+      "member": 4,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.8113674463232893e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.785523269760279e-07,
+            "RT64_pass": true,
+            "RT_error": 4.2548971457279094e-08,
+            "decode_accepted": true,
+            "input": 6.369831078489724,
+            "physical": 0.4999999997950887,
+            "reencode": 6.369831035940752,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.369831078489724,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.6549763721412967e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.296801162941552e-07,
+            "RT64_pass": true,
+            "RT_error": 6.79903244815705e-10,
+            "decode_accepted": true,
+            "input": 5.959861260986081,
+            "physical": 0.4999999972663689,
+            "reencode": 5.959861261665984,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.959861260986081,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.8367596798292664e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.864873999466457e-07,
+            "RT64_pass": true,
+            "RT_error": 3.1235456887657165e-08,
+            "decode_accepted": true,
+            "input": 6.436395295091632,
+            "physical": 0.49999999986752186,
+            "reencode": 6.436395263856175,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.436395295091632,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "candidate",
+      "member": 5,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.766412558281866e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.645039244630832e-07,
+            "RT64_pass": true,
+            "RT_error": 1.2554298933764585e-08,
+            "decode_accepted": true,
+            "input": 6.251984536782415,
+            "physical": 0.4999999995611615,
+            "reencode": 6.251984549336714,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.251984536782415,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.5655814876253454e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.017442148829204e-07,
+            "RT64_pass": true,
+            "RT_error": 8.930829409337093e-10,
+            "decode_accepted": true,
+            "input": 5.725517934920585,
+            "physical": 0.49999998883399077,
+            "reencode": 5.725517935813668,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.725517934920585,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7806106902795577e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.689408407123618e-07,
+            "RT64_pass": true,
+            "RT_error": 2.205316818049141e-09,
+            "decode_accepted": true,
+            "input": 6.289204087926444,
+            "physical": 0.49999999965447095,
+            "reencode": 6.289204085721127,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.289204087926444,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "candidate",
+      "member": 6,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.8060919998305594e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.769037499470498e-07,
+            "RT64_pass": true,
+            "RT_error": 2.5191372543531543e-08,
+            "decode_accepted": true,
+            "input": 6.356001812035822,
+            "physical": 0.4999999997757753,
+            "reencode": 6.356001837227194,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.356001812035822,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.5783629784938914e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.057384307793411e-07,
+            "RT64_pass": true,
+            "RT_error": 4.5509196411330777e-10,
+            "decode_accepted": true,
+            "input": 5.759023846343027,
+            "physical": 0.49999999083905816,
+            "reencode": 5.759023845887935,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.759023846343027,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.8185179662558192e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.807868644549435e-07,
+            "RT64_pass": true,
+            "RT_error": 1.4547429039168946e-08,
+            "decode_accepted": true,
+            "input": 6.388575737461655,
+            "physical": 0.499999999818693,
+            "reencode": 6.388575722914226,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.388575737461655,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "candidate",
+      "member": 7,
+      "points": [
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.922694516945648e-05,
+            "RT32_pass": true,
+            "RT64_bound": 9.13342036545515e-07,
+            "RT64_pass": true,
+            "RT_error": 6.714144262787158e-08,
+            "decode_accepted": true,
+            "input": 6.661668314501999,
+            "physical": 0.4999999999706838,
+            "reencode": 6.661668381643442,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.661668314501999,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.5324416330534002e-05,
+            "RT32_pass": true,
+            "RT64_bound": 7.913880103291876e-07,
+            "RT64_pass": true,
+            "RT_error": 2.807274412930383e-10,
+            "decode_accepted": true,
+            "input": 5.6386437945515056,
+            "physical": 0.499999981440852,
+            "reencode": 5.638643794270778,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.6386437945515056,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999980926513672,
+          "U_bits": "e0ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7790411247111933e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.684503514722479e-07,
+            "RT64_pass": true,
+            "RT_error": 5.242959844053985e-09,
+            "decode_accepted": true,
+            "input": 6.2850895659629105,
+            "physical": 0.49999999964519437,
+            "reencode": 6.28508957120587,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.2850895659629105,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "original",
+      "member": 0,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_pass": false,
+            "RT64_pass": false,
+            "decode_accepted": false,
+            "error": "decode: endpoint, out-of-support, or saturated noise; no clipping",
+            "input": 13.818125388087743,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 13.818125388087743,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.675344000914093e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.36045000285654e-07,
+            "RT64_pass": true,
+            "RT_error": 4.649754359320468e-09,
+            "decode_accepted": true,
+            "input": 6.01325377775624,
+            "physical": 0.4999999980310226,
+            "reencode": 6.013253782405994,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.01325377775624,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.3861326492131806e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.058166452879119e-06,
+            "RT64_pass": false,
+            "RT_error": 0.0015702415392739866,
+            "decode_accepted": true,
+            "input": 7.8765435719534,
+            "physical": 0.49999999999999634,
+            "reencode": 7.878113813492674,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 7.8765435719534,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    },
+    {
+      "arm": "original",
+      "member": 1,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.4507080268303214e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0783462583844755e-06,
+            "RT64_pass": false,
+            "RT_error": 0.010958335942795827,
+            "decode_accepted": true,
+            "input": 8.045824049854078,
+            "physical": 0.4999999999999991,
+            "reencode": 8.056782385796874,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 8.045824049854078,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.754809534558565e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.608779795495515e-07,
+            "RT64_pass": true,
+            "RT_error": 1.2682376038242182e-08,
+            "decode_accepted": true,
+            "input": 6.221567906273204,
+            "physical": 0.49999999946701845,
+            "reencode": 6.221567893590828,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.221567906273204,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.3924378123551116e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0601368163609724e-06,
+            "RT64_pass": false,
+            "RT_error": 0.001147097936893715,
+            "decode_accepted": true,
+            "input": 7.893072178820184,
+            "physical": 0.4999999999999968,
+            "reencode": 7.894219276757077,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 7.893072178820184,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    },
+    {
+      "arm": "original",
+      "member": 2,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_pass": false,
+            "RT64_pass": false,
+            "decode_accepted": false,
+            "error": "decode: endpoint, out-of-support, or saturated noise; no clipping",
+            "input": 18.90627857951281,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 18.90627857951281,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.758188770503853e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.619339907824541e-07,
+            "RT64_pass": true,
+            "RT_error": 2.1551712414691337e-08,
+            "decode_accepted": true,
+            "input": 6.230426370549621,
+            "physical": 0.4999999994963022,
+            "reencode": 6.230426392101333,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.230426370549621,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.480906698350326e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.087783343234477e-06,
+            "RT64_pass": false,
+            "RT_error": 0.006678557231349913,
+            "decode_accepted": true,
+            "input": 8.12498805532348,
+            "physical": 0.4999999999999995,
+            "reencode": 8.13166661255483,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 8.12498805532348,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    },
+    {
+      "arm": "original",
+      "member": 3,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_pass": false,
+            "RT64_pass": false,
+            "decode_accepted": false,
+            "error": "decode: endpoint, out-of-support, or saturated noise; no clipping",
+            "input": 10.78306955654057,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 10.78306955654057,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7133343347925652e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.479169796226766e-07,
+            "RT64_pass": true,
+            "RT_error": 2.4713981972013244e-09,
+            "decode_accepted": true,
+            "input": 6.112843158598622,
+            "physical": 0.4999999989402162,
+            "reencode": 6.112843156127224,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.112843158598622,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.433174313516276e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0728669729738363e-06,
+            "RT64_pass": false,
+            "RT_error": 0.002405960720290423,
+            "decode_accepted": true,
+            "input": 7.999860472424106,
+            "physical": 0.49999999999999856,
+            "reencode": 7.997454511703816,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 7.999860472424106,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    },
+    {
+      "arm": "original",
+      "member": 4,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.523572012958406e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.101116254049502e-06,
+            "RT64_pass": false,
+            "RT_error": 0.005096678914549457,
+            "decode_accepted": true,
+            "input": 8.236832617649684,
+            "physical": 0.4999999999999998,
+            "reencode": 8.241929296564233,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 8.236832617649684,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.798697247008364e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.745928896901137e-07,
+            "RT64_pass": true,
+            "RT_error": 2.1754488876979394e-08,
+            "decode_accepted": true,
+            "input": 6.336616911197606,
+            "physical": 0.49999999974568077,
+            "reencode": 6.336616889443117,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.336616911197606,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.5154711492303403e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0985847341344814e-06,
+            "RT64_pass": false,
+            "RT_error": 0.02633260712585006,
+            "decode_accepted": true,
+            "input": 8.215596689438383,
+            "physical": 0.4999999999999998,
+            "reencode": 8.241929296564233,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 8.215596689438383,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    },
+    {
+      "arm": "original",
+      "member": 5,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.35863261643004e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0495726926343876e-06,
+            "RT64_pass": false,
+            "RT_error": 0.0007603579579749109,
+            "decode_accepted": true,
+            "input": 7.804453886014365,
+            "physical": 0.49999999999999345,
+            "reencode": 7.80369352805639,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 7.804453886014365,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7389777688373045e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.559305527616576e-07,
+            "RT64_pass": true,
+            "RT_error": 1.2280939820641379e-08,
+            "decode_accepted": true,
+            "input": 6.180065882340863,
+            "physical": 0.49999999930617733,
+            "reencode": 6.180065870059924,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.180065882340863,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.496007188346953e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0925022463584229e-06,
+            "RT64_pass": false,
+            "RT_error": 0.02875526825294017,
+            "decode_accepted": true,
+            "input": 8.164573083820237,
+            "physical": 0.49999999999999967,
+            "reencode": 8.193328352073177,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 8.164573083820237,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    },
+    {
+      "arm": "original",
+      "member": 6,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.61674064458785e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.1302314514337032e-06,
+            "RT64_pass": false,
+            "RT_error": 0.07594012882843515,
+            "decode_accepted": true,
+            "input": 8.481068595348374,
+            "physical": 0.49999999999999994,
+            "reencode": 8.405128466519939,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 8.481068595348374,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7746098653328547e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.670655829165171e-07,
+            "RT64_pass": true,
+            "RT_error": 1.8540222690432984e-08,
+            "decode_accepted": true,
+            "input": 6.2734732853781585,
+            "physical": 0.4999999996176723,
+            "reencode": 6.273473303918381,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.2734732853781585,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.4163383716119864e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0676057411287458e-06,
+            "RT64_pass": false,
+            "RT_error": 0.002732412174137444,
+            "decode_accepted": true,
+            "input": 7.955726060878526,
+            "physical": 0.499999999999998,
+            "reencode": 7.952993648704388,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 7.955726060878526,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    },
+    {
+      "arm": "original",
+      "member": 7,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.60037410325735e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.1251169072679219e-06,
+            "RT64_pass": false,
+            "RT_error": 0.03303622272300899,
+            "decode_accepted": true,
+            "input": 8.438164689242948,
+            "physical": 0.49999999999999994,
+            "reencode": 8.405128466519939,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 8.438164689242948,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.818877265527895e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.808991454774672e-07,
+            "RT64_pass": true,
+            "RT_error": 3.3255718179248106e-08,
+            "decode_accepted": true,
+            "input": 6.389517618945445,
+            "physical": 0.49999999981980614,
+            "reencode": 6.389517585689727,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.389517618945445,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.500955594899249e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0940486234060154e-06,
+            "RT64_pass": false,
+            "RT_error": 0.01578331738048888,
+            "decode_accepted": true,
+            "input": 8.177545034692688,
+            "physical": 0.49999999999999967,
+            "reencode": 8.193328352073177,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 8.177545034692688,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    },
+    {
+      "arm": "candidate",
+      "member": 0,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_pass": false,
+            "RT64_pass": false,
+            "decode_accepted": false,
+            "error": "decode: endpoint, out-of-support, or saturated noise; no clipping",
+            "input": 9.030811338507368,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 9.030811338507368,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7174126850289595e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.491914640715498e-07,
+            "RT64_pass": true,
+            "RT_error": 1.1452350179297355e-10,
+            "decode_accepted": true,
+            "input": 6.1235343090423155,
+            "physical": 0.49999999900896963,
+            "reencode": 6.123534308927792,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.1235343090423155,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.3861311961937226e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0581659988105383e-06,
+            "RT64_pass": false,
+            "RT_error": 0.0015740505426018458,
+            "decode_accepted": true,
+            "input": 7.876539762950072,
+            "physical": 0.49999999999999634,
+            "reencode": 7.878113813492674,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 7.876539762950072,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    },
+    {
+      "arm": "candidate",
+      "member": 1,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.450708026406737e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0783462582521054e-06,
+            "RT64_pass": false,
+            "RT_error": 0.010958337053196487,
+            "decode_accepted": true,
+            "input": 8.045824048743677,
+            "physical": 0.4999999999999991,
+            "reencode": 8.056782385796874,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 8.045824048743677,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7457147786742118e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.580358683356912e-07,
+            "RT64_pass": true,
+            "RT_error": 1.7782110006692164e-08,
+            "decode_accepted": true,
+            "input": 6.197726549407726,
+            "physical": 0.49999999937970496,
+            "reencode": 6.197726567189836,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.197726549407726,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.392436392200616e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0601363725626925e-06,
+            "RT64_pass": false,
+            "RT_error": 0.001150820786693707,
+            "decode_accepted": true,
+            "input": 7.893068455970384,
+            "physical": 0.4999999999999968,
+            "reencode": 7.894219276757077,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 7.893068455970384,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    },
+    {
+      "arm": "candidate",
+      "member": 2,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_pass": false,
+            "RT64_pass": false,
+            "decode_accepted": false,
+            "error": "decode: endpoint, out-of-support, or saturated noise; no clipping",
+            "input": 49.26606653026404,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 49.26606653026404,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7621206342292027e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.631626981966258e-07,
+            "RT64_pass": true,
+            "RT_error": 2.854127600926404e-09,
+            "decode_accepted": true,
+            "input": 6.240733515393801,
+            "physical": 0.4999999995284013,
+            "reencode": 6.2407335125396735,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.240733515393801,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.4809067873423466e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0877833710444833e-06,
+            "RT64_pass": false,
+            "RT_error": 0.0066783239441079445,
+            "decode_accepted": true,
+            "input": 8.124988288610721,
+            "physical": 0.4999999999999995,
+            "reencode": 8.13166661255483,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 8.124988288610721,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    },
+    {
+      "arm": "candidate",
+      "member": 3,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_pass": false,
+            "RT64_pass": false,
+            "decode_accepted": false,
+            "error": "decode: endpoint, out-of-support, or saturated noise; no clipping",
+            "input": 14.131567401289985,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 14.131567401289985,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.6635039463713518e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.323449832410474e-07,
+            "RT64_pass": true,
+            "RT_error": 1.3723653324859697e-09,
+            "decode_accepted": true,
+            "input": 5.9822157851757165,
+            "physical": 0.49999999761644587,
+            "reencode": 5.982215783803351,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 5.9822157851757165,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.433173295093764e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0728666547168013e-06,
+            "RT64_pass": false,
+            "RT_error": 0.0024032909867814922,
+            "decode_accepted": true,
+            "input": 7.999857802690597,
+            "physical": 0.49999999999999856,
+            "reencode": 7.997454511703816,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 7.999857802690597,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    },
+    {
+      "arm": "candidate",
+      "member": 4,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_pass": false,
+            "RT64_pass": false,
+            "decode_accepted": false,
+            "error": "decode: endpoint, out-of-support, or saturated noise; no clipping",
+            "input": 8.741864201593485,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 8.741864201593485,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7792943046405524e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.685294702001726e-07,
+            "RT64_pass": true,
+            "RT_error": 7.702363191697259e-10,
+            "decode_accepted": true,
+            "input": 6.28575326195693,
+            "physical": 0.499999999646707,
+            "reencode": 6.285753261186693,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.28575326195693,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.51547041177792e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0985845036806e-06,
+            "RT64_pass": false,
+            "RT_error": 0.026334540313122545,
+            "decode_accepted": true,
+            "input": 8.215594756251111,
+            "physical": 0.4999999999999998,
+            "reencode": 8.241929296564233,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 8.215594756251111,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    },
+    {
+      "arm": "candidate",
+      "member": 5,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.3608861438896026e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0502769199655008e-06,
+            "RT64_pass": false,
+            "RT_error": 0.0007598551577832069,
+            "decode_accepted": true,
+            "input": 7.810361373037959,
+            "physical": 0.4999999999999938,
+            "reencode": 7.809601517880176,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 7.810361373037959,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.772638067276106e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.664493960237831e-07,
+            "RT64_pass": true,
+            "RT_error": 2.7762938614728228e-09,
+            "decode_accepted": true,
+            "input": 6.268304335080275,
+            "physical": 0.4999999996047656,
+            "reencode": 6.268304332303981,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.268304335080275,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.496008484225683e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0925026513205258e-06,
+            "RT64_pass": false,
+            "RT_error": 0.028751871184603317,
+            "decode_accepted": true,
+            "input": 8.164576480888574,
+            "physical": 0.49999999999999967,
+            "reencode": 8.193328352073177,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 8.164576480888574,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    },
+    {
+      "arm": "candidate",
+      "member": 6,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_pass": false,
+            "RT64_pass": false,
+            "decode_accepted": false,
+            "error": "decode: endpoint, out-of-support, or saturated noise; no clipping",
+            "input": 8.96261977597118,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 8.96261977597118,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7611182202021317e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.628494438131662e-07,
+            "RT64_pass": true,
+            "RT_error": 3.548525029373195e-09,
+            "decode_accepted": true,
+            "input": 6.238105747166676,
+            "physical": 0.49999999952041263,
+            "reencode": 6.238105750715201,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.238105747166676,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.4163406642069394e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0676064575646686e-06,
+            "RT64_pass": false,
+            "RT_error": 0.0027384220742510124,
+            "decode_accepted": true,
+            "input": 7.955732070778639,
+            "physical": 0.499999999999998,
+            "reencode": 7.952993648704388,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 7.955732070778639,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    },
+    {
+      "arm": "candidate",
+      "member": 7,
+      "points": [
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_pass": false,
+            "RT64_pass": false,
+            "decode_accepted": false,
+            "error": "decode: endpoint, out-of-support, or saturated noise; no clipping",
+            "input": 9.211026178257752,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 9.211026178257752,
+          "variant": "A_captured_final_CPU_F32_weights"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 2.7751393554102294e-05,
+            "RT32_pass": true,
+            "RT64_bound": 8.672310485656967e-07,
+            "RT64_pass": true,
+            "RT_error": 1.3919637886772307e-08,
+            "decode_accepted": true,
+            "input": 6.274861311846592,
+            "physical": 0.49999999962106734,
+            "reencode": 6.274861297926954,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 6.274861311846592,
+          "variant": "B_CPU_F32_pre_softmax_replay_F64log_CPUsoftmax64"
+        },
+        {
+          "U": 0.9999994039535522,
+          "U_bits": "f6ff7f3f",
+          "noise_status": {
+            "RT32_bound": 3.500955670466014e-05,
+            "RT32_pass": false,
+            "RT64_bound": 1.0940486470206293e-06,
+            "RT64_pass": false,
+            "RT_error": 0.015783119286750136,
+            "decode_accepted": true,
+            "input": 8.177545232786427,
+            "physical": 0.49999999999999967,
+            "reencode": 8.193328352073177,
+            "scope": "counterfactual scalar noise only; not a physical21-vector/cohort"
+          },
+          "value": 8.177545232786427,
+          "variant": "C_softmax64_adjusted_F32logits_F64log_CPUsoftmax64"
+        }
+      ],
+      "stage": 19
+    }
+  ],
+  "primary_report": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/tail-postprocessing-offline-01/report.json",
+  "primary_report_sha256": "cbc8e44e62780d48e594845bd63a9c72faa76eaf7a1459d9e4dbb2210e989a5a",
+  "schema": "posteriorforge.prior_tail_ABC_figure.v1",
+  "scope": "render saved N1024 own-stage U values/statuses only; no numerical diagnosis or new thresholds",
+  "source_sha256": "d18b0e07f6db39d9f7ef09ae8931639b1d5e302d689923a9c3553e4037127c2a"
+}

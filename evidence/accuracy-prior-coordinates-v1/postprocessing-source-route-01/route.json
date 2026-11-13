@@ -1,0 +1,2143 @@
+{
+  "CDF_translation_details": {
+    "CDF": "before+p[bucket]*share; ys<=frm_first ->0; ys>=frm_last ->1; clip0..1",
+    "all_observed_translation_inputs_and_outputs_F32": true,
+    "before": "cumsum(p)-p, not a prepended-cumsum lookup",
+    "explicit_mass_normalization": false,
+    "mapper": "searchsorted(frm,ys)-1 with exact endpoint-index fixes, then index clamp0..B-1",
+    "share": "(ys-frm[bucket])/(frm[bucket+1]-frm[bucket]), the active parentheses-only correction; clamp0..1",
+    "translate": "destination CDF first=0,last=1 unconditionally, then diff and clamp_min0"
+  },
+  "active_order": [
+    "unobserved forward output -> float()/0.9 -> optional -inf mask -> captured raw_model_logits",
+    "GPU softmax of adjusted logits -> cumsum(p)-p -> bucket/interpolation CDF -> boundary/global clipping",
+    "force destination first/last CDF=0/1 -> adjacent diff -> clamp_min(0) -> captured raw_translated_probabilities and FP64 mass",
+    "selected one-member stack.mean(0) -> GPU log -> CPU copy -> captured logits",
+    "CPU FP32 softmax -> captured probabilities -> CPU FP32 cumsum -> captured inverse cdf and same-U outputs"
+  ],
+  "actual_arrays_not_captured": [
+    "untempered NN forward logits before float()/temperature",
+    "pretranslation GPU softmax weights",
+    "translation prob_so_far and interpolated prob_left at each destination boundary before differencing",
+    "explicit runtime average_before_softmax attribute (source bound False instead)",
+    "pre-mask logits or an explicit separate cancellation-mask array"
+  ],
+  "archive_semantics": {
+    "borders": "API criterion grid to_borders*y_train_std_+y_train_mean_, in learned prior-latent target units, NOT physical sigma units.",
+    "cdf": "Actual CPU FP32 cumsum(probabilities) in the inverse; NOT the translator CDF evaluated on target borders.",
+    "component_raw_mass": "Actual GPU FP64 sum of raw translated FP32 weights, then copied to CPU.",
+    "from_borders": "Actual source borders passed to translator after inverse target transform/SDK border handling, in standardized regressor-target coordinates.",
+    "logits": "Actual selected-single-head SDK stack.mean(0).log() result copied from GPU to CPU; average_before_softmax sourceFalse.",
+    "probabilities": "Actual CPU FP32 softmax(logits) inside whole-batch e71 return observer; NOT actual GPU pretranslation softmax.",
+    "raw_model_logits": "Actual GPU translator-input logits copied to CPU: already output.float()/0.9 and after optional cancellation mask. Not untempered raw NN output.",
+    "raw_translated_probabilities": "Actual GPU translator return after CDF endpoint forcing, adjacent differences and negative clipping; not explicitly normalized.",
+    "to_borders": "Actual destination checkpoint canonical grid in standardized regressor-target coordinates."
+  },
+  "average_before_softmax": {
+    "basis": "inference.frozen_regressor_settings False; original capture passes it; cached Resident copies and changes fit_mode/inference_precision only; SDK constructor stores argument; selected-head loop yields one output",
+    "direct_runtime_attribute_measurement_claimed": false,
+    "explicit_runtime_metadata_fields": [],
+    "source_bound_value": false
+  },
+  "capture_manifest_sha256": "cf11be3c542eb11c7ed9423845eb1f80fb046df59a2b85254cb9f20d25663461",
+  "diagnostic_B_C_constraints": [
+    "Do not divide captured raw_model_logits by0.9 again.",
+    "B needs an explicitly labelled CPU-F32 softmax replay, because actual GPU pretranslation softmax was not saved. Identical FP32 input does not prove CPU/GPU softmax bit identity.",
+    "C softmax64 must use the SAME captured already-adjusted FP32 translator-input logits, not be called unscaled raw NN replay.",
+    "Higher precision translation/difference followed by exact normalization is an explicit diagnostic arithmetic choice, not captured FP32 SDK API output.",
+    "The sourceFalse one-head route has no extra GPU softmax between raw translation and GPU log. SourceTrue would have one, but is not established active here.",
+    "Include or explicitly separate posttranslation log/CPU-softmax rounding; do not attribute all differences solely to CDF translation."
+  ],
+  "family": "active translator and inverse use finite linear-uniform bars. FullSupportBarDistribution density half-normal formulas do not supply the sampled inverse here.",
+  "observed_array_dtypes": {
+    "bin": [
+      "<i8"
+    ],
+    "borders": [
+      "<f4"
+    ],
+    "cdf": [
+      "<f4"
+    ],
+    "cdf_before": [
+      "<f4"
+    ],
+    "component_raw_mass": [
+      "<f8"
+    ],
+    "fraction_diagnostic_F32": [
+      "<f4"
+    ],
+    "from_borders": [
+      "<f4"
+    ],
+    "logits": [
+      "<f4"
+    ],
+    "output": [
+      "<f4"
+    ],
+    "probabilities": [
+      "<f4"
+    ],
+    "raw_model_logits": [
+      "<f4"
+    ],
+    "raw_translated_probabilities": [
+      "<f4"
+    ],
+    "rest": [
+      "<f4"
+    ],
+    "selected_probability": [
+      "<f4"
+    ],
+    "to_borders": [
+      "<f4"
+    ],
+    "uniforms": [
+      "<f4"
+    ]
+  },
+  "saved_member_calls": 48,
+  "schema": "posteriorforge.prior_tail_postprocessing_source_route.v1",
+  "scope": "read-only exact frozen source and saved metadata; no tensor evaluation, model constructor, target transform/preprocessing replay or RNG calls",
+  "source_excerpts": [
+    {
+      "file_sha256": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "first_line": 367,
+      "last_line": 378,
+      "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/regressor.py",
+      "source": [
+        {
+          "line": 367,
+          "text": ""
+        },
+        {
+          "line": 368,
+          "text": "                - If `None`, the default ModelInterfaceConfig is used."
+        },
+        {
+          "line": 369,
+          "text": "                - If `dict`, the key-value pairs are used to update the default"
+        },
+        {
+          "line": 370,
+          "text": "                  `ModelInterfaceConfig`. Raises an error if an unknown key is passed."
+        },
+        {
+          "line": 371,
+          "text": "                - If `ModelInterfaceConfig`, the object is used as the configuration."
+        },
+        {
+          "line": 372,
+          "text": "        \"\"\""
+        },
+        {
+          "line": 373,
+          "text": "        super().__init__()"
+        },
+        {
+          "line": 374,
+          "text": "        self.n_estimators = n_estimators"
+        },
+        {
+          "line": 375,
+          "text": "        self.categorical_features_indices = categorical_features_indices"
+        },
+        {
+          "line": 376,
+          "text": "        self.softmax_temperature = softmax_temperature"
+        },
+        {
+          "line": 377,
+          "text": "        self.average_before_softmax = average_before_softmax"
+        },
+        {
+          "line": 378,
+          "text": "        self.model_path = model_path"
+        }
+      ]
+    },
+    {
+      "file_sha256": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "first_line": 521,
+      "last_line": 529,
+      "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/regressor.py",
+      "source": [
+        {
+          "line": 521,
+          "text": "        # Standardize y"
+        },
+        {
+          "line": 522,
+          "text": "        mean = np.mean(y)"
+        },
+        {
+          "line": 523,
+          "text": "        std = np.std(y)"
+        },
+        {
+          "line": 524,
+          "text": "        self.y_train_std_ = std.item() + 1e-20"
+        },
+        {
+          "line": 525,
+          "text": "        self.y_train_mean_ = mean.item()"
+        },
+        {
+          "line": 526,
+          "text": "        y = (y - self.y_train_mean_) / self.y_train_std_"
+        },
+        {
+          "line": 527,
+          "text": "        self.renormalized_criterion_ = FullSupportBarDistribution("
+        },
+        {
+          "line": 528,
+          "text": "            self.bardist_.borders * self.y_train_std_ + self.y_train_mean_,"
+        },
+        {
+          "line": 529,
+          "text": "        ).float()"
+        }
+      ]
+    },
+    {
+      "file_sha256": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "first_line": 645,
+      "last_line": 719,
+      "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/regressor.py",
+      "source": [
+        {
+          "line": 645,
+          "text": "        std_borders = self.bardist_.borders.cpu().numpy()"
+        },
+        {
+          "line": 646,
+          "text": "        outputs: list[torch.Tensor] = []"
+        },
+        {
+          "line": 647,
+          "text": "        borders: list[np.ndarray] = []"
+        },
+        {
+          "line": 648,
+          "text": ""
+        },
+        {
+          "line": 649,
+          "text": "        for output, config in self.executor_.iter_outputs("
+        },
+        {
+          "line": 650,
+          "text": "            X,"
+        },
+        {
+          "line": 651,
+          "text": "            device=self.device_,"
+        },
+        {
+          "line": 652,
+          "text": "            autocast=self.use_autocast_,"
+        },
+        {
+          "line": 653,
+          "text": "        ):"
+        },
+        {
+          "line": 654,
+          "text": "            assert isinstance(config, RegressorEnsembleConfig)"
+        },
+        {
+          "line": 655,
+          "text": ""
+        },
+        {
+          "line": 656,
+          "text": "            if self.softmax_temperature != 1:"
+        },
+        {
+          "line": 657,
+          "text": "                output = output.float() / self.softmax_temperature  # noqa: PLW2901"
+        },
+        {
+          "line": 658,
+          "text": ""
+        },
+        {
+          "line": 659,
+          "text": "            borders_t: np.ndarray"
+        },
+        {
+          "line": 660,
+          "text": "            logit_cancel_mask: np.ndarray | None"
+        },
+        {
+          "line": 661,
+          "text": "            descending_borders: bool"
+        },
+        {
+          "line": 662,
+          "text": ""
+        },
+        {
+          "line": 663,
+          "text": "            # TODO(eddiebergman): Maybe this could be parallelized or done in fit"
+        },
+        {
+          "line": 664,
+          "text": "            # but I somehow doubt it takes much time to be worth it."
+        },
+        {
+          "line": 665,
+          "text": "            # One reason to make it worth it is if you want fast predictions, i.e."
+        },
+        {
+          "line": 666,
+          "text": "            # don't re-do this each time."
+        },
+        {
+          "line": 667,
+          "text": "            # However it gets a bit more difficult as you need to line up the"
+        },
+        {
+          "line": 668,
+          "text": "            # outputs from `iter_outputs` above (which may be in arbitrary order),"
+        },
+        {
+          "line": 669,
+          "text": "            # along with the specific config the output belongs to. This is because"
+        },
+        {
+          "line": 670,
+          "text": "            # the transformation done to the borders for a given output is dependant"
+        },
+        {
+          "line": 671,
+          "text": "            # upon the target_transform of the config."
+        },
+        {
+          "line": 672,
+          "text": "            if config.target_transform is None:"
+        },
+        {
+          "line": 673,
+          "text": "                borders_t = std_borders.copy()"
+        },
+        {
+          "line": 674,
+          "text": "                logit_cancel_mask = None"
+        },
+        {
+          "line": 675,
+          "text": "                descending_borders = False"
+        },
+        {
+          "line": 676,
+          "text": "            else:"
+        },
+        {
+          "line": 677,
+          "text": "                logit_cancel_mask, descending_borders, borders_t = ("
+        },
+        {
+          "line": 678,
+          "text": "                    _transform_borders_one("
+        },
+        {
+          "line": 679,
+          "text": "                        std_borders,"
+        },
+        {
+          "line": 680,
+          "text": "                        target_transform=config.target_transform,"
+        },
+        {
+          "line": 681,
+          "text": "                        repair_nan_borders_after_transform=self.interface_config_.FIX_NAN_BORDERS_AFTER_TARGET_TRANSFORM,"
+        },
+        {
+          "line": 682,
+          "text": "                    )"
+        },
+        {
+          "line": 683,
+          "text": "                )"
+        },
+        {
+          "line": 684,
+          "text": "                if descending_borders:"
+        },
+        {
+          "line": 685,
+          "text": "                    borders_t = borders_t.flip(-1)  # type: ignore"
+        },
+        {
+          "line": 686,
+          "text": ""
+        },
+        {
+          "line": 687,
+          "text": "            borders.append(borders_t)"
+        },
+        {
+          "line": 688,
+          "text": ""
+        },
+        {
+          "line": 689,
+          "text": "            if logit_cancel_mask is not None:"
+        },
+        {
+          "line": 690,
+          "text": "                output = output.clone()  # noqa: PLW2901"
+        },
+        {
+          "line": 691,
+          "text": "                output[..., logit_cancel_mask] = float(\"-inf\")"
+        },
+        {
+          "line": 692,
+          "text": ""
+        },
+        {
+          "line": 693,
+          "text": "            outputs.append(output)  # type: ignore"
+        },
+        {
+          "line": 694,
+          "text": ""
+        },
+        {
+          "line": 695,
+          "text": "        transformed_logits = ["
+        },
+        {
+          "line": 696,
+          "text": "            translate_probs_across_borders("
+        },
+        {
+          "line": 697,
+          "text": "                logits,"
+        },
+        {
+          "line": 698,
+          "text": "                frm=torch.as_tensor(borders_t, device=self.device_),"
+        },
+        {
+          "line": 699,
+          "text": "                to=self.bardist_.borders.to(self.device_),"
+        },
+        {
+          "line": 700,
+          "text": "            )"
+        },
+        {
+          "line": 701,
+          "text": "            for logits, borders_t in zip(outputs, borders)"
+        },
+        {
+          "line": 702,
+          "text": "        ]"
+        },
+        {
+          "line": 703,
+          "text": "        stacked_logits = torch.stack(transformed_logits, dim=0)"
+        },
+        {
+          "line": 704,
+          "text": "        if self.average_before_softmax:"
+        },
+        {
+          "line": 705,
+          "text": "            logits = stacked_logits.log().mean(dim=0).softmax(dim=-1)"
+        },
+        {
+          "line": 706,
+          "text": "        else:"
+        },
+        {
+          "line": 707,
+          "text": "            logits = stacked_logits.mean(dim=0)"
+        },
+        {
+          "line": 708,
+          "text": ""
+        },
+        {
+          "line": 709,
+          "text": "        # Post-process the logits"
+        },
+        {
+          "line": 710,
+          "text": "        logits = logits.log()"
+        },
+        {
+          "line": 711,
+          "text": "        if logits.dtype == torch.float16:"
+        },
+        {
+          "line": 712,
+          "text": "            logits = logits.float()"
+        },
+        {
+          "line": 713,
+          "text": "        logits = logits.cpu()"
+        },
+        {
+          "line": 714,
+          "text": ""
+        },
+        {
+          "line": 715,
+          "text": "        # Determine and return intended output type"
+        },
+        {
+          "line": 716,
+          "text": "        logit_to_output = partial("
+        },
+        {
+          "line": 717,
+          "text": "            _logits_to_output,"
+        },
+        {
+          "line": 718,
+          "text": "            logits=logits,"
+        },
+        {
+          "line": 719,
+          "text": "            criterion=self.renormalized_criterion_,"
+        }
+      ]
+    },
+    {
+      "file_sha256": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1",
+      "first_line": 548,
+      "last_line": 599,
+      "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/utils.py",
+      "source": [
+        {
+          "line": 548,
+          "text": "def _map_to_bucket_ix(y: torch.Tensor, borders: torch.Tensor) -> torch.Tensor:"
+        },
+        {
+          "line": 549,
+          "text": "    ix = torch.searchsorted(sorted_sequence=borders, input=y) - 1"
+        },
+        {
+          "line": 550,
+          "text": "    ix[y == borders[0]] = 0"
+        },
+        {
+          "line": 551,
+          "text": "    ix[y == borders[-1]] = len(borders) - 2"
+        },
+        {
+          "line": 552,
+          "text": "    return ix"
+        },
+        {
+          "line": 553,
+          "text": ""
+        },
+        {
+          "line": 554,
+          "text": ""
+        },
+        {
+          "line": 555,
+          "text": "# TODO (eddiebergman): Can probably put this back to the Bar distribution."
+        },
+        {
+          "line": 556,
+          "text": "# However we don't really need the full BarDistribution class and this was"
+        },
+        {
+          "line": 557,
+          "text": "# put here to make that a bit more obvious in terms of what was going on."
+        },
+        {
+          "line": 558,
+          "text": "def _cdf(logits: torch.Tensor, borders: torch.Tensor, ys: torch.Tensor) -> torch.Tensor:"
+        },
+        {
+          "line": 559,
+          "text": "    ys = ys.repeat(logits.shape[:-1] + (1,))"
+        },
+        {
+          "line": 560,
+          "text": "    n_bars = len(borders) - 1"
+        },
+        {
+          "line": 561,
+          "text": "    y_buckets = _map_to_bucket_ix(ys, borders).clamp(0, n_bars - 1).to(logits.device)"
+        },
+        {
+          "line": 562,
+          "text": ""
+        },
+        {
+          "line": 563,
+          "text": "    probs = torch.softmax(logits, dim=-1)"
+        },
+        {
+          "line": 564,
+          "text": "    prob_so_far = torch.cumsum(probs, dim=-1) - probs"
+        },
+        {
+          "line": 565,
+          "text": "    prob_left_of_bucket = prob_so_far.gather(index=y_buckets, dim=-1)"
+        },
+        {
+          "line": 566,
+          "text": ""
+        },
+        {
+          "line": 567,
+          "text": "    bucket_widths = borders[1:] - borders[:-1]"
+        },
+        {
+          "line": 568,
+          "text": "    share_of_bucket_left = ys - borders[y_buckets] / bucket_widths[y_buckets]"
+        },
+        {
+          "line": 569,
+          "text": "    share_of_bucket_left = share_of_bucket_left.clamp(0.0, 1.0)"
+        },
+        {
+          "line": 570,
+          "text": ""
+        },
+        {
+          "line": 571,
+          "text": "    prob_in_bucket = probs.gather(index=y_buckets, dim=-1) * share_of_bucket_left"
+        },
+        {
+          "line": 572,
+          "text": "    prob_left_of_ys = prob_left_of_bucket + prob_in_bucket"
+        },
+        {
+          "line": 573,
+          "text": ""
+        },
+        {
+          "line": 574,
+          "text": "    prob_left_of_ys[ys <= borders[0]] = 0.0"
+        },
+        {
+          "line": 575,
+          "text": "    prob_left_of_ys[ys >= borders[-1]] = 1.0"
+        },
+        {
+          "line": 576,
+          "text": "    return prob_left_of_ys.clip(0.0, 1.0)"
+        },
+        {
+          "line": 577,
+          "text": ""
+        },
+        {
+          "line": 578,
+          "text": ""
+        },
+        {
+          "line": 579,
+          "text": "def translate_probs_across_borders("
+        },
+        {
+          "line": 580,
+          "text": "    logits: torch.Tensor,"
+        },
+        {
+          "line": 581,
+          "text": "    *,"
+        },
+        {
+          "line": 582,
+          "text": "    frm: torch.Tensor,"
+        },
+        {
+          "line": 583,
+          "text": "    to: torch.Tensor,"
+        },
+        {
+          "line": 584,
+          "text": ") -> torch.Tensor:"
+        },
+        {
+          "line": 585,
+          "text": "    \"\"\"Translate the probabilities across the borders."
+        },
+        {
+          "line": 586,
+          "text": ""
+        },
+        {
+          "line": 587,
+          "text": "    Args:"
+        },
+        {
+          "line": 588,
+          "text": "        logits: The logits defining the distribution to translate."
+        },
+        {
+          "line": 589,
+          "text": "        frm: The borders to translate from."
+        },
+        {
+          "line": 590,
+          "text": "        to: The borders to translate to."
+        },
+        {
+          "line": 591,
+          "text": ""
+        },
+        {
+          "line": 592,
+          "text": "    Returns:"
+        },
+        {
+          "line": 593,
+          "text": "        The translated probabilities."
+        },
+        {
+          "line": 594,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 595,
+          "text": "    prob_left = _cdf(logits, borders=frm, ys=to)"
+        },
+        {
+          "line": 596,
+          "text": "    prob_left[..., 0] = 0.0"
+        },
+        {
+          "line": 597,
+          "text": "    prob_left[..., -1] = 1.0"
+        },
+        {
+          "line": 598,
+          "text": ""
+        },
+        {
+          "line": 599,
+          "text": "    return (prob_left[..., 1:] - prob_left[..., :-1]).clamp_min(0.0)"
+        }
+      ]
+    },
+    {
+      "file_sha256": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1",
+      "first_line": 647,
+      "last_line": 693,
+      "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/utils.py",
+      "source": [
+        {
+          "line": 647,
+          "text": "def _transform_borders_one("
+        },
+        {
+          "line": 648,
+          "text": "    borders: np.ndarray,"
+        },
+        {
+          "line": 649,
+          "text": "    target_transform: TransformerMixin | Pipeline,"
+        },
+        {
+          "line": 650,
+          "text": "    *,"
+        },
+        {
+          "line": 651,
+          "text": "    repair_nan_borders_after_transform: bool,"
+        },
+        {
+          "line": 652,
+          "text": ") -> tuple[npt.NDArray[np.bool_] | None, bool, np.ndarray]:"
+        },
+        {
+          "line": 653,
+          "text": "    \"\"\"Transforms the borders used for the bar distribution for regression."
+        },
+        {
+          "line": 654,
+          "text": ""
+        },
+        {
+          "line": 655,
+          "text": "    Args:"
+        },
+        {
+          "line": 656,
+          "text": "        borders: The borders to transform."
+        },
+        {
+          "line": 657,
+          "text": "        target_transform: The target transformer to use."
+        },
+        {
+          "line": 658,
+          "text": "        repair_nan_borders_after_transform:"
+        },
+        {
+          "line": 659,
+          "text": "            Whether to repair any borders that are NaN after the transformation."
+        },
+        {
+          "line": 660,
+          "text": ""
+        },
+        {
+          "line": 661,
+          "text": "    Returns:"
+        },
+        {
+          "line": 662,
+          "text": "        logit_cancel_mask:"
+        },
+        {
+          "line": 663,
+          "text": "            The mask of the logit values to ignore,"
+        },
+        {
+          "line": 664,
+          "text": "            those that mapped to NaN borders."
+        },
+        {
+          "line": 665,
+          "text": "        descending_borders: Whether the borders are descending after transformation"
+        },
+        {
+          "line": 666,
+          "text": "        borders_t: The transformed borders themselves."
+        },
+        {
+          "line": 667,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 668,
+          "text": "    borders_t = target_transform.inverse_transform(borders.reshape(-1, 1)).squeeze()  # type: ignore"
+        },
+        {
+          "line": 669,
+          "text": ""
+        },
+        {
+          "line": 670,
+          "text": "    logit_cancel_mask: npt.NDArray[np.bool_] | None = None"
+        },
+        {
+          "line": 671,
+          "text": "    if repair_nan_borders_after_transform:"
+        },
+        {
+          "line": 672,
+          "text": "        broken_mask = ("
+        },
+        {
+          "line": 673,
+          "text": "            ~np.isfinite(borders_t)"
+        },
+        {
+          "line": 674,
+          "text": "            | (borders_t > REGRESSION_NAN_BORDER_LIMIT_UPPER)"
+        },
+        {
+          "line": 675,
+          "text": "            | (borders_t < REGRESSION_NAN_BORDER_LIMIT_LOWER)"
+        },
+        {
+          "line": 676,
+          "text": "        )"
+        },
+        {
+          "line": 677,
+          "text": "        if broken_mask.any():"
+        },
+        {
+          "line": 678,
+          "text": "            borders_t, logit_cancel_mask = _cancel_nan_borders("
+        },
+        {
+          "line": 679,
+          "text": "                borders=borders_t,"
+        },
+        {
+          "line": 680,
+          "text": "                broken_mask=broken_mask,"
+        },
+        {
+          "line": 681,
+          "text": "            )"
+        },
+        {
+          "line": 682,
+          "text": ""
+        },
+        {
+          "line": 683,
+          "text": "    _repair_borders(borders_t, inplace=True)"
+        },
+        {
+          "line": 684,
+          "text": ""
+        },
+        {
+          "line": 685,
+          "text": "    reversed_order = np.arange(len(borders_t) - 1, -1, -1)"
+        },
+        {
+          "line": 686,
+          "text": "    descending_borders = (np.argsort(borders_t) == reversed_order).all()"
+        },
+        {
+          "line": 687,
+          "text": "    if descending_borders:"
+        },
+        {
+          "line": 688,
+          "text": "        borders_t = borders_t[::-1]"
+        },
+        {
+          "line": 689,
+          "text": "        logit_cancel_mask = ("
+        },
+        {
+          "line": 690,
+          "text": "            logit_cancel_mask[::-1] if logit_cancel_mask is not None else None"
+        },
+        {
+          "line": 691,
+          "text": "        )"
+        },
+        {
+          "line": 692,
+          "text": ""
+        },
+        {
+          "line": 693,
+          "text": "    return logit_cancel_mask, descending_borders, borders_t"
+        }
+      ]
+    },
+    {
+      "file_sha256": "7a86fbbefdb0fa7e850a394bea8af710c2e5f0139c10cdce1fd272fb9709eec0",
+      "first_line": 82,
+      "last_line": 104,
+      "path": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/compat_cdf.py",
+      "source": [
+        {
+          "line": 82,
+          "text": "def _corrected_helper(original):"
+        },
+        {
+          "line": 83,
+          "text": "    \"\"\"Compile the exact guarded function, changing one expression only.\"\"\""
+        },
+        {
+          "line": 84,
+          "text": "    tree = ast.parse(inspect.getsource(original))"
+        },
+        {
+          "line": 85,
+          "text": "    expected = ast.parse("
+        },
+        {
+          "line": 86,
+          "text": "        \"ys - borders[y_buckets] / bucket_widths[y_buckets]\", mode=\"eval\").body"
+        },
+        {
+          "line": 87,
+          "text": "    matches = [node for node in ast.walk(tree)"
+        },
+        {
+          "line": 88,
+          "text": "               if isinstance(node, ast.Assign)"
+        },
+        {
+          "line": 89,
+          "text": "               and any(isinstance(target, ast.Name) and target.id == \"share_of_bucket_left\""
+        },
+        {
+          "line": 90,
+          "text": "                       for target in node.targets)"
+        },
+        {
+          "line": 91,
+          "text": "               and ast.dump(node.value, include_attributes=False)"
+        },
+        {
+          "line": 92,
+          "text": "               == ast.dump(expected, include_attributes=False)]"
+        },
+        {
+          "line": 93,
+          "text": "    if len(matches) != 1:"
+        },
+        {
+          "line": 94,
+          "text": "        raise CompatibilityError(\"CDF adapter interpolation expression mismatch\")"
+        },
+        {
+          "line": 95,
+          "text": "    matches[0].value = ast.parse("
+        },
+        {
+          "line": 96,
+          "text": "        \"(ys - borders[y_buckets]) / bucket_widths[y_buckets]\", mode=\"eval\").body"
+        },
+        {
+          "line": 97,
+          "text": "    ast.fix_missing_locations(tree)"
+        },
+        {
+          "line": 98,
+          "text": "    ast.increment_lineno(tree, original.__code__.co_firstlineno - 1)"
+        },
+        {
+          "line": 99,
+          "text": "    namespace = dict(original.__globals__)"
+        },
+        {
+          "line": 100,
+          "text": "    compiled = compile(tree, original.__code__.co_filename, \"exec\","
+        },
+        {
+          "line": 101,
+          "text": "                       flags=original.__code__.co_flags & __future__.annotations.compiler_flag,"
+        },
+        {
+          "line": 102,
+          "text": "                       dont_inherit=True)"
+        },
+        {
+          "line": 103,
+          "text": "    exec(compiled, namespace)"
+        },
+        {
+          "line": 104,
+          "text": "    return namespace[original.__name__]"
+        }
+      ]
+    },
+    {
+      "file_sha256": "7a86fbbefdb0fa7e850a394bea8af710c2e5f0139c10cdce1fd272fb9709eec0",
+      "first_line": 141,
+      "last_line": 157,
+      "path": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/compat_cdf.py",
+      "source": [
+        {
+          "line": 141,
+          "text": "        def counted_helper(*args, **kwargs):"
+        },
+        {
+          "line": 142,
+          "text": "            value = fixed_helper(*args, **kwargs)"
+        },
+        {
+          "line": 143,
+          "text": "            descriptor[\"executed_corrected_cdf_code_sha256\"] = corrected_code_sha256"
+        },
+        {
+          "line": 144,
+          "text": "            descriptor[\"patched_call_count\"] += 1"
+        },
+        {
+          "line": 145,
+          "text": "            return value"
+        },
+        {
+          "line": 146,
+          "text": ""
+        },
+        {
+          "line": 147,
+          "text": "        namespace = dict(original.__globals__)"
+        },
+        {
+          "line": 148,
+          "text": "        namespace[\"_cdf\"] = counted_helper"
+        },
+        {
+          "line": 149,
+          "text": "        replacement = FunctionType(original.__code__, namespace, original.__name__,"
+        },
+        {
+          "line": 150,
+          "text": "                                   original.__defaults__, original.__closure__)"
+        },
+        {
+          "line": 151,
+          "text": "        replacement.__kwdefaults__ = original.__kwdefaults__"
+        },
+        {
+          "line": 152,
+          "text": "        replacement.__annotations__ = original.__annotations__.copy()"
+        },
+        {
+          "line": 153,
+          "text": "        replacement.__module__ = original.__module__"
+        },
+        {
+          "line": 154,
+          "text": "        replacement.__qualname__ = original.__qualname__"
+        },
+        {
+          "line": 155,
+          "text": "        descriptor[\"active_translator_code_sha256\"] = _code_sha256(replacement)"
+        },
+        {
+          "line": 156,
+          "text": "        if replacement.__code__ is not original.__code__:"
+        },
+        {
+          "line": 157,
+          "text": "            raise CompatibilityError(\"CDF adapter translator code changed\")"
+        }
+      ]
+    },
+    {
+      "file_sha256": "e71f43b73ae8259c20b5d7b52feccc7c851e9a2fbb86d869bc0a5f7f3af792a1",
+      "first_line": 55,
+      "last_line": 87,
+      "path": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/execution_mixture.py",
+      "source": [
+        {
+          "line": 55,
+          "text": "def _component_mass_cpu(output):"
+        },
+        {
+          "line": 56,
+          "text": "    torch=import_module(\"torch\")"
+        },
+        {
+          "line": 57,
+          "text": "    return output.sum(dim=-1,dtype=torch.float64).detach().cpu()"
+        },
+        {
+          "line": 58,
+          "text": ""
+        },
+        {
+          "line": 59,
+          "text": ""
+        },
+        {
+          "line": 60,
+          "text": "def _observe_component_prediction(base,query,*,member_index,capture_member,report):"
+        },
+        {
+          "line": 61,
+          "text": "    \"\"\"Install capture only after base.predict's active-CDF guard has run.\"\"\""
+        },
+        {
+          "line": 62,
+          "text": "    regressor=base.regressor;module=_regressor_module()"
+        },
+        {
+          "line": 63,
+          "text": "    active=cache._require_active_cdf(module,base.cdf_descriptor)"
+        },
+        {
+          "line": 64,
+          "text": "    original_predict=regressor.predict"
+        },
+        {
+          "line": 65,
+          "text": "    previous_instance_predict=vars(regressor).get(\"predict\",_MISSING)"
+        },
+        {
+          "line": 66,
+          "text": "    captures=[];mass_reports=[];raw_masses=[]"
+        },
+        {
+          "line": 67,
+          "text": ""
+        },
+        {
+          "line": 68,
+          "text": "    def predict_proxy(*args,**kwargs):"
+        },
+        {
+          "line": 69,
+          "text": "        def record(logits,*,frm,to):"
+        },
+        {
+          "line": 70,
+          "text": "            output=active(logits,frm=frm,to=to)"
+        },
+        {
+          "line": 71,
+          "text": "            mass_tensor=_component_mass_cpu(output)"
+        },
+        {
+          "line": 72,
+          "text": "            mass=mass_tensor.numpy()"
+        },
+        {
+          "line": 73,
+          "text": "            raw_masses.append(mass_tensor)"
+        },
+        {
+          "line": 74,
+          "text": "            import numpy as np"
+        },
+        {
+          "line": 75,
+          "text": "            if not np.isfinite(mass).all() or np.any(mass<=0):"
+        },
+        {
+          "line": 76,
+          "text": "                raise cache.CacheExecutionError(\"undefined component probability mass; no mixture-law claim\")"
+        },
+        {
+          "line": 77,
+          "text": "            deviation=float(np.max(np.abs(mass.astype(np.float64)-1)))"
+        },
+        {
+          "line": 78,
+          "text": "            if bool((mass>HEAD_MASS_ENVELOPE).any()):"
+        },
+        {
+          "line": 79,
+          "text": "                raise cache.CacheExecutionError(\"component canonical mass exceeds qualified head envelope\")"
+        },
+        {
+          "line": 80,
+          "text": "            mass_reports.append({\"rows\":len(mass),\"min\":float(mass.min()),\"max\":float(mass.max()),"
+        },
+        {
+          "line": 81,
+          "text": "                                 \"max_abs_deviation_from_one\":deviation})"
+        },
+        {
+          "line": 82,
+          "text": "            if capture_member:"
+        },
+        {
+          "line": 83,
+          "text": "                captures.append({\"ensemble_index\":member_index,"
+        },
+        {
+          "line": 84,
+          "text": "                    \"raw_logits\":logits.detach().cpu().clone(),"
+        },
+        {
+          "line": 85,
+          "text": "                    \"from_borders\":frm.detach().cpu().clone(),\"to_borders\":to.detach().cpu().clone(),"
+        },
+        {
+          "line": 86,
+          "text": "                    \"translated_probabilities\":output.detach().cpu().clone(),"
+        },
+        {
+          "line": 87,
+          "text": "                    \"component_probability_mass\":mass.copy(),"
+        }
+      ]
+    },
+    {
+      "file_sha256": "e71f43b73ae8259c20b5d7b52feccc7c851e9a2fbb86d869bc0a5f7f3af792a1",
+      "first_line": 224,
+      "last_line": 252,
+      "path": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/execution_mixture.py",
+      "source": [
+        {
+          "line": 224,
+          "text": "def finite_bar_icdf(logits,borders,uniforms):"
+        },
+        {
+          "line": 225,
+          "text": "    \"\"\"Vectorized inherited finite-uniform-bar ICDF with caller-owned FP32 u."
+        },
+        {
+          "line": 226,
+          "text": ""
+        },
+        {
+          "line": 227,
+          "text": "    No clipping or repair, including u=0 with leading zero probability: the"
+        },
+        {
+          "line": 228,
+          "text": "    original 0/0 NaN is retained for complete-vector support rejection. A single"
+        },
+        {
+          "line": 229,
+          "text": "    shared distribution uses one CDF and never expands an N-by-bin matrix."
+        },
+        {
+          "line": 230,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 231,
+          "text": "    torch=import_module(\"torch\")"
+        },
+        {
+          "line": 232,
+          "text": "    if logits.ndim!=2 or borders.ndim!=1 or uniforms.ndim!=1 or logits.shape[-1]+1!=len(borders):"
+        },
+        {
+          "line": 233,
+          "text": "        raise ValueError(\"logits[row,bin], borders[bin+1], uniforms[row] required\")"
+        },
+        {
+          "line": 234,
+          "text": "    if len(logits) not in (1,len(uniforms)) or uniforms.dtype!=torch.float32:"
+        },
+        {
+          "line": 235,
+          "text": "        raise ValueError(\"one shared or oneperrow distribution; caller-owned FP32 uniforms required\")"
+        },
+        {
+          "line": 236,
+          "text": "    if not bool(torch.isfinite(uniforms).all()) or bool((uniforms<0).any()) or bool((uniforms>=1).any()):"
+        },
+        {
+          "line": 237,
+          "text": "        raise ValueError(\"uniforms must be finite in[0,1)\")"
+        },
+        {
+          "line": 238,
+          "text": "    if logits.device!=borders.device or logits.device!=uniforms.device:"
+        },
+        {
+          "line": 239,
+          "text": "        raise ValueError(\"logits, borders and uniforms must share a device\")"
+        },
+        {
+          "line": 240,
+          "text": "    probabilities=logits.softmax(-1);cdf=torch.cumsum(probabilities,-1)"
+        },
+        {
+          "line": 241,
+          "text": "    if len(logits)==1:"
+        },
+        {
+          "line": 242,
+          "text": "        index=torch.searchsorted(cdf[0],uniforms).clamp(0,probabilities.shape[-1]-1)"
+        },
+        {
+          "line": 243,
+          "text": "        before=torch.cat((torch.zeros(1,dtype=cdf.dtype,device=cdf.device),cdf[0]),dim=0)"
+        },
+        {
+          "line": 244,
+          "text": "        rest=uniforms-before[index]"
+        },
+        {
+          "line": 245,
+          "text": "        probability=probabilities[0,index]"
+        },
+        {
+          "line": 246,
+          "text": "    else:"
+        },
+        {
+          "line": 247,
+          "text": "        index=torch.searchsorted(cdf,uniforms[:,None].contiguous()).squeeze(-1).clamp(0,probabilities.shape[-1]-1)"
+        },
+        {
+          "line": 248,
+          "text": "        before=torch.cat((torch.zeros((*cdf.shape[:-1],1),dtype=cdf.dtype,device=cdf.device),cdf),dim=-1)"
+        },
+        {
+          "line": 249,
+          "text": "        rest=uniforms-before.gather(-1,index[:,None]).squeeze(-1)"
+        },
+        {
+          "line": 250,
+          "text": "        probability=probabilities.gather(-1,index[:,None]).squeeze(-1)"
+        },
+        {
+          "line": 251,
+          "text": "    left=borders[index];right=borders[index+1]"
+        },
+        {
+          "line": 252,
+          "text": "    return left+(right-left)*rest/probability"
+        }
+      ]
+    },
+    {
+      "file_sha256": "5dfdefa870489ded594de1db13a55a3da5948c720d7a9fd587ebe3a8f8be00a2",
+      "first_line": 173,
+      "last_line": 208,
+      "path": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/execution_hybrid.py",
+      "source": [
+        {
+          "line": 173,
+          "text": "    def _predict_uncached(self,member_index,query,capture_member):"
+        },
+        {
+          "line": 174,
+          "text": "        import numpy as np"
+        },
+        {
+          "line": 175,
+          "text": "        regressor=self.uncached_regressor"
+        },
+        {
+          "line": 176,
+          "text": "        if regressor is None:raise cache.CacheExecutionError(\"declared uncached fallback was not prepared\")"
+        },
+        {
+          "line": 177,
+          "text": "        value=cache._numpy_query(query,self.stage_index,self.query_batch_size)"
+        },
+        {
+          "line": 178,
+          "text": "        module=self.base._sdk_regressor;active=cache._require_active_cdf(module,self.cdf_descriptor)"
+        },
+        {
+          "line": 179,
+          "text": "        captures=[];masses=[];calls_before=self.cdf_descriptor[\"patched_call_count\"]"
+        },
+        {
+          "line": 180,
+          "text": "        def record(logits,*,frm,to):"
+        },
+        {
+          "line": 181,
+          "text": "            output=active(logits,frm=frm,to=to);mass=mixture._component_mass_cpu(output)"
+        },
+        {
+          "line": 182,
+          "text": "            array=mass.numpy()"
+        },
+        {
+          "line": 183,
+          "text": "            if not np.isfinite(array).all() or np.any(array<=0) or np.any(array>mixture.HEAD_MASS_ENVELOPE):"
+        },
+        {
+          "line": 184,
+          "text": "                raise cache.CacheExecutionError(\"fallback raw probability mass outside the unchanged envelope\")"
+        },
+        {
+          "line": 185,
+          "text": "            masses.append(mass)"
+        },
+        {
+          "line": 186,
+          "text": "            if capture_member:captures.append({\"ensemble_index\":member_index,\"raw_logits\":logits.detach().cpu().clone(),"
+        },
+        {
+          "line": 187,
+          "text": "                \"from_borders\":frm.detach().cpu().clone(),\"to_borders\":to.detach().cpu().clone(),"
+        },
+        {
+          "line": 188,
+          "text": "                \"translated_probabilities\":output.detach().cpu().clone(),\"component_probability_mass\":array.copy(),"
+        },
+        {
+          "line": 189,
+          "text": "                \"configuration_identity\":cache._configuration_identity(regressor.executor_.ensemble_configs[0])})"
+        },
+        {
+          "line": 190,
+          "text": "            return output"
+        },
+        {
+          "line": 191,
+          "text": "        with selected_preprocessing_member(regressor.executor_,member_index,self.hybrid_counters):"
+        },
+        {
+          "line": 192,
+          "text": "            self.hybrid_counters[\"original_translator_alias_restored\"]=False"
+        },
+        {
+          "line": 193,
+          "text": "            module.translate_probs_across_borders=record"
+        },
+        {
+          "line": 194,
+          "text": "            try:"
+        },
+        {
+          "line": 195,
+          "text": "                with self.base._model_rng():prediction=regressor.predict(value,output_type=\"full\",quantiles=[])"
+        },
+        {
+          "line": 196,
+          "text": "            finally:"
+        },
+        {
+          "line": 197,
+          "text": "                conflict=module.translate_probs_across_borders is not record"
+        },
+        {
+          "line": 198,
+          "text": "                module.translate_probs_across_borders=active"
+        },
+        {
+          "line": 199,
+          "text": "                self.hybrid_counters[\"original_translator_alias_restored\"]=module.translate_probs_across_borders is active"
+        },
+        {
+          "line": 200,
+          "text": "                if conflict:raise cache.CacheExecutionError(\"corrected translator alias changed during uncached fallback\")"
+        },
+        {
+          "line": 201,
+          "text": "        if len(masses)!=1 or (capture_member and len(captures)!=1) or self.cdf_descriptor[\"patched_call_count\"]-calls_before!=1:"
+        },
+        {
+          "line": 202,
+          "text": "            raise cache.CacheExecutionError(\"fallback must execute exactly one corrected canonical translation\")"
+        },
+        {
+          "line": 203,
+          "text": "        if self.cdf_descriptor.get(\"executed_corrected_cdf_code_sha256\")!=self.cdf_descriptor.get(\"corrected_cdf_code_sha256\") or self.cdf_descriptor.get(\"corrected_cdf_code_sha256\")==self.cdf_descriptor.get(\"original_cdf_code_sha256\"):"
+        },
+        {
+          "line": 204,
+          "text": "            raise cache.CacheExecutionError(\"fallback did not execute the declared corrected CDF\")"
+        },
+        {
+          "line": 205,
+          "text": "        prediction.update(component_raw_mass=masses[0],head_mass_envelope=mixture.HEAD_MASS_ENVELOPE,hybrid_execution_path=\"original_fit_preprocessors\")"
+        },
+        {
+          "line": 206,
+          "text": "        if capture_member:prediction[\"member\"]=captures[0]"
+        },
+        {
+          "line": 207,
+          "text": "        self.hybrid_counters[\"uncached_predict_count\"]+=1;self.hybrid_counters[\"uncached_query_rows\"]+=len(value)"
+        },
+        {
+          "line": 208,
+          "text": "        return prediction"
+        }
+      ]
+    },
+    {
+      "file_sha256": "95366efc4871b96c3a1a3f19414ed1fd77d058f02135f4afd95a64b5918b3d3e",
+      "first_line": 40,
+      "last_line": 46,
+      "path": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/inference.py",
+      "source": [
+        {
+          "line": 40,
+          "text": "def frozen_regressor_settings(checkpoint, device=\"cuda\"):"
+        },
+        {
+          "line": 41,
+          "text": "    return dict(n_estimators=8, categorical_features_indices=None,"
+        },
+        {
+          "line": 42,
+          "text": "                softmax_temperature=0.9, average_before_softmax=False,"
+        },
+        {
+          "line": 43,
+          "text": "                model_path=str(Path(checkpoint).resolve()), device=device,"
+        },
+        {
+          "line": 44,
+          "text": "                ignore_pretraining_limits=False, fit_mode=\"fit_preprocessors\","
+        },
+        {
+          "line": 45,
+          "text": "                memory_saving_mode=\"auto\", random_state=0, n_jobs=1,"
+        },
+        {
+          "line": 46,
+          "text": "                inference_config=None, inference_precision=\"torch.float32\")"
+        }
+      ]
+    },
+    {
+      "file_sha256": "45cd3107c50dcf73d03167e2b6dd045cccdb798337e8d3c47b5210cc30dc1a03",
+      "first_line": 211,
+      "last_line": 243,
+      "path": "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/execution_cache.py",
+      "source": [
+        {
+          "line": 211,
+          "text": "        from .inference import CHECKPOINT_SHA256,frozen_regressor_settings"
+        },
+        {
+          "line": 212,
+          "text": "        if _sha(checkpoint)!=CHECKPOINT_SHA256:raise CacheExecutionError(\"immutable checkpoint hash mismatch\")"
+        },
+        {
+          "line": 213,
+          "text": "        self.checkpoint=str(Path(checkpoint).resolve());self.device=device;self.query_batch_size=query_batch_size"
+        },
+        {
+          "line": 214,
+          "text": "        self.cdf_descriptor=cdf_descriptor;self.regressor=None;self.stage_index=None"
+        },
+        {
+          "line": 215,
+          "text": "        self._torch,self._sdk_regressor,self._sdk_inference=_load_sdk()"
+        },
+        {
+          "line": 216,
+          "text": "        _require_active_cdf(self._sdk_regressor,cdf_descriptor)"
+        },
+        {
+          "line": 217,
+          "text": "        if not self._torch.cuda.is_available():raise CacheExecutionError(\"reserved CUDA execution required\")"
+        },
+        {
+          "line": 218,
+          "text": "        self.settings=frozen_regressor_settings(self.checkpoint);self.settings[\"fit_mode\"]=\"fit_with_cache\""
+        },
+        {
+          "line": 219,
+          "text": "        self.metadata={**execution_metadata(),\"config\":{**dict(CONFIG_INVARIANTS),"
+        },
+        {
+          "line": 220,
+          "text": "            \"query_batch_size\":query_batch_size,\"device\":device},\"prepare_count\":0,\"predict_count\":0,"
+        },
+        {
+          "line": 221,
+          "text": "            \"query_rows\":0,\"model_rng_isolation_count\":0,\"stages\":[]}"
+        },
+        {
+          "line": 222,
+          "text": "        self._prepared=None"
+        },
+        {
+          "line": 223,
+          "text": ""
+        },
+        {
+          "line": 224,
+          "text": "    @contextmanager"
+        },
+        {
+          "line": 225,
+          "text": "    def _model_rng(self):"
+        },
+        {
+          "line": 226,
+          "text": "        torch=self._torch"
+        },
+        {
+          "line": 227,
+          "text": "        index=torch.device(self.device).index"
+        },
+        {
+          "line": 228,
+          "text": "        if index is None:index=torch.cuda.current_device()"
+        },
+        {
+          "line": 229,
+          "text": "        with torch.random.fork_rng(devices=[index],enabled=True):"
+        },
+        {
+          "line": 230,
+          "text": "            yield"
+        },
+        {
+          "line": 231,
+          "text": "        self.metadata[\"model_rng_isolation_count\"]+=1"
+        },
+        {
+          "line": 232,
+          "text": ""
+        },
+        {
+          "line": 233,
+          "text": "    def prepare(self,theta_context,obs_context,stage_index):"
+        },
+        {
+          "line": 234,
+          "text": "        if type(stage_index) is not int or not 0<=stage_index<21:raise ValueError(\"stage index0..20 required\")"
+        },
+        {
+          "line": 235,
+          "text": "        theta,obs=_numpy_training(theta_context,obs_context)"
+        },
+        {
+          "line": 236,
+          "text": "        self.close();_require_active_cdf(self._sdk_regressor,self.cdf_descriptor)"
+        },
+        {
+          "line": 237,
+          "text": "        torch=self._torch;settings=dict(self.settings);settings[\"inference_precision\"]=torch.float32"
+        },
+        {
+          "line": 238,
+          "text": "        regressor=self._sdk_regressor.TabPFNRegressor(**settings)"
+        },
+        {
+          "line": 239,
+          "text": "        joint=torch.cat((torch.from_numpy(obs.copy()),torch.from_numpy(theta.copy())),dim=1)"
+        },
+        {
+          "line": 240,
+          "text": "        torch.cuda.synchronize();started=time.perf_counter()"
+        },
+        {
+          "line": 241,
+          "text": "        try:"
+        },
+        {
+          "line": 242,
+          "text": "            with self._model_rng():"
+        },
+        {
+          "line": 243,
+          "text": "                regressor.fit(joint[:,:33+stage_index],joint[:,33+stage_index])"
+        }
+      ]
+    },
+    {
+      "file_sha256": "883fb5840cf3460fa5162b34d0fc24a43b43d70bb3bcff3585d0cfd3e483cc38",
+      "first_line": 129,
+      "last_line": 169,
+      "path": "/home/it4i-bbenvegnen/workspace/PosteriorForge/scripts/diagnose_prior_tail_conditionals_v1.py",
+      "source": [
+        {
+          "line": 129,
+          "text": "def icdf_observer(callback):"
+        },
+        {
+          "line": 130,
+          "text": "    \"\"\"Only a return observer; reverse AST recovers the exact frozen expression.\"\"\""
+        },
+        {
+          "line": 131,
+          "text": "    source=textwrap.dedent(inspect.getsource(_ICDF)); original=ast.parse(source); tree=copy.deepcopy(original)"
+        },
+        {
+          "line": 132,
+          "text": "    node=tree.body[0]; last=node.body[-1];require(isinstance(last,ast.Return),'inverse return changed')"
+        },
+        {
+          "line": 133,
+          "text": "    node.body[-1:]=[ast.Assign(targets=[ast.Name(id='_result',ctx=ast.Store())],value=last.value),"
+        },
+        {
+          "line": 134,
+          "text": "                   ast.Expr(value=ast.Call(func=ast.Name(id='_observe',ctx=ast.Load()),args=[ast.Call(func=ast.Name(id='locals',ctx=ast.Load()),args=[],keywords=[]),ast.Name(id='_result',ctx=ast.Load())],keywords=[])),"
+        },
+        {
+          "line": 135,
+          "text": "                   ast.Return(value=ast.Name(id='_result',ctx=ast.Load()))]"
+        },
+        {
+          "line": 136,
+          "text": "    reverse=copy.deepcopy(tree);reverse.body[0].body[-3:]=[ast.Return(value=reverse.body[0].body[-3].value)]"
+        },
+        {
+          "line": 137,
+          "text": "    require(ast.dump(reverse,include_attributes=False)==ast.dump(original,include_attributes=False),'inverse observer has undeclared AST changes')"
+        },
+        {
+          "line": 138,
+          "text": "    scope=dict(_ICDF.__globals__);scope['_observe']=callback;ast.fix_missing_locations(tree)"
+        },
+        {
+          "line": 139,
+          "text": "    exec(compile(tree,'<prior-tail-private-return-observer>','exec'),scope)"
+        },
+        {
+          "line": 140,
+          "text": "    return scope[_ICDF.__name__], {'reverse_AST_exact':True,'original_function_source_sha256':hashlib.sha256(source.encode()).hexdigest(),"
+        },
+        {
+          "line": 141,
+          "text": "                                  'arithmetic_changed':False,'shared_globals_modified':False}"
+        },
+        {
+          "line": 142,
+          "text": ""
+        },
+        {
+          "line": 143,
+          "text": "def observed_inverse(prediction, torch):"
+        },
+        {
+          "line": 144,
+          "text": "    logits=prediction['logits']; borders=prediction['criterion'].borders"
+        },
+        {
+          "line": 145,
+          "text": "    require(logits.dtype==borders.dtype==torch.float32 and logits.device.type==borders.device.type=='cpu','actual CPU F32 output required')"
+        },
+        {
+          "line": 146,
+          "text": "    observations=[]"
+        },
+        {
+          "line": 147,
+          "text": "    def capture(state,result):"
+        },
+        {
+          "line": 148,
+          "text": "        index=state['index'];before=state['before']"
+        },
+        {
+          "line": 149,
+          "text": "        selected=before[index] if len(logits)==1 else before.gather(-1,index[:,None]).squeeze(-1)"
+        },
+        {
+          "line": 150,
+          "text": "        observations.append({k:v.detach().numpy().copy() for k,v in {"
+        },
+        {
+          "line": 151,
+          "text": "            'probabilities':state['probabilities'],'cdf':state['cdf'],'bin':index,'cdf_before':selected,"
+        },
+        {
+          "line": 152,
+          "text": "            'rest':state['rest'],'selected_probability':state['probability'],'output':result}.items()})"
+        },
+        {
+          "line": 153,
+          "text": "    observed,derivation=icdf_observer(capture); output=[]"
+        },
+        {
+          "line": 154,
+          "text": "    for value in fixed_uniforms():"
+        },
+        {
+          "line": 155,
+          "text": "        uniforms=torch.full((len(logits),),float(value),dtype=torch.float32,device='cpu')"
+        },
+        {
+          "line": 156,
+          "text": "        expected=_ICDF(logits,borders,uniforms);actual=observed(logits,borders,uniforms)"
+        },
+        {
+          "line": 157,
+          "text": "        require(actual.numpy().tobytes()==expected.numpy().tobytes(),'observed inverse differs from frozen whole-batch output')"
+        },
+        {
+          "line": 158,
+          "text": "        output.append(actual.numpy().copy())"
+        },
+        {
+          "line": 159,
+          "text": "    first=observations[0]"
+        },
+        {
+          "line": 160,
+          "text": "    require(all(o['probabilities'].tobytes()==first['probabilities'].tobytes() and o['cdf'].tobytes()==first['cdf'].tobytes() for o in observations),'same whole-batch density changed by U')"
+        },
+        {
+          "line": 161,
+          "text": "    arrays={'logits':logits.numpy().copy(),'borders':borders.numpy().copy(),"
+        },
+        {
+          "line": 162,
+          "text": "            'probabilities':first['probabilities'],'cdf':first['cdf'], 'uniforms':fixed_uniforms(),"
+        },
+        {
+          "line": 163,
+          "text": "            **{k:np.stack([o[k] for o in observations]) for k in ['bin','cdf_before','rest','selected_probability','output']}}"
+        },
+        {
+          "line": 164,
+          "text": "    with np.errstate(divide='ignore',invalid='ignore'):"
+        },
+        {
+          "line": 165,
+          "text": "        arrays['fraction_diagnostic_F32']=arrays['rest']/arrays['selected_probability']"
+        },
+        {
+          "line": 166,
+          "text": "    try: _ICDF(logits,borders,torch.ones(len(logits),dtype=torch.float32))"
+        },
+        {
+          "line": 167,
+          "text": "    except ValueError as error: stress={'u':1.,'outside_production_domain':True,'expected_rejection':str(error)}"
+        },
+        {
+          "line": 168,
+          "text": "    else: raise RuntimeError('frozen u=1 guard unexpectedly accepted')"
+        },
+        {
+          "line": 169,
+          "text": "    return arrays, {'observer':derivation,'all_provided_U_whole_batch_byte_parity':True,'u1_stress':stress,"
+        }
+      ]
+    },
+    {
+      "file_sha256": "883fb5840cf3460fa5162b34d0fc24a43b43d70bb3bcff3585d0cfd3e483cc38",
+      "first_line": 306,
+      "last_line": 318,
+      "path": "/home/it4i-bbenvegnen/workspace/PosteriorForge/scripts/diagnose_prior_tail_conditionals_v1.py",
+      "source": [
+        {
+          "line": 306,
+          "text": "                def save(arm,member,features,label,prediction,elapsed):"
+        },
+        {
+          "line": 307,
+          "text": "                    arrays,meta=observed_inverse(prediction,torch)"
+        },
+        {
+          "line": 308,
+          "text": "                    arrays.update(raw_translated_probabilities=prediction['member']['translated_probabilities'].numpy().copy(),"
+        },
+        {
+          "line": 309,
+          "text": "                                  component_raw_mass=prediction['component_raw_mass'].numpy().copy(),"
+        },
+        {
+          "line": 310,
+          "text": "                                  raw_model_logits=prediction['member']['raw_logits'].numpy().copy(),"
+        },
+        {
+          "line": 311,
+          "text": "                                  from_borders=prediction['member']['from_borders'].numpy().copy(),"
+        },
+        {
+          "line": 312,
+          "text": "                                  to_borders=prediction['member']['to_borders'].numpy().copy())"
+        },
+        {
+          "line": 313,
+          "text": "                    filename=f'stage{stage}-{arm}-member{member}-{label}.npz'"
+        },
+        {
+          "line": 314,
+          "text": "                    with (output/filename).open('xb') as stream: np.savez(stream,**arrays)"
+        },
+        {
+          "line": 315,
+          "text": "                    entry={'member':member,'label':label,'file':filename,'sha256':sha_file(output/filename),"
+        },
+        {
+          "line": 316,
+          "text": "                           'arrays':{k:array_descriptor(v) for k,v in arrays.items()},'configuration':prediction['member']['configuration_identity'],"
+        },
+        {
+          "line": 317,
+          "text": "                           'input':array_descriptor(features),'ICDF':meta,'timing':elapsed,"
+        },
+        {
+          "line": 318,
+          "text": "                           'selected_fitted_state':selected_parameters(control.regressor if arm=='original' else engine.regressor,member,output,filename[:-4])}"
+        }
+      ]
+    },
+    {
+      "file_sha256": "3e753389dcb8f3970452e82ff832d40857cf3def29b60f6d4f95c0e1b52937bf",
+      "first_line": 256,
+      "last_line": 283,
+      "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/model/bar_distribution.py",
+      "source": [
+        {
+          "line": 256,
+          "text": "    def icdf(self, logits: torch.Tensor, left_prob: float) -> torch.Tensor:"
+        },
+        {
+          "line": 257,
+          "text": "        \"\"\"Implementation of the quantile function"
+        },
+        {
+          "line": 258,
+          "text": "        :param logits: Tensor of any shape, with the last dimension being logits"
+        },
+        {
+          "line": 259,
+          "text": "        :param left_prob: float: The probability mass to the left of the result."
+        },
+        {
+          "line": 260,
+          "text": "        :return: Position with `left_prob` probability weight to the left."
+        },
+        {
+          "line": 261,
+          "text": "        \"\"\""
+        },
+        {
+          "line": 262,
+          "text": "        probs = logits.softmax(-1)"
+        },
+        {
+          "line": 263,
+          "text": "        cumprobs = torch.cumsum(probs, -1)"
+        },
+        {
+          "line": 264,
+          "text": "        idx = ("
+        },
+        {
+          "line": 265,
+          "text": "            torch.searchsorted("
+        },
+        {
+          "line": 266,
+          "text": "                cumprobs,"
+        },
+        {
+          "line": 267,
+          "text": "                left_prob * torch.ones(*cumprobs.shape[:-1], 1, device=logits.device),"
+        },
+        {
+          "line": 268,
+          "text": "            )"
+        },
+        {
+          "line": 269,
+          "text": "            .squeeze(-1)"
+        },
+        {
+          "line": 270,
+          "text": "            .clamp(0, cumprobs.shape[-1] - 1)"
+        },
+        {
+          "line": 271,
+          "text": "        )  # this might not do the right for outliers"
+        },
+        {
+          "line": 272,
+          "text": "        cumprobs = torch.cat("
+        },
+        {
+          "line": 273,
+          "text": "            [torch.zeros(*cumprobs.shape[:-1], 1, device=logits.device), cumprobs],"
+        },
+        {
+          "line": 274,
+          "text": "            -1,"
+        },
+        {
+          "line": 275,
+          "text": "        )"
+        },
+        {
+          "line": 276,
+          "text": ""
+        },
+        {
+          "line": 277,
+          "text": "        rest_prob = left_prob - cumprobs.gather(-1, idx[..., None]).squeeze(-1)"
+        },
+        {
+          "line": 278,
+          "text": "        left_border = self.borders[idx]"
+        },
+        {
+          "line": 279,
+          "text": "        right_border = self.borders[idx + 1]"
+        },
+        {
+          "line": 280,
+          "text": "        return left_border + (right_border - left_border) * rest_prob / probs.gather("
+        },
+        {
+          "line": 281,
+          "text": "            -1,"
+        },
+        {
+          "line": 282,
+          "text": "            idx[..., None],"
+        },
+        {
+          "line": 283,
+          "text": "        ).squeeze(-1)"
+        }
+      ]
+    },
+    {
+      "file_sha256": "3e753389dcb8f3970452e82ff832d40857cf3def29b60f6d4f95c0e1b52937bf",
+      "first_line": 448,
+      "last_line": 458,
+      "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/model/bar_distribution.py",
+      "source": [
+        {
+          "line": 448,
+          "text": "class FullSupportBarDistribution(BarDistribution):"
+        },
+        {
+          "line": 449,
+          "text": "    def __init__("
+        },
+        {
+          "line": 450,
+          "text": "        self,"
+        },
+        {
+          "line": 451,
+          "text": "        borders: torch.Tensor,"
+        },
+        {
+          "line": 452,
+          "text": "        **kwargs: Any,"
+        },
+        {
+          "line": 453,
+          "text": "    ):"
+        },
+        {
+          "line": 454,
+          "text": "        # here borders should start with min and end with max, where all values"
+        },
+        {
+          "line": 455,
+          "text": "        # lie in (min,max) and are sorted"
+        },
+        {
+          "line": 456,
+          "text": "        \"\"\":param borders:\"\"\""
+        },
+        {
+          "line": 457,
+          "text": "        super().__init__(borders, **kwargs)"
+        },
+        {
+          "line": 458,
+          "text": "        self.assert_support(allow_zero_bucket_left=False)"
+        }
+      ]
+    },
+    {
+      "file_sha256": "3e753389dcb8f3970452e82ff832d40857cf3def29b60f6d4f95c0e1b52937bf",
+      "first_line": 577,
+      "last_line": 585,
+      "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib64/python3.11/site-packages/tabpfn/model/bar_distribution.py",
+      "source": [
+        {
+          "line": 577,
+          "text": "    def sample(self, logits: torch.Tensor, t: float = 1.0) -> torch.Tensor:"
+        },
+        {
+          "line": 578,
+          "text": "        \"\"\"Samples values from the distribution."
+        },
+        {
+          "line": 579,
+          "text": ""
+        },
+        {
+          "line": 580,
+          "text": "        Temperature t."
+        },
+        {
+          "line": 581,
+          "text": "        \"\"\""
+        },
+        {
+          "line": 582,
+          "text": "        p_cdf = torch.rand(*logits.shape[:-1])"
+        },
+        {
+          "line": 583,
+          "text": "        return torch.tensor("
+        },
+        {
+          "line": 584,
+          "text": "            [self.icdf(logits[i, :] / t, p) for i, p in enumerate(p_cdf.tolist())],"
+        },
+        {
+          "line": 585,
+          "text": "        )"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1148 @@
+{
+  "A": "Actual captured final CPUFloat32 softmax weights; exact normalized existing-weight reference from report98ecc, not raw GPU pre-softmax.",
+  "B": "NEW CPU TorchFloat32 softmax REPLAY of saved adjusted logits, promoted toFloat64; TorchFloat64 correctedCDF/diff then TorchFloat64 log/CPUsoftmax.",
+  "C": "NEW CPU TorchFloat64 softmax of SAME saved posttemperature/cancel Float32logits; TorchFloat64 correctedCDF/diff, log and CPUsoftmax.",
+  "actual_GPU_preclip_negative_diffs_and_clipped_mass": "UNOBSERVED; postclamp rawP or later inverseCDF cannot establish zero",
+  "actual_GPU_pretranslation_softmax_array": "UNOBSERVED/not captured",
+  "all_groups_both_supplied_U": [
+    {
+      "arm": "original",
+      "branch": "A",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": true,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        5.974072995021991,
+        6.606934946331822
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        2.9802334441193205e-07,
+        1.0132783706999103e-06
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "A",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 8,
+      "noise_only_RT64_failure_count": 8,
+      "own_stage_U": false,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        7.529397991641291,
+        32.82315415911835
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 5,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        2.9802334441193205e-07,
+        1.0132783706999103e-06
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "B",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": true,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        5.577100058924182,
+        5.904766464905823
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "B",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": false,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        6.147834687710111,
+        6.650758569239766
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "C",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": true,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        6.130906996181581,
+        6.436397752268245
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.785241198116587e-07,
+        5.881770999809783e-07
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "C",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 8,
+      "noise_only_RT64_failure_count": 8,
+      "own_stage_U": false,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        7.980646149079114,
+        8.43549804349948
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.785241198116587e-07,
+        5.881770999809783e-07
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "A",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": true,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        6.04319148281856,
+        6.661668314501999
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.172325921413948e-07,
+        1.0728834663950887e-06
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "A",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 8,
+      "noise_only_RT64_failure_count": 8,
+      "own_stage_U": false,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        7.906234280676431,
+        37.38874322821875
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 3,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.172325921413948e-07,
+        1.0728834663950887e-06
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "B",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": true,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        5.630096708715815,
+        5.959861260986081
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "B",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": false,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        6.251245713882848,
+        6.772980504959366
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "C",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": true,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        6.130907672288024,
+        6.436395295091632
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.785243110451763e-07,
+        5.881760542554212e-07
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "C",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 8,
+      "noise_only_RT64_failure_count": 8,
+      "own_stage_U": false,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        7.9806468849626455,
+        8.43549405592768
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.785243110451763e-07,
+        5.881760542554212e-07
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "A",
+      "label": "N1",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": true,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        6.1521737154243015,
+        6.374622725791241
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.172322127891244e-07,
+        5.960458129286651e-07
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "A",
+      "label": "N1",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 8,
+      "noise_only_RT64_failure_count": 8,
+      "own_stage_U": false,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        7.839906642062841,
+        8.338609623582427
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.172322127891244e-07,
+        5.960458129286651e-07
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "B",
+      "label": "N1",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": true,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        5.556739407434865,
+        5.878308650753783
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "B",
+      "label": "N1",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": false,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        6.1099604811557695,
+        6.6271429253783
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "C",
+      "label": "N1",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": true,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        6.130911207190343,
+        6.436395738219764
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.785258714144748e-07,
+        5.88176421400814e-07
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "C",
+      "label": "N1",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 8,
+      "noise_only_RT64_failure_count": 8,
+      "own_stage_U": false,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        7.9806531395825715,
+        8.43549543191523
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.785258714144748e-07,
+        5.88176421400814e-07
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "A",
+      "label": "N1",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": true,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        6.1544847054432745,
+        6.446367166779308
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.7683665574024863e-07,
+        5.960456357532784e-07
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "A",
+      "label": "N1",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 8,
+      "noise_only_RT64_failure_count": 8,
+      "own_stage_U": false,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        7.939089254585901,
+        8.338609603528965
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.7683665574024863e-07,
+        5.960456357532784e-07
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "B",
+      "label": "N1",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": true,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        5.586044426777822,
+        5.894396916392526
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "B",
+      "label": "N1",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": false,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        6.165508751339864,
+        6.627830879665136
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "C",
+      "label": "N1",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": true,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        6.130910850851458,
+        6.43639334412289
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.785257185924165e-07,
+        5.881754036573934e-07
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "C",
+      "label": "N1",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 8,
+      "noise_only_RT64_failure_count": 8,
+      "own_stage_U": false,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        7.980652560143123,
+        8.435491563722708
+      ],
+      "stage": 15,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.785257185924165e-07,
+        5.881754036573934e-07
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "A",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": false,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        6.0479993843486906,
+        6.463002642802221
+      ],
+      "stage": 19,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.1723278204253044e-07,
+        8.940691700584514e-07
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "A",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 8,
+      "noise_only_RT64_failure_count": 8,
+      "own_stage_U": true,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        7.804453886014365,
+        18.90627857951281
+      ],
+      "stage": 19,
+      "strict_noise_decode_failure_count": 3,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.1723278204253044e-07,
+        8.940691700584514e-07
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "B",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": false,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        5.466138222962197,
+        5.705064023318444
+      ],
+      "stage": 19,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "B",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": true,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        6.01325377775624,
+        6.389517618945445
+      ],
+      "stage": 19,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "C",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": false,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        6.072530025685448,
+        6.292795219124784
+      ],
+      "stage": 19,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.557539654565126e-07,
+        5.35322224703083e-07
+      ]
+    },
+    {
+      "arm": "original",
+      "branch": "C",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 8,
+      "noise_only_RT64_failure_count": 8,
+      "own_stage_U": true,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        7.8765435719534,
+        8.215596689438383
+      ],
+      "stage": 19,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.557539654565126e-07,
+        5.35322224703083e-07
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "A",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": false,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        6.016818994386667,
+        6.841760606422661
+      ],
+      "stage": 19,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.768370418079844e-07,
+        1.2516971593700312e-06
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "A",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 8,
+      "noise_only_RT64_failure_count": 8,
+      "own_stage_U": true,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        7.810361373037959,
+        49.26606653026404
+      ],
+      "stage": 19,
+      "strict_noise_decode_failure_count": 6,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.768370418079844e-07,
+        1.2516971593700312e-06
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "B",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": false,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        5.458043449947163,
+        5.671965804552887
+      ],
+      "stage": 19,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "B",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": true,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        5.9822157851757165,
+        6.28575326195693
+      ],
+      "stage": 19,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "C",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 0,
+      "noise_only_RT64_failure_count": 0,
+      "own_stage_U": false,
+      "provided_U_bits": "e0ff7f3f",
+      "quantile_range": [
+        6.072528257957698,
+        6.29279421661302
+      ],
+      "stage": 19,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.557531281492057e-07,
+        5.353217333489038e-07
+      ]
+    },
+    {
+      "arm": "candidate",
+      "branch": "C",
+      "label": "N1024",
+      "members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "noise_only_RT32_failure_count": 8,
+      "noise_only_RT64_failure_count": 8,
+      "own_stage_U": true,
+      "provided_U_bits": "f6ff7f3f",
+      "quantile_range": [
+        7.876539762950072,
+        8.215594756251111
+      ],
+      "stage": 19,
+      "strict_noise_decode_failure_count": 0,
+      "tail_mass_above_mathematical_upper_endpoint_threshold_range": [
+        4.557531281492057e-07,
+        5.353217333489038e-07
+      ]
+    }
+  ],
+  "attribution": "Built with PriorLabs-TabPFN",
+  "default_RNG_preserved": true,
+  "exact_report_sha256": "cbc8e44e62780d48e594845bd63a9c72faa76eaf7a1459d9e4dbb2210e989a5a",
+  "input_analysis_sha256": "98eccfb5b6db580f0fa3a2cd64e5765e8312c7ca960cf4c1debe68c37fee2f91",
+  "new_CPU_branch_clipping_statistics": {
+    "B": {
+      "CDF_clip_above1_range": [
+        521,
+        725
+      ],
+      "CDF_clip_above1_total": 30545,
+      "CDF_monotonicity_violations_total": 0,
+      "last_bin_mass_range": [
+        0.0,
+        0.0
+      ],
+      "negative_diff_absolute_mass_total": 0.0,
+      "negative_diff_count_total": 0,
+      "scope": "NEW CPU arithmetic branch only, never actual GPU preclip observation"
+    },
+    "C": {
+      "CDF_clip_above1_range": [
+        0,
+        0
+      ],
+      "CDF_clip_above1_total": 0,
+      "CDF_monotonicity_violations_total": 0,
+      "last_bin_mass_range": [
+        3.931584779959252e-08,
+        5.408981895715925e-08
+      ],
+      "negative_diff_absolute_mass_total": 0.0,
+      "negative_diff_count_total": 0,
+      "scope": "NEW CPU arithmetic branch only, never actual GPU preclip observation"
+    }
+  },
+  "new_neural_GPU_model_constructor_world_posterior_G3_live_sampler_or_RNG_draws": 0,
+  "post64_direct_reference_quantile_difference_max": {
+    "B": 8.881784197001252e-16,
+    "C": 3.552713678800501e-15
+  },
+  "post64_direct_reference_within_declared_diagnostic_span_tolerance": {
+    "B": true,
+    "C": true
+  },
+  "primary_execution_library_trace": {
+    "C_pre64": "TorchCPUfloat64.softmax atscriptline132",
+    "post64": "TorchCPUfloat64 log->softmax",
+    "root_independent_NumPy64_crosscheck": "separate corroboration, not silently identical arithmetic",
+    "translation": "TorchCPUfloat64 cumsum(p)-p, correctedrelative share, sourceboundary overrides/clips/diff/clamp_min0",
+    "unused_convenience_function": "NumPy softmax64 helper is defined but NOT CALLED in the primary execution path"
+  },
+  "ranked_future_decisions_not_implemented": [
+    {
+      "choice": "Higherprecision postprocessing numerical candidate C, keeping neural forwardFloat32 and same adjustedF32logits/borderbits.",
+      "limit": "Source/law/qualified version needed; C still fails existing noiseRT at focal stage19. CPUreplayB is not a valid improvement claim.",
+      "rank": 1
+    },
+    {
+      "choice": "Explicit whole-vector representability AND RTdomain rejection q|D with counted mass and fresh qualification.",
+      "limit": "Prospective policy only, never salvage/filter this failed wave, never componentwise redraw or a silent tolerance waiver.",
+      "rank": 2
+    },
+    {
+      "choice": "Broader mixed or physical-noise representation.",
+      "limit": "New representation/candidate must preserve scientific bindings and pass fresh appropriate checks; no accuracy guarantee.",
+      "rank": 3
+    },
+    {
+      "choice": "Decoder-only higherprecision/logCDF",
+      "limit": "Insufficient for the historical extremes with finalFloat64; d8 alreadylogtail. No endpoint/predecessor substitution.",
+      "rank": 4
+    }
+  ],
+  "records": 48,
+  "schema": "posteriorforge.saved_tail_postprocessing_compact_summary.v1",
+  "scope": "saved48focal CPU arithmetic only; no new production policy or recovered cohort",
+  "script_source_sha256": "79b2d2fbfbc5d085128480cebab5874ba110bcaab0be5b66dbbe22318a724a1f",
+  "source_order": {
+    "B_C_borders": "capturedFloat32 from/to merely promotedFloat64, no refit or reconstruction",
+    "average_before_softmax": false,
+    "flag_is_source_bound_not_saved_runtime_bool": true,
+    "saved_logits_already_temperature_and_cancellation_adjusted": true,
+    "selected_single_head_route": "mean(identity)->GPUlog->CPUcopy->CPUsoftmax",
+    "temperature_reapplied": false
+  },
+  "source_route_sha256": "bca101eab0ddb30c2d1103b8c804532e06b5520621d9ce4b9616efbdd59f32da",
+  "status": "diagnostic_only",
+  "wall_seconds": 7.461212672293186,
+  "warnings": [
+    "B zero tail/lowerquantiles reflect NEW CPUF32 replay overnormalization and sourceCDFclipping; not actual GPU evidence or demonstrated scientific improvement",
+    "C makes focal quantiles much smaller and stage19 endpointdecode passes, but all8botharms still fail unchanged RT32/64; no codec qualification",
+    "mathematical endpoint tail threshold is not the complete roundtrip domain; tailmass belowthreshold does not guarantee RT",
+    "both known1024/N1 windows and all8heads remain counterfactual; historical selectedmember/grouping unknown"
+  ]
+}

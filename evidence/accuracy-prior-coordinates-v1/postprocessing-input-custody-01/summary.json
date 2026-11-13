@@ -1,0 +1,293 @@
+{
+  "Torch_imported": false,
+  "actual_component_mass_semantics": "Actual GPU sum(translated raw P,dtype=Float64), copied to CPU; CPU Float64 reduction checks are recomputations, not that captured operation.",
+  "actual_pretranslation_GPU_F32_softmax_result_captured": false,
+  "actual_probabilities_semantics": "Actual CPU Float32 softmax of final API logits used in observed finite_bar_icdf. They are not pretranslation softmax probabilities.",
+  "actual_raw_translated_P_semantics": "Actual GPU corrected-CDF translated output, copied without renormalization before API GPU stack/mean/log.",
+  "boundary_pitfalls": [
+    "All8 canonical output bins share the returned target-mean/SD-renormalized criterion; from/to border arrays are in standardized latent target space and are not decoded sigma bounds.",
+    "SafePower inverse-border arrays and fitted state are captured. Do not apply the target inverse a second time to final API criterion outputs.",
+    "Corrected CDF uses Float32 cumulative-minus-current probability, clamps interpolated CDF, forces first/last target CDF0/1, differences, and clamps negative bin masses. It does not simply return its softmax input even when from==to.",
+    "A CPU softmax recomputation from saved pretranslation logits is not bit-evidence of the original GPU softmax; actual GPU pretranslation probabilities were not saved.",
+    "API GPU log then CPU softmax can renormalize/round translated masses again; raw translated P, API P, F64 raw mass and Float32 terminal CDF must remain distinct.",
+    "The saved fraction rest/p is a posthoc diagnostic temporary; frozen ICDF evaluates left+(right-left)*rest/p, so operation-order rounding may differ from left+width*fraction.",
+    "Saved -inf cancellation is an intended API input property; it must not be replaced with epsilon. No clipping, renormalization or repair is activated by this inspection."
+  ],
+  "capture_manifest_sha256": "cf11be3c542eb11c7ed9423845eb1f80fb046df59a2b85254cb9f20d25663461",
+  "first_party_callback_sources_match_recorded_capture_Git_bytes": true,
+  "full_48_focal_receipt_sha256": "9438c969cd0a58664c83f9340c5b4093d8dbd285d2b0818af9cd8be9183bc7bf",
+  "no_G3_posterior_decode_cohort_repair_source_change": true,
+  "no_model_constructor_forward_preprocessing_transform_RNG_or_softmax_calls": true,
+  "raw_model_logits_semantics": "Actual input to GPU translator after temperature0.9 division and cancellation. Untempered raw neural output and actual GPU pretranslation softmax are absent.",
+  "recommended_order": "Stage19 member0 original then candidate: target_transform=None and exact frm==to avoid fitted-transform ambiguity. Stage15 member0 original contrasts the second stage. Stage19 original member2 includes actual SafePower fitted/border state for a transform case.",
+  "recommended_scalar_cases": [
+    {
+      "CPU_minus_actual_GPU_mass": 0.0,
+      "CPU_recomputed_API_P_sum_Float64": 0.999998337306329,
+      "CPU_recomputed_translated_raw_P_sum_Float64": 1.0,
+      "actual_API_logits_last_bin": -14.332947731018066,
+      "actual_CPU_ICDF_Float32_terminal_CDF": 0.9999983310699463,
+      "actual_CPU_ICDF_softmax_P_last_bin": 5.960451403552725e-07,
+      "actual_component_raw_mass_GPU_sum_Float64": 1.0,
+      "actual_focal_row_offset": 805,
+      "actual_raw_row_zero_based": 41765,
+      "actual_translated_raw_P_last_bin": 5.960464477539062e-07,
+      "arm": "original",
+      "batch": "N1024",
+      "file": "stage19-original-member0-N1024.npz",
+      "file_sha256": "cd8a797fe4695ead13bd64962bd85070d00adecaca245f32377bfe20c7064782",
+      "from_borders_descriptor": {
+        "dtype": "<f4",
+        "sha256": "4e9e53f00186e68f15628f55647b44d4b790039c2d155da14606cd493eda4a83",
+        "shape": [
+          5001
+        ]
+      },
+      "from_to_exact_equal": true,
+      "historical_U_scalar_case": {
+        "CDF_before": 0.9999977350234985,
+        "P_selected": 5.960451403552725e-07,
+        "U": 0.9999994039535522,
+        "bin": 4999,
+        "fraction_diagnostic_F32": 2.800006151199341,
+        "output": 193.3621826171875,
+        "rest": 1.6689300537109375e-06
+      },
+      "member": 0,
+      "pretranslation_logits_focal_descriptor": {
+        "dtype": "<f4",
+        "sha256": "6df1f1456538ed132612cda9e12e8838a564a6902367d35340d691c8423bf5c3",
+        "shape": [
+          5000
+        ]
+      },
+      "returned_criterion_borders": {
+        "descriptor": {
+          "dtype": "<f4",
+          "sha256": "ba39708a489978d821ab6e6d82b3f57af2af89c0d78e0502a48567349920310c",
+          "shape": [
+            5001
+          ]
+        },
+        "first": -92.5218505859375,
+        "last": 86.4041519165039
+      },
+      "stage": 19,
+      "target_mean": -0.0055904993787407875,
+      "target_sd": 0.9938715696334839,
+      "target_transform_type": null,
+      "temperature": 0.9,
+      "to_borders_descriptor": {
+        "dtype": "<f4",
+        "sha256": "4e9e53f00186e68f15628f55647b44d4b790039c2d155da14606cd493eda4a83",
+        "shape": [
+          5001
+        ]
+      }
+    },
+    {
+      "CPU_minus_actual_GPU_mass": 0.0,
+      "CPU_recomputed_API_P_sum_Float64": 0.9999983378523303,
+      "CPU_recomputed_translated_raw_P_sum_Float64": 1.0,
+      "actual_API_logits_last_bin": -14.689621925354004,
+      "actual_CPU_ICDF_Float32_terminal_CDF": 0.9999983310699463,
+      "actual_CPU_ICDF_softmax_P_last_bin": 4.1723211552380235e-07,
+      "actual_component_raw_mass_GPU_sum_Float64": 1.0,
+      "actual_focal_row_offset": 805,
+      "actual_raw_row_zero_based": 41765,
+      "actual_translated_raw_P_last_bin": 4.172325134277344e-07,
+      "arm": "candidate",
+      "batch": "N1024",
+      "file": "stage19-candidate-member0-N1024.npz",
+      "file_sha256": "38d1d2aef5d2994c1be7acbf99beac6712cd88b094bc2227f54bb4e1d2876add",
+      "from_borders_descriptor": {
+        "dtype": "<f4",
+        "sha256": "4e9e53f00186e68f15628f55647b44d4b790039c2d155da14606cd493eda4a83",
+        "shape": [
+          5001
+        ]
+      },
+      "from_to_exact_equal": true,
+      "historical_U_scalar_case": {
+        "CDF_before": 0.9999979138374329,
+        "P_selected": 4.1723211552380235e-07,
+        "U": 0.9999994039535522,
+        "bin": 4999,
+        "fraction_diagnostic_F32": 3.571431875228882,
+        "output": 239.20098876953125,
+        "rest": 1.4901161193847656e-06
+      },
+      "member": 0,
+      "pretranslation_logits_focal_descriptor": {
+        "dtype": "<f4",
+        "sha256": "ae2f506173bab58da3a28aacd378d901ed4602ea5a417b60b61e579c96c01f56",
+        "shape": [
+          5000
+        ]
+      },
+      "returned_criterion_borders": {
+        "descriptor": {
+          "dtype": "<f4",
+          "sha256": "ba39708a489978d821ab6e6d82b3f57af2af89c0d78e0502a48567349920310c",
+          "shape": [
+            5001
+          ]
+        },
+        "first": -92.5218505859375,
+        "last": 86.4041519165039
+      },
+      "stage": 19,
+      "target_mean": -0.0055904993787407875,
+      "target_sd": 0.9938715696334839,
+      "target_transform_type": null,
+      "temperature": 0.9,
+      "to_borders_descriptor": {
+        "dtype": "<f4",
+        "sha256": "4e9e53f00186e68f15628f55647b44d4b790039c2d155da14606cd493eda4a83",
+        "shape": [
+          5001
+        ]
+      }
+    },
+    {
+      "CPU_minus_actual_GPU_mass": 0.0,
+      "CPU_recomputed_API_P_sum_Float64": 0.9999987156323793,
+      "CPU_recomputed_translated_raw_P_sum_Float64": 1.0,
+      "actual_API_logits_last_bin": -14.843772888183594,
+      "actual_CPU_ICDF_Float32_terminal_CDF": 0.9999986886978149,
+      "actual_CPU_ICDF_softmax_P_last_bin": 3.576272433747363e-07,
+      "actual_component_raw_mass_GPU_sum_Float64": 1.0,
+      "actual_focal_row_offset": 259,
+      "actual_raw_row_zero_based": 4355,
+      "actual_translated_raw_P_last_bin": 3.5762786865234375e-07,
+      "arm": "original",
+      "batch": "N1024",
+      "file": "stage15-original-member0-N1024.npz",
+      "file_sha256": "b49b235877199f5542073076b3c5186bfd87240a707713df03941341f72fe6e4",
+      "from_borders_descriptor": {
+        "dtype": "<f4",
+        "sha256": "4e9e53f00186e68f15628f55647b44d4b790039c2d155da14606cd493eda4a83",
+        "shape": [
+          5001
+        ]
+      },
+      "from_to_exact_equal": true,
+      "historical_U_scalar_case": {
+        "CDF_before": 0.9999980330467224,
+        "P_selected": 5.960453819398026e-08,
+        "U": 0.9999980926513672,
+        "bin": 4661,
+        "fraction_diagnostic_F32": 1.0000017881393433,
+        "output": 8.844069480895996,
+        "rest": 5.960464477539063e-08
+      },
+      "member": 0,
+      "pretranslation_logits_focal_descriptor": {
+        "dtype": "<f4",
+        "sha256": "e8adf3aed7c81f20e13fa9e885b62e58397850bdf3d241cf99a3c2ad3a53ffe2",
+        "shape": [
+          5000
+        ]
+      },
+      "returned_criterion_borders": {
+        "descriptor": {
+          "dtype": "<f4",
+          "sha256": "334a462a1c4bc889ceae61a265b1e80296cbe528911ebe69cba667aee0b7b24f",
+          "shape": [
+            5001
+          ]
+        },
+        "first": -93.85807037353516,
+        "last": 87.60953521728516
+      },
+      "stage": 15,
+      "target_mean": -0.027640938758850098,
+      "target_sd": 1.0079892873764038,
+      "target_transform_type": null,
+      "temperature": 0.9,
+      "to_borders_descriptor": {
+        "dtype": "<f4",
+        "sha256": "4e9e53f00186e68f15628f55647b44d4b790039c2d155da14606cd493eda4a83",
+        "shape": [
+          5001
+        ]
+      }
+    },
+    {
+      "CPU_minus_actual_GPU_mass": 0.0,
+      "CPU_recomputed_API_P_sum_Float64": 0.9999985781505947,
+      "CPU_recomputed_translated_raw_P_sum_Float64": 1.0000004172325134,
+      "actual_API_logits_last_bin": -14.332947731018066,
+      "actual_CPU_ICDF_Float32_terminal_CDF": 0.9999985694885254,
+      "actual_CPU_ICDF_softmax_P_last_bin": 5.960450835118536e-07,
+      "actual_component_raw_mass_GPU_sum_Float64": 1.0000004172325134,
+      "actual_focal_row_offset": 805,
+      "actual_raw_row_zero_based": 41765,
+      "actual_translated_raw_P_last_bin": 5.960464477539062e-07,
+      "arm": "original",
+      "batch": "N1024",
+      "file": "stage19-original-member2-N1024.npz",
+      "file_sha256": "ee03ff714ff0fc78c3a9c796bb673667cbeb9a64240b0b395118508a78ea645e",
+      "from_borders_descriptor": {
+        "dtype": "<f4",
+        "sha256": "cb7017eba4784029d1f0033269713e89cbf8c4ce75319a766a333b8182136692",
+        "shape": [
+          5001
+        ]
+      },
+      "from_to_exact_equal": false,
+      "historical_U_scalar_case": {
+        "CDF_before": 0.9999979734420776,
+        "P_selected": 5.960450835118536e-07,
+        "U": 0.9999994039535522,
+        "bin": 4999,
+        "fraction_diagnostic_F32": 2.400005578994751,
+        "output": 169.59376525878906,
+        "rest": 1.430511474609375e-06
+      },
+      "member": 2,
+      "pretranslation_logits_focal_descriptor": {
+        "dtype": "<f4",
+        "sha256": "ccdb6ec4d57d99fc1ebd4effe4ebf02185a3d216ef6fd19e9733b78869130d09",
+        "shape": [
+          5000
+        ]
+      },
+      "returned_criterion_borders": {
+        "descriptor": {
+          "dtype": "<f4",
+          "sha256": "ba39708a489978d821ab6e6d82b3f57af2af89c0d78e0502a48567349920310c",
+          "shape": [
+            5001
+          ]
+        },
+        "first": -92.5218505859375,
+        "last": 86.4041519165039
+      },
+      "stage": 19,
+      "target_mean": -0.0055904993787407875,
+      "target_sd": 0.9938715696334839,
+      "target_transform_type": "sklearn.pipeline.Pipeline",
+      "temperature": 0.9,
+      "to_borders_descriptor": {
+        "dtype": "<f4",
+        "sha256": "4e9e53f00186e68f15628f55647b44d4b790039c2d155da14606cd493eda4a83",
+        "shape": [
+          5001
+        ]
+      }
+    }
+  ],
+  "record_count": 48,
+  "recorded_capture_commit": "375426be0041974405d454b14fc4860447d8ccd8",
+  "schema": "posteriorforge.tail_postprocessing_input_custody.v1",
+  "source_hashes": {
+    "/home/it4i-bbenvegnen/workspace/PosteriorForge/scripts/diagnose_prior_tail_conditionals_v1.py": "883fb5840cf3460fa5162b34d0fc24a43b43d70bb3bcff3585d0cfd3e483cc38",
+    "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/compat_cdf.py": "7a86fbbefdb0fa7e850a394bea8af710c2e5f0139c10cdce1fd272fb9709eec0",
+    "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/execution_hybrid.py": "5dfdefa870489ded594de1db13a55a3da5948c720d7a9fd587ebe3a8f8be00a2",
+    "/home/it4i-bbenvegnen/workspace/PosteriorForge/src/posteriorforge/execution_mixture.py": "e71f43b73ae8259c20b5d7b52feccc7c851e9a2fbb86d869bc0a5f7f3af792a1",
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib/python3.11/site-packages/tabpfn/regressor.py": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/lib/python3.11/site-packages/tabpfn/utils.py": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1"
+  },
+  "status": "saved_focal_array_and_source_inspection_complete"
+}
