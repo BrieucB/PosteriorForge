@@ -1,0 +1,62 @@
+{
+  "command": [
+    "/scratch/project/eu-26-17/eubrieucb/posteriorforge/envs/inference/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/test_prior_pair_downstream_v2.py"
+  ],
+  "cwd": "/home/it4i-bbenvegnen/workspace/PosteriorForge",
+  "elapsed_wall_seconds": 5.606730028986931,
+  "environment_name": "inference",
+  "exit_code": 0,
+  "explicit_environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "PYTHONPATH": "src"
+  },
+  "finished_UTC": "2026-11-13T02:38:28.559129+00:00",
+  "passed_case0_screen": {
+    "after_sha256": "aa8aff311d8f7fab6d774337510bb5f66abed309300c995267e98fa7f3e2a88e",
+    "before_sha256": "aa8aff311d8f7fab6d774337510bb5f66abed309300c995267e98fa7f3e2a88e",
+    "numerical_replay_scope": "existing guards independently replayed by Model; this downstream suite does not rerun numerical inference",
+    "path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/pair-conditionals-v2-seed20261111-case0-01/manifest.json"
+  },
+  "scope": "Existing59 CPU plumbing tests after ONLY producer registry data/pin activation; no new numerical/helper code, neural/posterior/G3/GPU run",
+  "source_after": {
+    "docs/accuracy-prior-coordinate-fixed-panel-v1.md": "9fc6a91568864cc996dafbcfaa41e77280e4825c63f61d455bdadf3703cd0a66",
+    "docs/accuracy-prior-coordinate-native-control-v2.md": "8640a4e157698862823521d3fd14396ecc3ebf121dffffabc987cc937d3ad2fc",
+    "scripts/evaluate_prior_pair_v1.py": "f16e13bb251ff195ed1c7f23a2045c806f7c1bc027665671d2d58e6a98246f1d",
+    "scripts/evaluate_prior_pair_v2.py": "61eb7b6c1546a0401cc25518adaba0a444ae2a09a83dd5a23745b8c337ceb1d7",
+    "scripts/preflight_prior_coordinate_pairs_v1.py": "b69a92b59fa504bce22e34dc31895f9162870425118764293f959c46390110e4",
+    "scripts/qualify_prior_coordinate_pair_v2.py": "a9f4d6818c030ac29587642fa744101c49b9f4a5fd192ab224c0f273f770e875",
+    "scripts/refresh_prior_pair_global_block_v1.py": "22e57084351631f36c6989cc01fe8bf4f2827095e587c496cda2e7f368d3cdb9",
+    "scripts/refresh_prior_pair_v2_global_block.py": "16524299f46166bab135be91ef7d31ceb780126508ca48ea33ca84a030010b74",
+    "src/posteriorforge/execution_prior_native_v2.py": "0199b16e9cc34203fa0d5645d161742fe9ed244633d7beee047fbcbf2528661c",
+    "src/posteriorforge/performance_prior_pair_v2.py": "311f2cbfb3c3bd977ff9af348cd81a008c3c7711ec70f850fb25b3bc2d120a85",
+    "src/posteriorforge/prior_coordinate_pair_v1.py": "402117cad65af190352cb0b14977fbbdc896f196d069749b0be28608fdef400e",
+    "tests/test_prior_pair_downstream_v2.py": "5ca37ac9dfb4d73d5732baf38b5be420f369d3fa6c9837ff6127d982ed5af998"
+  },
+  "source_before": {
+    "docs/accuracy-prior-coordinate-fixed-panel-v1.md": "9fc6a91568864cc996dafbcfaa41e77280e4825c63f61d455bdadf3703cd0a66",
+    "docs/accuracy-prior-coordinate-native-control-v2.md": "8640a4e157698862823521d3fd14396ecc3ebf121dffffabc987cc937d3ad2fc",
+    "scripts/evaluate_prior_pair_v1.py": "f16e13bb251ff195ed1c7f23a2045c806f7c1bc027665671d2d58e6a98246f1d",
+    "scripts/evaluate_prior_pair_v2.py": "61eb7b6c1546a0401cc25518adaba0a444ae2a09a83dd5a23745b8c337ceb1d7",
+    "scripts/preflight_prior_coordinate_pairs_v1.py": "b69a92b59fa504bce22e34dc31895f9162870425118764293f959c46390110e4",
+    "scripts/qualify_prior_coordinate_pair_v2.py": "a9f4d6818c030ac29587642fa744101c49b9f4a5fd192ab224c0f273f770e875",
+    "scripts/refresh_prior_pair_global_block_v1.py": "22e57084351631f36c6989cc01fe8bf4f2827095e587c496cda2e7f368d3cdb9",
+    "scripts/refresh_prior_pair_v2_global_block.py": "16524299f46166bab135be91ef7d31ceb780126508ca48ea33ca84a030010b74",
+    "src/posteriorforge/execution_prior_native_v2.py": "0199b16e9cc34203fa0d5645d161742fe9ed244633d7beee047fbcbf2528661c",
+    "src/posteriorforge/performance_prior_pair_v2.py": "311f2cbfb3c3bd977ff9af348cd81a008c3c7711ec70f850fb25b3bc2d120a85",
+    "src/posteriorforge/prior_coordinate_pair_v1.py": "402117cad65af190352cb0b14977fbbdc896f196d069749b0be28608fdef400e",
+    "tests/test_prior_pair_downstream_v2.py": "5ca37ac9dfb4d73d5732baf38b5be420f369d3fa6c9837ff6127d982ed5af998"
+  },
+  "source_unchanged": true,
+  "started_UTC": "2026-11-13T02:38:22.950355+00:00",
+  "stdout_stderr_file": "inference-pytest.txt",
+  "stdout_stderr_sha256": "860e3472b306852abd3159c51a798094c20e1149cbed2171c74e668470e0b2b1",
+  "versions": {
+    "numpy": "1.26.4",
+    "python": "3.11.13",
+    "scipy": "1.12.0"
+  }
+}

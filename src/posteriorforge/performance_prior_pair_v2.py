@@ -39,7 +39,7 @@ QUALIFIER_SHA256 = "a9f4d6818c030ac29587642fa744101c49b9f4a5fd192ab224c0f273f770
 PAIR_CPU_RECEIPT_SHA256 = "6f35d9d090a955604186c5fbf3312b82465eff6fdae7e4cd24a23b646dbdf193"
 # Numerical proof sources exclude this data/orchestration-only registry.
 # Root inserts only a completed same-pair proof after its independent audit.
-QUALIFICATION_SHA256_BY_PAIR = {}
+QUALIFICATION_SHA256_BY_PAIR = {(20261111, 0): "aa8aff311d8f7fab6d774337510bb5f66abed309300c995267e98fa7f3e2a88e"}
 COUNT = 50000
 MODE = ancestor.failed.MODE
 backend = native_v2

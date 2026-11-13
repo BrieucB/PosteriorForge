@@ -22,7 +22,7 @@ for _key,_value in vars(_ANCESTOR).items():
   _clone=FunctionType(_value.__code__,globals(),_value.__name__,_value.__defaults__,_value.__closure__)
   _clone.__kwdefaults__=_value.__kwdefaults__;globals()[_key]=_clone
 SCHEMA="posteriorforge.prior_coordinate_pair_assessment.v2"
-WRAPPER_SHA256='74cb52b451b1f99987445e73de7f27232acff6e8fb6de875d398e0002524ebc3'
+WRAPPER_SHA256='16524299f46166bab135be91ef7d31ceb780126508ca48ea33ca84a030010b74'
 LABELS=("OLD matched physical-target neural mixed FP16/FP32 + physical G3",
  "NEW v2 prior coordinates FP32\n18 cached; all8 original at6/10/14",
  "NEW same v2 parent + ONE SEPARATE physical G3","qualified same-case reference")

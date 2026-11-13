@@ -1,0 +1,172 @@
+{
+  "NPZ_or_arrays_included": false,
+  "Slurm_process_state": "COMPLETED",
+  "all21_fresh_finite_screen_passed": true,
+  "all_ICDF_comparisons_passed": true,
+  "all_final_mixture_comparisons_passed": true,
+  "allocated_gpu_seconds": 433,
+  "cached_stage_count": 18,
+  "compatibility_adapter": {
+    "activation": "explicit",
+    "active_translator_code_sha256": "8a13551c263346388cee3326e17daabcae89274dd7fa9dcf0f07aded35498367",
+    "adapter_id": "tabpfn-2.0.9-finite-cdf-parentheses-v1",
+    "adapter_sha256": "7a86fbbefdb0fa7e850a394bea8af710c2e5f0139c10cdce1fd272fb9709eec0",
+    "adapter_version": 1,
+    "corrected_cdf_code_sha256": "ae3c7d841ba63f2fd27f7a317848834bdf4bcf5330c780e5dad6dd678b4ba140",
+    "correction": "finite_cdf_parentheses_only",
+    "exact_patch_target": "tabpfn.regressor.translate_probs_across_borders.__globals__['_cdf']",
+    "executed_corrected_cdf_code_sha256": "ae3c7d841ba63f2fd27f7a317848834bdf4bcf5330c780e5dad6dd678b4ba140",
+    "execution_optimized": false,
+    "original_alias_identity_verified": true,
+    "original_alias_restored": true,
+    "original_cdf_code_sha256": "5e7eebe9521dba64daa2148b35d0ff4f8d88f618a1193cb2b6ea3404249c4945",
+    "original_translator_code_sha256": "8a13551c263346388cee3326e17daabcae89274dd7fa9dcf0f07aded35498367",
+    "patched_call_count": 1008,
+    "schema": "posteriorforge.compat.finite_cdf.v1",
+    "scope": "finite_ensemble_cdf_parentheses_only",
+    "sdk_aliases_unchanged": true,
+    "sdk_files_modified": false,
+    "sdk_source_sha256": {
+      "tabpfn/regressor.py": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "tabpfn/utils.py": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1"
+    },
+    "sdk_source_sha256_after": {
+      "tabpfn/regressor.py": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "tabpfn/utils.py": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1"
+    },
+    "sdk_sources_unchanged": true,
+    "source_guard_passed": true,
+    "tabpfn_version": "2.0.9",
+    "tail_family_changed": false,
+    "translator_code_unchanged": true,
+    "variant": "cdf_arithmetic_v1"
+  },
+  "elapsed_screen_seconds": 426.4734170259908,
+  "failed_stages": [],
+  "global_RNG_preserved": true,
+  "gpus": 1,
+  "hard_validity_all21_passed": true,
+  "ignored_child_step_ids": [
+    "5411500.batch",
+    "5411500.extern"
+  ],
+  "literal_screen_status": "prior_coordinate_pair_v2_screen_pass",
+  "logs": [
+    {
+      "bytes": 291,
+      "file": "stdout.log",
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/logs/pf-prior-pair0-v2-screen-5411500.out",
+      "scope": "exact closed Slurm stream",
+      "sha256": "2a166d9b9102f88561555315f3ab3796241dfede2721fef627a00236932fc7e2"
+    },
+    {
+      "bytes": 0,
+      "file": "stderr.log",
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/logs/pf-prior-pair0-v2-screen-5411500.err",
+      "scope": "exact closed Slurm stream",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "main_allocation_only": "main Slurm allocation only; batch/extern never added",
+  "manifest_bytes": 18486492,
+  "manifest_sha256": "aa8aff311d8f7fab6d774337510bb5f66abed309300c995267e98fa7f3e2a88e",
+  "native_all8_stages": [
+    6,
+    10,
+    14
+  ],
+  "no_requeue": true,
+  "other_pair_or_case2_v1_numerical_credit_transferred": false,
+  "pair": {
+    "case": 0,
+    "context_seed": 20261111,
+    "context_size": 4096,
+    "count": 50000,
+    "repetition": 0
+  },
+  "posterior_accuracy_or_population_calibration_claimed": false,
+  "posterior_vectors_generated": 0,
+  "project_ledger_after": {
+    "actual_gpu_hours": 28.9275,
+    "actual_gpu_seconds": 104139,
+    "cap_exceeded": false,
+    "cap_gpu_hours": 200,
+    "remaining_gpu_hours": 171.0725,
+    "remaining_gpu_seconds": 615861,
+    "reservation_count": 126,
+    "reserved_gpu_hours": 0.0,
+    "reserved_gpu_seconds": 0
+  },
+  "raw_gzip_sha256": "d37832c4dd24ce3dc523d8a47f54b19d55b8779e10d3bad8cdcb4a1d37a7c81f",
+  "recorded_allocation_new_G3_updates": 0,
+  "recorded_allocation_posterior_submitted": false,
+  "recorded_numeric_maxima": {
+    "final_mixtures": {
+      "max_cdf_absolute_error": {
+        "query_label": "1024",
+        "stage_index": 16,
+        "value": 3.5332062232606987e-06
+      },
+      "max_normalization_error": {
+        "query_label": "1024",
+        "stage_index": 6,
+        "value": 4.111342594259604e-06
+      },
+      "max_probability_absolute_error": {
+        "query_label": "1024",
+        "stage_index": 8,
+        "value": 1.7136316898813675e-07
+      },
+      "max_row_total_variation": {
+        "query_label": "stress",
+        "stage_index": 9,
+        "value": 1.652503706850439e-05
+      }
+    },
+    "members": {
+      "max_cdf_absolute_error": {
+        "member_index": 0,
+        "query_label": "1024",
+        "stage_index": 16,
+        "value": 1.3589859008789062e-05
+      },
+      "max_normalization_error": {
+        "member_index": 6,
+        "query_label": "stress",
+        "stage_index": 13,
+        "value": 3.0994415283203125e-06
+      },
+      "max_probability_absolute_error": {
+        "member_index": 6,
+        "query_label": "1024",
+        "stage_index": 15,
+        "value": 5.960464477539062e-07
+      },
+      "max_row_total_variation": {
+        "member_index": 7,
+        "query_label": "stress",
+        "stage_index": 5,
+        "value": 3.84598970413208e-05
+      }
+    },
+    "native_stage_max_member_CDF": {
+      "10": 0.0,
+      "14": 0.0,
+      "6": 0.0
+    },
+    "scope": "maxima of recorded scalar diagnostics only; no NN/CDF/array recomputation",
+    "thresholds": {
+      "max_cdf_absolute": 2e-05,
+      "max_row_total_variation": 0.0001,
+      "normalization_absolute": 1e-05,
+      "quantile_coordinate_span_fraction": 2e-06
+    }
+  },
+  "reference_integrations": 0,
+  "restarts": 0,
+  "runtime_exception_fields_present": [],
+  "schema": "posteriorforge.prior_coordinate_pair_v2_screen_evidence.v1",
+  "sources_unchanged": true,
+  "speed_gain_or_isolated_route_cost_claimed": false,
+  "v1_failure_reclassified": false
+}

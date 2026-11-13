@@ -1,0 +1,67 @@
+{
+  "CI": {
+    "conclusion": "success",
+    "id": 43351578320,
+    "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43351578320"
+  },
+  "CI_verification_scope": "Root-recorded exact launch preflight; no additional API audit during curation",
+  "CPU_panel_receipt_sha256": "6f35d9d090a955604186c5fbf3312b82465eff6fdae7e4cd24a23b646dbdf193",
+  "GPU_or_ledger_action_by_curation": false,
+  "arrays_or_NPZ_copied": false,
+  "authorization": "ONLY fresh v2 first-pair screen; no posterior reservation unless actual v2 screen passes",
+  "cached_stage_count": 18,
+  "checkout_names_are_not_live_process_inventory": true,
+  "exact_committed_sources_as_recorded": {
+    "docs/accuracy-prior-coordinate-native-control-v2.md": "8640a4e157698862823521d3fd14396ecc3ebf121dffffabc987cc937d3ad2fc",
+    "scripts/qualify_prior_coordinate_pair_v2.py": "a9f4d6818c030ac29587642fa744101c49b9f4a5fd192ab224c0f273f770e875",
+    "src/posteriorforge/execution_prior_native_v2.py": "0199b16e9cc34203fa0d5645d161742fe9ed244633d7beee047fbcbf2528661c",
+    "src/posteriorforge/performance_prior_pair_v2.py": "9260a7bdb3bbd3e593f8e0c754fdc8c3f0ca32d87978d14e3394209e1d33866d"
+  },
+  "job_id": "5411500",
+  "launch_time_GPU_reservation_seconds": 1200,
+  "native_all8_stages": [
+    6,
+    10,
+    14
+  ],
+  "no_model_preflight_receipt_sha256": "4f5dc1d89288f65433dcf7ab84ed4a681841fcd5a84d0e039114daa9e326b60c",
+  "no_requeue_recorded": true,
+  "pair": {
+    "case": 0,
+    "context_seed": 20261111,
+    "context_size": 4096,
+    "count": 50000,
+    "repetition": 0
+  },
+  "posterior_or_physical_accuracy_claimed": false,
+  "raw_submission_zero_actual_GPU_seconds_is_launch_bookkeeping_not_final_cost": true,
+  "reservation_id": "a2b1da54e2194f3bb00be186cb7428fa",
+  "schema": "posteriorforge.prior_coordinate_pair_v2_launch_evidence.v1",
+  "scope": "Root launch/CI snapshots only; no screen result, terminal cost or posterior included",
+  "screen_completion_or_numerical_pass_claimed": false,
+  "screen_result_copied": false,
+  "source_commit": "dcc084e6f8b3a9490290e31027560973f766bf6a",
+  "source_inventory_check": {
+    "committed_HEAD_exact": true,
+    "current_checkout_exact": true,
+    "external_libraries": "existing pinned SDK/PyTorch source and runtime version guards are retained; third-party binaries are not Git blobs",
+    "inventory_sha256": "edae96e0a5aa7f8a84b3d699636bf041f30fdf8dd4ff263c47fce2f68f6374ae",
+    "own_source_checked_separately_to_avoid_recursive_hash": true,
+    "schema": "posteriorforge.prior_coordinate_pair_runtime_sources.v2",
+    "source_count": 155
+  },
+  "source_snapshots": {
+    "preflight.json": "7da236aedca2635f9f5854b59c0c8d739c12269d550376c33cef51b79c612725",
+    "submission.json": "88093d10de6df860334a7e51175f65ddc77f325aee1b34a05e4502160a8cf783"
+  },
+  "terminal_Slurm_accounting_included": false,
+  "untracked_paths_at_preflight": [
+    "scripts/diagnose_host_reuse.py",
+    "scripts/evaluate_ss15_campaign.py",
+    "src/posteriorforge/execution_tail_observer.py",
+    "tests/test_execution_tail_observer.py",
+    "tests/test_host_reuse_diagnostic.py"
+  ],
+  "untracked_scope": "read-only checkout names, not a live-process module inventory",
+  "v1_or_case2_numerical_credit_transferred": false
+}

@@ -394,3 +394,35 @@ def test_untampered_private_v2_run_guard_passes_with_only_source_commit_boundary
     assert fn.__globals__["require_sources"]() is True
     assert fn.__globals__["engine_scope"].__wrapped__.__globals__["require_sources"]() is True
     assert all(p.ancestor._RUN_BODY.__globals__[key] is value for key, value in before.items())
+
+
+def test_actual_registered_same_pair_v2_proof_positive_replay():
+    """Actual positive proof/interface replay; no mocks, NN, GPU or new draws."""
+    from pathlib import Path
+    root = Path("/scratch/project/eu-26-17/eubrieucb/posteriorforge")
+    phase = root / "results/accuracy-prior-coordinates-v1"
+    proof = phase / "pair-conditionals-v2-seed20261111-case0-01/manifest.json"
+    if not proof.is_file():
+        pytest.skip("actual completed v2 case0 conditional artifact unavailable")
+    owner = spec()
+    assert p.qualification_sha256(owner) == "aa8aff311d8f7fab6d774337510bb5f66abed309300c995267e98fa7f3e2a88e"
+    context, query, raw = p.pairs.raw_inputs(owner, banks=root / "results/banks-v1")
+    _, _, _, model, _ = p.model_bindings(context, query)
+    repo = Path(p.__file__).resolve().parents[2]
+    before = state()
+    document, receipt = p.qualification_receipt(
+        proof, spec=owner, banks=root / "results/banks-v1",
+        pair_cpu_receipt=phase / "pair-preflight-combined-01/receipt.json",
+        raw_bindings=raw, model_inputs=model,
+        codec_inventory=phase / "codec-inventory-inference-01/manifest.json",
+        codec_reference_inventory=phase / "codec-inventory-reference-01/manifest.json",
+        codec_combined_inventory=repo / "evidence/accuracy-prior-coordinates-v1/codec-inventory-01/CPU-receipt.json",
+        completed_grid=root / "results/accuracy-ss15-v1/sigma-native-grid-completion-01/completion.json",
+        prefix_run=root / "results/accuracy-ss15-v1/sigma-native-pilot-01",
+        failed_screen=phase / "conditionals-01/manifest.json")
+    assert document["schema"] == p.QUALIFICATION_SCHEMA and document["status"] == p.QUALIFICATION_STATUS
+    assert document["matching_FP32_execution_passed_all21"] is True
+    assert document["FP32_failed_stages"] == [] and receipt["replay"]["passed"] is True
+    assert receipt["replay"]["native_all8_stages"] == [6, 10, 14]
+    assert document["compatibility_adapter"]["patched_call_count"] == 1008
+    assert state() == before

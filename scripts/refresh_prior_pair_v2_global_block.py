@@ -25,7 +25,7 @@ for _key,_value in vars(_ANCESTOR).items():
   _clone.__kwdefaults__=_value.__kwdefaults__;globals()[_key]=_clone
 
 SCHEMA="posteriorforge.prior_coordinate_pair_global_refresh.v2"
-PRODUCER_SHA256="9260a7bdb3bbd3e593f8e0c754fdc8c3f0ca32d87978d14e3394209e1d33866d"
+PRODUCER_SHA256="311f2cbfb3c3bd977ff9af348cd81a008c3c7711ec70f850fb25b3bc2d120a85"
 PRODUCER_SCHEMA="posteriorforge.inference.prior_coordinate_pair.v2"
 PRODUCER_VARIANT="accuracy_prior_coordinates_pair_native_fp32_physical_f64_fifo_v2"
 PAIR_QUALIFIER_SHA256="a9f4d6818c030ac29587642fa744101c49b9f4a5fd192ab224c0f273f770e875"

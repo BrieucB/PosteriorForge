@@ -1,0 +1,62 @@
+{
+  "final_mixtures": {
+    "max_cdf_absolute_error": {
+      "query_label": "1024",
+      "stage_index": 16,
+      "value": 3.5332062232606987e-06
+    },
+    "max_normalization_error": {
+      "query_label": "1024",
+      "stage_index": 6,
+      "value": 4.111342594259604e-06
+    },
+    "max_probability_absolute_error": {
+      "query_label": "1024",
+      "stage_index": 8,
+      "value": 1.7136316898813675e-07
+    },
+    "max_row_total_variation": {
+      "query_label": "stress",
+      "stage_index": 9,
+      "value": 1.652503706850439e-05
+    }
+  },
+  "members": {
+    "max_cdf_absolute_error": {
+      "member_index": 0,
+      "query_label": "1024",
+      "stage_index": 16,
+      "value": 1.3589859008789062e-05
+    },
+    "max_normalization_error": {
+      "member_index": 6,
+      "query_label": "stress",
+      "stage_index": 13,
+      "value": 3.0994415283203125e-06
+    },
+    "max_probability_absolute_error": {
+      "member_index": 6,
+      "query_label": "1024",
+      "stage_index": 15,
+      "value": 5.960464477539062e-07
+    },
+    "max_row_total_variation": {
+      "member_index": 7,
+      "query_label": "stress",
+      "stage_index": 5,
+      "value": 3.84598970413208e-05
+    }
+  },
+  "native_stage_max_member_CDF": {
+    "10": 0.0,
+    "14": 0.0,
+    "6": 0.0
+  },
+  "scope": "maxima of recorded scalar diagnostics only; no NN/CDF/array recomputation",
+  "thresholds": {
+    "max_cdf_absolute": 2e-05,
+    "max_row_total_variation": 0.0001,
+    "normalization_absolute": 1e-05,
+    "quantile_coordinate_span_fraction": 2e-06
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "README.txt": "8fa2bad6396fb83b412fa2e185ee04fba28344dabad0e99e5c848a5df3f4c879",
+  "inference-junit.xml": "9d21fcc8234757b2481892c63b4dceabf33aae1fa4845fced3b9fb40e7338e75",
+  "inference.log": "c62ac1a1c8fce04e037151200154f5d6ca8f8cf3afaa84db14c16bf367b4aa6e",
+  "proof-replay.json": "1c52fa57a51172a09810c694f62fc309a7f627f57d38f38cba1968c41718c458",
+  "reference-junit.xml": "4d0aa57c1c96eba17a709760be974341a1fa88add22b7446fe799cca5b9dac32",
+  "reference.log": "9d6726995eac610e47e7d6253ac0f4a3484ff9c47cabd13fd761754f435905bc",
+  "tests-receipt.json": "a5b6e499e1b0e5a99c1a040d8345b4b7bb115bc182a2303e0026d7f5553fec40"
+}
