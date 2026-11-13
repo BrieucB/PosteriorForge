@@ -1,0 +1,5 @@
+...................................s                                     [100%]
+- generated xml file: /scratch/project/eu-26-17/eubrieucb/posteriorforge/results/accuracy-prior-coordinates-v1/pair-v2-production-cpu-tests-01/reference-junit.xml -
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_performance_prior_pair_fixture_v2.py:30: could not import 'torch': No module named 'torch'
+35 passed, 1 skipped in 6.75s
