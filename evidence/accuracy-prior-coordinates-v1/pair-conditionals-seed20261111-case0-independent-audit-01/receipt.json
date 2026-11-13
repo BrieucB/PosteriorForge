@@ -1,0 +1,339 @@
+{
+  "CDF_alias_and_SDK_source_restoration_verified": true,
+  "CPU_audit_seconds": 5.487328117713332,
+  "FP16_activated": false,
+  "actual_CDF_calls": 1008,
+  "actual_CDF_calls_per_arm": 504,
+  "all21_existing_stage_decisions_replayed": true,
+  "all21_final_mixtures_and_ICDFv2_passed": true,
+  "all21_hard_validity_passed": true,
+  "all21_recorded_stage_RNG_before_after_hashes_equal": true,
+  "allocation_receipt_sha256": "9ee6c03d940410597cce304fc65593612b2891d81745561ed5c1d7c7082401e8",
+  "allocation_scope": "Saved Root-reconciled receipt/sacct authenticated only; no accounting/scheduler mutation",
+  "attribution": "Built with PriorLabs-TabPFN",
+  "audit_NumPy_Python_default_RNG_unchanged": true,
+  "cached19_recorded_cold_after_contracts_equal": true,
+  "candidate_revision_from_saved_allocation": "2770468bdf6276c3a1b4492732d01c720d19923c",
+  "classification": "only per-member FP32 CDF tolerance failure; no recorded hard/structural predicate failure",
+  "cross_environment_F64_identity_claimed": false,
+  "dtype_QKV_attention_witnesses_replayed": true,
+  "error_field_present": false,
+  "exact_failed_member": {
+    "final_mixture": {
+      "max_cdf_absolute_error": 6.335889978004161e-06,
+      "max_normalization_error": 2.1303052325505334e-06,
+      "max_probability_absolute_error": 1.4854595065116882e-07,
+      "max_row_total_variation": 6.783631069484024e-06,
+      "minimum_probability": 0.0,
+      "passed": true
+    },
+    "logit_checks": {
+      "max_centered_logit_error_on_common_finite_bins": 0.00013819892372701759,
+      "negative_infinity_pattern_equal": true,
+      "shape_equal": true
+    },
+    "member": 5,
+    "metrics": {
+      "configuration_identity_equal": true,
+      "exact_borders": true,
+      "float32": true,
+      "index": 5,
+      "max_cdf_absolute_error": 2.0325183868408203e-05,
+      "max_normalization_error": 0.0,
+      "max_probability_absolute_error": 4.172325134277344e-07,
+      "max_row_total_variation": 2.1338464489609188e-05,
+      "minimum_probability": 0.0,
+      "passed": false
+    },
+    "physical_slot": 13,
+    "query": "1024",
+    "query_feature_shape": [
+      1024,
+      29
+    ],
+    "stage": 14,
+    "target": "z_d0_m3",
+    "thresholds": {
+      "max_cdf_absolute": 2e-05,
+      "max_row_total_variation": 0.0001,
+      "normalization_absolute": 1e-05,
+      "quantile_coordinate_span_fraction": 2e-06
+    }
+  },
+  "global_RNG_scope": "Recorded producer Boolean/source assertion; separate global initial/final hashes are not stored at top level",
+  "mixture_pass_does_not_waive_member_failure": true,
+  "native6_10_four_immutable_snapshot_and_control_equalities_replayed": true,
+  "new_G3_updates": 0,
+  "new_model_GPU_draw_or_reference_integration_calls": 0,
+  "own_pair_proof_gate_rejection": {
+    "message": "own-pair all21 qualification must be a pinned SHA256",
+    "type": "RuntimeError"
+  },
+  "pair": {
+    "case": 0,
+    "context_seed": 20261111,
+    "context_size": 4096,
+    "count": 50000,
+    "repetition": 0
+  },
+  "pair_CPU_receipt_sha256": "6f35d9d090a955604186c5fbf3312b82465eff6fdae7e4cd24a23b646dbdf193",
+  "posterior_vectors_generated": 0,
+  "prefix_parent_manifest_sha256": "3e0c158fd0005c0864d816b173f00e751afd8dba7b1cfbfcf640755b01336c1f",
+  "prefix_payload_sha256": "a9ecadf2aa1dae18fbc492ef36221edcc6de94d6181d11a0aa49db3d009d3f04",
+  "producer_elapsed_seconds": 433.2478167640511,
+  "production_activation_permitted": false,
+  "public_producer_registry_empty": true,
+  "qualification_passed": false,
+  "raw6_model_F32_all21_mask_target_query_and_FIRST1024_custody_recomputed": true,
+  "raw_artifact_and_consumed_sources_unchanged": true,
+  "raw_error_value": null,
+  "raw_manifest_sha256": "fbed99d9fb256bb72a49cb03bebb820d805ac2cbafaa4ebac4deb08bf3160734",
+  "raw_sacct_sha256": "4395912729404ccabd7aa84cef69d345364fb616ed5a6a932bc3bcd48298656f",
+  "raw_status_preserved": "prior_coordinate_pair_structural_or_hard_failure",
+  "recorded_seed": 79655661,
+  "recorded_seed_role": "prior-coordinate-fixed-conditionals-v1",
+  "reference_integrations": 0,
+  "same_environment_F64_runtime_input_provenance_verified": true,
+  "saved_GPU_count": 1,
+  "saved_main_allocation_GPU_seconds": 440,
+  "saved_restarts": 0,
+  "schema": "posteriorforge.independent_prior_pair_conditional_failure_audit.v1",
+  "source_Git_closure": {
+    "current_committed_and_recorded_candidate_bytes_exact": true,
+    "dependencies": 151,
+    "own_producer_checked_separately": true,
+    "total_files": 152
+  },
+  "source_pins": {
+    "fixed_selection_anchor": "5ec69eb7aadbd74c7d96ee534b71d0d8bee2b6dd6f6e3d2f44e74607452f682b",
+    "numeric_ancestral_sources": {
+      "ancestral_sources": {
+        "SS15_representation": "46323c0b94301c2f7e678538881d5cbbdd8bc52c62a60021798176bffe81eb85",
+        "backend": "88f28c5a1f01c086661243c5d3bfb59631eb3c95fe3567b7f1ede325ddba0aea",
+        "codec": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+        "codec_inventory_helper": "ce68e237f15d239f99f091c2310cf15791d1cf7f7cf7442c2db029241834a636",
+        "numeric_comparison_helper": "0c3dd7274d6741bba2ba0ae2744542865f48b2f887a6831e1d2aa6bce47f78c0",
+        "numeric_hard_guards": "c55c00a1697f8d4341880af18676c29b4d99551e131c89ff79bea238c693f8bd",
+        "numeric_utility": "6c927a5c278c7fc54b556ac557ecef64f5e6338f5ae13bf466f3b1e6a4640f90",
+        "preregistration": "7c4aca04c4571960108c0296ec5d4770940ce0b51fa0a77cdd0c27182b4ed849",
+        "prior_and_order_sources": {
+          "execution_ss15_sigma_first.py": "d48d1638ef9e540bdd629d321fba657af4db757700b1092fc58fb9ded1f79ad2",
+          "science/analytical_benchmark_v2.py": "8d5f286f6d8512391dea2ae036313bec05782d28c7803f336490cbcdce3bd99f",
+          "science/hierarchical_exact.py": "db001593cc7307b1290b981622705961c5953001a6c1245fae5ec779938e9687",
+          "science/hierarchical_noise.py": "cbf0b8c956362a5eaa31923e9b94a3db3e3ede2072603add51e78105b8c0cbf0",
+          "science/hierarchical_problem.py": "03aa2d8a3d279783cf6c599f1400f253f3db2e1e7eb027aff5b7cd1b48fe12d0"
+        },
+        "qualifier": "3ae723d4748f23af40b89b9508713e270730985b6a8b5d4ccca1959e60ae17f9"
+      },
+      "execution": "e5a2733e767b187e573315547ec9253267e43d1e3700596f61e97116c53f3256",
+      "failed_empty_cache_screen": "550b91af4a031a3393f59146e1aa5360c75b0e716362ee727aeb1397af149593",
+      "input_numeric_ancestry": "3ae723d4748f23af40b89b9508713e270730985b6a8b5d4ccca1959e60ae17f9",
+      "native_protocol": "82b731edc9d57410e5343bb82833658931de728bd99940707908438dbbcdfc7b",
+      "qualifier": "9221da7853d1ecea3606d9001c70589f61bb89a28717bbc333bc8a280ff81bf9"
+    },
+    "numerical_collector_ancestry": "9221da7853d1ecea3606d9001c70589f61bb89a28717bbc333bc8a280ff81bf9",
+    "pair_CPU_helper": "b69a92b59fa504bce22e34dc31895f9162870425118764293f959c46390110e4",
+    "pair_CPU_receipt": "6f35d9d090a955604186c5fbf3312b82465eff6fdae7e4cd24a23b646dbdf193",
+    "pair_inputs": "402117cad65af190352cb0b14977fbbdc896f196d069749b0be28608fdef400e",
+    "pair_sources": {
+      "codec": "d8ce6c49e7b65c6ee55c59b7243d4ce943cbea28c92ebed0329798074aaa70c5",
+      "completion": "6136487ee78375a802c8a0cb0c225a7f1b207063b4083514614c0d97a35c2425",
+      "execution": "e5a2733e767b187e573315547ec9253267e43d1e3700596f61e97116c53f3256",
+      "input_numeric_ancestry": "3ae723d4748f23af40b89b9508713e270730985b6a8b5d4ccca1959e60ae17f9",
+      "inventory_helper": "ce68e237f15d239f99f091c2310cf15791d1cf7f7cf7442c2db029241834a636",
+      "pair_module": "402117cad65af190352cb0b14977fbbdc896f196d069749b0be28608fdef400e",
+      "preregistration": "9fc6a91568864cc996dafbcfaa41e77280e4825c63f61d455bdadf3703cd0a66",
+      "representation": "46323c0b94301c2f7e678538881d5cbbdd8bc52c62a60021798176bffe81eb85",
+      "training_inventory": "f3266ab6fd36887c95291020b2cdd2d2a5529f2e6c984b32de22a28b9d31da04"
+    },
+    "physical_FIFO": "f8823ae75e7ae2eea6f1aa667af48ecf5c892450361b5abd490ccda36a28f7e0",
+    "qualifier": "29ca88203b81f240769a6bb38b18b68aff0fe6ed2df36003729b17e0116163a0"
+  },
+  "stage_decisions": [
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 0
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 1
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 2
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 3
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 4
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 5
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 6
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 7
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 8
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 9
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 10
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 11
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 12
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 13
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": false,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 14
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 15
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 16
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 17
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 18
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 19
+    },
+    {
+      "CDF_calls": 48,
+      "hard_validity_passed": true,
+      "matching_FP32_execution_passed": true,
+      "recorded_hard_probability_records": 6,
+      "source_state_dtype_rng_guard_count": 12,
+      "stage": 20
+    }
+  ],
+  "state_scope_limit": "Recorded contracts and source-controlled guards replayed; no new GPU measurements/full cached-KV byte audit",
+  "status": "audit_passed_numeric_screen_failed",
+  "strict_failed_stages": [
+    14
+  ],
+  "strict_passed_stages": 20,
+  "success_validator_rejection": {
+    "message": "new pair proof schema/pass status required; old5ec cannot qualify another pair",
+    "type": "ValueError"
+  },
+  "torch_imported": false,
+  "unchanged_thresholds": {
+    "max_cdf_absolute": 2e-05,
+    "max_row_total_variation": 0.0001,
+    "normalization_absolute": 1e-05,
+    "quantile_coordinate_span_fraction": 2e-06
+  }
+}
