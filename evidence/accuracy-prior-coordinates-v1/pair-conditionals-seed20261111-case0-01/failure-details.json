@@ -1,0 +1,74 @@
+{
+  "classification_from_recorded_flags": "numerical_CDF_tolerance_failure; all recorded hard-validity guards passed",
+  "failures": [
+    {
+      "final_mixture_metrics": {
+        "max_cdf_absolute_error": 6.335889978004161e-06,
+        "max_normalization_error": 2.1303052325505334e-06,
+        "max_probability_absolute_error": 1.4854595065116882e-07,
+        "max_row_total_variation": 6.783631069484024e-06,
+        "minimum_probability": 0.0,
+        "passed": true
+      },
+      "hard_validity_passed": true,
+      "inverse_CDF_passed": true,
+      "member_index_zero_based": 5,
+      "query_label": "1024",
+      "query_shape": [
+        1024,
+        29
+      ],
+      "recorded_member_metrics": {
+        "configuration_identity_equal": true,
+        "exact_borders": true,
+        "float32": true,
+        "index": 5,
+        "logits": {
+          "max_centered_logit_error_on_common_finite_bins": 0.00013819892372701759,
+          "negative_infinity_pattern_equal": true,
+          "shape_equal": true
+        },
+        "max_cdf_absolute_error": 2.0325183868408203e-05,
+        "max_normalization_error": 0.0,
+        "max_probability_absolute_error": 4.172325134277344e-07,
+        "max_row_total_variation": 2.1338464489609188e-05,
+        "minimum_probability": 0.0,
+        "passed": false
+      },
+      "route": "frozen88_resident_cache",
+      "stage_index_zero_based": 14,
+      "target_codec_coordinate": {
+        "dataset_id": "mechanical_3",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          11,
+          12,
+          13
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          11,
+          12,
+          13
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_d0_m3",
+        "physical_name": "d0_m3",
+        "physical_slot": 13,
+        "stage": 14
+      },
+      "thresholds": {
+        "max_cdf_absolute": 2e-05,
+        "max_row_total_variation": 0.0001,
+        "normalization_absolute": 1e-05,
+        "quantile_coordinate_span_fraction": 2e-06
+      }
+    }
+  ],
+  "literal_status": "prior_coordinate_pair_structural_or_hard_failure",
+  "model_or_physical_cause_inferred": false
+}

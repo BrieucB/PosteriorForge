@@ -1,0 +1,210 @@
+{
+  "NPZ_or_arrays_included": false,
+  "Slurm_process_state": "COMPLETED",
+  "actual_recorded_outcome": "numeric matching failure at one member/query; hard validity passed",
+  "all21_hard_validity_passed": true,
+  "all_ICDF_comparisons_passed": true,
+  "all_final_mixture_comparisons_passed": true,
+  "allocated_gpu_seconds": 440,
+  "cause_or_old_physical_watchpoint_link_claimed": false,
+  "compatibility_adapter": {
+    "activation": "explicit",
+    "active_translator_code_sha256": "8a13551c263346388cee3326e17daabcae89274dd7fa9dcf0f07aded35498367",
+    "adapter_id": "tabpfn-2.0.9-finite-cdf-parentheses-v1",
+    "adapter_sha256": "7a86fbbefdb0fa7e850a394bea8af710c2e5f0139c10cdce1fd272fb9709eec0",
+    "adapter_version": 1,
+    "corrected_cdf_code_sha256": "ae3c7d841ba63f2fd27f7a317848834bdf4bcf5330c780e5dad6dd678b4ba140",
+    "correction": "finite_cdf_parentheses_only",
+    "exact_patch_target": "tabpfn.regressor.translate_probs_across_borders.__globals__['_cdf']",
+    "executed_corrected_cdf_code_sha256": "ae3c7d841ba63f2fd27f7a317848834bdf4bcf5330c780e5dad6dd678b4ba140",
+    "execution_optimized": false,
+    "original_alias_identity_verified": true,
+    "original_alias_restored": true,
+    "original_cdf_code_sha256": "5e7eebe9521dba64daa2148b35d0ff4f8d88f618a1193cb2b6ea3404249c4945",
+    "original_translator_code_sha256": "8a13551c263346388cee3326e17daabcae89274dd7fa9dcf0f07aded35498367",
+    "patched_call_count": 1008,
+    "schema": "posteriorforge.compat.finite_cdf.v1",
+    "scope": "finite_ensemble_cdf_parentheses_only",
+    "sdk_aliases_unchanged": true,
+    "sdk_files_modified": false,
+    "sdk_source_sha256": {
+      "tabpfn/regressor.py": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "tabpfn/utils.py": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1"
+    },
+    "sdk_source_sha256_after": {
+      "tabpfn/regressor.py": "bbb7d6dec265b18a30a54ff28719c957bc05d4164f693f76d998380132d2c46e",
+      "tabpfn/utils.py": "a0521d68cd2880e041a49ac5acee42a2b8d1297e246e3f7a9c477e49f5e97fc1"
+    },
+    "sdk_sources_unchanged": true,
+    "source_guard_passed": true,
+    "tabpfn_version": "2.0.9",
+    "tail_family_changed": false,
+    "translator_code_unchanged": true,
+    "variant": "cdf_arithmetic_v1"
+  },
+  "decided_stage_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "elapsed_screen_seconds": 433.2478167640511,
+  "failed_member_query_records": [
+    {
+      "final_mixture_metrics": {
+        "max_cdf_absolute_error": 6.335889978004161e-06,
+        "max_normalization_error": 2.1303052325505334e-06,
+        "max_probability_absolute_error": 1.4854595065116882e-07,
+        "max_row_total_variation": 6.783631069484024e-06,
+        "minimum_probability": 0.0,
+        "passed": true
+      },
+      "hard_validity_passed": true,
+      "inverse_CDF_passed": true,
+      "member_index_zero_based": 5,
+      "query_label": "1024",
+      "query_shape": [
+        1024,
+        29
+      ],
+      "recorded_member_metrics": {
+        "configuration_identity_equal": true,
+        "exact_borders": true,
+        "float32": true,
+        "index": 5,
+        "logits": {
+          "max_centered_logit_error_on_common_finite_bins": 0.00013819892372701759,
+          "negative_infinity_pattern_equal": true,
+          "shape_equal": true
+        },
+        "max_cdf_absolute_error": 2.0325183868408203e-05,
+        "max_normalization_error": 0.0,
+        "max_probability_absolute_error": 4.172325134277344e-07,
+        "max_row_total_variation": 2.1338464489609188e-05,
+        "minimum_probability": 0.0,
+        "passed": false
+      },
+      "route": "frozen88_resident_cache",
+      "stage_index_zero_based": 14,
+      "target_codec_coordinate": {
+        "dataset_id": "mechanical_3",
+        "decode_latent_dependencies": [
+          0,
+          1,
+          2,
+          11,
+          12,
+          13
+        ],
+        "encode_physical_dependencies": [
+          0,
+          1,
+          2,
+          11,
+          12,
+          13
+        ],
+        "kind": "local_conditional_gaussian_residual_given_all_globals",
+        "latent_name": "z_d0_m3",
+        "physical_name": "d0_m3",
+        "physical_slot": 13,
+        "stage": 14
+      },
+      "thresholds": {
+        "max_cdf_absolute": 2e-05,
+        "max_row_total_variation": 0.0001,
+        "normalization_absolute": 1e-05,
+        "quantile_coordinate_span_fraction": 2e-06
+      }
+    }
+  ],
+  "failed_stage_indices": [
+    14
+  ],
+  "global_RNG_preserved": true,
+  "gpus": 1,
+  "ignored_child_step_ids": [
+    "5411440.batch",
+    "5411440.extern"
+  ],
+  "literal_screen_status": "prior_coordinate_pair_structural_or_hard_failure",
+  "logs": [
+    {
+      "bytes": 306,
+      "file": "stdout.log",
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/logs/pf-prior-pair0-screen-5411440.out",
+      "scope": "exact closed Slurm job stream, no reinterpretation",
+      "sha256": "4945df16c274fd94a0773ed3b5d1bbc7a346544bd5c36e39eb0879474eff905d"
+    },
+    {
+      "bytes": 0,
+      "file": "stderr.log",
+      "original_path": "/scratch/project/eu-26-17/eubrieucb/posteriorforge/logs/pf-prior-pair0-screen-5411440.err",
+      "scope": "exact closed Slurm job stream, no reinterpretation",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "main_allocation_only": "main Slurm allocation only; batch/extern steps never added",
+  "manifest_bytes": 19190368,
+  "manifest_sha256": "fbed99d9fb256bb72a49cb03bebb820d805ac2cbafaa4ebac4deb08bf3160734",
+  "matching_FP32_execution_passed_all21": false,
+  "new_G3_updates": 0,
+  "no_requeue": true,
+  "pair": {
+    "case": 0,
+    "context_seed": 20261111,
+    "context_size": 4096,
+    "count": 50000,
+    "repetition": 0
+  },
+  "posterior_accuracy_assessed": false,
+  "posterior_submitted": false,
+  "posterior_vectors_generated": 0,
+  "project_ledger_after": {
+    "actual_gpu_hours": 28.807222222222222,
+    "actual_gpu_seconds": 103706,
+    "cap_exceeded": false,
+    "cap_gpu_hours": 200,
+    "remaining_gpu_hours": 171.1927777777778,
+    "remaining_gpu_seconds": 616294,
+    "reservation_count": 125,
+    "reserved_gpu_hours": 0.0,
+    "reserved_gpu_seconds": 0
+  },
+  "raw_gzip_sha256": "dd7ef0153513562f81521300e8cf9199e67d72de01542539ddba214b072d5c15",
+  "reference_integrations": 0,
+  "restarts": 0,
+  "row_counts": [
+    1,
+    1024
+  ],
+  "runtime_exception_fields_present": [],
+  "schema": "posteriorforge.prior_coordinate_pair_screen_failure_evidence.v1",
+  "source_unchanged": true,
+  "stress_rows": 8,
+  "thresholds": {
+    "max_cdf_absolute": 2e-05,
+    "max_row_total_variation": 0.0001,
+    "normalization_absolute": 1e-05,
+    "quantile_coordinate_span_fraction": 2e-06
+  },
+  "v1_stopped_after_case0_failure": true,
+  "v2_execution_or_results_included": false
+}

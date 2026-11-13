@@ -1,0 +1,52 @@
+{
+  "CI": {
+    "conclusion": "success",
+    "id": 43344039123,
+    "url": "https://github.com/BrieucB/PosteriorForge/actions/runs/43344039123"
+  },
+  "CI_verification_scope": "exact Root-recorded launch preflight; no extra API audit during curation",
+  "CPU_panel_receipt_sha256": "6f35d9d090a955604186c5fbf3312b82465eff6fdae7e4cd24a23b646dbdf193",
+  "authorized_scope": "ONLY first fixed pair screen; no posterior reservation unless actual screen passes",
+  "current_screen_manifest_copied": false,
+  "exact_committed_sources_as_recorded": {
+    "scripts/qualify_prior_coordinate_pair_v1.py": "29ca88203b81f240769a6bb38b18b68aff0fe6ed2df36003729b17e0116163a0",
+    "src/posteriorforge/performance_prior_pair_v1.py": "52eaa638d09358765fcbb1d229265a5679f05a5fe0a5866f513412c7dc572a0b",
+    "src/posteriorforge/prior_coordinate_pair_v1.py": "402117cad65af190352cb0b14977fbbdc896f196d069749b0be28608fdef400e"
+  },
+  "final_Slurm_accounting_included": false,
+  "finite_screen_scope": "N1/N1024/stress8, all21 stages/all8 members; zero posterior cohort claimed",
+  "gpus": 1,
+  "job_id": "5411440",
+  "launch_time_GPU_reservation_seconds": 1200,
+  "ledger_mutated_by_curation": false,
+  "no_arrays_or_NPZ_copied": true,
+  "no_model_preflight_receipt_sha256": "34ed156504f1962b5d40b4f1cc4ad2a158eedb9631e58ca047b149c25b5cf353",
+  "no_requeue_recorded": true,
+  "numerical_screen_completion_claimed": false,
+  "pair": {
+    "case": 0,
+    "context_seed": 20261111,
+    "context_size": 4096,
+    "count": 50000,
+    "repetition": 0
+  },
+  "posterior_or_accuracy_claimed": false,
+  "raw_submission_actual_gpu_seconds_scope": "original launch-time bookkeeping field only, NOT final measured GPU cost",
+  "read_only_checkout_listing_is_not_live_process_inventory": true,
+  "reservation_id": "c07f829127714274a2ebc87548744e70",
+  "schema": "posteriorforge.prior_coordinate_pair_launch_evidence.v1",
+  "scope": "launch/CI snapshots only; running numerical screen completion and cost are not included",
+  "source_commit": "2770468bdf6276c3a1b4492732d01c720d19923c",
+  "source_snapshots": {
+    "preflight.json": "f9cd28db5d4159aaa3625badcc8668d85c6f6ec5b91706305b61ef98b7531b89",
+    "submission.json": "f6d499ecf854749cbcfddea4583328ab2298c71a04d614fd874ec4348538ffda"
+  },
+  "untracked_paths_at_preflight": [
+    "scripts/diagnose_host_reuse.py",
+    "scripts/evaluate_ss15_campaign.py",
+    "src/posteriorforge/execution_tail_observer.py",
+    "tests/test_execution_tail_observer.py",
+    "tests/test_host_reuse_diagnostic.py"
+  ],
+  "untracked_scope": "read-only checkout names, not a live-process module inventory"
+}

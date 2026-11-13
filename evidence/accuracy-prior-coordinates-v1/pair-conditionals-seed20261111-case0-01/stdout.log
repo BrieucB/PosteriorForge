@@ -1,0 +1,1 @@
+{"FP32_failed_stages": [14], "matching_FP32_execution_passed_all21": false, "pair": {"case": 0, "context_seed": 20261111, "context_size": 4096, "count": 50000, "repetition": 0}, "schema": "posteriorforge.prior_coordinate_pair_conditionals.v1", "status": "prior_coordinate_pair_structural_or_hard_failure"}
